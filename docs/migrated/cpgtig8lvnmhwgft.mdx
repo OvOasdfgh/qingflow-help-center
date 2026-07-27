@@ -1,0 +1,232 @@
+---
+title: "审批拒绝，如何触发流程外Q-Robot"
+description: "1. 场景/功能描述2. 思路流程2.1. 方案一（简单·由选择字段控制）表单内增加选择字段，以选项“拒绝”/“同意”来进行控制，而节点原有的“拒绝”功能不开放。2.2. 方案二（复杂·提醒推送+Q-Source）轻商城“提醒推送”，将A应用数据的申请结果推送至辅助应用(由Q-Source接收..."
+slug: "/搭建技巧/按功能分类/流程设计/审批拒绝-如何触发流程外q-robot"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/cpgtig8lvnmhwgft?singleDoc#"
+source_updated_at: "2024-10-15T03:38:10.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "流程设计"
+  - "审批拒绝，如何触发流程外Q-Robot"
+---
+### 场景/功能描述
+
+![原文画板](https://cdn.nlark.com/yuque/0/2023/jpeg/27174367/1694762552685-aa0a9835-539d-4adb-bafb-4c16d044fa17.jpeg)
+
+### 思路流程
+
+#### 方案一（简单·由选择字段控制）
+
+表单内增加选择字段，以选项“拒绝”/“同意”来进行控制，而节点原有的“拒绝”功能不开放。
+
+#### 方案二（复杂·提醒推送+Q-Source）
+
+轻商城“提醒推送”，将A应用数据的申请结果推送至辅助应用(由Q-Source接收)，当申请结果为“拒绝”时，Q-Robot更新至A应用的辅助字段，A应用的流程外Q-Robot设置为当辅助字段更新时进行触发。
+
+（与方案一的区别是，配置上较为复杂，但是可以保留系统自带的审批“拒绝”按钮）
+
+### 配置过程
+
+#### 方案一
+
+##### A应用
+
+###### 表单设计
+
+提交人填入
+
+申请事项填入
+
+申请事由填入
+
+请确认申请结果填入
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1694769989654-54d7d41c-e542-4f97-8e00-0c2566faea14.png)
+
+###### 流程设计
+
+增加“审批”，关闭“流程拒绝”功能。
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1694769803139-cea9022b-273c-47ac-b52e-3d926089d24c.png)
+
+###### 拓展设置
+
+流程外Q-Robot
+
+首次触发时间：根据指定字段-“请确认审批结果”更新时触发，添加数据至B应用，并设置筛选数据：请确认审批结果 = 拒绝。
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1694770060816-00df9b8c-cfa0-4350-be3f-da37dbf25cc9.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1694769829701-4b9674e7-e771-41d0-913b-428213cce4b7.png)
+
+##### B应用
+
+###### 表单设计
+
+提交人传入
+
+申请事项传入
+
+申请事由传入
+
+申请结果传入
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1694769847817-04be0164-db31-4073-922a-0e3915c9b4e6.png)
+
+#### 方案二
+
+##### A应用
+
+###### 表单设计
+
+提交人填入
+
+申请事项填入
+
+申请事由填入
+
+辅助字段隐藏
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1694761454601-9eb14d02-fbf5-4a4c-9616-30029551e8ce.png)
+
+###### 流程设计
+
+增加“审批”
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1694761466754-1a2df87a-f86d-4872-ab8c-0bdabbdcfdd6.png)
+
+###### 拓展设置
+
+流程外Q-Robot
+
+首次触发时间：根据指定字段-“辅助字段”更新时触发，添加数据至B应用。
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1694761478550-2dbcfd13-b4e3-4aca-8066-0ec0ceeadf99.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1694761491287-eb4d76a7-481c-4503-9fed-86dde852e98b.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1694761504648-355a427a-67c5-4763-875e-dd20d87bbdca.png)
+
+##### B应用
+
+###### 表单设计
+
+提交人传入
+
+申请事项传入
+
+申请事由传入
+
+申请结果传入
+
+​
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1694761522672-ecda7448-afca-4e8b-9ddd-cd424aa95efc.png)
+
+##### 中间应用
+
+###### 表单设计
+
+可选择合适的字段类型，用于进行接收“提醒推送”的数据。其中应用名称、数据编号、申请结果等会使用到。
+
+（应用名称、应用appkey、数据ID、数据编号、申请时间、申请人userId、申请人名字、申请人邮箱、申请人手机号、通知时间、数据链接、提醒人userId、提醒人名字、提醒人邮箱、提醒人手机号、当前节点id、当前节点名称、申请结果、申请内容、当前流程状态、当前超时状态、超时时间、节点处理人userId、节点处理人名字"、审批类型、通过类型、errorCode、errorMsg、Q-Source名称）
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1694761589162-ee8447ab-59c9-4a8c-823b-e66060e21d1c.png)
+
+###### 流程设计
+
+申请人节点：Q-Source被动（勾选新增数据进入流程）
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1694761605273-37bc5022-8ad5-408d-8f2d-8749c8682f7b.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1694761617551-0db992e2-401b-4883-b747-9c925be5efe9.png)
+
+流程分支
+
+申请结果 = 拒绝
+
+应用名称 = A
+
+符合条件，执行Q-Robot更新，更新至A应用辅助字段
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1694761642248-c8947882-ba57-4c48-aeba-2070301e6bb8.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1694761653925-d45cba24-55ed-4236-8350-b7187277928a.png)
+
+##### 轻商城·提醒推送
+
+推送类别：申请结果
+
+推送范围：A应用
+
+推送的URL：中间应用 Q-Source被动的URL
+
+Method：POST
+
+Body Type：application/json
+
+JSON Body：
+
+\{
+"提醒类型的ID":"\{提醒类别的ID$$IWVC$$\}",
+"应用名称":"\{应用名称$$QXRC$$\}",
+"应用appkey":"\{应用appkey$$UZKC$$\}",
+"数据ID":"\{数据ID$$ROXC$$\}",
+"数据编号":"\{数据编号$$XOQC$$\}",
+"申请时间":"\{申请时间$$MLJ7$$\}",
+"申请人userId":"\{申请人userId$$TIWC$$\}",
+"申请人名字":"\{申请人名字$$4OX7$$\}",
+"申请人邮箱":"\{申请人邮箱$$ZPKC$$\}",
+"申请人手机号":"\{申请人手机号$$3YN7$$\}",
+"通知时间":"\{通知时间$$W9VE$$\}",
+"数据链接":"\{数据链接$$ASL1$$\}",
+"提醒人userId":"\{提醒人userId$$ERQE$$\}",
+"提醒人名字":"\{提醒人名字$$1QRE$$\}",
+"提醒人邮箱":"\{提醒人邮箱$$VTIC$$\}",
+"提醒人手机号":"\{提醒人手机号$$U1P8$$\}",
+"当前节点id":"\{当前节点id$$9IT2$$\}",
+"当前节点名称":"\{当前节点名称$$2MJA$$\}",
+"申请结果":"\{申请结果$$AGH9$$\}",
+"申请内容":"\{申请内容$$S8J2$$\}",
+"当前流程状态":"\{当前流程状态$$Q6X6$$\}",
+"当前超时状态":"\{当前超时状态$$ODR0$$\}",
+"超时时间":"\{超时时间$$CZUD$$\}",
+"节点处理人userId":"\{节点处理人userId$$8WT0$$\}",
+"节点处理人名字":"\{节点处理人名字$$2KZ8$$\}",
+"审批类型":"\{审批类型$$5ML9$$\}",
+"通过类型":"\{通过类型$$BIV1$$\}",
+"errorCode":"\{errorCode$$G0N1$$\}",
+"errorMsg":"\{errorMsg$$6KP8$$\}",
+"Q-Source名称":"\{Q-Source名称$$YCH0$$\}"
+\}
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1694761543350-fcdfc0cb-f1a1-4e80-b89b-1528f9bde985.png)
+
+![企业微信截图\_17255083132167.png](https://cdn.nlark.com/yuque/0/2024/png/43099917/1725515110903-e1c5bff0-d178-4538-ba9f-99b733f2765e.png)
+
+### 实现效果
+
+#### 方案一
+
+A应用
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1694770159302-01b9276e-4aee-4b65-b2d7-a46dfe43f76a.png)
+
+B应用
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1694770173859-51a70b8d-2e60-4cb5-b349-169f5292731b.png)
+
+#### 方案二
+
+A应用
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1694769416725-b5145e07-2080-43e9-a911-0feaf5e6e4a7.png)
+
+B应用
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1694769458294-180b5b93-a034-4681-ab42-f1566c7a8d32.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/cpgtig8lvnmhwgft?singleDoc#)

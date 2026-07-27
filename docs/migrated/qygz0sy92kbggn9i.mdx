@@ -1,0 +1,55 @@
+---
+title: "如何提示表格提交校验失败具体行数？"
+description: "1. 场景/问题描述客户在导入表格时，表格行较多，通过表格中的辅助字段生成0或1，再在表格外求和，以此达到提交校验的效果，但目前的配置方案对于客户来说难以定位问题行，希望直观看到需要修改的行数。2. 思路逻辑通过代码块识别校验失败行。3. 配置过程3.1. 表单设计3.2. 代码块var ta..."
+slug: "/搭建技巧/按功能分类/表格使用/校验/如何提示表格提交校验失败具体行数"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/qygz0sy92kbggn9i?singleDoc#"
+source_updated_at: "2024-10-15T03:38:08.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "表格使用"
+  - "校验"
+  - "如何提示表格提交校验失败具体行数？"
+---
+## 场景/问题描述
+
+客户在导入表格时，表格行较多，通过表格中的辅助字段生成0或1，再在表格外求和，以此达到提交校验的效果，但目前的配置方案对于客户来说难以定位问题行，希望直观看到需要修改的行数。
+
+## 思路逻辑
+
+通过代码块识别校验失败行。
+
+## 配置过程
+
+### 表单设计
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1693885018706-254d2594-8fa9-4de4-b90f-648db05f6240.png)
+
+### 代码块
+
+```javascript
+var table = qf_field.{表格$$175C86ACA$$};
+
+var indices = table
+  .map((obj, index) => (obj["field_163941455"] === 1 ? index+1 : -1))
+  .filter(index => index !== -1)
+  .join(", ");
+
+qf_output = {r : indices}
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1693885030649-12e7bc80-fc84-410f-af2c-9bd9c70c9701.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1693885054554-2bf0fed2-277b-4bc8-9b29-45899a552392.png)![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1693885061507-667ed6b0-502f-421b-851f-058bfe112607.png)
+
+#### 字段解析与配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1693885066310-d64dbb7b-e7e2-4ef8-b6b7-32df8fb50111.png)![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1693885084122-da9f9d81-097f-459d-a106-a59c1b1fdef7.png)
+
+## 实现效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1693885144245-8c6cb4bf-3856-40da-b86b-b7c5d623b7e6.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/qygz0sy92kbggn9i?singleDoc#)

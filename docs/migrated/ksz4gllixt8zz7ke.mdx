@@ -1,0 +1,195 @@
+---
+title: "时间函数"
+description: "1 功能介绍1.1 功能简介本功能集提供了一系列用于处理和转换日期时间的函数，旨在帮助用户更方便地在数据分析和处理中操作日期时间信息。这些函数适用于各种场景，如财务报表分析、项目管理、日志记录分析等，能够帮助用户更准确地理解和使用时间数据，从而提高数据处理的效率和准确性。2 设置步骤YEAR返..."
+slug: "/帮助文档/表单引擎/字段常用设置/默认内容/通过公式计算/时间函数"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/ksz4gllixt8zz7ke?singleDoc#"
+source_updated_at: "2026-01-21T09:20:27.000Z"
+keywords:
+  - "帮助文档"
+  - "表单引擎"
+  - "字段常用设置"
+  - "默认内容"
+  - "通过公式计算"
+  - "时间函数"
+---
+## 1 功能介绍
+
+### 1.1 功能简介
+
+本功能集提供了一系列用于处理和转换日期时间的函数，旨在帮助用户更方便地在数据分析和处理中操作日期时间信息。这些函数适用于各种场景，如财务报表分析、项目管理、日志记录分析等，能够帮助用户更准确地理解和使用时间数据，从而提高数据处理的效率和准确性。
+
+## 2 设置步骤
+
+### YEAR
+
+返回日期时间中的年份。
+
+> 函数用法：YEAR(timestamp)
+
+**函数示例：**
+
+提取日期中的年份。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700796318713-374c6d1c-a388-4ec1-a3a7-2671b22c7e74.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700796923021-1b6a6d36-f120-483f-8d19-3e8710d6ac3d.png)
+
+### MONTH
+
+返回日期中的月份， 值是介于 1 到 12 之间的整数。
+
+> 函数用法：MONTH(timestamp)
+
+**函数示例：**
+
+提取日期中的月份。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700796365846-4f173fe5-03de-448f-8b78-ec9eafa3e897.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700796958839-1d9d9a17-e2e0-429d-8dbf-1b64ee79fd2a.png)
+
+### DAY
+
+可用于返回日期中的天数， 值是介于 1 到 31 之间的整数。
+
+> 函数用法：DAY(timestamp)
+
+**函数示例：**
+
+提取日期中的天数。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700796384636-2420a0cd-0648-4cac-a4dc-0797ed3d2d20.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700796990792-bafd88af-0547-416c-a15a-b9cb24901a69.png)
+
+### HOUR
+
+​返回日期时间中的小时数，值是介于 0 到 23 之间的整数。
+
+> 函数用法：HOUR(timestamp)
+
+**函数示例：**
+
+​提取日期时间中的小时数。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2024/png/2056184/1731914308601-e81dbaa3-e419-4864-a16d-4273b5b5eb63.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2024/png/2056184/1731914614489-b182380c-b386-4ccf-92bf-b430bf715269.png)
+
+### MINUTE
+
+​返回日期时间中的分钟数，值是介于 0 到 59 之间的整数。
+
+> 函数用法：MINUTE(timestamp)
+
+**函数示例：**
+
+​提取日期时间中的分钟数。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2024/png/2056184/1731914326267-4980e91a-9dc5-440f-8e72-a797b3cf5646.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2024/png/2056184/1731914653505-42601f41-047a-41bb-b25f-4657062c095a.png)
+
+### SECOND
+
+​返回日期时间中的秒数，值是介于 0 到 59 之间的整数。
+
+> 函数用法：SECOND(timestamp)
+
+**函数示例：**
+
+提取日期时间中的秒数。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2024/png/2056184/1731914344351-f95f3a88-52ed-461d-9fb7-af856b492b28.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2024/png/2056184/1731914737414-2807c7b3-154b-4b9b-9430-26a283fc6425.png)
+
+### DATE
+
+将数字拼接为日期信息，顺序为年/月/日/时/分/秒。
+
+> 函数用法：DATE(year,month,day,hour,minute,second)其中各参数的含义如下：year: 必需，年份；month: 必需，月份；day: 必需，天数；hour: 非必需，小时；minute: 非必需，分钟；second: 非必需，秒。
+
+**函数示例：**
+
+将数字拼接成日期。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700796425615-2b5c4f66-2b4b-4268-af70-a5d9008ca107.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700797112194-1a16fab8-7414-4f50-a0b0-53a470594427.png)
+
+### CURDATE
+
+返回当前日期，只包含年、月、日部分，格式为YYYY-MM-DD。
+
+> 函数用法：CURDATE(timestamp)
+
+**函数示例：**
+
+返回打开表单时的当前日期。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700796730320-5520454a-e7a8-4dfd-8125-4300362540ef.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700796891839-4b7869be-c3c0-4f06-bd3d-cd7b2976fd3a.png)
+
+### NOW
+
+返回当前时间，精确到时/分/秒。
+
+> 函数用法：NOW()
+
+**函数示例：**
+
+返回当前时间，显示格式为年-月-日 时:分:秒。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700796813122-19fbbe5a-2455-4c30-b144-cf6fd7e5a341.png)![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700796867122-4a79c2b3-eecf-44d4-a3cc-454ddd6f3b50.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700796900812-d0686677-ccdd-43d3-8cc1-d9f9f1377292.png)
+
+### DAYS
+
+计算两个日期之间的天数。
+
+> 函数用法：DAYS(end\_timestamp, start\_timestamp)其中各参数的含义如下：end\_timestamp: 必需，结束日期；start\_timestamp: 必需，起始日期。
+
+**函数示例：**
+
+计算两次缴费日期之间的日期间隔。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700796524590-328de44f-54f2-4a37-9d03-f5d61207cc66.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700797097403-86e7b843-9524-4a3c-ab36-55d861dd1bf3.png)
+
+### DATEDELTA
+
+在指定日期的基础上**增加**/**减少**指定数量的单位时间，并返回目标时间。
+
+> 函数用法：DATEDELTA(日期，数量，时间单位)其中各参数的含义如下：日期： 必需，初始日期；数量：必需，需要加减的时间单位，必须为整数，正数为增加，负数为减少。时间单位：天:D；月:M；年:Y；小时:H；分钟:MIN。
+
+**函数示例：**
+
+将缴费日前两天设为缴费提醒日
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700796580884-7898854c-bb0e-4f36-a8b0-79954bf0f398.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700797147657-c84b325d-7f20-4a02-8a2d-860daaae6c2d.png)
+
+### NETWORKDAYS
+
+计算两个日期之间完整的工作日数值，其中，工作日不包括周末和专门指定的假期。
+
+> 函数用法：NETWORKDAYS(日期字段1,日期字段2, "weekend", 指定假期1, 指定假期2...)其中各参数的含义如下：日期字段1：开始日期日期字段2：结束日期weekend：不用指定假期时为选填。周末字符串，用于指定周末日，未填写时默认周末为休息日。每个字符表示一周中的一天（从周日开始），共七个字符，其中用0表示工作日，用1表示休息日。例如：1100000表示周日和周一为休息日。指定假期：选填，从工作日日历中排除的一个或多个日期。例如："2020-10-01"注意：如果 start\_date 晚于 end\_date，则返回值将为负数，值将是所有工作日的数量。
+
+**函数示例：**
+
+统计两个日期之间工作日天数。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2024/png/2056184/1731915895671-14071eab-08d1-4cbe-8897-83ef5f3ef126.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2024/png/2056184/1731916225521-5fb83ff5-4026-4b1a-9bfa-f7472f5cb82c.png)
+
+### DATETOTIMESTAMP
+
+轻流：将日期转化为13位毫秒级时间戳，例："2020-07-30 15:40:30"转化为“1596078030000”。
+
+注意：轻析公式函数转化为10位毫秒级时间戳。
+
+> 函数用法：DATETOTIMESTAMP（date）data：日期字段，必填。日期格式有年月日、年月日时分、年月日时分秒。前两者在更高精度的日期位统一补0。对于格式错误的参数，统一返回 Invalid Value。
+
+**函数示例：**
+
+该函数可将日期转时间戳。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2024/png/2056184/1731914378972-98b85fa2-710e-40ac-b295-b55ccdeb2b73.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2024/png/2056184/1731914856527-2c3a7724-dbe0-40e3-aa68-377c03e1d923.png)
+
+### TIMESTAMPTODATE
+
+将时间戳统一转换为\[年-月-日 时:分:秒\]格式日期字符串。
+
+> 函数用法：TIMESTAMPTODATE（timestamp）时间戳：文本格式，必填。用户可以在使用时根据需要截取。兼容10位和13位时间戳。对于格式错误的参数，统一返回 Invalid Value。
+
+**函数示例：**
+
+该函数可将时间戳转日期函数。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2024/png/2056184/1731914402896-98a61f78-35e6-4a6f-a378-9a6fca2e3933.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2024/png/2056184/1731915155608-c3cfcb71-816d-448e-80a1-f5c29cc33594.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/ksz4gllixt8zz7ke?singleDoc#)

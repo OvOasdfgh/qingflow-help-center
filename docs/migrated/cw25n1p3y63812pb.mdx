@@ -1,0 +1,85 @@
+---
+title: "创建部门"
+description: "调用本接口，创建部门1. 权限说明仅专有轻流可以调用。「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有通讯录权限。2. 请求请求方式：POST请求地址：http(s)://xxx.xx(自有域名)/openApi/departm..."
+slug: "/帮助文档/轻代码/openapi/通讯录/部门/创建部门"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/cw25n1p3y63812pb?singleDoc#"
+source_updated_at: "2024-10-15T03:35:07.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "通讯录"
+  - "部门"
+  - "创建部门"
+---
+调用本接口，创建部门
+
+---
+
+### **权限说明**
+
+仅专有轻流可以调用。
+
+「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有通讯录权限。
+
+### 请求
+
+**请求方式：**POST
+
+**请求地址：**http(s)://xxx.xx(自有域名)/openApi/department
+
+#### **2.1 请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+
+#### **2.2 请求体（Body）**
+
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| deptId | 是 | int | 部门id |
+| name | 是 | string | 部门名称 |
+| parentId |  | int | 父部门id |
+| deptLeader |  | array | 部门主管的userId |
+| ordinal |  | int | 同级部门（同个父部门）中的顺序值，取值范围为0-2^30 |
+
+#### **2.3 请求体示例**
+
+```json
+{
+    "deptId":123456,
+    "name":"产品部",
+    "parentId":2278,
+    "deptLeader":["9054"]
+}
+```
+
+### 3.返回
+
+#### 3.1 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| questionRelations |  |  | 关联的设置，这里没用 |
+| result | 是 | object | 返回结果 |
+| deptId | 是 | int | 部门id |
+
+#### 3.2 返回体示例
+
+```json
+{
+    "errCode": 0,
+    "errMsg": null,
+    "questionRelations": [],
+    "result": {
+        "deptId": 123456
+    }
+}
+```
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/cw25n1p3y63812pb?singleDoc#)

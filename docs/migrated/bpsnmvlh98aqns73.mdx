@@ -1,0 +1,127 @@
+---
+title: "如何使用代码块根据人数确定所需车辆组合"
+description: "1. 问题描述：有一个旅行团，每次出发的人员数量不一样，需要系统自动给他计算所需要的大巴车数组合，需要组合的车位数够用并且价格是最便宜的。2. 实现思路在表格内手动输入每种车辆的车位数及价格信息，通过实际出发人数，使用代码块根据输入的车辆信息，计算出最便宜的车辆组合。支持版本：600、700版..."
+slug: "/常见问题-faq/轻代码/如何使用代码块根据人数确定所需车辆组合"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/bpsnmvlh98aqns73?singleDoc#"
+source_updated_at: "2025-02-18T02:27:41.000Z"
+keywords:
+  - "常见问题（FAQ）"
+  - "轻代码"
+  - "如何使用代码块根据人数确定所需车辆组合"
+---
+## 问题描述：
+
+有一个旅行团，每次出发的人员数量不一样，需要系统自动给他计算所需要的大巴车数组合，需要组合的车位数够用并且价格是最便宜的。
+
+## 实现思路
+
+在表格内手动输入每种车辆的车位数及价格信息，通过实际出发人数，使用代码块根据输入的车辆信息，计算出最便宜的车辆组合。
+
+支持版本：600、700版本皆可使用
+
+## 表单设计
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/43154275/1737625611510-875f2e65-9e74-4429-ba05-95b995ddd531.png)
+
+## 代码块示例
+
+**注释：**
+
+qf\_field.\{人数$$3295DBE1B$$\}替换成自己表单内的“人数”字段
+
+qf\_field.\{表格$$3295DBE1D$$\}替换成自己表单内的“车辆价格信息”表
+
+field\_317296896替换表格内的“价格”字段
+
+field\_317296897替换表格内的“车位数”字段
+
+```javascript
+function calculateOptimalBuses(passengers, busOptions) {  
+    // 过滤出可用的选项  
+   //field_317296896替换表格内的车辆费用字段
+    const availableBuses = busOptions.filter(option => option.field_317296896 > 0); 
+
+    let minCost = Infinity;  
+    let bestCombination = [];  
+
+    // 生成所有可能的二维组合  
+    function findCombinations(currentIndex, currentCombination, currentCost, currentCapacity) {  
+        if (currentCapacity >= passengers) {  
+            if (currentCost < minCost) {  
+                minCost = currentCost;  
+                bestCombination = [...currentCombination];  
+            }  
+            return;  
+        }  
+
+        for (let i = currentIndex; i < availableBuses.length; i++) {  
+            const bus = availableBuses[i];  
+            currentCombination.push(bus);  
+          //field_317296896替换表格内的车辆费用字段 field_317296897替换表格内的车位字段
+            findCombinations(i, currentCombination, currentCost + bus.field_317296897, currentCapacity + bus.field_317296896);  
+            currentCombination.pop();  
+        }  
+    }  
+
+    findCombinations(0, [], 0, 0);  
+
+    if (bestCombination.length > 0) {  
+      //field_317296896替换表格内的车辆费用字段 field_317296897替换表格内的车位字段
+        const totalCost = bestCombination.reduce((sum, bus) => sum + bus.field_317296897, 0);  
+        const totalCapacity = bestCombination.reduce((sum, bus) => sum + bus.field_317296896, 0);  
+
+        // 生成座位数字符串  
+        const seatCounts = bestCombination.map(bus => bus.field_317296896).join('+');  
+
+        // 统计每种座位的数量  
+        const seatCountMap = {};  
+        bestCombination.forEach(bus => {  
+          //field_317296896替换表格内的车辆费用字段
+            const seatCount = bus.field_317296896;  
+            seatCountMap[seatCount] = (seatCountMap[seatCount] || 0) + 1;  
+        });  
+
+        // 生成车辆数量字符串  
+        const vehicleCountString = Object.entries(seatCountMap)  
+            .map(([seat, count]) => `${count}辆${seat}座位`)  
+            .join('+');  
+
+        return {  
+            totalBuses: bestCombination.length,  
+            totalCost: totalCost,  
+            totalCapacity: totalCapacity,  
+            busDetails: bestCombination,  
+            seatCountString: seatCounts, // 输出座位数字符串  
+            vehicleCountString: vehicleCountString // 输出车辆数量字符串  
+        };  
+    } else {  
+        return null; // 如果没有找到合适的方案  
+    }  
+}  
+// 示例输入  
+const passengers = qf_field.{人数$$3295DBE1B$$};  //qf_field.{人数$$3295DBE1B$$}替换成自己表单的人数字段
+const busOptions = qf_field.{表格$$3295DBE1D$$}; //qf_field.{表格$$3295DBE1D$$}替换成自己表单内的车辆价格信息表
+
+// 计算  
+const result = calculateOptimalBuses(passengers, busOptions);  
+
+qf_output = {result}
+```
+
+### JsonPath解析
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/43154275/1738719466027-50deb836-4269-4461-977d-6e1a6f01a031.png)
+
+### 关联代码块的输出内容
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/43154275/1738719500028-30fbf169-4eba-4360-a4aa-507af2a4bb1b.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/43154275/1738719512126-d48bb324-5f26-4183-9c0b-354960ab642e.png)
+
+## 实现效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/43154275/1737625485032-d0508611-b12d-45b5-bc3d-f2833a510d48.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/bpsnmvlh98aqns73?singleDoc#)

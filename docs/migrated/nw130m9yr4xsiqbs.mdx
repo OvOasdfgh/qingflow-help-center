@@ -1,0 +1,77 @@
+---
+title: "Webhook"
+description: "功能简介webhook是轻流应用中，流程上的一个节点（如下图）。在这个节点，您可以通过简单的配置，当数据流经该节点时，自动触发并使用您所需的第三方系统API提供的功能，如向钉钉系统增加新成员，调用谷歌日历，发送邮件，Trello增加卡片，github增加Issue等等。您也可以基于轻流进行二次..."
+slug: "/帮助文档/轻代码/集成中心/webhook"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/nw130m9yr4xsiqbs?singleDoc#"
+source_updated_at: "2024-11-26T08:30:15.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "集成中心"
+  - "Webhook"
+---
+## 功能简介
+
+webhook是轻流应用中，流程上的一个节点（如下图）。在这个节点，您可以通过简单的配置，当数据流经该节点时，自动触发并使用您所需的第三方系统API提供的功能，如向钉钉系统增加新成员，调用谷歌日历，发送邮件，Trello增加卡片，github增加Issue等等。您也可以基于轻流进行二次开发，与公司已有的系统进行对接。
+
+Webhook也支持全局配置，在轻商城-插件中心-第三方连接-webhook配置界面进行配置后保存，即可以配置并生成全局可用的Webhook模版，方便您的后续使用。
+
+目前webhook功能仅对企业版用户开放，如需试用或升级，请联系与您对接的轻流同事。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-07/H0TNqHeO4YAkEKD0fdukIPeqSYfa-zwJ_.png)
+
+## 设置步骤
+
+(1) 请先确认您的版本：Webhook 为一种Q-Robot节点，目前仅开放给**企业版**及以上用户，如需试用或升级，请联系我们（具体见本文底端）。
+
+(2) 在轻商城-插件中心-第三方连接中安装Webhook功能
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-07/zTfPIwAHjQjkXGCVRhxgoQdml96_Cs28_.png)
+
+(3) 编辑应用流程时，添加Webhook节点，点击后可以看到以下配置内容
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-07/pFSZzXm9X2fHqzhasv4UuBfhgbTm1LsA_.png)
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-07/yK7iXY62TKZlipA4ENIxeXD1kM9pSyur_.png)
+
+(4) 各个配置项说明
+
+| 配置项名称 | 可填内容 | 用途描述 |
+| --- | --- | --- |
+| 配置模式 | 自定义/使用插件中心模版/使用连接中心模版 | 如果想使用已有的webhook全局配置或连接中心现有的模版，可以选择对应模版直接使用，免去配置过程 |
+| 鉴权方式 | 插件中心已有的鉴权 | 可以使用现有鉴权，省去鉴权步骤 |
+| URL | 第三方系统api的url，可以插入应用中表单内的字段、「工作区ID」和「应用ID」 | 设置为第三方系统api定义中指定的url |
+| Method | 目前支持POST/PUT/DELETE/GET | 目前涵盖了常用的方法 |
+| 触发方式 | 默认/自定义 | 默认情况下，会发送轻流预定义好的数据结构到指定url |
+| Header | 请求发送的header信息，支持插入「工作区ID」和「应用ID」 | 请求的header信息，支持自定义值或表单内字段插入 |
+| Body | url-encoded、application/json、application/xml，均支持插入「工作区ID」和「应用ID」 | 请求的body信息，支持上述三种格式 |
+| x-www-form-urlencoded | body内容的键值对 |  |
+| application/json | body内容自定义json结构，可以插入字段 | 这部分属于轻流webhook进阶内容，可以自定义请求体内容，支持传输普通字段、表格子字段、整表格 |
+| application/xml | body内容自定义xml结构，可以插入字段 | 这部分属于轻流webhook进阶内容，可以自定义请求体内容，支持传输普通字段、表格子字段、整表格 |
+| 回调更新当前数据 | 可以对返回数据进行自定义解析，更新当前表单字段 | 支持解析XML和JSON格式的返回数据，按照自定义的规则更新到当前表单 |
+
+## 注意事项
+
+- 插入字段时，实际插入的内容
+
+| 插入的字段 | 实际内容 |
+| --- | --- |
+| 成员字段 | 成员绑定的邮箱 |
+| 申请人 | 申请人绑定的邮箱 |
+| 上传附件 | 附件的url |
+| 日期 | 例：2020-09-18 14:09:46，随设置的精度变化 |
+| 下拉选择、单项选择 | 选项名称，空格隔开 |
+
+- 企业微信用户不支持插入申请人、成员与部门字段
+- 「数组格式」的结果关联到单值格式字段（如：单行文本）时，只取数组第一个对象值填入
+- 表格字段的JSON Path解析结果必须为数组
+- 超时时间为60s
+
+## 视频课程
+
+您可以点击轻流学院的教学视频来学习如何使用Webhook功能。
+
+[SP3 Webhook配置详解](https://learn.qingflow.com/detail/v_60a51171e4b0adb2d865baf0/3)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/nw130m9yr4xsiqbs?singleDoc#)

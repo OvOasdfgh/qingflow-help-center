@@ -1,0 +1,91 @@
+---
+title: "获取管理员列表"
+description: "获取系统管理员列表1. 权限说明仅「超管accessToken」拥有调用权限。（权限组accessToken无法调用）2. 请求请求方式：GET请求地址：https://api.qingflow.com/manager/super（公有云版本）GET https://api.qingflow...."
+slug: "/帮助文档/轻代码/openapi/通讯录/管理员/获取管理员列表"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/ffuma4g9f80mfw26?singleDoc#"
+source_updated_at: "2024-10-15T03:35:09.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "通讯录"
+  - "管理员"
+  - "获取管理员列表"
+---
+获取系统管理员列表
+
+---
+
+### **权限说明**
+
+仅「超管accessToken」拥有调用权限。（权限组accessToken无法调用）
+
+### 请求
+
+**请求方式：**GET
+
+**请求地址：**https://api.qingflow.com/manager/super（公有云版本）
+
+```javascript
+GET https://api.qingflow.com/manager/super
+```
+
+**其他版本请求地址：**
+
+钉钉版本：[https://api.ding.qingflow.com/manager/super](https://api.ding.qingflow.com/manager/super)
+
+专有轻流：http(s)://xxx.xx(自有域名)/openApi/manager/super
+
+#### **2.1 参数说明(路径参数)：**
+
+无
+
+#### **2.2 参数说明(查询参数)：**
+
+无
+
+#### **2.3 请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+
+#### **2.4 请求体（Body）**
+
+无
+
+#### **2.5 请求体示例**
+
+无
+
+### 返回
+
+#### 3.1 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| questionRelations |  |  | 关联的设置，这里没用 |
+| result | 是 | object | 返回结果 |
+| managerUserIds |  | \[array\] | 管理员的userId |
+
+#### 3.2 返回体示例
+
+```json
+{
+    "errCode": 0,
+    "errMsg": null,
+    "questionRelations": [],
+    "result": {
+        "managerUserIds": [
+            "283360",
+            "833342"
+        ]
+    }
+}
+```
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/ffuma4g9f80mfw26?singleDoc#)

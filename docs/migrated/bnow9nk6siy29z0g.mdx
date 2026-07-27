@@ -1,0 +1,140 @@
+---
+title: "报表：获取“上周最后一天”的数据"
+description: "1. 场景/功能描述报表中的“上周最后一天”的数据获取是一种常见的需求，特别是在管理和分析业务数据时。这个功能可以帮助用户获取需要的数据，以便进行比较、趋势分析和决策制定。2. 思路逻辑⭐️ 相关教程 ⭐️：如何计算月初月末周一周日、本周范围：https://exiao.yuque.com/e..."
+slug: "/搭建技巧/按功能分类/数据管理/应用数据处理/报表-获取-上周最后一天-的数据"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/bnow9nk6siy29z0g?singleDoc#"
+source_updated_at: "2024-10-15T03:38:13.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "数据管理"
+  - "应用数据处理"
+  - "报表：获取“上周最后一天”的数据"
+---
+## 场景/功能描述
+
+报表中的“上周最后一天”的数据获取是一种常见的需求，特别是在管理和分析业务数据时。这个功能可以帮助用户获取需要的数据，以便进行比较、趋势分析和决策制定。
+
+## 思路逻辑
+
+> ⭐️ 相关教程 ⭐️：如何计算月初月末周一周日、本周范围：https://exiao.yuque.com/enzu8l/oy1eh8/mnrbh2?singleDoc# Q-Robot更新：https://help.qingflow.com/help-docs?type=nocode&docId=7e2dc5fb641ffe8000061ed124157038&parentId=
+
+## 配置过程
+
+### 表单设计
+
+#### 日期
+
+字段类型：日期
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1691659231279-17572900-693b-4f03-a004-5e1ddf55ee7b.png)
+
+#### 周一
+
+字段类型：日期
+
+默认内容-通过公式计算
+
+IF(NUM(TEXT(插入日期字段,"E"))!=0,DATEDELTA(插入日期字段,(-NUM(TEXT(插入日期字段,"E"))+1),"D"),DATEDELTA(插入日期字段,-6,"D"))
+
+作用：用于判断同一周的数据（周一至周日算作一周）
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1691659245464-516dbcd4-ecb4-475b-88b2-ff695024244c.png)
+
+#### 当周最后一天（历史数据）
+
+字段类型：日期
+
+默认内容-关联已有数据
+
+上周最后一天（即当前应用）- 日期
+
+筛选数据：
+
+周一 等于 周一
+
+是否为当周最后一天 等于 是
+
+作用：用于获取历史数据中，当周最后一天是哪一天
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1691659556546-bbae3cc1-7138-453b-a6ca-8fa03e91593b.png)
+
+#### 是否为当周最后一天
+
+字段类型：单行文字
+
+默认内容-通过公式计算
+
+IFS(
+
+DAYS(插入日期字段,插入当周最后一天历史数据字段)>0,"是",
+
+AND(NOT(ISEMPTY(插入日期字段)),ISEMPTY(插入当周最后一天历史数据字段)),"是",
+
+true,"否"
+
+)
+
+作用：通过对比得到该日期是否为当周最后一天
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1691659577717-fc1f3b2d-ce9b-4240-a120-c3a72302cea9.png)
+
+### 流程设计
+
+#### 申请人节点
+
+提交/通过时重新触发数据关联/公式（请按计算顺序设置）
+
+周一
+
+当周最后一天（历史数据）
+
+是否为当周最后一天
+
+作用：针对Q-Robot或者导入的数据，或者字段隐藏时，可以实现自动计算/判断。
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1691659617439-a646a38f-8bea-419e-b94b-751099ed7d4c.png)
+
+#### Q-Robot 更新历史数据
+
+目标应用：上周最后一天（当前应用）
+
+筛选数据：
+
+周一 等于 周一
+
+日期 小于 日期
+
+更新规则：
+
+是否为当周最后一天	更新为	自定义	否
+
+作用：更新历史数据，是否为当周最后一天的判断
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1691659634290-9b26008c-069a-4b71-b51c-2f65738a5d90.png)
+
+### 报表设计
+
+数据范围
+
+AND(DAYS(IF(NUM(TEXT(CURDATE(),"E"))!=0,DATEDELTA(CURDATE(),(-NUM(TEXT(CURDATE(),"E"))-6),"D"),DATEDELTA(CURDATE(),-13,"D")),插入周一字段)==0,插入是否为当周最后一天字段=="是")
+
+作用：满足2个条件，可筛选得到上周最后一天的数据
+
+1. 公式计算得到上周一，与表单中周一字段比较是否同一天
+
+2.是否为当周最后一天为是
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1691661182519-96e53b8e-b70b-4001-8681-c604a3f13261.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1691661209842-0adc9c9e-0485-415f-a08a-7f3660ee1307.png)
+
+## 实现效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1691661153840-f52d6dd4-38db-48aa-b911-a1223a2cae45.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1691662289568-64c97bcd-abf4-44a5-9dac-00f4a2309221.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/bnow9nk6siy29z0g?singleDoc#)

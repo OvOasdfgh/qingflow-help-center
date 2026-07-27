@@ -1,0 +1,62 @@
+---
+title: "更新外部组织"
+description: "该接口用于更新在通讯录中外部组织的信息。权限说明限专有轻流可用。「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有通讯录的权限。路径参数无请求请求方式：POST请求地址：https://自有域名/openApi/external/..."
+slug: "/帮助文档/轻代码/openapi/通讯录/外部组织/更新外部组织"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/dgt47giqmipn48e0?singleDoc#"
+source_updated_at: "2025-08-11T09:23:53.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "通讯录"
+  - "外部组织"
+  - "更新外部组织"
+---
+该接口用于更新在通讯录中外部组织的信息。
+
+---
+
+#### 权限说明
+
+限专有轻流可用。「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有通讯录的权限。
+
+#### 路径参数
+
+无
+
+#### 请求
+
+**请求方式：POST**
+
+**请求地址：**[https://自有域名/openApi/external/dept/update](https://xn--eqrt2gz0rng0a/openApi/manager/sub)
+
+**请求头（header）**
+
+| 参数 | 类型 | 是否必须 | 说明 |
+| --- | --- | --- | --- |
+| `accessToken` | string | 是 | 可在【插件中心】-【openAPI】查询每个工作区的accessToken，token没有时限，除非手动重置 |
+
+**Body 请求参数**
+
+| 参数 | 类型 | 是否必须 | 说明 |
+| --- | --- | --- | --- |
+| **name** | string | 是 | 名字 |
+| **id** | long | 是 | 外部id |
+| **ordinal** | long | 是 | 顺序 |
+
+#### 返回
+
+**返回体 **
+
+| 参数 | 类型 | 是否必含 | 说明 |
+| --- | --- | --- | --- |
+| errCode | int | 是 | 错误代码 |
+| errMsg | string | 是 | 错误信息 |
+| result | object | 是 | 返回对象信息 |
+| name | string | 是 | 名字 |
+| id | long | 是 | 外部id |
+| ordinal | long | 是 | 顺序 |
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/dgt47giqmipn48e0?singleDoc#)

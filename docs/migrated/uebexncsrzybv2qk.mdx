@@ -1,0 +1,66 @@
+---
+title: "连接功能日志"
+description: "功能简介应用内「数据管理——概览」界面，新增了连接功能日志模块，便于查看连接功能的执行结果、排查问题。功能效果鼠标移动至目标日志，点击“查看数据”可以跳转至对应数据。点击“查看详情”可以查看具体信息，如图：涉及功能范围Q-Linker（提交重计算部分）Q-Source主动（手动、自动轮询）Q-..."
+slug: "/帮助文档/轻代码/集成中心/连接功能日志"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/uebexncsrzybv2qk?singleDoc#"
+source_updated_at: "2024-11-26T08:30:16.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "集成中心"
+  - "连接功能日志"
+---
+### 功能简介
+
+应用内「数据管理——概览」界面，新增了连接功能日志模块，便于查看连接功能的执行结果、排查问题。
+
+### 功能效果
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/jpfOgIpL-q16b7C1z5DlnSPHwLtBRJ24_.png)
+
+鼠标移动至目标日志，点击“查看数据”可以跳转至对应数据。
+
+点击“查看详情”可以查看具体信息，如图：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/XfelI2TyaqIZYaj0YWXUKreCbM33d8YN_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/Prw_-3IJIvDY-Gb30SPUUZGWQCkuf47L_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/gEfUaKlQJqNS9kVCeU4-qmAdGtmvScfc_.png)
+
+### 涉及功能范围
+
+- Q-Linker（提交重计算部分）
+- Q-Source主动（手动、自动轮询）
+- Q-Source被动
+- Webhoook
+- Q-Database（手动、自动轮询）
+- OPEN API（添加、更新、删除数据）
+- 提醒推送
+
+### 注意事项
+
+1、以下情况，日志内无数据编号显示：
+
+- Q-Source被动批量更新
+- Q-Source主动、Q-Databse功能拉取多条数据
+- 未成功拉取/更新数据等
+
+2、是否含有响应信息：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/k9X2cR6bhVoJ_nP6fWGWa8VOAuiixcTu_.png)
+
+3、除Q-Source被动、OPEN API外，其他类型的日志详情页面，含有“重新执行”按钮
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/UXozCr_0Z9gENyK48JFp06BD-u6a06ZW_.png)
+
+- 每个日志仅能重新执行一次，执行后，会产生新的日志记录
+- 在表单页面-流程日志中，重新执行Webhook节点后，该节点对应的流程日志也变为“已重新执行”状态
+
+4、Q-Source主动配置被删除，可能会导致「全部数据拉取方式」内容显示为空
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/mpGVtUSnS78D4MRgDQPpNZ9hhjZxr0xt_.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/uebexncsrzybv2qk?singleDoc#)

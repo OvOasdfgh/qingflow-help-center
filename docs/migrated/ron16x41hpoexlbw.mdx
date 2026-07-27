@@ -1,0 +1,92 @@
+---
+title: "移除部门成员"
+description: "调用本接口，移除部门成员1. 权限说明仅支持专有轻流。「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有通讯录权限。2. 请求请求方式：DELETE请求地址：http(s)://xxx.xx(自有域名)/openApi/depar..."
+slug: "/帮助文档/轻代码/openapi/通讯录/部门/移除部门成员"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/ron16x41hpoexlbw?singleDoc#"
+source_updated_at: "2024-10-15T03:35:07.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "通讯录"
+  - "部门"
+  - "移除部门成员"
+---
+调用本接口，移除部门成员
+
+---
+
+### **权限说明**
+
+仅支持专有轻流。
+
+「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有通讯录权限。
+
+### 请求
+
+**请求方式：DELETE**
+
+**请求地址：**http(s)://xxx.xx(自有域名)/openApi/department/:deptId/user
+
+> 请求地址中:deptId为需要替换的变量，根据实际获取值更新，示例如下：
+
+```javascript
+POST https://ncbd.qingflow.com/openApi/department/123456/user
+```
+
+#### **2.1 参数说明(路径参数)：**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| deptId | 是 | 部门id，可通过文档接口获取 |
+
+#### **2.2 请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+
+#### **2.3 请求体（Body）**
+
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| deptId | 是 | int | 部门id |
+| userIds | 是 | array | 用户的userId |
+
+#### **2.4 请求体示例**
+
+```json
+{
+    "deptId":123456,
+    "userIds":["123","456"]
+}
+```
+
+### 3.返回
+
+#### 3.1 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| questionRelations |  |  | 关联的设置，这里没用 |
+| result | 是 | object | 返回结果 |
+| deptId | 是 | int | 部门id |
+
+#### 3.2 返回体示例
+
+```json
+{
+    "errCode": 0,
+    "errMsg": null,
+    "questionRelations": [],
+    "result": {
+        "deptId": 123456
+    }
+}
+```
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/ron16x41hpoexlbw?singleDoc#)

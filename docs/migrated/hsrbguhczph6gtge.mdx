@@ -1,0 +1,99 @@
+---
+title: "案例：超时信息推送至企业微信群"
+description: "场景描述用户日常使用企业微信进行办公交流，希望能够在企业微信工作群内，接收到轻流平台的超时提醒信息，方便直接处理。解决方案针对上述场景，轻流推荐使用【提醒推送】功能实现向企业微信群内推送消息，提高工作效率。操作步骤创建企业微信机器人利用企业微信群机器人推送消息需要获取群机器人的webhook地..."
+slug: "/帮助文档/轻代码/集成中心/提醒推送/案例-超时信息推送至企业微信群"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/hsrbguhczph6gtge?singleDoc#"
+source_updated_at: "2024-11-26T08:30:15.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "集成中心"
+  - "提醒推送"
+  - "案例：超时信息推送至企业微信群"
+---
+### 场景描述
+
+用户日常使用企业微信进行办公交流，希望能够在企业微信工作群内，接收到轻流平台的超时提醒信息，方便直接处理。
+
+### 解决方案
+
+针对上述场景，轻流推荐使用【提醒推送】功能实现向企业微信群内推送消息，提高工作效率。
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/RpAJ6dtV_GBnvxFFVTP1qep0XGDmGXKG_.png)
+
+### 操作步骤
+
+#### 创建企业微信机器人
+
+利用企业微信群机器人推送消息需要获取群机器人的webhook地址，步骤如下：
+
+##### 在手机端群聊信息中点击创建群机器人。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/SGc_eMQ5r86DBu68sc3KhdDIzDz1gPec_.png)
+
+##### 获取其Webhook地址。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/cIjEl5PPXY1KfntN-Icsw5qEWz0yq2cn_.png)
+
+PC端：在企业微信群,右键创建群机器人，并点击机器人获取Webhook地址。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/UY-wDFjT6Gx5l3Tntdo5FRiY-FHSEh3y_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/7HixPn_v-YQwyqhNuuJURGWZtNej8rWA_.png)
+
+##### 注意事项
+
+请注意保护好机器人的webhook地址，避免泄漏！
+
+#### 具体配置
+
+安装并点击「提醒推送」后，点击配置按钮即可开始「提醒推送」的配置，需配置的内容（如下图）包括：提醒类别，推送范围，鉴权方式，推送请求
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/XpW9fDu0C2fi_3b7FCq28MfL4NfqbuLB_.png)
+
+##### 提醒类别与推送范围
+
+按照需求选择提醒类别与推送范围，在本例中，需要推送“招聘”应用中的超时相关消息，因此配置如下：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/LiSK0l4AshuIBGU7QJgy--MfK31XAlNL_.png)
+
+##### **鉴权方式**
+
+本例为向企业微信机器人的webhook地址发送消息，因此无需配置鉴权。
+
+##### **推送请求**
+
+1、首先按照上文鉴权信息中步骤获取指定群机器人的Webhook地址；
+
+2、按照企业微信群机器人API文档（下图）填写配置项：
+
+[群机器人配置说明 - 企业微信API](https://work.weixin.qq.com/api/doc/90000/90136/91770)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/GLQdfHQ87qpA5qhMY5I6NsIU5k_36PEp_.png)
+
+配置如图：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/JXz2VPI1f6e0fiwzEfCXqO24Gvh5kzdX_.png)
+
+3、点击保存，就完成配置了。
+
+注：一定要注意在对应流程节点的【高级设置】中设置超时时间与预警时间。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/EUR08PPoaHwwBaJ9rmgD0ATUbVhMMe-4_.png)
+
+### 效果展示
+
+若该节点在设置的时间前并未被处理，在企业微信群中收到推送消息如下：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/V4bco49omc7ue6BX7jIirXgEL3W7_Ekc_.png)
+
+### 注意事项
+
+提醒推送具有以下限制：
+
+1. 提醒推送为企业版单独付费功能，如果需要试用或购买请联系轻流销售人员。
+2. 钉钉版本调用的接口请先联系轻流开通白名单
+3. 全局提醒推送每个工作区最多只能设置3个。
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/hsrbguhczph6gtge?singleDoc#)

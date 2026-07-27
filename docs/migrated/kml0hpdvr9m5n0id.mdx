@@ -1,0 +1,102 @@
+---
+title: "轻流 x 有赞--新增商品"
+description: "应用场景通过轻流，将审批过后的商品放在有赞商场上进行售卖。落地方案图文/视频演示帮助文档一、获取access_Token：本次测试账号所用的是：自用型无容器应用获取和刷新 access_token帮组文档：https://doc.youzanyun.com/resource/develop-g..."
+slug: "/搭建技巧/按功能分类/第三方集成/有赞/轻流-x-有赞-新增商品"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/kml0hpdvr9m5n0id?singleDoc#"
+source_updated_at: "2024-10-15T03:38:15.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "第三方集成"
+  - "有赞"
+  - "轻流 x 有赞--新增商品"
+---
+## 应用场景
+
+通过轻流，将审批过后的商品放在有赞商场上进行售卖。
+
+## 落地方案
+
+![原文画板](https://cdn.nlark.com/yuque/0/2022/jpeg/28884377/1655279367006-69a164fd-94bc-4cfc-81cc-2779923385b4.jpeg)
+
+## 图文/视频演示
+
+## 帮助文档
+
+### 一、获取access\_Token：
+
+本次测试账号所用的是：自用型无容器应用
+
+获取和刷新 access\_token帮组文档：[https://doc.youzanyun.com/resource/develop-guide/41355/49259](https://doc.youzanyun.com/resource/develop-guide/41355/49259)
+
+关于 client\_id、client\_secret 和 grant\_id 的获取方式，请参见[如何查看 client\_id 和 client\_secret](https://doc.youzanyun.com/resource/faq/27034/28981/64897)和[如何查看店铺 id（kdt\_id）](https://doc.youzanyun.com/resource/faq/27034/28981/64898)。
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/28884377/1655201309261-8fd2daf2-699a-47ba-8e9a-fb475fe07931.png)
+
+postman测试：
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/28884377/1655280762117-7af9a663-e5e8-4cce-a88e-8fb726b7376c.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/28884377/1655280847981-2e1f7571-98b7-43e3-8bf6-44620953f44b.png)
+
+### 二、新增商品中必须请求参数
+
+新增商品参考文档[https://doc.youzanyun.com/detail/API/0/521](https://doc.youzanyun.com/detail/API/0/521)
+
+(1)、image\_ids：通过调用 ——批量查询店铺素材中心图片列表接口获取，参考帮助文档[https://doc.youzanyun.com/detail/API/0/1537](https://doc.youzanyun.com/detail/API/0/1537)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/28884377/1655277422882-f68df455-5e16-40b1-ba7f-37f3614a24ea.png)
+
+注意：所需要的image\_ids与media\_id是一样的，直接调用media\_id即可。
+
+（2）、title：商品名即商品标题。不能超过100字，受违禁词控制
+
+（3）、desc：通过打开有赞微商场后台——内容——素材中心获取[https://www.youzan.com/](https://www.youzan.com/)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/28884377/1655277730338-1c6a8e4e-3037-4383-92b7-0fd478ddfc56.png)
+
+点击链接，将弹出来的链接复制即可调用。
+
+注意：新增商品时，需自行将所售卖的商品图片导入素材中心中
+
+（4）、price： 价格，单位：分。精确到个位
+
+\*注意：yz\_open\_id：有赞用户id，用户在有赞的唯一id。推荐使用。如果店铺类型为有赞连锁D(微商城连锁)此参数为必填。获取方式：参考文档[https://doc.youzanyun.com/detail/API/0/2203](https://doc.youzanyun.com/detail/API/0/2203)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/28884377/1655278207746-9d2e035a-a407-4265-b1c1-71773152b4d3.png)
+
+### 三、配置连接器
+
+具体配置过程，我们内部人员已完成配置，已经可以直接使用。
+
+### 四、创建应用表单及创建webhook
+
+#### 1、创建一个新增商品的应用表单，如下图：
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/28884377/1655279576614-2ea7f052-11b0-46a2-b809-94160712ac84.png)
+
+#### 2、webhook的配置
+
+其中配置模式选择连接中心的模板，具体操作如下图：
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/28884377/1655279651241-398e3674-0d95-48f0-a1e1-55fe6de0ef7e.png)
+
+### 五、发布并发起新的数据
+
+创建完成后保存并发布应用，点击发起新的数据，将所需的必填参数查出并填入表单中，如下图：
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/28884377/1655280261444-cc8470a7-7124-44cc-a8e3-6b828337aa56.png)
+
+登录有赞商城后台，查看商品管理，确认是否上架了该商品。如下图:
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/28884377/1655280370227-9b2b0bb6-a1dd-4f73-b0aa-0f03f4825389.png)
+
+​
+
+​
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/kml0hpdvr9m5n0id?singleDoc#)

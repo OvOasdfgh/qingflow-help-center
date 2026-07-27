@@ -1,0 +1,92 @@
+---
+title: "如何查看附件上传中的文件URL？"
+description: "1. 场景/问题描述有时我们需要知道到附件上传的文件的URL，有什么方式可以查看吗？2. 思路逻辑方式1:通过表单配置Q-linker回调数据来查看方式2:开发者工具中查看方式3:导出数据到excel表查看3. 配置过程3.1. 方式1：Q-linker3.1.1. 表单配置Q-linker ..."
+slug: "/搭建技巧/按功能分类/其他/附件上传/如何查看附件上传中的文件url"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/oyen3g59hdh37wix?singleDoc#"
+source_updated_at: "2024-10-15T03:38:23.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "其他"
+  - "附件上传"
+  - "如何查看附件上传中的文件URL？"
+---
+## 场景/问题描述
+
+有时我们需要知道到附件上传的文件的URL，有什么方式可以查看吗？
+
+## 思路逻辑
+
+方式1:通过表单配置Q-linker回调数据来查看
+
+方式2:开发者工具中查看
+
+方式3:导出数据到excel表查看
+
+## 配置过程
+
+### 方式1：Q-linker
+
+#### 表单配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690267454713-b9b6e3df-0f5f-4c33-89b8-87721b7745eb.png)
+
+Q-linker 配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690267490028-7b72b55a-3748-4a19-80de-8021cbd27922.png)
+
+URL：[https://connect.oalite.com/api/returnAll](https://connect.oalite.com/api/returnAll)
+
+method：post
+
+body：
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690267530988-a39d60c5-d60d-4753-8b0b-80588bbd34da.png)
+
+#### json path解析配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690267552154-c7e0ef4d-3cb3-4ddb-abc4-4643fc08a74d.png)
+
+#### 字段接收配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690267576692-58fc2478-c839-465b-b5b7-4ef980693826.png)
+
+#### 实现效果
+
+[https://qingflow.com/f/dee49d69](https://qingflow.com/f/dee49d69)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690267614640-defcc67d-951e-4d91-a475-e510746c22ea.png)
+
+### 方式2:开发者工具
+
+- 打开想要获取的文件的轻流表单
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698890740638-3bda93a8-a6da-442c-93bb-33bda921b512.png)
+
+- 鼠标右键选择检查，选择网络
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698890756477-66f0ddae-1241-4cbc-bc34-e97de4324e36.png)
+
+- 点击附件下载
+
+查看控制台信息，这个即是文件的下载地址
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698890776625-8d9cc9db-d01e-48b0-b19b-3fb575036631.png)
+
+### 方式3:导出数据
+
+- 数据管理后台，选中数据，点击导出
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698890949486-3d983478-3976-4996-955d-9ae9369a671b.png)
+
+- 查看excel表
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698890994682-19f9e518-d9f5-450b-87d9-c32491bc226e.png)
+
+​
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/oyen3g59hdh37wix?singleDoc#)

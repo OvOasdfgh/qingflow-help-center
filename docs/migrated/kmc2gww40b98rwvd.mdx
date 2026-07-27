@@ -1,0 +1,56 @@
+---
+title: "飞书机器人"
+description: "1. 介绍组织内存在给特定群组自动推送消息的需求，比如：监控报警推送、销售线索推送、运营内容推送等。你可以在群聊中添加一个自定义机器人，通过服务端调用webhook地址，即可将外部系统的通知消息即时推送到群聊中。2. 鉴权信息1.邀请自定义机器人入群。进入你的目标群组，打开会话设置，找到群机器..."
+slug: "/帮助文档/轻代码/连接中心/连接器/消息推送/飞书机器人"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/kmc2gww40b98rwvd?singleDoc#"
+source_updated_at: "2024-11-26T08:30:17.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "连接中心"
+  - "连接器"
+  - "消息推送"
+  - "飞书机器人"
+---
+### 介绍
+
+组织内存在给特定群组自动推送消息的需求，比如：监控报警推送、销售线索推送、运营内容推送等。你可以在群聊中添加一个自定义机器人，通过服务端调用webhook地址，即可将外部系统的通知消息即时推送到群聊中。
+
+### 鉴权信息
+
+1.邀请自定义机器人入群。进入你的目标群组，打开**会话设置**，找到**群机器人**，并点击**添加机器人**，选择**自定义机器人**加入群聊。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/XQ_JTcjd7wjcqZf1ewf6wDcPCvzjhOEs_.png)
+
+2.为你的机器人输入一个合适的名字和描述，也可以为机器人设置一个合适的头像，然后点击下一步。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/KOoZIa4JhWWFgHNdC3483kch0JuHeYYh_.png)
+
+3.配置webhook。你会获取该机器人的 webhook 地址，格式如：[**https://open.feishu.cn/open-apis/bot/v2/hook/xxxxxxxxxxxxxxxxx**](https://open.feishu.cn/open-apis/bot/v2/hook/xxxxxxxxxxxxxxxxx)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/kYYwcIH4_-RAgTlOFX2ev0T49jQOTVLB_.png)
+
+##### 注意事项
+
+**请妥善保存好此 webhook 地址**，不要公布在Gitlab、博客等可公开查阅的网站上，避免地址泄露后被恶意调用发送垃圾消息
+
+### 事件信息
+
+| 事件 | 描述 |
+| --- | --- |
+| 推送数据到飞书 | 发送文本消息进入飞书 |
+
+### 配置演示
+
+##### 推送数据到飞书
+
+1.连接中心飞书机器人配置地址可全局默认
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/C7qxr6DQmtuXd2f-M16Pdk08V27Fw9O8_.png)
+
+2.应用流程中添加webhook，使用连接中心模版，选择飞书机器人，事件选择推送数据到飞书
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/NUy_RRJ2I7hh0fSviWKHoUVK8VT9FwgK_.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/kmc2gww40b98rwvd?singleDoc#)

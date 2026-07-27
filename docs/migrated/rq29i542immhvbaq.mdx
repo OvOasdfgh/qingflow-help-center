@@ -1,0 +1,92 @@
+---
+title: "查询操作结果"
+description: "调用本接口，查询操作结果1. 权限说明「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有对应应用的操作权限。2. 请求请求方式：GET请求地址：https://api.qingflow.com/operation/:request..."
+slug: "/帮助文档/轻代码/openapi/其他/查询操作结果"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/rq29i542immhvbaq?singleDoc#"
+source_updated_at: "2024-10-15T03:35:13.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "其他"
+  - "查询操作结果"
+---
+调用本接口，查询操作结果
+
+---
+
+### **权限说明**
+
+「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有对应应用的操作权限。
+
+### 请求
+
+**请求方式：GET**
+
+**请求地址：**https://api.qingflow.com/operation/:requestId（公有云版本）
+
+> 请求地址中:requestId为需要替换的变量，根据实际获取值更新，示例如下：
+
+```javascript
+GET https://api.qingflow.com/operation/cabc33ac-737b-4e0c-a144-d6dfb
+```
+
+**其他版本请求地址：**
+
+钉钉版本：[https://api.ding.qingflow.com/operation/:requestId](https://api.ding.qingflow.com/operation/:requestId)
+
+专有轻流：http(s)://xxx.xx(自有域名)/openApi/operation/:requestId
+
+##### **参数说明(路径参数)：**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| requestId | 是 | 添加数据等请求返回的requestId |
+
+##### **参数说明(查询参数)：**
+
+##### **请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+
+### 返回
+
+##### 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| questionRelations |  |  | 关联的设置，这里没用 |
+| result | 是 | object | 操作结果，如果查询的是添加数据的requestId，会返回新增数据的applyId |
+| successUsers | 是 | array | 添加成功的成员userIds |
+| userId |  | string | 用户的userId |
+| email |  | string | 邮箱 |
+| customRole |  | array | 自建角色id列表（仅企业微信/钉钉/飞书等特殊工作区适用） |
+| customDepartment |  | array | 自建部门id列表（仅企业微信/钉钉/飞书等特殊工作区适用） |
+| beingDisabled |  | boolean | 是否禁用成员 |
+| beingActive | 是 | boolean | 用户的激活状态 |
+| errorUsers | 是 | array |  |
+| errorCode | 是 | string | 失败的错误码 |
+| userId |  | string | 用户的userId |
+| email |  | string | 邮箱 |
+| customRole |  | array | 自建角色id列表（仅企业微信/钉钉/飞书等特殊工作区适用） |
+| customDepartment |  | array | 自建部门id列表（仅企业微信/钉钉/飞书等特殊工作区适用） |
+| memberInfo | 是 | object | 批量添加成员的结果信息 |
+
+##### 返回体示例
+
+```json
+{
+    "errorCode": 0,
+    "memberInfo": null,
+    "message": null,
+    "result": "57826679,57812355,57812233,57811782"
+}
+```
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/rq29i542immhvbaq?singleDoc#)

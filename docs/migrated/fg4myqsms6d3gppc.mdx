@@ -1,0 +1,111 @@
+---
+title: "身份认证"
+description: "功能简介轻流身份认证是基于轻流通讯录提供的应用级身份认证服务，支持OIDC协议，向下兼容OAuth2.0，经过轻流用户的登录并授权后，第三方系统可以获取到权限token和用户的个人信息。该功能仅企业版可用功能效果在轻商城-插件中心-身份认证配置中创建应用，填写必要参数后，轻流会自动分配一对cl..."
+slug: "/帮助文档/轻代码/集成中心/用户体系/身份认证"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/fg4myqsms6d3gppc?singleDoc#"
+source_updated_at: "2024-11-26T08:30:16.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "集成中心"
+  - "用户体系"
+  - "身份认证"
+---
+### 功能简介
+
+轻流身份认证是基于轻流通讯录提供的应用级身份认证服务，支持OIDC协议，向下兼容OAuth2.0，经过轻流用户的登录并授权后，第三方系统可以获取到权限token和用户的个人信息。该功能仅企业版可用
+
+### 功能效果
+
+在轻商城-插件中心-身份认证配置中创建应用，填写必要参数后，轻流会自动分配一对client\_id和client\_secret（secret可以手动重置）作为后续调用身份认证相关服务的凭证。
+
+用户会通过网页登录并授权的形式-换取授权码code-换取access\_token和id\_token，最终获取到用户的授权&认证信息
+
+### 设置步骤
+
+#### 创建应用
+
+首先需要系统管理员账号进入本工作区轻商城-插件中心-身份认证配置页面，新建一个身份认证配置
+
+![文档图片](https://cdn.nlark.com/yuque/0/2024/png/43099917/1722567131658-be260a9b-2752-401f-a093-49d4cdab1789.png)
+
+其中回调地址作用为：
+
+1、用户确认授权后的跳转地址，会附带授权码code和state（如有）
+
+2、用作请求中的redirect\_uri参数校验
+
+#### 用户登录&授权
+
+##### 请求方式：GET
+
+##### 请求地址（公有云）：[https://accounts.qingflow.com/oidc-authorize?response\_type=code&client\_id=xxxx&redirect\_uri=xxxxxx&scope=openid%20email&(state=xxxxxx)](https://accounts.qingflow.com/oidc-authorize?response_type=code&client_id=xxxx&redirect_uri=xxxxxx&scope=openid%20email&(state=xxxxxx%29)
+
+##### 参数
+
+Query Params：
+
+| **参数** | **必须** | **说明** |
+| --- | --- | --- |
+| response\_type | 是 | 固定值：code |
+| client\_id | 是 | 创建应用时获取 |
+| scope | 是 | 决定id\_token包含的信息和userInfo接口返回值，可选值openid（必传，返回用户外部userid）、profile（返回用户昵称、头像）、email（返回用户邮箱信息）、phone（返回用户手机号） |
+| redirect\_uri | 是 | 回调地址，需要与创建应用时填写的保持一致，授权成功后会重定向至此地址并携带code和state（如有）参数 |
+| state | 否 | 用于防止跨站请求伪造(CSRF)攻击的参数，会原样透传 |
+
+*注：请在浏览器中请求；专有轻流请求url有变动，参照*
+
+#### *获取令牌*
+
+##### 请求方式：POST
+
+##### 请求地址（公有云）：[https://qingflow.com/api/oidcAuthentication/token](https://qingflow.com/api/oidcAuthentication/token)
+
+##### 参数
+
+Headers：
+
+| **参数** | **必须** | **说明** |
+| --- | --- | --- |
+| Content-Type | 是 | 固定值：application/x-www-form-urlencoded |
+
+Body：
+
+| **参数** | **必须** | **说明** |
+| --- | --- | --- |
+| code | 是 | 上一步骤中回调时轻流发布的code |
+| redirect\_uri | 是 | 回调地址，需要与创建应用时填写的保持一致，用作校验 |
+| grant\_type | 是 | 固定值：authorization\_code |
+| client\_id | 是 | 创建应用时获取 |
+
+返回值包括id\_token和access\_token，id\_token由用户信息经HS256算法的jwt加密生成，加密secret为client\_secret，payload包含的信息由scope决定
+
+jwt测试解密可以使用：[https://jwt.io/#debugger](https://jwt.io/#debugger)
+
+#### 获取用户信息
+
+##### 请求方式：GET
+
+##### 请求地址（公有云）：[https://api.qingflow.com/oidcAuthentication](https://api.qingflow.com/oidcAuthentication)
+
+##### 参数：
+
+Headers
+
+​
+
+| **参数** | **必须** | **说明** |
+| --- | --- | --- |
+| oidctoken | 是 | oidc授权后的token |
+
+返回用户信息，由授权时的scope决定，参照下表
+
+![文档图片](https://cdn.nlark.com/yuque/0/2024/png/43099917/1722568473973-787d1f09-6519-4ec4-aac5-07ff3cc301e3.png)
+
+OIDC协议相关的可以参照官方文档：[https://openid.net/specs/openid-connect-basic-1\_0.html](https://openid.net/specs/openid-connect-basic-1_0.html)
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/fg4myqsms6d3gppc?singleDoc#)

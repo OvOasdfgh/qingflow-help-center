@@ -1,0 +1,91 @@
+---
+title: "空气质量查询"
+description: "场景描述在室外工作时，有时候在表单中需要获取当前精准的空气质量数据解决方案通过Q-Linker我们可以轻松实现这个需求：设置步骤1.选择空气质量查询服务商在阿里云市场中选取合适的空气质量查询服务商，本次案例以此服务商为例：易源数据2.添加表单字段在轻流中新建应用，输入城市(单行文本类型) ，p..."
+slug: "/帮助文档/轻代码/集成中心/q-linker/q-linker使用案例/空气质量查询"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/zgtlzfwmhqwilv75?singleDoc#"
+source_updated_at: "2024-11-26T08:30:15.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "集成中心"
+  - "Q-Linker"
+  - "Q-Linker使用案例"
+  - "空气质量查询"
+---
+## 场景描述
+
+在室外工作时，有时候在表单中需要获取当前精准的空气质量数据
+
+## 解决方案
+
+通过Q-Linker我们可以轻松实现这个需求：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/JW7R1kD2-x1_BJGjtlkL3o7H_9KZXpjB_.gif)
+
+## 设置步骤
+
+### 1.选择空气质量查询服务商
+
+在阿里云市场中选取合适的空气质量查询服务商，本次案例以此服务商为例：[易源数据](https://market.aliyun.com/products/57096001/cmapi010843.html?spm=5176.730005.productlist.d_cmapi010843.6b813524U7AYkj&innerSource=search_%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F%20%E5%A2%A8%E8%BF%B9#sku=yuncode484300003)
+
+### 2.添加表单字段
+
+在轻流中新建应用，输入城市(单行文本类型) ，pm2.5(单行文本类型)和Q-Linker查询按钮 ，如下图：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/n76M7BQrREiY9vfkVvKmX0DMMJKXY-Cm_.png)
+
+### 3.配置Q-Linker字段
+
+先查看API提供的使用说明，红圈是所需的必要信息，如下图：
+
+![文档图片](https://hc.qingflow.com/wp-content/uploads/2020/04/2-8.png)
+
+- **URL、QueryParam、Method**
+
+由于请求的参数是Query，所以格式为url? 参数A & 参数B & 参数C…所以URL中需要手动配置一下参数的值，如下图：
+
+其中city是你需要提供的，代表需要查询的城市，可以配置为表单中已有的字段，例如图中插入了标题为‘所在城市’的单行文本
+
+- **Call Type**: GET
+- **Header/Body**:
+
+如下图，发送请求想要得到回复是需要鉴权的，就好比古代打仗调集士兵是需要”军符“一样，此时我们需要的鉴权的密码就是API服务商提供的AppCode，所需要的Key是”Authorization“，Value值是下图红圈中的部分，相应格式按照API的要求配置
+
+![文档图片](https://hc.qingflow.com/wp-content/uploads/2020/04/4-2.png)
+
+- **Result Format**: JSON
+- **Json Path: **
+
+$.showapi\_res\_body.pm.pm2\_5
+
+$.showapi\_res\_body.pm.aqi
+
+$.showapi\_res\_body.pm.pm10
+
+$.showapi\_res\_body.pm.quality
+
+别名是将用于数据关联对JSON Path对应数据的调取,不可重复
+
+![文档图片](https://hc.qingflow.com/wp-content/uploads/2020/04/5-1.png)
+
+![文档图片](https://hc.qingflow.com/wp-content/uploads/2020/04/6-8.png)
+
+### 4.配置相应字段用来显示结果
+
+使用单行文字字段显示各项空气参数，如下图：
+
+关联应用为当前应用，关联字段为JSON Path的别名
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/QYAZQACQynIr-X9HF23iAxK4AgzrfIWH_.png)
+
+![文档图片](https://hc.qingflow.com/wp-content/uploads/2020/04/8-1.png)
+
+### 5.发布应用 并使用
+
+使用效果如图： ![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/4EWFf0Z7nVTmPCgzD1Zw_A4zWXY2HnJX_.gif)
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/zgtlzfwmhqwilv75?singleDoc#)

@@ -1,0 +1,108 @@
+---
+title: "如何姓名转拼音"
+description: "1. 场景描述解决客户中英文姓名转换需求，同样可以作用在任意需要中文转拼音的需求中。2. 实现方式2.1. 代码块方式通过代码块中引用pinyin库来对输入的字段做转换，再通过客户要求如: 每个字首字母大写，其他字符保持不变，每个中文转拼音后间隔开，将输入的内容按要求做转换。2.2. Qlin..."
+slug: "/常见问题-faq/轻代码/如何姓名转拼音"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/hpa7sadl5oyvh9nz?singleDoc#"
+source_updated_at: "2025-02-18T02:36:38.000Z"
+keywords:
+  - "常见问题（FAQ）"
+  - "轻代码"
+  - "如何姓名转拼音"
+---
+### 场景描述
+
+解决客户中英文姓名转换需求，同样可以作用在任意需要中文转拼音的需求中。
+
+### 实现方式
+
+#### 代码块方式
+
+通过代码块中引用pinyin库来对输入的字段做转换，再通过客户要求如: 每个字首字母大写，其他字符保持不变，每个中文转拼音后间隔开，将输入的内容按要求做转换。
+
+#### Qlinker方式
+
+通过调用接口来实现直接转为英文或拼音，例：调用[https://www.tianapi.com/](https://www.tianapi.com/)内接口直接转为英文
+
+### 表单设计
+
+#### 代码块方式：
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/38364190/1735710085245-7cf8e5c0-ecf6-430a-8b61-d87a9dbe38fc.png)
+
+#### Qlinker方式：
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/38364190/1735785708921-c14b133e-c846-4610-833e-9d60ac08d4f5.png)
+
+### 代码块内容
+
+注：7.0.0版本无需修改代码可以使用，专有云客户可能因为版本不同需要运维同事帮助安装pinyin库才能使用
+
+代码块中仅需要替换输入变量中的字段即可实现转换需求，其中如果仅需要首个中文首字母大写则修改下面的对于规则。
+
+```javascript
+// 引入 pinyin 库
+const pinyin = require('pinyin').default;
+
+// 输入变量
+let name = qf_field.{name$$2ABA678DD$$};
+
+// 用于存储转换后的拼音结果
+let result = "";
+
+// 将输入字符串按字符分割为数组，方便遍历处理
+let chars = name.split('');
+
+for (let char of chars) {
+  if (/[\u4e00-\u9fa5]/.test(char)) {
+    // 使用 pinyin 库转换为拼音数组
+    const options = {
+      style: pinyin.STYLE_NORMAL
+    };
+    const pinyinResult = pinyin(char, options);
+
+    // 获取拼音并将首字母大写，然后添加空格
+    let pinyinWithUpperFirst = pinyinResult[0][0].charAt(0).toUpperCase() + pinyinResult[0][0].slice(1);
+    result += " " + pinyinWithUpperFirst + " ";  // 在拼音前后加空格
+  } else {
+    result += char;  // 非中文字符直接拼接
+  }
+}
+
+// 去除多余空格
+result = result.trim().replace(/\s{2,}/g, ' ');
+
+// 使用 qf_output 对象按照要求格式输出
+qf_output = {
+  output: result
+};
+```
+
+#### 运行测试
+
+测试返回的内容为需求格式则为成功，解析后在字段中关联即可实现。
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/38364190/1735712187072-a83b7dfd-4a45-49b2-a62d-151123f55dbf.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/38364190/1735711812976-f19e80a2-1bf0-40c6-b0d3-78e485084f8c.png)
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/38364190/1735712097863-a592d707-7360-4f9f-944b-d0777ac6c0bb.png)
+
+### Qlinker内容
+
+#### 配置内容
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/38364190/1735785897240-f635538a-b538-40e6-8335-47211fb38256.png)
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/38364190/1735786057329-0113109e-4d57-44c3-8f2a-118e122fcfec.png)
+根据接口文档仅需要添加一个需要翻译的字段，将key放在URL即可实现
+
+#### 测试解析
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/38364190/1735786171514-e1afcb70-1625-4c49-92e9-eb095bd655e6.png)![image.png](https://cdn.nlark.com/yuque/0/2025/png/38364190/1735786194685-67e53c15-aeae-4734-a97d-c1415837b52a.png)
+
+### 实现效果
+
+#### 代码块
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/38364190/1735786754244-6e81b586-840c-4d22-b3d6-d931b15f8e56.png)
+
+#### Qlinker
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/38364190/1735786796260-fa1e4250-9aec-42b1-8b5f-7a334713ac61.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/hpa7sadl5oyvh9nz?singleDoc#)

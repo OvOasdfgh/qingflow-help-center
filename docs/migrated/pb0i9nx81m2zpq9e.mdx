@@ -1,0 +1,261 @@
+---
+title: "轻流 x 数据库"
+description: "应用场景通过轻流应用表单实现与数据库（Mysql、SQL server、Oracle）进行对接ps:公有云环境下，连接数据库需要确保所连接的数据库可以在外网环境下访问，否则无法进行连接。私有化环境下，需要部署对应的连接器，然后根据运维提供的访问地址进行对接数据库。落地方案图文/视频演示帮助文档..."
+slug: "/搭建技巧/按功能分类/第三方集成/数据库/轻流-x-数据库"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/pb0i9nx81m2zpq9e?singleDoc#"
+source_updated_at: "2024-10-15T03:38:16.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "第三方集成"
+  - "数据库"
+  - "轻流 x 数据库"
+---
+## 应用场景
+
+通过轻流应用表单实现与数据库（Mysql、SQL server、Oracle）进行对接
+
+ps:
+
+公有云环境下，连接数据库需要确保所连接的数据库可以在外网环境下访问，否则无法进行连接。
+
+私有化环境下，需要部署对应的连接器，然后根据运维提供的访问地址进行对接数据库。
+
+## 落地方案
+
+![原文画板](https://cdn.nlark.com/yuque/0/2023/jpeg/28884377/1694497453478-4c3b1525-3536-4310-96c1-73a5db9dc6ef.jpeg)
+
+## 图文/视频演示
+
+## 帮助文档
+
+### 一、获取连接数据库基础信息
+
+需要获取到的参数：
+
+- url：数据库地址
+- port：端口号
+- dbName：数据库名称
+- username：用户名
+- password：密码
+
+如何找数据库的IP地址以及端口号：
+
+这里是本地环境的数据库，可以配置内网穿透（或者其他方式）来进行打通，使得外网可以连接数据库
+
+[如何配置服务器的sqlserver可以通过外网访问](https://www.u72.net/IT/show-76421.html)
+
+点击电脑左下方的“开始”->“Microsoft SQL Server2005”->“配置工具”->“SQL Server Configuration Manager”-> “展开网络配置” -->点击“MYSQLSERVER协议” -->双击“TCP/IP” -->选择“IP地址”就能看到端口号了
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694742341224-3861b1b3-9bfb-49b6-be3e-2da64f082b27.png)
+
+这些参数为连接数据库的必须条件
+
+以连接数据库工具（DBeaver）连接MySQL为例：
+
+图中圈出来的内容即为上述所说
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694498121125-e02a9cb0-4d17-4b0a-bce8-e445f9200598.png)
+
+### 二、获取access\_token
+
+- 请求头（Header）
+
+| ​参数 | 是否必填 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 企业版客户需要试用请联系轻流技术支持申请token，试用token可以调用500次接口购买企业版客户，首次有10000次使用额度，后续使用完可联系客户成功人员进行增购。专有云/私有化客户，运维会单独提供token进行使用。 |
+
+### 三、查询数据库表数据（select）
+
+1. 接口说明：用户调用数据库地址进行查询数据库表数据
+2. 接口地址：
+
+1. 公有云地址:  https://connect.oalite.com/api/database/XXXXX
+2. 私有化/专有云: https://xxxxx.xxxx.xxx/database/XXXXX
+3. （XXXXX为数据库类型，可填写mysql / sqlserver / oracle，请依据数据库类型选择相应地址）
+
+1. 请求方式：POST
+2. 请求头（Header）：accessToken
+3. 请求体（body）：
+
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| url | 是 | string | 数据库地址 |
+| port | 是 | string | 端口号 |
+| dbName | 是 | string | 数据库名称 |
+| username | 是 | string | 用户名 |
+| password | 是 | string | 密码 |
+| sqlType | 是 | string | sql类型 只支持：select/update/insert |
+| sql | 是 | string | sql语句 |
+
+1. ​请求示例：
+
+```json
+curl --location 'https://connect.oalite.com/api/database/sqlserver' \
+--header 'accessToken: 4b9ee78556c948728207***' \
+--header 'Content-Type: application/json' \
+--data '{
+    "dbtype":"sqlserver",
+    "url": "114.116.***.**",
+    "port": "***",
+    "dbName": "***",
+    "username": "**",
+    "password": "*****",
+    "sqlType": "select",
+    "sql": "select * from ***"
+}'
+```
+
+1. 响应示例
+
+```json
+{
+    "code":0,
+    "data":[
+        {
+            "join_date":"2021-18-02",
+            "sex":"男",
+            "name":"小赵",
+            "start_end_date":"2021-01-07~2021-01-09",
+            "id":"1001",
+            "dept":"测试部门",
+            "salary":"7000",
+            "age":"18"
+        },
+        {
+            "join_date":"2021-19-03",
+            "sex":"女",
+            "name":"小钱",
+            "start_end_date":"2021-01-01~2021-01-30",
+            "id":"1002",
+            "dept":"测试部门",
+            "salary":"6000",
+            "age":"18"
+        }
+    ],
+    "msg":null
+}
+
+```
+
+注意：对于查询数据库表数据，如果想要将数据获取到表格中，就使用q-linker获取。如果想要将数据存放在应用中，就使用Q source主动进行获取。具体场景看具体使用。这里是以QS主动为例
+
+##### 1、postman测试
+
+- 具体先在postman测试成功之后，再将具体配置移至到轻流中
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694499891507-44132f4e-48ba-45ea-9919-d372e7b5e813.png)
+
+##### 2、QS主动配置获取数据库表数据
+
+- 表单设计具体接收返回的参数内容，这里简单举例获取数据表数据中的store\_name、store\_code
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694501290552-95a62a5d-2ef5-4b85-a29e-652006675724.png)
+
+- 轻流QS主动配置信息
+- QS主动说明：[https://help.qingflow.com/help-docs?type=qingCode&docId=392ae32f64245c50001bc7f07deaee9e&parentId=](https://help.qingflow.com/help-docs?type=qingCode&docId=392ae32f64245c50001bc7f07deaee9e&parentId=)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694501507325-f295c9a6-2656-42ea-96f7-cd93f55ecd86.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694501602186-99621c81-f3e9-470d-b48a-e46aa533ed55.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694501623243-7b29cf22-3ccc-4baa-b803-6f550087acba.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694501679106-38ba9c5e-6a5f-4e1e-a4b1-2d6b6f467b9e.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694501700706-ddb3077d-3352-44cf-9b90-e07e3f7f6981.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694486003258-636a6396-3454-47de-9852-77a0130eed69.png)
+
+##### 3、实际效果
+
+- 这里我点击手动运行，看下具体效果，其中申请人会默认以管理员身份
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694501839033-755fcf2c-1e77-457a-97c3-8f1a5dada44c.png)
+
+### 四、插入数据到数据库（insert）
+
+1. 接口说明：用户调用数据库接口进行数据插入
+2. 接口地址：
+
+1. 公有云地址:  https://connect.oalite.com/api/database/XXXXX
+2. 私有化/专有云: https://xxxxx.xxxx.xxx/database/XXXXX
+3. （XXXXX为数据库类型，可填写mysql / sqlserver / oracle，请依据数据库类型选择相应地址）
+
+1. 请求方式：POST
+2. 请求头（Header）：accessToken
+3. 请求体（body）：
+
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| url | 是 | string | 数据库地址 |
+| port | 是 | string | 端口号 |
+| dbName | 是 | string | 数据库名称 |
+| username | 是 | string | 用户名 |
+| password | 是 | string | 密码 |
+| sqlType | 是 | string | sql类型 只支持：select/update/insert |
+| sql | 是 | string | sql语句 |
+
+- 对于推送数据，主要使用的是轻流的webhook功能，所以这里就以上述做个简单配置
+
+##### 1、webhook配置数据库插入数据
+
+- 表单设计，这里只做简单配置演示，具体推送字段需要根据具体需求做判断
+
+例如：往test数据库中的表test110中插入数据
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694504354737-89fef4a3-50e9-4adf-9a5d-1b6ab5dd7cfb.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694504435648-893a8a10-a3ee-47d7-af01-10ece7c24349.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694504942368-58d80efd-dfba-41ce-ba9f-3c94d10308e5.png)
+
+- SQL语句需要根据数据库表的字段来进行填写
+
+下图为例：数据类型为数字类型的话，轻流插入字段就不需要加单引号，反之其他字段需要加引号
+
+然后具体SQL语句的写法可以参考该文档：
+
+[https://www.w3school.com.cn/sql/sql\_insert.asp](https://www.w3school.com.cn/sql/sql_insert.asp)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694505055603-c7dc63bf-7071-402d-926b-1637f271a675.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694504976054-19e99671-c070-4823-8b8d-645259b97afc.png)
+
+##### 2、实际效果
+
+- 完成配置后，点击保存发布后，后续发起表单数据，就会触发webhook，进行数据库表数据的插入操作
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694505230713-b44948f4-6fa2-4dc5-8699-8d6fff422c18.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694505269667-295428d7-313f-4b33-9971-73a028646dc2.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694505293482-ab807466-eed4-4367-91d3-62dfb9b6e811.png)
+
+PS：如果遇到问题根据下述文档进行排查
+
+[https://exiao.yuque.com/rlf3k1/oanb79/apa9nf48a9gzql4r?singleDoc#](https://exiao.yuque.com/rlf3k1/oanb79/apa9nf48a9gzql4r?singleDoc#) 《如何排查接口问题》
+
+大概率失败的原因是由于SQL语句中引号加与不加的问题。具体可以在postman测试成功之后再进行轻流的配置。
+
+如果postman测试连接数据库报错如下：
+
+- 就是当前版本数据库TLS协议太低，需要上网下载对应版本的补丁或者更新数据库到最新版本，使得数据库TLS协议满足1.2即可
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694742431712-054c0fb5-d053-42ff-85f9-5ab134ba6073.png)
+
+- 该报错大概率是body中参数填写有问题，导致与数据库服务器之间的通信失败。
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698739198734-95128493-e085-4c30-9679-ae18b7227144.png)
+
+​
+
+​
+
+​
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/pb0i9nx81m2zpq9e?singleDoc#)

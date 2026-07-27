@@ -1,0 +1,80 @@
+---
+title: "如何获取指定成员的手机号？"
+description: "1. 场景/功能描述在团队或组织内部，有时需要获取特定成员的手机号以进行有效的沟通和联系。由于轻流系统中无法直接通过公式获取手机号，但通过利用 Q-Linker 可以在发起表单申请时，实时调用轻流通讯录接口来实现这一目标。2. 思路逻辑⭐️ 相关教程 ⭐️：Q-Linker配置说明：https..."
+slug: "/搭建技巧/按功能分类/其他/通讯录/如何获取指定成员的手机号"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/aaz3iuvvrl4at2lh?singleDoc#"
+source_updated_at: "2024-10-15T03:38:22.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "其他"
+  - "通讯录"
+  - "如何获取指定成员的手机号？"
+---
+## 场景/功能描述
+
+在团队或组织内部，有时需要获取特定成员的手机号以进行有效的沟通和联系。由于轻流系统中无法直接通过公式获取手机号，但通过利用 Q-Linker 可以在发起表单申请时，实时调用轻流通讯录接口来实现这一目标。
+
+## 思路逻辑
+
+> ⭐️ 相关教程 ⭐️：Q-Linker配置说明：https://help.qingflow.com/help-docs?type=nocode&docId=0122a58764244d6506a37b0004a4b79c&parentId=获取工作区全部成员接口：https://help.qingflow.com/help-docs?type=qingCode&docId=704de8fa6428f55b00034a922410c9bb&parentId=
+
+## 配置过程
+
+### 表单设计
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1691399542824-83bb318a-e4e4-4189-b90b-f485480d0c81.png)
+
+#### Q-Linker
+
+##### URL
+
+https://api.qingflow.com/user
+
+##### Method
+
+Get
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1691399558663-bbdd59ae-b766-4b69-84f3-82549dc77fac.png)
+
+##### Header/Body
+
+前往[轻商城-open api](https://qingflow.com/center/plugin/detail/20)，点击配置，打开后复制Access Token
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1691400724905-34a3e6db-ab2b-4884-8e7e-729ec5200de5.png)
+
+Header
+
+accessToken	自定义	粘贴刚才获取到的accesstoken
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1691399596904-5a13f369-a1d0-41e6-99c1-d0ff07367c68.png)
+
+##### Result Format
+
+配置JSON Path
+
+基础别名	手机号
+
+$.result.result\[?(@.email=='\{插入成员字段\}')\].mobileNum
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1691399580748-1966f8c8-9f07-4220-80e0-190338b775d3.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1691400933859-807d3117-f464-4c15-8b7f-2753dc360792.png)
+
+#### 手机号
+
+默认内容
+
+关联已有数据-Q-Linker-手机号
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1691399617115-12cc7edd-dac9-47f0-bbe7-9b76803bcad7.png)
+
+## 实现效果
+
+通过使用 Q-Linker 调用轻流通讯录接口来获取指定成员的手机号，您可以实现更便捷的成员联系方式管理，提高团队内部沟通效率和数据准确性。
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1691401044260-8aead167-edca-4428-867f-39dc8ea79cd5.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/aaz3iuvvrl4at2lh?singleDoc#)

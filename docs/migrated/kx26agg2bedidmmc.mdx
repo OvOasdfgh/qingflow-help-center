@@ -1,0 +1,81 @@
+---
+title: "结束委托"
+description: "1. 权限说明仅专有轻流支持仅「超管accessToken」可以调用。2. 请求请求方式：POST请求地址：https://xxx.qingflow.com/openApi/delegate/terminate2.1 参数说明(路径参数)：无2.2 参数说明(查询参数)：无2.3 请求头（He..."
+slug: "/帮助文档/轻代码/openapi/任务委托/结束委托"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/kx26agg2bedidmmc?singleDoc#"
+source_updated_at: "2024-10-15T03:35:09.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "任务委托"
+  - "结束委托"
+---
+### **权限说明**
+
+仅专有轻流支持
+
+仅「超管accessToken」可以调用。
+
+### 请求
+
+**请求方式：**POST
+
+**请求地址：**[https://xxx.qingflow.com/openApi/delegate/terminate](https://xxx.qingflow.com/openApi/delegate/terminate)
+
+##### **2.1 参数说明(路径参数)：**
+
+无
+
+##### **2.2 参数说明(查询参数)：**
+
+无
+
+##### **2.3 请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+
+##### **2.4 请求体（Body）**
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| delegateId | 是 | int | 任务委托id |
+| userId | 是 | string | 用户ID |
+
+##### **2.5 请求体示例**
+
+```latex
+{
+"delegateId":111
+"userId":9018
+}
+```
+
+### 返回
+
+##### 3.1 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| result | 是 | object | 返回结果 |
+| delegateId | 是 | int | 任务委托id |
+
+##### 3.2 返回体示例
+
+```json
+{
+	"errCode": 0,
+	"errMsg": "ok",
+	"result": {
+			"delegateId": 10
+		  }
+}
+```
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/kx26agg2bedidmmc?singleDoc#)

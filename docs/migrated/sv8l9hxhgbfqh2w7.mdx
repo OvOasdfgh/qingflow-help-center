@@ -1,0 +1,61 @@
+---
+title: "鉴权"
+description: "对接三方系统时，一些接口需要校验调用者身份，现在只需要在轻流中简单配置，就可以实现一次配置生成模版，全局可用，目前Qlinker已经支持了鉴权的使用1. 功能详情当前鉴权支持：1、Basic Auth，以Base64编码的方法对用户输入的用户名和密码拼接后加密，自动插入到header中2、Ap..."
+slug: "/帮助文档/轻代码/集成中心/鉴权"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/sv8l9hxhgbfqh2w7?singleDoc#"
+source_updated_at: "2024-11-26T08:30:15.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "集成中心"
+  - "鉴权"
+---
+对接三方系统时，一些接口需要校验调用者身份，现在只需要在轻流中简单配置，就可以实现一次配置生成模版，全局可用，目前Qlinker已经支持了鉴权的使用
+
+### 功能详情
+
+当前鉴权支持：
+
+1、Basic Auth，以Base64编码的方法对用户输入的用户名和密码拼接后加密，自动插入到header中
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/xpu1PHcEfAgvL3ER-nKh_MvkBcJwJwjR_.png)
+
+2、Api key，支持在特定位置插入参数：
+
+- header
+- query param
+- body
+
+当使用此鉴权的请求为GET时，会忽略插入到body的参数
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/U_UOS3Ly6NSLQ4lqQn3EOhPfYWGO8bWn_.png)
+
+3、Temporary Token，支持需要先访问另一URL获取临时Token的方式，需要用户自定义此请求的地址及返回参数解析方式，然后将解析完成的参数插入到header/query/body中
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/6vZYy2BouZzxUbIXhFDG9y_-DSnlWywR_.png)
+
+参数插入时，选择自定义模式，可以完成一些需要在accesstoken前后拼接字符串的操作。通过参数输入框内，![公式：别名名称](https://www.yuque.com/api/services/graph/generate_redirect/latex?%E5%88%AB%E5%90%8D%E5%90%8D%E7%A7%B0)代表accesstoken，可在前后拼接字符串整体作为accesstoken的value值，进行鉴权的插入
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/YwDqWncC8xu0kXJssgJxk9MdOSc0vR5N_.png)
+
+选择变量则只能插入上面解析的返回值。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/_Lj9pDHkOg_O5LQ71f-P1b91Kvn00MRk_.png)
+
+4、OAuth2.0 ，是一种授权机制，用来授权第三方应用，获取用户数据。详细来说即数据的所有者告诉系统，同意授权第三方应用进入系统获取这些数据。系统产生一个短期的进入令牌（token），用来代替密码，供第三方应用使用。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/ABqq0UqJ7g6UgSsVHYyVFs267z9a05xX_.png)
+
+accessToken设置中，允许用户配置拼接前缀，例如需要在accessToken前面拼接Bearer才可以调用接口，此配置项用于支持上述场景，会在拼接的前缀和accessToken中自动隔开一个空格
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/WEIKQPTag8jRpDr5YA7azi2b6wqEc3fp_.png)
+
+### 注意事项
+
+1、如果参数配置-参数未知选择「Body」，配置的json body不能出现多余的换行（如下图）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/Uf6xCLLRALWrFi8XKQG28a8f8eTNzwQK_.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/sv8l9hxhgbfqh2w7?singleDoc#)

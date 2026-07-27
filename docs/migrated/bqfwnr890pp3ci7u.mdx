@@ -1,0 +1,58 @@
+---
+title: "轻流 x 爱客CRM"
+description: "应用场景轻流实现与爱客CRM数据打通落地方案图文/视频演示帮助文档这里仅仅演示如何使用轻流调用CRM系统的接口。后续接口可以根据具体需求进行调用1. 获取accesstoken爱客的帮助文档：http://apidoc.weiwenjia.com/docs/crm_open_api/user_..."
+slug: "/搭建技巧/按功能分类/第三方集成/爱客crm/轻流-x-爱客crm"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/bqfwnr890pp3ci7u?singleDoc#"
+source_updated_at: "2024-10-15T03:38:15.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "第三方集成"
+  - "爱客CRM"
+  - "轻流 x 爱客CRM"
+---
+## 应用场景
+
+轻流实现与爱客CRM数据打通
+
+## 落地方案
+
+![原文画板](https://cdn.nlark.com/yuque/0/2021/jpeg/2997244/1612677747703-8de424bb-2bbf-4ae4-8d55-337ced816d20.jpeg)
+
+## 图文/视频演示
+
+## 帮助文档
+
+这里仅仅演示如何使用轻流调用CRM系统的接口。后续接口可以根据具体需求进行调用
+
+### 获取accesstoken
+
+- 爱客的帮助文档：[http://apidoc.weiwenjia.com/docs/crm\_open\_api/user\_login](http://apidoc.weiwenjia.com/docs/crm_open_api/user_login)
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/2898265/1612167592175-adbeb76f-8bfa-4c1d-a84a-471f4faf6bfc.png)
+
+- 根据帮助文档拼接后：`https://api.ikcrm.com/api/v2/auth/login`
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/2898265/1612167688445-8c836cb8-f663-4703-b9ba-dc686e05eaf0.png)
+
+#### 轻流设置Q-Linker字段
+
+- 根据接口文档，将具体参数放在Q-linker的具体地方。
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/2898265/1612167899215-b3afbfd7-5112-4a70-ba27-c80f0adbf3cb.png)![image.png](https://cdn.nlark.com/yuque/0/2021/png/2898265/1612167983353-92794839-c1ec-49f1-bacb-e922254ead89.png)![image.png](https://cdn.nlark.com/yuque/0/2021/png/2898265/1612168035407-9da86ac2-d7fd-4d26-8ee9-b628cf921b5f.png)
+
+##### login输入手机号，password里输入密码
+
+​
+
+##### 根据返回设置jsonpath
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/2898265/1612168116547-9e4889cf-9477-4c37-88d5-689f709d9a35.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/2898265/1612168229950-4270f8f4-1155-42cd-b477-66779fcd53e2.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/2898265/1612168262742-4949c77e-b23c-41d7-ae66-4a4f8833daf8.png)![image.png](https://cdn.nlark.com/yuque/0/2021/png/2898265/1612168272185-65105076-ea6e-495c-8fca-a1a70493aff7.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/bqfwnr890pp3ci7u?singleDoc#)

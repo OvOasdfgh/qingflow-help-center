@@ -1,0 +1,82 @@
+---
+title: "如何实现Q-robot更新数据-主表单数据汇总至表格"
+description: "1. 场景11.1. 针对已有数据进行表格行添加1.1.1. 场景说明例如，收款记录表中，需要针对同一笔订单号，对每款商品进行收款记录，每次增加某款商品的收款，都需要将该项收款添加至明细记录表中。1.1.2. 应用设置应用A全部为主表单字段，即每款商品明细应用B为明细记录表，由主表单字段与表格..."
+slug: "/常见问题-faq/q-robot/如何实现q-robot更新数据-主表单数据汇总至表格"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/dxq998nv9adn6919?singleDoc#"
+source_updated_at: "2024-10-15T03:38:53.000Z"
+keywords:
+  - "常见问题（FAQ）"
+  - "Q-Robot"
+  - "如何实现Q-robot更新数据-主表单数据汇总至表格"
+---
+## 场景1
+
+### 针对已有数据进行表格行添加
+
+#### 场景说明
+
+例如，收款记录表中，需要针对同一笔订单号，对每款商品进行收款记录，每次增加某款商品的收款，都需要将该项收款添加至明细记录表中。
+
+#### 应用设置
+
+应用A全部为主表单字段，即每款商品明细
+
+![图片.png](https://cdn.nlark.com/yuque/0/2021/png/12539373/1640674936350-f2259de6-b84c-4445-b6a1-6221acbd6db8.png)
+
+应用B为明细记录表，由主表单字段与表格字段组成，即订单编号与该单号下所有商品明细
+
+![图片.png](https://cdn.nlark.com/yuque/0/2021/png/12539373/1640675776401-8dad6a4b-c2e4-4907-b54b-65cf3f5aaf5a.png)
+
+需要由A向B添加明细数据，目前Q-Robot添加数据不支持主表单字段添加至表格子字段，Q-Robot更新数据可以实现，设置如下：
+
+![图片.png](https://cdn.nlark.com/yuque/0/2021/png/12539373/1640679416322-4eaf40dd-fa19-4fa4-b0d1-7f429c8f2333.png)
+
+![图片.png](https://cdn.nlark.com/yuque/0/2021/png/12539373/1640679454684-fcd6d1f9-66d9-4f4b-a753-a17873a428c6.png)
+
+Q-Robot更新详细设置方式参考帮助文档：[https://help.qingflow.com/help-docs?type=nocode&docId=fc8e6465641fff6606135efa5b51d7ad&parentId=](https://help.qingflow.com/help-docs?type=nocode&docId=fc8e6465641fff6606135efa5b51d7ad&parentId=)
+
+​
+
+#### 效果![图片.png](https://cdn.nlark.com/yuque/0/2021/png/12539373/1640681231012-ef04d090-7f3c-4cb2-9d01-f57e1571dd45.png)根据对应的订单编号，数据已被更新-添加新行添加至表格![图片.png](https://cdn.nlark.com/yuque/0/2021/png/12539373/1640686127373-2aa202a6-958a-48b8-9ee7-b6eb072b1a97.png)
+
+## 场景2
+
+### 针对没有的数据做表格行添加
+
+#### 场景说明
+
+同样是收款记录明细，一笔订单数据第一次添加至表格，明细记录表中实际是没有订单编号的，直接去做更新数据-添加新行是无法添加表格子字段数据的。要解决的问题是添加主表单数据的同时，添加对应的明细至表格行
+
+#### 应用设置
+
+基于上述应用设置，需要做些调整，
+
+- 表格应用B添加一个单行文本（辅助字段），设置如下
+
+![图片.png](https://cdn.nlark.com/yuque/0/2021/png/12539373/1640744519860-e7ddd4c2-5d25-4300-805e-16dd7939249d.png)
+
+- 主表单应用A中Q-robot更新数据节点设置，需要添加两个更新节点
+
+更新节点1:
+
+目的是查找主表单字段-订单编号，没有订单编号就执行添加
+
+![图片.png](https://cdn.nlark.com/yuque/0/2021/png/12539373/1640746394513-ea148acc-cd60-41a8-8a84-6de052dd4d1e.png)更新节点2:
+
+根据添加的订单编号，更新表格行-添加新行
+
+![图片.png](https://cdn.nlark.com/yuque/0/2021/png/12539373/1640747033720-36bac994-7ef0-4e90-81d4-a956dd6eb6a2.png)![图片.png](https://cdn.nlark.com/yuque/0/2021/png/12539373/1640747076359-2c41e8ea-e4aa-475c-8ee0-f7b22c5b63c5.png)
+
+#### 效果
+
+**主表单应用A中Q-robot执行情况**
+
+![图片.png](https://cdn.nlark.com/yuque/0/2021/png/12539373/1640747719698-018976e3-3fe8-44b7-a005-3e145b0b5b53.png)
+
+**明细表B中数据**![图片.png](https://cdn.nlark.com/yuque/0/2021/png/12539373/1640748148181-003e1575-dd35-4d31-a1fe-ab75d8dcf4cf.png)![图片.png](https://cdn.nlark.com/yuque/0/2021/png/12539373/1640748633165-6be6b3e8-c7c3-4f56-bd94-33221eb6fdcf.png)
+
+表格到表格的数据添加请参考文档：[https://exiao.yuque.com/enzu8l/oy1eh8/keavmocqxzbdx4sk?singleDoc#](https://exiao.yuque.com/enzu8l/oy1eh8/keavmocqxzbdx4sk?singleDoc#) 《如何实现表格到表格的逐条数据传递》
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/dxq998nv9adn6919?singleDoc#)

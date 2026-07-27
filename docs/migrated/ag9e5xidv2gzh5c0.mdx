@@ -1,0 +1,72 @@
+---
+title: "如何合并表格中多个附件？"
+description: "1. 场景/功能描述表格附件，经常用于记录不同任务的信息。每一行对应一个任务，而每个任务可能包含不同数量和类型的附件。由于附件内容分散且查看不方便，如果将每个任务的附件整合到一个字段中，那么就可以更方便地查看和管理任务及其附件信息了。2. 思路逻辑⭐️ 相关教程 ⭐️：代码块：https://..."
+slug: "/搭建技巧/按功能分类/表格使用/拆分-合并/如何合并表格中多个附件"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/ag9e5xidv2gzh5c0?singleDoc#"
+source_updated_at: "2024-10-15T03:38:09.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "表格使用"
+  - "拆分/合并"
+  - "如何合并表格中多个附件？"
+---
+## 场景/功能描述
+
+表格附件，经常用于记录不同任务的信息。每一行对应一个任务，而每个任务可能包含不同数量和类型的附件。由于附件内容分散且查看不方便，如果将每个任务的附件整合到一个字段中，那么就可以更方便地查看和管理任务及其附件信息了。
+
+## 思路逻辑
+
+> ⭐️ 相关教程 ⭐️：代码块：https://help.qingflow.com/help-docs?type=qingCode&docId=ca291667642446ec001ac2ea5356c2bd&parentId=
+
+## 配置过程
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1690782404517-800262ef-6702-4d61-b434-515ff9b29e19.png)
+
+### 代码块配置
+
+```javascript
+var table = 插入表格字段;
+qf_output = {table:table}
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1690783064134-8acb05d6-8883-40a4-9314-941c266811ab.png)
+
+上传任意附件，并点按测试，解析得到数据和字段代码
+
+表格：table
+
+表格·附件：field\_144831959（请勿照搬，以获取到的为准）![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1690783095504-484286cf-03c7-4c6d-94cc-346f23ae9611.png)
+
+```javascript
+var table = 插入表格字段;
+var result = table[0].粘贴上表格·附件的字段代码;
+for(var i =0;i<table.length-1;i++){
+  result = result.concat(table[i+1].粘贴上表格·附件的字段代码);
+}
+qf_output = {result:result};
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1690782420737-0f5cc132-288a-41a9-ad6f-35d914cbe298.png)
+
+创建别名
+
+基础别名	附件	$.result
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1690782455484-cf1e9b00-3b80-426b-9dda-c15f7a26ee98.png)
+
+### 附件上传
+
+默认内容	关联已有数据-代码块-附件
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1690782746000-b5566c26-0f69-4291-97ad-7b6b6d83aa6e.png)
+
+## 实现效果
+
+利用“代码块”功能可以整合附件到一个字段中，用户能够更便捷地查看和管理任务及其附件信息，无需逐个查看每个附件。这样的功能实现能够提高任务管理的效率和用户体验，使得用户能够更轻松地查看和管理任务及其附件信息。
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1690782790564-7a2d274a-e027-4d7b-b4f3-596c3c3f31a2.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/ag9e5xidv2gzh5c0?singleDoc#)

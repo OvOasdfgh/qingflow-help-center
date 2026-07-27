@@ -1,0 +1,200 @@
+---
+title: "轻流 x 微信公众号--单点登录"
+description: "应用场景通过轻流配置单点登录sso，实现微信公众号授权登录至轻流。注：本文档仅为测试账号用，具体配置需要根据正式账号进行相关配置落地方案图文/视频演示帮助文档一、获取测试号信息1、登录微信公众号平台https://mp.weixin.qq.com/debug/cgi-bin/sandboxin..."
+slug: "/搭建技巧/按功能分类/第三方集成/微信/轻流-x-微信公众号-单点登录"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/fvigegdn18yti867?singleDoc#"
+source_updated_at: "2024-10-15T03:38:20.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "第三方集成"
+  - "微信"
+  - "轻流 x 微信公众号--单点登录"
+---
+## 应用场景
+
+通过轻流配置单点登录sso，实现微信公众号授权登录至轻流。
+
+注：本文档仅为测试账号用，具体配置需要根据正式账号进行相关配置
+
+## 落地方案
+
+![原文画板](https://cdn.nlark.com/yuque/0/2022/jpeg/12966864/1657157596350-f3d26c33-1058-4047-a1ab-8b494daad21f.jpeg)
+
+## 图文/视频演示
+
+## 帮助文档
+
+### 一、获取测试号信息
+
+#### 1、登录微信公众号平台
+
+[https://mp.weixin.qq.com/debug/cgi-bin/sandboxinfo?action=showinfo&t=sandbox/index](https://mp.weixin.qq.com/debug/cgi-bin/sandboxinfo?action=showinfo&t=sandbox/index)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/28884377/1657076547096-1e562954-360b-45c3-b7da-08ac8ee589cb.png)
+
+#### 2、登录微信获取测试号信息
+
+登录完即可获取到一个测试公众账号的信息。主要有appId和appsecret两个参数，这将唯一标示一个公众号，并且需要将他们作为参数获取用户的信息。
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698396637472-42b8fb78-c370-414d-b546-0c8ba139e659.png)
+
+#### 3、关注公众号，获取openid
+
+用户只有关注了这个公众号了，才能通过打开有公众号信息的链接去授权第三方登录，并获取用户信息的操作。故我们还需要用我们的微信关注微信号，操作如下：
+
+还是刚刚那个登录成功后跳转的页面，我们可以看到，该页面有一个二维码，我们可以通过扫描该二维码进行关注，关注成功在右边的“用户列表”会多一个用户的信息。如下图所示：
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698396613233-f3fa8c88-b9f8-4708-941d-cd55482d4ff2.png)
+
+#### 4、配置回调函数
+
+我们在微信客户端访问第三方网页（即我们自己的网页）的时候，我们可以通过微信网页授权机制，我们不仅要有前面获取到的appid和appsecret还需要有当用户授权之后，回调的域名设置，即用户授权后，页面会跳转到哪里。具体的配置如下：
+
+在刚刚的页面，有一个“网页授权获取用户基本信息”，点击后面的修改
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/28884377/1657076946747-21f73b51-9b41-4a8b-8777-b84ddd5408f1.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/28884377/1657076914946-694919a7-c808-4620-b647-d89d16e067ec.png)
+
+PS：关于网页授权回调域名的说明
+
+1. 在微信公众号请求用户网页授权之前，开发者需要先到公众平台官网中的“开发 - 接口权限 - 网页服务 - 网页帐号 - 网页授权获取用户基本信息”的配置选项中，修改授权回调域名。请注意，这里填写的是域名（是一个字符串），而不是URL，因此请勿加 http:// 等协议头；
+2. 授权回调域名配置规范为全域名，比如需要网页授权的域名为：www.qq.com，配置以后此域名下面的页面http://www.qq.com/music.html 、 http://www.qq.com/login.html 都可以进行OAuth2.0鉴权。但http://pay.qq.com 、 http://music.qq.com 、 http://qq.com 无法进行OAuth2.0鉴权
+3. 如果公众号登录授权给了第三方开发者来进行管理，则不必做任何设置，由第三方代替公众号实现网页授权即可
+
+### 二、轻流配置单点登录sso
+
+配置文档参考：[https://developers.weixin.qq.com/doc/offiaccount/OA\_Web\_Apps/Wechat\_webpage\_authorization.html](https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_webpage_authorization.html)
+
+#### 1、用户同意授权，获取code
+
+在确保微信公众账号拥有授权作用域（scope参数）的权限的前提下（服务号获得高级接口后，默认拥有 scope 参数中的snsapi\_base和snsapi\_userinfo），引导关注者打开如下页面：
+
+https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect\_uri=REDIRECT\_URI&response\_type=code&scope=SCOPE&state=STATE#wechat\_redirect
+
+若提示“该链接无法访问”，请检查参数是否填写错误，是否拥有 scope 参数对应的授权作用域权限。
+
+尤其注意：由于授权操作安全等级较高，所以在发起授权请求时，微信会对授权链接做正则强匹配校验，如果链接的参数顺序不对，授权页面将无法正常访问
+
+| **参数** | **是否必须** | **说明** |
+| --- | --- | --- |
+| appid | 是 | 公众号的唯一标识 |
+| redirect\_uri | 是 | 授权后重定向的回调链接地址， 请使用 urlEncode 对链接进行处理 |
+| response\_type | 是 | 返回类型，请填写code |
+| scope | 是 | 应用授权作用域，snsapi\_base （不弹出授权页面，直接跳转，只能获取用户openid），snsapi\_userinfo （弹出授权页面，可通过 openid 拿到昵称、性别、所在地。并且， 即使在未关注的情况下，只要用户授权，也能获取其信息 ） |
+| state | 否 | 重定向后会带上 state 参数，开发者可以填写a-zA-Z0-9的参数值，最多128字节 |
+| #wechat\_redirect | 是 | 无论直接打开还是做页面302重定向时候，必须带此参数 |
+| forcePopup | 否 | 强制此次授权需要用户弹窗确认；默认为false；需要注意的是，若用户命中了特殊场景下的静默授权逻辑，则此参数不生效 |
+| forceSnapShot | 否 | 强制此次授权进入快照页；默认为false；需要注意的是，若本次登录命中了近期登录过免授权逻辑逻辑或特殊场景下的静默授权逻辑，则此参数不生效 |
+
+尤其注意：跳转回调redirect\_uri，应当使用 https 链接来确保授权 code 的安全性。
+
+PS：关于网页授权的两种 scope 的区别说明
+
+1. 以snsapi\_base为 scope 发起的网页授权，是用来获取进入页面的用户的 openid 的，并且是静默授权并自动跳转到回调页的。用户感知的就是直接进入了回调页（往往是业务页面）
+2. 以snsapi\_userinfo为 scope 发起的网页授权，是用来获取用户的基本信息的。但这种授权需要用户手动同意，并且由于用户同意过，所以无须关注，就可在授权后获取该用户的基本信息。
+3. 用户管理类接口中的“获取用户基本信息接口”，是在用户和公众号产生消息交互或关注后事件推送后，才能根据用户 OpenID 来获取用户基本信息。这个接口，包括其他微信接口，都是需要该用户（即openid）关注了公众号后，才能调用成功的。
+
+轻流中配置如下：
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/28884377/1657077451171-49f9079f-08d1-4c8f-b358-e41dce1da0b6.png)
+
+#### 2、通过 code 换取网页授权access\_token
+
+首先请注意，这里通过 code 换取的是一个特殊的网页授权access\_token,与基础支持中的access\_token（该access\_token用于调用其他接口）不同。公众号可通过下述接口来获取网页授权access\_token。如果网页授权的作用域为snsapi\_base，则本步骤中获取到网页授权access\_token的同时，也获取到了openid，snsapi\_base式的网页授权流程即到此为止。
+
+尤其注意：由于公众号的 secret 和获取到的access\_token安全级别都非常高，必须只保存在服务器，不允许传给客户端。后续刷新access\_token、通过access\_token获取用户信息等步骤，也必须从服务器发起。
+
+**请求方法**
+
+获取 code 后，请求以下链接获取access\_token：
+
+https://api.weixin.qq.com/sns/oauth2/access\_token?appid=APPID&secret=SECRET&code=CODE&grant\_type=authorization\_code
+
+| **参数** | **是否必须** | **说明** |
+| --- | --- | --- |
+| appid | 是 | 公众号的唯一标识 |
+| secret | 是 | 公众号的appsecret |
+| code | 是 | 填写第一步获取的 code 参数 |
+| grant\_type | 是 | 填写为authorization\_code |
+
+**返回说明**
+
+正确时返回的 JSON 数据包如下：
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/28884377/1657077876789-50386c0a-1015-4237-ab3e-c06b25c71315.png)
+
+| **参数** | **描述** |
+| --- | --- |
+| access\_token | 网页授权接口调用凭证,注意：此access\_token与基础支持的access\_token不同 |
+| expires\_in | access\_token接口调用凭证超时时间，单位（秒） |
+| refresh\_token | 用户刷新access\_token |
+| openid | 用户唯一标识 |
+| scope | 用户授权的作用域，使用逗号（,）分隔 |
+
+轻流中配置如下：
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/28884377/1657077725629-0a1bfee3-9a60-474d-8831-2b5da8048423.png)
+
+#### 3、拉取用户信息(需 scope 为 snsapi\_userinfo)
+
+如果网页授权作用域为snsapi\_userinfo，则此时开发者可以通过access\_token和 openid 拉取用户信息了。
+
+**请求方法**
+
+http：GET（请使用 https 协议）：
+
+https://api.weixin.qq.com/sns/userinfo?access\_token=ACCESS\_TOKEN&openid=OPENID&lang=zh\_CN
+
+| **参数** | **描述** |
+| --- | --- |
+| access\_token | 网页授权接口调用凭证,注意：此access\_token与基础支持的access\_token不同 |
+| openid | 用户的唯一标识 |
+| lang | 返回国家地区语言版本，zh\_CN 简体，zh\_TW 繁体，en 英语 |
+
+**返回说明**
+
+正确时返回的 JSON 数据包如下：![image.png](https://cdn.nlark.com/yuque/0/2022/png/28884377/1657077939442-646d3ba5-1439-425c-b687-bed04ed10d92.png)
+
+| **参数** | **描述** |
+| --- | --- |
+| openid | 用户的唯一标识 |
+| nickname | 用户昵称 |
+| sex | 用户的性别，值为1时是男性，值为2时是女性，值为0时是未知 |
+| province | 用户个人资料填写的省份 |
+| city | 普通用户个人资料填写的城市 |
+| country | 国家，如中国为CN |
+| headimgurl | 用户头像，最后一个数值代表正方形头像大小（有0、46、64、96、132数值可选，0代表640\*640正方形头像），用户没有头像时该项为空。若用户更换头像，原有头像 URL 将失效。 |
+| privilege | 用户特权信息，json 数组，如微信沃卡用户为（chinaunicom） |
+| unionid | 只有在用户将公众号绑定到微信开放平台帐号后，才会出现该字段。 |
+
+轻流中配置如下：
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/28884377/1657078182573-1ab0b173-2abb-462a-b555-58d37ca56fa1.png)
+
+### 三、微信客户端测试
+
+PS：需在微信客户端中打开链接。
+
+1、复制登录链接，通过微信客户端打开
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/28884377/1657078240097-434ff5d9-5cfa-4ffe-a28c-2b2beeb2706c.png)
+
+2、点击链接
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/28884377/1657078278769-de262b1f-c7a2-437b-9732-21b76ce79793.png)
+
+3、点击授权
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/28884377/1657078365769-73f2413b-7426-4c81-8da1-bba5ff124e72.png)
+
+4、登录成功（在手机微信中打开）
+
+![3fd3b955a34843a0c8ed9c705aeab8f.jpg](https://cdn.nlark.com/yuque/0/2022/jpeg/28884377/1657078737592-2fa5323d-e09a-42be-9e0e-55b65698806b.jpeg)
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/fvigegdn18yti867?singleDoc#)

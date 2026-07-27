@@ -1,0 +1,262 @@
+---
+title: "如何对数据去重？"
+description: "一. 基础设置方法1.字段：不允许重复值字段类型单行文字, 多行文字, 数字, 链接, 日期, 起止时间, 电话, 邮箱, 地址, 表格注意事项相同大小写英文字母视为等值。即当您已录入大写字母A，再输入小写字母a时，会提示不允许重复值。2.通过字段对比，设置提交校验来去重数据量比较小的时候，可..."
+slug: "/常见问题-faq/数据/如何对数据去重"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/ig5zzdxvvgah7ude?singleDoc#"
+source_updated_at: "2024-10-15T03:38:50.000Z"
+keywords:
+  - "常见问题（FAQ）"
+  - "数据"
+  - "如何对数据去重？"
+---
+### 一. 基础设置方法
+
+#### 1.字段：不允许重复值
+
+##### ![图片.png](https://cdn.nlark.com/yuque/0/2021/png/12539373/1619595147597-08822c47-1c94-48f4-bda7-9cce0f8869e7.png)字段类型
+
+单行文字, 多行文字, 数字, 链接, 日期, 起止时间, 电话, 邮箱, 地址, 表格
+
+##### 注意事项
+
+相同大小写英文字母视为等值。即当您已录入大写字母A，再输入小写字母a时，会提示不允许重复值。
+
+​
+
+#### 2.通过字段对比，设置提交校验来去重
+
+数据量比较小的时候，可以利用CONCAT函数拼接对已有数据跟部分填写字段做对比
+
+​
+
+#### 3.导入数据：不允许重复值
+
+##### ① 字段设置不允许重复值
+
+与上述的“字段设置：不允许重复值”方法一致
+
+##### ② 开启提交重计算（申请人节点）
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1654085304948-3046801b-5d69-4ba3-863c-38e661fc87ef.png)
+
+##### ③ 导入时勾选进入流程
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1654084582930-4034e609-cf71-4f02-8698-ca007b0ac62c.png)
+
+##### ④ 实现效果
+
+![企业微信截图\_f5aa19ab-30c6-454e-8e15-271932803967.png](https://cdn.nlark.com/yuque/0/2021/png/12539373/1623982938866-fbb539bc-56d6-47d6-9913-d795ecc85d53.png)
+
+#### ​
+
+### 二. 数据关联统计查重
+
+#### 场景一：统计新品数量
+
+##### 1.应用字段设置
+
+![企业微信截图\_fa4d4712-ed00-484a-819c-a4423e3d06fd.png](https://cdn.nlark.com/yuque/0/2021/png/12539373/1627442052034-b6f11d58-56cc-44e4-841f-d85d0ab12aa5.png)1.“计数”字段关联商品名称，用于统计每个商品录入次数，
+
+2.“是否为新品”字段用于判断计数，公式内容见下图：如果计数内容不为空值，则说明该商品已存在
+
+![企业微信截图\_87388dc3-0bee-4327-b06c-55991effb489.png](https://cdn.nlark.com/yuque/0/2021/png/12539373/1627442315347-03bb8989-99f9-49bb-84a8-44cb497c4715.png)​
+
+##### 2.报表设置
+
+![企业微信截图\_95392315-c5c6-4145-8615-97b173fc1319.png](https://cdn.nlark.com/yuque/0/2021/png/12539373/1627443549349-b7516c31-65d4-4b6b-af4c-2a74d1a5ce8e.png)设置筛选条件“是否为新品”等于“是”，则可以去重统计商品种类
+
+​
+
+#### 场景二：数据关联-重复值校验
+
+目标 同一人同一天，不允许重复选择同一样水果；
+
+逻辑 ①输入姓名和时间，选择水果；
+
+②用数据关联字段进行计数，统计同一人同一天同一水果提交的次数，第一次提交计数为0；
+
+③仅当计数==0，允许提交
+
+##### 1.应用字段设置
+
+字段名称 字段类型
+
+姓名 单行文本
+
+提交日期 日期
+
+今天想要吃什么水果？	数据关联（关联水果名称表-请自行添加应用和数据）——去重目标
+
+辅助字段 数据关联（详细设置见下图）
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1654089022925-7b7828d5-add4-4ef1-90eb-08f1f9ad2a50.png) ![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1654089038710-f5e68db6-595d-4d5a-b14e-39dff591995d.png)
+
+##### 2.隐藏辅助字段
+
+①添加流程-申请人-字段权限，将辅助字段设置为隐藏；
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1654089325572-e685d7b3-485e-4cdf-8f6e-8f964bb5b52b.png)
+
+②隐藏后默认为空，请在添加流程-申请人-高级设置，开启“提交/通过时重新触发数据关联或公式”。
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1654089476204-c372b253-791d-43a5-9d94-088eb397c887.png)
+
+##### 3.提交校验设置
+
+添加流程-申请人-高级设置，提交校验：NUM(辅助字段)==0，文案自定义；
+
+逻辑：“数据关联”字段本质上等同于“单行文本”，请用NUM()转换为数字；
+
+仅当计数=0时，允许提交。
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1654089344967-995ab889-16e8-48d3-a29e-119568f07381.png)
+
+注：也可以将字段设置为表单隐藏，这样就不需要配置提交重计算了
+
+##### 4.演示效果
+
+[https://qingflow.com/f/c9b78419](https://qingflow.com/f/c9b78419)
+
+​
+
+### 三. 表格数据去重**（通过汇总表统计）**
+
+#### 
+
+#### 场景一：应用内表格数据去重
+
+##### 方法一
+
+目标：通过应用B对应用A中的表格数据进行去重，汇总表进行数据汇总统计
+
+###### 1.应用A设置
+
+- 将应用A中需要去重的数据以及编号通过Q-Robot添加到应用B
+
+![文档图片](https://cdn.nlark.com/yuque/0/2021/png/21388903/1625467621466-122c8c18-7d8f-46db-b6af-8dbe391a298b.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_82%2Ctext_6L275rWB%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10)
+
+###### 2.应用B设置
+
+- 在应用B中添加一个判断字段，从而来判断从应用A中添加过来的数据是否是重复值
+
+![文档图片](https://cdn.nlark.com/yuque/0/2021/png/21388903/1625467897059-23f0359c-69ac-4cf3-98bb-f7f6e3c1125d.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_45%2Ctext_6L275rWB%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10)
+
+- 对应用B的“判断”字段进行关联已有数据**（因为是Q-Robot添加来的数据，需要对“判断”和“去重关联”这两个字段开启提交重计算）**，并设置提交校验：如果“去重关联”字段有值则不允许提交，即“去重关联”字段为空允许提交
+
+![文档图片](https://cdn.nlark.com/yuque/0/2021/png/21388903/1625469458782-e9614579-08ef-4403-8000-3bfdfd6a6ff3.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_81%2Ctext_6L275rWB%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10)
+
+![文档图片](https://cdn.nlark.com/yuque/0/2021/png/21388903/1625470849506-3c7590ea-7fe6-4fa9-80b6-db8738e75fa8.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_82%2Ctext_6L275rWB%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10)
+
+###### 3.创建汇总表
+
+![文档图片](https://cdn.nlark.com/yuque/0/2021/png/21388903/1625471427289-6343d2a1-0659-4ecf-8e13-d7c636cdfc48.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_81%2Ctext_6L275rWB%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10)
+
+###### 4.实现效果
+
+在应用A中发起一条数据
+
+![文档图片](https://cdn.nlark.com/yuque/0/2021/png/21388903/1625471598062-0df3c0b0-4fc1-4315-bbd0-c6c350384652.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_52%2Ctext_6L275rWB%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10)
+
+在应用B中将这条数据进行了去重
+
+![文档图片](https://cdn.nlark.com/yuque/0/2021/png/21388903/1625471910590-2114a50c-05a0-46d4-a27f-2840b9c66e99.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_67%2Ctext_6L275rWB%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10)
+
+汇总表中显示共3名客户，分别为1，2，3
+
+![文档图片](https://cdn.nlark.com/yuque/0/2021/png/21388903/1625472212200-72fac661-fe4d-43d2-b5fd-49147725cf33.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_81%2Ctext_6L275rWB%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10)
+
+##### 方法二
+
+目标：实现从多商品入库到商品库存管理
+
+###### 1.入库单设置
+
+仓库地点 单行文本
+
+商品名称 单行文本
+
+入库数量 数字
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1654093216257-d100a53c-26bb-495b-8454-95bc1cf2bb6e.png)
+
+添加流程：Q-robot 添加数据： 拆分表格行数据到流水表（仅入库）
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1654093274461-1ce05d0c-606b-40fd-ab71-74b7417cd316.png)
+
+###### 2.流水表（仅入库）设置
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1654093554723-fb97a976-a80a-40af-9606-f488154b1596.png)
+
+由于“当前数量”和“最新数量”，无法通过Q-robot传过来，请在添加流程-申请人-高级设置，开启提交/通过时重新触发数据关联或公式
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1654093688370-f1a35e4c-f235-47c1-a3e7-2a4a59997f9c.png)
+
+添加流程：Q-robot 更新数据，设置如下
+
+目标应用：商品库存管理，**“有就更新”库存数量，“没有就添加”商品库存！实现去重。**
+
+​
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1654093796243-5816a6b0-84aa-4b44-9bd9-3eec5bcc50b9.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1654093838507-eb8c3af8-0134-4711-9f17-732f8fca3626.png)
+
+###### 3.商品库存管理设置
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1654094034268-48961372-6f48-4a1d-912d-bf1cf363c549.png)
+
+###### 4.实现效果
+
+入库商品以表格形式，商品重复/多次入库，均可去重
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1654094713043-240b267a-b6a8-40a6-af29-59da5699d25c.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1654094730915-f0d401a5-1b00-4c33-94a8-8c863b35bf24.png)
+
+使用关联报表后，可查询同一仓库的商品库存，同理亦可查询-同一商品不同仓库库存
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1654094821591-0e9e4f6b-e784-4fb4-99ef-e1940aba7f2f.png)
+
+#### 
+
+#### 场景二：表格行不允许重复值
+
+###### 1.设置方式
+
+编辑表格-右下角位置
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1654095112064-30b72c9a-c04b-48e7-8db2-1dce456b86a6.png)
+
+###### 2.注意事项
+
+指定字段在表格行完全重复时，才会无法提交
+
+仅限当前表单表格，无法限制多次提交表单的数据
+
+###### 3.实现效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1654095408904-ff25ec3b-139f-4e17-a209-874ce2c8f467.png)
+
+#### 
+
+#### 场景三：表格内字段不允许重复值
+
+###### 1.设置方式
+
+编辑表格，点开表格字段，在字段内设置不允许重复值
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1654095173705-6438ff2c-db59-49f7-838e-ea00ba84f76e.png)
+
+###### 2.注意事项
+
+无法限制当前表单表格，仅针对多次提交表单的数据
+
+###### 3.实现效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1654095764677-6229cc5e-1dd8-492c-a98f-e676455d4612.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1654095801265-4380764f-1fca-4837-8f79-57fea01dffb9.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/ig5zzdxvvgah7ude?singleDoc#)

@@ -1,0 +1,98 @@
+---
+title: "飞书连接器事件"
+description: "1. 介绍飞书是字节跳动旗下先进协作与管理平台。2. 鉴权信息用户可以使用飞书提供的三种访问凭证调用接口，不同的API可能会支持上述一种或多种的访问凭证（access token）作为API调用时的鉴权手段。具体可见飞书的API说明文档。轻流中飞书连接器相关事需要用到自建应用的access_t..."
+slug: "/帮助文档/轻代码/连接中心/连接器/消息推送/飞书连接器事件"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/lpkgtkpm7ahgmm9a?singleDoc#"
+source_updated_at: "2024-11-26T08:30:18.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "连接中心"
+  - "连接器"
+  - "消息推送"
+  - "飞书连接器事件"
+---
+### 介绍
+
+飞书是字节跳动旗下先进协作与管理平台。
+
+### 鉴权信息
+
+用户可以使用飞书提供的三种访问凭证调用接口，不同的API可能会支持上述一种或多种的访问凭证（access token）作为API调用时的鉴权手段。具体可见[**飞书的API说明文档**](https://open.feishu.cn/document/ukTMukTMukTM/uMTNz4yM1MjLzUzM)。
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/YCnJnnyt4hisfW_UIHGEauho7B6CfyJq_.png)
+
+轻流中飞书连接器相关事需要用到自建应用的access\_token，具体获取方式如下：
+
+##### **自建应用身份凭证获取方法**
+
+**第一步: 获取 App ID 和 App Secret**
+
+登录[开发者后台](https://open.feishu.cn/app/)，创建企业自建应用。进入企业自建应用详情页，获取 App ID 和 App Secret。
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/cEHyjO-HWOQJDlqlXMI-SkzVB8KaPYBW_.png)
+
+**第二步: 进入轻商城-连接中心中，选择连接器“飞书”，点击“配置”，并填写App ID 和 App Secret。**
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/gmg_9MKpchKxCRSa925zuA9TFgLoTujn_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/gL9JL9TwRQHyMotChMo2GpzvL88K1vX9_.png)
+
+通过以上步骤，您可以完成飞书鉴权，省去每次使用连接器重新获取与填写access\_token的步骤。
+
+##### 注意事项
+
+1. 飞书中每个应用都有独立的id与secret。由于目前连接中心各事件无法为每个事件都配置独立的鉴权，所以使用的事件属于飞书中不同应用，那么使用事件时需要配置不同的app\_id 与app\_secret。
+2. 不同的事件要求的权限不同，在使用连接器前，请确认相关事件要求的应用/用户权限并根据要求开启相应权限。开启权限方法如下（或者您可以查看[**相关文档**](https://open.feishu.cn/document/ukTMukTMukTM/uQjN3QjL0YzN04CN2cDN)）。
+
+### 事件信息
+
+| 事件 | 描述 |
+| --- | --- |
+| 获取用户基本信息 | 飞书自建应用：获取用户基本信息。 |
+| 获取 tenant\_access\_token（企业自建应用） | 企业自建应用通过此接口获取 tenant\_access\_token，调用接口获取企业资源时，需要使用 tenant\_access\_token 作为授权凭证。 |
+| 获取用户列表 | 以【企业自建应用】身份或【用户】身份获取用户列表。具体用户列表结果由应用/个人的通讯录权限决定 |
+| 获取部门信息列表 | 以应用/用户身份获取部门信息列表。部分返回字段受到数据权限控制。 |
+| 查询人员类型 | 以应用身份访问通讯录，获取员工的人员类型 |
+
+### 配置演示
+
+#### 获取用户列表
+
+**效果展示：**
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/lgKN00i8f9gYGRrNAGYhwbHivWfIGWzy_.gif)
+
+**前置条件：**
+
+首先需要确定您在连接中心-飞书连接器中配置了鉴权信息（配置方法见上文鉴权信息）
+
+并且确定您的飞书应用具有相应权限（权限申请方式见上文注意事项），相应权限要求如下：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/CObIka6qClHDYya1xns4JXgZhLnu0t1a_.png)
+
+**配置步骤：**
+
+1. 创建一个应用，应用中选Q-Linker字段，「配置模式」选连接中心里对应模版，并点击右上角保存（这里一定要注意保存，关系到下一步表格的配置）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/lPfU98VMvDaDEDJNt6tDjqkv_eC5fUwG_.png)
+
+1. 添加表格字段，按照连接中心-飞书连接器-对应事件中的参数要求编辑表格
+
+（事件中要求的字段见下图）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/IS13hekVcbOB_bxJCf_gES-mSz-kF42F_.png)
+
+（应用中表格的配置字段见下图）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/aU-URYufHJ87gQgnhEt95wYChixGmx36_.png)
+
+1. 关联表格，点击你的表格，右侧配置框中：默认内容-关联已有数据-XXX（Q-linker名称）-用户列表；关联子字段（如下图，将您的表格字段与连接器事件中字段关联起来）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/fUU41k8pHKerChBBoc7tv8eHtQ0M_-ei_.png)
+
+**结果展示**
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/my2xKHg6YKleoJ_nsNqr0PaPkVWqIkEc_.gif)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/lpkgtkpm7ahgmm9a?singleDoc#)

@@ -1,0 +1,144 @@
+---
+title: "【旧】获取报表数据表列表数据"
+description: "获取轻流系统中指定数据表数据（仅对轻流老报表生效，不支持700版本后轻析报表数据获取）1. 权限说明仅专有轻流支持；「权限组accessToken」可调用，「权限组accessToken」须具有该报表对应应用的权限。2. 请求请求方式：POST请求地址：https://xxx.qingflow..."
+slug: "/帮助文档/轻代码/openapi/其他/旧-获取报表数据表列表数据"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/ifxecphf9z3zkh39?singleDoc#"
+source_updated_at: "2025-07-29T02:51:27.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "其他"
+  - "【旧】获取报表数据表列表数据"
+---
+获取轻流系统中指定数据表数据（仅对轻流老报表生效，不支持700版本后轻析报表数据获取）
+
+---
+
+### **权限说明**
+
+仅专有轻流支持；
+
+「权限组accessToken」可调用，「权限组accessToken」须具有该报表对应应用的权限。
+
+### 请求
+
+**请求方式：**POST
+
+**请求地址：**[https://xxx.qingflow.com](https://xxx.qingflow.com)(**自有域名**)/openApi/chart/:chartkey/apply/filter
+
+> 请求地址中:chartkey为需要替换的变量，根据实际获取值更新，示例如下：
+
+```javascript
+POST https://xxx.qingflow.com(自有域名)/openApi/chart/888888/apply/filter
+```
+
+#### **参数说明(路径参数)：**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| chartkey | 是 | 报表的key值，获取方式参考：基本概念介绍——chartKey |
+
+#### **参数说明(查询参数)：**
+
+无
+
+#### **请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+
+#### **请求体（Body）**
+
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| filter | 是 |  |  |
+| pageSize | 是 |  | 每页数据条数 |
+| pageNum | 是 |  | 请求页码 |
+| queries |  | array | 针对字段的查询条件 |
+| queId |  | int | 字段ID，特殊queId可查看 |
+| searchKey |  | string | 搜索的关键词（**选择类型字段传递optionId**） |
+| queryKey |  | string | 模糊搜索全部字段数据的key值 |
+| accurateQuery |  | array | 数据表设置了查询条件时，查询条件的值 |
+| queId |  | int | 字段ID，specialQueId可见数据结构 |
+| searchKey |  | string | 搜索的关键词,选择类型传递optionId |
+
+#### **请求体示例**
+
+```json
+{"filter":{
+    "pageSize": 50,
+    "pageNum": 1,
+    "queries": [
+        {
+            "queId": 42612279,
+            "searchKey": "12"
+        }
+    ],
+    "queryKey": null
+},
+"accurateQuery": [{
+        "queId": 42612279,
+        "searchKey": "124" //搜索的关键词
+    }]
+}
+```
+
+### 返回
+
+#### 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| result | 是 | object | 返回结果 |
+| pageSize | 是 | int | 每页数据量 |
+| pageNum | 是 | int | 开始页码 |
+| resultAmount | 是 | int | 结果总量 |
+| pageAmount | 是 | int | 总页数 |
+| result | 是 | object |  |
+| applyId | 是 | int | 数据的id |
+| answers | 是 | \[array\] |  |
+| queId | 是 | number | 字段id， specialQueId可见文档 |
+| queTitle |  | string | 字段名称 |
+| queType | 是 | number | 字段类型。1、描述文字；2、单行文字；3、多行文字；4、日期时间；5、成员字段；6、邮箱；7、手机；8、数字；9、链接；10、单项选择；11、下拉选择；12、多项选择；13、上传附件；14、起止时间；15、图片选择；16、富文本；17、定位字段；18、表格；19、数据关联；20、Q-Linker；21、地址字段；22、部门字段； |
+| values | 是 | \[array\] | \[\["$ref:answerValue"\]\] 表格字段以外的字段类型必填 |
+| value | 是 | string | 问题的结果值 |
+| otherInfo | 是 | string | 问题结果的其他信息,上传文件这里是文件名,选择类的其他选项这里是其他选项填写的内容 |
+| id | 是 | number | 选择类型，为optId，成员类型，为uid；成员字段 ，当前用户: -1；地址字段，1-4：省、市、区、详细地址 |
+| tableValues | 是 | \[array\] | \[\["$ref:answerDetail"\]\] 表格类型字段必填 |
+
+#### 返回体示例
+
+```json
+{
+    "errCode": 0,
+    "errMsg": "",
+    "result": {
+        "pageSize": 0,
+        "pageNum": 0,
+        "resultAmount": 0,
+        "pageAmount": 0,
+        "result": {
+            "applyId": 0,
+            "answers": [{
+                "queId": "1",
+                "queTitle":"",
+                "queType":"1",
+                "values":[{
+                    "value":"",
+                    "otherInfo":"",
+                    "id":""
+                }],
+                "tableValues":[]
+            }]
+        }
+    }
+}
+```
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/ifxecphf9z3zkh39?singleDoc#)

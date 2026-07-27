@@ -1,0 +1,112 @@
+---
+title: "流程修改后，流程中数据的流转表现"
+description: "1.问题描述应用的流程经常需要进行修改，流程修改发布后，对于原来流程中的数据其流转情况是什么样的不清楚，此文档对上述问题做相关表现说明。2.具体表现2.1 只修改到达节点后的流程（不动当前节点） 原流程 2.1.1增加节点情况 表现数据提交后，会按照新的流程走，即审批1提交——审批2——填..."
+slug: "/常见问题-faq/流程/流程修改后-流程中数据的流转表现"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/fgurmaicr5an8tdg?singleDoc#"
+source_updated_at: "2025-02-18T02:30:44.000Z"
+keywords:
+  - "常见问题（FAQ）"
+  - "流程"
+  - "流程修改后，流程中数据的流转表现"
+---
+## 1.问题描述
+
+应用的流程经常需要进行修改，流程修改发布后，对于原来流程中的数据其流转情况是什么样的不清楚，此文档对上述问题做相关表现说明。
+
+## 2.具体表现
+
+#### 2.1 只修改到达节点后的流程（不动当前节点）
+
+**原流程**
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/21779625/1736492345792-1dbcfc1f-ad99-4722-8629-d7ed62c3f9fc.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/21779625/1737080538667-cedcf562-3b92-43b9-885a-ace6082542d4.png)
+
+##### 2.1.1增加节点情况
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/21779625/1737080754437-fdee2e9b-34dd-46ca-8d92-180c688bdc8c.png)
+
+**表现**
+
+数据提交后，会按照新的流程走，即审批1提交——审批2——填写1——结束
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/21779625/1737080872390-79607085-c0fa-421b-a4fe-b10a3cc0bf85.png)
+
+##### 2.1.2删除节点的情况
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/21779625/1737081434001-5391ac8c-ae40-4ea3-9cb7-80f5a2097c11.png)
+
+**表现**
+
+数据提交后，会按照新的流程走，即审批1提交——结束
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/21779625/1737081852207-5ffcd99c-51a3-4b58-bfd2-1d22bf55d42f.png)
+
+#### 2.2 仅删除当前节点
+
+**原流程**
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/21779625/1736492345792-1dbcfc1f-ad99-4722-8629-d7ed62c3f9fc.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/21779625/1737083621748-95f0537f-f79a-4414-9f9d-56bd64cf29ac.png)
+
+**修改后的流程**
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/21779625/1736492954446-48c83730-0601-4c17-8934-f30448e8c913.png)
+
+**表现**
+
+待办还存在，进入待办提交数据后依然按照原流程继续走，即审批1提交——填写1——结束
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/21779625/1737083738898-4faebece-cc63-40ff-9789-b8d509f756ad.png)
+
+#### 2.3删除当前所有流程
+
+##### 2.3.1流程不包含分支的情况
+
+**原流程**
+
+![文档图片](https://cdn.nlark.com/yuque/0/2025/png/21779625/1736492345792-1dbcfc1f-ad99-4722-8629-d7ed62c3f9fc.png?x-oss-process=image%2Fformat%2Cwebp)
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/21779625/1737083921148-ad111837-2d2f-4f6c-ae02-17edd22832f9.png)
+
+**修改后的流程**
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/21779625/1736498952893-72ca347a-2ee4-4b71-a181-e816423e823d.png)
+
+**表现**
+
+待办还存在，进入待办提交数据后依然按照原流程继续走，即审批1提交——填写1——结束
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/21779625/1737084001633-f05370da-3151-4d3e-9cbe-1712eac8c8d5.png)
+
+##### 2..3.2流程包含分支的情况
+
+**原流程**
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/21779625/1736499236061-b93b903e-b5e1-4f24-ab12-cbb215c6f6ca.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/21779625/1737085279659-4b56c901-aa5f-4f2a-9fce-7ed9e6e0cff6.png)
+
+**修改后的流程**
+
+![文档图片](https://cdn.nlark.com/yuque/0/2025/png/21779625/1736498952893-72ca347a-2ee4-4b71-a181-e816423e823d.png?x-oss-process=image%2Fformat%2Cwebp)
+
+**表现**
+
+待办还存在，进入待办提交数据后依然按照原流程继续走，***但是会跳过分支，只走主流程，***
+
+即审批1提交——填写1——填写2——结束
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/21779625/1737085380075-fee80323-6c44-4745-a7fb-50f607f95f6c.png)
+
+​
+
+​
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/fgurmaicr5an8tdg?singleDoc#)

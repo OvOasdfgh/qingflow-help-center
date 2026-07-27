@@ -1,0 +1,102 @@
+---
+title: "无标题文档"
+description: "1. 文档介绍主要介绍该应用表单中，需要填写的字段内容如何获取，以及应用表单的具体作用。2. 操作说明2.1. AccessToken为调用轻流OPENAPI接口的超级管理员Token，获取方式如下图路径：注意：若插件未安装，请先安装，以及Token初始化重置。3. 3.1. 工作区环境选择当..."
+slug: "/常见问题-faq/门户/无标题文档"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/af23lwuipizc1sd4?singleDoc#"
+source_updated_at: "2025-02-18T02:26:18.000Z"
+keywords:
+  - "常见问题（FAQ）"
+  - "门户"
+  - "无标题文档"
+---
+## 文档介绍
+
+主要介绍该应用表单中，需要填写的字段内容如何获取，以及应用表单的具体作用。
+
+## 操作说明
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/29217731/1737963113639-fb860865-4b4c-40e2-b992-677c6b386b4b.png)
+
+### AccessToken
+
+为调用轻流OPENAPI接口的超级管理员Token，获取方式如下图路径：
+
+注意：若插件未安装，请先安装，以及Token初始化重置。
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/29217731/1737962907354-49a08fe8-dc3a-4441-a68a-932400d16928.png)
+
+## ![image.png](https://cdn.nlark.com/yuque/0/2025/png/29217731/1737962915540-430074e1-2113-46f7-aa2b-ddcfeeb53492.png)![image.png](https://cdn.nlark.com/yuque/0/2025/png/29217731/1737962925582-97e74eb7-1741-4596-a3ee-7f8ec817e4e8.png)![image.png](https://cdn.nlark.com/yuque/0/2025/png/29217731/1737962931771-e5c4ca1a-3bc2-49e4-827d-aebd6b95a149.png)
+
+### 工作区环境
+
+选择当前工作区的使用环境。 公有云微信/飞书/企业微信、公有云钉钉 、专有云
+
+​
+
+如何判断：根据访问工作区的域名判断即可。如果访问域名是[https://qingflow.com](https://qingflow.com)，即为公有云，如果访问域名是：[https://app4355.eapps.dingtalkcloud.com](https://app4355.eapps.dingtalkcloud.com)，即为钉钉。专有云为私有化部署http(s)://xxxx.com。
+
+当选择专有云时，需要手动填写访问域名。
+
+​
+
+### 查询所有人可见的门户信息
+
+点击“点击这里进行查询”查询所有人可见的门户信息
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/29217731/1737963417032-f32028a3-36e8-4694-9b80-6d5b5efca647.png)
+
+## 效果展示
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/29217731/1737963990970-4d3a92d6-71d4-4ca0-8ae0-407451526a60.png)
+
+​
+
+## 代码块配置参考
+
+### 代码块
+
+```javascript
+const axios = require('axios');
+new_url=qf_field.{URL$$3364BDDAA$$}+"/dashes?pageSize=2000&pageNum=1"
+
+let config = {
+  method: 'get',
+  maxBodyLength: Infinity,
+  url: new_url,
+  headers: { 
+    'accessToken':qf_field.{Access Token$$3364BDD98$$},
+
+}
+};
+
+let res = []
+
+axios.request(config)
+  .then((response) => {
+    var result = response.data.result.result;
+    for (let i = 0; i < result.length; i++) {
+      elem = result[i];
+      if(elem.dashAuth==1){
+        res.push(elem)
+      }
+    }
+    console.log("res:"+res)
+    qf_output={res} ;
+  })
+  .catch((error) => {
+    console.log(error);
+
+  });
+```
+
+### 解析
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/29217731/1737964271554-1e7297a2-2b31-42cb-ab61-4d4259819617.png)
+
+### 表格配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/29217731/1737964301248-f917463d-c122-452d-a2f9-c0915bf08aa1.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/af23lwuipizc1sd4?singleDoc#)

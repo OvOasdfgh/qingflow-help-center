@@ -1,0 +1,58 @@
+---
+title: "如何输出表格重复行提示？"
+description: "1. 场景/问题描述客户需要一个前端功能，实现校验表格行重复项并输出提示2. 思路逻辑通过代码块判断是否存在重复行，并且把重复行信息输出，最终填写到一个单行文本中3. 配置过程//填写的表格 var table = qf_field.{表格$$177A7771A$$}; //正则判断机身编号的..."
+slug: "/搭建技巧/按功能分类/表格使用/校验/如何输出表格重复行提示"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/gl2c5wmngnzoq5mq?singleDoc#"
+source_updated_at: "2024-10-15T03:38:08.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "表格使用"
+  - "校验"
+  - "如何输出表格重复行提示？"
+---
+## 场景/问题描述
+
+客户需要一个前端功能，实现校验表格行重复项并输出提示
+
+## 思路逻辑
+
+通过代码块判断是否存在重复行，并且把重复行信息输出，最终填写到一个单行文本中
+
+## 配置过程
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1697005925437-16742fa5-9b5b-4cc8-b01b-eafc1948a7fa.png)
+
+```javascript
+//填写的表格
+var table = qf_field.{表格$$177A7771A$$};
+//正则判断机身编号的规则 A打头，后续8位及以上
+let regex = /^A.{8,}$/;
+//创建新数组
+var indices = [];
+for (var i = 0; i < table.length; i++) {
+  var SN = table[i]["field_165732193"];//field_165732194为MAC地址的ID，field_165732193为机身编号ID
+
+  if (!regex.test(SN)) {
+    indices.push(i + 1); // 添加不符合正则表达式的对象的索引（从1开始）
+  }
+
+}
+//将不符合正则条件的索引输出到filteredIndices数组
+var filteredIndices = indices.filter(function (index) {
+  return index !== "";
+});
+//通过join将数组拼接
+var result = filteredIndices.join(", ");
+//调试用 输出原table
+//qf_output = {t : table}
+qf_output = {r : result}
+```
+
+## 实现效果
+
+> 视频：代码块-批量验证MAC地址是否合规 - Google Chrome 2023-11-06 14-04-23.mp4。请在[原文](https://exiao.yuque.com/ixwxsb/bgzs0e/gl2c5wmngnzoq5mq?singleDoc#)中查看。
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/gl2c5wmngnzoq5mq?singleDoc#)

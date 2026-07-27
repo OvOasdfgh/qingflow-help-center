@@ -1,0 +1,60 @@
+---
+title: "如何实现流程外QR添加数据到子表格"
+description: "1.场景包含子表格的数据在触发流程外QR添加数据的时候，字段匹配的配置只能是主子段，表格子字段无法匹配。2.实现思路要实现把子表格内容也同步添加到目标应用，可以通过关联已有表格的方式把子表格信息关联出来，从而达到添加子表的目的。3.搭建示例该场景一共涉及以下两个应用，「应用A」触发流程外QR添..."
+slug: "/常见问题-faq/q-robot/如何实现流程外qr添加数据到子表格"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/vfuko7ehk7nt9q54?singleDoc#"
+source_updated_at: "2025-02-18T02:54:35.000Z"
+keywords:
+  - "常见问题（FAQ）"
+  - "Q-Robot"
+  - "如何实现流程外QR添加数据到子表格"
+---
+## 1.场景
+
+包含子表格的数据在触发流程外QR添加数据的时候，字段匹配的配置只能是主子段，表格子字段无法匹配。
+
+## 2.实现思路
+
+要实现把子表格内容也同步添加到目标应用，可以通过关联已有表格的方式把子表格信息关联出来，从而达到添加子表的目的。
+
+## 3.搭建示例
+
+该场景一共涉及以下两个应用，「应用A」触发流程外QR添加数据到「应用B」
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1730276371058-4734aac5-f43c-400e-b1d5-cac035c7a014.png)
+
+#### 3.1表单设置
+
+**应用A**
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1730277324841-23a32921-7c13-400d-8ba3-610a82ae4ed8.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1730277367607-f7ce25b1-2e35-44ed-96fd-e6e8cf609f55.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1730277412091-56d75f53-ce3b-490d-aef1-681dc40fe46e.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1730277464255-7d5c3a9e-f946-4b10-a7b5-5e6f931432ce.png)
+
+**应用B**
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1730278171810-71d01f86-a31b-4af1-b842-640becd657e0.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1730278933540-08f7ae6c-a404-432d-a44b-bb7399f1a098.png)
+
+***重点配置：***
+
+***【学生信息排名填写】：表格——关联已有表格-应用A-学生信息（筛选条件：班级编号等于班级编号，子字段关联：姓名等于姓名，学号等于学号，性别等于性别，年龄等于年龄）***
+
+***子表格需要设置提交重计算***
+
+#### 3.2实现效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1730279131348-3c151bf8-47c6-4859-b06f-571edc5d0011.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1730279375608-53d8a12a-466d-404b-8c0e-d1b8d32a7bbf.png)
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/vfuko7ehk7nt9q54?singleDoc#)

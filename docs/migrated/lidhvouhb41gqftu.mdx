@@ -1,0 +1,106 @@
+---
+title: "判断函数公式左右括号是否对等"
+description: "场景通过公式计算时，会出现左右括号数量不对等导致的公式错误，排查时费时考验眼力。应用搭建代码块代码编写var s = qf_field.{文本框1$$66A695EB$$};var s = qf_field.{文本框 1$$66A695EB$$}; // 从字段内获取一个字符串值并赋值给变量 ..."
+slug: "/搭建技巧/按功能分类/公式函数/判断函数公式左右括号是否对等"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/lidhvouhb41gqftu?singleDoc#"
+source_updated_at: "2025-02-18T02:53:40.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "公式函数"
+  - "判断函数公式左右括号是否对等"
+---
+#### 场景
+
+通过公式计算时，会出现左右括号数量不对等导致的公式错误，排查时费时考验眼力。
+
+#### 应用搭建
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/29217731/1730185047682-87b5a4d3-f213-4aa7-8ba6-7ba5dbea905d.png)
+
+##### 代码块
+
+###### 代码编写
+
+var s = qf\_field.\{文本框1$$66A695EB$$\};
+
+```javascript
+var s = qf_field.{文本框 1$$66A695EB$$};
+// 从字段内获取一个字符串值并赋值给变量 s。
+
+var word1 = "(";
+// 定义字符串常量 "("，表示左括号，赋值给变量 word1。
+
+var repeat1 = 0;
+// 初始化变量 repeat1 为 0，用于记录字符串 s 中左括号的数量。
+
+var location1 = 0;
+// 初始化变量 location1 为 0，用于记录在字符串 s 中查找左括号的起始位置。
+
+for(var x1 = 0;s.indexOf(word1,location1)!= -1;x1++){
+// 开始一个循环，循环条件是在字符串 s 中从 location1 位置开始能找到左括号（s.indexOf(word1,location1)!= -1）。
+   repeat1 += 1;
+   // 每次找到一个左括号，将 repeat1 的值加 1，表示左括号数量增加。
+   location1 = s.indexOf(word1,location1) + 1;
+   // 更新 location1 的值为下一次查找左括号的起始位置。
+}
+
+var word2 = ")";
+// 定义字符串常量 ")"，表示右括号，赋值给变量 word2。
+
+var repeat2 = 0;
+// 初始化变量 repeat2 为 0，用于记录字符串 s 中右括号的数量。
+
+var location2 = 0;
+// 初始化变量 location2 为 0，用于记录在字符串 s 中查找右括号的起始位置。
+
+for(var x2 = 0;s.indexOf(word2,location2)!= -1;x2++){
+// 开始一个循环，循环条件是在字符串 s 中从 location2 位置开始能找到右括号（s.indexOf(word2,location2)!= -1）。
+   repeat2 += 1;
+   // 每次找到一个右括号，将 repeat2 的值加 1，表示右括号数量增加。
+   location2 = s.indexOf(word2,location2) + 1;
+   // 更新 location2 的值为下一次查找右括号的起始位置。
+}
+
+var result;
+// 声明一个变量 result，用于存储最终的结果。
+
+if(repeat1 > repeat2){
+// 如果左括号的数量大于右括号的数量。
+   result = "公式有误：左括号比右括号要多"+(repeat1-repeat2)+"个";
+// 将结果设置为提示左括号比右括号多的具体数量的字符串。
+}else if(repeat1 < repeat2){
+// 如果左括号的数量小于右括号的数量。
+   result = "公式有误：右括号比左括号要多"+(repeat2-repeat1)+"个";
+// 将结果设置为提示右括号比左括号多的具体数量的字符串。
+}
+
+qf_output = {检测结果: result};
+// 将包含检测结果的对象赋值给 qf_output，用于输出
+```
+
+​
+
+注意，代码块部分需要替换为自己的字段（如下图）
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/29217731/1730185338077-fe51172f-9f00-4451-8a7f-e9d5f8e328b3.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/29217731/1730185798266-1ae60f9c-008b-4b5e-bcd9-cfa847e39ca4.png)
+
+###### 返回解析
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/29217731/1730185450436-977646cb-55e5-4237-a754-354c591d41bc.png)
+
+检测结果字段配置：
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/29217731/1730185366105-1cfcf07d-74a7-49b0-9c7d-583762a0b961.png)
+
+### 实现效果
+
+注意：这个代码块只检测英文的() 如果是其他形式的左右括号不进行检测
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/29217731/1730191085300-7984aee8-0631-4a84-8313-3c8605fe8dec.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/lidhvouhb41gqftu?singleDoc#)

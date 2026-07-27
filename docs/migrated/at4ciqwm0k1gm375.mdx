@@ -1,0 +1,126 @@
+---
+title: "如何暂停流程"
+description: "1.场景/问题描述需求：一个表单内有很多项目，每个项目有预计完成时间，在项目执行期间可能由于一些原因需要暂停项目，后续需要恢复时再将项目恢复运行。暂停期间要有字段体现这个项目的状态，并且之前流程负责人的待办视图要移除这个项目，后续项目重新运行时，再把待办加回来。2.思路逻辑首先建两个应用，一个..."
+slug: "/常见问题-faq/流程/如何暂停流程"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/at4ciqwm0k1gm375?singleDoc#"
+source_updated_at: "2025-02-18T02:48:58.000Z"
+keywords:
+  - "常见问题（FAQ）"
+  - "流程"
+  - "如何暂停流程"
+---
+## 1.场景/问题描述
+
+需求：一个表单内有很多项目，每个项目有预计完成时间，在项目执行期间可能由于一些原因需要暂停项目，后续需要恢复时再将项目恢复运行。暂停期间要有字段体现这个项目的状态，并且之前流程负责人的待办视图要移除这个项目，后续项目重新运行时，再把待办加回来。
+
+## 2.思路逻辑
+
+首先建两个应用，一个是项目表，一个是暂停或恢复项目运行表
+
+逻辑：在暂停项目表中使用引用字段（引用字段实质就是数据ID），单条引用项目表的数据，通过Q-Linker调用获取单条数据的流程日志接口，取到当前流程执行节点的节点id（auditNodeId）和节点负责人的用户id（uid），通过webhook调用单条数据重新指派接口，把负责人指派给某个固定的成员或者机器人，然后更新项目执行状态。
+
+## 3.配置过程
+
+### 3.1.表单配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1721553185629-ed3d7144-e973-447d-85e2-d7cc4d41ffee.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1721627210378-ae39910b-ed64-4a82-a451-7b7846ea5b94.png)
+
+### 3.2.Q-Linker配置（获取单条数据的流程日志）
+
+#### 3.2.1.URL
+
+获取单条数据的流程日志接口文档：[https://help.qingflow.com/help-docs?type=qingCode&docId=0122a5876428e120070b62b8001478f4&parentId=](https://help.qingflow.com/help-docs?type=qingCode&docId=0122a5876428e120070b62b8001478f4&parentId=)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1721627285029-3303f813-8c08-471f-a01f-f34e37d7f9d1.png)
+
+#### 3.2.2.Header
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1721627679647-20077ef0-fa11-494a-8442-849b29336886.png)
+
+#### 3.2.3.测试API请求
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1721627315439-a235de37-9106-46df-a84e-edcd4c3350d3.png)
+
+#### 3.2.4.JSON Path 解析
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1721627412423-fae20058-423e-4715-b380-cdf2f22a4c8f.png)
+
+#### 3.2.5.关联到Q-Linker解析到的结果
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1721723712265-612a2f97-c1cc-465d-bd66-2895eaa41160.png)
+
+### 3.3获取数据ID
+
+#### 3.3.1.通过回调接口，获得数据ID（目的：单条数据重新指派接口的URL中会使用）
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1721627517802-ccdcd891-baf4-4993-a7f7-98a019735686.png)
+
+#### 3.3.2.Header/Body
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1721627568802-95fd59f1-91a5-49d1-a963-74c5d40e92b4.png)
+
+#### 3.3.3.测试API请求
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1721723396124-7820fdc2-b1a1-45f8-a01c-a8f02dd28b1b.png)
+
+#### 3.3.4.配置JSON Path
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1721723448152-5270a37d-2a29-4056-8410-9b00341bc50f.png)
+
+### 3.4.添加流程配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1721627947025-d7df9054-57fd-4c7e-b34e-3f2e1e8818fe.png)
+
+#### 3.4.1.暂停项目流程
+
+##### 3.4.1.1.配置webhook
+
+单条数据重新指派接口文档：[https://help.qingflow.com/help-docs?type=qingCode&docId=fc8e64656428e01b06fde94b57488bce&parentId=](https://help.qingflow.com/help-docs?type=qingCode&docId=fc8e64656428e01b06fde94b57488bce&parentId=)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1721628318565-30d12303-5af4-4eef-9ab8-63cc527c68e4.png)
+
+##### 3.4.1.2.配置请求体
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1721628400379-fd1d0966-9074-4b79-a708-290fdca024fb.png)
+
+##### 3.4.1.3.配置QR更新项目状态
+
+通过配置的更新筛选条件，满足条件更新项目状态
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1721553877133-20c7b5b3-e8d2-470b-9e48-451055a96be3.png)
+
+#### 3.4.2.恢复项目流程
+
+##### 3.4.2.1.配置webhook接口
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1721628546348-345c6397-e13a-46a6-9d9e-c81d72b4e623.png)
+
+##### 3.4.2.2.配置请求体
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1721628611662-c88cf7cd-560a-42e9-874d-b2c4ca519213.png)
+
+##### 3.4.2.3.配置QR更新项目状态
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1721724224677-c0b09506-1360-4e9c-8a74-060b79220d49.png)
+
+## 4.实现效果
+
+### 4.1.暂停流程
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1722652496491-c7950ed5-189a-4354-a1b4-af0684ebc933.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1722652529915-8698be46-200c-4910-a2fc-63c5f3e0f69f.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1722652559017-4bee4476-261a-4342-b999-87a4e831dfba.png)
+
+### 4.2.恢复流程
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1722653153685-bc1de695-72c8-496d-a672-c5c0c8017cbe.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1722652732243-78d40746-275a-4a55-8ebf-994a291ed0c1.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/at4ciqwm0k1gm375?singleDoc#)

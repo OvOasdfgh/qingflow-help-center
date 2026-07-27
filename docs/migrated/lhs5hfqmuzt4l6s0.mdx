@@ -1,0 +1,57 @@
+---
+title: "案例：轻流应用数据同步"
+description: "场景描述客户A希望通过连接功能实时同步轻流内其他应用的数据。假设此案例的目标应用为-商品表解决方案针对上述场景，Q-Source主动功能可以轻松搞定。操作步骤第1步：搭建应用，根据需要配置表单；第2步：根据轻流OPEN API帮助文档，配置Q- Source主动特别提示：1、根据轻流OPEN ..."
+slug: "/帮助文档/轻代码/集成中心/q-sourse/q-source主动/案例-轻流应用数据同步"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/lhs5hfqmuzt4l6s0?singleDoc#"
+source_updated_at: "2024-11-26T08:30:13.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "集成中心"
+  - "Q-Sourse"
+  - "Q-Source主动"
+  - "案例：轻流应用数据同步"
+---
+## 场景描述
+
+客户A希望通过连接功能实时同步轻流内其他应用的数据。
+
+假设此案例的目标应用为-商品表
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/rrqeuCyqAnfK5TsezXTtrRLwkGqz6OV4_.png)
+
+## 解决方案
+
+针对上述场景，Q-Source主动功能可以轻松搞定。
+
+## 操作步骤
+
+### 第1步：搭建应用，根据需要配置表单；
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/mi1XCLeJpGZdwq9Y3lCDcZrEyrsiZm5l_.png)
+
+### 第2步：根据轻流OPEN API帮助文档，配置Q- Source主动
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/aoY04RtVY12yEEaFD8PDAAFchs-xtp2m_.png)
+
+特别提示：
+
+1、根据轻流OPEN API文档，请求体包含pageSize和pageNum，所以拉取方式可以选择【分页拉取】；
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/9vqRbKTPSrUad9oi5oD1Pr4DeRM1UwRe_.png)
+
+2、可以选择在Body中插入pageNum参数值：\{\{PAGE\_INDEX\}\}；
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/HVExrs0EgD93riYKEwGJyYzi9UqAdZXV_.png)
+
+### 第3步：保存配置，发布应用后点击【手动运行】查看是否成功；
+
+手动运行后返回应用的列表界面，查看全部数据已确认Q-Source主动模式是否运行成功；
+
+成功后可在全部数据中查看同步到的数据；
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/ANwbeD4oWmDWXqEmXq8SWgCuUyZpBa4a_.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/lhs5hfqmuzt4l6s0?singleDoc#)

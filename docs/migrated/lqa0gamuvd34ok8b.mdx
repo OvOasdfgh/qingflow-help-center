@@ -1,0 +1,77 @@
+---
+title: "百度营销"
+description: "1. 介绍百度营销开放账户管理、广告投放管理、数据洞察、资产管理、转化追踪等接口。对接可以实现系统数据深度打通，广告智能投放等场景。2. 鉴权信息百度营销商业开发者中心可以申请调用API权限的token。这里也和百度营销的帮助文档一样，以普通API权限申请为例子。a.首先有一个生效的百度推广账..."
+slug: "/帮助文档/轻代码/连接中心/连接器/企业服务/百度营销"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/lqa0gamuvd34ok8b?singleDoc#"
+source_updated_at: "2024-11-26T08:30:18.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "连接中心"
+  - "连接器"
+  - "企业服务"
+  - "百度营销"
+---
+### 介绍
+
+百度营销开放账户管理、广告投放管理、数据洞察、资产管理、转化追踪等接口。对接可以实现系统数据深度打通，广告智能投放等场景。
+
+### 鉴权信息
+
+百度营销[**商业开发者中心**](https://dev2.baidu.com/content?sceneType=0&pageId=100369&nodeId=16&subhead=)可以申请调用API权限的token。这里也和百度营销的帮助文档一样，以普通API权限申请为例子。
+
+a.首先有一个生效的百度推广账户。然后点击「商业开发者中心」右下角的E秘。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/60F3ulqzCLBWWD6RzCOh7K13SRcb6-py_.png)
+
+b.输入发送“申请API”自助开通权限。然后点击「查看Token」查看Token（API权限代码）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/eQQNAXrV6LJKX3TbTn-IagK2iFP3WXPl_.png)
+
+c.复制token
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/Amko_Ot2hff8dikooJZKGBvfWr_e8G_P_.png)
+
+d.在「连接器」百度营销对应的事件中填入token
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/lglJQsMQUKPlCp69TU_GbIAiZ2U11LlB_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/qT0M70IF5rz5zLILY7c9t_806X5bFzch_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/D9YOXIrVJ0hdlKOln-zA0U3oN2jCWBh8_.png)
+
+### 事件信息
+
+（这里只展示一下有哪些事件）
+
+| 事件 | 描述 |
+| --- | --- |
+| 【搜索广告投放】查询账户 | 可以返回搜索广告投放的账户的相关信息 |
+| 【搜索广告投放】更新账户 | 更新username对应的账户信息 |
+| 【搜索广告投放】查询计划 | 根据指定的计划id获取推广计划(id可批量) |
+| 【信息流广告投放】查询账户信息 | 可查询信息流账户信息 |
+| 【线索管理】获取线索信息 | 拉取基木鱼营销通-线索数据（包括广告线索组件和基木鱼落地页里的线索信息） |
+
+### 配置演示
+
+#### 【搜索广告投放】查询账户
+
+1、变量输入可以直接在「事件配置」里输入，成为全局默认值，其他应用选择使用该模版，对应变量都会是该值。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/C_DD0sYjpY3vSbKuC1s1A5lS5CbNGzjN_.png)
+
+2、使用时，新建对应应用，选Q-Linker字段，「配置模式」选连接中心里对应模版。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/r8aRjBg8RNRZ4dMDMXRJ7OhdqRQSH0DI_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/nw5Gbi5gpLDeGY-pPHOso4xvRIpNehty_.png)
+
+3、根据连接中心事件的别名，以及自身业务场景，设置其他返回数据的字段。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/ZazsTO23aS5VoxYIq03pyQfvf8EeJCu0_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/16kGStCFbQGOZeZNDaq-RdIEAJKNwHVe_.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/lqa0gamuvd34ok8b?singleDoc#)

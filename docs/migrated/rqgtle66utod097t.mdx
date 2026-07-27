@@ -1,0 +1,77 @@
+---
+title: "更新外部用户"
+description: "该接口用于更新在通讯录中外部用户的信息。权限说明限专有轻流可用。「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有通讯录的权限。路径参数无请求请求方式：POST请求地址：https://自有域名/openApi/external/..."
+slug: "/帮助文档/轻代码/openapi/通讯录/外部用户/更新外部用户"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/rqgtle66utod097t?singleDoc#"
+source_updated_at: "2025-08-11T09:23:14.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "通讯录"
+  - "外部用户"
+  - "更新外部用户"
+---
+该接口用于更新在通讯录中外部用户的信息。
+
+---
+
+#### 权限说明
+
+限专有轻流可用。「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有通讯录的权限。
+
+#### 路径参数
+
+无
+
+#### 请求
+
+**请求方式：POST**
+
+**请求地址：**[https://自有域名/openApi/external/user/update](https://xn--eqrt2gz0rng0a/openApi/manager/sub)
+
+**请求头（header）**
+
+| 参数 | 类型 | 是否必须 | 说明 |
+| --- | --- | --- | --- |
+| `accessToken` | string | 是 | 可在【插件中心】-【openAPI】查询每个工作区的accessToken，token没有时限，除非手动重置 |
+
+**Body 请求参数**
+
+| 参数 | 类型 | 是否必须 | 说明 |
+| --- | --- | --- | --- |
+| userId | string | 是 | 用户的外部ID |
+| nickName | string | 是 | 用户名字 |
+| email | string | 是 | 邮箱 |
+| headImg | string | 是 | 头像地址 |
+| mobileNum | string | 是 | 手机号（和邮箱二选一必填） |
+| areaCode | string | 是 | 手机区号（不需要+号，例如86） |
+| beingDisabled | boolean | 是 | 是否禁用 |
+| beingCollaborator | boolean | 是 | 是否开启协同 |
+| deptInfo | Object | 是 | 部门信息 |
+| deptId | long | 是 | 外部部门ID |
+
+#### 返回
+
+**返回体 **
+
+| 参数 | 类型 | 是否必含 | 说明 |
+| --- | --- | --- | --- |
+| errCode | int | 是 | 错误代码 |
+| errMsg | string | 是 | 错误信息 |
+| result | Object | 是 | 返回对象信息 |
+| userId | string | 是 | 用户的外部ID |
+| nickName | string | 是 | 用户名字 |
+| email | string | 是 | 邮箱 |
+| headImg | string | 是 | 头像地址 |
+| mobileNum | string | 是 | 手机号（和邮箱二选一必填） |
+| areaCode | string | 是 | 手机区号（不需要+号，例如86） |
+| beingDisabled | boolean | 是 | 是否禁用 |
+| beingCollaborator | boolean | 是 | 是否开启协同 |
+| deptInfo | Object | 是 | 部门信息 |
+| name | string | - | 外部部门名称 |
+| deptId | long | 是 | 外部部门ID |
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/rqgtle66utod097t?singleDoc#)

@@ -1,0 +1,59 @@
+---
+title: "登出用户"
+description: "1. 权限说明工作区级接口 仅专有云可调用 需登录接口专用accesstoken2. 接口描述调用本接口，可实现对通过[登录接口]登录系统的用户的登出操作3. 请求请求方式:POST请求地址: https://{专有轻流域名]}/openApi/user/logoutHTTP URL/user..."
+slug: "/帮助文档/轻代码/openapi/其他/登出用户"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/utlsdqgpuqh3xm6f?singleDoc#"
+source_updated_at: "2024-10-15T03:35:13.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "其他"
+  - "登出用户"
+---
+### 权限说明
+
+工作区级接口
+
+- 仅专有云可调用
+
+- 需登录接口专用accesstoken
+
+### 接口描述
+
+调用本接口，可实现对通过\[登录接口\]登录系统的用户的登出操作
+
+### 请求
+
+请求方式:POST
+请求地址: https://\{专有轻流域名\]\}/openApi/user/logout
+
+| HTTP URL | /user/logout |
+| --- | --- |
+| HTTP Method | POST |
+
+### 请求头
+
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| accessToken | 是 | string | 专有云: 仅支持专用token调用 (用secret和wsid获取） |
+
+### 请求体
+
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| userId | 是 | string | 用户id (外部id) |
+| code | 是 | string | 登录用code (/user/login接口返回的) |
+
+### 返回体
+
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码 (0为成功) |
+| errMsg | 是 | string | 描述错误 |
+| result | 是 | array | <br /> |
+| userld | 是 | string | 成员id |
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/utlsdqgpuqh3xm6f?singleDoc#)

@@ -1,0 +1,110 @@
+---
+title: "如何实现成员拆分"
+description: "1. 场景/功能描述应用场景：任务派发。在指派成员时，利用Q-linker或代码块功能，将主表单多位成员自动拆分至表格行，最终每位成员收到各自的待办任务进行填写。无需在表格行手动逐个选择成员，可以极大地提高效率。2. 思路逻辑2.1. 方法一：Q-linker提交数据之后，利用Q-linker..."
+slug: "/搭建技巧/按场景分类/项目-任务/如何实现成员拆分"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/ueholl8dx6a7niwv?singleDoc#"
+source_updated_at: "2024-10-15T03:38:03.000Z"
+keywords:
+  - "搭建技巧"
+  - "按场景分类"
+  - "项目/任务"
+  - "如何实现成员拆分"
+---
+## 场景/功能描述
+
+应用场景：任务派发。在指派成员时，利用Q-linker或代码块功能，将主表单多位成员自动拆分至表格行，最终每位成员收到各自的待办任务进行填写。无需在表格行手动逐个选择成员，可以极大地提高效率。
+
+​
+
+![原文画板](https://cdn.nlark.com/yuque/0/2022/jpeg/27174367/1669701751587-c098028d-49d3-4fdd-8649-7dc3c9c3da0d.jpeg)
+
+## 思路逻辑
+
+### 方法一：Q-linker
+
+提交数据之后，利用Q-linker调用“[获取单条数据的详细信息](https://www.eolink.com/share/project/api/detail?groupID=1198135&apiID=4230669&shareCode=Q7zHBt&shareToken=$2y$10$r48Mwc25x.SjeD6~2FsrE.jOsWd5LB1jo.2juceD7IcQRj875Lhcy5G&shareID=274369)”的接口，将成员字段拆分至表格行。(可配置重计算)
+
+### 方法二：代码块
+
+在选择成员后，运行代码块即可将成员字段拆分至表格行。(不可配置重计算)
+
+## 配置过程
+
+### 方法一：Q-linker
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1669704084844-92703818-3055-40ba-9b5c-bc7470f6313e.png)
+
+#### URL
+
+正式版：https://api.qingflow.com/apply/\{applyId\}
+钉钉版本： https://api.ding.qingflow.com/apply/\{applyId\}
+专有云/私有化客户: http(s)://xxx.qingflow.com(自有域名)/openApi/apply/\{applyId\}
+
+注：\{applyId\} 是数据ID，在轻流系统中，每条数据都有唯一的数据ID。(可作为字段插入)
+
+#### Method
+
+根据“[获取单条数据的详细信息](https://www.eolink.com/share/project/api/detail?groupID=1198135&apiID=4230669&shareCode=Q7zHBt&shareToken=$2y$10$r48Mwc25x.SjeD6~2FsrE.jOsWd5LB1jo.2juceD7IcQRj875Lhcy5G&shareID=274369)”接口文档，选择：GET
+
+#### Header/Body
+
+accessToken 等于 自定义 XXX
+
+前往轻商城 --> [https://qingflow.com/center/plugin/detail/20](https://qingflow.com/center/plugin/detail/20)，在open api页面，点击右上角配置，可以获取到accessToken。
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1669704236014-56771084-3e6b-49de-9c4e-bbefd68f45e3.png)
+
+#### Result Format
+
+JSON
+
+配置JSON Path
+
+表格别名（表格）：$.result.answers\[?(@.queTitle=='成员字段标题')\].values\[\*\]
+
+子别名（成员）：$.email
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1671004558259-75d2afeb-78ff-48a0-840f-f340936b8ce6.png)
+
+表格设置默认内容：关联Q-linker
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1669706190360-43d2ef49-9e2a-437a-9ca3-cb36cf015b6d.png)
+
+在添加流程-申请人节点，设置提交/通过时重新触发数据关联或公式：1. Q-linker 2. 表格 3. 表格·成员
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1669706238894-318be16f-f3ee-4fb7-8404-feae3d2dfeda.png)
+
+### 方法二：代码块
+
+代码块设置：​
+
+```javascript
+let a = qf_field.{成员$$922468AB$$};
+qf_output = {"cy":a}
+```
+
+注意：qf\_field.\{成员$$922468AB$$\}请手动替换为应用内需要拆分的成员字段。
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1669693677914-d3023199-8b36-43d2-805c-b5d537d18189.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1669693930344-89696f3e-8384-4408-bbef-68e75bdbc718.png)
+
+## 实现效果
+
+### 方法一
+
+从分派任务应用添加成员数据，Q-Robot添加至拆分成员应用，Q-linker触发重计算得到拆分后成员表格。
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1669706077399-349f08b5-2386-4b61-b793-00e4fa01a806.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1669706165034-22518eee-7643-450a-b8ac-e507a60ae8b6.png)
+
+### 方法二
+
+发起新的表单，选择成员后，运行代码块可以拆分至表格中。
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1669706472777-465657ff-a868-412e-85bb-1b70f4d6055e.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/ueholl8dx6a7niwv?singleDoc#)

@@ -1,0 +1,65 @@
+---
+title: "企业微信（客户联系）"
+description: "1. 介绍腾讯的办公协同应用。2. 鉴权信息获取access_token是调用企业微信API接口的第一步，相当于创建了一个登录凭证，其它的业务API接口，都需要依赖于access_token来鉴权调用者身份。操作步骤：1、【企业微信管理员操作】在企业微信的管理后台获取企业ID和客户联系secr..."
+slug: "/帮助文档/轻代码/连接中心/连接器/消息推送/企业微信-客户联系"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/qq01hbt6gs85kxxr?singleDoc#"
+source_updated_at: "2024-11-26T08:30:17.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "连接中心"
+  - "连接器"
+  - "消息推送"
+  - "企业微信（客户联系）"
+---
+### 介绍
+
+腾讯的办公协同应用。
+
+### 鉴权信息
+
+获取access\_token是调用企业微信API接口的第一步，相当于创建了一个登录凭证，其它的业务API接口，都需要依赖于access\_token来鉴权调用者身份。
+
+操作步骤：
+
+1、【企业微信管理员操作】在企业微信的管理后台获取[**企业ID**](https://work.weixin.qq.com/api/doc/90000/90135/91039#14953/corpid)和[**客户联系secret**](https://work.weixin.qq.com/wework_admin/frame#customer/analysis)；
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/EhrN2Unt7FJbLsiVACm-W5wK4_FRD7Zz_.png)
+
+2、【轻流系统工作区的管理员操作】在轻流连接中心-企业微信连接器-鉴权配置中输入上一步获取的企业ID和客户联系Secret，点击保存按钮便配置完成。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/4Mo6uNypMdW_WWAr5VQbRIIRnkphalim_.png)
+
+#### 注意事项
+
+客户联系的secret和应用的secret无法通用
+
+### 事件信息
+
+| 事件 | 描述 |
+| --- | --- |
+| 获取客户列表 | 企业可通过此接口获取指定成员添加的客户列表。客户是指配置了客户联系功能的成员所添加的外部联系人。没有配置客户联系功能的成员，所添加的外部联系人将不会作为客户返回。 |
+| 获取客户详情 | 企业可通过此接口，根据外部联系人的userid（如何获取?），拉取客户详情。 |
+| 获取企业标签库 | 企业可通过此接口获取企业客户标签详情。 |
+| 添加企业客户标签 | 企业可通过此接口向客户标签库中添加新的标签组和标签，每个企业最多可配置3000个企业标签。 |
+| 分配在职成员的客户 | 企业可通过此接口，转接在职成员的客户给其他成员。 |
+
+### 配置演示
+
+#### 获取客户列表
+
+1.在连接中心——连接器查看对应事件的变量和别名
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/u0vFTZzMrz36JsNfwhte-9MryKXTAjX1_.png)
+
+2.根据变量和别名设计表单
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/UpgMUl1lKSeHdOBNUdLDYaVFcNXc8uxl_.png)
+
+3.配置webhook
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/kjkt11zM3kBbCq427A6lsOSkuIT_OyST_.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/qq01hbt6gs85kxxr?singleDoc#)

@@ -1,0 +1,82 @@
+---
+title: "轻流 x 微软PowerBi"
+description: "应用场景PowerBi作为一款商业智能软件，其数据报表开放了接口，可接受json数组并作为数据源，自动生成报表并做数据分析处理，轻流通过webhook主动推送固定格式的数据，可以根据用户需求携带表单信息。此处以一个职场培训机构，通过轻流和webhook打通，实现数据实时显示报表的效果。落地方案..."
+slug: "/搭建技巧/按功能分类/第三方集成/微软/轻流-x-微软powerbi"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/ez960meqb72ihqfg?singleDoc#"
+source_updated_at: "2024-10-15T03:38:16.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "第三方集成"
+  - "微软"
+  - "轻流 x 微软PowerBi"
+---
+## 应用场景
+
+PowerBi作为一款商业智能软件，其数据报表开放了接口，可接受json数组并作为数据源，自动生成报表并做数据分析处理，轻流通过webhook主动推送固定格式的数据，可以根据用户需求携带表单信息。
+
+此处以一个职场培训机构，通过轻流和webhook打通，实现数据实时显示报表的效果。
+
+## 落地方案
+
+![原文画板](https://cdn.nlark.com/yuque/0/2021/jpeg/2997244/1611729840793-12bd418b-7871-48dc-a0ef-446d2b5d72d8.jpeg)
+
+## 图文/视频演示
+
+[powerBI场景视频.mp4](https://exiao.yuque.com/attachments/yuque/0/2024/mp4/26393678/1728963496769-c9c77746-0ebc-44ca-9414-8c97ea77abd1.mp4)
+
+## 帮助文档
+
+配置文档
+
+### 一、配置步骤
+
+1、在powerbi-我的工作区中新建流数据集，选择api，下一步。
+
+路径：powerbi----我的工作区----新建----流数据集----API
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1638775/1606369435080-54501d3d-bec9-454b-b5a4-cefb4f80c887.png)![image.png](https://cdn.nlark.com/yuque/0/2021/png/2898265/1609839585994-286ddf5f-2a3b-4143-ba40-b71923d40bd0.png)
+
+2、之后在「流中的值」里对接收数据格式进行配置，默认是一个数组，下方「历史数据分析」开关决定是否在powerbi中显示历史数据，打开会显示历史所有数据，关闭则仅显示最新的数据。
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/2898265/1609839787437-a47188e9-88e3-4761-b788-e043b791019f.png)
+
+3、创建数据集，会自动生成推送URL，将此URL保存下，作为轻流发送数据的目标。
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/2898265/1609839850837-3857b730-8f52-4e43-a83e-385c24a1e321.png)
+
+4、在轻流中新建一个webhook节点，URL=刚才复制的URL，Method=POST，触发方式=自定义，Body Type=application/json
+
+JSON Body按照步骤3中格式配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/2898265/1609839910259-45081d55-49d4-48f5-9996-c18dbb29a92c.png)
+
+5、应用创建后，在powerbi中进行报表配置。在我的工作区数据集中找到你刚刚创建的数据集。通过报表和字段配置制作报表，此时已经可以通过轻流应用发送数据，进行测试了。测试数据也会在这个页面显示
+
+路径：我的工作区---数据集
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/2898265/1609840067436-16d16a1c-c3f7-4d54-8b9b-ada0f52e3f3a.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/2898265/1609840140355-5d6868c0-3e9b-429a-acfe-fe52df523007.png)
+
+6、最后的效果。在轻流提交数据，在powerbi查看数据变化。
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/2898265/1609840290495-7bfc1de6-34fa-416b-97b5-1e8bc2e9933e.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/2898265/1609840317799-49ac6472-a0b8-42ed-a9e0-75b0ed5a419a.png)
+
+### 二、注意事项
+
+##### 1、字段匹配
+
+1、轻流表单字段很多，但是PBI只支持数字文本日期三种。
+
+2、轻流日期对应PBI日期。在webhook中数组内是必加引号的，所以数字字段无法准确传入。
+
+3、其他类型的表单字段，用文本字段应该就可以发；有的应用中不是文本字段的，需要关注测试下；
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/ez960meqb72ihqfg?singleDoc#)

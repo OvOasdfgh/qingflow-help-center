@@ -1,0 +1,173 @@
+---
+title: "如何实现打卡定位提交校验功能"
+description: "1. 场景/功能描述场景1:公司A的全体员工需要在B地址进行公司的季度大会宣导，需要统计员工考勤，如果打卡定位地点在目标B地址500米以内就允许提交打卡，否则不允许场景2:公司A的某个部门员工需要去拜访客户，到达客户B地址的时候，需要员工进行打卡，如果打卡定位地点在目标B地址500米以内就允许..."
+slug: "/搭建技巧/按功能分类/数据管理/数据校验/如何实现打卡定位提交校验功能"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/etqdhps89wy0e9gy?singleDoc#"
+source_updated_at: "2024-10-15T03:38:12.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "数据管理"
+  - "数据校验"
+  - "如何实现打卡定位提交校验功能"
+---
+## 场景/功能描述
+
+场景1:公司A的全体员工需要在B地址进行公司的季度大会宣导，需要统计员工考勤，如果打卡定位地点在目标B地址500米以内就允许提交打卡，否则不允许
+
+场景2:公司A的某个部门员工需要去拜访客户，到达客户B地址的时候，需要员工进行打卡，如果打卡定位地点在目标B地址500米以内就允许提交打卡，否则不允许
+
+## 思路流程
+
+通过使用代码块+提交校验来进行实现
+
+逻辑思路：通过使用代码块中调用地图的API接口去获取定位地址以及目标地址的经纬度，再通过计算两个地址的距离是否在500米以内，如果满足就返回true，反之返回false
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697093501676-2bca2e02-b8b4-48ed-b0e2-1efd71bda387.png)
+
+## 配置过程
+
+### 调用API接口准备工作
+
+这里使用的是百度地图的地理编码API接口，所以以调用百度地图为例，其他地图类接口请自行查找。
+
+百度地图开放平台：[https://lbsyun.baidu.com](https://lbsyun.baidu.com)
+
+地理编码API接口文档：[https://lbsyun.baidu.com/faq/api?title=webapi/guide/webservice-geocoding-base](https://lbsyun.baidu.com/faq/api?title=webapi/guide/webservice-geocoding-base)
+
+使用接口前先根据使用准备流程申请完成
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697094743619-d0a3740f-ad56-4a00-a9ee-beaa21f7e2b5.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697094933616-ac6d9b22-dee1-4790-a3ec-9a75e22d9b09.png)
+
+### 表单设计
+
+这里以场景2为例：拜访客户，到达客户地点进行打卡，需要有一个维护客户信息地址的表单，如下图
+
+#### 考勤客户地址信息
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697095062240-9d06e1b0-03d9-4d62-8e15-fbe558c289b5.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697095107387-3876a019-070a-401e-8130-b3753d319985.png)
+
+#### 外出考勤打卡
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697095163804-390b68ae-b774-4db5-92ea-468240f531dc.png)
+
+##### 客户名称
+
+数据关联字段，关联考勤客户地址信息的客户姓名
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697095216062-b8583bb8-4298-4ae9-85a6-db94a2b0d269.png)
+
+##### 客户地址
+
+单行文字字段，关联已有数据，带出对应客户名称的地址
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697095314068-850388a8-5b24-4405-8674-9b3fb3d46e5c.png)
+
+##### 代码块
+
+###### 代码注释
+
+qf\_field.\{客户地址$$185A76DED$$\}：表单客户地址字段
+
+qf\_field.\{定位$$1853BE60C$$\}：表单定位字段
+
+ak:百度地图控制台应用中获取具体参数内容
+
+```javascript
+const axios = require('axios');
+const geolib = require('geolib');
+
+// 输入的地址 A，插入表单客户地址字段
+const addressA = qf_field.{客户地址$$185A76DED$$};
+
+// 输入的地址 B，插入表单定位字段
+const addressB = qf_field.{定位$$1853BE60C$$};
+
+if(addressA==null || addressB==null){
+    qf_output={'istrue':false}
+}else{
+// 百度地图地理编码 API 的请求 URL，其中的ak从百度地图控制台应用中获取
+const geocodeUrlA = `http://api.map.baidu.com/geocoding/v3/?address=${encodeURIComponent(
+  addressA
+)}&output=json&ak=YGlUOz7nfpwS1ZRIePOqz2HQsG*****`;
+
+const geocodeUrlB = `http://api.map.baidu.com/geocoding/v3/?address=${encodeURIComponent(
+  addressB
+)}&output=json&ak=YGlUOz7nfpwS1ZRIePOqz2HQsG*****`;
+
+axios
+  .all([
+    axios.get(geocodeUrlA),
+    axios.get(geocodeUrlB)
+  ])
+  .then(axios.spread((responseA, responseB) => {
+    const resultA = responseA.data;
+    const resultB = responseB.data;
+    if (resultA.status === 0 && resultB.status === 0) {
+      const locationA = resultA.result.location;
+      const latitudeA = locationA.lat;
+      const longitudeA = locationA.lng;
+
+      const locationB = resultB.result.location;
+      const latitudeB = locationB.lat;
+      const longitudeB = locationB.lng;
+
+      const distance = geolib.getDistance(
+        { latitude: latitudeA, longitude: longitudeA },
+        { latitude: latitudeB, longitude: longitudeB }
+      );
+      
+      // 判断距离是否小于等于 500 米
+      if (distance <= 500) {
+      const istrue=true;//距离小于等于 500 米
+      qf_output={istrue}
+       
+      } else {
+      const istrue=false;//距离大于 500 米
+      qf_output={istrue}
+       
+      }
+    }
+  }))
+}
+```
+
+###### 代码测试
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697095623293-9f899a51-5874-42b8-92b7-5391fc668be5.png)
+
+###### 字段接收配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697095645823-725e801c-d45f-4d35-b86e-399a0822bcee.png)
+
+###### 是否允许打卡
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697095662660-4a140b23-0ab9-470f-8ed6-d2698e82c0f0.png)
+
+### 流程设计
+
+#### 外出考勤打卡
+
+申请人节点——高级设置——提交校验
+
+公式：AND(是否允许打卡=="true")
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697095861992-919546b7-faa8-4b8e-a8b0-980a1b3aacb0.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697095888152-093d44c9-c2b6-4b86-93d2-a3f13ce2ac6d.png)
+
+## 实现效果
+
+由于定位字段需要移动端使用，所以具体测试在移动端测试
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697095994668-55a9d7b6-9b5e-45fb-966c-b94f375036f7.png)
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/etqdhps89wy0e9gy?singleDoc#)

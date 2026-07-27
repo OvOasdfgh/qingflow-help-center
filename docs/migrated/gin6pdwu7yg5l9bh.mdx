@@ -1,0 +1,70 @@
+---
+title: "如何设置当前时间和某个日期字段的天数倒计时？"
+description: "场景描述在合同管理中，需要把合同到期倒计时每日滚动更新，以便查询到即将到期客户联系续期应用设置合同信息表单设置先创建一个基础信息表「合同信息」，所有的合同基础信息都在这个表单中进行录入表单中合同到期天数使用公式得到流程设置设置流程外Q-robot每天触发添加数据到辅助应用将最新的合同到期天数计..."
+slug: "/常见问题-faq/表单/如何设置当前时间和某个日期字段的天数倒计时"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/gin6pdwu7yg5l9bh?singleDoc#"
+source_updated_at: "2025-02-18T03:01:01.000Z"
+keywords:
+  - "常见问题（FAQ）"
+  - "表单"
+  - "如何设置当前时间和某个日期字段的天数倒计时？"
+---
+### 场景描述
+
+在合同管理中，需要把合同到期倒计时每日滚动更新，以便查询到即将到期客户联系续期
+
+### 应用设置
+
+#### 合同信息
+
+##### 表单设置
+
+先创建一个基础信息表「合同信息」，所有的合同基础信息都在这个表单中进行录入
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1711612895451-3982e0c8-3d94-43ff-bdec-09de5ff172a0.png)
+
+表单中合同到期天数使用公式得到
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1711612642413-0a2fccac-f2de-45a8-b8cf-89701892e1e5.png)
+
+##### 流程设置
+
+设置流程外Q-robot每天触发添加数据到辅助应用将最新的合同到期天数计算出来
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1711613757999-a9a8a537-e1b0-4aae-ab23-aa5d7193c62a.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1711614752410-5c13e414-7c6c-4612-991a-b9d4e2bd503d.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1711615024636-27142887-5b08-400d-913a-610f50dc5559.png)
+
+#### 辅助更新倒计时
+
+##### 表单设置
+
+该表单为辅助表，用于辅助更新最新合同到期天数
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1711615604295-9c3f7ee2-bc30-488a-8444-438350ad0fab.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1711616039307-b98ea61d-9784-4671-b73f-fdf670eaac48.png)
+
+##### 流程设置
+
+由于该表单数据是Q-robot添加过来的，不会触发公式，需要将涉及公式的字段设置提交重计算
+
+##### ![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1711616350556-4fbf7a57-7b0e-4170-8e73-3b76e8c71937.png)
+
+设置流程内Q-robot更新数据将最新的天数更新到【合同信息】
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1711616482717-e850232e-6993-4b82-aee4-3d65591d28c2.png)
+
+### 实现效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1711618652391-00f3d87c-a33b-4dd8-a1f4-e76356fe16a5.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1712044133395-04959b2d-7209-4b4c-b1fe-4e73e51fa746.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1712044160194-a80213d2-f764-40fd-ad8b-27cef83f8679.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/gin6pdwu7yg5l9bh?singleDoc#)

@@ -1,0 +1,98 @@
+---
+title: "获取单条数据对应打印模版文件"
+description: "获取单条数据对应打印模版文件1. 权限说明仅专有轻流支持；「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有相应应用权限。2. 请求请求方式：POST请求地址：https://xxx.xx(自有域名)/openApi/{appKe..."
+slug: "/帮助文档/轻代码/openapi/应用数据接口/数据内容/获取单条数据对应打印模版文件"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/pc80uwa7zq9w1ro6?singleDoc#"
+source_updated_at: "2024-11-20T03:04:31.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "应用数据接口"
+  - "数据内容"
+  - "获取单条数据对应打印模版文件"
+---
+获取单条数据对应打印模版文件
+
+---
+
+### **权限说明**
+
+仅专有轻流支持；
+
+「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有相应应用权限。
+
+### 请求
+
+**请求方式：**POST
+
+**请求地址：**https://xxx.xx(自有域名)/openApi/\{appKey\}/apply/\{applyId\}/\{printKey\}/print
+
+> 请求地址中applyId和printKey为需要替换的变量。
+
+#### **参数说明(路径参数)：**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| appKey | 是 | 应用 id，获取方式详见：[基本概念介绍](https://exiao.yuque.com/ixwxsb/bgzs0e/cl59vxilcqdkmq1h#appKey) |
+| applyId | 是 | 申请id文档 |
+| printKey | 是 | 打印模版key文档 |
+
+#### **参数说明(查询参数)：**
+
+无
+
+#### **请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+
+#### **请求体（Body）**
+
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| userId |  | string | 用户userId，userId可在通讯录接口中查询获得 |
+| auditNodeId | 是 | number | 节点id |
+
+#### **请求体示例**
+
+```json
+{
+    "userId": "4064",
+    "auditNodeId": 34070036
+}
+```
+
+### 3.返回
+
+#### 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| result | 是 | object | 返回结果 |
+| printKey | 是 | string | 打印模版key |
+| printName | 是 | string | 打印模版名称 |
+| url | 是 | string | 打印文件url |
+
+#### 返回体示例
+
+```json
+{
+    "errMsg": "",
+    "errCode": 0,
+    "result": {
+        "printKey": "选择使用的打印模版key",
+        "printName": "打印模版的名称",
+        "url": "生成打印文件地址"
+    }
+}
+```
+
+##
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/pc80uwa7zq9w1ro6?singleDoc#)

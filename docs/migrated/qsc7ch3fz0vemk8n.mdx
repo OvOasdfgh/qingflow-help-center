@@ -1,0 +1,92 @@
+---
+title: "获取应用Word打印模版信息"
+description: "获取应用word打印模版信息1. 权限说明仅专有轻流支持；「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有相应应用权限。2. 请求请求方式：GET请求地址：https://xxx.xx(自有域名)/openApi/app/:ap..."
+slug: "/帮助文档/轻代码/openapi/轻流应用接口/获取应用word打印模版信息"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/qsc7ch3fz0vemk8n?singleDoc#"
+source_updated_at: "2024-12-03T02:48:49.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "轻流应用接口"
+  - "获取应用Word打印模版信息"
+---
+获取应用word打印模版信息
+
+---
+
+### **权限说明**
+
+仅专有轻流支持；
+
+「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有相应应用权限。
+
+### 请求
+
+**请求方式：**GET
+
+**请求地址：**https://xxx.xx(自有域名)/openApi/app/:appKey/print
+
+> 请求地址中:appKey为需要替换的变量。
+
+##### **2.1 参数说明(路径参数)：**
+
+| 参数 | 类型 | 必须 | 说明 |
+| --- | --- | --- | --- |
+| appkey | string | 是 | 应用key文档 |
+
+##### **2.2 参数说明(查询参数)：**
+
+无
+
+##### **2.3 请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+
+##### **2.4 请求体（Body）**
+
+无
+
+##### **2.5 请求体示例**
+
+无
+
+### 返回
+
+##### 3.1 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| result | 是 | object | 返回结果 |
+| formTitle | 是 | string | 应用标题 |
+| openApiPrintTemplateList | 是 | array | 打印模版列表 |
+| printKey | 是 | string | 打印模版key |
+| printName | 是 | string | 打印模版名称 |
+| customFileName | 是 | string | 自定义打印文件名称 |
+
+##### 3.2 返回体示例
+
+```json
+{
+    "errMsg": "",
+    "errCode": 0,
+    "result": {
+        "formTitle": "应用标题",
+        "openApiPrintTemplateList": [{
+            "printName": " 打印模版的名称",
+            "printKey": " 打印模版的key",
+            "customFileName": "支付信息测试"
+        }]
+    }
+}
+```
+
+### 注意事项
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/qsc7ch3fz0vemk8n?singleDoc#)

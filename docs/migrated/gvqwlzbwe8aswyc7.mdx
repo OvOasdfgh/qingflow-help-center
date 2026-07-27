@@ -1,0 +1,60 @@
+---
+title: "钉钉机器人"
+description: "1. 介绍企业内部有较多系统支撑着公司的核心业务流程，譬如CRM系统、交易系统、监控报警系统等等。通过钉钉的自定义机器人，可以将这些系统事件同步到钉钉的聊天群。2. 鉴权信息1.选择需要添加机器人的群聊，然后依次单击群设置 &gt; 智能群助手。2.在机器人管理页面选择自定义机器人，输入机器人名字并..."
+slug: "/帮助文档/轻代码/连接中心/连接器/消息推送/钉钉机器人"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/gvqwlzbwe8aswyc7?singleDoc#"
+source_updated_at: "2024-11-26T08:30:17.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "连接中心"
+  - "连接器"
+  - "消息推送"
+  - "钉钉机器人"
+---
+### 介绍
+
+企业内部有较多系统支撑着公司的核心业务流程，譬如CRM系统、交易系统、监控报警系统等等。通过钉钉的自定义机器人，可以将这些系统事件同步到钉钉的聊天群。
+
+### 鉴权信息
+
+1.选择需要添加机器人的群聊，然后依次单击**群设置 **> **智能群助手**。
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/pmwrXyhMkKzi-x7f3c0P21cYJg5X34iM_.png)
+
+2.在机器人管理页面选择**自定义**机器人，输入机器人名字并选择要发送消息的群，同时可以为机器人设置机器人头像。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/2dt_BAMttAF8bpFzTTrwCJ9xYKaK3i_f_.png)
+
+3.完成必要的[安全设置](https://open.dingtalk.com/document/robots/customize-robot-security-settings#topic-2101465)，勾选**我已阅读并同意《自定义机器人服务及免责条款**》，然后单击**完成**。连接器目前不支持使用加签方式，不要勾选。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/lkqBEcStpjXk7F2nh7tisxfW82NqhwSG_.png)
+
+完成安全设置后，复制出机器人的Webhook地址，可用于向这个群发送消息，格式如：
+
+[https://oapi.dingtalk.com/robot/send?access\_token=XXXXXX](https://oapi.dingtalk.com/robot/send?access_token=XXXXXX)
+
+##### 注意事项
+
+请保管好此Webhook 地址，不要公布在外部网站上，泄露后有安全风险。
+
+### 事件信息
+
+| 事件 | 描述 |
+| --- | --- |
+| 发送文本类型消息 | 机器人的text类型消息支持在content中使用&lt;@userid>扩展语法来@群成员 |
+
+### 配置演示
+
+#### 发送文本类型消息
+
+1.连接中心钉钉机器人配置地址可全局默认
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/VP7HrexXsuI_UTtsHAzjwguCYwav1Vs2_.png)
+
+2.应用流程中添加webhook，使用连接中心模版，选择钉钉机器人，事件选择发送文本类型消息。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/OBt9jLpLQzSJ4XFqm7zWes7uMvhltawo_.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/gvqwlzbwe8aswyc7?singleDoc#)

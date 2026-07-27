@@ -1,0 +1,71 @@
+---
+title: "天眼查"
+description: "1. 介绍天眼查是中国领先的商业查询平台，主要提供专业的企业信息查询、企业关系挖掘服务。2. 鉴权信息具体操作：1、调用天眼查接口需要提前在天眼查开放平台的「个人中心」中充值，然后在天眼查API接口目录中找到对应接口，点击“申请接口”，才可在轻流中成功调用。用户可以在「个人中心」-「我的接口」..."
+slug: "/帮助文档/轻代码/连接中心/连接器/企业服务/天眼查"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/dvikaaiugqklb3pq?singleDoc#"
+source_updated_at: "2024-11-26T08:30:18.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "连接中心"
+  - "连接器"
+  - "企业服务"
+  - "天眼查"
+---
+### 介绍
+
+天眼查是中国领先的商业查询平台，主要提供专业的企业信息查询、企业关系挖掘服务。
+
+### 鉴权信息
+
+具体操作：
+
+1、调用天眼查接口需要提前在[**天眼查开放平台**](https://open.tianyancha.com/console/usercenter)的「个人中心」中充值，然后在[**天眼查API接口目录**](https://open.tianyancha.com/api_list)中找到对应接口，点击“申请接口”，才可在轻流中成功调用。用户可以在「个人中心」-「我的接口」中查看已成功的接口。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/8HDPCGb0udVQ73ooFxgIktFB8WnXsVEe_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/Hlof5kChnP9E_KEUeSJ8IwCV5xzZGLDt_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/xpXSLjsRtofJiXoz_HTAtu1Lbt9JLwV8_.png)
+
+2、在[**天眼查开放平台**](https://open.tianyancha.com/console/usercenter)的「个人中心」-「我的接口」中复制token值（如下图所示）；
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/PG_W0qL1NxDxOj2jIXQBC36RHLsiJeXq_.png)
+
+3、在轻流「连接中心」-「天眼查」连接器中点击配置，将上述token值粘贴到变量“Authorization”对应的输入框内（如下图所示）；至此，连接器的鉴权配置完成。
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/FGHMzQdc2onxWPOAbmov1CDYuPMLaV_F_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/c8Zu0jQ9vp09TMHzDpvAQ3qR-0rRA1v4_.png)
+
+### 事件信息
+
+| 事件 | 描述 |
+| --- | --- |
+| 企业基本信息查询 | 可以通过公司名称或ID获取企业基本信息，企业基本信息包括公司名称或ID、类型、成立日期、经营状态、注册资本、法人、工商注册号、统一社会信用代码、组织机构代码、纳税人识别号等字段信息。 |
+
+### 配置演示
+
+#### 事件「企业基本信息查询」配置过程
+
+1、根据需求建立表单，如下图。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/XktMdgo8EPsXUywWhCa89pMNr7HdFRvV_.png)
+
+2、点击Q-Linker组件，配置模式选择对应连接中心的模版，并点击“绑定变量”，对模版变量与自定义表单字段进行绑定。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/WdYphmseOKzwu9egE2ff6u46kCQB85el_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/7umm3XJdpSEwxEPJhWdrjXjuwTuwVu35_.png)
+
+3、点击表单中自定义的查询结果组件，将其与Q-Linker返回结果进行关联，即可获取查询结果。如下图，将返回结果中企业名与表单相应字段关联。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/PmqlVL3YHkpdowrhhzyCDICfHqFcfouT_.png)
+
+4、将所有需要的结果都与相应表单字段进行关联。
+
+5、保存应用并发布，点击“发起新的”即可进行查询，效果如下。
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/%E8%BF%9E%E6%8E%A5%E4%B8%AD%E5%BF%83%E5%A4%A9%E7%9C%BC%E6%9F%A5%E6%93%8D%E4%BD%9C-%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62021-07-20%20%E4%B8%8B%E5%8D%883.26.47-1.gif?sign=5ea1b049880c990de80d4dc3cd24da01&t=1683542091)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/dvikaaiugqklb3pq?singleDoc#)

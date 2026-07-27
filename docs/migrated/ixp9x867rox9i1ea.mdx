@@ -1,0 +1,97 @@
+---
+title: "语雀开放性调研"
+description: "1、获取语雀的Token点击语雀的个人头像，进入账户设置页面获取Token2、获取单个用户信息（id或login）获取当前 Token 对应的用户的个人信息请求方式：GET请求的URL：https://www.yuque.com/api/v2/userpostman测试样例Q-Linker配置..."
+slug: "/搭建技巧/按功能分类/第三方集成/语雀/语雀开放性调研"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/ixp9x867rox9i1ea?singleDoc#"
+source_updated_at: "2024-10-15T03:38:15.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "第三方集成"
+  - "语雀"
+  - "语雀开放性调研"
+---
+## 1、获取语雀的Token
+
+**点击语雀的个人头像，进入账户设置页面获取Token**
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1594005112454-4b6c5093-f83d-4e7d-9cd8-95dfc08a174c.png)
+
+## 2、获取单个用户信息（id或login）
+
+**获取当前 Token 对应的用户的个人信息**
+
+**请求方式：GET**
+
+**请求的URL：**`[**https://www.yuque.com/api/v2**](https://www.yuque.com/api/v2)**/user**`
+
+### postman测试样例
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1594005736602-6cdf9266-b8ad-4352-ba74-ec46868c7400.png)
+
+#### Q-Linker配置样例（以下配置都可以参考本样例）：
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1597893045757-c1100df8-2831-44ce-952e-71573b5fd853.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1597893228664-26212014-eaa6-41b1-8207-721f5ebcf3ca.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1597893266007-191fb7c5-4923-4ebc-a025-b7b1c78479e2.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1597893312080-584e3b4e-2363-4c36-babc-ad62e4e99b4e.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1597893375483-1ab277d6-4275-4662-a067-d43291a9f580.png)
+
+## 3、获取单个用户信息
+
+**请求方式：GET**
+
+**请求的URL：**`[https://www.yuque.com/api/v2](https://www.yuque.com/api/v2)/user/:id`
+
+### postman测试样例
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1594006500636-1f34a163-d1e0-4038-a9f2-2c64776de464.png)
+
+## 4、获取某个用户加入的组织列表
+
+**请求方式：GET**
+
+**请求的URL：**[https://www.yuque.com/api/v2/users/1105851/groups](https://www.yuque.com/api/v2/users/1105851/groups)
+
+### postman测试样例
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1595228157150-2f76b1a3-ccf9-4064-a1e2-b1154540baad.png)
+
+### 5、获取组织成员信息
+
+**请求方式：GET**
+
+**请求URL：**[**https://www.yuque.com/api/v2/groups/2386607/users**](https://www.yuque.com/api/v2/groups/2386607/users)
+
+#### postman测试样例：
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1597891373929-a9a88950-1e01-4b26-9d79-d77a0e055c35.png)
+
+### 6、删除组织内的某个成员
+
+**请求方式：DELETE**
+
+**请求URL：**[**https://www.yuque.com/api/v2/groups/2386607/users/1638775**](https://www.yuque.com/api/v2/groups/2386607/users/1638775)
+
+#### postman测试样例：
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1597891515131-59bdb096-3dc9-46d5-bda1-202e67c6b14a.png)
+
+### 7、向群组内添加成员
+
+**请求方式：PUT**
+
+**请求URL：**[**https://www.yuque.com/api/v2/groups/2386607/users/1638775**](https://www.yuque.com/api/v2/groups/2386607/users/1638775)
+
+#### postman测试样例：
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1597891632654-f25c2f44-a991-4658-b09d-0cf8362d6576.png)
+
+[Q-Linker和语雀.mov](https://exiao.yuque.com/attachments/yuque/0/2024/mov/26393678/1728963496432-2c5ad57f-b371-4b10-8be4-eeef902de8b2.mov)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/ixp9x867rox9i1ea?singleDoc#)

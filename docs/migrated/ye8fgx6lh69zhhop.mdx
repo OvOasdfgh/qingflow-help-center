@@ -1,0 +1,96 @@
+---
+title: "成员如何定时收到填写日报/周报的待办"
+description: "场景成员可以每天或每周定时收到填写日报或周报的待办🔗安装方案系统逻辑要定时向员工生成待办，需要先有一条推送待办的数据，在这条数据中选择要接收待办的成员，有多少个成员需要写报告就发起多少条数据，通过流程外Q-Robot重复每天/每周自动向填写日报的应用中添加数据，生成待办场景搭建「日报推送」添..."
+slug: "/搭建技巧/按功能分类/其他/自动推送/成员如何定时收到填写日报-周报的待办"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/ye8fgx6lh69zhhop?singleDoc#"
+source_updated_at: "2024-10-15T03:38:22.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "其他"
+  - "自动推送"
+  - "成员如何定时收到填写日报/周报的待办"
+---
+#### 场景
+
+成员可以每天或每周定时收到填写日报或周报的待办
+
+🔗[安装方案](https://qingflow.com/center/template/detail/8a63e2d9?type=3&tab=2&name=%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5)
+
+#### 系统逻辑
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1634783859915-67b3f89b-1c7f-479e-b84d-6f80a8e06ebb.png)
+
+要定时向员工生成待办，需要先有一条推送待办的数据，在这条数据中选择要接收待办的成员，有多少个成员需要写报告就发起多少条数据，通过流程外Q-Robot重复每天/每周自动向填写日报的应用中添加数据，生成待办
+
+#### 场景搭建
+
+##### 「日报推送」
+
+添加一个成员字段【接收人】
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1634783955643-014b6023-c30e-41fb-ac46-afcf51ccbcc2.png)
+
+在拓展设置中创建流程外Q-Robot
+
+首次触发时间：设置首次生成待办的自定义时间
+
+重复周期：日报选择“每天”，同理周报选择“每周”（每天/每周重复按照首次触发的自定义时间添加数据生成待办）
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1631847742533-2c1a80ff-cd39-4b01-ba4b-a45397e4c53e.png)
+
+点击“下一步”，选择触发动作“添加数据”，将成员字段【接收人】添加到目标应用「日报填写」的对应字段中
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1631848102248-63bb7380-7a3a-403f-bf46-6ac7d00d8e1f.png)
+
+发起一条数据，选择需要收到待办的成员
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1631848993506-3ae303c3-f623-4788-8163-be79a5663e0d.png)
+
+##### 「日报填写」
+
+添加一个成员字段【填写人】，再添加一个多行文字字段【日报内容】
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1634784053169-39ed0261-0058-41a5-bacf-e969f89a8157.png)
+
+流程中添加“填写节点”
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1631849494602-1287a503-3edb-4e8a-a4c8-c392c3450d78.png)
+
+设置节点负责人-动态-成员字段【填写人】
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1634784159766-2bcc714e-61e5-4b53-bb97-d5ce7797b2b9.png)
+
+设置字段权限，将成员字段【填写人】设置“仅可见”，多行文字字段【日报内容】设置“可编辑”
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1631849682343-1eb88a12-4806-49ad-8b4c-c4f958ad3d90.png)
+
+#### 实现效果
+
+每天早上9:30对应成员会收到一条“日报填写”的待办
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1631850056024-e6c0a791-60fe-433d-9b06-ace1561e52f0.png)
+
+#### 系统优化
+
+在填写节点-高级设置中设置流程超时时间以及超时预警时间
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1631851018214-f86e2ee3-aae1-41a7-bb84-e69827f8b6f2.png)
+
+创建报表，设置筛选条件：申请时间动态范围今日；当前流程状态==已通过/当前流程状态!=(不等于)已通过
+
+当前流程状态==已通过：日报已填写完成并提交
+
+当前流程状态!=已通过：日报还未填写
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1631851153338-804d1c55-c044-4f84-9723-ae4a0cd2dea4.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1631851179497-06e25d1f-a3be-4035-bcc9-bb38b9fc35fc.png)
+
+创建门户，将报表添加到门户中
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1631851305472-0bd00d49-cf31-447f-8069-fffaf31498e2.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/ye8fgx6lh69zhhop?singleDoc#)

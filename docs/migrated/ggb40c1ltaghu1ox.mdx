@@ -1,0 +1,127 @@
+---
+title: "逻辑函数"
+description: "1 功能介绍1.1 功能简介逻辑函数，是一类返回值为 true 、false 或其他自定义逻辑值的函数。可以对单个或多个表达式的逻辑关系进行判断，最终返回一个逻辑值。关于逻辑函数的几个基本概念：true：代表判断后的结果是真的，正确的，也可以用 1 表示；false：代表判断后的结果是假的，错..."
+slug: "/帮助文档/表单引擎/字段常用设置/默认内容/通过公式计算/逻辑函数"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/ggb40c1ltaghu1ox?singleDoc#"
+source_updated_at: "2025-06-10T10:01:20.000Z"
+keywords:
+  - "帮助文档"
+  - "表单引擎"
+  - "字段常用设置"
+  - "默认内容"
+  - "通过公式计算"
+  - "逻辑函数"
+---
+## 1 功能介绍
+
+### 1.1 功能简介
+
+逻辑函数，是一类返回值为 **true** 、**false** 或其他自定义逻辑值的函数。
+
+可以对单个或多个表达式的逻辑关系进行判断，最终返回一个逻辑值。
+
+关于逻辑函数的几个基本概念：
+
+- true：代表判断后的结果是真的，正确的，也可以用 1 表示；
+- false：代表判断后的结果是假的，错误的，也可以用 0 表示；
+- *logical1*, *\[logical2\]*, …：代表不同的参数逻辑值。
+
+## 2 设置步骤
+
+### IF
+
+IF 函数可用于判断一个条件能否满足；如果满足返回一个值，如果不满足则返回另外一个值。
+
+> 函数用法：IF(logical\_test，value\_if\_true, value\_if\_false)其中各参数的含义如下：logical\_test：必需，逻辑表达式，要判断是否成立的条件；value\_if\_true：必需，满足条件时的返回值；value\_if\_false：必需，不满足条件时的返回值。
+
+**函数示例：**
+
+根据输入的成绩判断是否及格，60分及以上为及格，否则不及格。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700102188523-c720359c-4a23-42c8-b25f-9610db7ff3e4.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1699258699389-6cade28d-c0d2-49bd-8037-ae8f5c2bb08b.png)
+
+### IFS
+
+IFS 函数可用于判断是否满足一个或多个条件，且返回符合第一个 true 条件的值。 IFS 函数可以取代多个嵌套 IF 语句，并且有多个条件时更方便阅读。
+
+> 函数用法：IFS(logical\_test1, value\_if\_true1, logical\_test2, value\_if\_true2, … ,logical\_testn, value\_if\_truen)其中各参数的含义如下：logical\_test1：必需，计算结果为 true 或 false 的条件；value\_if\_true1：必需，当 logical\_test1 的计算结果为 true 时要返回结果，可以为空；logical\_test2…logical\_testn：非必需，计算结果为 true 或 false 的条件；value\_if\_true2…value\_if\_truen：非必需，当 logical\_testn 的计算结果为 true 时要返回结果。 每个 value\_if\_truen 对应于一个条件 logical\_testn，可以为空。注：n 的最大值为 127，即 IFS 函数最多允许 127 个不同的条件。 先计算各条件值（若为公式需先计算），然后按顺序依次判断条件是否符合，仅当条件 1 不满足时，才继续判断条件 2 例如：IFS(ISEMPTY(数字2)，0，数字2 == 0,0，true，ROUND(数字1/数字2)，2））会先计算ROUND函数，再进行IFS条件判断，如果ROUND计算失败将直接返回。
+
+**函数示例：**
+
+根据成绩判断等级，90分及以上为“优”，75分及以上为“良”，60分及以上为“中”，60分以下为“差”。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700102341687-e743a109-aaa4-4b8b-ad3e-c6f1fafe1902.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1699258766207-9e440a4f-b38b-45e3-af8b-7b4c1fc87470.png)
+
+### AND
+
+AND 函数可用于表示：当所有参数逻辑值为 true 时，返回 true；只要有任何一个参数逻辑值为 false，则返回false。通常与IF/IFS函数组合使用。
+
+> 函数用法：AND(logical1, logical2, …)
+
+**函数示例：**
+
+产品A和产品B的质量分要同时大于60，才算合格。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700102247779-2033f07d-3083-459c-9e99-a3a1cf348ad8.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1699259412051-65fce7ef-5fa5-43ce-b570-38a34ceb4f70.png)
+
+### OR
+
+OR 函数可用于表示：参数组中，任何一个参数逻辑值为 true 时，即返回 true；只有当所有逻辑参数值为 false 时，才返回 false。通常与IF/IFS函数组合使用。
+
+> 函数用法：OR(logical1,logical2, …)
+
+**函数示例：**
+
+评判顾客等级，规定消费次数大于三次或消费金额大于1000元的顾客为重点顾客，满足一项即可。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700102267020-4993f3a0-c376-4507-af17-a976a997d55a.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1699259482510-190e5dc5-ae7f-415d-b8b9-aefef4ecb09d.png)
+
+### XOR
+
+除了“与运算”（AND）和“或运算”（OR），还有一种“异或运算”（XOR），也非常重要。XOR 函数可返回所有参数的异或值。**“相异则或”**，异或的含义是：两个逻辑值相同，返回 false，两个逻辑值不同，则返回 true。
+
+> 函数用法：XOR(logical1,logical2, …)条件可以检查如下内容:如果一个数字大于另一个数字>如果一个数字小于另一个数字&lt;如果数字或文本等于 =对于两种情况，您可以将 XOR 函数视为: "或者这个或者那个，但不能同时"。参数必须计算为逻辑值，如 true 或 false，或者为包含逻辑值的数组或引用可以使用 XOR 数组公式检查数组中是否出现某个值。当 true 输入的数字为奇数时，XOR 的结果为 true；当 true 输入的数字为偶数时，XOR 的结果为 false。例如：=XOR(5>2, 0>1, 4&lt;2)返回 true，=XOR(1+1=2，2+2=4)返回 false
+
+**函数示例：**
+
+检查神奇宝贝(Pokemons)类型是否为 Fire 类型**或** HP **小于** 60，但**不是两者**，函数返回 true 或 false 。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700104277397-e7d71d45-b79f-4ea4-8836-b2fe959eb976.png)**效果展示**每一行都检查 Fire 类型**或** HP &lt; 60, 但**不能同时检查**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700105017679-ca8db5e1-b04c-48ff-b0f5-95519015e6e8.png)例如:Ivysaur **不是** Fire 类型，但 HP > 60，函数返回 falseCharmeleon **是**Fire 类型，HP &lt; 60，函数返回 falseWartortle **不是** Fire 类型，但 HP **&lt;** 60，函数返回 true
+
+> 将 XOR 函数与 IF 函数 相结合，可以检查 IF 函数的多个条件。注意: IF 函数允许指定返回值。IF(logical\_test，value\_if\_true, value\_if\_false)XOR 函数取代了 logical\_test 条件。这里，IF 函数返回"Yes"或"No"。
+
+**数示例：**
+
+检查神奇宝贝(Pokemons)类型是否为 Fire 类型**或** HP **小于** 60，但**不是两者**，函数返回 Yes 或 No 。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700104803798-e87c7cd2-e273-4ed5-b371-ff9f34ce7951.png)**效果展示**每一行都检查 Fire 类型**或** HP &lt; 60, 但**不能同时检查**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700105033467-66683c54-1148-4bf7-b9ff-38238ec28665.png)例如:Ivysaur **不是** Fire 类型，但 HP > 60，函数返回 NoCharmeleon **是**Fire 类型，HP &lt; 60，函数返回 NoWartortle **不是** Fire 类型，但 HP **&lt;** 60，函数返回 Yes
+
+### NOT
+
+NOT 函数可用于对其参数的逻辑求反，当逻辑为 true 时，返回结果 false；当逻辑为 false 时，返回结果 true。当要确保一个值不等于某一特定值时，可以使用 NOT 函数。
+
+> 函数用法：NOT(logical)
+
+**函数示例：**
+
+当合格率大于不合格率时，返回 true；当合格率小于不合格率时，返回 false，检查合格率情况。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700102799268-c65bb28b-5ead-4049-86c9-3b41a381693e.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700102889426-66898c11-d960-4f9d-a89e-bd76839306fd.png)(合格率>不合格率)![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700102928084-4ef75b34-b875-49db-8630-9d0538ea747e.png)(合格率&lt;不合格率)
+
+### ISEMPTY
+
+ISEMPTY 函数可用于判断值是否为空字符串或者空数组。如果是空值，返回true。
+
+> 函数用法：ISEMPTY(text)
+
+**函数示例：**
+
+根据成绩判断等级，90分及以上为“优”，75分及以上为“良”，60分及以上为“中”，60分以下为“差”。
+
+在没有填写成绩前，等级为空值。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700102296123-54c314dd-7a98-44b6-8410-92277fde8cba.png)**效果展示**![iShot\_2023-11-06\_17.46.31.gif](https://cdn.nlark.com/yuque/0/2023/gif/21683170/1699264054078-60d0c261-8a87-4902-88c0-3f414ab5d18a.gif)如果没有加ISEMPTY的判断，则未填写成绩时，“分数”&lt;60 ，等级为“差”
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/ggb40c1ltaghu1ox?singleDoc#)

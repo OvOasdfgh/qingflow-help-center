@@ -1,0 +1,146 @@
+---
+title: "轻流 x 钉钉--日程"
+description: "应用场景在轻流平台可以对钉钉的日程进行增加/修改/删除操作。落地方案图文/视频演示帮助文档一、接口权限申请操作链接：https://ding-doc.dingtalk.com/doc#/serverapi2/rnomdt/OhMEA1、创建应用以管理者身份在钉钉开放平台创建应用，会生成Agen..."
+slug: "/搭建技巧/按功能分类/第三方集成/钉钉/轻流-x-钉钉-日程"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/qkmnk9put8g1hnyl?singleDoc#"
+source_updated_at: "2024-10-15T03:38:20.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "第三方集成"
+  - "钉钉"
+  - "轻流 x 钉钉--日程"
+---
+## 应用场景
+
+在轻流平台可以对钉钉的日程进行增加/修改/删除操作。
+
+## 落地方案
+
+![原文流程图](https://cdn.nlark.com/yuque/0/2021/jpeg/2997244/1611733733113-ceffaf8e-6a52-41b4-b4c2-67f2a97d5c65.jpeg)
+
+## 图文/视频演示
+
+## 帮助文档
+
+### 一、接口权限申请
+
+**操作链接：**[https://ding-doc.dingtalk.com/doc#/serverapi2/rnomdt/OhMEA](https://ding-doc.dingtalk.com/doc#/serverapi2/rnomdt/OhMEA)
+
+##### 1、创建应用
+
+以管理者身份在钉钉开放平台创建应用，会生成AgentId，Appkey和Appsecret
+
+**路径：**（已认证开发者）
+
+钉钉开放平台--应用开发--创建应用
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1605860665583-9c21049e-ee39-4e9e-8c2a-b49d94309882.png)
+
+##### 2、申请接口权限
+
+申请创建日程相关权限。
+
+​
+
+**路径：**
+
+应用开发--你创建的应用--权限管理--添加接口权限
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1605860874753-162d6876-fc75-472f-a3c5-31279248d361.png)
+
+### 二、获取access\_Token：
+
+操作链接:[https://ding-doc.dingtalk.com/doc#/serverapi2/eev437](https://ding-doc.dingtalk.com/doc#/serverapi2/eev437)
+
+##### 1、access\_Token
+
+根据之前获得的appid和appkey来获取access\_token，注意，access\_Token只有2小时的有效期，过期需要重新获取。
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1597716452994-31ac2917-dabb-452c-bfa5-23a02933084d.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_10%2Ctext_6L275rWB%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10)
+
+postman测试：
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1609296659617-30a24ff9-6558-4e1e-bbe3-fa9dec85bb94.png)
+
+##### 2、在轻流中的配置：
+
+​
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1609296720695-9d3def9d-b790-4e1d-96ef-8ee1157a46db.png)
+
+### 三、创建日程
+
+钉钉平台操作参考链接：[https://ding-doc.dingtalk.com/doc#/serverapi2/iqel76](https://ding-doc.dingtalk.com/doc#/serverapi2/iqel76)
+
+**需要注意必要参数的获取方法。**
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1605864131592-e42c55c4-667c-47d0-83ff-1aabc2d54e3c.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1605864091950-fb6c6b77-9a4e-43ca-8e38-af0f35f8f08a.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1605864017934-6b311d48-07d0-4887-a9b1-4e6fea2b221b.png)
+
+##### 1、获取员工userID
+
+获取userID方法很多，这里**用手机号获取userID**。
+
+钉钉开放平台操作帮助手册地址：[https://ding-doc.dingtalk.com/doc#/serverapi2/ege851](https://ding-doc.dingtalk.com/doc#/serverapi2/ege851)
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1605864581740-bd4653e7-ef5d-4b02-99b5-5d83438b4416.png)
+
+**postman示例：**
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1605864659896-09f7d1ee-f23d-4800-bffb-eb8a9277c574.png)
+
+##### 2、获取agentID
+
+**路径：**
+
+应用开发--你的应用里--凭证与基础信息
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1605864878366-50fd56f5-6489-49e1-b35d-cc25ce2ed994.png)
+
+##### 3、创建日程/会议：
+
+**示例JSON格式：**
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1605863802677-0b56859f-c62b-4206-8192-83dc33f4a4cc.png)
+
+**postman测试：**
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1605865055658-b35264a7-16c7-4a06-9a72-2af665208311.png)
+
+**响应：**
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1605865067878-247ae23b-4e6c-436d-93cb-bc6866ab1d3a.png)
+
+**​**
+
+**在轻流中的配置：**
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1605865188960-db126d4f-7909-4da4-9b54-87e723b883f3.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1605865264982-694a3881-8bd3-46c6-b9c7-f27602c5f3dc.png)
+
+### 四、设置ip白名单
+
+​
+
+##### 1、错误原因：访问ip不在白名单之中 。 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1605865516871-e96ac065-a510-4eec-b3d4-78bd252082e9.png)
+
+##### 2、处理方法：添加白名单
+
+钉钉开发平台帮助手册：[https://ding-doc.dingtalk.com/doc#/faquestions/cvbtph/mjMoK](https://ding-doc.dingtalk.com/doc#/faquestions/cvbtph/mjMoK)
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1605865587192-7b4611e0-8901-44b7-8ed0-320f21b53eb1.png)
+
+**路径：**
+
+应用开发--你的应用--开发管理--修改
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1605865759905-37ce9bed-2c26-44b7-b8c4-907a16692440.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/qkmnk9put8g1hnyl?singleDoc#)

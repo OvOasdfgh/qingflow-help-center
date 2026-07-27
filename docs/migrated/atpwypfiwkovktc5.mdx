@@ -1,0 +1,247 @@
+---
+title: "轻流 x 聚水潭"
+description: "应用场景通过轻流应用表单实现与聚水潭进行对接落地方案图文/视频演示帮助文档一、进行授权操作1、访问该表单链接获取授权链接https://qingflow.com/f/f5b57ef5 其中的username为聚水潭的账号点击查询之后，会返回一个链接，请点击打开，然后进行授权操作输入账号密码之..."
+slug: "/搭建技巧/按功能分类/第三方集成/聚水潭/轻流-x-聚水潭"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/atpwypfiwkovktc5?singleDoc#"
+source_updated_at: "2024-10-15T03:38:16.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "第三方集成"
+  - "聚水潭"
+  - "轻流 x 聚水潭"
+---
+## 应用场景
+
+通过轻流应用表单实现与聚水潭进行对接
+
+## 落地方案
+
+![原文画板](https://cdn.nlark.com/yuque/0/2023/jpeg/28884377/1693560265261-3bf929c1-e33e-4edf-a245-d6dc67778486.jpeg)
+
+## 图文/视频演示
+
+## 帮助文档
+
+### 一、进行授权操作
+
+1、访问该表单链接获取授权链接
+
+[https://qingflow.com/f/f5b57ef5  ](about:blank)
+
+- 其中的username为聚水潭的账号
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693560374472-cd303846-7427-43b5-964c-350b56d48ed2.png)
+
+- 点击查询之后，会返回一个链接，请点击打开，然后进行授权操作
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693560628914-38c9779c-6c85-406d-8595-021c36f47c4f.png)
+
+- 输入账号密码之后，正常会显示授权成功
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693560527139-3297bdbe-d4bf-4e8e-ace1-ad6a60d83d8f.png)
+
+### 二、获取access\_token
+
+#### 1、postman测试
+
+1. 接口说明：用户获取调用聚水潭OpenApi的凭证token，授权后超过30天不使用，token会失效，需要重新进行授权
+2. 接口地址：[https://connect.oalite.com/api/jst/accessToken](https://connect.oalite.com/api/return)
+3. 请求方式：GET
+4. 请求头（Header）：无
+5. 请求参数（查询参数）：
+
+| ​参数 | 是否必填 | 说明 |
+| --- | --- | --- |
+| username | 是 | 聚水潭账号 |
+
+- 请求示例
+
+```bash
+curl --location 'https://connect.oalite.com/api/jst/accessToken?username=1*848021***'
+```
+
+- 响应示例
+
+```json
+{
+    "errCode": 0,
+    "data": {
+        "access_token": "eb8d3cffcf4b4590aefc44e640906600"
+    },
+    "errMsg": null
+}
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693560895766-e795a14f-c28e-4cd2-8833-6dc655acab86.png)
+
+#### 2、鉴权配置
+
+- 将postman测试成功之后，将相同配置放置在轻流鉴权配置即可
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693561952356-70e49679-98d7-44b2-8f9e-5b330c5b6acd.png)
+
+### 三、以查询聚水潭采购单为例
+
+对应的接口文档：[https://openweb.jushuitan.com/dev-doc?docType=6&docId=26](https://openweb.jushuitan.com/dev-doc?docType=6&docId=26)
+
+#### 准备工作：
+
+##### 1、进行聚水潭参数加签操作
+
+1. 接口说明：用户调用聚水潭需要进行参数加签，包含时间戳，token等参数；该接口对加签进行了封装，返回内容可以直接用于调用聚水潭openApi接口
+2. 接口地址：[https://connect.oalite.com/api/jst/signature](about:blank)
+3. 请求方式：POST
+4. 请求头（Header）：无
+5. 请求参数（查询参数）：
+
+| ​参数 | 是否必填 | 说明 |
+| --- | --- | --- |
+| access\_token | 是 | 鉴权接口获得的token |
+
+1. 请求体：根据请求的聚水潭接口的请求体确定
+
+1. 以聚水潭采购单查询中的请求示例为例
+
+1. 实际业务场景可以根据接口文档的请求参数做具体调整
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693563002438-333e4591-2730-4c93-93a3-627c22f9ce81.png)
+
+1. 请求示例：以请求聚水潭采购单查询接口为例
+
+```json
+curl --location 'https://connect.oalite.com/api/jst/signature?access_token=f**259de3e014575b34a8be1******' \
+--header 'Content-Type: application/json' \
+--data '{"so_ids":[],"page_index":1,"modified_begin":"2023-08-10","modified_end":"2023-08-16","page_size":30,"po_ids":[]}'
+```
+
+1. 响应示例：
+
+```json
+{
+  "msg": "执行成功",
+  "code": 0,
+  "data": {
+    "datas": [
+      {
+        "seller": "广州许诺化妆品有限公司123",
+        "po_date": "2021-11-1815:31:49",
+        "send_address": "上海上海市浦东新区华业公寓",
+        "po_id": 113622,
+        "item_type": "成品",
+        "freight": 0,
+        "remark": "",
+        "tax_rate": 0,
+        "finish_time": "",
+        "labels": "",
+        "receive_status": "",
+        "wms_co_id": 0,
+        "so_id": "",
+        "purchaser_name": "肺棘",
+        "confirm_date": "2021-11-1817:43:20",
+        "term": "",
+        "supplier_id": 763,
+        "items": [
+          {
+            "i_id": "102025",
+            "delivery_date": "",
+            "field_3": "",
+            "po_id": 113622,
+            "price": 5999.4,
+            "plan_arrive_qty": 0,
+            "qty": 1,
+            "name": "羊毛双面围巾",
+            "sku_id": "1234560",
+            "remark": "",
+            "poi_id": 620961,
+            "tax_rate": 0
+          }
+        ],
+        "status": "Confirmed",
+        "more_rate": 0.0
+      }
+    ],
+    "page_index": 1,
+    "has_next": false,
+    "data_count": 2,
+    "page_count": 1,
+    "page_size": 2
+  }
+}
+```
+
+##### 2、postman测试
+
+- 注意点：body中的编写，需要紧凑书写，参数与参数之间不能存在有任何空格。不然会导致sign计算的不对
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693563379602-6a9fb54c-39e4-492a-b0ce-89e3a42a8151.png)
+
+##### 3、轻流的配置
+
+- 表单配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693791892871-a974800f-a55c-48dd-80f6-0cb6de696b37.png)
+
+- 根据接口将参数放在具体位置即可，其中已经使用了鉴权，所以无法再加入token
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693791941874-433a1c27-df3c-4651-8214-7ca8ee2c14ed.png)
+
+- body的内容这里是直接用的固定参数，当前也可以换成插入字段，以便于更好的动态查询
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693791966960-697dcbbf-269d-486a-a200-e0985552c643.png)
+
+- 解析规则配置
+
+- 其余字段和token解析一样
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693792226649-80664c79-8e44-4a5e-91c2-4f640a1f50f8.png)
+
+- 字段接收配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693792285894-51e38199-b178-4880-9a55-0814b39775a9.png)
+
+#### 聚水潭采购单查询
+
+##### 1、postman测试
+
+URL换成具体聚水潭的接口地址，由于这里是以聚水潭采购单为例，所以URL为
+
+[https://openapi.jushuitan.com/open/purchase/query](https://openapi.jushuitan.com/open/purchase/query)
+
+数据格式以接口文档为准，所以是x-www-form-urlencoded
+
+然后参数根据上一步准备工作返回的内容直接填充即可
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693793415571-ae12aecd-1cc8-4a72-ad7a-d43baae6197d.png)
+
+##### 2、轻流的配置
+
+- 表单配置
+
+由于查询返回内容为数组格式，所以在轻流中以表格进行接收。其次接收内容需要根据接口文档具体配置，这里我只接收四个内容。
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693793724887-62580d95-18fa-4a03-8447-f52825745395.png)
+
+- q-linker采购单查询配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693793880182-fc328308-45be-42a9-98a1-57bb81f7b899.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693794014449-f409d2af-d8fb-44ce-8543-cf3772fc7904.png)
+
+- 解析规则
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693794036277-f8843a6e-dfd0-4b87-bb9d-bb9344206e6f.png)
+
+- 字段接收配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693794055637-05044303-695c-435d-ab09-3572bd81f933.png)
+
+#### 实际效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693793701784-8399defb-06f3-418d-b5a2-8cee735c9eab.png)
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/atpwypfiwkovktc5?singleDoc#)

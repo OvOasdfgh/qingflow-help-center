@@ -1,0 +1,152 @@
+---
+title: "获取应用基本信息"
+description: "调用本接口，获取应用基本信息。1. 权限说明仅「超管accessToken」拥有调用权限。（权限组accessToken无法调用）2. 请求请求方式：GET请求地址：https://api.qingflow.com/apps（公有云版本）示例如下：GET https://api.qingflo..."
+slug: "/帮助文档/轻代码/openapi/轻流应用接口/获取应用基本信息"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/uti158995g1fh88a?singleDoc#"
+source_updated_at: "2024-10-15T03:35:10.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "轻流应用接口"
+  - "获取应用基本信息"
+---
+调用本接口，获取应用基本信息。
+
+---
+
+### **权限说明**
+
+仅「超管accessToken」拥有调用权限。（权限组accessToken无法调用）
+
+### 请求
+
+**请求方式：**GET
+
+**请求地址：**https://api.qingflow.com/apps（公有云版本）
+
+> 示例如下：
+
+```javascript
+GET https://api.qingflow.com/apps
+```
+
+钉钉版本：[https://api.ding.qingflow.com/apps](https://api.ding.qingflow.com/apps)
+
+专有轻流：http(s)://xxx.xx(自有域名)/openApi/apps
+
+##### **2.1 参数说明(查询参数)：**
+
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| appKey |  | string | 应用ID，不填则默认工作区内所有应用 |
+| pageSize | 是 | int | 每页数据条数 |
+| pageNum | 是 | int | 请求页码 |
+
+##### **2.2 请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+
+### 返回
+
+##### 3.1 返回体
+
+| 参数名 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| questionRelations |  |  | 关联的设置，这里没用 |
+| result | 是 | object | 结果 |
+| pageNum | 是 | int | 请求页码 |
+| pegeSize | 是 | int | 每页数据条数 |
+| resultAmount | 是 | int | 总数据条数 |
+| pageAmount | 是 | int | 总页数 |
+| result | 是 | array |  |
+| appKey | 是 | string | 应用的key |
+| appName | 是 | string | 应用的标题 |
+| appAuth | 是 | int | 应用的可见权限, 1-2分别代表：工作区可查看，指定用户 |
+| authMembers |  | object | 指定用户可见的时候，可见的用户列表，不支持动态负责人 |
+| users |  | array | 用户列表 |
+| userId |  | string | 用户id |
+| userName |  | string | 用户昵称 |
+| depts |  | array | 部门列表 |
+| deptId |  | int | 部门id |
+| deptName |  | string | 部门名称 |
+| roles |  | array | 角色列表 |
+| roleId |  | int | 角色id |
+| roleName |  | string | 角色名称 |
+| creator |  | object | 应用创建者 |
+| userId | 是 | string | 应用创建者的userid |
+| nickName | 是 | string | 应用创建者的昵称 |
+| headImg | 是 | string | 应用创建者的头像 |
+| createTime | 是 | int | 应用的创建时间 |
+| appIcon | 是 | string | 应用的图标 |
+| tags | 是 | array | 应用所属的应用包 |
+| tagId | 是 | int | 应用包id |
+| tagName | 是 | string | 应用包名称 |
+| appPublishStatus | 是 | int | 应用的发布状态 |
+
+##### 3.2 返回体示例
+
+```json
+{
+    "errCode": 0,
+    "errMsg": null,
+    "questionRelations": [],
+    "result": {
+        "pageAmount": 1,
+        "pageNum": 1,
+        "pageSize": 20,
+        "result": [
+            {
+                "appAuth": 2,
+                "appIcon": "https://file.qingflow.com/assets/mobile/images/icon_appase.png",
+                "appKey": "00071f",
+                "appName": "未命名应用",
+                "appPublishStatus": 0,
+                "authMembers": {
+                    "depts": [],
+                    "roles": [],
+                    "users": [
+                        {
+                            "userId": "9098",
+                            "userName": "pony"
+                        },
+                        {
+                            "userId": "9024",
+                            "userName": "snow"
+                        }
+                    ]
+                },
+                "createTime": "2022-02-09T17:15:07",
+                "creator": {
+                    "headImg": "https://file.qingflow.com/assets/contact/avar1.png",
+                    "nickName": "",
+                    "userId": "6889"
+                },
+                "tags": [
+                    {
+                        "userId": "3909",
+                            "userName": "pony"
+
+                    },
+                    {
+                         "userId": "3904",
+                            "userName": "snow"
+
+                    }
+                ]
+            }
+        ],
+        "resultAmount": 1
+    }
+}
+```
+
+##### 3.3 错误码相关
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/uti158995g1fh88a?singleDoc#)

@@ -1,0 +1,83 @@
+---
+title: "浙江药械采购平台"
+description: "1. 介绍浙江省药械采购中心是经省机构编制委员会批准，浙江省医疗保障局所属公益一类事业单位。承担药品、医用耗材招标采购平台的相关建设和维护工作。2. 鉴权信息1.平台商户需要通过平台方获取机构ID和secret。2.通过q-linker获取accessToken。将机构ID（机构编号），ser..."
+slug: "/帮助文档/轻代码/连接中心/连接器/系统集成/浙江药械采购平台"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/kmgb632oe2qa8vpy?singleDoc#"
+source_updated_at: "2024-11-26T08:30:17.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "连接中心"
+  - "连接器"
+  - "系统集成"
+  - "浙江药械采购平台"
+---
+### 介绍
+
+浙江省药械采购中心是经省机构编制委员会批准，浙江省医疗保障局所属公益一类事业单位。承担药品、医用耗材招标采购平台的相关建设和维护工作。
+
+### 鉴权信息
+
+1.平台商户需要通过平台方获取机构ID和secret。
+
+2.通过q-linker获取accessToken。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/8K4Mv3qwQQJBDZDIRFGN3nmWdYestmjS_.png)
+
+将机构ID（机构编号），sercet（密码），logtime排序。排序字段通过公式获得，其中logtime取当前时间即可。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/71dsVUUMDvw662Yv95Gi5keDwVWxXSRS_.png)
+
+排序后的字段值进行MD5加密。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/wMyVJRsqvUorkZ0821dlLyQaPU22P7y__.png)
+
+加密完成后，再将排序字段，MD5排序，得到params。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/k2e4vBf_jKVvULqtCZ5t_qmdUQFs0MAK_.png)
+
+通过q-linker请求平台接口获得accessToken。表单中“accessToken”关联接收q-linker的值。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/X3Zl_wTpAjdNDDjf0j5eO6yuJw1D2gVN_.png)
+
+轻商城-连接中心配置鉴权。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/u2c182scCotOMoDp9jWnD9YDj-ebMnxj_.png)
+
+#### 注意事项
+
+accessToken有效期为 30min。且accessToken效果类似 Session 滑动，即最后一次访问后，如果 30min 内没有再次使用该accessToken访问，则accessToken失效。
+
+### 事件信息
+
+（这里只展示一下有哪些事件）
+
+| 事件 | 描述 |
+| --- | --- |
+| 获取采购订单 | 调用本接口，获取采购订单 |
+| 配送订单 | 通过采购订单明细进行配送操作，包含正常订单和应急急救订单。 |
+| 获取收货信息 | 调用本接口，获取收货信息 |
+| 获取退货信息 | 调用本接口，获取退货信息 |
+| 获取商品信息 | 通过查询条件以分页的形式获取商品信息。 |
+| 获取支付订单 | 此接口获取医院已审核通过的支付订单信息。 |
+| 获取支付明细订单 | 此接口获取支付订单支付明细 |
+
+### 配置演示
+
+#### 获取采购订单
+
+1.变量输入可以直接在「事件配置」里输入，成为全局默认值。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/j8Vmw0d-6WctpH-Mavboa8797hARNGRI_.png)
+
+2.使用时，新建对应应用，选Q-Linker字段，「配置模式」选连接中心里对应模版。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/ZY6P3PDFE2U_GfZKWwg6xLUyUILncpp-_.png)
+
+3.根据连接中心事件的别名，以及自身业务场景，设置其他返回数据的字段。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/22xuTn4tSezKXadDSaxvZAI69jujUNJH_.png)![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/oN5c-aJC5QzXN__UgY0AuEVq2qSZYFP2_.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/kmgb632oe2qa8vpy?singleDoc#)

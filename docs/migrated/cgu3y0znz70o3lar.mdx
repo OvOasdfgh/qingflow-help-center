@@ -1,0 +1,88 @@
+---
+title: "轻流 x 企业微信---机器人推送信息"
+description: "应用场景企业微信是目前对内工作协同高效的主流软件。企业微信群机器人可以帮我们定向推送自定义消息。比如我们可以通过企业微信群机器人推送工单提醒，推送订单信息，反馈bug，推送工单处理信息等。这里假设小A是互联网公司的群运营专员，每天都要定向推送不同类型不同领域的新闻消息到指定群聊。落地方案图文/..."
+slug: "/搭建技巧/按功能分类/第三方集成/企业微信/轻流-x-企业微信-机器人推送信息"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/cgu3y0znz70o3lar?singleDoc#"
+source_updated_at: "2025-06-04T09:25:02.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "第三方集成"
+  - "企业微信"
+  - "轻流 x 企业微信---机器人推送信息"
+---
+## 应用场景
+
+企业微信是目前对内工作协同高效的主流软件。
+
+企业微信群机器人可以帮我们定向推送自定义消息。比如我们可以通过企业微信群机器人**推送工单提醒，推送订单信息，反馈bug，推送工单处理信息**等。
+
+这里假设小A是互联网公司的群运营专员，每天都要定向推送不同类型不同领域的新闻消息到指定群聊。
+
+## 落地方案
+
+![原文流程图](https://cdn.nlark.com/yuque/0/2021/jpeg/2997244/1611728862712-78c029b1-82e5-4257-91bc-e201a61f93c6.jpeg)
+
+## 图文/视频演示
+
+视频演示[企业微信机器人视频1.mp4](https://exiao.yuque.com/attachments/yuque/0/2024/mp4/26393678/1728963498891-b49a1204-ed6b-44ce-bbab-7aa3dad1e5f2.mp4)
+
+## 帮助文档
+
+配置文档：
+
+## 1、接口调用流程
+
+![原文流程图](https://cdn.nlark.com/yuque/0/2020/png/1638775/1597726776060-562bdb46-0dbe-4143-99d7-5ed6d0a258d5.png)
+
+## 2、获取企业微信群机器人的webhook地址
+
+1、前置工作：一个企业微信群；创建人在群中设置了机器人
+
+2、获取群机器人的webhook地址，界面如图所示，单击复制地址将该机器人的webhook地址保存下来
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1638775/1597716618024-713c43c4-1f52-479c-9cd2-61ca74abdd4d.png)
+
+## 3、在轻流中创建应用、配置流程
+
+这个应用实际上是配合客户需求来的，本例中为基于心知天气的数据查询，具体功能是输入一个城市名，单击查询后，返回天气、气温、中文城市名，本例所要做的是将以上数据通过机器人推送到对应的企业微信群
+
+1、创建应用（此步骤根据客户需求，本例只考虑其返回的信息，所以省略）
+
+2、配置流程
+
+在应用的添加流程配置中添加节点-添加Q Robot后选择webhook
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1638775/1597720216561-004d027a-d723-497c-bdce-2b828c2a6085.png)
+
+按照如下配置页面：
+
+配置方法可以在企业微信开发者文档中获取：
+
+[https://open.work.weixin.qq.com/api/doc/90000/90136/91770](https://open.work.weixin.qq.com/api/doc/90000/90136/91770)
+
+本例中的配置仅供参考，不适用所有情况
+
+首先在URL一栏填写之前获取的企业微信机器人的webhook地址，需要注意的是这个webhook地址如果不配置ip白名单，则所有人均可调用，需要考虑数据安全问题
+
+接下来Method选择POST，Body Type选择application/json，在JSON Body中配置所要传输的数据，也即推送到企业微信中的文本的具体格式
+
+其中mentioned\_list, mentioned\_mobile\_list为非必要参数，本例仅简单表述功能故不做设置
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1638775/1597720495316-0b5f3c83-2b3d-4ec4-bbef-0fd21e5c83ae.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1638775/1597720722989-ab4c0ac9-cff7-4ddd-a7a3-b2a7481f5c08.png)
+
+## 4、实现功能展示
+
+在轻流中提交一条数据：
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1638775/1597721008433-47057a1d-cc22-4008-97e2-c774201b6390.png)
+
+提交成功后，企业微信群机器人会自动推送如下消息：
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1638775/1597726798564-db759f72-5c95-454f-be14-7e57c946879b.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/cgu3y0znz70o3lar?singleDoc#)

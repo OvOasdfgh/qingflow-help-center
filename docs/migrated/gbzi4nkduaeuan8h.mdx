@@ -1,0 +1,62 @@
+---
+title: "QS主动获取URL链接如何放到附件上传字段"
+description: "1. 场景/问题描述QS主动批量获取数据，由于目前QS主动不支持附件上传字段，但是需要传到附件上传字段进行展示2. 思路逻辑先通过QS主动将附件的URL放在单行文字中，然后进入流程调用接口将URL链接回传到附件上传字段中。3. 配置过程3.1. 表单配置3.1.1. 回调接口实现3.1.1.1..."
+slug: "/搭建技巧/按功能分类/其他/附件上传/qs主动获取url链接如何放到附件上传字段"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/gbzi4nkduaeuan8h?singleDoc#"
+source_updated_at: "2024-10-15T03:38:23.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "其他"
+  - "附件上传"
+  - "QS主动获取URL链接如何放到附件上传字段"
+---
+## 场景/问题描述
+
+QS主动批量获取数据，由于目前QS主动不支持附件上传字段，但是需要传到附件上传字段进行展示
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693554190663-67f8f384-fb10-4c6f-8ead-2a8fdab8f63c.png)
+
+## 思路逻辑
+
+先通过QS主动将附件的URL放在单行文字中，然后进入流程调用接口将URL链接回传到附件上传字段中。
+
+## 配置过程
+
+### 表单配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693554045675-d31def72-1e39-4019-94e0-322a19e0c8e6.png)
+
+#### 回调接口实现
+
+##### 实现路径
+
+将单行文字的URL通过webhook回调接口去回调回来，然后传到附件上传字段进行展示
+
+[https://connect.oalite.com/api/returnAll](https://connect.oalite.com/api/returnAll)----回调地址
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693554962390-b29eee15-2bed-44f4-ba36-1752bfdf9833.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693555049757-560ed19a-f501-49bb-a6ca-9a407e40a9d3.png)
+
+#### OpenApi的更新数据接口实现
+
+##### 实现路径
+
+通过更新数据接口去更新当前数据，将单行文字的URL传进附件上传字段中
+
+具体接口文档链接：[https://help.qingflow.com/help-docs?type=qingCode&docId=93e4b6a06428e9380710351d2d57d2b5&parentId=](https://help.qingflow.com/help-docs?type=qingCode&docId=93e4b6a06428e9380710351d2d57d2b5&parentId=)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693554647090-cd5079ed-4ce3-412c-aa8c-a4ded92289d3.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693554713937-2d1fe4ee-5d95-4898-8e91-d65f404c4c31.png)
+
+## 实现效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693555155547-6114f631-f8d6-4e94-a971-6b772a71e278.png)
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/gbzi4nkduaeuan8h?singleDoc#)

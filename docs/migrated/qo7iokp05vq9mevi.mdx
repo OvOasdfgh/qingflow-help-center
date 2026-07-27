@@ -1,0 +1,49 @@
+---
+title: "流程引擎升级"
+description: "1.简介为了给广大用户带来更好的产品体验，轻流对流程引擎进行了升级。以下内容公有云已在2023年10月14日上线（钉钉版本将于10月18日）上线，专有轻流预计将在5.3.0版本上线。2.更新功能2.1 审批加签功能简介：支持在审批节点中增加临时审批人。功能配置：在审批节点-基础设置 中开启加签..."
+slug: "/更新动态/产品公告/流程引擎升级"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/qo7iokp05vq9mevi?singleDoc#"
+source_updated_at: "2024-10-15T03:37:03.000Z"
+keywords:
+  - "更新动态"
+  - "产品公告"
+  - "流程引擎升级"
+---
+## 1.简介
+
+为了给广大用户带来更好的产品体验，轻流对流程引擎进行了升级。以下内容**公有云**已在2023年10月14日上线（钉钉版本将于10月18日）上线，**专有轻流**预计将在5.3.0版本上线。
+
+## 2.更新功能
+
+### 2.1 审批加签
+
+**功能简介**：支持在审批节点中增加临时审批人。
+**功能配置**：在**审批节点-基础设置** 中开启加签功能。
+
+**功能使用**：在**处理待办** 时点击【**更多-加签**】 ，即可加签审批人。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-10-16/fwP6-SDcR94UECjcqyD3vfK_WBMYDuuT_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-10-16/4IA8Ri5ZSgdvCHkC9fskEiArYvyhxMVr_.png)
+
+### 2.2 流转规则
+
+**功能简介**：增加了可配置自动化节点流转规则。默认「到达节点时进入下一节点」，可切换为「**执行完成后进入下一节点** 」，以保证业务流程严格按顺序执行。
+
+**可用的节点类型** ：Q-Robot 新增数据、Q-Robot 更新数据、Webhook节点。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-10-16/rXojGQpmBc4dS9nJ1h3zs6uRyILtZ1ts_.png)
+
+**需要注意的是**，当流程进入自动化节点，流程被回退或撤回，已经在执行的自动化节点，会继续执行完毕；还未开始执行的自动化节点，会停止执行。
+
+### 2.3 流程状态
+
+**功能简介**：当流程进入**自动化节点** 时，流程将处于「**自动化进行中** 」状态：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-10-16/R_65gJJml7mlD_5h3NO0Zr4FlQ6zbJZg_.png)
+
+**需要注意的是**，自动化节点长时间未执行完毕（状态为“进行中”时），可在节点流程日志中**手动重试** 。
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/qo7iokp05vq9mevi?singleDoc#)

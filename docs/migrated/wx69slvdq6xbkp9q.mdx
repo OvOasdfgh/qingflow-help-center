@@ -1,0 +1,113 @@
+---
+title: "如何实现一物一码的库存管理"
+description: "场景每个设备都有独立的SN编码，库存管理既要按设备型号计数，又要区分每个设备的独立性。出入库传递出入库的设备数量数据，也要传递出入库的设备的SN编码🔗安装方案当前文档在《基础出入库》基础上进行讲解，请先学习《基础出入库》：https://qingflow.com/dashboard/28d6..."
+slug: "/搭建技巧/按场景分类/进销存-仓库/如何实现一物一码的库存管理"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/wx69slvdq6xbkp9q?singleDoc#"
+source_updated_at: "2024-10-15T03:37:59.000Z"
+keywords:
+  - "搭建技巧"
+  - "按场景分类"
+  - "进销存/仓库"
+  - "如何实现一物一码的库存管理"
+---
+#### 场景
+
+每个设备都有独立的SN编码，库存管理既要按设备型号计数，又要区分每个设备的独立性。出入库传递出入库的设备数量数据，也要传递出入库的设备的SN编码
+
+🔗[安装方案](https://qingflow.com/center/template/detail/8946ee40?type=3&tab=2&name=%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5)
+
+​
+
+当前文档在《基础出入库》基础上进行讲解，请先学习《基础出入库》：[https://qingflow.com/dashboard/28d66ded/view](https://qingflow.com/dashboard/28d66ded/view)
+
+#### 业务流程
+
+在常规出入库上建立应用「SN码管理」，不同之处是出库或入库时一个产品对应一张出库表或入库表，除了添加流水数据，还需要将每个产品数据添加或更新至应用「SN码管理」
+
+#### 系统逻辑
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1630313678265-2c7ba69c-bc87-4a18-b237-a952738b2a1d.png)
+
+#### 场景搭建
+
+##### 「库存流水」
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1630314034508-e98475a4-8b3e-4c6b-8d1a-f405a1f25b6f.png)
+
+除了【当前库存】【最新库存】，其他字段的数据通过应用「出库单」「入库单」系统自动添加过来，不需要过多设置
+
+【当前库存】：添加**数据关联**字段，关联应用自身「库存流水」中当前产品最新一条数据（聚合方式-最新数据）的字段【最新库存】的值
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1630314439917-6a61418d-edf6-4f77-af2d-ec11c4e39a00.png)
+
+【最新库存】：设置公式，非数字字段需要在字段前添加NUM()，将字段转换为数字参与公式计算，如图中【当前库存】
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1630314829234-8427f2e9-6067-421e-a2c0-4177f07e2820.png)
+
+在添加流程中申请人节点-高级设置，**开启提交/通过时重新触发数据关联或公式**，选择字段【当前库存】【最新库存】，注意触发顺序，需要先触发的字段顺序在前，此处需要先知道当前库存才能计算最新库存，【当前库存】要先触发，顺序在前
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1630314942243-7ec2e341-0dd4-4f5c-afa5-297974538724.png)
+
+##### 「SN码管理」
+
+该应用的数据都由应用「出库单」「入库单」进行添加或更新，不需过多设置，添加以下图中字段即可
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1630315252079-40933200-4460-47fa-8304-894866cf414e.png)
+
+##### 「入库单」
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1630315483352-a88cb0ff-f568-453b-ad76-27dbe8d9abf2.png)
+
+【入库单号】：添加公式（RK-202106180001）
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1630315571200-bf7b779e-1136-418e-b63a-4a2fc8b0a4f4.png)
+
+【当前库存】：设置同「库存流水」中【当前库存】字段，数据关联-聚合方式-最新数据
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1630316643061-37eba146-1ce1-46a9-9b74-b10de05ecca7.png)
+
+【产品SN码】：表格中添加**单行文字**，设置扫码录入，并且不允许录入重复值
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1630316928287-af716ce6-900d-4572-82cf-3fed0a70a75c.png)
+
+【入库数量】：设置公式，入库数量和录入的SN码数量相等
+
+COUNT函数简介：返回所有参与运算字段中值（字符串）的数量
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1630316962068-92bd4c8e-5ce4-442f-8472-69320e478f9a.png)
+
+申请人节点-高级设置，设置**提交校验**-应用校验-库存流水（应用「库存流水」在被添加数据时不允许提交数据）
+
+**开启提交/通过时重新触发数据关联或公式**，选择字段【当前库存】（多人同时打开入库单提交数据后重新触发【当前库存】，获得正确值）
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1630317695393-0cb8dd02-5bef-40e4-a83c-91bbe0170cd0.png)
+
+添加节点Q-Robot添加数据，往应用「SN码管理」中添加数据
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1630317985694-25273377-c7d7-43cc-8b47-ce1ccf3ac716.png)
+
+再添加一个Q-Robot添加数据节点，往应用「库存流水」中添加流水
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1630318106859-36ff112f-eb96-400b-9a0a-5c1c0331aa92.png)
+
+##### 「出库单」
+
+设置与「入库单」相同
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1630318186569-0dacdecb-eabd-4759-9d40-e70122c6ae06.png)
+
+申请人节点设置**提交校验**并开启**提交/通过时重新触发数据关联或公式**
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1630318271291-eece0d9c-965e-4929-8f31-3d022fe5cb80.png)
+
+添加Q-Robot更新数据节点，将「SN码管理」中产品状态更新为“出库”，并更新出库单号
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1630318477286-3332cdfb-0e70-4bce-9c96-e003c221690e.png)
+
+添加Q-Robot添加数据节点，往应用「库存流水」中添加流水
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1630318492028-9cdb7873-8aaa-412f-a725-2cf6c077f12b.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/wx69slvdq6xbkp9q?singleDoc#)

@@ -1,0 +1,47 @@
+---
+title: "轻流 x 腾讯云idaas"
+description: "仅为对接方案对接腾讯云身份认证服务，配置项如下：腾讯云idaas应用配置轻流sso配置腾讯云idaas：1、首先进入管理员模式，在应用管理中找到需要对接的应用，点击登录配置-常规配置2、记录下client ID和client Secret，还有一个well-known接口地址3、填写回调uri..."
+slug: "/搭建技巧/按功能分类/第三方集成/腾讯云/轻流-x-腾讯云idaas"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/oga0w51gzmkg77h9?singleDoc#"
+source_updated_at: "2024-10-15T03:38:18.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "第三方集成"
+  - "腾讯云"
+  - "轻流 x 腾讯云idaas"
+---
+仅为对接方案
+
+对接腾讯云身份认证服务，配置项如下：
+
+- 腾讯云idaas应用配置
+- 轻流sso配置
+
+腾讯云idaas：
+
+1、首先进入管理员模式，在应用管理中找到需要对接的应用，点击登录配置-常规配置
+
+2、记录下client ID和client Secret，还有一个well-known接口地址
+
+3、填写回调uri：[https://accounts.qingflow.com/sso/cb](https://accounts.qingflow.com/sso/cb)，允许授权模式默认即可
+
+4、单点登录url填写轻流sso生成的登录链接，每个工作区不一样，可参考[https://accounts.qingflow.com/sso?serverName](https://accounts.qingflow.com/sso?serverName)=xxxxx
+
+5、点击确定后保存
+
+轻流sso：
+
+1、选择Oauth2.0协议，复制下登录链接，clientid和secret填写腾讯云idaas提供的
+
+2、请求用户授权设置，需要配置well known地址提供的"authorization\_endpoint"，参数设置需要配置client\_id、redirect\_uri、response\_type、scope。共四个参数，具体需要参照腾讯云的帮助文档
+
+3、配合腾讯云的回调地址解析，需要删去轻流中第三方登录后跳转轻流地址设置中的state一项
+
+4、获取accesstoken设置中，配置well known地址提供的"token\_endpoint"，参数配置，首先参数内容编码选择参数内容编码；header中根据腾讯要求配置Authorization；body设置需要配置grant\_type、code、redirect\_uri，此步骤配置完成后可以测试获取到腾讯accesstoken
+
+5、访问腾讯身份信息接口，获取当前授权的用户信息并绑定到轻流账号上
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/oga0w51gzmkg77h9?singleDoc#)

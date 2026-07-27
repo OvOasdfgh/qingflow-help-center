@@ -1,0 +1,173 @@
+---
+title: "表格录入商品出库如何表格上下行联动计算？"
+description: "1. 场景/问题描述当进行商品出库的时候，在表格中关联出当前库存时，在下一行录入相同数据时，库存数量并不会进行实时更新，导致无法用表格进行录入。2. 思路逻辑通过代码块来进行实现表格出库，对于当前库存的实时计算。使得录入新行时，直接显示最新的库存数量3. 配置过程3.1. 场景1：不同发货地的..."
+slug: "/搭建技巧/按场景分类/进销存-仓库/表格录入商品出库如何表格上下行联动计算"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/gxtcpupb8rnm695d?singleDoc#"
+source_updated_at: "2024-10-15T03:37:57.000Z"
+keywords:
+  - "搭建技巧"
+  - "按场景分类"
+  - "进销存/仓库"
+  - "表格录入商品出库如何表格上下行联动计算？"
+---
+## 场景/问题描述
+
+当进行商品出库的时候，在表格中关联出当前库存时，在下一行录入相同数据时，库存数量并不会进行实时更新，导致无法用表格进行录入。
+
+## 思路逻辑
+
+通过代码块来进行实现表格出库，对于当前库存的实时计算。使得录入新行时，直接显示最新的库存数量
+
+## 配置过程
+
+### 场景1：不同发货地的情况
+
+#### 表单设计
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698824303910-a2f22e50-7c5a-4a36-ae5a-0c1e398d8eb6.png)
+
+#### 代码与测试
+
+##### 代码注释
+
+input替换成表单中的实际录入表格
+
+field\_159268617代表出库录入表格——产品名称字段
+
+field\_159137225代表出库录入表格——当前库存字段
+
+field\_159137216代表出库录入表格——出库数量字段
+
+```javascript
+const input = qf_field.{出库录入$$16B47C88C$$};
+
+const groupBy = (array, key) => {
+  return array.reduce((result, item) => {
+    (result[item[key]] = result[item[key]] || []).push(item);
+    return result;
+  }, {});
+};
+
+const groupedTable = groupBy(input, "field_159268617");
+Object.keys(groupedTable).forEach(groupKey => {
+  let prevValue = null;
+  groupedTable[groupKey].forEach((entry, index) => {
+    if (index > 0) {
+      entry.field_159137225 = groupedTable[groupKey][index - 1].field_159137225 - groupedTable[groupKey][index - 1].field_159137216;
+    } else {
+      entry.field_159137225 = entry.field_159137225;
+    }
+    entry.value = entry.field_159137225 - entry.field_159137216;
+  });
+});
+const sortedOutput = Object.values(groupedTable)
+  .flat()
+  .sort((a, b) => {
+    if (a.field_159268617 < b.field_159268617) {
+      return -1;
+    }
+    if (a.field_159268617 > b.field_159268617) {
+      return 1;
+    }
+    return 0;
+  });
+
+//const output = { "output":sortedOutput };
+
+qf_output={sortedOutput}
+```
+
+- 其中输出的value为当前实际库存
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692352493434-0f673dca-0748-4b4c-b2db-df67c8666122.png)
+
+##### 解析配置规则
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692352537803-0b026606-f5a1-494b-ad83-0308176907b4.png)
+
+##### 表格字段解析配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692352657528-32269731-544a-47e2-b074-e420c51db74a.png)
+
+- 该字段可以在表单中隐藏
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692352709073-e26125d6-552e-4b4f-8d13-eb14ca4ec4be.png)
+
+#### 实际效果
+
+[https://qingflow.com/f/c5466dba](https://qingflow.com/f/c5466dba)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692352741503-c705de6d-68c0-4531-9a62-4cad133932ac.png)
+
+### 场景2：不考虑发货地的情况
+
+#### 表单设计
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698824428292-8c5e087a-235a-466b-803a-a8dc70232a5a.png)
+
+#### 代码与测试
+
+##### 代码注释
+
+input替换成表单中的实际录入表格
+
+field\_160008422代表出库录入表格——产品名称字段
+
+field\_160008413代表出库录入表格——当前库存字段
+
+field\_160008412代表出库录入表格——出库数量字段
+
+```javascript
+const input =qf_field.{出库录入$$17234DA88$$};
+  
+  // 创建一个空对象来存储按照名称汇总后的结果
+  const summary = {};
+  
+  // 遍历数组中的每个对象
+  input.forEach((item) => {
+    // 获取field_160008422的内容名称作为键
+    const key = item.field_160008422;
+  
+    // 如果该名称已经存在对象中，则将field_160008412的值累加
+    if (key in summary) {
+      summary[key].field_160008412 += item.field_160008412;
+    } else {
+      // 如果该名称还不存在对象中，则将整个对象项添加进去
+      summary[key] = { ...item };
+    }
+  });
+  
+  // 对summary对象进行处理，计算value和最终的field_160008412值
+  Object.values(summary).forEach((item) => {
+    item.value = item.field_160008413 - item.field_160008412;
+  });
+  
+  // 将summary对象的值转换为列表形式
+  const output = Object.values(summary);
+  
+  //console.log(output);
+  
+qf_output={output}
+```
+
+- 其中输出的value为当前实际库存
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692859878082-8e1acee6-bfc0-48c0-988b-775aa0b2a39e.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692859889117-b39d4d56-4928-41d1-b042-7c2e4d87fbb9.png)
+
+##### 解析配置规则
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692859896765-c4228af6-a171-4dc3-a2fb-ea8f748ee235.png)
+
+##### 表格字段解析配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692859910107-2df6dc87-7126-45ea-bdaf-660c6da03dfe.png)
+
+#### 实际效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692859968438-d98b83b3-9b01-4b9a-aa4c-d93e614b4464.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/gxtcpupb8rnm695d?singleDoc#)

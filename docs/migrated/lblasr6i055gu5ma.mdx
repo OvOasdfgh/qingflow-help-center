@@ -1,0 +1,172 @@
+---
+title: "Q-Source被动"
+description: "功能介绍目前系统间的数据传输大多通过rest API接口完成。轻流强大的连接相关功能，支持和三方系统完成复杂业务的集成。Q-Source被动可以理解为轻流每个应用有个“自定义接口”，可以将三方系统发送的数据（JSON/XML/正则表达式）接收，并解析到应用的字段中。完成对应数据的新增和更新。轻..."
+slug: "/帮助文档/轻代码/集成中心/q-sourse/q-source被动"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/lblasr6i055gu5ma?singleDoc#"
+source_updated_at: "2025-08-25T08:45:58.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "集成中心"
+  - "Q-Sourse"
+  - "Q-Source被动"
+---
+## 功能介绍
+
+目前系统间的数据传输大多通过rest API接口完成。轻流强大的连接相关功能，支持和三方系统完成复杂业务的集成。
+
+Q-Source被动可以理解为轻流每个应用有个“自定义接口”，可以将三方系统发送的数据（*JSON/XML/正则表达式*）接收，并解析到应用的字段中。完成对应数据的新增和更新。
+
+*轻流被动接收三方系统数据（轻流开放的接口）：Q-Source被动、*[***OpenAPI添加数据***](https://qingflow.com/help/docs/6114c2d6d601550046421ddc)
+
+*轻流主动拉取三方系统数据（对接三方系统的接口）：*[***Q-Source主动***](https://qingflow.com/help/docs/6114c2d5d601550046421dcc)*、*[***Q-linker***](https://qingflow.com/help/docs/6114c2d5d601550046421dcb)*、*[***Webhook***](https://qingflow.com/help/docs/6116117d9024630046929289)*、*[***提醒推送***](https://qingflow.com/help/docs/6116117d902463004692928a)
+
+## 设置步骤
+
+因为Q-Source被动是接收三方系统发送的数据到轻流，所以需要：
+
+「1」三方系统配置发送的请求
+
+「2」轻流Q-Source被动配置数据接收
+
+### 一、三方系统的配置
+
+1、**请求方法：**post
+
+2、**请求地址：**该Q-Source被动的url
+
+*（在【应用编辑】-【添加流程】-「申请人」-「高级设置」-「添加来源」-Q-Source被动）*
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/43099917/1756111495279-9700f04f-03b2-4e79-870e-4c8f16a29da5.png)
+
+3、**请求体：**将想发送的数据，以JSON（或XML/正则表达式）格式进行发送
+
+*整体配置如下（以postman里的配置举例）：*
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-07-05/nUHqRJyjSRklnu_Wpdr4Vv2ZeiwJ3wjI_.png)
+
+### 二、轻流「Q-Source被动」的配置
+
+1、根据三方系统发送的数据格式，选择对应的接收数据类型。
+
+*（JSON/XML/正则表达式，默认为JSON，如下图）*
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/T7pjA3MjRBMOxNV-rBxXbZ33GAV0LcZz_.png)
+
+*例子：上面postman我们选的数据格式是JSON，所有这里我们也选JSON。*
+
+2、根据三方系统发送的数据内容，添加数据解析。
+
+方法：点击添加后，左边选择想填充的字段，右边选择解析语法（默认JSON Path），然后写对应想解析的解析规则。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/Kp4tbQ9JW1LYiNaPxuqwa_RjkC2Tzj-o_.png)
+
+*例子：上面发送的内容为\{"name":"贾胜强"\}，根据*[***JSON Path语法***](https://blog.csdn.net/roc1010/article/details/90812130)*，解析规则为$.name可以得到name的值：贾胜强（如下图）*
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/QLTUimiQn-0Kx3ZKzD0aW9de0NDPCbVw_.png)
+
+*效果如下：*
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-07-05/AHbNSryURTiul33C5K1D579FwJk74k7-_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-07-05/FmLf1cnFRcIEFSUxiGrZEsy0b3kLT7Ip_.png)
+
+## 其他
+
+### 一、赋值规则（详细见下表）
+
+1. 左边是单值类型，右边返回数组类型，默认选择数组中第一个值作为结果。
+2. 左边是多值类型，右边是数组类型，按照赋值规则进行匹配
+3. 申请人、成员以邮箱匹配；部门以文本直接匹配。
+
+|  | 目前是否支持 | 赋值规则 | 这里以JSON格式数据举例 |  |
+| --- | --- | --- | --- | --- |
+| 字段类型 |  |  | JSON格式数据 | 对应解析规则 |
+| 申请人 | √ | 纯文本按照email匹配当前工作区用户,不过滤申请人范围，申请人未设置rule,则设置为匿名用户 | \{"[answer":"esfesfse@qq.com](mailto:answer%22:%22esfesfse@qq.com)"\} | $.answer |
+| 1:单行文字 | √ | 纯文本，不做格式校验 | \{"answer":"a test"\} | $.answer |
+| 2:多行文字 | √ | 纯文本，不做格式校验 | \{"answer":"a test"\} | $.answer |
+| 3:数字 | √ | 纯文本，不做格式校验 | \{"number":13888888888\} | $.number |
+| 4:链接 | √ | 纯文本，不做格式校验 | \{"picture":[https://abc.123.com/fgh](https://abc.123.com/fgh)\} | $.picture |
+| 5:日期 | √ | 如果解析值可以转换成日期对象，则统一转换成’yy-mm-dd-hh:mm’格式，非法日期字符串则赋空值 | \{"time":"2021-01-29"\} | $.time |
+| 6:起止时间 | √ | ‘~’符号分割，分割后解析规则同日期字段，如果有一个值无法解析，则整个答案赋空值 | \{"time":"2021-01-08~2021-02-16"\} | $.time |
+| 7:手机 | √ | 纯文本，不做格式校验 | \{"phone":"13888888888"\} | $.phone |
+| 8:邮箱 | √ | 纯文本，不做格式校验 | \{"[email":"8888888@qq.com](mailto:email%22:%228888888@qq.com)"\} | $.email |
+| 9:单项选择 | √ | 按照选项内容匹配，不存在且允许选择\[其他\]选项,则向其他选项赋值，否则赋空值，选项重名则选择第一个 | \{"opt":"未命名2"\} | $.opt |
+| 10:下拉选择 | √ | 按照选项内容匹配，不存在且允许选择\[其他\]选项,则向其他选项赋值，否则赋空值，选项重名则选择第一个 | \{"value":"未命名3"\} | $.value |
+| 11:多项选择 | √ | 按照选项内容匹配，不存在且允许选择\[其他\]选项,则向其他选项赋值，否则赋空值。 | \{"value": "未命名2"\}\{"value": \["未命名2","未命名3"\]\} | $.value |
+| 12:图片选择 | √ | 根据\[文本显示值\]匹配，无匹配则赋空值 | \{"value": "未命名2"\}\{"value": \["未命名2","未命名3"\]\} | $. value |
+| 13:上传附件 | √ | 支持，传文件/资源的url；支持解析文件原名称 | 仅传输文件，不解析文件原名称\{"value":"[https://file.abc/file/456f.png"](https://file.abc/file/456f.png")\}\{"value":\[ "[https://file.abc/file/456f.png",](https://file.abc/file/456f.png",) "[https://file.abc/file/456f.png"](https://file.abc/file/456f.png") \]\}传输文件同时解析文件原名称\{"value":\{"filePath":"[https://file.abc/file/456f.png"](https://file.abc/file/456f.png"),"fileName":"附件.jpg"\}\} | $.value |
+| 14:地址字段 | √ | 支持，以空格隔开 | \{“value”:“上海市 闵行区”\} | $.value |
+| 15:描述文字 |  | 过滤 | / | / |
+| 16:富文本 |  | 过滤 | / | / |
+| 17:段落 |  | 过滤 | / | / |
+| 18:表格 | √ | 支持 | \{“table”:\[\{“id”:“1”,“name”:“测试”\},\{“id”:“2”,“name”:“test”\} \]\} | 表格字段 $.table 表格子字段 $.id $.name |
+| 19:定位 |  | 过滤 | / | / |
+| 20:数据关联 | √ | 纯文本，不做格式校验 | \{"answer":"a test"\} | $.answer |
+| 21:成员字段 | √ | 纯文本按照\[email\]查询当前工作区用户，不存在则赋空值 | \{"[user":"esfesfse@qq.com](mailto:user%22:%22esfesfse@qq.com)"\}\{"user":\["[esfesfse@qq.com](mailto:esfesfse@qq.com)"[,"12334@qq.com](mailto:,%2212334@qq.com)"\]\} | $.user |
+| 22:部门字段 | √ | 纯文本按照\[部门名称\]查询当前工作去部门，重名部门则都赋值，不存在则赋空值 | \{"value":"G测试部门"\}\{"value":\["G测试部门","A部门"\]\} | $.value |
+| 23:q-linker |  | 过滤 | / | / |
+| 24:文字识别 | √ | 支持，传文件/资源的url | \{"value":"[https://file.abc/file/456f.png](https://file.abc/file/456f.png)"\} | $.value |
+
+### 二、新增数据选择是否进入流程
+
+功能效果：默认开启，关闭可只新增数据，不进入流程。
+
+位置：「标题」下方
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/0yZ8wNsZdX-UX_yeUY4y1rQuZb7F9eYd_.png)
+
+### 三、更新数据
+
+功能效果：设置判断条件后，当识别接收到的数据和已在轻流中的某条数据是同一条时，更新这条数据。
+
+位置：「接收数据解析」下方，有个「更新数据」开关，默认关闭。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/ACq53wIG1dTz5BZITGVN6Azb0H03Wj9g_.png)
+
+除使用表单字段做筛选外，也可以使用数据ID（applyId）进行筛选。但是未设置applyId的path、path读取出的数据为空、读出的applyId值不是数字、读出的applyId不存在或对应数据已被删除、读出的对应数据不是当前应用的。都依旧为添加数据。
+
+成员与部门匹配最新规则：
+
+| ​<br /> | 字段映射 | 更新筛选 |  |  |
+| --- | --- | --- | --- | --- |
+| 字段类型 | 匹配规则 | 历史数据 | 匹配规则 | 历史数据 |
+| 成员 | 成员（绑定邮箱） | 成员（绑定邮箱） | 成员（绑定邮箱） | - |
+| 部门 | 部门名称 | 部门名称 | 部门名称 | - |
+
+![1732245913876.png](https://cdn.nlark.com/yuque/0/2024/png/2056184/1732245920028-e2b30b63-8fc9-40c9-ac8e-7aa8d481cd9c.png)请注意：
+
+1. 本「成员与部门匹配最新规则」功能仅限700版本。600版本用户在更新筛选时，成员和部门的匹配规则仍将基于内部ID。
+2. 对于历史配置中使用的内部ID配置，任务执行不受影响，但不再支持配置的修改。
+3. 对于更新筛选中用户和部门字段的内部ID关联，在浏览器端做隐藏处理，历史数据不处理。
+4. 系统不支持基于内部ID的配置修改，未来考虑增加使用外部ID进行数据交互。
+
+### 四、白名单设置
+
+点击插件中心->\[Q-Source\]的配置按钮可以配置「Q-Source被动模式」的白名单：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/ZG7ZUr8fmQD7_t5GcZKlcPTqJUymZDCg_.png)
+
+当没有设置任何白名单ip的时候，「Q-Source被动模式」不校验来源ip(只校验源公网ip)，当添加白名单ip之后，来自非白名单ip的Q-Source请求将被拒绝。
+
+IP格式为标准点分十进制格式 最大为255.255.255.255最小为1.1.1.1
+
+### 五、注意事项
+
+1、如果表单某个字段设置了必填，则Q-Source被动收到的数据，必须设置该必填字段的解析，且确实有值。否则会添加失败。
+
+（1）公有云用户：如果数据添加不成功，可通过「查询操作结果」接口，根据requestId查询操作结果，返回错误码40500表示Q-Source被动有必填字段未解析
+
+（2）专有轻流用户：可自主选择Q\_Source被动是否走消息队列，如果选择不走消息队列，在出现上述由于必填字段未解析导致添加数据失败的情况时，会直接返回错误信息。
+
+2、Q-Source被动模式新增数据时：只有勾选「进入流程」才会触发流程外Q-Robot，否则不触发流程外Q-Robot。
+
+3、专有轻流用户：Q-Source被动模式更新数据时，会触发流程外Q-Robot。
+
+您也可以点击轻流学院的教学视频来学习如何使用Q-Source被动模式。
+
+[SP2 Q-Source配置详解](https://learn.qingflow.com/detail/v_60a4f653e4b0fe322014c555/3)
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/lblasr6i055gu5ma?singleDoc#)

@@ -1,0 +1,82 @@
+---
+title: "用友U8"
+description: "1. 介绍用友U8开放平台开放了包括基础档案、凭证、存货、采购等 相关业务的几十个接口。开发者可以通过这些接口对U8ERP系统进行关联。 API的开放版图在持续扩大中。2. 鉴权信息用友U8在调用api之前首先要获取全局识别码(token)，然后才能通过 token 访问 api。用户可以在用..."
+slug: "/帮助文档/轻代码/连接中心/连接器/系统集成/用友u8"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/ryu5xsw4bp8wpmc1?singleDoc#"
+source_updated_at: "2024-11-26T08:30:17.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "连接中心"
+  - "连接器"
+  - "系统集成"
+  - "用友U8"
+---
+### 介绍
+
+用友U8开放平台开放了包括基础档案、凭证、存货、采购等 相关业务的几十个接口。开发者可以通过这些接口对U8ERP系统进行关联。 API的开放版图在持续扩大中。
+
+### 鉴权信息
+
+用友U8在调用api之前首先要获取全局识别码(token)，然后才能通过 token 访问 api。用户可以在[**用友U8开放平台**](https://u8open.yonyou.com/opamanager/indexm)申请应用获取参数，这里参照用友U8的帮助文档举例。
+
+1. 访问应用中心：
+
+在导航中可以找到【应用中心】的访问入口。用户只有登录后，才能进入应用中心。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/il6XRnt4RXlP9rgVkqXFFdKWQZ8RFvC3_.jpg)
+
+1. 创建应用：
+
+点击【创建应用】后，只有用户为【开发者】才能打开创建应用页面。
+
+2.1 如果非开发者，可以点击页面中的【成为开发者】，申请成为开发者。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/rlPXnLjiWEhrVinErPY2gP10Tv1IKnWk_.jpg)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/A95qI23oFPxX5-fTuburNtzsbY-8U0sa_.jpg)
+
+2.2 如果是开发者，直接创建应用即可。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/eWdU7TXY8ruSV529JIho00OgIavh3GD1_.jpg)![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/8Sl-vqCbi9i-zl0Ka-mccJNucms2iboj_.png)
+
+1. 应用管理：获Appkey和AppSecret参数
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/RqMCkcBb7EqstCFkdvAan-cd9DDk1NA1_.jpg)
+
+1. 在连接中心对应的「用友U8连接器」的鉴权管理中填入对应参数：调用方id对应登陆账号，应用编码对应AppKey，密钥对应AppSecret
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/T3TGdY5KAlvo42EKoRCusocVz1exb6UY_.png)
+
+### 事件信息
+
+（这里只展示一下有哪些事件）
+
+| 事件 | 描述 |
+| --- | --- |
+| 【交易号】获取交易号 | 通过 HTTP post 方式创建资源时（比如在 U8 系统里创建一张新的销售订单），为了防止同一资源因重复提交导致资源重复创建问题，需要通过交易号来识别多次提交是否为重复提交，从而保证即使重复提交也不会导致生成两个新的资源。 |
+| 【订单状态】获取应用订单状态 | 获取某用户的应用购买状态 |
+| 【数据源配置】获取数据源配置 | 根据用户，获取其应用数据源参数配置 |
+| 【U8帐套】获取单个U8帐套信息 | 获取单个U8帐套信息 |
+
+### 配置演示
+
+#### 【交易号】获取交易号
+
+1、变量输入可以直接在「事件配置」里输入，成为全局默认值，其他应用选择使用该模版，对应变量都会是该值。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/4HzxEfuTRYeJsHyqQwALhZPrewvdt_a__.png)
+
+2、使用时，新建对应应用，选Q-Linker字段，「配置模式」选连接中心里对应模版。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/XbJFoFVIqcNZ9lhxDfcUsOe7O5SB9o3C_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/f4xaOiKYyL7FkM0U6Pvmt5VGLe8mVrIO_.png)
+
+3、根据连接中心事件的别名，以及自身业务场景，设置其他返回数据的字段。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/mQDAsMYQ1lVzJU4GB3wTZDwdIoYMNNe7_.png)![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/onRR60RrDvICUc9h0BIz73iJrHizCJ3y_.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/ryu5xsw4bp8wpmc1?singleDoc#)

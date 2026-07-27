@@ -1,0 +1,157 @@
+---
+title: "如何实现随机抽取考卷作答"
+description: "1. 场景/功能描述随机抽取考题，考题分为多种类型，需求是实现随机抽取作答2. 思路流程需要创建一个考卷基础表，用于录入不同考卷和考题，使用者可以用批量导入的方式快速导入考卷创建考试应用，用代码块的方式对考题排序进行随机，再通过关联的方式拉取考题作答。3. 配置过程3.1. 表单设计3.1.1..."
+slug: "/搭建技巧/按功能分类/其他/随机抽取/如何实现随机抽取考卷作答"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/saru48rexnexvv0g?singleDoc#"
+source_updated_at: "2024-10-15T03:38:22.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "其他"
+  - "随机抽取"
+  - "如何实现随机抽取考卷作答"
+---
+## 场景/功能描述
+
+随机抽取考题，考题分为多种类型，需求是实现随机抽取作答
+
+## 思路流程
+
+需要创建一个考卷基础表，用于录入不同考卷和考题，使用者可以用批量导入的方式快速导入考卷
+
+创建考试应用，用代码块的方式对考题排序进行随机，再通过关联的方式拉取考题作答。
+
+## 配置过程
+
+### 表单设计
+
+#### 考卷基础表
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1697682651764-e59de16c-6ba9-4af5-9830-22208c899c3d.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1697682666575-50f139c2-e605-47d9-bd3f-6627c60104b2.png)
+
+其中：【考卷编号】、【正确答案】为单行文本，【题目类型】为下拉选择（包含单选、多选、不定项选择、判断题），【题目序号】为数字字段，【题干】是多行文字
+
+#### 考试应用
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1697683756914-3accd3ca-1914-4b93-b5e1-7a244dc74fb5.png)![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1697683766994-e2b83673-2290-4d87-8170-b3abbef7f10d.png)![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1697683775728-446d0265-9477-4522-ae8e-2151e9c62ad7.png)![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1697683790390-8c4ed511-909d-421c-90e2-572424953fb6.png)![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1697683799801-7464307c-85f4-4376-becd-75b5843b063e.png)![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1697683808853-29b4dd87-bb5e-49d2-9eeb-9a4cb94b6705.png)
+
+##### 字段详情
+
+【最终得分】
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1697686322798-366613c9-5bed-418a-8b5d-aaaff5ea8772.png)
+
+【得分等级】
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1697686345693-e33ddef2-5b3b-4d92-a2ae-8a0b24f04cc4.png)
+
+【考试日期】
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1697686365885-5fa15cb9-a19c-464b-a4c1-078023fb32ef.png)
+
+【考生】
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1697686400697-f7086eac-f359-41e1-b619-6f63b7faac95.png)
+
+【考卷编号】
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1697686423188-49ad2ed6-c024-4bff-8622-ec9f394cae01.png)
+
+【随机抽取考卷】
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1697686749674-95aaff29-a2c3-46f9-90a0-14e66892a443.png)
+
+```javascript
+var num1 = qf_field.{单选题数量$$1876B9AB2$$}
+var num2 = qf_field.{多选题数量$$1876B9AC8$$}
+var num3 = qf_field.{不定项选择题数量$$1876B9AC9$$}
+var num4 = qf_field.{判断题数量$$1876B9ACA$$}
+
+var fullData = {
+  "单选": generate(num1),
+  "多选": generate(num2),
+  "不定项": generate(num3),
+  "判断": generate(num4)
+}
+function generate(num) {
+  var data = [];
+  var newData = [];
+  var table = {};
+  var result = [];
+  for (var i = 0; i < num; i++) {
+    var n = Math.random()
+    data.push(n)
+  }
+  newData = [...data];
+  // 升序排序
+  newData.sort();
+  // 结果降序
+  //newData.reverse();
+  for (var i = 0; i < newData.length; i++) {
+    table[newData[i]] = i + 1;
+  }
+  for (var i = 0; i < num; i++) {
+    var no = table[data[i]].toString()
+    result.push(
+      {
+        "排序号": no
+      }
+    )
+  }
+  return result;
+}
+
+qf_output = fullData
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1697686783580-d5b3a7bd-8935-47ba-adc6-71a963bb300c.png)![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1697686799019-192098f4-7054-4752-872b-2fbb72706e85.png)![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1697686809083-f38a9706-c618-4df8-ae8a-541ffeeacce2.png)
+
+【单选题共计得分】
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1697686828922-3e615589-b1ce-4bb5-8644-c7dba722c2d5.png)
+
+【单选题表格】
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1697686852973-29ecb891-a923-4c69-9390-42f0668e4e78.png)![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1697686865527-2e253ec2-95b4-4b69-a945-2b9fc50bb643.png)
+
+【表格.题干】
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1697686897191-2e7d51e5-d11b-4f8b-8a53-c45b62ec1244.png)
+
+【表格.正确答案】
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1697686910688-7ffad2f8-721f-49e6-acd3-3b16efd519ad.png)
+
+【表格.得分】
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1697686936598-62a6c070-3f4d-48ad-9340-f6469ab65896.png)
+
+（其余题型类似）
+
+## 实现效果
+
+在考卷基础表中导入考卷![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1697686985749-2ae377f8-d6e2-4076-ab39-5c7f88794921.png)
+
+在考卷应用中选择考卷编号，选择考题数量，自动随机拉取考卷进行作答。
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1697687034946-2ac16dce-a230-4847-9589-0706be2419eb.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1697687065902-fbfc43cb-efe8-41fd-821f-5adf2dcaaab3.png)
+
+小计和总分会根据答题情况自动算分。
+
+​
+
+可以创建一个门户来展示考试报表数据
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1697705148794-bea63639-30bc-4a55-83c8-5b8b13d51735.png)
+
+​
+
+ps.根据具体场景修改字段权限和流程。
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/saru48rexnexvv0g?singleDoc#)

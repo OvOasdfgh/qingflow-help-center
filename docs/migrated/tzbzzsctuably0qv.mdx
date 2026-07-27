@@ -1,0 +1,112 @@
+---
+title: "代码块"
+description: "1. 功能简介通过JS编码自定义的代码块，绑定字段作为变量输入，结果输出。实现比公式更高级的数据处理。代码块已支持异步请求。2. 功能效果3. 设置步骤在进行设置前，请确保你是企业版，并且在轻商城安装了代码块插件。3.1 编写JS代码这里以采购审批场景为例子。假设所有采购需求的预算都为¥500..."
+slug: "/帮助文档/表单引擎/字段类型与配置/连接工具类/代码块"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/tzbzzsctuably0qv?singleDoc#"
+source_updated_at: "2024-10-25T03:25:03.000Z"
+keywords:
+  - "帮助文档"
+  - "表单引擎"
+  - "字段类型与配置"
+  - "连接工具类"
+  - "代码块"
+---
+### 功能简介
+
+通过JS编码自定义的代码块，绑定字段作为变量输入，结果输出。实现比公式更高级的数据处理。
+
+代码块已支持异步请求。
+
+### 功能效果
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/Cms-images/%E4%BB%A3%E7%A0%81%E5%9D%97%E5%B8%AE%E5%8A%A9%E6%96%87%E6%A1%A3.gif?sign=483e166a93840fd2b0a787d8f045d5e9&t=1683611840)
+
+### 设置步骤
+
+在进行设置前，请确保你是企业版，并且在轻商城安装了代码块插件。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/4npWAQbh93474StGtkZoiY2DQbNkREPx_.png)
+
+#### 3.1 编写JS代码
+
+这里以采购审批场景为例子。假设所有采购需求的预算都为¥50000，超过¥50000不通过。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/lCyHduPNIal41h88F9Cx-msc8LYaBbKJ_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/S_C8YAfFU0i5sZMrdNY0cBwKMfdXyckp_.png)
+
+插入字段的规则如下
+
+1. 字段值为空则插入表现为null
+2. 实际支持字符串、数组、number的填充
+
+|  | 字段类型 | 是否支持插入 | 插入规则 | 插入表现 |
+| --- | --- | --- | --- | --- |
+| 系统字段 | 更新时间 | ✅ | 字符串类型直接插入 | "yyyy-mm-dd hh:mm:nn" |
+|  | 申请时间 | ✅ | 字符串类型直接插入 | "yyyy-mm-dd hh:mm:nn" |
+|  | 数据ID | ✅ | Number类型直接插入 | 12343543 |
+|  | 「工作区ID」和「应用ID」 | ✅ | Number类型直接插入 | 12343543 |
+|  | 编号 | ✅ | 字符串类型直接插入 | “12” |
+|  | 申请人 | ✅ | 字符串类型，以邮箱直接插入直接插入 | "[99999@qq.com](mailto:99999@qq.com)" |
+| 表单内字段（基础字段） | 1:单行文字 | ✅ | 字符串类型直接插入 | "aaaaa" |
+|  | 2:多行文字 | ✅ | 字符串类型直接插入 | "aaaaa" |
+|  | 3:数字 | ✅ | Number类型直接插入 | 123 |
+|  | 4:链接 | ✅ | 字符串类型直接插入 | "[http://www.baidu.com](http://www.baidu.com)" |
+|  | 5:日期 | ✅ | 字符串类型直接插入 | "yyyy-mm-dd hh:mm:nn" |
+|  | 6:起止时间 | ✅ | 字符串类型直接插入 | "yyyy-mm-dd hh:mm:nn～yyyy-mm-dd hh:mm:nn" |
+|  | 7:手机 | ✅ | Number类型直接插入 | 13344445555 |
+|  | 8:邮箱 | ✅ | 字符串类型直接插入 | "[99999@qq.com](mailto:99999@qq.com)" |
+|  | 9:单项选择 | ✅ | 字符串类型直接插入 | "未命名2" |
+|  | 10:下拉选择 | ✅ | 字符串类型直接插入 | "未命名2" |
+|  | 11:多项选择 | ✅ | 数组类型直接插入，里面元素为字符串 | \["未命名2","未命名1"\] |
+|  | 12:图片选择 | ✅ | 数组类型直接插入，里面元素为字符串 | \["未命名2","未命名1"\] |
+|  | 13:上传附件 | ✅ | 数组类型直接插入，里面元素为字符串 | \["附件的url","附件的url"\] |
+|  | 14:地址字段 | ✅ | 字符串类型直接插入，四级之间空格隔开 | "上海市 上海市 闵行区 都会路368号" |
+| 表单内字段（高级字段） | 15:描述文字 | ✅ | 字符串类型直接插入,值为html段落标签 | "我是一个描述文字" |
+|  | 16:富文本 | ✅ | 字符串类型直接插入,值为html段落标签 | "我是一个富文本" |
+|  | 17:段落 | ❌ |  |  |
+|  | 18:表格 | ✅ | 目前只支持插入表格字段，数组类型插入，数组内每个对象代表表格的一行，对象内每个参数的key值为"field\_XXXX"，其中XXXX为字段id。参数的value值为字段值，类型：数字字段表格子字段为number，单行文字为字符串，上传附件为数组 | \[ \{ "field\_42390651": "uwef", "field\_42390650": 1 \},"field\_42392656": \[ "[https://abcd.com/attach/da19a319-6d121-b0ff-d2b691f65.png](https://abcd.com/attach/da19a319-6d121-b0ff-d2b691f65.png)"\] \{ "field\_42390651": "efef", "field\_42390650": 2\},"field\_42392656": \[ "[https://abcd.com/attach/da19a319-6d121-b0ff-d2b691f65.png](https://abcd.com/attach/da19a319-6d121-b0ff-d2b691f65.png)", "[https://abcd.com/documents/form/attach/39b6e-1d82-4988-a296-cd146af.png](https://abcd.com/documents/form/attach/39b6e-1d82-4988-a296-cd146af.png)" \]\] |
+|  | 19:定位 | ✅ | 字符串类型直接插入，四级之间空格隔开 | "上海市 上海市 闵行区 都会路368号其灵自如寓" |
+|  | 20:数据关联 | ✅ | 字符串类型直接插入 | "未命名2" |
+|  | 21:引用 | ✅ | 数组类型直接插入，里面元素为Number类型直接插入数据ID | \[84752345,21123456\] |
+|  | 22:成员字段 | ✅ | 数组类型直接插入，里面元素为字符串类型直接插入成员邮箱 | \["[99999@qq.com](mailto:99999@qq.com)"\] |
+|  | 23:部门字段 | ✅ | 数组类型直接插入，里面元素为字符串类型直接插入部门名称 | \["测试部门","开放平台"\] |
+|  | 24:Q-Linker | ❌ |  |  |
+|  | 25:文字识别 | ❌ |  |  |
+|  | 26:代码块字段 | ❌ |  |  |
+
+#### 3.2 测试运行
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/ZHxTxSCKS9Em5DeyekpBt8rn17zS-pUT_.png)
+
+#### 3.3 生成别名
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/2sGGmbjqBhgetMJvvqNuuXQdae3edkSw_.png)
+
+#### 3.4 返回别名绑定字段
+
+请先点击右上角保存字段配置
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/BSfra-W5gP9xHoidKtNY5eMIyU6wt7Oj_.png)
+
+#### 3.5 效果展示
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/ha6D5hKUduY9CfY9U4pZnnKj04HXRL1C_.png)
+
+### 注意事项
+
+1、代码块运行环境为 node.js v16.13.0
+
+了解更多[**https://nodejs.org/dist/latest-v16.x/docs/api/**](https://nodejs.org/dist/latest-v16.x/docs/api/)
+
+2、目前支持的模块除基本模块外，额外引入有lodash 、 axios和date-fns
+
+3、部分关键词已经禁用（目前已禁用eval，setTimeout，setInterval）
+
+4、http请求已支持回调
+
+5、一个代码块插入变量最多200次（专有轻流500次）
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/tzbzzsctuably0qv?singleDoc#)

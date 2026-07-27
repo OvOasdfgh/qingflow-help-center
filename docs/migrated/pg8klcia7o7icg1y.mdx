@@ -1,0 +1,96 @@
+---
+title: "案例：待办信息推送至企业微信群"
+description: "场景描述用户日常使用企业微信进行办公交流，希望能够在企业微信工作群内，接收到轻流系统的待办信息，方便直接处理。解决方案针对上述场景，轻流推荐使用【提醒推送】功能实现向企业微信群内推送消息，提高工作效率。操作步骤创建企业微信机器人利用企业微信群机器人推送消息，需要获取群机器人的webhook地址..."
+slug: "/帮助文档/轻代码/集成中心/提醒推送/案例-待办信息推送至企业微信群"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/pg8klcia7o7icg1y?singleDoc#"
+source_updated_at: "2024-11-26T08:30:15.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "集成中心"
+  - "提醒推送"
+  - "案例：待办信息推送至企业微信群"
+---
+### 场景描述
+
+用户日常使用企业微信进行办公交流，希望能够在企业微信工作群内，接收到轻流系统的待办信息，方便直接处理。
+
+### 解决方案
+
+针对上述场景，轻流推荐使用【提醒推送】功能实现向企业微信群内推送消息，提高工作效率。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/Jx3XRzbrUoNqU9E5xbGle485HSx4dG9q_.gif)
+
+### 操作步骤
+
+#### 创建企业微信机器人
+
+利用企业微信群机器人推送消息，需要获取群机器人的webhook地址，步骤如下：
+
+#### 在手机端群聊信息中点击创建群机器人。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/BdfTRW2HYMjAoemqjq-5T6zOadocWIUL_.png)
+
+#### 获取其Webhook地址。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/AQhU1LLW2rSRB6sZaNx-gV6n4ol1lYRB_.png)
+
+PC端：在企业微信群,右键创建群机器人，获取Webhook地址。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/sy1gWhQS8kL2xnkR6bXz-OEODMsPg5W4_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/jpHPId64kcKCEF8gkISxbS8ax1-N7LpK_.png)
+
+#### 注意事项
+
+请注意保护好机器人的webhook地址，避免泄漏！
+
+### 具体配置
+
+安装并点击「提醒推送」后，点击配置按钮即可开始「提醒推送」的配置，需配置的内容（如下图）包括：提醒类别，推送范围，鉴权方式，推送请求
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/tHnRKJDrBAsg_5h_VzyyonYV1vAVrAO2_.png)
+
+#### 提醒类别与推送范围
+
+按照需求选择提醒类别与推送范围，在本例中，需要推送“面试”应用包中的待办消息，因此配置如下：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/SuKsSXcMfFKXfRum54LmRIxlc55uDDMf_.png)
+
+#### **鉴权方式**
+
+本例为向企业微信机器人的webhook地址发送消息，因此无需配置鉴权。
+
+#### **推送请求**
+
+1、首先按照上文鉴权信息中步骤获取指定群机器人的Webhook地址；
+
+2、按照企业微信群机器人API文档（下图）填写配置项：
+
+[群机器人配置说明 - 企业微信API](https://work.weixin.qq.com/api/doc/90000/90136/91770)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/3u6be0W9inhIumjj_FGpKchT33GuN-Td_.png)
+
+配置如图：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/sZaoEVZ9cdJTNembbuOi3cFYVTuRI1fJ_.png)
+
+3、点击保存，就完成配置了。
+
+### 效果展示
+
+若有新的待办消息，在企业微信群中收到推送消息如下：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/Zd4J4pvgJz1z0gSu_GstVYZYrml37LBi_.gif)
+
+### 注意事项
+
+提醒推送具有以下限制：
+
+1. 提醒推送为企业版单独付费功能，如果需要试用或购买请联系轻流销售人员。
+2. 钉钉版本调用的接口请先联系轻流开通白名单
+3. 全局提醒推送每个工作区最多只能设置3个。
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/pg8klcia7o7icg1y?singleDoc#)

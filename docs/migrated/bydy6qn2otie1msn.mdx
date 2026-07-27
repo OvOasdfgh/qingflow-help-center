@@ -1,0 +1,125 @@
+---
+title: "获取指定应用详细信息"
+description: "获取轻流系统中指定应用的详细表单信息。1. 权限说明「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有对应应用包/应用的权限。2. 请求请求方式：GET请求地址：https://api.qingflow.com/app/:appk..."
+slug: "/帮助文档/轻代码/openapi/轻流应用接口/获取指定应用详细信息"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/bydy6qn2otie1msn?singleDoc#"
+source_updated_at: "2024-10-15T03:35:10.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "轻流应用接口"
+  - "获取指定应用详细信息"
+---
+获取轻流系统中指定应用的详细表单信息。
+
+---
+
+### **权限说明**
+
+「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有对应应用包/应用的权限。
+
+### 请求
+
+**请求方式：**GET
+
+**请求地址：**https://api.qingflow.com/app/:appkey/form（公有云版本）
+
+> 请求地址中:appkey为需要替换的变量，根据实际获取值更新，示例如下：
+
+```javascript
+GET https://api.qingflow.com/app/88888888/form
+```
+
+**其他版本请求地址：**
+
+钉钉版本：[https://api.ding.qingflow.com/app/:appkey/form](https://api.ding.qingflow.com/app/:appkey/form)
+
+专有轻流：http(s)://xxx.xx(自有域名)/openApi/app/:appkey/form
+
+##### **2.1 参数说明(路径参数)：**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| appKey | 是 | 应用ID，获取方式参考：基本概念介绍——appKey |
+
+##### **2.2 请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+| userId |  | userId为空时，默认使用工作区创建人的身份调用接口。详见基本概念介绍——userId |
+
+### 返回
+
+##### 3.1 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码。0：正确返回 |
+| errMsg | 是 | string |  |
+| result | 是 | object | 返回结果 |
+| questionBaseInfos | 是 | \[array\] |  |
+| queId | 是 | int | 表单模块的id |
+| queType | 是 | int | 表单模块类型，枚举值见文档 |
+| queTitle |  | string | 表单模块标题 |
+| options |  | \[array\] | 选择类型表单模块的选项信息 |
+| optId |  | int | 选项id |
+| linkQueIds |  | \[array\] | 该选项关联的字段id数组 |
+| optValue |  | string | 选项值 |
+| subQuestionBaseInfos |  | \[object\] | 表格类型模块的子模块信息（与questionBaseInfos参数的数据结构一致） |
+| questionRelations | 是 | \[array\] | 数据关联的内容，参数见文档 |
+
+##### 3.2 返回体示例
+
+```json
+{
+    "errCode": 0,
+    "errMsg": null,
+    "questionRelations": [
+        {
+            "displayedQueId": null,
+            "displayedQueInfo": null,
+            "matchRuleFormula": null,
+            "matchRuleType": 1,
+            "matchRules": [],
+            "qlinkerAlias": "省",
+            "qlinkerConfig": {
+                "qlinkerAlias": "省",
+                "queId": 35921618,
+                "queTitle": "Q-Linker"
+            },
+            "queId": 35921620,
+            "relationType": 2,
+            "sortConfig": null,
+            "tableMatchRules": []
+        }
+        }
+    ],
+    "result": {
+        "questionBaseInfos": [
+            {
+                "options": [],
+                "queId": -9,
+                "queTitle": "支付信息",
+                "queType": 18,
+                "required": false,
+                "subQuestionBaseInfos": [
+                    {
+                        "options": [],
+                        "queId": -10,
+                        "queTitle": "支付状态",
+                        "queType": 2,
+                        "required": false,
+                        "subQuestionBaseInfos": []
+                    }
+                ]
+            }
+        ]
+    }
+}
+```
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/bydy6qn2otie1msn?singleDoc#)

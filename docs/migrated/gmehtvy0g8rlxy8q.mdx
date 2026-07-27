@@ -1,0 +1,82 @@
+---
+title: "对聚合求和数据的每天自动更新"
+description: "1. 场景/问题描述客户经理们经常需要去跟进客户，需要查看他们近30天跟进客户的数量跟总客户数量的比例，客户信息录入在应用A中，客户跟进的数据储存在应用B中2. 思路逻辑数据关联字段的聚合求和能实现分别对某个销售在30天内的有效客户数量、以及近30天内跟进次数求和，之后用除法算出比例，但是数据..."
+slug: "/常见问题-faq/表单/对聚合求和数据的每天自动更新"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/gmehtvy0g8rlxy8q?singleDoc#"
+source_updated_at: "2025-02-18T02:45:18.000Z"
+keywords:
+  - "常见问题（FAQ）"
+  - "表单"
+  - "对聚合求和数据的每天自动更新"
+---
+## 场景/问题描述
+
+客户经理们经常需要去跟进客户，需要查看他们近30天跟进客户的数量跟总客户数量的比例，客户信息录入在应用A中，客户跟进的数据储存在应用B中
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1735804308309-413397f1-0243-4ab5-af8f-a9b61a71dd43.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1735804391139-7c3f92a5-b069-48f4-b245-aa6f82dfb6a2.png)
+
+## 思路逻辑
+
+数据关联字段的聚合求和能实现分别对某个销售在30天内的有效客户数量、以及近30天内跟进次数求和，之后用除法算出比例，但是数据关联必须要每次手动发起形成一条数据到辅助应用中，对于做报表不够方便，还会产生冗余数据。
+
+而轻析中的数据集有定时每天更新，和对数据的筛选、分组汇总，可以实现每天自动更新报表，不需要在辅助应用另外发起数据了。
+
+## 表单设计
+
+3.1简易的客户表单设计以及跟进信息表单设计如下
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1735804705278-add5d7f2-1e82-43df-91d1-12114923a9a4.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1735804720425-a090df53-60cb-4698-bfb0-a23590ab30db.png)
+
+3.2数据录入如下：
+
+![文档图片](https://cdn.nlark.com/yuque/0/2025/png/34394013/1735804308309-413397f1-0243-4ab5-af8f-a9b61a71dd43.png?x-oss-process=image%2Fformat%2Cwebp%2Fresize%2Cw_1125%2Climit_0)
+
+![文档图片](https://cdn.nlark.com/yuque/0/2025/png/34394013/1735804391139-7c3f92a5-b069-48f4-b245-aa6f82dfb6a2.png?x-oss-process=image%2Fformat%2Cwebp%2Fresize%2Cw_1125%2Climit_0)
+
+3.3在数据集中对这两个应用分别进行筛选、分组汇总的设置：
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1735804862066-55c2d8f2-c68c-4049-ac7d-cfa2a186929f.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1735804877070-025d4984-773b-46e4-9a0c-99a00cd315a8.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1735804892676-8d1e9c64-1b84-4a57-a39b-368ba9f22241.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1735804904269-4b1a5f50-b070-4b6a-ae48-a7e3ae6c161a.png)
+
+然后对处理后的数据用连接节点合并到一起
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1735805099983-b1fff54c-743a-4d16-9b15-83cc14cb3c94.png)
+
+之后在字段编辑节点把汇总后的两个字段修改字段名，以及新建一个计算字段如下：
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1735805121741-2df27af1-b449-4af0-be75-1373141c73d1.png)![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1735805176751-bd9f94e1-9ee1-4ede-bd01-f7dd250cc647.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1735805189395-1db8667a-dff2-4fd3-8cc0-3750b93f5425.png)
+
+最后用输出节点把处理后的数据进行展示，并发布该数据集
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1735805230475-c4583113-0ce2-42d2-bd6f-1e448f6bfee5.png)
+
+3.4对这个数据集设置定时更新，按天更新，设置如下：
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1735805286349-55c1e0af-fda0-4493-9157-eea124c3eaa0.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1735805302490-efaaee7d-e14d-4ec0-b0e7-4a2d824e275e.png)
+
+3.5对这个数据集作为数据源制作轻析报表（举例：做折线图）
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1735805361823-fe87d777-38e6-4c87-b8ee-7ad08cea4176.png)
+
+​
+
+## 效果展示
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1735805369683-a4785942-1b80-4302-b07b-b2d77f7c9b18.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/gmehtvy0g8rlxy8q?singleDoc#)

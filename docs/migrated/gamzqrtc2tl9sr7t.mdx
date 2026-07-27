@@ -1,0 +1,116 @@
+---
+title: "新版关联引擎上线"
+description: "1、简介为了给广大用户带来更好的产品体验，2023年8月11日0时，我们上线了新版关联引擎（数据关联和关联已有数据） 。2、新版关联引擎的优势新引擎，相较现有的已有，存在以下优势——1、性能提升数据关联字段、使用关联已有数据配置的字段，加载速度提升有效减少使用这两类字段较多的表单，加载卡顿的现..."
+slug: "/更新动态/产品公告/新版关联引擎上线"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/gamzqrtc2tl9sr7t?singleDoc#"
+source_updated_at: "2024-10-15T03:37:03.000Z"
+keywords:
+  - "更新动态"
+  - "产品公告"
+  - "新版关联引擎上线"
+---
+## 1、简介
+
+为了给广大用户带来更好的产品体验，2023年8月11日0时，我们上线了**新版关联引擎（数据关联和关联已有数据）** 。
+
+## 2、新版关联引擎的优势
+
+新引擎，相较现有的已有，存在以下优势——
+
+1、性能提升
+
+- 数据关联字段、使用关联已有数据配置的字段，加载速度提升
+- 有效减少使用这两类字段较多的表单，加载卡顿的现象
+
+2、功能增强
+
+- 数据关联字段的聚合方式，新增：未填计数和总计数的聚合类型。具体见下文3.1
+- 关联已有数据，新增排序设置配置项。开启后，关联已有数据的值为：排序后的第一条数据。具体见下文3.2
+
+3、逻辑一致性提升
+
+- 统一了数据关联和关联已有数据对空值的处理逻辑。具体见下文4.3
+
+## 3、新版关联引擎的新增功能
+
+### 3.1字段「默认内容」下配置「关联已有数据」，新增「排序」配置项
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-08-24/YBbmnxMHp4CA0D_CgGp0KbTltwrBt1uX_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-08-24/XjdUpHwtJxAxKMmgjIXqVkgRXfzdBwnr_.png)
+
+### 3.2「数据关联」字段，聚合关系新增「未填计数」、「总计数」类型
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-08-24/Wl4h2zyrjqtTakNojdw9AJd65TEj4Sct_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-08-24/F36MQ6zoUx9Dv6jNNUZO54Cw1zbRXD0i_.png)
+
+## 4、新版关联引擎的逻辑调整
+
+同时，为了对功能表现进行统一、提升性能表现，在新版关联引擎中也有部分逻辑的统一和变更，详情如下——
+
+### 4.1字段「默认内容」下配置「关联已有数据」的数据返回逻辑调整
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-08-24/mN8uzYR6IcTm60wU39LMa4u79ARvZH6-_.png)
+
+### 4.2「数据关联」字段，「聚合方式」为最新数据/最旧数据是的返回逻辑调整
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-08-24/C-jQNsAsyemtXojLGHP9ttFHnnP4ckle_.png)
+
+### 4.3「数据关联」聚合方式，对空值处理的逻辑调整
+
+「数据关联」聚合方式，对空值处理的逻辑调整，调整后的计算原则如下——
+
+1、若被关联的应用无数据的情况
+
+- 求和、平均、最新、最旧、最大、最小：视为空
+- 已填计数、未填计数、总计数：视为0
+
+2、若被关联应用有数据，但被关联字段值全部为空的情况
+
+- 求和、平均、已填计数、未填计数、总计数：空字段视为0，参与计算/计数
+- 最新、最旧、最大、最小：视为空
+
+变更前后对比详情如下，其中有差异点用红色进行了标注——
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-08-24/7dHW0jkOIc5lxVs9ewek4mbYXUA5kTUg_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-08-24/m8lVrrywl3AnZpuA3U98D47mjwEoyBWc_.png)
+
+## 5、如何开启/关闭新版关联引擎？
+
+### 5.1开启新版引擎
+
+**系统管理员** 可通过【表单设计】页面的「开启新版关联引擎」，为**整个工作区全局** 开启新版关联引擎，如下图。
+
+注意：
+
+1、此处开启是针对整个工作区全局生效！
+
+2、该功能仅适用于“宽表”结构存储的工作区，若您的工作区没有显示该开启按钮，可联系您的客户成功经理将工作区升级为“宽表”结构。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-08-24/WzprYSy4NP99MMWiJqzJRQZUviyqFWTE_.png)
+
+### 5.2返回旧版引擎
+
+若想切换回旧版数据关联/关联已有数据引擎，亦可点击下图「返回旧版关联引擎」按钮，为**整个工作区全局** 切换回旧版关联引擎。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-08-24/S7IMTGicZH4nPVESNlN7HezayWsSxGOQ_.png)
+
+## 6、注意事项
+
+1、在23年8月11日0时之后新创建的工作区，直接开启新版关联引擎
+
+2、在23年8月11日0时之前已经创建的工作区，默认状态依然为旧版关联引擎，需手动切换至新版引擎
+
+我们深知变更可能对贵司的业务产生影响，因此我们采取了以下措施来降低变更对您的影响：
+
+新版关联引擎将会与旧版关联引擎共存一段时间。这将为贵司管理员提供足够的时间来熟悉新版引擎，检查是否会对现有业务产生影响，并在必要时进行调整。
+
+与此同时，我们也将逐步停止旧版引擎的服务，在停止旧版引擎服务之前，我们将提前至少提前1个月通过公告通知您。
+
+感谢您对我们的信任和支持。我们致力于确保这项变更尽可能平稳地进行，以确保您的业务不受影响。如果您有任何疑问或需要进一步的协助，请随时与我们联系。若新版使用过程中，遇到问题/建议，可通过该表单提交反馈 [反馈与建议](https://qingflow.com/f/e00a49a0)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/gamzqrtc2tl9sr7t?singleDoc#)

@@ -1,0 +1,281 @@
+---
+title: "如何实现自动引用其他应用数据？"
+description: "1. 场景描述例如我有产品明细表如下图我希望可以在另一个应用产品表格中实现根据产品分类自动引用产品明细的数据2. 解决思路可以通过使用代码块来实现或者使用q-linker来实现。具体看实际场景采用，如果是手动发起数据两者都可以采用，但是如果是通过QR添加数据发起数据，那么就需要使用Q-link..."
+slug: "/搭建技巧/按功能分类/数据管理/应用数据处理/如何实现自动引用其他应用数据"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/lhd7kws866crge2b?singleDoc#"
+source_updated_at: "2024-10-15T03:38:14.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "数据管理"
+  - "应用数据处理"
+  - "如何实现自动引用其他应用数据？"
+---
+## 场景描述
+
+例如我有产品明细表如下图
+
+我希望可以在另一个应用产品表格中实现根据产品分类自动引用产品明细的数据
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1691639627154-c3e30920-4482-4474-98f6-d9698f8172f3.png)
+
+## 解决思路
+
+可以通过使用代码块来实现或者使用q-linker来实现。
+
+具体看实际场景采用，如果是手动发起数据两者都可以采用，但是如果是通过QR添加数据发起数据，那么就需要使用Q-linker来进行提交重计算。
+
+## 配置过程
+
+### 代码块实现
+
+#### 代码与测试
+
+- 代码注释
+
+- key：对应表单中产品分类字段
+- URL：需要换成对应的获取应用数据接口的URL，具体看[帮助文档](https://help.qingflow.com/help-docs?type=qingCode&docId=fc8e64656428ea3a06fe9b406b9b7be9&parentId=)
+- accessToken：需要换成对应工作区中openAPI的超管token。获取位置：轻商场--拓展插件-- openAPI
+- queId：需要替换成对应获取的字段ID，queries中的queid是进行具体筛选的ID
+
+```javascript
+const axios = require('axios');
+var key = qf_field.{产品分类$$1686A6A92$$};
+let data = JSON.stringify({
+  "pageSize": "50",
+  "pageNum": "1",
+  "queries": [
+    {
+      "queId": 156360776,
+      "searchKey": key,
+      "scope": 1
+    }
+  ]
+});
+
+let config = {
+  method: 'post',
+  maxBodyLength: Infinity,
+  url: 'https://api.qingflow.com/app/c17e3960/apply/filter',
+  headers: {
+    'accessToken': 'd866db1d-79ca-42c5-9e9c-0b1ce21*****',
+    'Content-Type': 'application/json'
+  },
+  data: data
+};
+
+async function fetchData() {
+  if (key === null) {
+    return []; // 返回空数组
+  }
+
+  const res = await axios(config);
+  var msg = res.data;
+  var result = msg.result.result;
+  var res_list = [];
+
+  result.forEach((value, index) => {
+    var res_msg = new Map();
+    var answers = value.answers;
+    answers.forEach((value, index) => {
+      var queId = value.queId;
+      var queTitle = value.queTitle;
+      if (queId == 156360782) {
+        var values = value.values;
+        var dataValue = values[0].dataValue;
+        res_msg[queTitle] = dataValue;
+        res_list.push(res_msg);
+      }
+    });
+  });
+
+  return res_list;
+}
+
+fetchData().then((res_list) => qf_output={res_list});
+```
+
+- 注释
+
+- accessToken：需要换成对应工作区中openAPI的超管token。获取位置：轻商场--拓展插件-- openAPI
+- apiUrl1：需要换成对应的获取应用数据接口的URL，具体看[帮助文档](https://help.qingflow.com/help-docs?type=qingCode&docId=fc8e64656428ea3a06fe9b406b9b7be9&parentId=)
+- key：对应表单中产品分类字段
+- queId：extractQueIdsApi1中queid需要替换成对应获取的字段ID，queriesApi1中的queid是进行具体筛选的ID
+
+```javascript
+const axios = require('axios');
+
+const headers = {   
+    'accessToken': 'd866db1d-79ca-42c5-9e9c-0b1ce21135d2',
+    'Content-Type': 'application/json'
+  };
+  
+const apiUrl1 = 'https://api.qingflow.com/app/c17e3960/apply/filter';
+const pageSize = 200;
+var key = qf_field.{产品分类$$1686A6A92$$};;
+const queriesApi1 = [
+    {
+        "queId": 156360776,
+        "searchKey": key,
+        "scope": 1
+    }
+]; // API1的查询条件
+
+async function processPage(apiUrl, pageNum, queries) {
+  const postData = {
+    pageSize: pageSize.toString(), 
+    pageNum: pageNum.toString(),
+    queries: queries
+  };
+
+  const response = await axios.post(apiUrl, postData, { headers });
+  return response.data.result;
+}
+
+async function processAllPages(apiUrl, queries, extractQueIds) {
+  const firstPageData = await processPage(apiUrl, 1, queries);
+  let totalPages = firstPageData.pageAmount;
+
+  const promises = [];
+
+  for (let pageNum = 2; pageNum <= totalPages; pageNum++) {
+    promises.push(processPage(apiUrl, pageNum, queries));
+  }
+
+  const responses = await Promise.all(promises);
+  const reslist = extractData(firstPageData, extractQueIds);
+
+  responses.forEach((data) => {
+    const extractedData = extractData(data, extractQueIds);
+    reslist.push(...extractedData);
+  });
+
+  return reslist;
+}
+
+function extractData(response, queIds) {
+  const result = response.result;
+  const res_list = [];
+
+  result.forEach((value) => {
+    const res_msg = {};
+
+    value.answers.forEach((v) => {
+      const queId = v.queId;
+      const queTitle = v.queTitle;
+
+      if (queIds.includes(queId)) {
+        const values = v.values;
+        const dataValue = values[0].dataValue;
+        res_msg[queTitle] = dataValue;
+      }
+    });
+
+    res_list.push(res_msg);
+  });
+
+  return res_list;
+}
+
+(async () => {
+  const extractQueIdsApi1 =[156360782]; // API1的提取queId
+
+  if (key === null) {
+   qf_output={'reslist1':null};; // 返回空数组
+  }else{
+    const reslist1 = await processAllPages(apiUrl1, queriesApi1, extractQueIdsApi1);
+    qf_output={reslist1};
+  }
+})();
+
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1691639791675-70f8ee65-1121-40f9-8ced-4876b9307987.png)
+
+#### 解析与字段配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1691639811531-026f8e55-adaa-4ccf-af13-2f12494831da.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1691639826554-eb48812d-9be2-432d-a321-5d1cb0da0f2f.png)
+
+#### 实现效果
+
+[https://qingflow.com/f/b9acd2b0](https://qingflow.com/f/b9acd2b0)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1691653728678-725f84d6-a0a3-4c45-adaf-cbeedbc3ef8f.png)
+
+### Q-linker实现
+
+#### Q-linker配置
+
+- 具体接口文档：[获取应用数据接口](https://help.qingflow.com/help-docs?type=qingCode&docId=fc8e64656428ea3a06fe9b406b9b7be9&parentId=)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692175065579-f85a0ed5-6e95-4d7d-8f88-73a50f2e35a9.png)
+
+##### URL
+
+https://api.qingflow.com/app/c17e3960/apply/filter
+
+红色部分为获取具体应用的appkey
+
+##### Method
+
+post
+
+##### Header
+
+accessToken：\*\*\*\*\*
+
+获取从轻商城——拓展插件——openAPI
+
+##### body
+
+```json
+{
+  "pageSize": "50",
+  "pageNum": "1",
+  "queries": [
+    {
+      "queId": 156360776,
+      "searchKey":"",
+      "scope": 1
+    }
+  ]
+}
+```
+
+其中pagesize表示为每页的数量，如果应用数量很大，可以填大点，这里的queid表示需要筛选的字段ID，searchKey表示筛选的具体内容。
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692175533593-615c6f49-55af-4c6d-83ca-5e3d5f854bb4.png)
+
+#### 解析规则配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692175552659-94f7fec4-f902-4a0f-9aa4-d915176287f0.png)
+
+产品名称解析：
+
+$.answers\[?(@.queTitle == '产品名称')\].values\[0\].value
+
+作用是过滤数组，查询queTitle等于产品名称的具体内容
+
+#### 表格字段配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692175610003-d2cd58f2-3aec-4db8-b940-78a31bf1da81.png)
+
+#### 表单字段配置
+
+需要再加一个字段来进行输出产品分类，因为如果直接将单项选择的产品分类作为字段插入进body中的话，当自动触发q-linker的话，就会返回全部内容。
+
+所以加了单行文字字段来进行判断输出，如果单项选择没有选择内容就输出空格，有选择就输出本身。这样就避免自动触发输出全部内容了
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692176237138-b867c977-17fd-4725-8d59-8b884757cec1.png)
+
+## 实际效果
+
+[https://qingflow.com/f/57d94170](https://qingflow.com/f/57d94170)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692176395872-7d1b8b70-2f26-4954-b38d-63e33fc51aeb.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/lhd7kws866crge2b?singleDoc#)

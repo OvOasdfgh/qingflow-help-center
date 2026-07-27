@@ -1,0 +1,78 @@
+---
+title: "表格数据按照分类进行拆分重组"
+description: "1. 场景/问题描述有时候客户需要对于表格中的数据按照分类进行重组分类显示2. 思路逻辑使用代码块按照分类分别取出对应表格行数据后，形成新的数组再放到不同的表格中3. 配置过程3.1. 表单配置3.2. 代码与测试3.2.1. 代码注释table：表单中需要带拆解的表格变量data：定义dat..."
+slug: "/搭建技巧/按功能分类/表格使用/拆分-合并/表格数据按照分类进行拆分重组"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/kv6kk6ahg30lhvfc?singleDoc#"
+source_updated_at: "2024-10-15T03:38:09.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "表格使用"
+  - "拆分/合并"
+  - "表格数据按照分类进行拆分重组"
+---
+## 场景/问题描述
+
+有时候客户需要对于表格中的数据按照分类进行重组分类显示
+
+​
+
+## 思路逻辑
+
+使用代码块按照分类分别取出对应表格行数据后，形成新的数组再放到不同的表格中
+
+​
+
+## 配置过程
+
+### 表单配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693289408936-f7ba8212-6ccd-4cf2-aaaf-739eb29233ec.png)
+
+### 代码与测试
+
+#### 代码注释
+
+table：表单中需要带拆解的表格变量
+
+data：定义data对象，其中有3个数组，目的是为了接收表格子字段分类的甲乙丙，如果还有分类，需要继续加list数组
+
+field\_162089837代表表格子字段分类的表格ID
+
+获取方式：[https://exiao.yuque.com/enzu8l/oy1eh8/bhfdnqmx67wfox04?singleDoc#](https://exiao.yuque.com/enzu8l/oy1eh8/bhfdnqmx67wfox04?singleDoc#) 《如何在代码块中分辨表格的不同列》
+
+```javascript
+const table = qf_field.{表格$$174346C19$$};
+
+const data = {
+    "list1": [],
+    "list2": [],
+    "list3": []
+};
+
+for (const item of table) {
+    if (item.field_162089837 === "甲类") {
+        data.list1.push(item);
+    } else if (item.field_162089837 === "乙类") {
+        data.list2.push(item);
+    }else if (item.field_162089837 === "丙类") {
+        data.list3.push(item);
+    }
+}
+qf_output={data}
+
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693289656607-648dc2e4-93e5-417c-827f-517fc9b56b1a.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693289814207-9fe29fc9-996c-4f57-a261-bd1c87319ea3.png)
+
+#### 解析配置与字段接收配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693289831821-443f5122-7b80-4848-b84d-421964026fba.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693289854172-1774ac7a-4d57-4121-a6af-41de7b1846ae.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/kv6kk6ahg30lhvfc?singleDoc#)

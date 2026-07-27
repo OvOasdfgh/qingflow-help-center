@@ -1,0 +1,442 @@
+---
+title: "轻流 x 旺店通（企业版）"
+description: "应用场景产品介绍：旺店通是一款专门为电商量身定做的电商ERP系统软件,致力于提供专业的电子商务ERP解决方案,能全面覆盖线上电商、网店以及线下实体店进销存管理及wms仓储管理系统等官网：https://www.wangdian.cn/API文档：https://open.wangdian.cn..."
+slug: "/搭建技巧/按功能分类/第三方集成/旺店通/轻流-x-旺店通-企业版"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/gf76dvqh4fc89qg2?singleDoc#"
+source_updated_at: "2024-10-15T03:38:17.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "第三方集成"
+  - "旺店通"
+  - "轻流 x 旺店通（企业版）"
+---
+## 应用场景
+
+产品介绍：
+
+旺店通是一款专门为电商量身定做的电商ERP系统软件,致力于提供专业的电子商务ERP解决方案,能全面覆盖线上电商、网店以及线下实体店进销存管理及wms仓储管理系统等
+
+官网：[https://www.wangdian.cn/](https://www.wangdian.cn/)
+
+API文档：[https://open.wangdian.cn/qyb/open/apidoc](https://open.wangdian.cn/qyb/open/apidoc)
+
+实现目标：
+
+通过轻流应用表单实现与旺店通（企业版）进行对接
+
+Ps:
+
+1、目前批量获取数据暂时只能存放在表格中并且只能获取部分数据，体验上会有点不好。
+
+不过后续产品QS主动支持代码块处理即可实现定时轮训获取。如果不想要放在表格中，可以采用定制开发来实现
+
+2、部分接口暂时无法通过轻流实现，原因是由于数组中需要嵌套数组，但可以使用代码块进行数据处理，望知晓，例如：创建原始订单（[https://open.wangdian.cn/qyb/open/apidoc/doc?path=trade\_push.php](https://open.wangdian.cn/qyb/open/apidoc/doc?path=trade_push.php)）
+
+## 落地方案
+
+![原文画板](https://cdn.nlark.com/yuque/0/2023/jpeg/28884377/1696992469624-816f341b-0194-42d7-9eaa-f6c8c4be406b.jpeg)
+
+## 图文/视频演示
+
+## 帮助文档
+
+### 一、旺店通（企业版）接入
+
+- 接入指南：[https://open.wangdian.cn/open/guide?path=guide\_kfzn](https://open.wangdian.cn/open/guide?path=guide_kfzn)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1696992737084-8e75d707-1975-49bc-9745-6f33abd1eb70.png)
+
+- 获取必要参数，这里是测试环境测试用
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1696992851445-50b1d5fc-0f4c-4303-a21b-5b63cdee7e4d.png)
+
+- 正式环境必要参数获取位置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1696992909840-0f463e9f-5049-4379-a4be-ce8542d21727.png)
+
+注意点：
+
+接口规范：[https://open.wangdian.cn/qyb/open/guide?path=guide\_jkgf](https://open.wangdian.cn/qyb/open/guide?path=guide_jkgf)
+
+- REST风格的API，使用HTTPS协议发送POST请求调用接口。
+- HTTPS请求头类型为 Content-Type: application/x-www-form-urlencoded
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1696996594641-1db994b8-1342-46e9-8451-08a2564aa29b.png)
+
+### 二、签名算法
+
+#### 1、签名sign介绍
+
+- 算法说明：[https://open.wangdian.cn/qyb/open/guide?path=guide\_signsf](https://open.wangdian.cn/qyb/open/guide?path=guide_signsf)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1696996694624-91f7ae65-f6a7-44b1-aa44-8db166d5b5cd.png)
+
+#### 2、代码块实现
+
+以文档所举为示例，其中timestamp计算规则：北京时间1970-01-01 08:00:00起至现在的总秒数，10位int值,旺店通企业版API服务端允许请求最大时间误差为5min，date.timezone = Asia/Shanghai。
+
+```javascript
+const { differenceInSeconds, parse } = require('date-fns');
+const crypto = require('crypto');
+
+// 通过当前时间和起始时间计算总秒数
+function calculateTotalSeconds() {
+  const startTime = parse('1970-01-01 08:00:00', 'yyyy-MM-dd HH:mm:ss', new Date(), { timeZone: 'Asia/Shanghai' });
+  const currentTime = new Date();
+  const seconds = differenceInSeconds(currentTime, startTime);
+  return seconds;
+}
+// 输出总秒数时间戳
+const totalSeconds = calculateTotalSeconds();
+
+// 请求参数
+const params = {
+  appkey: 'test2-xx',
+  page_no: 0,
+  end_time: '2016-08-01 13:00:00',
+  start_time: '2016-08-01 12:00:00',
+  page_size: 40,
+  sid: 'test2',
+  timestamp: totalSeconds,
+};
+
+// 第一步：参数排序
+const sortedParams = Object.keys(params).sort().reduce((acc, key) => Object.assign(acc, { [key]: params[key] }), {});
+
+// 第二步：处理每个参数
+const processedParams = Object.keys(sortedParams).map((key) => {
+  let value = sortedParams[key].toString();
+  let length = Buffer.byteLength(value, 'utf8').toString().padStart(4, '0');
+  let processedValue = `${length}-${value}`;
+  return `${Buffer.byteLength(key, 'utf8').toString().padStart(2, '0')}-${key}:${processedValue};`;
+});
+
+// 第三步：计算 sign
+const appsecret = '12345';
+const signString = processedParams.join('');
+const index = signString.indexOf('09-timestamp'); // 获取 "09-timestamp" 的索引位置
+const semicolonIndex = signString.indexOf(';', index); // 获取在 "09-timestamp" 后面的分号的索引位置
+const result = signString.slice(0, semicolonIndex) + signString.slice(semicolonIndex + 1); // 切割字符串，并删除找到的分号
+const sign = crypto.createHash('md5').update(`${result}${appsecret}`).digest('hex');
+
+// 添加 sign 参数
+params.sign = sign;
+
+qf_output={params}
+```
+
+#### 3、代码测试
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697005427043-2fc5d29e-a8a2-4988-85aa-9fb6f94a690f.png)
+
+### 三、查询订单管理为例
+
+对应的接口文档：[https://open.wangdian.cn/qyb/open/apidoc/doc?path=trade\_query.php](https://open.wangdian.cn/qyb/open/apidoc/doc?path=trade_query.php)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697005756568-2fbe2bdb-8c0b-4c03-b4c5-06cf2415d395.png)
+
+#### 1、代码块实现
+
+- 具体查询参数内容根据接口文档去填写，填写至params中
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697008862878-3da88a44-f0b8-415d-843b-ca0b11418de8.png)
+
+- 这里end\_time、start\_time为插入表单中的字段
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697008935076-97170c60-a471-4fba-ac99-31e7d82ef01d.png)
+
+```javascript
+const { differenceInSeconds, parse } = require('date-fns');
+const crypto = require('crypto');
+const axios = require('axios');
+const qs = require('qs');
+
+// 通过当前时间和起始时间计算总秒数
+function calculateTotalSeconds() {
+  const startTime = parse('1970-01-01 08:00:00', 'yyyy-MM-dd HH:mm:ss', new Date(), { timeZone: 'Asia/Shanghai' });
+  const currentTime = new Date();
+  const seconds = differenceInSeconds(currentTime, startTime);
+  return seconds;
+}
+// 输出总秒数时间戳
+const totalSeconds = calculateTotalSeconds();
+
+// 请求参数
+const params = {
+  appkey: 'test2-123456',
+  page_no: '0',
+  end_time: qf_field.{结束时间$$1856C9B1B$$},
+  start_time: qf_field.{开始时间$$1856C9B1A$$},
+  page_size: '50',
+  sid: 'test2',
+  timestamp: totalSeconds,
+};
+if(params.start_time==null || params.end_time==null){
+    qf_output={'data':null}
+}else{
+// 第一步：参数排序
+const sortedParams = Object.keys(params).sort().reduce((acc, key) => Object.assign(acc, { [key]: params[key] }), {});
+
+// 第二步：处理每个参数
+const processedParams = Object.keys(sortedParams).map((key) => {
+  let value = sortedParams[key].toString();
+  let length = Buffer.byteLength(value, 'utf8').toString().padStart(4, '0');
+  let processedValue = `${length}-${value}`;
+  return `${Buffer.byteLength(key, 'utf8').toString().padStart(2, '0')}-${key}:${processedValue};`;
+});
+
+// 第三步：计算 sign
+const appsecret = '12345';
+const signString = processedParams.join('');
+const index = signString.indexOf('09-timestamp'); // 获取 "09-timestamp" 的索引位置
+const semicolonIndex = signString.indexOf(';', index); // 获取在 "09-timestamp" 后面的分号的索引位置
+const result = signString.slice(0, semicolonIndex) + signString.slice(semicolonIndex + 1); // 切割字符串，并删除找到的分号
+const sign = crypto.createHash('md5').update(`${result}${appsecret}`).digest('hex');
+
+// 添加 sign 参数
+params.sign = sign;
+
+let data = qs.stringify(params);
+
+let config = {
+  method: 'post',
+  maxBodyLength: Infinity,
+  url: 'https://api.wangdian.cn/openapi2/trade_query.php',
+  headers: { 
+    'Content-Type': 'application/x-www-form-urlencoded'
+  },
+  data : data
+};
+
+axios(config)
+.then(function (res) {
+    const resdata=res.data;
+  qf_output={'data':res.data}
+});
+}
+```
+
+#### 2、字段接收配置
+
+- 这里只配置了部分字段，可以根据自己的需求去具体配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697008998705-9ad8f2a0-62ce-4f0e-b3fa-0e0bd53a3c4e.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697009032260-b01f94be-9e65-4cca-95d3-50ad646a1a50.png)
+
+当然后续QS主动支持代码块，也可以在代码块中去配置上述配置。也可以通过定制开发去封装实现QS主动调用
+
+### 四、创建**采购申请单**为例
+
+对应的接口文档：[https://open.wangdian.cn/qyb/open/apidoc/doc?path=purchase\_apply\_push.php](https://open.wangdian.cn/qyb/open/apidoc/doc?path=purchase_apply_push.php)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697018049435-aaf031dc-44d6-4d1f-8722-7904c61a13bf.png)
+
+#### 1、代码块实现
+
+- 表单配置参考
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697079687752-ebc11cb2-d6c3-4b8d-8b6e-7f83d942a015.png)
+
+- 这里的请求参数根据具体接口文档去修改
+
+- 其中qf\_field.\{采购明细节点$$1857CBECC$$\}为表格字段对应的是接口文档的采购明细节点details\_list数组内容
+- goodsDetail 这块代码中的field\_173486855和field\_173486856分别为表格中的商家编码以及采购申请量的表格字段ID，获取方式：field\_id获取方式[https://exiao.yuque.com/rlf3k1/oanb79/ml0u7lgb3wa0vhiz?singleDoc#](https://exiao.yuque.com/rlf3k1/oanb79/ml0u7lgb3wa0vhiz?singleDoc#) 《如何在代码块中分辨表格的不同列》
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697079606173-a797f3c6-5d83-4b74-8133-a74da6996a2a.png)
+
+- appkey、appsecret以及sid需替换为咱们旺店通所提供的具体参数内容
+
+```javascript
+const { differenceInSeconds, parse } = require('date-fns');
+const crypto = require('crypto');
+const axios = require('axios');
+const qs = require('qs');
+
+// 通过当前时间和起始时间计算总秒数
+function calculateTotalSeconds() {
+  const startTime = parse('1970-01-01 08:00:00', 'yyyy-MM-dd HH:mm:ss', new Date(), { timeZone: 'Asia/Shanghai' });
+  const currentTime = new Date();
+  const seconds = differenceInSeconds(currentTime, startTime);
+  return seconds;
+}
+// 输出总秒数时间戳
+const totalSeconds = calculateTotalSeconds();
+
+const table = qf_field.{采购明细节点$$1857CBECC$$};
+
+if(table==null){
+   qf_output={'data':null}
+}else{
+  const goodsDetail = table.map(item => {
+    const newItem = {
+        "spec_no": item.field_173486855,
+        "num": item.field_173486856
+    };
+    return newItem;
+});
+// 请求参数
+const params = {
+  appkey: 'test2-123456',
+  warehouse_no: qf_field.{仓库编号$$18596807C$$},
+  details_list:`${JSON.stringify(goodsDetail)}`,
+  sid: 'test2',
+  timestamp: totalSeconds,
+};
+
+if(params.warehouse_no==null ){
+    qf_output={'data':null}
+}else{
+    // 第一步：参数排序
+const sortedParams = Object.keys(params).sort().reduce((acc, key) => Object.assign(acc, { [key]: params[key] }), {});
+
+// 第二步：处理每个参数
+const processedParams = Object.keys(sortedParams).map((key) => {
+  let value = sortedParams[key].toString();
+  let length = Buffer.byteLength(value, 'utf8').toString().padStart(4, '0');
+  let processedValue = `${length}-${value}`;
+  return `${Buffer.byteLength(key, 'utf8').toString().padStart(2, '0')}-${key}:${processedValue};`;
+});
+
+// 第三步：计算 sign
+const appsecret = '12345';
+const signString = processedParams.join('');
+const index = signString.indexOf('09-timestamp'); // 获取 "09-timestamp" 的索引位置
+const semicolonIndex = signString.indexOf(';', index); // 获取在 "09-timestamp" 后面的分号的索引位置
+const result = signString.slice(0, semicolonIndex) + signString.slice(semicolonIndex + 1); // 切割字符串，并删除找到的分号
+const sign = crypto.createHash('md5').update(`${result}${appsecret}`).digest('hex');
+
+// 添加 sign 参数
+params.sign = sign;
+
+let data = qs.stringify(params);
+
+let config = {
+  method: 'post',
+  maxBodyLength: Infinity,
+  url: 'https://api.wangdian.cn/openapi2/purchase_apply_push.php',
+  headers: { 
+    'Content-Type': 'application/x-www-form-urlencoded'
+  },
+  data : data
+};
+
+axios(config)
+.then(function (res) {
+    const resdata=res.data;
+    qf_output={resdata}
+});
+}
+}
+```
+
+##### 字段接收配置
+
+- 上述配置完成后，点击代码块，会生成对应的采购单号自动填入对应字段中
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697080298261-4ff8d34c-3378-4fe9-b702-8c73f9e0c21a.png)![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697080315753-d8594884-3127-4c82-927a-bf184c6ee08a.png)
+
+#### 2、webhook实现
+
+- 通过代码块计算签名之后，提交数据进入流程触发webhook去完成调用接口
+
+- 注意点：生成签名后，需要在5分钟之内提交数据触发webhook,因为旺店通企业版API服务端允许请求最大时间误差为5min
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697081690544-cf38d5be-221d-4329-89d4-baa701239e9b.png)
+
+##### 实现路径
+
+- 代码块签名
+
+```javascript
+const { differenceInSeconds, parse } = require('date-fns');
+const crypto = require('crypto');
+const axios = require('axios');
+const qs = require('qs');
+
+// 通过当前时间和起始时间计算总秒数
+function calculateTotalSeconds() {
+  const startTime = parse('1970-01-01 08:00:00', 'yyyy-MM-dd HH:mm:ss', new Date(), { timeZone: 'Asia/Shanghai' });
+  const currentTime = new Date();
+  const seconds = differenceInSeconds(currentTime, startTime);
+  return seconds;
+}
+// 输出总秒数时间戳
+const totalSeconds = calculateTotalSeconds();
+
+const table =qf_field.{采购明细节点$$18598DCCD$$};
+
+  const goodsDetail = table.map(item => {
+    const newItem = {
+        "spec_no": item.field_173648656,
+        "num": item.field_173648657
+    };
+    return newItem;
+});
+// 请求参数
+const params = {
+  appkey: 'test2-123456',
+  warehouse_no: qf_field.{仓库编号$$18598DCC2$$},
+  details_list:`${JSON.stringify(goodsDetail)}`,
+  sid: 'test2',
+  timestamp: totalSeconds,
+};
+
+if(params.warehouse_no==null ){
+     qf_output={'data':null}
+}else{
+    // 第一步：参数排序
+const sortedParams = Object.keys(params).sort().reduce((acc, key) => Object.assign(acc, { [key]: params[key] }), {});
+
+// 第二步：处理每个参数
+const processedParams = Object.keys(sortedParams).map((key) => {
+  let value = sortedParams[key].toString();
+  let length = Buffer.byteLength(value, 'utf8').toString().padStart(4, '0');
+  let processedValue = `${length}-${value}`;
+  return `${Buffer.byteLength(key, 'utf8').toString().padStart(2, '0')}-${key}:${processedValue};`;
+});
+
+// 第三步：计算 sign
+const appsecret = '12345';
+const signString = processedParams.join('');
+const index = signString.indexOf('09-timestamp'); // 获取 "09-timestamp" 的索引位置
+const semicolonIndex = signString.indexOf(';', index); // 获取在 "09-timestamp" 后面的分号的索引位置
+const result = signString.slice(0, semicolonIndex) + signString.slice(semicolonIndex + 1); // 切割字符串，并删除找到的分号
+const sign = crypto.createHash('md5').update(`${result}${appsecret}`).digest('hex');
+
+// 添加 sign 参数
+params.sign = sign;
+
+qf_output={params}
+
+}
+```
+
+##### 字段接收配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697081941010-0be6b354-65d6-4bcc-90da-6c1629dc7666.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697081952397-e1a01a69-4995-4fb3-8f48-c0a683d3ec16.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697081968799-0a92b233-7a66-472b-956a-0c101716c1b8.png)
+
+- webhook配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697082095472-a629e998-c830-4fbc-a7d4-f9a83fec3610.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697082202976-96ff5529-af38-469e-8537-41bccef859e9.png)
+
+​
+
+##### ​
+
+##### 
+
+#### 
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/gf76dvqh4fc89qg2?singleDoc#)

@@ -1,0 +1,118 @@
+---
+title: "读取成员信息"
+description: "从轻流系统中读取某一成员详细信息。1. 权限说明「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有通讯录权限。2. 请求请求方式：GET请求地址：https://api.qingflow.com/user/:userId（公有云版..."
+slug: "/帮助文档/轻代码/openapi/通讯录/成员/读取成员信息"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/rqbihakpmd20cc99?singleDoc#"
+source_updated_at: "2024-10-15T03:35:08.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "通讯录"
+  - "成员"
+  - "读取成员信息"
+---
+从轻流系统中读取某一成员详细信息。
+
+---
+
+### **权限说明**
+
+「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有通讯录权限。
+
+### 请求
+
+**请求方式：**GET
+
+**请求地址：**https://api.qingflow.com/user/:userId（公有云版本）
+
+> 请求地址中:userId为需要替换的变量，根据实际获取值更新，示例如下：
+
+```javascript
+GET https://api.qingflow.com/user/888888
+```
+
+**其他版本请求地址：**
+
+钉钉版本：[https://api.ding.qingflow.com/user/:userId](https://api.ding.qingflow.com/user/:userId)
+
+专有轻流：http(s)://自有域名/openApi/user/:userId
+
+#### **2.1 参数说明(路径参数)：**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| userId | 是 | 用户ID，获取方式参考：基本概念介绍 |
+
+#### **2.2 请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+
+#### **2.3 请求体（Body）**
+
+无
+
+#### **2.4 请求体示例**
+
+无
+
+### 返回
+
+#### 3.1 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | number | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| result |  |  |  |
+| areaCode | 是 | string | 区号 |
+| beingActive |  | boolean | 用户的激活状态 |
+| beingDisabled |  | boolean | 是否禁用成员 |
+| customDepartment |  | \[array\] | 成员所在自建部门列表（仅企业微信/钉钉/飞书等特殊工作区的专有轻流工作区适用） |
+| customRole |  | \[array\] | 成员所属自建角色列表（仅企业微信/钉钉/飞书等特殊工作区的专有轻流工作区适用） |
+| department | 是 | \[array\] | 部门id列表 |
+| email | 是 | string | 邮箱 |
+| headImg | 是 | string | 头像 |
+| mobileNum | 是 | string | 手机号 |
+| name | 是 | string | 用户名 |
+| role | 是 | \[array\] | 角色id列表 |
+| userId | 是 | string | 用户的userId |
+| superiorId |  | string | 直属主管的外部id（仅限专有轻流） |
+
+#### 3.2 返回体示例
+
+```json
+{
+    "errCode": 0,
+    "errMsg": null,
+    "questionRelations": [],
+    "result": {
+        "areaCode": "86",
+        "beingActive": true,
+        "beingDisabled": false,
+        "customDepartment": [],
+        "customRole": [],
+        "department": [],
+        "email": "gangsi@exiao.tech",
+        "headImg": "https://file.qingflow.com/uploads/file/55245bf6-a83-40cd-b173-91fc38e09668.jpeg",
+        "mobileNum": "17824231492",
+        "name": "钢丝",
+        "optionId": 835371,
+        "role": [
+            267688,
+            268480
+        ],
+        "userId": "835371"
+    }
+}
+```
+
+### 注意事项
+
+1、企微版本公有云工作区，用户名（name参数）返回用户userid
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/rqbihakpmd20cc99?singleDoc#)

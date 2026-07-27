@@ -1,0 +1,170 @@
+---
+title: "非管理员如何删除数据"
+description: "1. 场景/问题描述通过webhook功能，实现普通成员、外部用户均可删除目标应用的数据。【仅限企业版本】2. 思路逻辑应用+条件分支+webhook，完成删除目标后，再删除本条申请数据-即删除记录。在目标应用的数据表报表中，配置自定义按钮-删除，发起删除申请后可删除数据。3. 配置过程3.1..."
+slug: "/常见问题-faq/数据/非管理员如何删除数据"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/spwslg8852qq7pgu?singleDoc#"
+source_updated_at: "2024-10-15T03:38:51.000Z"
+keywords:
+  - "常见问题（FAQ）"
+  - "数据"
+  - "非管理员如何删除数据"
+---
+## 场景/问题描述
+
+通过webhook功能，实现普通成员、外部用户均可删除目标应用的数据。**【仅限企业版本】**
+
+## 思路逻辑
+
+应用+条件分支+webhook，完成删除目标后，再删除本条申请数据-即删除记录。
+
+在目标应用的数据表报表中，配置自定义按钮-删除，发起删除申请后可删除数据。
+
+​
+
+## 配置过程
+
+### webhook配置
+
+[查询API文档：删除数据 ](https://help.qingflow.com/help-docs?type=qingCode&docId=2cc84e266428e9c7070e75f351e7eeba&parentId=)(推荐根据API文档，自定义配置）
+
+#### 删除全部数据
+
+##### URL
+
+根据API文档描述，调用URL：https://api.qingflow.com/xxx，删除数据：/app/\{appKey\}/apply
+
+URL: https://api.qingflow.com/app/\{应用ID$$67945AC9$$\}/apply （绿色部分请替换为目标应用ID）
+
+应用ID通过基本信息查询, 并且每个应用ID都是不一样的是唯一的。
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658358204227-056a0f5c-7ed0-4918-8491-4aa4aeee21c7.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658358507341-d6c7e274-cd1e-4d9d-9643-9134e98752eb.png)
+
+​
+
+##### Method
+
+根据API文档描述，使用：DELETE
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658358116891-ab5c00cb-9ef4-42d7-8729-5207b32e03eb.png)
+
+##### 触发方式
+
+自定义
+
+##### Header
+
+accessToken 必填，通过[轻商城-拓展插件](https://qingflow.com/center/plugin/detail/20)获取
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658358165668-da550c01-4d62-45a5-ab51-439cef5c6a91.png)
+
+![文档图片](https://cdn.nlark.com/yuque/0/2022/png/27174367/1656938848349-7bf0e720-ee62-4f2b-96cd-6193fd440854.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_40%2Ctext_6L275rWB%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658358691179-a98e3717-f296-488e-a71e-27e23def04cd.png)
+
+##### Body Type
+
+application/json
+
+##### ​JSON Body
+
+根据API文档描述，复制预览数据至JSON Body处
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658358265831-651f5c8c-24de-4cba-aead-9b698555f4eb.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658358311002-0e84e170-7230-4b8d-abe2-bed1cae6124f.png)
+
+###### "pageSize"
+
+"每页数据条数"，请自行设置；
+
+###### "pageNum"
+
+"请求页码"，请自行设置；
+
+#### 删除单条数据
+
+##### URL、Method、触发方式、Header、Body Type — 配置方法同上述一致
+
+##### JSON Body
+
+根据API文档描述，复制预览数据至JSON Body处
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658359005598-30a2cd65-5aeb-4086-b33e-aff965162511.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658359046061-73a65ea8-6dab-43db-9ab7-c276d5822ebd.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658358893299-4b5b421f-8040-4ac6-8d89-f0eb5fd5daf3.png)
+
+###### "pageSize"
+
+"每页数据条数"，请自行设置；
+
+###### "pageNum"
+
+"请求页码"，请自行设置
+
+###### "queries"
+
+###### "queId"
+
+单条数据，根据唯一编号作为查询条件，编号代表"2"。
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658359144483-3f7f18af-2321-4e65-b96c-dde617133c46.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658359161305-2584c510-22c9-45ac-9b80-bc0a6b8e1993.png)
+
+###### "searchKey"
+
+查询关键字 — 目标应用的数据编号![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658359270088-0e9fbf1c-588d-447a-b5c9-ebef04d96bf7.png)
+
+#### 删除指定申请人的数据
+
+##### URL、Method、触发方式、Header、Body Type、JSON Body — 配置方法同上述一致
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658359447927-ccf529cf-3773-4505-a8c2-479134b74b11.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658359345267-4d429b6a-0a58-4621-8179-935f437e4e52.png)
+
+#### 删除本条申请数据
+
+##### URL、Method、触发方式、Header、Body Type、JSON Body — 配置方法同上述一致
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658359511942-a619dcbf-77aa-4440-9ebc-34c2140fd7a9.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658359367306-77ff0992-dba2-412c-bea1-a327412c0ace.png)
+
+### 流程图
+
+![流程图片.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658323719029-6e4b6302-3e6a-479a-bf17-ca0387ea44d2.png)
+
+### 添加自定义按钮
+
+在目标应用-拓展设置-自定义按钮处配置一个：删除按钮
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658359577866-d857259d-6aeb-4985-8de2-53f47188231a.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658359593525-087c5b6d-beef-4c1d-8b62-1b78e71632c1.png)
+
+在目标应用的数据表中，配置自定义按钮：删除
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658359683232-f97028db-9bb4-4054-9129-eb3e9ca29ec4.png)
+
+### 门户设置
+
+将目标应用-数据表，和删除数据-数据表，添加至门户中即可。
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658359740218-9fd8c2fb-79c1-483e-aecd-cfe58d86ab4c.png)
+
+## 实现效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658359808302-1fd2328c-055b-43c2-b924-3cf3a9e80ef6.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658359831369-c7f64240-2aeb-4ac7-b9f4-b547e7dbcaf8.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658359946656-184dbd2c-f3cc-41c3-bd3d-508aabe92dab.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/spwslg8852qq7pgu?singleDoc#)

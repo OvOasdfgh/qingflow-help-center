@@ -1,0 +1,193 @@
+---
+title: "代码块：根据入库日期筛选数据流水表"
+description: "1. 场景/问题描述需要根据入库日期的一个时间段以及成员字段填报人来筛选数据进行填充至表格中2. 解决思路通过使用代码块，调用获取应用数据接口，然后根据成员字段的邮箱调用获取userid的接口，来实现数据该成员下的所有数据，最后再根据数据的入库日期来进行筛选过滤3. 配置过程3.1. 代码注释..."
+slug: "/帮助文档/轻代码/云编程中心/代码块/代码块-根据入库日期筛选数据流水表"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/alue5ms8inxa1fkt?singleDoc#"
+source_updated_at: "2024-11-26T08:30:20.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "云编程中心"
+  - "代码块"
+  - "代码块：根据入库日期筛选数据流水表"
+---
+## 场景/问题描述
+
+需要根据入库日期的一个时间段以及成员字段填报人来筛选数据进行填充至表格中
+
+​
+
+## 解决思路
+
+通过使用代码块，调用获取应用数据接口，然后根据成员字段的邮箱调用获取userid的接口，来实现数据该成员下的所有数据，最后再根据数据的入库日期来进行筛选过滤
+
+​
+
+## 配置过程
+
+### 代码注释
+
+代码涉及接口文档：
+
+[获取应用数据接口](https://help.qingflow.com/help-docs?type=qingCode&docId=fc8e64656428ea3a06fe9b406b9b7be9&parentId=)
+
+[通过邮箱或手机号获取成员userId](https://help.qingflow.com/help-docs?type=qingCode&docId=97331e4564e2d58101db4aea2f1a6519&parentId=)
+
+accessToken：需要通过拓展插件——openAPI中获取
+
+apiUrl：获取对应应用的API接口
+
+email：插入表单成员字段
+
+postData：根据接口文档写筛选条件，按照字段ID进行筛选
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1705914788330-304728ad-4388-4054-a09a-48a27086e93e.png)
+
+queid：需要替换具体获取对应字段的queid
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1705474893965-afdf610c-4a54-47f9-8522-696c64a18b70.png)
+
+queid如何获取：[https://exiao.yuque.com/enzu8l/oy1eh8/fympczhy51i7nx2c?singleDoc#](https://exiao.yuque.com/enzu8l/oy1eh8/fympczhy51i7nx2c?singleDoc#) 《调用添加数据接口，如何body内容中写主字段以及表格字段》
+
+```javascript
+const axios = require('axios');
+
+const headers = {
+    'accessToken': '8ce948******2e853',
+    'Content-Type': 'application/json'
+};
+
+const apiUrl = 'https://ebc.yclqjt.com/openApi/app/fc4e5ff5/apply/filter';
+const pageSize = 200;
+
+async function processPage(pageNum) {
+    const email = qf_field.{填报人$$12ABDBBAB$$};
+    const uid = await getUserID(email);
+    const postData = {
+        "pageSize": pageSize,
+        "pageNum": pageNum,
+        "queriesRel": "and",
+        "queries": [
+            {
+                "queId": 118887626,
+                "searchKey": "入库"
+            },
+            {
+                "queId": 118896523,
+                "searchUserIds": [
+                    uid
+                ]
+            }
+        ]
+    };
+    const response = await axios.post(apiUrl, postData, { headers });
+    return response.data.result;
+}
+
+async function processAllPages() {
+    const firstPageData = await processPage(1);
+    let totalPages = firstPageData.pageAmount;
+
+    const promises = [];
+
+    // 从第2页开始，因为我们已经处理了第一页
+    for (let pageNum = 2; pageNum <= totalPages; pageNum++) {
+        promises.push(processPage(pageNum));
+    }
+
+    const responses = await Promise.all(promises);
+
+    // 包括第一页的数据
+    const reslist = extractData(firstPageData, [118887593, 118887552, 118887553,118887554,118887555,118895191,118895192,118895190,118896547,118887617,118896522,118896498]);
+
+    responses.forEach((data) => {
+        const extractedData = extractData(data, [118887593, 118887552, 118887553,118887554,118887555,118895191,118895192,118895190,118896547,118887617,118896522,118896498]);
+        reslist.push(...extractedData);
+    });
+
+    return reslist;
+}
+
+function extractData(response, queIds) {
+    const result = response.result;
+    const res_list = [];
+
+    result.forEach((value) => {
+        const res_msg = {};
+
+        value.answers.forEach((v) => {
+            const queId = v.queId;
+            const queTitle = v.queTitle;
+
+            if (queIds.includes(queId)) {
+                if (queId === 118895190) {
+                    // 特殊处理 queId = 118895190，即处理成员字段
+                    const email = v.values.map(item => item.email);
+                    res_msg[queTitle] = email;
+                } else {
+                    // 常规处理
+                    const values = v.values;
+                    const dataValue = values[0].dataValue;
+                    res_msg[queTitle] = dataValue;
+                }
+            }
+        });
+
+        res_list.push(res_msg);
+    });
+
+    return res_list;
+}
+
+async function getUserID(email) {
+    let config = {
+        method: 'get',
+        maxBodyLength: Infinity,
+        url: `https://ebc.yclqjt.com/openApi/user/getId?email=${email}`,
+        headers: {
+            'accessToken': '8ce948********204c72e853',
+            'Content-Type': 'application/json'
+        }
+    };
+
+    const response = await axios.request(config);
+    const userid = response.data.result[0].userId;
+    return userid;
+}
+
+(async () => {
+    const reslist = await processAllPages();
+    function filterReslistByDate(reslist) {
+        // 定义筛选开始和结束时间
+        const startDate = new Date(new Date().setHours(17, 0, 0, 0) - 86400000); // 昨天下午17:00
+        const endDate = new Date(new Date().setHours(17, 0, 0, 0)); // 今天下午17:00
+    
+        // 筛选符合条件的数据
+        const filteredList = reslist.filter(item => {
+            const itemDate = new Date(item["入库日期"]);
+            return itemDate >= startDate && itemDate <= endDate;
+        });
+    
+        // 返回筛选后的结果
+        return filteredList;
+    }
+    const filteredData = filterReslistByDate(reslist);
+    
+    //console.log(filteredData);
+    qf_output={filteredData}
+})();
+```
+
+### 代码测试
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1705474996734-281762dd-fd3a-45b7-8cf2-ddcf9cae412c.png)
+
+### 解析与配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1705542370841-90c0e646-ba44-4d44-aced-2dcda51c0f0e.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1705542401102-effce10f-bd2c-4f4a-be0b-cca01a7dd290.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/alue5ms8inxa1fkt?singleDoc#)

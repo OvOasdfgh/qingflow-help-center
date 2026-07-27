@@ -1,0 +1,46 @@
+---
+title: "数据修改校验优化"
+description: "1.预期上线时间为了保证成员修改数据时符合业务规范，确保数据准确性，轻流计划对视图和数据表修改数据时的字段校验设置 进行变更。以下内容公有云 将在8月10日（钉钉版本于8月16日）上线，专有轻流 预计将在5.3.0版本上线。2.变更事项变更前：拥有视图、报表可编辑权限的用户，在打开自定义视图和..."
+slug: "/更新动态/产品公告/数据修改校验优化"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/xo6t963z9igqarc1?singleDoc#"
+source_updated_at: "2024-10-15T03:37:03.000Z"
+keywords:
+  - "更新动态"
+  - "产品公告"
+  - "数据修改校验优化"
+---
+## 1.预期上线时间
+
+为了保证成员修改数据时符合业务规范，确保数据准确性，轻流计划对**视图和数据表修改数据时的字段校验设置** 进行变更。以下内容**公有云** 将在8月10日（钉钉版本于8月16日）上线，**专有轻流** 预计将在5.3.0版本上线。
+
+## 2.变更事项
+
+#### **变更前：**
+
+拥有视图、报表可编辑权限的用户，在打开自定义视图和报表数据详情修改数据时，若视图中没有编辑过字段值，则不校验字段格式和字段本身设置的合法性校验；报表则在任何情况下都没有进行字段格式和字段本身设置的合法性校验（如：必填、不允许重复值、字数限制等）。
+
+#### 变更后：
+
+拥有视图、报表可编辑权限的用户，若打开视图和报表数据详情修改数据，则会在确认修改时会**校验** 字段格式和字段本身设置（如：必填、不允许重复值、字数限制等）。
+
+> 表单中勾选不允许重复值
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-08-24/aHt2rjRa3v7B9CGZscEPa6W3muKx5DvZ_.png)
+
+> 报表明细数据中修改数据时，系统会自动校验是否有重复值、是否必填
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-08-24/0rnv-fNmqrOgwDpM2ymGEyGwI9n2cpDn_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-08-24/IhjKVfUquxZG7yZIqzCEElW_079U9TN8_.png)
+
+具体校验项可见下方明细：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-08-24/3pF0_gO3PQoDi0yU15FJN8G98mklenSz_.png)
+
+## 3.潜在影响
+
+本次修改不会影响通过视图和报表修改数据的业务场景，仅针对修改时字段的合法性进行校验。
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/xo6t963z9igqarc1?singleDoc#)

@@ -1,0 +1,88 @@
+---
+title: "获取角色列表"
+description: "调用本接口，获取角色列表1. 权限说明「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有通讯录权限。2. 请求请求方式：GET请求地址：https://api.qingflow.com/role（公有云版本）示例如下：GET ht..."
+slug: "/帮助文档/轻代码/openapi/通讯录/角色/获取角色列表"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/eufnwpa5s0x32dmg?singleDoc#"
+source_updated_at: "2024-10-15T03:35:07.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "通讯录"
+  - "角色"
+  - "获取角色列表"
+---
+调用本接口，获取角色列表
+
+---
+
+### **权限说明**
+
+「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有通讯录权限。
+
+### 请求
+
+**请求方式：**GET
+
+**请求地址：**https://api.qingflow.com/role（公有云版本）
+
+> 示例如下：
+
+```javascript
+GET https://api.qingflow.com/role
+```
+
+**其他版本请求地址：**
+
+钉钉版本：[https://api.ding.qingflow.com/role](https://api.ding.qingflow.com/role)
+
+专有轻流：http(s)://xxx.xx(自有域名)/openApi/role
+
+#### **2.1 请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+
+### 返回
+
+#### 3.1 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| questionRelations | 是 | array | 关联的设置，这里没用 |
+| result | 是 | object | 返回结果 |
+| role | 是 | array |  |
+| optionId |  | int |  |
+| roleId |  | int |  |
+| roleName |  | string |  |
+
+#### 3.2 返回体示例
+
+```json
+{
+    "errCode": 0,
+    "errMsg": null,
+    "questionRelations": [],
+    "result": {
+        "role": [
+            {
+                "optionId": null,
+                "roleId": 183668,
+                "roleName": "123243"
+            },
+            {
+                "optionId": null,
+                "roleId": 322984,
+                "roleName": "某角色"
+            },         
+        ]
+    }
+}
+```
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/eufnwpa5s0x32dmg?singleDoc#)

@@ -1,0 +1,172 @@
+---
+title: "Q-Source主动"
+description: "功能介绍将用户已有的外部数据源和轻流的应用关联起来，轻流定期将外部数据源的变更（增、改、删）同步到轻流中。例：用户在轻流外已有一个客户数据库，用户企业内部对客户信息的改动都会修改这个客户数据库，同时用户在轻流的审批流程中需要使用这些客户数据，此时可以在轻流中创建一个「客户数据库应用」，同时通过..."
+slug: "/帮助文档/轻代码/集成中心/q-sourse/q-source主动"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/bq8liw91yc10br77?singleDoc#"
+source_updated_at: "2025-01-10T03:10:59.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "集成中心"
+  - "Q-Sourse"
+  - "Q-Source主动"
+---
+## 功能介绍
+
+将用户已有的外部数据源和轻流的应用关联起来，轻流定期将外部数据源的变更（增、改、删）同步到轻流中。
+
+例：用户在轻流外已有一个客户数据库，用户企业内部对客户信息的改动都会修改这个客户数据库，同时用户在轻流的审批流程中需要使用这些客户数据，此时可以在轻流中创建一个「客户数据库应用」，同时通过QSource主动轮询将「该应用」（轻流）和用户已有的客户数据库（三方系统）关联起来，定时将客户数据库的改动同步到轻流中的这个「客户数据库应用」里。
+
+(ps: Q-Source主动轮询功能为单独付费功能，企业版涵盖该功能，如果需要试用，可向轻流商务人员提交申请。)
+
+## 功能效果
+
+这里以企业微信成员库同步到轻流表单为例：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/Cms-images/Qsource%E4%B8%BB%E5%8A%A8%E5%8A%9F%E8%83%BD%E6%95%88%E6%9E%9C.gif?sign=dbe521e9f4b8668945994c17f9d01380&t=1683623587)​
+
+## 设置步骤
+
+### 一、添加数据来源
+
+如下图，「Q-Source主动模式」在 **表单编辑->添加流程->申请人节点->高级设置->数据来源** 中添加
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/s7L3zvn0yJ4yCHDpnHqYWeqHpBpS5Y4d_.png)
+
+### 二、配置项目详解
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/lCRRwt90adcQZVlBXLVNXeZt-8IS5kbk_.png)
+
+（1）「标题」：可以设置该数据源的标题，方便在数据来源直接显示。例如设置为：人员信息表，则数据来源处显示为
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/65WyUlCVUW7NOa4cT7q6O1wkeHKLeCC3_.png)
+
+（2）「新增数据是否进入流程」：从外部数据源同步到的数据是否进入轻流的审批流程，如果选择否，数据添加后会直接设置为已通过状态，如果选择是，数据会进入应用设置的审批流程。
+
+（3）「轮询间隔」：每隔多长时间同步一次数据，轮询间隔单位为小时，且只能为正整数。
+
+（4）「开始时间」：同步开始时间，开始时间如果在应用发布时间之后，则会被设置为从开始时间加上轮询间隔直到得到一个应用发布时间之后的开始时间。
+
+（5）「同步处理」：可以选择数据同步的方式。
+
+i： 添加新数据：将同步到的新数据添加到轻流中
+
+ii： 更新已有数据：如果同步到的数据在轻流中已存在，则更新轻流应用中的数据
+
+iii：删除未同步到的数据：将该应用中没有和外部数据匹配上的数据全部删除
+
+ps: 轻流数据和外部数据是否为同一条数据由下面将要配置的数据标识位决定。
+
+（6）「全部数据拉取方式」：可以根据接口规定，选择对应拉取数据方式。大数据量接口一般需要分次拉取，这时可以看接口规定是分页还是偏移量
+
+**i：单次请求包含所有数据：**一次http请求返回的数组即所有数据，大多数场景都是这样。例如上面的【企业微信】[**部门成员信息接口**](https://work.weixin.qq.com/api/doc/90000/90135/90201)。
+
+**ii： 分页拉取：**通过分页的方式拉取数据。
+
+【判断是否需要分页拉取】请求参数里包含pageSize和pageNum。
+
+【使用】在下方的接口参数中填入 \{\{PAGE\_INDEX\}\} 视为起始页码，轻流会自动从起始页码开始递增以获取新的数据,直到请求的数据为空或者这页数据条数小于pageSize数量(可插入的接口参数为: QueryParam,Header, JSONBody, formBody)
+
+【例子】下图表示以分页拉取的方式，从第一页开始拉数据，每页拉100条数据，一页一页拉取，直到请求的数据为空或者这页数据条数小于pageSize数量为止。
+
+比如接口查询到的数据有1120条，第一次请求拉了第一页100条数据。第二次请求还是100条，一直到第12次，拉到20条数据。20小于100，且下一页数据为空。这时把所有数据整理一起返回，一共1120条。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/aV4kniUVhvr8wBsP6vy02hAiWK4EE38g_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/KOl0sXItMBVtCREztJL1jaxTpkafR2n8_.png)
+
+**iii：偏移量拉取：**通过偏移量方式拉取全部数据。例如【钉钉】[**考勤数据接口**](https://developers.dingtalk.com/document/app/open-attendance-clock-in-data)
+
+【判断是否需要偏移量拉取】请求参数里包含offset和limit。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/RqaFWadpHNgK-jrwZw5f8MmB1IxN0kjK_.png)
+
+【使用】在下方的接口参数中填入\{\{OFFSET\}\} 视为获取数据起始点，轻流会自动从起始点开始递增以获取新的数据,直到请求的数据为空(可插入的接口参数为: QueryParam,Header, JSONBody, formBody)
+
+【例子】下图表示以偏移量拉取的方式，从第一条（偏移量0可以理解为数组的\[0\]）开始拉取。每次50条数据，直到拉取完所有数据为止。
+
+比如接口查询到的数据有1120条，第一次请求拉了第1到第50条数据。第二次请求还是50条。第23次请求拉到了20条数据，第24次拉取为0，这时把所有数据整理一起返回，一共1120条。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/bagzAGz9PP-DVFjLTquJRu3EJdpqeYkZ_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/_diB5jguuJhKcEG30J329CmAbSLWZmWP_.png)
+
+（7）「鉴权方式」：鉴权配置，一些接口可以通过配置鉴权模版，直接使用。常用场景为需要临时token的（例如企业微信、钉钉、飞书），需要oauth2.0鉴权方式的（例如语雀、微盟云）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/vq7K_BQ3Pycosd76jh0Di_hpMn07yUf9_.png)
+
+（8）URL， QueryParam， Header，Method, Body: 轻流通过http请求外部数据源的数据，前面列出的配置部分为http请求的配置。目前Method支持GET和POST请求，POST请求可以传输JSON、urlencoded和XML格式的数据。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/IP6ol_9VBnX9eb4O8UpYd2MmMKtmgffz_.png)
+
+（9）「返回内容是否为数组」：Q-Source主动是应用级的数据同步，对于应用来说是很多条数据，多条数据的表现就是数组。所以只有接收到数组形式的数据，才能在应用中表现为多数据同步。
+
+QSource主动轮询支持接收JSON、XML格式的返回数据。以JSON格式数据为例子，如果返回数据不是数组结构，需要输入一个JSONPath,轻流将使用输入的JSONPath解析接收到的返回数据，请务必保证解析到的是一个数组结构，否则如果在\[同步处理\]选择了\[删除未同步到的数据\]将会删除应用中的所有数据。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/vvVGNF88w5txV7UjHDdVxIapRcnnExO9_.png)
+
+（10）「测试接口」：点击可以测试自己配置的http请求参数是否正确
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/rjJnLV6QeBN0FpVijohv_6LwIsmczpFV_.png)
+
+效果如下：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/uvOmcoLPjVsiM1-LxJ66UntaIIDP2tAn_.gif)
+
+（11）「返回内容解析」：此解析是针对接收到的返回数据的每一个数组元素的解析，例：接受到的返回数据为下图结构，此时如果希望将\[email\]的内容填入轻流表单的一个单行文字字段，需要输入的JSONPath为：$.testResult.email，如下图。轻流会通过此处设置的内容解析规则，将数据源返回的数据填入轻流表单中，生成或更新表单数据。
+
+![文档图片](https://hc.qingflow.com/wp-content/uploads/2020/03/WX20200309-110721@2x.png)
+
+![文档图片](https://hc.qingflow.com/wp-content/uploads/2020/03/WX20200309-110732@2x.png)
+
+ps：通过「测试接口」后的「生成内容解析」按钮会更方便哦～
+
+效果如下：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/Cms-images/%E7%94%9F%E6%88%90%E5%86%85%E5%AE%B9%E8%A7%A3%E6%9E%90%E8%A7%86%E9%A2%91.gif?sign=16511bdd9d33a917df9e2e54619e8ddd&t=1683624939)
+
+（12）「数据标识位」：此处仅可选择设置了\[返回内容解析\]的表单字段（一个或者多个都可以，多个则为并条件），通过对比该字段的值和通过该字段设置的\[返回内容解析\]解析到的值做对比，相同时视为同一条数据。
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/ojKIGP6l49qrahzq_fvW6mbEpOjj-Z1y_.png)
+
+（12）手动触发：添加完毕后，点击主动触发按钮可以主动触发一次QSource主动轮询，但是每个主动模式的QSource每次主动触发最低间隔为30分钟。同时只有「开启状态」的QSource主动可以手动触发。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/Y8z0ArLjnOMj5e9-MY6vSSdnVa5KEsuc_.png)
+
+点击手动触发后，您可以在页面右下角看到弹出的「进程中心」中查看数据同步进度。
+（13）开启状态：只有处于开启状态的QSource主动轮询才会启动。
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/UdwWeMhiB8RW7AfoAZOjDF0G8CzT92a1_.png)
+
+## 视频课程
+
+您也可以点击轻流学院的教学视频来学习如何使用Q-Source主动模式。
+
+[SP2 Q-Source配置详解](https://learn.qingflow.com/detail/v_60a4f653e4b0fe322014c555/3)​
+
+## 注意事项
+
+1、QSource主动模式不支持同步以下字段类型的数据： 富文本、描述文字、Q-Linker、附件上传、OCR、定位
+
+2、待拉取数据的「数据标识位」字段值若为空值，会导致拉取失败。
+
+3、待拉取数据的「数据标识位」字段值前面若有空格，会导致重复添加数据。
+
+4、一个应用最多设置10个数据来源。如果设置多个Q-Source/Q-Database，则只能有一个是可以同步删除数据
+
+5、Q-Source主动模式新增/更新数据时，不会触发流程外Q-Robot。
+
+6、单个http请求超时时间为60s
+
+7、数据量限制：
+
+- 公有云：单次Q-Source主动最大新增数据量为5000条（勾选进入流程情况下）；单次拉取的数据量（这里指从接口解析到的初始数据，不止是新增/更新的部分）不能超过20万条。
+- 公有云、专有云：分页拉取方式下，单次最大拉取页数为2000页。
+
+8、在Q-Source中，申请人可关联外部数据源同步数据，分主动和被动两种方式。Q-Source主动模式功能优化方案如下，可提升系统性能：
+
+- 将主动拉取数据的轮询时长限制在30分钟以上。
+- 标识位个数最多可设置 5 个。
+- 规范标识位类型，限定标识位的字段类型仅限如下六种类型：单行文本、数字、日期、时间、电话、邮箱。
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/bq8liw91yc10br77?singleDoc#)

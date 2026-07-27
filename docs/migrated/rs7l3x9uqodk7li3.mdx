@@ -1,0 +1,74 @@
+---
+title: "表格别名"
+description: "当Result Format选择JSON或XML的时候，别名可以选择配置[表格别名],表格别名用于将QLinker请求到的数组(表格)类型数据关联到表格中。具体配置方法如下：JSON类型以如下的JSON返回数据为例:{ \"testResult\": { \"target\": \"http..."
+slug: "/帮助文档/轻代码/集成中心/q-linker/q-linker的配置方法/表格别名"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/rs7l3x9uqodk7li3?singleDoc#"
+source_updated_at: "2024-11-26T08:30:14.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "集成中心"
+  - "Q-Linker"
+  - "Q-Linker的配置方法"
+  - "表格别名"
+---
+```plain
+当Result Format选择JSON或XML的时候，别名可以选择配置[表格别名],表格别名用于将QLinker请求到的数组(表格)类型数据关联到表格中。具体配置方法如下：
+```
+
+## JSON类型
+
+以如下的JSON返回数据为例:
+
+```latex
+{
+  "testResult": {
+    "target": "http://newhuan.name",
+    "secure": false,
+    "email": "qftestalpha@163.com",
+    "pathRewrite": {
+      "test": "/"
+    },
+    "data": [ { "key": "扎啤", "value": "2" }, { "key": "炸鸡", "value": "4" } ],
+    "array": ["列表数据1","列表数据2","列表数据3","列表数据4","列表数据5"]
+  }
+}
+```
+
+如果我想将\[$.testResult.data\]中的数据作为表格的两行，可以按照如下方式设置:
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/5F--QZ-rsHZq-t8_ubeEiu4K1bSGpQKw_.png)
+
+然后，将表格字段的配置项\[默认内容\]设置为\[关联已有表格\]，选择该Q-linker字段的\[表格别名\],并将表格子字段关联到对应的\[子别名\]
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/GTDQGNbev00Oq9RMzeeMtLnEdn1c_brD_.png)
+
+表单配置就结束了。
+
+配置完成之后，点击Q-Linker查询，Q-Linker字段关联到数据后就会将对应数据填充到表格中。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/8WfMDoCFPnXZvttRpLC6dLSnlnhpvJuH_.png)
+
+## XML类型
+
+XML的配置方式与JSON基本一致，以如下的xml文件为例:
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/kON578lEB0P_tuA0JwKr9SbGn_DKpfYW_.png)
+
+Q-linker的XPath配置如下图所示：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/eAGSsy0WsPASSKwP5IU9x5aPOiWLDU0L_.png)
+
+表格设置如下：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/_xUAzluTbvbQQHuyPb7Ip00jStPYudtu_.png)
+
+结果： ![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/UNWjGImzFCuh6ZXhVmVFnMjC9y2hEYqU_.png)
+
+## 注意事项
+
+1、解析至表格的JSON Path解析结果必须为数组。
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/rs7l3x9uqodk7li3?singleDoc#)

@@ -1,0 +1,37 @@
+---
+title: "【批量定时更新】流程日志记录变更"
+description: "1.预期上线时间为方便用户迅速查询到有效记录、提升工作区性能，轻流计划对Q-Database和Q-Source主动的流程日志记录进行变更。以下内容公有云将在10月31日（钉钉版本于11月1日）上线，专有轻流预计将在5.3.0版本上线。2.变更事项更新前Q-Source主动、Q-Database..."
+slug: "/更新动态/产品公告/批量定时更新-流程日志记录变更"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/rahpomew2fkpyd4l?singleDoc#"
+source_updated_at: "2024-10-15T03:37:03.000Z"
+keywords:
+  - "更新动态"
+  - "产品公告"
+  - "【批量定时更新】流程日志记录变更"
+---
+## 1.预期上线时间
+
+为方便用户迅速查询到有效记录、提升工作区性能，轻流计划对**Q-Database和Q-Source主动的流程日志记录**进行变更。以下内容**公有云**将在10月31日（钉钉版本于11月1日）上线，**专有轻流**预计将在5.3.0版本上线。
+
+## 2.变更事项
+
+#### 更新前
+
+Q-Source主动、Q-Database批量定时更新数据，都会产生流程日志和变更记录。
+
+#### 更新后
+
+Q-Source主动、Q-Database批量定时更新数据，仅**有字段值变更**才产生流程日志和变更记录，若数据无更新，则不记录流程/更新日志。
+
+以Q-Source主动为例：
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-10-27/YtUx2VFDfzGT_6SqkGpkPGDkHMA7oy-Q_.png)
+
+专有轻流客户如希望Q-Source主动、Q-Database批量更新数据时，无字段值变更也产生流程日志记录，可联系客户经理通过后台配置的方式实现。
+
+## 3.潜在影响
+
+此次更新影响范围为**环境内所有工作区**，影响功能为**Q-Database、Q-Source主动**，未产生的流程日志通过OPEN API也查询不到。
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/rahpomew2fkpyd4l?singleDoc#)

@@ -1,0 +1,255 @@
+---
+title: "数字函数"
+description: "1 功能介绍1.1 功能简介工作中经常需要对数值进行统计、计算和处理等操作。数字函数，可以帮助我们在公式中编辑处理数值信息。2 设置步骤AVERAGE可用于计算一组数值的算术平均值。函数用法：AVERAGE(数字1,数字2,...)函数示例："
+slug: "/帮助文档/表单引擎/字段常用设置/默认内容/通过公式计算/数字函数"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/irapz6yg4oqwtaf4?singleDoc#"
+source_updated_at: "2026-01-12T01:50:57.000Z"
+keywords:
+  - "帮助文档"
+  - "表单引擎"
+  - "字段常用设置"
+  - "默认内容"
+  - "通过公式计算"
+  - "数字函数"
+---
+## 1 功能介绍
+
+### 1.1 功能简介
+
+工作中经常需要对数值进行统计、计算和处理等操作。
+
+数字函数，可以帮助我们在公式中编辑处理数值信息。
+
+## 2 设置步骤
+
+### AVERAGE
+
+可用于计算一组数值的算术平均值。
+
+> 函数用法：AVERAGE(数字1,数字2,...)
+
+**函数示例：**
+
+计算全年平均采购单价。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700459341409-281e8cd5-425c-453e-bb38-130b1364468c.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700622776752-2bf8385d-47db-4b4b-96db-bb852bc50928.png)
+
+### COUNT
+
+统计参数个数，value 代表不同的值。
+
+> 函数用法：COUNT(value1, value2, …)
+
+**函数示例：**
+
+利用COUNT函数统计你去过的地方，结合CONCAT函数，以一句话形式展示。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700459409407-74676639-9bdc-4405-a0eb-b8c140a8bd9c.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700622813387-c4b2fddf-56b1-4bbc-bbf3-f5623297ac68.png)
+
+### COUNTIF
+
+统计满足条件的参数个数，value 代表不同的值，criteria 为判断条件。
+
+> 函数用法：COUNTIF(value1, value2, …, criteria)
+
+**函数示例：**
+
+利用COUNTIF函数统计四位同学中成绩为A的人数。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700459503017-cbac6221-0e71-4360-b306-d23f01e58c78.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700622834445-f9872436-8860-4301-be8d-5c6379112cd2.png)
+
+### MAX
+
+返回一组值中的最大值。
+
+> 函数用法：MAX(number1, number2, …)
+
+**函数示例：**
+
+用MAX函数查找四位同学测试成绩的最高分。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700459617452-71ed2cd7-304c-4753-b680-e9ff87a6dba7.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700622915549-6b50b820-7e5c-4d16-83e5-ccedf6926d6c.png)
+
+### MIN
+
+返回一组值中的最小值。
+
+> 函数用法：MIN(number1, number2, …)
+
+**函数示例：**
+
+用MIN函数查找四位同学测试成绩的最低分。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700459600445-c95ebeaf-e627-4c6f-82da-e48a0c10efc8.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700622869393-c183b349-c542-4513-b303-d3aefaebffa9.png)
+
+### ROUND
+
+将数字四舍五入到指定的位数。
+
+> 函数用法：ROUND(number, num\_digits)number: 必需。 要四舍五入的数字。num\_digits: 必需。 要进行四舍五入运算的位数。
+
+**函数示例：**
+
+用ROUND函数将应缴税款保留两位小数。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700622232010-8cce1381-38ac-4e09-9c6f-6bda595279b8.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700622993896-59e0e252-0f1e-41a8-a751-418841a0e471.png)
+
+### INT
+
+将数字向下舍入到最接近的整数。
+
+> 函数用法：INT(number)
+
+**函数示例：**
+
+用INT函数将应缴纳税款向下取整。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700631954418-df3dbea0-c2fc-478e-b4ea-c03ea908dbf6.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700631918033-bd529cd4-ab6c-4ae1-8936-2bc5ca1f56ae.png)
+
+### MOD
+
+返回两数相除的余数。 结果的符号与除数相同。
+
+> 函数用法：MOD(number, divisor)number: 必需。 要计算余数的被除数。divisor: 必需。 除数。
+
+**函数示例：**
+
+按固定人数划分学习小组，统计没有被分组的学员数量。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700632343039-0579d86a-19ef-4f9b-9b9a-edf81c0a5fc4.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700632365485-9e0fcbca-6c75-42c0-8b1f-cc8699751487.png)
+
+### PRODUCT
+
+函数使所有以参数形式给出的数字相乘并返回乘积。也可以使用运算符号\*，直接相乘，效果一样。
+
+> 函数用法：PRODUCT(number1, \[number2\], …)
+
+**函数示例：**
+
+按固定人数划分学习小组，统计总人数。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700632591814-f5e2a786-ed5a-49c7-bcec-5f367db1d2b3.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700632569482-112a5099-c279-48a3-b773-4771957bc178.png)
+
+### SUM
+
+使所有以参数形式给出的数字相加并返回和。
+
+> 函数用法：SUM(number1, \[number2\], …)
+
+**函数示例：**
+
+用SUM函数计算某同学的高考总分。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2024/png/2056184/1731910874826-a99aeecc-dc61-48e6-924c-d5a5bdc5e57f.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2024/png/2056184/1731910934016-5676374f-efd4-40ce-91d7-51d532e7b1a5.png)
+
+### SUMPRODUCT
+
+在给定的数组中，将数组间对应的元素相乘，并返回乘积之和。
+
+> 函数用法：SUMPRODUCT(array1, \[array2\])array: 可选。多个数字数组。
+
+**函数示例：**
+
+用SUMPRODUCT函数计算出所有商品的总价。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2024/png/2056184/1733901276266-fbe836c2-4773-4080-a407-e31a347a9715.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2024/png/2056184/1733901190165-8b408b88-b761-499f-ae58-341dd88f9055.png)
+
+### SUMIF
+
+在Sum函数的基础上，增加了条件判断功能，可计算表格中满足**某一条件**的数字相加并返回和。
+
+> 函数用法：SUMIF(range, criteria, \[sum\_range\])range：必需；根据 criteria 的条件规则进行检测的判断字段。支持的字段包括：子表单中的数字、单行文本、下拉框、单选按钮组；criteria：必需；用于判断的条件规则。sum\_range：非必需；用于求和的计算字段，省略此参数时，即自动对 range 进行求和计算。支持的字段包括：子表单中的数字、单行文本、下拉框、单选按钮组。
+
+**函数示例：**
+
+用SUMIF函数计算出商品A的总销售额。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700463525398-30201d78-3d42-408b-b00c-9d843a765922.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700622944842-063865f4-2a6f-465b-99d9-218de53b4aa1.png)
+
+### NUM
+
+将属性为文本的数值，转化为数字属性，参与计算。
+
+> 函数用法：NUM(文本)例如，通过数据关联字段聚合功能统计出来的数值，为文本属性，需要用NUM函数转化后参与计算。
+
+**函数示例：**
+
+通过数据关联字段计数功能统计出来的数值，
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700633452846-70ce9d7a-8149-47f1-934b-ea4fd9f804dc.png)![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700633493247-8ef3c5fb-ad00-4be1-8b8f-86d049f41377.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700633424566-6349f867-0db1-4032-a1c4-ed9d075d2b70.png)
+
+### RMBUPPER
+
+把数字转换为大写的中文金额。
+
+> 函数用法：RMBUPPER(number)
+
+**函数示例：**
+
+用RMBUPPER函数将所填金额转化为大写中文金额。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700622666787-49ec0223-c909-47f1-8b49-754e223145db.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700623126022-a7181b7e-5dc6-4107-9ab5-0c47139cac2b.png)
+
+### ROUNDUP
+
+将数字保留指定位数，最后一位向上取整。
+
+> 函数用法：ROUNDUP(number, num\_digits)
+
+**函数示例：**
+
+用ROUNDUP函数将应缴纳税款向上取整，不保留小数位数。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700622385445-1b9d7165-ee0e-45df-936b-6ed86052080b.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700623012711-5619763e-8c8a-4a47-a34b-3e543995bf80.png)
+
+### ROUNDDOWN
+
+将数字保留指定位数，最后一位向下取整。
+
+> 函数用法：ROUNDDOWN(number, num\_digits)
+
+**函数示例：**
+
+用ROUNDDOWN函数将应缴纳税款向下取整，保留1位小数。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700631558085-b933e67b-5865-4ca8-bea2-f1a25561c1f2.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700631589042-1f3dc340-2961-45f0-b088-26cca32d71b1.png)
+
+### POWER
+
+返回数字乘幂的结果。
+
+> 函数用法：POWER(number, power)number: 必需。 基数。 可为任意实数。power: 必需。 基数乘幂运算的指数。
+
+**函数示例：**
+
+计算指定数值的乘幂。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700633718946-4c4687db-2fe4-452e-9e02-ee01107e3d73.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700633702718-030c03fc-2892-4886-a4d9-f406591c1e76.png)
+
+### LN
+
+返回一个数的自然对数，以数学常数e为底。
+
+> 函数用法：LN(number)
+
+**函数示例：**
+
+计算指定数字的自然对数。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700638502915-7bfbe701-34e9-48ea-8b17-c5d6c926d22c.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700638410581-bcf5fb36-e325-49fe-9318-4c1a1032f82e.png)
+
+### SQRT
+
+平方根计算（Square Root Calculations），返回正的平方根。
+
+> 函数用法：SQRT(number)
+
+**函数示例：**
+
+计算指定数字的平方根。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700638518414-e06f7f78-90f2-428f-9e03-4b2a77bc7da8.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700638420212-250cf00b-31ab-40d4-a00b-8db82b856ef9.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/irapz6yg4oqwtaf4?singleDoc#)

@@ -1,0 +1,105 @@
+---
+title: "获取单条数据的留言信息"
+description: "调用本接口以获取指定数据的留言信息1. 权限说明「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有对应应用的权限。2. 请求请求方式：GET请求地址：https://api.qingflow.com/{appKey}/apply/..."
+slug: "/帮助文档/轻代码/openapi/应用数据接口/数据内容/获取单条数据的留言信息"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/hu5z8wwa8ga24zo1?singleDoc#"
+source_updated_at: "2024-11-20T02:58:13.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "应用数据接口"
+  - "数据内容"
+  - "获取单条数据的留言信息"
+---
+调用本接口以获取指定数据的留言信息
+
+---
+
+### **权限说明**
+
+「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有对应应用的权限。
+
+### 请求
+
+**请求方式：**GET
+
+**请求地址：**https://api.qingflow.com/\{appKey\}/apply/\{applyId\}/comment?pageSize=PAGESIZE&pageNum=PAGENUM（公有云版本）
+
+> 请求地址中PAGESIZE、PAGENUM与:applyId为需要替换的变量，根据实际获取值更新，示例如下：
+
+```javascript
+GET https://api.qingflow.com/123456/apply/123456/comment?pageSize=5&pageNum=1
+```
+
+**其他版本请求地址：**
+
+钉钉版本：[https://api.ding.qingflow.com/\{appKey\}/apply/\{applyId\}/comment?pageSize=PAGESIZE&pageNum=PAGENUM](https://api.ding.qingflow.com/apply/:applyId/comment?pageSize=PAGESIZE&pageNum=PAGENUM)
+
+专有轻流：http(s)://xxx.xx(自有域名)/openApi/\{appKey\}/apply/\{applyId\}/comment?pageSize=PAGESIZE&pageNum=PAGENUM
+
+#### **参数说明(路径参数)**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| appKey | 是 | 应用 id，获取方式详见：[基本概念介绍](https://exiao.yuque.com/ixwxsb/bgzs0e/cl59vxilcqdkmq1h) |
+| applyId | 是 | 数据的id，可在轻流的URL中获取，或通过调用【获取应用的数据】文档接口获取 |
+
+#### **参数说明(查询参数)**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| pageSize | 是 | 每页数据量 |
+| pageNum | 是 | 查询的页码，从1 开始 |
+
+#### **请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+
+### 返回
+
+#### 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| questionRelations |  |  | 关联的设置，这里没用 |
+| result | 是 | object | 返回结果 |
+| pageAmount | 是 | int | 总页数 |
+| pageNum | 是 | string | 分页，从1开始 |
+| pageSize | 是 |  | 每页数据量 |
+| result | 是 |  | 结果 |
+| commentId |  |  | 留言的id，添加时不用填 |
+| commentMsg |  |  | 留言的人的内容 |
+| mentionUserIds |  |  | 被@的人的userId |
+| resultAmount | 是 |  | 结果总量 |
+
+#### 返回体示例
+
+```json
+{
+    "errCode": 0,
+    "errMsg": null,
+    "questionRelations": [],
+    "result": {
+        "pageAmount": 1,
+        "pageNum": 1,
+        "pageSize": 5,
+        "result": [
+            {
+                "commentId": 77469,
+                "commentMsg": "这是我创建的留言\n",
+                "mentionUserIds": []
+            }
+        ],
+        "resultAmount": 1
+    }
+}
+```
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/hu5z8wwa8ga24zo1?singleDoc#)

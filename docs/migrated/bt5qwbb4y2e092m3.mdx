@@ -1,0 +1,107 @@
+---
+title: "如何实现业务员锁单"
+description: "场景客户下单时，如何识别是哪个业务员的订单，并对业务员的业绩进行统计与分析🔗安装方案功能了解数据来源标记https://qingflow.com/help/docs/6114c393d601550046421df9在「销售订单」应用中的拓展设置-提交设置-数据来源标记中添加，每个业务员添加一..."
+slug: "/搭建技巧/按场景分类/客户-销售/如何实现业务员锁单"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/bt5qwbb4y2e092m3?singleDoc#"
+source_updated_at: "2024-10-15T03:38:00.000Z"
+keywords:
+  - "搭建技巧"
+  - "按场景分类"
+  - "客户/销售"
+  - "如何实现业务员锁单"
+---
+### 场景
+
+客户下单时，如何识别是哪个业务员的订单，并对业务员的业绩进行统计与分析
+
+🔗[安装方案](https://qingflow.com/center/template/detail/70747000?type=3&tab=2&name=%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5)
+
+### 功能了解
+
+##### 数据来源标记
+
+[https://qingflow.com/help/docs/6114c393d601550046421df9](https://qingflow.com/help/docs/6114c393d601550046421df9)
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1638431278491-eaa69246-b5b1-4b4b-932d-5d2c7feb5d15.png)
+
+在「销售订单」应用中的拓展设置-提交设置-数据来源标记中添加，每个业务员添加一条，确认添加后每个业务员会生成一条专属的链接
+
+**如果提交设置中没有数据来源标记功能，先在轻商城-插件中心中进行安装后使用**
+
+### 搭建步骤
+
+#### 表单设置
+
+##### 「商品信息」
+
+【商品名称】：单行文字
+
+【单价】：数字
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1638430217099-7af3f019-d4ab-41b6-b65d-bc1b60580b04.png)
+
+##### 「销售订单」
+
+【客户名称】：单行文字
+
+【联系方式】：电话
+
+【地址】：地址
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1638430339785-b2368e9b-9231-4d74-aff1-6954b5c6f1e8.png)
+
+【销售明细】：表格
+
+【销售明细·商品名称】：数据关联
+
+关联应用「商品信息」中的字段【商品名称】，调取有哪些商品
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1638430699492-4faf92c9-c2a0-4194-b02d-1985bc088b67.png)
+
+【销售明细·单价】：数字-关联已有数据
+
+选择了商品名称后，单价和商品是一一对应的，用关联已有数据获取唯一值
+
+关联应用「商品信息」中的字段【单价】，筛选条件：选择的商品名称和「商品信息」中的商品名称相同
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1638430799027-5936ffac-2025-44e0-995a-a0e5add3c372.png)
+
+【销售明细·销售数量】：数字
+
+【销售明细·小计金额】：数字-设置公式
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1638431029363-4f542de2-0d4d-426b-90c0-f4c5ad53df38.png)
+
+【总金额】：数字-设置公式
+
+将小计金额求和
+
+SUM:返回所有参与字段中数值的总和
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1638431073164-bd9cd838-72db-4faf-954a-7d09c5716ca7.png)
+
+设置数据来源标记
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1638431422405-6637c98f-f9b7-4098-b9aa-a5a2ada81128.png)
+
+将每个业务员的链接发给对应人员，通过不同链接提交表单后，每条数据会有对应的数据来源内容，即对应的业务员
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1638431514768-fb5d1c39-a551-47eb-a164-60233b6368e6.png)
+
+#### 门户/报表设置
+
+在应用「销售订单」中创建报表-柱状表，按月统计每个业务员的业绩
+
+维度：申请时间、数据来源
+
+指标：数据总量
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1638432402234-aac200c6-081c-4699-89fa-931c6b5d4a00.png)
+
+创建门户，添加报表
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1638432527279-215963bc-419c-48b2-aa90-5de6c900663c.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/bt5qwbb4y2e092m3?singleDoc#)

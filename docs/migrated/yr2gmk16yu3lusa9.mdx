@@ -1,0 +1,47 @@
+---
+title: "轻流 x Siri"
+description: "应用场景轻流和Siri实现对接，依托于轻流超强的「开放连接」能力，通过Siri发起申请，智能对话式实现多种功能，打卡、请假、各类应用数据的增删改查等等。落地方案图文/视频演示帮助文档配置文档1、轻流中openapi配置首先确保当前工作区开启了openapi的功能，将accesstoken记录下..."
+slug: "/搭建技巧/按功能分类/第三方集成/siri/轻流-x-siri"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/yr2gmk16yu3lusa9?singleDoc#"
+source_updated_at: "2024-10-15T03:38:15.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "第三方集成"
+  - "Siri"
+  - "轻流 x Siri"
+---
+## 应用场景
+
+轻流和Siri实现对接，依托于轻流超强的「开放连接」能力，通过Siri发起申请，智能对话式实现多种功能，打卡、请假、各类应用数据的增删改查等等。
+
+## 落地方案
+
+![原文画板](https://cdn.nlark.com/yuque/0/2021/jpeg/2997244/1611730707950-30f463ce-9c89-4c0d-8191-bbd6425f6b9c.jpeg)
+
+## 图文/视频演示
+
+## 帮助文档
+
+配置文档
+
+## 1、轻流中openapi配置
+
+- 首先确保当前工作区开启了openapi的功能，将accesstoken记录下来
+- 获取想要查询的工作区应用的appkey
+
+## 2、iphone快捷指令配置
+
+- 创建新快捷指令-添加操作-网页-获取URl内容，在配置页面进行如下配置，需要填写accessToken和userId，以此唯一确定调用接口的用户身份
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/1638775/1609919972750-bb6feac6-b279-446e-abe5-52ccfe2ab17f.png)
+
+- 根据返回的json数据确定需要获取的数据的路径，以获取代办数据的数量为例，在快捷指令做如下配置
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/1638775/1609920231218-617be7a8-790c-4f3b-b809-7e69775cbfa4.png)
+
+- 此时已经可以点击右下角运行按钮测试结果了
+- 最后保存此快捷指令，配置好名称，就可以对Siri说话来调用这个接口了
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/yr2gmk16yu3lusa9?singleDoc#)

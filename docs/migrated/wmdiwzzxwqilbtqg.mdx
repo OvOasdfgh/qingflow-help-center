@@ -1,0 +1,152 @@
+---
+title: "创建子管理员"
+description: "创建子管理员1. 权限说明仅支持专有轻流；仅「超管accessToken」拥有调用权限。（权限组accessToken无法调用）2. 请求请求方式：POST请求地址：https://自有域名/openApi/manager/sub2.1 参数说明(路径参数)：无2.2 参数说明(查询参数)：无..."
+slug: "/帮助文档/轻代码/openapi/通讯录/子管理员/创建子管理员"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/wmdiwzzxwqilbtqg?singleDoc#"
+source_updated_at: "2024-10-15T03:35:09.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "通讯录"
+  - "子管理员"
+  - "创建子管理员"
+---
+创建子管理员
+
+---
+
+### **权限说明**
+
+仅支持专有轻流；
+
+仅「超管accessToken」拥有调用权限。（权限组accessToken无法调用）
+
+### 请求
+
+**请求方式：**POST
+
+**请求地址：**[https://自有域名/openApi/manager/sub](https://xn--eqrt2gz0rng0a/openApi/manager/sub)
+
+#### **2.1 参数说明(路径参数)：**
+
+无
+
+#### **2.2 参数说明(查询参数)：**
+
+无
+
+#### **2.3 请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看[《基本概念介绍》](https://exiao.yuque.com/ixwxsb/cqfg2y/raknagwicnl88913?singleDoc#)​ |
+
+#### **2.4 请求体（Body）**
+
+| 参数名 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| submanagerName | string |  | 子管理员名称 |
+| authMemberConfig | object |  | 子管理员成员配置。 |
+| userIds | array |  | 成员ID。 |
+| deptIds | array |  | 部门ID。 |
+| roleIds | array |  | 角色ID。 |
+| beingSubDepart | Boolean |  | 是否包含子部门 |
+| includeSubDeparts | Boolean |  | 是否动态包含已选部门下的子部门。如果depart参数有值，则必填 |
+| authAppConfig | object |  | 应用权限配置 |
+| beingAuthApp | Boolean |  | 应用权限是否开启，true：开启初始值：false |
+| beingEditApp | Boolean |  | 编辑应用是否开启，true：开启。初始值：false |
+| beingAddApp | Boolean |  | 添加应用是否开启，true：开启。初始值：false |
+| beingDelApp | Boolean |  | 删除应用是否开启，true：开启。初始值：false |
+| beingDataManage | Boolean |  | 数据管理是否开启，true：开启。初始值：false |
+| beingEditTag | Boolean |  | 应用包编辑权限 |
+| authScope | object |  | 应用/门户权限范围 |
+| appKeys | array |  | 应用key |
+| dashKeys | array |  | 仪表盘key |
+| tagIds | array |  | 应用包ID |
+| authContactConfig | object |  | 通讯录权限配置 |
+| beingAuthContact | Boolean |  | 通讯录权限是否开启，true：开启(此时部门和角色是必填项，无内容可传 \[\] )；初始值：false |
+| beingControlAll | Boolean |  | beingControlAll |
+| depts | array |  |  |
+| deptld | number |  |  |
+| deptName | string |  |  |
+| roles | array |  |  |
+| roleld | number |  |  |
+| roleName | string |  |  |
+| beingIncludeSubDept | Boolean |  | 是否包含子部门 |
+| qingStoreAuthConfig | object |  |  |
+| beingUseSolution | Boolean |  | 解决方案是否开启 |
+| beingUsePlugins | Boolean |  | 插件是否开启 |
+| beingUseConnection | Boolean |  | 连接中心是否开启 |
+
+#### **2.5 请求体示例**
+
+```json
+{
+    "subManagerName": "xxxx",
+    "authMemberConfig": {
+        "userIds": [],
+        "deptIds": [],
+        "roleIds": [],
+        "beingSubDepart": true
+    },
+    "authAppConfig": {
+        "beingAuthApp": true,
+        "beingEditApp": true,
+        "beingAddApp": true,
+        "beingDelApp": true,
+        "beingDataManage": true,
+        "beingEditTag": false,
+        "authScope": {
+            "appKeys": ['xxxxx'],
+            "dashKeys": [],
+            "tagIds": [1234567, '78903']
+        }
+    },
+    "authContactConfig": {
+        "beingAuthContact": true,
+        "beingControlAll": false,
+        "depts": [{
+            "deptId": 4,
+            "deptName": "xxxxx"
+        }],
+        "roles": [{
+            "roleId": 24,
+            "roleName": "xxxxx"
+        }],
+        "beingIncludeSubDept": false
+    },
+    "qingStoreAuthConfig": {
+        "beingUseSolution": false,
+        "beingUsePlugins": false,
+        "beingUseConnection": false
+    }
+}
+```
+
+### 返回
+
+#### 3.1 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| result | 是 | object | 返回结果 |
+| subManamerId | 是 | number | 子管理员id |
+
+#### 3.2 返回体示例
+
+```json
+{
+	"errCode": 0,
+	"errMsg": "ok",
+	"result": {
+			"subManamerId":""
+		}
+}
+```
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/wmdiwzzxwqilbtqg?singleDoc#)

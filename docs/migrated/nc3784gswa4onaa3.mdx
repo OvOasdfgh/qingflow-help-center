@@ -1,0 +1,178 @@
+---
+title: "轻流 x 钉钉--单点登录"
+description: "场景/功能描述在现代企业中，为了提高工作效率并简化用户体验，许多应用程序都提供了单点登录（Single Sign-On，简称SSO）功能，允许用户通过一个认证机制访问多个应用程序，无需重复输入账号密码。轻流 x 钉钉的单点登录功能提供了一种方便快捷的身份验证方式，用户可以通过钉钉的工作台打开轻..."
+slug: "/搭建技巧/按功能分类/第三方集成/钉钉/轻流-x-钉钉-单点登录"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/nc3784gswa4onaa3?singleDoc#"
+source_updated_at: "2024-10-15T03:38:20.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "第三方集成"
+  - "钉钉"
+  - "轻流 x 钉钉--单点登录"
+---
+### 场景/功能描述
+
+在现代企业中，为了提高工作效率并简化用户体验，许多应用程序都提供了单点登录（Single Sign-On，简称SSO）功能，允许用户通过一个认证机制访问多个应用程序，无需重复输入账号密码。
+
+轻流 x 钉钉的单点登录功能提供了一种方便快捷的身份验证方式，用户可以通过钉钉的工作台打开轻流，并自动授权登录，无需额外的账号密码验证步骤。
+
+### 文档教程
+
+> ⭐️ 相关教程 ⭐️：钉钉：https://open.dingtalk.com/document/isvapp/tutorial-enabling-login-to-third-party-websites轻流：https://qingflow.com/help/docs/6114c2d4d601550046421dc2
+
+### 配置过程
+
+#### 步骤一：前往[轻流-轻商城模块](https://qingflow.com/center/plugin/detail/22)，安装“单点登录”功能。
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1686282122019-d759c19a-d1a3-46fb-9958-a6ffe62c7e6d.png)
+
+#### 步骤二：登录[钉钉开发者后台](https://open-dev.dingtalk.com/#/index)，创建并配置应用。
+
+1. 以创建企业内部应用-H5微应用为例。
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1686281729602-423d7ac4-faad-4b2a-a9c2-5dc987eafa1c.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1686281792504-568604b4-4fb7-496f-b000-0416452507bb.png)
+
+1. 配置H5微应用相关信息，开发模式、服务器出口IP、应用首页地址等。
+
+从轻流单点登录配置界面，复制得到登录链接。
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1686282034097-f4f0f79e-5711-4a1c-9aa2-1b91b411fb63.png)
+
+在H5微应用中设置上首页地址和后台地址，填入轻流单点登录中复制的链接。
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1686282239919-ccadaf65-f84c-42fa-ba28-cc5a4a5bd384.png)
+
+#### 步骤三：添加H5微应用的接口调用权限。
+
+1.登录开发者后台-点击应用开发-企业内部应用，找到对应的应用并点击。
+
+2.单击**权限管理**进入权限管理页面，根据以下配置添加接口调用权限。
+
+（1）权限范围选择**全部员工**。
+
+（2）选择**个人权限**，申请**个人手机号信息**和**通讯录个人信息读权限。**
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1686283194546-5b642f93-370b-4460-91db-2a408dcf5409.png)​
+
+#### 步骤四：登录[钉钉开发者后台](https://open-dev.dingtalk.com/#/index)，设置上轻流网站的回调域名。
+
+回调域名设置为：**https://accounts.qingflow.com/sso/cb**
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1686290124047-fb4ce8fe-aac9-466c-94a2-879d9420e0d9.png)
+
+#### 步骤五：前往[轻流-轻商城模块](https://qingflow.com/center/plugin/detail/22)，配置“单点登录”功能。
+
+**ClientId：H5微应用的AppKey。**
+
+**ClientSecret：H5微应用的AppSecret。**
+
+**退出登录后跳转到指定页面：勾选后，退出轻流账户后将直接跳转「授权页面」，填写框内已有默认链接。**
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1686290744920-3406fef7-2ec4-4f1f-8827-6883041bdb36.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1686290953441-27f93070-6de8-4e63-89dd-02ef03139ee5.png)
+
+##### 1.请求用户授权设置
+
+> ⭐️ 相关教程 ⭐️：钉钉：https://open.dingtalk.com/document/isvapp/tutorial-enabling-login-to-third-party-websites
+
+接口地址：https://login.dingtalk.com/oauth2/auth
+
+参数设置：
+
+redirect\_uri 参数 Redirect URL
+
+response\_type	自定义 code
+
+scope 自定义 openid
+
+client\_id 参数 Client ID
+
+prompt 自定义 consent
+
+第三方登录后跳转轻流地址设置（要用authCode）：
+
+https://accounts.qingflow.com/sso/cb?state=*d28f1a47-fd01-45e8-b83b(请注意，此部分内容请勿照搬设置)-3adcfe966c99*&authCode=$AUTH\_CODE$
+
+⚠️注意：以上地址每个工作区都不一样，请勿照搬设置，填写框内已有默认链接，正常使用即可。
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1686291499496-fe886cc9-7020-4fd2-8cba-6907546710cf.png)
+
+##### 2.获取 AccessToken 配置
+
+> ⭐️ 接口文章 ⭐️获取用户token：https://open.dingtalk.com/document/isvapp/obtain-user-token
+
+接口地址：https://api.dingtalk.com/v1.0/oauth2/userAccessToken
+
+请求类型：POST
+
+参数内容编码：application/json
+
+Body设置：
+
+clientId 参数 Client ID
+
+clientSecret 参数 Client Secret
+
+code 参数 AuthCode
+
+grantType 自定义 authorization\_code
+
+返回内容解析：
+
+access\_token $.accessToken
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1686292945630-f934e938-2d54-4ca0-8728-3fb93650b355.png)
+
+##### 3.获取第三方UserId配置
+
+> ⭐️ 接口文章 ⭐️获取用户通讯录个人信息：https://open.dingtalk.com/document/isvapp/dingtalk-retrieve-user-information
+
+接口地址：https://api.dingtalk.com/v1.0/contact/users/me
+
+请求类型：GET
+
+Header 设置：
+
+x-acs-dingtalk-access-token	参数 access\_token
+
+返回内容解析：
+
+UserId $.openId
+
+用户名 $.nick
+
+邮箱 $.email
+
+手机号 $.mobile
+
+头像 $.avatarUrl
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1686294627151-3d243d56-d55e-4563-8485-060a1ea3fedf.png)
+
+#### 步骤六：H5微应用的发布。
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1686294778423-eb95f13f-2da0-4d41-91e3-5cdb90fd7101.png)
+
+### 实现效果
+
+实现了轻流和钉钉的单点登录功能后，用户只需在钉钉工作台中单击应用图标即可直接访问官网版轻流，避免了频繁输入用户名和密码的麻烦，提高了用户体验和工作效率。
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1686294905342-9b469e0b-3c66-427b-b520-23221c97d910.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1686294952817-d36d42f0-b9e0-433f-85a6-1876d1baf047.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1686294974116-770d01bb-7040-4a96-86d9-65cfbb9d446d.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1686296153602-f284932c-0e12-40d8-8765-b381bf81d238.png)
+
+### 注意事项
+
+> ⚠️ 账号绑定相关注意事项 ⚠️单点登录到轻流后，会以最后「获取第三方userid配置」中拿到的userid新建一个用户，并自动加入配置单点登录的这个工作区。如果工作区已达到人数上限,通过单点登录生成的新帐号将会被禁用并无法登录. 如果需要和已有账号绑定的话,可以在通讯录成员信息编辑弹窗中将用户的\[外部userId\]设置为对应外部帐号的\[userId\],(此信息可以询问对接的系统服务提供商),那么下次使用该\[外部userId\]登录轻流时,就可以登录这个绑定后的轻流帐号了。请不要将不同的轻流帐号绑定同一个\[外部用户id\],否则每次将随机登录一个绑定此\[外部用户id\]的轻流帐号
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/nc3784gswa4onaa3?singleDoc#)

@@ -1,0 +1,120 @@
+---
+title: "获取不在部门的成员"
+description: "调用本接口，获取不在部门的成员1. 权限说明「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有通讯录权限。2. 请求请求方式：GET请求地址：https://api.qingflow.com/user/undeparted（公有云..."
+slug: "/帮助文档/轻代码/openapi/通讯录/部门/获取不在部门的成员"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/ed38hwubl1xl1zfx?singleDoc#"
+source_updated_at: "2024-10-15T03:35:08.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "通讯录"
+  - "部门"
+  - "获取不在部门的成员"
+---
+调用本接口，获取不在部门的成员
+
+---
+
+### **权限说明**
+
+「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有通讯录权限。
+
+### 请求
+
+**请求方式：**GET
+
+**请求地址：**https://api.qingflow.com/user/undeparted（公有云版本）
+
+> 示例如下：
+
+```javascript
+POST https://api.qingflow.com/user/undeparted
+```
+
+**其他版本请求地址：**
+
+钉钉版本：[https://api.ding.qingflow.com/user/undeparted](https://api.ding.qingflow.com/user/undeparted)
+
+专有轻流：http(s)://xxx.xx(自有域名)/openApi/user/undeparted
+
+#### **请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+
+### 返回
+
+#### 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| questionRelations |  |  | 关联的设置，这里没用 |
+| result | 是 | object | 返回结果 |
+| leaderIds |  | int |  |
+| userList |  | string |  |
+| areaCode |  |  |  |
+| beingActive |  | boolean | 用户的激活状态 |
+| beingDisabled |  | boolean | 是否禁用成员 |
+| customDepartment |  | array | 自建部门id列表（仅企业微信/钉钉/飞书等特殊工作区适用） |
+| customRole |  | array | 自建角色id列表（仅企业微信/钉钉/飞书等特殊工作区适用） |
+| department |  | array | 部门id列表 |
+| email |  | string | 邮箱 |
+| headImg |  | string | 头像 |
+| mobileNum |  | string | 手机号 |
+| name |  | string | 用户名 |
+| optionId |  | int |  |
+| role |  | array | 角色id列表 |
+| userId |  | string |  |
+
+#### 返回体示例
+
+```json
+{
+    "errCode": 0,
+    "errMsg": null,
+    "questionRelations": [],
+    "result": {
+        "leaderIds": [],
+        "userList": [
+            {
+                "areaCode": "86",
+                "beingActive": true,
+                "beingDisabled": false,
+                "customDepartment": [],
+                "customRole": [],
+                "department": [],
+                "email": "972653884@qq.com",
+                "headImg": "https://file.qingflow.com/uploads/file/8ca3c4729-ab79-6e1db6c9.jpg",
+                "mobileNum": "15075983456",
+                "name": "轻流-陆",
+                "optionId": 289260,
+                "role": [],
+                "userId": "289260"
+            },
+            {
+                "areaCode": "86",
+                "beingActive": false,
+                "beingDisabled": false,
+                "customDepartment": [],
+                "customRole": [],
+                "department": [],
+                "email": "999973412@qq.com",
+                "headImg": null,
+                "mobileNum": null,
+                "name": null,
+                "optionId": 873745,
+                "role": [],
+                "userId": "873745"
+            }
+        ]
+    }
+}
+```
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/ed38hwubl1xl1zfx?singleDoc#)

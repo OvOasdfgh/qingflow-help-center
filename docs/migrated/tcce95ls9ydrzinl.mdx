@@ -1,0 +1,106 @@
+---
+title: "查询门户基本信息"
+description: "调用本接口，查询门户的基本信息1. 权限说明仅「超管accessToken」拥有调用权限。（权限组accessToken无法调用）2. 请求请求方式：GET请求地址：https://api.qingflow.com/dashes（公有云版本）其他版本请求地址：钉钉版本：https://api...."
+slug: "/帮助文档/轻代码/openapi/轻流门户接口/查询门户基本信息"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/tcce95ls9ydrzinl?singleDoc#"
+source_updated_at: "2024-10-15T03:35:13.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "轻流门户接口"
+  - "查询门户基本信息"
+---
+调用本接口，查询门户的基本信息
+
+---
+
+### **权限说明**
+
+仅「超管accessToken」拥有调用权限。（权限组accessToken无法调用）
+
+### 请求
+
+**请求方式：GET**
+
+**请求地址：**https://api.qingflow.com/dashes（公有云版本）
+
+**其他版本请求地址：**
+
+钉钉版本：[https://api.ding.qingflow.com/dashes](https://api.ding.qingflow.com/dashes)
+
+专有轻流：http(s)://xxx.xx(自有域名)/openApi/dashes
+
+##### **参数说明(查询参数)：**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| dashKey | <br /> | 门户ID，可查询指定门户的基本信息，不填则查询所有门户信息 |
+| pageSize | 是 | 每页数据条数 |
+| pageNum | 是 | 页码 |
+
+##### **请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+
+### 返回
+
+##### 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| questionRelations |  |  | 关联的设置，这里没用 |
+| result | 是 | object | 返回结果 |
+| resultAmount |  | number | 结果数量 |
+| pageAmount |  | number | 页数 |
+| pageNum |  | number | 页码 |
+| pageSize |  | number | 每页数据量 |
+| result |  | object |  |
+| dashKey |  | string | 门户ID |
+| dashName |  | string | 门户名称 |
+| dashIcon |  | string | 门户图标 |
+| dashAuth |  | number | 门户的可见权限, 1-3分别代表：工作区可查看，指定用户可见，所有人可见 |
+| authMembers |  | object | 指定用户可见的时候，可见的用户列表，不支持动态负责人 |
+| users |  | \[array\] | 用户列表 |
+| userId |  | string | 外部id |
+| userName |  | string | 用户昵称 |
+| depts |  | \[array\] | 部门列表 |
+| deptId |  | number | 外部部门id |
+| deptName |  | string | 部门名称 |
+| roles |  | \[array\] | 角色列表 |
+| roleId |  | number | 外部角色id |
+| roleName |  | string | 角色名称 |
+| creator |  | object | 门户创建者 |
+| userId |  | string | 外部id |
+| nickName |  | string | 昵称 |
+| headImg |  | string | 头像 |
+| createTime |  | string | 创建时间 |
+| tags |  | \[array\] | 应用所属的应用包 |
+| tagId |  | number | 应用包id |
+| tagName |  | string | 应用包名称 |
+| dashPublishStatus |  | number | 门户状态 |
+
+##### 返回体示例
+
+```json
+{
+	"errCode": 0,
+	"errMsg": "ok",
+	"result": {
+		"resultAmount": 10,
+		"resultFormat": "json"
+		}
+}
+```
+
+##### 错误码相关
+
+### 注意事项
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/tcce95ls9ydrzinl?singleDoc#)

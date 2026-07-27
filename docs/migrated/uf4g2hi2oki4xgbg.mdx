@@ -1,0 +1,97 @@
+---
+title: "小鹅通"
+description: "1. 介绍小鹅通是知识产品与用户服务的数字化工具，包含知识店铺、企业直播、企业培训、企微助手等多款产品，可以为有线上化经营、商业变现、私域运营、用户服务需求的企业，提供一站式技术服务，助力企业完成数字化升级。小鹅通连接器支持小鹅通店铺与其他平台之间实现数据打通。2. 鉴权信息小鹅通连接器在调用..."
+slug: "/帮助文档/轻代码/连接中心/连接器/企业服务/小鹅通"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/uf4g2hi2oki4xgbg?singleDoc#"
+source_updated_at: "2024-11-26T08:30:19.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "连接中心"
+  - "连接器"
+  - "企业服务"
+  - "小鹅通"
+---
+## 介绍
+
+小鹅通是知识产品与用户服务的数字化工具，包含知识店铺、企业直播、企业培训、企微助手等多款产品，可以为有线上化经营、商业变现、私域运营、用户服务需求的企业，提供一站式技术服务，助力企业完成数字化升级。小鹅通连接器支持小鹅通店铺与其他平台之间实现数据打通。
+
+## 鉴权信息
+
+小鹅通连接器在调用api之前需要首先获取小鹅通开放api的全局唯一接口调用凭据（access\_token），调用各接口时都需使用 access\_token。用户可以在小鹅通[**云服务控制台**](https://admin.cloud.xiaoe-tech.com/#/account)申请应用后获取所需参数，请参考以下文档。
+
+1.访问小鹅通[**云服务控制台**](https://admin.cloud.xiaoe-tech.com/#/account)；
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/GLcJtP2o4U57sAAidFIPK351XwvzfiUl_.png)
+
+2.创建应用；
+
+（1）新增应用；
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/3SgXcT1sgP-mzEuo9fHCGrOovBztqCcr_.png)
+
+（2）绑定店铺，申请授权；
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/c8O7I15HSK1MmdnmwzfmP0NXLmI-yttp_.png)
+
+（3）申请后需至店铺管理台进行确认授权；
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/iWRb8ShmNJYy45g1oOQ0wrSpACeacLHd_.png)
+
+（4）点击刚刚创建的应用，获取应用详细信息，比如client\_id、client\_secret、app\_id等；
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/LZ4Nv6ersRftWjdu1HQNEJTMLX4HBOEC_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/j3moZywTh8jAk-0CiFpvAApaWl-usBQ7_.png)
+
+（5）在连接中心对应的「小鹅通连接器」的鉴权管理中填入对应参数：app\_id对应授权店铺id、client\_id对应client\_id、secret\_key对应client\_secret、grant\_type固定填写client\_credential。
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/YXowML5CzuVOtwdge69ZPqrC5qWkCL3d_.png)
+
+### 注意事项
+
+为了提高API接口的安全性，只有在ip白名单里面的ip，才能成功获取到access\_token，否则拒绝访问。因此，调用接口前，请在[云服务控制台](https://admin.cloud.xiaoe-tech.com/#/account)中提前将服务器的ip添加到白名单中。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/R_5KicgAwvK9PGSz5wGJCoO2BlJ_AVlf_.png)
+
+## 事件信息
+
+|  | 事件 | 描述 |
+| --- | --- | --- |
+| 用户管理 | 注册新用户 | 在小鹅通平台上注册一个新用户。[https://api-doc.xiaoe-tech.com/api\_list/user/register.html](https://api-doc.xiaoe-tech.com/api_list/user/register.html) |
+|  | 获取用户列表 | 获取小鹅通平台上的用户用户列表。[https://api-doc.xiaoe-tech.com/api\_list/user/get\_user\_info\_batch.html](https://api-doc.xiaoe-tech.com/api_list/user/get_user_info_batch.html) |
+|  | 更新用户信息 | 更新小鹅通平台上的用户信息。[https://api-doc.xiaoe-tech.com/api\_list/user/update\_user\_instruction.html](https://api-doc.xiaoe-tech.com/api_list/user/update_user_instruction.html) |
+|  | 获取用户消费信息 | 查询小鹅通平台用户的消费信息，比如购买商品记录。[https://api-doc.xiaoe-tech.com/api\_list/user/get\_user\_id\_and\_consumption\_info.html](https://api-doc.xiaoe-tech.com/api_list/user/get_user_id_and_consumption_info.html) |
+|  | 查询单个用户信息 | 查询小鹅通平台单个用户的用户信息。[https://api-doc.xiaoe-tech.com/api\_list/user/get\_user\_info.html](https://api-doc.xiaoe-tech.com/api_list/user/get_user_info.html) |
+| 学习数据管理 | 获取学习记录列表 | 获取小鹅通平台的学习记录列表。[https://api-doc.xiaoe-tech.com/api\_list/user/get\_learn\_record.html](https://api-doc.xiaoe-tech.com/api_list/user/get_learn_record.html) |
+|  | 获取每日学习记录 | 获取小鹅通平台的每日学习记录。[https://api-doc.xiaoe-tech.com/api\_list/user/get\_learn\_record\_daily.html](https://api-doc.xiaoe-tech.com/api_list/user/get_learn_record_daily.html) |
+| 直播管理 | 获取直播列表 | 获取小鹅通平台的直播列表。[https://api-doc.xiaoe-tech.com/api\_list/live\_broad/xe\_alive\_list\_get.html](https://api-doc.xiaoe-tech.com/api_list/live_broad/xe_alive_list_get.html) |
+|  | 获取班课列表 | 获取小鹅通平台的班课列表。[https://api-doc.xiaoe-tech.com/api\_list/big\_class/xe\_big\_class\_list\_get.html](https://api-doc.xiaoe-tech.com/api_list/big_class/xe_big_class_list_get.html) |
+| 商品管理 | 查询商品列表 | 查询小鹅通平台的商品列表。[https://api-doc.xiaoe-tech.com/api\_list/product/get\_goods\_list.html](https://api-doc.xiaoe-tech.com/api_list/product/get_goods_list.html) |
+| 订购管理 | 查询用户订购资源列表 | 查询小鹅通平台用户订购资源列表。[https://api-doc.xiaoe-tech.com/api\_list/buy/xe\_resource\_purchase\_get.html](https://api-doc.xiaoe-tech.com/api_list/buy/xe_resource_purchase_get.html) |
+
+## 配置演示
+
+### 获取每日学习记录
+
+1、变量输入可以直接在「事件配置」里输入，成为全局默认值，其他应用选择使用该模版，对应变量都会是该值。 !!
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/oTmG1thzXRCyDzb_HJmGzIn3p8AqoAiR_.png)
+
+2、使用时，新建对应应用，选Q-Linker字段，「配置模式」选连接中心里对应模版。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/R6MCI-Q3_J7Tz1PfZnLpODyt4U1BQTWT_.png)
+
+3、绑定变量。变量可选择输入自定义值或者绑定表单字段；
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/-FaOcNP7074rXBbjSbvEemF3C1TqzGIE_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/hdBklUimTIwafxszugycSxepptjVOHd8_.png)
+
+4、根据连接中心事件的别名，以及自身业务场景，设置其他返回数据的字段。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/FpxtHnZ2G6YUqJmSmTBNb0xyrFp6Q5pq_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/WVmv6lapHuKbkZ3lk0eBWMLrdyDz11oo_.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/uf4g2hi2oki4xgbg?singleDoc#)

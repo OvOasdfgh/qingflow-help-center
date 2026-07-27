@@ -1,0 +1,85 @@
+---
+title: "快递物流查询"
+description: "场景描述每笔订单发货后，我们需要对订单的物流情况进行记录，并方便地能够查询到物流状态。解决方案通过Q-Linker我们可以轻松实现这个需求：操作步骤1.首先选择物流快递查询服务商在阿里云市场中选取合适的物流查询服务商，本次案例以此服务商为例：全国物流快递查询2.添加表单字段在轻流中新建应用，增..."
+slug: "/帮助文档/轻代码/集成中心/q-linker/q-linker使用案例/快递物流查询"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/lwlzixiiy2utcape?singleDoc#"
+source_updated_at: "2024-11-26T08:30:14.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "集成中心"
+  - "Q-Linker"
+  - "Q-Linker使用案例"
+  - "快递物流查询"
+---
+## 场景描述
+
+每笔订单发货后，我们需要对订单的物流情况进行记录，并方便地能够查询到物流状态。
+
+## 解决方案
+
+通过Q-Linker我们可以轻松实现这个需求：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/m4Qq86JI_YG57OELnJTuBPcNwkzO8N2S_.gif)
+
+## 操作步骤​
+
+1.首先选择物流快递查询服务商
+
+在阿里云市场中选取合适的物流查询服务商，本次案例以此服务商为例：[**全国物流快递查询**](https://market.aliyun.com/products/56928004/cmapi026964.html?spm=5176.2020520132.101.6.1e357218XHpNh3#sku=yuncode2096400000)
+
+2.添加表单字段
+
+在轻流中新建应用，增加运单号(单行文本类型) ，快递状态(数据关联类型) 和 Q-Linker查询按钮 ，如下图：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/V8eIOR8NmMAvd3teRtdOkkDelaa9A05h_.png)
+
+3.配置Q-Linker字段
+
+先查看API提供的使用说明，红圈是所需的必要信息，如下图：
+
+![文档图片](https://hc.qingflow.com/wp-content/uploads/2020/04/DU9yprdwTlvcHsw7.png)
+
+因此我们这样配置Q-Linker：（右侧为轻流应用中配置框）
+
+- **调用地址、请求方式、返回类型：**
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/0XYmpQn85P1Bx92HoBBUJmrWmJ8iw-o7_.png)
+
+- **请求参数（Query）配置：**（下侧为轻流应用中配置框）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/f3YFrhVmgODOCwmX56j4VgIAS7tWZ1V6_.png)
+
+- **请求参数（Header）配置：**参考[**阿里云身份认证**](https://help.aliyun.com/document_detail/157953.html?spm=5176.product-detail.content.12.29015b92cuClMq)
+
+（下侧为轻流应用中配置框）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/w_MgU4CgZd3ciscDfEtuRGrD3Kch_Nn3_.png)
+
+注意：APPCODE后面有一个空格
+
+- **Json Path: **$.list\[\*\].content
+
+别名是将用于数据关联对JSON Path对应数据的调取,不可重复；
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/8UOLl4ckkpvYgWOKPda7FvF6xqwWg5iX_.png)
+
+注意：配置好之后要注意保存，后续字段才能关联JSON Path配置的别名。
+
+4.配置相应字段用来显示结果
+
+使用数据关联字段显示运单状态，如下图：
+
+关联Q-Linker(关联)，关联字段为JSON Path中配置的别名
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/3YgPbHwIsS3tU7Rr_6DvtFW04t4lJnTu_.png)
+
+5.发布应用，并使用
+
+使用效果如图：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/qfod2E9l3-Ln3uKAURanaz4RO3CiQbNA_.gif)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/lwlzixiiy2utcape?singleDoc#)

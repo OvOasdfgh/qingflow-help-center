@@ -1,0 +1,281 @@
+---
+title: "2025-03-27功能更新日志（7.1.9版本）"
+description: "无代码1.1 【表单】表格字段恢复初始化默认行搭建应用时添加表格字段初始化恢复默认行1.2 【移动端】首页交互体验优化待办组件：调整待办组件，可查看相关数据量和状态等信息。工作区信息：新增顶部工作区信息，支持切换。首页搜索：首页新增搜索，可以搜索应用包、应用、门户等资源。资源列表：新增「最近使..."
+slug: "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2025-03-27功能更新日志-7-1-9版本"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/tcqd66sgxzv46ra4?singleDoc#"
+source_updated_at: "2025-07-09T09:28:37.000Z"
+keywords:
+  - "更新动态"
+  - "更新日志"
+  - "轻流（官网/企微/飞书/钉钉版本）"
+  - "2025-03-27功能更新日志（7.1.9版本）"
+---
+## 无代码
+
+### 1.1 【表单】表格字段恢复初始化默认行
+
+搭建应用时添加表格字段初始化恢复默认行
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/26393678/1742811088432-9db5afc4-dfcf-41d7-9ac0-2ca3fd17a62f.png)
+
+### 1.2 【移动端】首页交互体验优化
+
+- **待办组件**：调整待办组件，可查看相关数据量和状态等信息。
+- **工作区信息**：新增顶部工作区信息，支持切换。
+- **首页搜索**：首页新增搜索，可以搜索应用包、应用、门户等资源。
+- **资源列表**：新增「最近使用」「与我分享」「收藏」列表，和「我的空间」功能同步，支持直接访问分类内资源
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/33534671/1742811810450-6f442fab-c48c-442b-b752-7fd58554feda.png)![image.png](https://cdn.nlark.com/yuque/0/2025/png/33534671/1742812144705-12879279-9f8e-40ca-8d26-ea318605235c.png)
+
+### 1.3 【移动端】查看门户表格视图功能补齐
+
+- 移动端打开门户视图支持移动端适配
+- 移动端打开门户视图数据支持分享、留言、排序、筛选等功能正常使用
+
+注意：移动端查看门户视图本期暂不支持详情页自定义按钮，待移动端支持视图上线后可支持
+
+### 1.4 【门户】轻析报表&轻流视图日期筛选逻辑统一
+
+**功能优化一：日期格式筛选规则：**
+
+1. 轻析报表维度或指标中设置了该日期字段的显示格式，门户筛选组件按该设置的显示格式筛选
+2. 轻析报表维度或指标中未设置该字段的显示格式，门户筛选组件默认按照“年-月-日”格式筛选。
+
+**功能优化二：统一轻流&轻析的日期筛选逻辑**
+
+1. 按日期的结果筛选统一调整为按照轻流现有的时间筛选规则为准，比如：准备筛选“今日”的数据，筛选规则为：当前时间至当日零点
+举例：2024-12-16 15：56
+筛选的是2024-12-16 00:00:00~2024-12-16 15:56:00范围的数据
+
+**功能优化三：动态筛选范围过滤**
+
+如果存在多个报表筛选条件，日期格式始终以第一个日期字段的格式为准
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/26393678/1735116037833-27105394-b2e0-40c1-95d6-dabc01b358db.png)
+
+### 1.5 【我的空间】首页
+
+为方便用户更方便地访问工作区内的资源，现将我的空间优化页面结构，并新增了【最近访问】、【与我分享】、【收藏】三个模块。![image.png](https://cdn.nlark.com/yuque/0/2025/png/2056184/1740464940218-684d3352-de81-4056-9149-23b3d5afdb98.png)
+
+- **右上角个人区**：点击后弹出个人信息弹窗，方便用户快速查看和管理个人资料。
+- **搜索功能**：新增搜索框，用户可以搜索当前工作区权限范围内的所有资源，提升查找效率。
+- **工作区信息**：
+
+- 展示当前所处工作区的“工作区名称”及用户“成员类型”图标。
+- 点击后展示用户加入的所有工作区，并可切换工作区。外部用户身份加入的工作区也可查看。
+- 创建和加入工作区的入口统一放在下拉列表中，简化操作流程。
+- 新用户无任何工作区时，界面样式优化，引导用户快速加入工作区
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/2056184/1740467217589-ac8d5764-38e5-42f0-b32f-73ec27cc5a3d.png)
+
+- **进入工作区**：只有成员身份加入的工作区才可见该按钮，外部用户身份加入的工作区不可见。
+- **应用包**：展示成员在工作区权限范围内可见的所有应用包。
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/2056184/1740467242971-309a709f-7f06-4c19-b3d1-cf854f4d8287.png)
+
+- **最近访问**
+
+- 以表格形式展示用户访问过的应用及门户资源，按访问降时间序排列。
+- 显示字段包括“资源名称”、“资源类型”、“访问时间”，并提供分享、收藏/取消收藏、移除等操作。
+- 列操作支持搜索、排序功能，数据展示上限为20条。
+
+- **与我分享**
+
+- 以表格形式展示通过分享链接访问的资源，包括应用包、应用、门户、视图、表单。
+- 显示字段为“名称”、“类型”、“访问时间”、“分享人”，并支持分享、收藏/取消收藏、删除等操作。
+- 列操作支持搜索、排序功能。
+
+- **收藏**
+
+- 以表格形式展示用户收藏的所有资源，按访问时间降序排列。
+- 显示字段为“资源名称”、“资源类型”、“收藏时间”、“分享人”，并支持分享、收藏/取消收藏、删除等操作。
+- 列操作支持搜索、排序功能。
+
+### 1.6 【表单】数值字段新增更多货币单位
+
+本次更新在已支持货币单位的基础上，依据国际货币组织公布的货币单位信息，现已支持多达177种常用货币或交易单位，不仅支持主流及大量非常用国家货币，同时也支持贵金属及比特币单位展示。
+
+| 货币名称 | 英文名称 | 货币符号 | 货币代码 |
+| --- | --- | --- | --- |
+| 人民币 | Chinese Yuan | ¥ | CNY |
+| 美元 | United States Dollar | $ | USD |
+| 欧元 | Euro | € | EUR |
+| 英镑 | British Pound | £ | GBP |
+| 澳元 | Australia Dollar | A$ | AUD |
+| 加元 | Canadian Dollar | C$ | CAD |
+| 日元 | Japanese Yen | ¥ | JPY |
+| 港币 | Hong Kong Dollar | HK$ | HKD |
+| 印度卢比 | Indian Rupee | ₹ | INR |
+| 瑞士法郎 | Swiss Franc | CHF | CHF |
+| 新台币 | New Taiwan Dollar | NT$ | TWD |
+| 澳门元 | Macau Pataca | MOP$ | MOP |
+| 韩元 | South Korean Won | ₩ | KRW |
+| 泰铢 | Thai Baht | ฿ | THB |
+| 新西兰元 | New Zealand Dollar | NZ$ | NZD |
+| 新加坡元 | Singapore Dollar | S$ | SGD |
+| 阿联酋迪拉姆 | United Arab Emirates Dirham | د.إ | AED |
+| 阿富汗尼 | Afghan Afghani | ؋ | AFN |
+| 阿尔巴尼列克 | Albania Lek | L | ALL |
+| 亚美尼亚德拉姆 | Armenia Dramnd | ֏ | AMD |
+| 荷兰盾 | Dutch Guilder | ƒ | ANG |
+| 安哥拉宽扎 | Angola Kwanza | Kz | AOA |
+| 阿根廷比索 | Argentina Peso | $ | ARS |
+| 阿鲁巴弗罗林 | Aruba Florin | ƒ | AWG |
+| 阿塞拜疆马纳特 | Azerbaijan Manat | ₼ | AZN |
+| 波黑可兑换马克 | Bosnia Convertible Mark | KM | BAM |
+| 巴巴多斯元 | Barbados Dollar | Bds$ | BBD |
+| 孟加拉国塔卡 | Bangladesh Taka | ৳ | BDT |
+| 保加利亚列弗 | Bulgaria Lev | лв | BGN |
+| 巴林第纳尔 | Bahrain Dinar | .د.ب | BHD |
+| 布隆迪法郎 | Burundi Franc | FBu | BIF |
+| 百慕大元 | Bermudian Dollar | BD$ | BMD |
+| 文莱元 | Brunei Dollar | B$ | BND |
+| 玻利维亚诺 | Bolivian Boliviano | Bs. | BOB |
+| 巴西雷亚尔 | Brazilian Real | R$ | BRL |
+| 巴哈马元 | Bahamian Dollar | B$ | BSD |
+| 比特币 | BitCoin | ₿ | BTC |
+| 不丹努扎姆 | Bhutanese Ngultrum | Nu. | BTN |
+| 博茨瓦纳普拉 | Botswana Pula | P | BWP |
+| 白俄罗斯卢布 | Belarusian Ruble | Br | BYR |
+| 伯利兹元 | Belize Dollar | BZ$ | BZD |
+| 刚果法郎 | Congolese Franc | FC | CDF |
+| 智利比索(基金) | Chilean Unidad de Fomento | CLF | CLF |
+| 智利比索 | Chilean Peso | $ | CLP |
+| 中国离岸人民币 | Chinese Offshore Renminbi | ¥ | CNH |
+| 哥伦比亚比索 | Colombia Peso | $ | COP |
+| 哥斯达黎加科朗 | Costa Rica Colon | ₡ | CRC |
+| 古巴比索 | Cuban Peso | $ | CUP |
+| 佛得角埃斯库多 | Cape Verde Escudo | Esc | CVE |
+| 塞普路斯镑 | Cyprus Pound | £ | CYP |
+| 捷克克朗 | Czech Republic Koruna | Kč | CZK |
+| 德国马克 | Deutsche Mark | DM | DEM |
+| 吉布提法郎 | Djiboutian Franc | Fdj | DJF |
+| 丹麦克朗 | Danish Krone | kr | DKK |
+| 多米尼加比索 | Dominican Peso | RD$ | DOP |
+| 阿尔及利亚第纳尔 | Algerian Dinar | د.ج | DZD |
+| 厄瓜多尔苏克雷 | Ecuadorian Sucre | S/. | ECS |
+| 埃及镑 | Egyptian Pound | £ | EGP |
+| 厄立特里亚纳克法 | Eritrean Nakfa | Nfk | ERN |
+| 埃塞俄比亚比尔 | Ethiopian Birr | Br | ETB |
+| 斐济元 | Fiji Dollar | FJ$ | FJD |
+| 福克兰群岛镑 | Falkland Islands Pound | £ | FKP |
+| 法国法郎 | French Franc | ₣ | FRF |
+| 格鲁吉亚拉里 | Georgian Lari | ₾ | GEL |
+| 加纳塞地 | Ghanaian Cedi | GH₵ | GHS |
+| 直布罗陀镑 | Gibraltar Pound | £ | GIP |
+| 冈比亚达拉西 | Gambian Dalasi | D | GMD |
+| 几内亚法郎 | Guinean Franc | FG | GNF |
+| 危地马拉格查尔 | Guatemalan Quetzal | Q | GTQ |
+| 圭亚那元 | Guyanese Dollar | GY$ | GYD |
+| 洪都拉斯伦皮拉 | Honduran Lempira | L | HNL |
+| 克罗地亚库纳 | Croatian Kuna | kn | HRK |
+| 海地古德 | Haitian Gourde | G | HTG |
+| 匈牙利福林 | Hungarian Forint | Ft | HUF |
+| 印度尼西亚卢比 | Indonesian Rupiah | Rp | IDR |
+| 爱尔兰镑 | Irish Pound | £ | IEP |
+| 以色列新谢克尔 | Israeli New Shekel | ₪ | ILS |
+| 伊拉克第纳尔 | Iraqi Dinar | ع.د | IQD |
+| 伊朗里亚尔 | Iranian Rial | ﷼ | IRR |
+| 冰岛克郎 | Icelandic Krona | kr | ISK |
+| 意大利里拉 | Italian Lira | ₤ | ITL |
+| 牙买加元 | Jamaican Dollar | J$ | JMD |
+| 约旦第纳尔 | Jordanian Dinar | د.ا | JOD |
+| 肯尼亚先令 | Kenyan Shilling | KSh | KES |
+| 吉尔吉斯斯坦索姆 | Kyrgyzstani Som | с | KGS |
+| 柬埔寨瑞尔 | Cambodian Riel | ៛ | KHR |
+| 科摩罗法郎 | Comorian franc | CF | KMF |
+| 朝鲜元 | North Korean Won | ₩ | KPW |
+| 科威特第纳尔 | Kuwaiti Dinar | د.ك | KWD |
+| 开曼群岛元 | Cayman Islands Dollar | KY$ | KYD |
+| 哈萨克斯坦坚戈 | Kazakstani Tenge | ₸ | KZT |
+| 老挝基普 | Lao kip | ₭ | LAK |
+| 黎巴嫩镑 | Lebanese Pound | ل.ل | LBP |
+| 斯里兰卡卢比 | Sri Lankan Rupee | Rs | LKR |
+| 利比里亚元 | Liberian dollar | L$ | LRD |
+| 莱索托洛蒂 | Lesotho Loti | L | LSL |
+| 立陶宛立特 | Lithuanian Litas | Lt | LTL |
+| 拉脱维亚拉特 | Latvian Lats | Ls | LVL |
+| 利比亚第纳尔 | Libyan Dinar | ل.د | LYD |
+| 摩洛哥迪拉姆 | Moroccan Dirham | د.م. | MAD |
+| 摩尔多瓦列伊 | Moldovan Leu | L | MDL |
+| 马达加斯加阿里亚里 | Malagasy Ariary | Ar | MGA |
+| 马其顿代纳尔 | Macedonian Denar | ден | MKD |
+| 缅甸元 | Myanmar Kyat | K | MMK |
+| 蒙古图格里克 | Mongolian Tugrik | ₮ | MNT |
+| 毛里塔尼亚乌吉亚 | Mauritania Ouguiya | UM | MRO |
+| 毛里求斯卢比 | Mauritian Rupee | ₨ | MUR |
+| 马尔代夫拉菲亚 | Maldives Rufiyaa | .ރ | MVR |
+| 马拉维克瓦查 | Malawian Kwacha | MK | MWK |
+| 墨西哥比索 | Mexican Peso | $ | MXN |
+| 墨西哥(资金) | Mexican Unidad De Inversion | MXV | MXV |
+| 林吉特 | Malaysian Ringgit | RM | MYR |
+| 莫桑比克新梅蒂卡尔 | New Mozambican Metical | MT | MZN |
+| 纳米比亚元 | Namibian Dollar | N$ | NAD |
+| 尼日利亚奈拉 | Nigerian Naira | ₦ | NGN |
+| 尼加拉瓜新科多巴 | Nicaraguan Cordoba Oro | C$ | NIO |
+| 挪威克朗 | Norwegian Krone | kr | NOK |
+| 尼泊尔卢比 | Nepalese Rupee | रू | NPR |
+| 阿曼里亚尔 | Omani Rial | ر.ع. | OMR |
+| 巴拿马巴波亚 | Panamanian Balboa | B/. | PAB |
+| 秘鲁新索尔 | Peruvian Nuevo Sol | S/ | PEN |
+| 巴布亚新几内亚基那 | Papua New Guinea Kina | K | PGK |
+| 菲律宾比索 | Philippine Peso | ₱ | PHP |
+| 巴基斯坦卢比 | Pakistan Rupee | ₨ | PKR |
+| 波兰兹罗提 | Polish Zloty | zł | PLN |
+| 巴拉圭瓜拉尼 | Paraguayan Guarani | ₲ | PYG |
+| 卡塔尔里亚尔 | Qatari Riyal | ر.ق | QAR |
+| 罗马尼亚列伊 | Romanian Leu | lei | RON |
+| 塞尔维亚第纳尔 | Serbian Dinar | дин. | RSD |
+| 俄罗斯卢布 | Russian Ruble | ₽ | RUB |
+| 卢旺达法郎 | Rwandan Franc | FRw | RWF |
+| 沙特里亚尔 | Saudi Arabian Riyal | ر.س | SAR |
+| 所罗门群岛元 | Solomon Islands Dollar | SI$ | SBD |
+| 塞舌尔卢比 | Seychelles Rupee | SR | SCR |
+| 苏丹镑 | Sudanese Pound | ج.س. | SDG |
+| 瑞典克朗 | Swedish Krona | kr | SEK |
+| 圣赫勒拿镑 | Saint Helena Pound | £ | SHP |
+| 斯洛文尼亚托拉尔 | Slovenian Tolar | SIT | SIT |
+| 塞拉利昂利昂 | Sierra Leonean Leone | Le | SLL |
+| 索马里先令 | Somali Shilling | S | SOS |
+| 苏里南元 | Suriname Dollar | $ | SRD |
+| 圣多美多布拉 | Sao Tome Dobra | Db | STD |
+| 萨尔瓦多科朗 | Salvadoran Colon | ₡ | SVC |
+| 叙利亚镑 | Syrian Pound | £ | SYP |
+| 斯威士兰里兰吉尼 | Swazi Lilangeni | E | SZL |
+| 塔吉克斯坦索莫尼 | Tajikistan Somoni | SM | TJS |
+| 土库曼斯坦马纳特 | Turkmenistan Manat | m | TMT |
+| 突尼斯第纳尔 | Tunisian Dinar | د.ت | TND |
+| 汤加潘加 | Tongan Pa'Anga | T$ | TOP |
+| 土耳其里拉 | Turkish Lira | ₺ | TRY |
+| 特立尼达多巴哥元 | Trinidad and Tobago Dollar | TT$ | TTD |
+| 坦桑尼亚先令 | Tanzanian Shilling | TSh | TZS |
+| 乌克兰格里夫纳 | Ukrainian Hryvnia | ₴ | UAH |
+| 乌干达先令 | Ugandan Shilling | USh | UGX |
+| 乌拉圭比索 | Uruguayan Peso | $U | UYU |
+| 乌兹别克斯坦苏姆 | Uzbekistani Som | so'm | UZS |
+| 委内瑞拉玻利瓦尔 | Venezuelan Bolivar Fuerte | Bs.S | VEF |
+| 越南盾 | Viet Nam Dong | ₫ | VND |
+| 瓦努阿图瓦图 | Vanuatu Vatu | Vt | VUV |
+| 萨摩亚塔拉 | Samoa Tala | WS$ | WST |
+| 也门里亚尔 | Yemeni Rial | ﷼ | YER |
+| 赞比亚克瓦查 | Zambian Kwacha | ZK | ZMW |
+| 津巴布韦元 | Zimbabwean Dollar | Z$ | ZWL |
+| 南非兰特 | South African Rand | R | ZAR |
+| 中非法郎 | Central African CFA Franc | FCFA | XAF |
+| 东加勒比元 | East Caribbean Dollar | EC$ | XCD |
+| IMF特别提款权 | IMF Special Drawing Rights | SDR | XDR |
+| 西非法郎 | West African CFA | CFA | XOF |
+| 太平洋法郎 | French Pacific Franc | F | XPF |
+| 银价盎司 | Ounces of Silver | XAG | XAG |
+| 金价盎司 | Ounces of Gold | XAU | XAU |
+| 铜价盎司 | Ounces of Copper | XCU | XCP |
+| 钯价盎司 | Ounces of Palladium | XPD | XPD |
+| 珀价盎司 | Ounces of Platinum | XPT | XPT |
+| 马耳他里拉 | Malta lira | Lm | MTL |
+| 斯洛伐克克朗 | Slovak koruna | Sk | SKK |
+
+### 1.7 【安全】未通过认证工作区功能使用限制生效
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/tcqd66sgxzv46ra4?singleDoc#)

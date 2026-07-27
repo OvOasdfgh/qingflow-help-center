@@ -1,0 +1,79 @@
+---
+title: "创建外部用户"
+description: "该接口用于在通讯录中创建外部用户。权限说明限专有轻流可用。「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有通讯录的权限。路径参数无请求请求方式：POST请求地址：https://自有域名/openApi/external/use..."
+slug: "/帮助文档/轻代码/openapi/通讯录/外部用户/创建外部用户"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/zrlfwfd2k6v1w72l?singleDoc#"
+source_updated_at: "2025-11-13T10:08:09.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "通讯录"
+  - "外部用户"
+  - "创建外部用户"
+---
+该接口用于在通讯录中创建外部用户。
+
+---
+
+#### 权限说明
+
+限专有轻流可用。「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有通讯录的权限。
+
+#### 路径参数
+
+无
+
+#### 请求
+
+**请求方式：POST**
+
+**请求地址：**[https://自有域名/openApi/external/user/add](https://xn--eqrt2gz0rng0a/openApi/manager/sub)
+
+**请求头（header）**
+
+| 参数 | 类型 | 是否必须 | 说明 |
+| --- | --- | --- | --- |
+| `accessToken` | string | 是 | 调用接口凭证 |
+
+**​**
+
+**请求体（body）**
+
+| 参数 | 类型 | 是否必须 | 说明 |
+| --- | --- | --- | --- |
+| userid | string | 是 | 用户的userid |
+| nickName | string | 否 | 用户名 |
+| areaCode | string | 否 | 区号，默认为86（填写手机号时该参数必填） |
+| mobileNum | string | 否 | 手机号（手机号、邮箱二选一必填） |
+| email | string | 否 | 邮箱（邮箱避免重复）（手机号、邮箱二选一必填） |
+| headimg | string | 否 | 头像 |
+| beingDisabled | boolean | 否 | 是否禁用成员 |
+| beingCollaborator | boolean | 否 | 是否是协同用户 |
+| deptinfo | Obeject | 否 | 部门信息 |
+| deptid | long | 否 | 外部部门id |
+
+#### 返回
+
+**返回体 **
+
+| 参数 | 类型 | 是否必含 | 说明 |
+| --- | --- | --- | --- |
+| errCode | int | 是 | 错误码，非0表示失败 |
+| errMsg | string | 是 | 错误描述 |
+| result | object | 是 | 返回结果 |
+| userId | int | 是 | 用户的userId |
+| nickName | string | 是 | 用户昵称 |
+| email | string | 是 | 邮箱 |
+| headImg | string | 是 | 头像地址 |
+| mobileNum | string | 是 | 手机号和邮箱二选一必填 |
+| areaCode | string | 是 | 手机区号不需要+号（例如 86） |
+| beingDisabled | boolean | 是 | 是否禁用 |
+| beingCollaborator | boolean | 是 | 是否开启协同 |
+| deptInfo | Object | 是 | 部门信息 |
+| name | string | - | 外部部门名称 |
+| deptId | long | 是 | 外部部门id |
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/zrlfwfd2k6v1w72l?singleDoc#)

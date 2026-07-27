@@ -1,0 +1,176 @@
+---
+title: "商品出库：根据入库日期来进行优先出库"
+description: "1. 场景/问题描述商品库存入库会有不同仓库以及对应的入库时间。现在需要根据商品的入库时间来进行出库的优先级，对应商品入库时间早的先进行出库。2. 思路逻辑代码块根据商品名称检索出所有仓库，然后根据入库时间来进行出库注意：因为是表单中执行代码块，所以需要避免并发的情况，即同时发起数据，可能会出..."
+slug: "/搭建技巧/按场景分类/进销存-仓库/商品出库-根据入库日期来进行优先出库"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/nhbn0pyl8vwg2rkp?singleDoc#"
+source_updated_at: "2024-10-15T03:37:59.000Z"
+keywords:
+  - "搭建技巧"
+  - "按场景分类"
+  - "进销存/仓库"
+  - "商品出库：根据入库日期来进行优先出库"
+---
+## 场景/问题描述
+
+商品库存入库会有不同仓库以及对应的入库时间。现在需要根据商品的入库时间来进行出库的优先级，对应商品入库时间早的先进行出库。
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693821188944-e6aa9c8e-eb6f-4cfd-8dd8-7486b1e52f66.png)
+
+## 思路逻辑
+
+代码块根据商品名称检索出所有仓库，然后根据入库时间来进行出库
+
+​
+
+注意：因为是表单中执行代码块，所以需要避免并发的情况，即同时发起数据，可能会出现出库出错的情况。
+
+代码块节点功能上线会解决优化
+
+## 配置过程
+
+### 表单设计
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693821096163-50fbf4a9-6c36-4017-a79a-f40df06817e2.png)
+
+### 代码与测试
+
+#### 代码注释
+
+table：商品出库表格
+
+url：轻流获取应用数据接口地址
+
+pageSize：可以设置大些，具体根据具体应用数据量而定，由于产品明细表中数据量只有6条，所以写了50
+
+accessToken：拓展插件——openAPI——超管token
+
+queid:这里的字段为【产品明细表】中的产品名称、库存、仓库、入库时间
+
+queid的获取方式：[https://exiao.yuque.com/rlf3k1/oanb79/ub34vw3b7cdqvovg?singleDoc#](https://exiao.yuque.com/rlf3k1/oanb79/ub34vw3b7cdqvovg?singleDoc#) 《调用添加数据接口，如何写body内容》
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693821335247-f4b67e34-c250-440d-a6fc-aab4b998f6d1.png)
+
+field\_163830122：为商品出库表格的出库数量表格字段ID
+
+field\_163829844：为商品出库表格的产品名称表格字段ID
+
+field\_id获取方式[https://exiao.yuque.com/rlf3k1/oanb79/ml0u7lgb3wa0vhiz?singleDoc#](https://exiao.yuque.com/rlf3k1/oanb79/ml0u7lgb3wa0vhiz?singleDoc#) 《如何在代码块中分辨表格的不同列》
+
+库存总剩余量字段的作用：当出库数量大于库存总数时，就会为负数，这时候可以用来提交校验，如果存在负数需要让申请人检查出库数量
+
+校验方法：
+
+[https://exiao.yuque.com/rlf3k1/oanb79/mp3eoimtb65dqrof?singleDoc#](https://exiao.yuque.com/rlf3k1/oanb79/mp3eoimtb65dqrof?singleDoc#) 《商品出库，如何使得出库后库存不允许为负数？》
+
+```javascript
+const axios = require('axios');
+
+const table =qf_field.{商品出库$$175B6EEBB$$};
+
+let data = JSON.stringify({
+  "pageSize": "50",
+  "pageNum": "1"
+});
+
+let config = {
+  method: 'post',
+  maxBodyLength: Infinity,
+  url: 'https://api.qingflow.com/app/452cc547/apply/filter',
+  headers: {
+    'accessToken': '8121b22f-40b4-40d6-a8cf-a863962ef**8',
+    'Content-Type': 'application/json'
+  },
+  data: data
+};
+
+axios(config)
+  .then(function (res) {
+    var msg = res.data;
+    var result = msg.result.result;
+    var res_list = [];
+    var res_dict = new Map();
+    result.map((value, index) => {
+      res_msg = new Map();
+      answers = value.answers;
+      answers.map((value, index) => {
+        var queId = value.queId;
+        var queTitle = value.queTitle;
+        if (queId == 159268601) {
+          var values = value.values;
+          dataValue = values[0].dataValue;
+          res_msg[queTitle] = dataValue;
+        }
+        if (queId == 159268602) {
+          var values = value.values;
+          dataValue = values[0].dataValue;
+          res_msg[queTitle] = dataValue;
+        }
+        if (queId == 163824252) {
+          var values = value.values;
+          dataValue = values[0].dataValue;
+          res_msg[queTitle] = dataValue;
+        }
+        if (queId == 163824253) {
+          var values = value.values;
+          var dataValue = values[0].dataValue;
+          res_msg[queTitle] = dataValue;
+          res_list.push(res_msg);
+        }
+      });
+    });
+
+     let res_table = JSON.parse(JSON.stringify(res_list));
+    for (const item of table) {
+      let quantityLeft = parseInt(item['field_163830122']);
+  
+      for (const res of res_table) {
+        if (res['产品名称'] === item['field_163829844'] && quantityLeft > 0) {
+          const stock = parseInt(res['库存']);
+          const quantityToRelease = Math.min(quantityLeft, stock);
+      
+          quantityLeft -= quantityToRelease;
+          res['库存'] = (stock - quantityToRelease).toString();
+        }
+      }
+    }
+     // 计算库存总剩余量
+for (const item of res_table) {
+    let quantityLeft = 0; // 初始化库存剩余量为0
+    
+    for (const res of res_list) {
+      if (res['产品名称'] === item['产品名称']) {
+        quantityLeft += parseInt(res['库存']);
+      }
+    }
+    
+    for (const innerItem of table) {
+      if (innerItem['field_163829844'] === item['产品名称']) {
+        quantityLeft -= parseInt(innerItem['field_163830122']);
+      }
+    }
+  
+    item['库存总剩余量'] = quantityLeft.toString();
+  }
+    qf_output={res_table}
+  });
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693821745003-05acba6d-3f95-4765-9d35-0eed763d7373.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693821758813-ed9706b6-71a6-4d33-b118-08e0013ae641.png)
+
+#### 解析规则配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693821769524-273f4233-fbed-4976-a4ab-29d790fad91e.png)
+
+#### 字段接收配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693821898315-e2f6e6fa-9bfb-4db8-b4f6-d563e79bbbdf.png)
+
+## 实现效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693822120869-1bafb066-aee8-4a62-886a-cb16e7721adc.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/nhbn0pyl8vwg2rkp?singleDoc#)

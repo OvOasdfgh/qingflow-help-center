@@ -1,0 +1,64 @@
+---
+title: "心知天气"
+description: "1. 介绍心知天气是中国气象局官方授权的商业气象服务公司，基于气象数值预报和人工智能技术，提供高精度气象数据、天气监控机器人、气象数据可视化产品，以及能源、电力、保险、农业、交通、互联网、物联网行业解决方案。2. 鉴权信息目前心知天气采用“私钥” 直接请求的方式进行鉴权，具体步骤如下：1、首先..."
+slug: "/帮助文档/轻代码/连接中心/连接器/企业服务/心知天气"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/ynpgc51xgsdw6t8u?singleDoc#"
+source_updated_at: "2024-11-26T08:30:19.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "连接中心"
+  - "连接器"
+  - "企业服务"
+  - "心知天气"
+---
+### 介绍
+
+心知天气是中国气象局官方授权的商业气象服务公司，基于气象数值预报和人工智能技术，提供高精度气象数据、天气监控机器人、气象数据可视化产品，以及能源、电力、保险、农业、交通、互联网、物联网行业解决方案。
+
+### 鉴权信息
+
+目前心知天气采用“私钥” 直接请求的方式进行鉴权，具体步骤如下：
+
+1、首先需要在心知天气官网注册账号并购买产品，而后在控制台-产品管理中查看并复制产品的私钥。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/1ykdGScp04zcCtDSC8apsUwD3wH3YF6S_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/TAjj5e-xx9Y7v3EH76mejfGFZEancA1a_.png)
+
+2、然后在轻流-连接中心-心知天气连接器鉴权管理中输入私钥。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/zCv_abyPj9X4GX6Bv0-laApQbwFYDv7B_.png)
+
+#### 注意事项
+
+不同等级的产品具有不同的调用数据权限及访问频率限制，请按需购买并配置。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/-1W-VQtxttobqg1gYxNM3ubZQ8QrYIF7_.png)
+
+### 事件信息
+
+| 事件 | 描述 |
+| --- | --- |
+| 天气实况查询 | 获取指定城市的天气实况。付费用户可获取全部数据，免费用户只返回天气现象文字、代码和气温 3 项数据。注：中国城市暂不支持云量和露点温度。详情可见心知天气-天气实况 |
+
+### 配置演示
+
+#### 天气实况查询
+
+1、首先可在连接中心查看该事件对应的变量与别名，以便对照建立表单。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/RR-DnSuFV0hybAFcAc4Ju3LSjnX23Qf__.png)
+
+2、根据在编辑应用-表单设计页面选择Q-Linker字段，配置方式选择相应连接器与事件，并将表单字段与变量和别名进行绑定。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/AUMydBEz0ez_LSOQy6yv95XmhqmD8K8L_.png)
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/nMhd_pIaE8WlvvcQO82RLOvag83JNUkX_.png)
+
+3、保存应用并发布，即可正常使用，最终效果如下。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/yOdoh3wGAaATPLYH87YSniEuxAQrZeFh_.gif)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/ynpgc51xgsdw6t8u?singleDoc#)

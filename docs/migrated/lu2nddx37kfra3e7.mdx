@@ -1,0 +1,94 @@
+---
+title: "案例：钉钉考勤数据同步"
+description: "场景描述客户A希望通过轻流实时获取钉钉上员工的考勤数据；解决方案针对上述场景，轻流推荐使用【Q-Source主动模式】与钉钉相关API接口进行对接，以实现实时同步员工钉钉打卡记录的目的；效果展示操作步骤第一步：查询对应钉钉API文档（获取打卡结果）的接口信息；根据API文档中的返回内容，确认在..."
+slug: "/帮助文档/轻代码/集成中心/q-sourse/q-source主动/案例-钉钉考勤数据同步"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/lu2nddx37kfra3e7?singleDoc#"
+source_updated_at: "2024-11-26T08:30:13.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "集成中心"
+  - "Q-Sourse"
+  - "Q-Source主动"
+  - "案例：钉钉考勤数据同步"
+---
+## 场景描述
+
+客户A希望通过轻流实时获取钉钉上员工的考勤数据；
+
+## 解决方案
+
+针对上述场景，轻流推荐使用【Q-Source主动模式】与钉钉相关API接口进行对接，以实现实时同步员工钉钉打卡记录的目的；
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/Cms-images/6/202111011522.gif?sign=f11a7de404e9b35bdd3bc2a67ac36806&t=1683626001)​
+
+### 效果展示
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/WnLqI_j1wzV49dQ6mpTvTnAJb1cZ_6tS_.gif)
+
+## 操作步骤
+
+### 第一步：查询对应钉钉API文档（[获取打卡结果](https://developers.dingtalk.com/document/app/open-attendance-clock-in-data)）的接口信息；
+
+根据API文档中的返回内容，确认在轻流中搭建的应用字段内容；
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/VeH1NZaiev1UteREnQr0f-8UFOx8xG5o_.png)
+
+### 第二步：搭建应用，根据想要的数据配置表单；
+
+根据API文档的【返回参数】以及你希望收集并展示的数据配置表单字段，配置完毕点击【保存】；
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/gCsm9DUXfHLgdLdzWkm55brYVRbTXpeO_.png)
+
+技巧提示：由于API接口返回的时间参数为时间戳，如果想转换为正常时间格式，需要添加一个新字段用来做时间格式转化，具体操作步骤如下：
+
+1、添加新字段，默认内容选择【通过公式计算】；
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/-kMXtF9uOaBgazf5KQjVIWT7I_H_s58H_.png)
+
+2、配置公式；
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/XkSXKTyWIV0VsUHKB2I43mlmMwk_a5qm_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/vi5wOhle_f-o7NFIEaIeMIET9KP_Dm0Q_.png)
+
+### 第三步：配置Q- Source主动模式
+
+根据API文档配置Q- Source主动，具体请参考；
+
+特别提示：
+
+1、因为请求参数里包含offset和limit，所以拉取方式需选择【偏移量拉取】；
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/jpJmXqyiRl0kIfBH5cGSTZnNGwUz_74g_.png)
+
+2、在Body中插入offset参数值：\{\{OFFSET\}\}；
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/Baj_S_EmzLoy4EFxktSQJOQKKQNg0R-v_.png)
+
+### 第四步：发布应用后点击【手动运行】查看是否成功；
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/IUE_PD7Ai0nDtlp8lz62xoXclpBJYyFs_.png)
+
+手动运行后返回应用的列表界面，查看全部数据已确认Q-Source主动模式是否运行成功；
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/6BKCIeZ6_TWhMz8iFwF5xdrB15fjloF1_.png)
+
+成功后可在全部数据中查看拉取到的打卡记录；
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/iG5IWdoarqMAoulHdMv5kmoqE37_q-2t_.png)
+
+## 注意事项
+
+1、考勤信息同步可能会出现延迟，可稍后再试。
+
+2、该接口不支持查询半年以前的数据。
+
+2、服务端API是以应用维度授权的，在调用接口前，确保已经为应用添加了接口权限。详情请参考[**权限申请**](https://developers.dingtalk.com/document/app/apply-for-permissions?spm=ding_open_doc.document.0.0.10e61f87aiUf6V#topic-1948173)。
+
+### 
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/lu2nddx37kfra3e7?singleDoc#)

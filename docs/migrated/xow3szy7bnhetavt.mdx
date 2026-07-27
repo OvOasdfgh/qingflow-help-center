@@ -1,0 +1,167 @@
+---
+title: "【旧】获取报表数据"
+description: "1. 权限说明仅对轻流老报表生效，不支持700版本后轻析报表数据获取仅专有轻流支持；「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有相应应用权限。2. 请求请求方式：POST请求地址：https://xxx.qingflow.c..."
+slug: "/帮助文档/轻代码/openapi/其他/旧-获取报表数据"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/xow3szy7bnhetavt?singleDoc#"
+source_updated_at: "2025-07-29T02:52:30.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "其他"
+  - "【旧】获取报表数据"
+---
+---
+
+## **权限说明**
+
+仅对轻流老报表生效，不支持700版本后轻析报表数据获取
+
+仅专有轻流支持；
+
+「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有相应应用权限。
+
+## 请求
+
+**请求方式：**POST
+
+**请求地址：**[https://xxx.qingflow.com/openApi/chart/:chartKey/chartData](https://xxx.qingflow.com/openApi/chart/:chartKey/chartData)
+
+> 请求地址中:chartKey和xxx.qingflow.com为需要替换的变量，根据实际获取值更新，示例如下：
+
+```javascript
+POST https://aaa.qingflow.com/openApi/chart/888888/chartData
+```
+
+#### **参数说明(路径参数)：**
+
+| 参数 | 类型 | 必须 | 说明 |
+| --- | --- | --- | --- |
+| chartKey | string | 是 | 报表的key值，获取方式参考：基本概念介绍——chartKey |
+
+#### **参数说明(查询参数)：**
+
+无
+
+#### **请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+
+#### **请求体（Body）**
+
+| 参数 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| accurateQuery | array |  | 数据表设置了查询条件时，查询条件的值 |
+| queId | number |  | 字段ID，specialQueId可见文档 |
+| searchKey | string |  | 搜索的关键词,选择类型传递optionId |
+
+#### **请求体示例**
+
+```json
+{
+    "accurateQuery": [{
+        "queId": 8888,
+        "searchKey": ""
+    }]
+}
+```
+
+## 返回
+
+#### 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | number | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| result | 是 | object | 返回结果 |
+| beingTime | 是 | boolean | 折线图/柱状图 是否按照时间类型显示 |
+| chartSeries | 是 | array |  |
+| seriesName | 是 | string | 分类（也叫系列） |
+| value | 是 | number | 时间类型，返回对应的时间戳 |
+| seriesValues | 是 | array |  |
+| rowName | 是 | string | 行名 |
+| value | 是 | number | 行高（也叫值），可能是计数的值，也可能是求和、平均值等 |
+| displayValue | 是 | string | 格式化后的值 |
+| chartHeaders | 是 | array | 汇总表的表头 |
+| value | 是 | string |  |
+| collectValues | 是 | array | 汇总表数据 |
+| value | 是 | string |  |
+| targetValue | 是 | object | 指标卡数据 |
+| ganttValue | 是 | array | 甘特图结果数据 |
+| pId | 是 | string | 甘特图的id，在最后一个维度按照申请去聚合,后端生成规则可以按照，第一级从1开始自增，第二级id为第一级+从1开始自增，第三级以此类推，哈夫曼编码 |
+| pParent | 是 | string | 父级的pId，第一级维度，这里返回0 |
+| pStart | 是 | string | 可以显示时分秒，也可以不显示，最后一级才会返回 |
+| pEnd | 是 | string | 最后一级才会返回 |
+| pName | 是 | string | 标题 |
+| applyId | 是 | number | 数据Id |
+| calendarValue | 是 | array | 仅返回查询日期中，包含数据的日期数据 |
+| date | 是 | string | 日期 |
+| dataList | 是 | array | 这个日期包含的所有数据 |
+| title | 是 | string | 数据标题 |
+
+#### 返回体示例
+
+```json
+{
+	"errCode": 0,
+	"errMsg": "",
+	"result": {
+			"beingTime": false,
+			"chartSeries": [
+					{
+							"seriesName": "",
+							"value": 0,
+							"seriesValues": [
+									{
+											"rowName": "",
+											"value": 0,
+											"displayValue": ""
+					    		}
+							]
+					}
+		],
+		"chartHeaders": [
+				{
+						"value": ""
+				}
+		],
+		"collectValues": [
+				{
+						"value": ""
+			}
+		],
+		"targetValue": {},
+		"ganttValue": [
+				{
+						"pId": "",
+						"pParent": "",
+						"pStart": "",
+						"pEnd": "",
+						"pName": "",
+						"applyId": 0
+				}
+		],
+		"calendarValue": [
+				{
+						"date": "",
+						"dataList": [
+								{
+										"title": ""
+								}
+						]
+				}
+		]
+	}
+}
+```
+
+## 
+
+---
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/xow3szy7bnhetavt?singleDoc#)

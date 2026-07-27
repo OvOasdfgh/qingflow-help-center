@@ -1,0 +1,91 @@
+---
+title: "开发前必读"
+description: "开发前须知序号注意事项备注1确保您的版本为企业版，并已在插件中心安装OpenAPI插件安装入口：轻商城-插件中心2在调用接口前，请确保已获取 API 所需的accesstoken，并加入到请求 Header 中您可以在子管理员accesstoken可通过调用文档接口获取在调用接口前，请确保您的..."
+slug: "/帮助文档/轻代码/openapi/开发前必读"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/cvrz11bbe0zg3lwp?singleDoc#"
+source_updated_at: "2024-10-15T03:35:06.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "开发前必读"
+---
+### 开发前须知
+
+| 序号 | 注意事项 | 备注 |
+| --- | --- | --- |
+| 1 | 确保您的版本为企业版，并已在插件中心安装OpenAPI插件 | 安装入口：轻商城-插件中心 |
+| 2 | 在调用接口前，请确保已获取 API 所需的accesstoken，并加入到请求 Header 中 | 您可以在子管理员accesstoken可通过调用文档接口获取 |
+|  | 在调用接口前，请确保您的accesstoken有相关权限 | 参考下方”权限说明” |
+| 3 | 在调用接口前，确保您已了解名词含义 | 文档 |
+| 4 | 在调用接口前，确保您已了解轻流公有云OpenApi调用限制（专有轻流不受限） |  |
+| 5 | 您可以使用 Postman 进行接口调试和示例代码查看。 | 文档 |
+| 6 | 您可以通过错误码表来了解排查建议 | 文档 |
+
+### 文档格式
+
+每个接口文档会按照如下格式提供信息：
+
+```latex
+权限说明
+请求：
+    请求方式
+    请求地址
+    参数说明（路径参数）
+    请求头（Header）
+	请求体（Body）
+    请求体示例
+返回：
+    返回体
+    返回体示例
+    错误码
+```
+
+#### 权限说明
+
+文档中会说明以下几点：
+
+- 该接口是否仅支持「专有轻流」调用。
+- 该接口对「权限组accessToken」的权限要求。
+
+#### 请求
+
+调用 API 的详细入参说明，参数使用方式按照 RESTFul，请求地址中不同参数位置如下例：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/5TYSWPZ5E5IlB6Eq296soE7px1JZilgK_.png)
+
+- 路径参数：需要放置在 URL 中，在文档中一般以 : 开头。
+- 请求头：需要放在 HTTP 请求的 Header 中，一般为access token。
+- 查询参数：需要在 URL 后使用 ? 进行连接，多个查询参数间以 & 分隔。
+- 请求体：需要放在 HTTP 请求的 Body 中，为 JSON 格式。
+- 请求体示例：对应接口的正确请求的样例。
+- 请求地址：公有云：[https://api.qingflow.com/xxx](https://api.qingflow.com/xxx)
+钉钉版本： [https://api.ding.qingflow.com/xxx](https://api.ding.qingflow.com/xxx)
+专有轻流: http(s)://xxx.xx(自有域名)/openApi/xxx
+
+#### 返回
+
+- 返回体：一次接口调用后，HTTP 响应中 Body 部分的内容。
+
+- 可以定时同步增删改数据
+- 绝大多数 API 的响应体结构包括 errCode、errMsg、result 三个部分。
+- **errCode**为错误码，**errMsg**为错误信息，**result**为 API 的调用结果。默认请求成功时，errCode 为 0，errMsg 为 success。result 在一些操作类 API 的返回中可能不存在。
+
+- 返回体示例：成功调用该接口结果的样例。
+- 错误码：错误调用该接口后，可能返回的错误码以及错误提示。
+
+### 注意事项
+
+查看接口与定义，请点击链接进入API总览：
+
+目前仅公开部分API，如有额外API需求，请通过下方联系方式告知我们。
+
+### 视频课程
+
+您也可以点击轻流学院的教学视频来学习如何调用轻流OPEN API。
+
+[EP4 OpenAPI调用](https://learn.qingflow.com/detail/v_60e39751e4b0151fc94d2211/3)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/cvrz11bbe0zg3lwp?singleDoc#)

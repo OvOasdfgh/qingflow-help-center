@@ -1,0 +1,88 @@
+---
+title: "获取登录用code"
+description: "1. 权限说明仅专有轻流申请开通后可用2. 请求请求方式：POST请求地址：http(s)://自有域名/openApi/user/login请求头（Header）参数必须说明accessToken是调用接口凭证。获取方法请查看“文档”注意：该accessToken为登录接口专用accessT..."
+slug: "/帮助文档/轻代码/openapi/其他/获取登录用code"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/mgcbhq556k9w76o3?singleDoc#"
+source_updated_at: "2024-10-15T03:35:13.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "其他"
+  - "获取登录用code"
+---
+### **权限说明**
+
+仅专有轻流申请开通后可用
+
+### 请求
+
+**请求方式：**POST
+
+**请求地址：**`http(s)://自有域名/openApi/user/login`
+
+##### **请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+
+> 注意：该accessToken为登录接口专用accessToken，需通过工作区id（wsId）和登录接口专用secret获取。
+
+##### **请求体（Body）**
+
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| userId | 是 | int | 用户id，详见文档 |
+
+##### **请求体示例**
+
+```json
+{
+   "userId":"USERID"
+}
+```
+
+### 返回
+
+##### 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| result | <br /> | object |  |
+| code | 是 | string | 登录用code，有效期2小时，只可用一次就会失效 |
+
+##### 返回体示例
+
+```json
+{
+    "errMsg": "0",
+    "errCode": null,
+    "result": {
+        "code": "CODE"
+    }
+}
+```
+
+### 注意事项
+
+**私有轻流登录操作步骤如下：**
+
+1、在轻流系统中获取**登录接口专用secret**。详见
+
+2、通过，由工作区id（wsid）和上一步获得的登录接口专用secret获取**登录接口专用accessToken**。工作区id的获取详见
+
+3、通过本文中接口，由上一步获得的登录接口专用accesstoken获取**登录用code。**
+
+4、将上一步获得的**登录用code**拼接至登录链接中（**https://xxxxxx（自有域名）/code-login?code=\{换取的code\}&redirectUrl=\{需要登录后跳转的地址\}**），点击即可成功登陆相应工作区。
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| code | 是 | 换取的登录code |
+| redirectUrl | 否 | 需要登录后跳转的链接地址。不拼接则跳转至首页。ps：如果需要跳转的地址也有拼接的查询参数，例如我们的数据详情页https://qingflow.com/dashboard/c5c352b9/view?applyId=147908160，则需要拼接登录链接为http://qingflow.com/code-login?code=xxxxxx&encodeRedirectUrl=true&redirectUrl=base64编码的地址其中code依旧为登录用code，encodeRedirectUrl为true，redirectUrl为编base64编码后的链接地址 |
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/mgcbhq556k9w76o3?singleDoc#)

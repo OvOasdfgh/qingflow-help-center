@@ -1,0 +1,65 @@
+---
+title: "Oracle"
+description: "1. 介绍对Oracle数据库进行增改查的操作2. 鉴权信息申请得到token之后将其配置在连接器的accesstoken中注意事项企业版客户需要试用请联系轻流技术支持申请token，试用token可以调用500次接口更高自定义程度配置，请在webhook/q-linker全局配置中自行配置，..."
+slug: "/帮助文档/轻代码/连接中心/连接器/数据处理/oracle"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/tpee2lu1y9sr5lco?singleDoc#"
+source_updated_at: "2024-11-26T08:30:18.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "连接中心"
+  - "连接器"
+  - "数据处理"
+  - "Oracle"
+---
+### 介绍
+
+对Oracle数据库进行增改查的操作
+
+### 鉴权信息
+
+申请得到token之后将其配置在连接器的accesstoken中
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/tu31Fdtk5XIgEN8Pcm_MR2B38vQMMakv_.png)
+
+##### 注意事项
+
+*企业版客户需要试用请联系轻流技术支持申请token，试用token可以调用500次接口*
+
+*更高自定义程度配置，请在webhook/q-linker全局配置中自行配置，可联系轻流技术支持*
+
+### 事件信息
+
+| 事件 | 描述 |
+| --- | --- |
+| 新增数据 | 在数据库中新增一行数据 |
+| 查询数据 | 查询数据库某表 |
+| 修改数据 | 修改数据库中某条数据 |
+
+### 配置演示
+
+##### 查询数据
+
+1.填入数据库下那个相关信息（如果涉及多个数据库请在表单设计中用字段匹配变量）
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/B3WgBAH86e_RxOCey_FAf20bwfCapaDn_.png)
+
+2.表单设计，将没设置默认值的变量 添加到表单中
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/-WJEp1UeI0sZ3byYlbPBGJCS63tEwfwO_.png)
+
+3.添加webhook节点选择连接中心模版，并将变量与字段匹配
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/H5BvqnCt1RMm32nwC0WzIn4qj78qoFFC_.png)
+
+4.在前端表单页面填好sql语句字段 例如
+
+```latex
+SELECT LastName,FirstName FROM Persons
+```
+
+### 试用申请
+
+试用版轻流用户可点击链接**免费**申请500次连接器调用次数，申请链接：[**https://qingflow.com/f/1893429e**](https://qingflow.com/f/1893429e)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/tpee2lu1y9sr5lco?singleDoc#)

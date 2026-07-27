@@ -1,0 +1,223 @@
+---
+title: "如何实现机构学员管理"
+description: "场景学生报名后编排到现有的班级中， 如果没有适合的，会新开一个班&gt;&gt;最终实现两个看板1.学生上课信息：班级和课表2.每天的课程表：课表+上课学员🔗安装方案系统逻辑搭建步骤表单设置「报名表」【报名日期】：日期-设置公式CURDATE：返回当前日期【姓名】：单行文字【联系方式】：电话【报名明细】..."
+slug: "/搭建技巧/按行业分类/教育培训/如何实现机构学员管理"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/qmakyryerh4t1uub?singleDoc#"
+source_updated_at: "2024-10-15T03:38:05.000Z"
+keywords:
+  - "搭建技巧"
+  - "按行业分类"
+  - "教育培训"
+  - "如何实现机构学员管理"
+---
+### 场景
+
+学生报名后编排到现有的班级中， 如果没有适合的，会新开一个班>>最终实现两个看板
+1.学生上课信息：班级和课表
+2.每天的课程表：课表+上课学员
+
+🔗[安装方案](https://qingflow.com/center/template/detail/e2e17762?type=3&tab=2&name=%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5)
+
+### 系统逻辑
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637222504299-e779042a-753e-44e9-8d9f-d05f58c86c1a.png)
+
+### 搭建步骤
+
+#### 表单设置
+
+##### 「报名表」
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637222585991-17128579-042d-4335-bbb4-2a4b4c946c53.png)
+
+【报名日期】：日期-设置公式
+
+*CURDATE：返回当前日期*
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637223769456-7dfe6df5-5cc9-4a60-b282-97f62fb4afd3.png)
+
+【姓名】：单行文字
+
+【联系方式】：电话
+
+【报名明细】：表格
+
+【报名明细·乐器】：下拉选择
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637224194666-7bf1fcf0-f140-4213-8771-bc69e68940be.png)
+
+##### 「班级信息」
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637226944763-6e4b70b4-0205-4ae8-9cce-8efccc3754cd.png)
+
+【班级】：单行文字
+
+【乐器】：下拉选择
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637227602527-206b88f1-dda4-4f50-ab5a-a60a218314ec.png)
+
+【班级状态】：单项选择
+
+【开班日期】【结班日期】：日期
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637227028452-23d93076-8ed2-4a17-8615-dc49515ef315.png)
+
+##### 「学员信息」
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637225057604-9fb6f404-8259-4404-a0d5-5634cd7584ef.png)
+
+【学员姓名】：单行文字
+
+【联系方式】：电话
+
+【乐器】：单行文字
+
+【班级】：数据关联-自定义按钮
+
+设置数据关联字段，关联「班级信息」应用中的字段【班级】，筛选条件：乐器相同，且班级状态!=已结束
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637225234495-02df0e12-9f4d-492f-a155-1da468a6039a.png)
+
+自定义按钮：在拓展设置中创建，触发动作-添加数据，目标应用-「班级信息」，不需要设置赋值规则
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637226109128-c1f01aed-ee6c-4376-99c6-a7bb43cb4531.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637226173028-df826e7a-c15f-4eb4-a6b0-424317b4ddbd.png)
+
+创建后在【班级】字段中添加该自定义按钮
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637226284100-1ddc39d6-47ed-4e46-98d3-5b9ac7a44ba9.png)
+
+【班级状态】：单行文字-关联已有数据
+
+关联「班级信息」应用中的字段【班级状态】，筛选条件：班级与乐器都相同
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637226394033-5d3b1b72-cf77-478e-b00c-af270fbfd638.png)
+
+##### 「教师信息」
+
+【姓名】：成员
+
+【授课乐器】：多项选择
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637293618652-958fb611-0e56-49ca-aac1-af2e6526d99e.png)
+
+##### 「课表信息」
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637293663394-eb8a1a2b-4815-4edd-b65b-ca1a14e652c4.png)
+
+【班级】：数据关联
+
+【乐器】：单行文字-关联已有数据
+
+关联「班级信息」应用中的字段【乐器】，筛选条件：班级相同
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637228195560-8984f107-7059-41ee-851d-d2f2561c83ae.png)
+
+【开班日期】：日期-关联已有数据
+
+关联「班级信息」应用中的字段【开班日期】，筛选条件：班级与乐器都相同
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637229393445-50963f41-291f-41f0-b5d1-3336c1dc03b9.png)
+
+【结班日期】：日期-关联已有数据
+
+关联「班级信息」应用中的字段【结班日期】，筛选条件：班级与乐器都相同
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637229340261-5e705e54-afc2-4e73-92dc-2db92b586101.png)
+
+【授课教师】：数据关联
+
+关联「教师信息」应用中的字段【姓名】，筛选条件：教师授课的乐器包含当前填写的乐器
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637293723027-4d5c79ba-a8ff-4c6a-a3ef-e873d3414a1d.png)
+
+【课程日期】：日期
+
+【课程时间】：下拉选择
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637229507410-377282af-1d67-4d22-87e1-33fef7bfc3d7.png)
+
+#### 流程设置
+
+在「报名表」应用中添加Q-Robot添加数据节点，将报名信息添加到学员信息中
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637229578549-6d55cd18-f963-4ad6-b72a-5767bf8c45ae.png)
+
+将报名信息添加到学员信息中后，进行班级安排
+
+添加审批节点，设置【班级】字段可编辑，其他字段仅可见
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637229872414-4a47b8ec-e3b3-474f-a016-e113276a3443.png)
+
+在「班级信息」申请人节点后添加审批节点，编辑班级状态，设置【班级】字段可编辑，其他字段仅可见，开班则将班级状态设置为“开班中”
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637230995663-61574d27-82a9-49a8-8dab-e895dbf9ecbb.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637230948290-c4457b5b-8215-45f8-967e-4af8f8f10d85.png)
+
+在高级设置中开启“流程超时”，设置流程超时提醒
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637231431089-0846c825-3586-4b2f-8c33-165d731b2977.png)
+
+在审批节点后添加Q-Robot更新数据节点，在修改完班级状态后，更新「学员信息」应用中的班级状态
+
+目标应用「学员信息」，筛选条件：班级与乐器都相同，更新【班级状态】字段
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637231188347-1f18989e-de83-4606-bc18-ea67d94f2116.png)
+
+同理，添加审批节点，编辑班级状态，设置【班级】字段可编辑，其他字段仅可见，结班后将班级状态设置为“已结束”
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637231399821-d0a969c7-2ac7-432a-91be-446d4e75c59a.png)
+
+设置流程超时提醒
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637231480224-cf51eef3-47a1-4c3b-a041-88a1ca5ee9f8.png)
+
+在审批节点后添加Q-Robot更新数据节点，在修改完班级状态后，更新「学员信息」应用中的班级状态
+
+目标应用「学员信息」，筛选条件：班级与乐器都相同，更新【班级状态】字段
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637292219185-9bbbc79c-e9f3-4a6d-85f1-eb5318208adf.png)
+
+#### 报表&门户设置
+
+在「班级信息」应用中创建报表
+
+\[今日开班班级\]，报表类型-数据表，数据筛选条件：开班日期==今日
+
+\[今日结班班级\]，报表类型-数据表，数据筛选条件：结班日期==今日
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637293987736-46ad6a81-32b5-4395-a087-ad254b4d9a55.png)
+
+在「课表信息」应用中创建报表
+
+\[课表\]，报表类型-数据表
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637312800716-7a52e1dc-4613-4e2d-beee-eb8c9a007a45.png)
+
+创建门户\[每日课表\]，机构人员进行查看
+
+添加报表，设置筛选组
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637313003846-e86bc170-27e1-4177-85ec-947698e4e7ad.png)
+
+设置课程日期的筛选条件，默认查看当天的课程表，设置系统默认：动态范围为“今日”
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637313064955-6af8ada7-fa42-4dce-8a65-38d4c8eff5f1.png)
+
+设置授课教师的筛选条件
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637313239544-7f962224-f092-436f-8871-017beeb36073.png)
+
+在「学员信息」应用中创建报表
+
+报表类型-数据表，数据筛选条件：班级状态!=已结束，设置查询条件-精确查询：学员姓名与联系方式
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1637313424855-c63ade5c-d30c-45e0-b646-6b9d1fa69623.png)
+
+创建门户\[学生课表\]，添加报表，学生可查询自己的课表
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/qmakyryerh4t1uub?singleDoc#)

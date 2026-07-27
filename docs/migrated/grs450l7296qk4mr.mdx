@@ -1,0 +1,88 @@
+---
+title: "如何实现校验表格特定行的内容必填"
+description: "1. 场景/问题描述在企业需要员工录入表单数据，其中表格默认5行，当下拉选择为符合时，第4行第5行描述内容字段不允许为空2. 思路逻辑代码块进行校验判断第4行第5行下拉选择为符合时，描述内容字段是否为空，为空输出该行描述内容为空，并用多行文本接收（表单可隐藏），然后提交校验来判断多行文本是否为..."
+slug: "/搭建技巧/按功能分类/数据管理/数据校验/如何实现校验表格特定行的内容必填"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/grs450l7296qk4mr?singleDoc#"
+source_updated_at: "2024-10-15T03:38:12.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "数据管理"
+  - "数据校验"
+  - "如何实现校验表格特定行的内容必填"
+---
+## 场景/问题描述
+
+在企业需要员工录入表单数据，其中表格默认5行，当下拉选择为符合时，第4行第5行描述内容字段不允许为空
+
+## 思路逻辑
+
+代码块进行校验判断第4行第5行下拉选择为符合时，描述内容字段是否为空，为空输出该行描述内容为空，并用多行文本接收（表单可隐藏），然后提交校验来判断多行文本是否为空，为空通过，不为空不允许通过。
+
+## 配置过程
+
+### 表单设计
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698832622913-93c0e8b8-931b-4972-84e1-ce2858e54958.png)
+
+### 代码块实现与测试
+
+```javascript
+const result = qf_field.{表格$$16378B9B2$$}
+
+let output = "";
+
+// 处理第4行和第5行
+const row4 = result[3];
+const row5 = result[4];
+
+// 判断第4行
+if (row4.field_151461171 === "符合") {
+  if (row4.field_151450611 === "" || row4.field_151450611 === null) {
+    output += "第四行描述字段内容为空\n";
+  }
+}
+
+// 判断第5行
+if (row5.field_151461171 === "符合") {
+  if (row5.field_151450611 === "" || row5.field_151450611 === null) {
+    output += "第五行描述字段内容为空\n";
+  }
+}
+qf_output={output}
+//console.log(output);
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690768586790-b1f80203-509a-46fd-acf2-ded2ca981043.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690768597445-e385f83e-7716-4401-99bf-d3dfb752de08.png)
+
+#### 解析与字段接收配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690768611371-03e2c77b-5106-4a1a-9232-e3aceed2ff32.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690768647029-6216cbf6-e2b2-4289-bee7-ec36b9cdea06.png)
+
+#### 提交校验配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690768673908-f3a431f2-1573-4d16-9fa1-cd18517b6c05.png)
+
+## 实现效果
+
+[https://qingflow.com/f/a77ead46](https://qingflow.com/f/a77ead46)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690768764162-b386c9c3-e9f1-47e7-8719-9bc52bab8a31.png)
+
+​
+
+​
+
+​
+
+​
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/grs450l7296qk4mr?singleDoc#)

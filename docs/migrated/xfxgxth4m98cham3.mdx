@@ -1,0 +1,74 @@
+---
+title: "金蝶云星空"
+description: "1. 介绍根据表单字段和筛选条件去金蝶数据库里查询数据2. 鉴权信息首先订阅连接中心连接器，并配置鉴权将申请的token填入，保存即可注意事项企业版客户需要试用请联系轻流技术支持申请token，试用token可以调用500次接口更高自定义程度配置，请在webhook/q-linker全局配置中..."
+slug: "/帮助文档/轻代码/连接中心/连接器/系统集成/金蝶云星空"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/xfxgxth4m98cham3?singleDoc#"
+source_updated_at: "2024-11-26T08:30:16.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "连接中心"
+  - "连接器"
+  - "系统集成"
+  - "金蝶云星空"
+---
+### 介绍
+
+根据表单字段和筛选条件去金蝶数据库里查询数据
+
+### 鉴权信息
+
+首先订阅连接中心连接器，并配置鉴权
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-07/TRU--Vt5evZLM9g1-qaAUOSvZ1dagTGv_.png)
+
+将申请的token填入，保存即可
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-07/gDDeRy3QPkGN1gpDCIvr8dSK6hDjoj43_.png)
+
+#### 注意事项
+
+*企业版客户需要试用请联系轻流技术支持申请token，试用token可以调用500次接口*
+
+*更高自定义程度配置，请在webhook/q-linker全局配置中自行配置，可联系轻流技术支持*
+
+### 事件信息
+
+| 事件 | 描述 |
+| --- | --- |
+| 根据表单id和字段id获取单据数据 | 根据表单id和字段id以及筛选条件查询金蝶云星空单据数据 |
+| 金蝶采购订单的保存 | 根据表单ID和字段ID进行对于金蝶采购表单的保存 |
+| 查询银行存款日记账报表 | 根据表单id和字段id实现银行存款日记账的查询报表数据功能 |
+
+### 配置演示
+
+#### 根据表单id和字段id获取数据
+
+1.根据连接中心事件所需变量设计表单
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-07/vDyESmdKqTt5YWAYzTJvrmlKAqH4xK2K_.png)
+
+*固定参数可以在这里配置默认值*
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-07/_jTG07tK_Sd6nLwyRyXCCmU-CIpEqBHi_.png)
+
+*这里要注意：最大行数、开始行索引、返回总行数和账套id四个字段需要使用数字字段*
+
+2.添加webhook节点，选择连接中心模版，并将表单中的字段和变量匹配
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-07/CyuiTuwDZukWeQTDIvhWm9dtRSRudFIJ_.png)
+
+3.绑定别名，并录入一条数据做测试
+
+注意：
+
+录入数据时过滤条件 例子：FDATE>='2021-7-1'
+
+需查询的字段key集合，格式：key1,key2 例子：FSUPPLIERID,FDATE,xxx
+
+k3cloud服务地址字段，需要后缀/k3cloud比如：[**https://xxx.ik3cloud.com/k3cloud**](https://platinumworks.ik3cloud.com/k3cloud)​
+
+### 试用申请
+
+试用版轻流用户可点击链接**免费**申请500次连接器调用次数，申请链接：[**https://qingflow.com/f/1893429e**](https://qingflow.com/f/1893429e)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/xfxgxth4m98cham3?singleDoc#)

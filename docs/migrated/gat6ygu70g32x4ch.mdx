@@ -1,0 +1,81 @@
+---
+title: "2023-10-26 功能更新日志"
+description: "无代码1.1 支持回退至逐级审批节点流程回退是指，在流程流转过程中，可以返回到之前的某个节点重新审批处理。节点负责人回退流程时，将保存他在该节点中对数据的更改，同时将流程退回到指定的节点。此次更新，支持流程回退至逐级审批节点。配置流程1、当前审批节点开启「逐级审批」和「流程回退」。2、回退范围..."
+slug: "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2023-10-26-功能更新日志"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/gat6ygu70g32x4ch?singleDoc#"
+source_updated_at: "2024-10-15T03:37:00.000Z"
+keywords:
+  - "更新动态"
+  - "更新日志"
+  - "轻流（官网/企微/飞书/钉钉版本）"
+  - "2023-10-26 功能更新日志"
+---
+## 无代码
+
+### 1.1 支持回退至逐级审批节点
+
+流程回退是指，在流程流转过程中，可以返回到之前的某个节点重新审批处理。节点负责人回退流程时，将保存他在该节点中对数据的更改，同时将流程退回到指定的节点。
+**此次更新**，支持流程回退至逐级审批节点。
+
+##### 配置流程
+
+1、当前审批节点开启「逐级审批」和「流程回退」。
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-10-23/i2c3OXfvliawIxyzEPnIS7bGDsJsz4m2_.png)
+
+2、回退范围：包含后续有回退操作的节点（根据实际情况选择之前的所有节点/上一节点/指定节点）
+被回退的数据重新提交后：选择**直达当前节点**
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-10-23/l5EDcJyp8ef3WTNJi9q6MvE1zH8Z6xOR_.png)
+
+##### 使用说明
+
+1、审批人选择回退至**逐级审批节点-指定等级**
+选择回退等级时，可展示相应等级及节点负责人，被回退的数据重新提交后，会从**相应等级开始顺序审批**。
+
+例如，某个逐级审批节点有1、2、3、4、5、6级主管，6级主管审批时将申请回退至1级主管，1级主管收到被回退的待办，重新提交后从2级开始依次审批。
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-10-23/GxUFGr2ewyGp3EXwxIHTy49h5PIzF_fu_.png)
+
+可用版本：全版本，全平台
+
+### 1.2 外部用户
+
+**此次更新**，为了满足工作区内成员与外部用户协作的场景，轻流上线了外部用户功能。「外部用户」为企业或组织提供了**对外协作的能力**，企业组织架构以外的用户能够自行注册和登录系统，以特定权限访问页面，并查看、创建、修改数据。可点此查看功能[\[帮助文档\]](https://help.qingflow.com/help-docs?type=nocode&docId=41d77edc652f40d00797ca2461f01d77&parentId=)，了解配置详情。
+
+##### 管理员设置外部用户
+
+管理员可在工作区中添加和管理外部用户，为外部用户设置权限。
+
+1、进入「通讯录」页面，选择「外部用户」。点击「添加外部用户」，即可批量添加或链接/二维码邀请外部用户。
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-10-26/TUO_MJ_wFxBWH6QzUCOmL_t3_9PqESUI_.png)
+
+2、在通讯录中点击用户列表右侧按钮，即可编辑、启用、禁用或删除外部用户。
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-10-26/RKkIdmFnP9o7TQ6pPhHxaNpkWtz-9B2i_.png)
+
+3、在应用包、应用/门户、视图等可见权限配置处，勾选「外部用户可见」。
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-10-26/cgYS4u5h-UiCyeDXIkyeslW8tsP7kRAg_.png)
+
+##### 外部用户登录使用
+
+外部用户登录后可进入相应的应用包、应用/门户或视图页面，以个人身份发起、查看及修改数据。
+
+1、用户点击进入外部**用户邀请或分享链接/二维码后**，即可注册外部用户账号（如已有账号，可以直接登录）
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-10-26/aiHxyyXfrXUFif9nhqJ6PMbPUONCpGV6_.png)
+
+2、外部用户点击资源的分享链接，可进入对应的页面，以个人身份发起、查看及修改数据
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-10-26/_NbRInJYYQVCH3lwWoA0mbNIx4LTMyLw_.png)
+
+可用版本：全版本，全平台
+
+### 1.3 报表列宽优化
+
+为方便管理员设置报表查看效果，轻流优化了报表列宽功能。列宽是指报表表头的宽度。**此次更新**，**管理员在编辑轻流报表时，修改报表列宽的设置可对所有未修改过默认列宽的用户生效** ，从而实现普通用户在查看报表时，能够获得最好的表现（避免表头显示不全，单元格显示不全等问题）。
+
+例如，下图红框为自定义列宽，蓝色为默认列宽，调整列宽可完整展示字段内容。
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-10-26/2mdgz9qVTMbn14EbNV1358hsNgVik0pS_.png)
+
+**管理员编辑报表**的列宽，会成为其他用户查看该报表时的**默认列宽**（若用户并非首次查看报表，有手动拖拽修改过列宽，则会依旧使用用户修改后的列宽呈现）；用户手动拖拽调整后的自定义列宽，只会生效**当前报表** 。
+
+可用版本：全版本，全平台
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/gat6ygu70g32x4ch?singleDoc#)

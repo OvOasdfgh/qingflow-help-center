@@ -1,0 +1,159 @@
+---
+title: "查询应用包基本信息"
+description: "调用本接口，获取应用包基本信息1. 权限说明仅「超管accessToken」拥有调用权限。（权限组accessToken无法调用）2. 请求请求方式：GET请求地址：https://api.qingflow.com/tag（公有云版本）其他版本请求地址：钉钉版本：https://api.din..."
+slug: "/帮助文档/轻代码/openapi/轻流应用包接口/查询应用包基本信息"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/vpx636gdmewp4t9u?singleDoc#"
+source_updated_at: "2024-10-15T03:35:10.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "轻流应用包接口"
+  - "查询应用包基本信息"
+---
+调用本接口，获取应用包基本信息
+
+---
+
+### **权限说明**
+
+仅「超管accessToken」拥有调用权限。（权限组accessToken无法调用）
+
+### 请求
+
+**请求方式：**GET
+
+**请求地址：**https://api.qingflow.com/tag（公有云版本）
+
+**其他版本请求地址：**
+
+钉钉版本：[https://api.ding.qingflow.com/tag](https://api.ding.qingflow.com/tag)
+
+专有轻流：http(s)://xxx.xx(自有域名)/openApi/tag
+
+##### **参数说明(查询参数)：**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| tagId |  | 应用包id，不填则查询工作区内所有应用包详细信息 |
+| pageSize | 是 | 每页数据条数 |
+| pageNum | 是 | 请求页码 |
+
+**请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+
+### 返回
+
+##### 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| questionRelations | 是 | array | 关联的设置，这里没用 |
+| result | 是 | object | 返回结果 |
+| pageNum | 是 | int | 请求页码 |
+| pageSize | 是 | int | 每页数据条数 |
+| resultAmount | 是 | int | 总数据条数 |
+| pageAmount | 是 | int | 总页数 |
+| result | 是 | array |  |
+| tagId | 是 | int | 应用包id |
+| tagName | 是 |  | 应用包名称 |
+| tagAuth | 是 | int | 应用包的可见权限, 1-2分别代表：工作区可查看、指定用户可见 |
+| authMembers |  | object | 指定用户可见的时候，可见的用户列表 |
+| users |  | array | 用户列表 |
+| userId |  | string | 用户id |
+| userName |  | string | 用户昵称 |
+| depts |  | array | 部门列表 |
+| deptId |  | int | 部门id |
+| deptName |  | string | 部门名称 |
+| roles |  | array | 角色列表 |
+| roleId |  | int | 角色id |
+| roleName |  | string | 角色名称 |
+| creator | 是 | object | 应用包创建者 |
+| userId | 是 | string | 应用包创建者的userid |
+| nickName | 是 | string | 应用包创建者的昵称 |
+| headImg | 是 | string | 应用包创建者的头像 |
+| createTime | 是 | string | 应用包的创建时间 |
+| tagIcon | 是 | string | 应用包的图标 |
+| appList | 是 | array | 应用列表（包含未发布状态应用） |
+| appKey |  | string | 应用id |
+| appName |  | string | 应用名称 |
+| dashList | 是 | array | 门户列表（包含未发布状态门户） |
+| dashKey |  | string | 门户id |
+| dashName |  | string | 门户名称 |
+
+##### 返回体示例
+
+```json
+{
+    "errCode": 0,
+    "errMsg": null,
+    "questionRelations": [],
+    "result": {
+        "pageAmount": 17,
+        "pageNum": 1,
+        "pageSize": 1,
+        "result": [
+            {
+                "appList": [
+                    {
+                        "appKey": "6029er18",
+                        "appName": "当前应用"
+                    },
+                    {
+                        "appKey": "d4dbc3ff",
+                        "appName": "目标应用"
+                    }
+                ],
+                "authMembers": {
+                    "depts": [],
+                    "roles": [],
+                    "users": [
+                        {
+                            "userId": "9050",
+                            "userName": "snow"
+                        }
+                    ]
+                },
+                "createTime": "2022-01-26T11:33:29",
+                "creator": {
+                    "headImg": "https://file.qingflow.com/assets/contact/aar1.png",
+                    "nickName": "",
+                    "userId": "6892"
+                },
+                "dashList": [
+                    {
+                        "dashKey": "fae003c3",
+                        "dashName": "门户"
+                    }
+                ],
+                "tagAuth": 2,
+                "tagIcon": "{\"icon\":null,\"iconColor\":\"qing-orange\",\"iconName\":null}",
+                "tagId": 9051,
+                "tagName": "nihao"
+            }
+        ],
+        "resultAmount": 17
+    }
+}
+```
+
+##### 错误码相关
+
+### 注意事项
+
+1、返回参数中，tagIcon参数为应用包的图标，可能的值为图片链接（自定义图标）或如下字符串：
+
+- 默认图标为橙色+首字，值为：\{"icon":null,"iconColor":"qing-orange","iconName":null\}，效果如图：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/FrJn-HWcfwbIfmrIuW4Zuor5mo5LogkT_.png)
+
+- 图标底色（iconColor）/组件（iconName）的值可参考
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/vpx636gdmewp4t9u?singleDoc#)

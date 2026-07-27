@@ -1,0 +1,82 @@
+---
+title: "Postman模版使用说明"
+description: "1. 简介为了方便开发者快速体验和测试各类接口，我们提供了第三方开发调试工具Postman的接口模板，下文将描述如何利用Postman工具来调试轻流的OpenAPI接口。2. 第一步：导入轻流Open API模版库将模板库文件导入Postman工具下载 Postman工具并导入轻流OpenAP..."
+slug: "/帮助文档/轻代码/openapi/开发前必读/postman模版使用说明"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/ssne9vpfc437oe56?singleDoc#"
+source_updated_at: "2024-10-15T03:35:06.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "开发前必读"
+  - "Postman模版使用说明"
+---
+### 简介
+
+为了方便开发者快速体验和测试各类接口，我们提供了第三方开发调试工具Postman的接口模板，下文将描述如何利用Postman工具来调试轻流的OpenAPI接口。
+
+### 第一步：导入轻流Open API模版库
+
+将模板库文件导入Postman工具
+
+> 下载 Postman工具并导入轻流OpenAPI模板库，轻流开放平台将不定期更新模板库文件。
+
+**1.下载Postman工具**
+
+你可以从[https://www.postman.com/downloads/](https://www.postman.com/downloads/) 下载postman工具并完成安装；
+
+**2.导入轻流OpenAPI模版库**
+
+下载模版压缩文件并解压到本地（**为保证模版质量，该文件会不定期更新**）；
+[轻流OPEN API.postman\_collection.json](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/8/%E8%BD%BB%E6%B5%81OPEN%20API.postman_collection(1%29.json?sign=be6aff98727a6d4584654f2188e56f2c&t=1684118720)
+
+在Postman中新建一个空白的Workspace，可见性可以选择(Personal)个人：
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/h5PEnho4_3tTfPJ8QY-8Soib2dRfj0ZG_.png)
+
+导入下载的接口模版文件——轻流OPEN API.postman\_collection.json，如下图：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/6X0pbG7IsqyCktk4zwfhjKBPl06QhLO9_.png)
+
+### 第二步：修改自己的变量
+
+**Q：什么是变量？**
+
+**A**：下图的\{\{专有\}\} 、\{\{accessToken\}\}都是变量。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/Aezl_RJxUclfj99KZuFnLaTUAQ_YWJ4N_.png)
+
+**Q：怎么修改变量？**
+
+A：配置路径如下图，变量名称可以自由设置和修改，每个变量都有一个初始值和一个当前值；根据使用情况，其中\{\{专有\}\}变量的书写格式是：xxxx.qingflow.com/（专有域名）+ openApi，如tencent.qingflow.com/openApi。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/Cms-images/A.gif?sign=29e6ead95499028663aaeb3e95c4613e&t=1683598849)
+
+**Q：什么是初始值？**
+
+**A：**
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/gAZ2_PbM1HLNGBleaziYINfHsLiLDdFs_.png)
+
+**Q：什么是当前值？**
+
+A：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/zzNuJGiXz5Buq2mEmytZEkg-YWnFTlXP_.png)
+
+**Q：为什么需要设置变量？**
+
+**A**：为了一劳永逸。设置变量后，你在测试轻流其他任何接口时，URL一栏都无需再做任何修改，可以避免重复操作，从而节省大量时间。
+
+**Q：怎么使用变量？**
+
+**A**：在任意位置插入之前设置好的变量，形式为：\{\{变量名称\}\}，该位置以后就会自动插入该变量的值。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/ur4cFDBA7PI9oJpEZoSnEf1txd1Niz3c_.gif)
+
+### 第三步：调试接口
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/Cms-images/A.gif?sign=29e6ead95499028663aaeb3e95c4613e&t=1683598849)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/ssne9vpfc437oe56?singleDoc#)

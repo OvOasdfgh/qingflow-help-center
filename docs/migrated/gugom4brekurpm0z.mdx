@@ -1,0 +1,136 @@
+---
+title: "根据成员字段获取成员信息"
+description: "1. 场景描述客户在设备巡检时需通过应用内成员的当前用户，自动填充表格内用户手机号，当有多个用户时则填充多行手机号。2. 实现思路2.1. 代码块实现通过TEXTUSER函数拿到用户的email，用代码块来调用邮箱获取用户userid的接口拿到userid，再调用userid拿到对应的成员信息..."
+slug: "/帮助文档/轻代码/openapi/通讯录/成员/根据成员字段获取成员信息"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/gugom4brekurpm0z?singleDoc#"
+source_updated_at: "2025-02-18T02:24:19.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "通讯录"
+  - "成员"
+  - "根据成员字段获取成员信息"
+---
+### 场景描述
+
+客户在设备巡检时需通过应用内成员的当前用户，自动填充表格内用户手机号，当有多个用户时则填充多行手机号。
+
+### 实现思路
+
+#### 代码块实现
+
+通过TEXTUSER函数拿到用户的email，用代码块来调用邮箱获取用户userid的接口拿到userid，再调用userid拿到对应的成员信息，填充到表格。
+
+#### 无代码实现
+
+再建一个辅助应用将每个成员对应的手机号导入数据进去后，通过关联的方式拿到对应的手机号。
+
+### 表单设计
+
+#### 代码块表单
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/38364190/1738637005781-17338ee9-25d6-463a-80b4-7bcedc42649d.png)
+
+#### 无代码表单
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/38364190/1738638252282-e1b5f279-6a06-42a8-a82e-ec41fc01871e.png)
+
+### 代码块实现方式
+
+#### 代码块内容
+
+注：7.0.0版本无需修改代码可以使用，红底黄字为替换的email字段，获取函数格式如下
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/38364190/1738642007919-bb8bb4f8-ad64-448f-b185-8ea9a5592a83.png)
+
+```javascript
+const axios = require('axios');
+
+async function getMobileNumbers() {
+  // 获取邮箱字符串，并用逗号分割成数组
+  const emailList = qf_field.{单行文字2$$33595EE90$$}
+.split(',')
+  .map(email => email.trim())
+  .filter(Boolean);
+
+// 处理每个邮箱的Promise数组
+const promises = emailList.map(async (email) => {
+  try {
+    // 第一步：通过邮箱获取用户ID
+    const userIdResponse = await axios.get(
+      `https://api.qingflow.com/user/getId?email=${email}`,
+      {
+        headers: {
+          'accessToken': 'd866db1d-79ca-42c5-9e9c-0b1ce21135d2'
+        }
+      }
+    );
+
+    // 提取用户ID
+    const userId = userIdResponse.data.result[0].userId;
+
+    // 第二步：通过用户ID获取详细信息，包括手机号码
+    const userInfoResponse = await axios.get(
+      `https://api.qingflow.com/user/${userId}`,
+      {
+        headers: {
+          'accessToken': 'd866db1d-79ca-42c5-9e9c-0b1ce21135d2'
+        }
+      }
+    );
+
+    // 提取手机号码
+    const mobileNumber = userInfoResponse.data.result.mobileNum;
+
+    // 返回处理结果
+    return {
+      field_319207055: null,
+      field_324424107: mobileNumber
+    };
+  } catch (error) {
+    // 返回null表示未找到对应的手机号
+    return {
+      field_319207055: null,
+      field_324424107: null
+    };
+  }
+});
+
+// 同时处理所有Promise
+const results = await Promise.all(promises);
+
+return {
+  key: results
+};
+}
+
+// 执行函数并输出结果
+getMobileNumbers().then(result => {
+  qf_output = result;
+});
+```
+
+#### 运行测试
+
+填入成员email，返回解析内容有手机号即为成功，如下图中配置解析，配置表格内关联别名即可
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/38364190/1738642304204-b0584723-4b66-44e5-af31-83071192ea3e.png)![image.png](https://cdn.nlark.com/yuque/0/2025/png/38364190/1738642385031-6e6ed00d-287e-42dd-bf50-8712abadb31a.png)![image.png](https://cdn.nlark.com/yuque/0/2025/png/38364190/1738642491146-719e3fac-3389-4944-a62a-5876bbb236f6.png)
+
+### 无代码实现方式
+
+#### 无代码内容
+
+新建一个辅助应用将成员字段与所需要关联的成员信息录入或导入进应用中，再通过关联方式带出成员信息。
+例如：
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/38364190/1738642853410-f0d40991-bf01-46bc-ae88-5eb3b736cb93.png)![image.png](https://cdn.nlark.com/yuque/0/2025/png/38364190/1738642884978-37741564-4193-4b81-ab62-69dd96d6f80f.png)
+
+### 实现效果
+
+#### 代码块效果
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/38364190/1738643099404-388da62c-11da-4eda-a752-71526bd625c4.png)
+
+#### 无代码效果
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/38364190/1738643150446-669a2002-5f8c-4144-8361-5b3231fcc8ab.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/gugom4brekurpm0z?singleDoc#)

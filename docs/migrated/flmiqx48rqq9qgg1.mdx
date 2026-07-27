@@ -1,0 +1,197 @@
+---
+title: "OAuth 2.0"
+description: "功能介绍1、OAuth协议OAuth协议是互联网标准协议。OAuth2.0是OAuth协议的延续版本，但不向前兼容OAuth 1.0(即完全废止了OAuth1.0)。OAuth（开放授权）是一个开放标准，允许用户让第三方应用访问该用户在某一网站上存储的私密的资源（如照片，视频，联系人列表），而..."
+slug: "/帮助文档/轻代码/集成中心/用户体系/sso/oauth-2-0"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/flmiqx48rqq9qgg1?singleDoc#"
+source_updated_at: "2024-11-26T08:30:16.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "集成中心"
+  - "用户体系"
+  - "SSO"
+  - "OAuth 2.0"
+---
+### 功能介绍
+
+#### 1、OAuth协议
+
+OAuth协议是互联网标准协议。OAuth2.0是OAuth协议的延续版本，但不向前兼容OAuth 1.0(即完全废止了OAuth1.0)。
+
+OAuth（开放授权）是一个开放标准，允许用户让第三方应用访问该用户在某一网站上存储的私密的资源（如照片，视频，联系人列表），而无需将用户名和密码提供给第三方应用。
+
+允许用户提供一个令牌，而不是用户名和密码来访问他们存放在特定服务提供商的数据。每一个令牌授权一个特定的网站（例如，视频网站)在特定的时段（例如，接下来的2小时内）内访问特定的资源（例如仅仅是某一相册中的视频）。这样，OAuth允许用户授权第三方网站访问他们存储在另外的服务提供者上的信息，而不需要分享他们的访问许可或他们数据的所有内容。
+
+详细了解可见百度百科：
+
+[OAuth2.0\_百度百科](https://baike.baidu.com/item/OAuth2.0/6788617?fr=aladdin)
+
+#### 2、单点登录
+
+单点登录（Single Sign On），简称为 SSO，其定义是在多个应用系统中，用户只需要登录一次就可以访问所有相互信任的应用系统。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/Cms-images/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62021-06-01%20%E4%B8%8A%E5%8D%8811.10.51.gif?sign=ecd4b5396ee593e100d7fb80ce622eee&t=1683620931)
+
+### 功能效果
+
+基于OAuth2.0，实现使用企业自有系统账号密码登录轻流。
+
+以「语雀」——>「轻流」为例：
+
+### 设置步骤
+
+#### 一、自有系统设置
+
+自有系统需要创建oauth应用并设置好回调地址。
+
+1、点击创建oauth应用
+
+需要在自有系统中，创建oauth协议应用。该应用的目的是：允许其他系统通过oauth协议访问该系统中的用户数据。
+
+*语雀如下（以下均以「语雀」——>「轻流」为例）：*
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/wbmrt3fmYmPL0YGzRHtk4jdBoOVd-Bfp_.png)
+
+2、填写应用信息
+
+需要在应用内填写对应回调地址。
+
+主页填写：公有云为：https://qingflow.com/arch/home，专有云和钉钉版自行确定填写。
+
+回调地址填写：公有云为：https://accounts.qingflow.com/sso/cb，专有云和钉钉版自行确定填写。
+
+*语雀「应用编辑页面」如下：*
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/dHLFmZ4cPjo4zmszJPWeE6J8cimxOi55_.png)
+
+3、获取client id和client secret
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/Wr3dUIMN4uro_frWJDBOLP91cebVNrKV_.png)
+
+#### 二、轻流中的配置
+
+配置入口：系统管理员可在「轻商城」——>「插件中心」——>「第三方连接」找到【单点登录】插件。
+
+1、填入clientid和client
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/-tkHlrlmf10fA6-T0WqQPVEbIxWhRFE8_.png)
+
+2、请求用户授权设置
+
+按照语雀的文档地址，进行对应参数配置。语雀接口文档地址：[https://www.yuque.com/yuque/developer/authorizing-oauth-apps](https://www.yuque.com/yuque/developer/authorizing-oauth-apps)
+
+语雀截图：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/217aHoXb3NKjD737hou6Fhh85FHL1nJ4_.png)
+
+轻流配置：
+
+【1】填入语雀请求用户授权接口地址
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/zF45SvVSPMsnJArNl674E9ANLYflvWyh_.png)
+
+【2】【3】选对应参数直接插入
+
+【4】参数名填入state，参数值可以自定义填入范围
+
+【5】参数名填入response\_type，参数值code
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/-WCqWujpu8zNvpVvjiTi8Ir2oIuYBlGT_.png)
+
+ps：参数配置这里，state参数不填也没事，因为回调会自动带。
+
+下方图的authCode需要根据接口文档进行更改
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/dSmkyyhWJnLZ9JK2hoA1LeHjoiJutl8B_.png)
+
+3、获取accesstoken设置
+
+语雀截图：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/p-2qaYRxMx2IaAqbIRCxd9RUhp-IGl0h_.png)
+
+轻流配置：
+
+【1】接口地址为https://www.yuque.com/oauth2/token
+
+【2】请求方法为post
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/OBXIEpYB1VBo9iyzZXW_E_XKyheOIDB3_.png)
+
+【3】【4】【5】参数名按语雀文档填写，参数值可以直接下拉选择参数
+
+【6】参数名grant\_type，参数值authorization\_code
+
+【7】回调参数名access\_token，解析jsonpath语法$.access\_token
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/tKeyhBJoclBOVD3LQ8nylmv-kWZj3NGh_.png)
+
+ps：返回内容解析部分的作用是使用jsonpath解析得到accesstoken，用于后面\[获取第三方UserId配置\]配置的参数。
+
+4、获取第三方userid配置
+
+根据Overview部分和user部分的文档,需要在轻流参数配置时，header里加入参数名为「X-Auth-Token」，参数值为上一步获取的「accesstoken」使用下拉选择直接插入参数。
+
+Overview：语雀api的整体说明[https://www.yuque.com/yuque/developer/api](https://www.yuque.com/yuque/developer/api)
+
+user：用户接口相关的api说明[https://www.yuque.com/yuque/developer/user](https://www.yuque.com/yuque/developer/user)
+
+语雀截图：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/1LEXyMDc-MtMOVwaxu5ZCMlCylcfW164_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/zaojmiE9PY_JKuXsD2PK6VjFV5NwNUik_.png)
+
+轻流配置：
+
+【1】overview文档中可见基本路径为：https://www.yuque.com/api/v2，
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/QMjLLi1EJNzWWqRxTHWXABHO-Yzk2eC9_.png)
+
+user文档中可见token获取用户信息接口为/user
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/cQYYhUviXmF5HGui133VdbZ9qDIyU7wF_.png)
+
+所以接口地址为：[https://www.yuque.com/api/v2/user](https://www.yuque.com/api/v2/user)
+
+【2】user文档里可见，方法为get
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/gwTiS6ZEbXHdO58LD9a4VEiZFcT119G__.png)
+
+【3】overview文档中可见api接口需要header中插入accesstoken验证用户身份才能访问。所以这里参数名为X-Auth-Token，参数值为下拉选择accesstoken
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/orYpxh2k7bLt940TX42d70fQC25aS5ZP_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/0N0BQ0oj_SJU7F5PYrHDCNfH0nqfesQ4_.png)
+
+【4】【5】【6】根据语雀截图，知道获取用户信息接口返回的内容。则可根据返回json写对应的jsonpath
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/jLrUTaLvipPl6Mny-NPw7sUgXQGcej5q_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/dErzkwVD8S8cJdkX173cRfHpTPjWIfAJ_.png)
+
+jsonpath语法：只需会基础的就可以[**https://blog.csdn.net/roc1010/article/details/90812130**](https://blog.csdn.net/roc1010/article/details/90812130)
+
+5、配置结束，登录路径
+
+点击「保存」后，回到最上方的「登录链接」部分，复制链接并在浏览器打开即可跳转自有系统登录页面，效果可见【功能效果】部分
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/tL0ORQziGx8-cwnVF2wcFdBF3ogqHsjx_.png)
+
+### 注意事项
+
+静默授权相关：
+
+- 语雀那边，如果复制链接后，打开链接的浏览器内已登录语雀账号，则不需要输入账号密码，可以直接跳转授权确认页面。
+
+账号绑定相关：
+
+- 单点登录到轻流后，会以最后「获取第三方userid配置」中拿到的userid新建一个用户，并自动加入配置单点登录的这个工作区。
+- 如果工作区已达到人数上限,通过单点登录生成的新帐号将会被禁用并无法登录.
+- 如果需要和已有账号绑定的话,可以在通讯录成员信息编辑弹窗中将用户的\[外部userId\]设置为对应外部帐号的\[userId\],(此信息可以询问对接的系统服务提供商),那么下次使用该\[外部userId\]登录轻流时,就可以登录这个绑定后的轻流帐号了。
+- 请不要将不同的轻流帐号绑定同一个\[外部用户id\],否则每次将随机登录一个绑定此\[外部用户id\]的轻流帐号
+
+![文档图片](https://hc.qingflow.com/wp-content/uploads/2019/11/image-16.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/flmiqx48rqq9qgg1?singleDoc#)

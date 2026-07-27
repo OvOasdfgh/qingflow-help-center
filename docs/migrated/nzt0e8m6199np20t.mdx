@@ -1,0 +1,632 @@
+---
+title: "如何实现会议室预约？"
+description: "1. 场景描述使用轻流系统实现会议室预约场景，满足会议室被占用期间不可被预约，以及取消后需要将该会议室该时段需要被释放出来。预约会议室实现要求1、会议室被占用期间不可被预约2、取消后需要将该会议室该时段需要被释放出来3、会议室预约时间至少30分钟起步（可修改）4、会议室预约时间不可预约之前时间..."
+slug: "/搭建技巧/按场景分类/人事-行政/如何实现会议室预约"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/nzt0e8m6199np20t?singleDoc#"
+source_updated_at: "2024-10-15T03:38:01.000Z"
+keywords:
+  - "搭建技巧"
+  - "按场景分类"
+  - "人事/行政"
+  - "如何实现会议室预约？"
+---
+## 场景描述
+
+使用轻流系统实现会议室预约场景，满足会议室被占用期间不可被预约，以及取消后需要将该会议室该时段需要被释放出来。
+
+**预约会议室实现要求**
+
+1、会议室被占用期间不可被预约
+
+2、取消后需要将该会议室该时段需要被释放出来
+
+3、会议室预约时间至少30分钟起步（可修改）
+
+4、会议室预约时间不可预约之前时间
+
+5、会议室预约时间需要以5分钟为精度（可修改）
+
+## 思路逻辑
+
+具体使用代码块来完成遇上预约会议室要求。其中需要调用OpenApi获取自身应用数据的会议室以及预约会议室起止时间，然后拿发起新数据的会议室以及预约会议室起止时间来跟自身应用的数据进行对比。
+
+如果当前会议室的预约时间跟自身应用数据的历史会议时间有冲突就会无法提交预约
+
+​
+
+注意：因为是跟自身应用做比较的，所以可能会存在并发的情况。所以请避免同时发起预约同一时段。
+
+后续代码块节点功能上线可解决。
+
+## 配置过程
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695005439795-024668bc-e6fd-453d-a094-942559980473.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695005449444-241dde44-4f12-49d3-8f97-3c287bd93651.png)
+
+其中，【校验时段是否被占用】、【显示该会议室预约情况】、【校验时段时分能被5整除】、【今天会议室预约情况】为代码块
+
+### 表单字段的设计
+
+#### 预约会议起止时间，格式为年月日时分
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695005377126-2b6f2d06-0566-4992-958c-62de889a200d.png)
+
+#### 预约开始日期（校验）
+
+含义：获取预约会议起止时间字段的开始日期，格式为年月日时分时分秒
+
+公式：LEFT(预约会议起止时间,16)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694750441763-74465d9d-608a-49fe-9852-1fb5b54279ae.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695005360665-e9460f3c-0555-4066-8db5-3e7e41c40d1a.png)
+
+#### 预约结束日期（校验）
+
+含义：获取预约会议起止时间字段的结束日期，格式为年月日时分
+
+公式：RIGHT(预约会议起止时间,16)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694750524967-34c52211-742d-40bc-9f17-a4f89f67bf02.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695005342634-5524eb06-6c10-4343-acfe-6ae814ffa068.png)
+
+#### 预约开始日期（筛选）
+
+含义：获取预约会议起止时间字段的开始日期，格式年月日
+
+公式：LEFT(预约会议起止时间,10)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694750664653-5a79b520-9f6e-4098-a410-073e61cb54ff.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695005226484-6e2f9cf7-fb97-4bbc-a2dd-a3c87cafeb37.png)
+
+#### 预约结束日期（筛选）
+
+含义：获取预约会议起止时间字段的结束日期，格式年月日时分秒
+
+公式：MID(预约会议起止时间,18,10)![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694750710236-4853a221-4770-4e4a-a264-5e9b8856a82b.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695005209528-7f2f9f37-3109-4f56-bbbe-cbea402b73a0.png)
+
+#### 预约人
+
+预约人设置为当前用户，然后字段可以设置为仅可见
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695005187908-b0987747-b55b-4710-b195-24e186f9f58e.png)
+
+#### 校验时段是否被占用
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695005153780-67d61ff9-37e3-42cc-9238-c05bb6d385df.png)
+
+##### 代码注释
+
+1. 代码中，【会议室】以及【预约会议起止时间】表示会议室预约表单中的对应的字段名称
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694750877868-7dcfca72-ed51-4dd8-bba7-36e37fd238a4.png)
+
+2、URL为获取应用数据接口，文档参考：[https://help.qingflow.com/help-docs?type=qingCode&docId=fc8e64656428ea3a06fe9b406b9b7be9&parentId=](https://help.qingflow.com/help-docs?type=qingCode&docId=fc8e64656428ea3a06fe9b406b9b7be9&parentId=)
+
+queid为【会议室预约】应用的会议室以及预约起止时间的字段ID
+
+queid的获取方式：[https://exiao.yuque.com/rlf3k1/oanb79/ub34vw3b7cdqvovg?singleDoc#](https://exiao.yuque.com/rlf3k1/oanb79/ub34vw3b7cdqvovg?singleDoc#) 《调用添加数据接口，如何写body内容》
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694756003557-f0ad8568-1074-4505-9003-244ed979ba28.png)
+
+3、 qf\_field.\{预约会议起止时间$$178A98D01$$\}以及qf\_field.\{会议室$$178A8997A$$\}：替换成表单对应的字段
+
+##### 完整代码
+
+```javascript
+const axios = require('axios');
+
+function isOverlap(date, startTime, endTime) {
+    const [start, end] = date.split('~');
+  
+    if (startTime <= start && start <= endTime) {
+      return true;
+    }
+  
+    if (startTime <= end && end <= endTime) {
+      return true;
+    }
+  
+    if (start <= startTime && endTime <= end) {
+      return true;
+    }
+  
+    return false;
+  }
+  
+  function checkAvailability(date, room, reslist) {
+    const filteredResList = reslist.filter(item => item['会议室'] === room);
+  
+    for (const item of filteredResList) {
+      const [reservationStart, reservationEnd] = item['预约会议起止时间'].split('~');
+      const overlap = isOverlap(date, reservationStart, reservationEnd);
+  
+      if (overlap) {
+        return false; // 时间区间已被覆盖
+      }
+    }
+  
+    return true; // 时间区间可用
+  }
+  
+  
+
+// 调用接口获取reslist
+async function fetchData() {
+  
+    const data = JSON.stringify({
+      "pageSize": "50",
+      "pageNum": "1"
+    });
+
+    const config = {
+      method: 'post',
+      url: 'https://api.qingflow.com/app/16365e01/apply/filter',
+      headers: {
+        'accessToken': 'd866db1d-79ca-42c5-9e9c-0b1ce21135d2',
+        'Content-Type': 'application/json'
+      },
+      data: data
+    };
+
+    const res = await axios(config);
+    const msg = res.data;
+    const result = msg.result.result;
+
+    const reslist = result.map(value => {
+      const res_msg = {};
+
+      value.answers.forEach(v => {
+        const queId = v.queId;
+        const queTitle = v.queTitle;
+
+        if (queId === 166744302 || queId === 166753788) {
+          const values = v.values;
+          const dataValue = values[0].dataValue;
+          res_msg[queTitle] = dataValue;
+        }
+      });
+
+      return res_msg;
+    });
+
+    const date = qf_field.{预约会议起止时间$$178A98D01$$}; // 添加一个判断条件，若为null，则isAvailable为true
+    const room = qf_field.{会议室$$178A8997A$$};
+    const isAvailable = (date === null) ? true : await checkAvailability(date, room, reslist);
+    qf_output={isAvailable}
+    //console.log(isAvailable);
+  
+}
+
+fetchData();
+```
+
+##### 代码测试
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694756785412-fa12e321-06c7-4660-98b5-09e8739efcf9.png)
+
+##### 解析规则配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694756795154-36943c58-2160-4dd9-912f-bf66e9328176.png)
+
+##### 字段接收配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695005124526-c0f02869-cc68-491e-b67a-2f1a7ef89524.png)
+
+#### 预约时间是否没有被占用
+
+该字段需要配置逻辑表单
+
+作用：当预约时段被占用的话，就显示对应字段，展示具体对应会议室当前日期的占用情况
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694763491564-34edb78e-d383-4d0c-a20d-9d9dec39ff5c.png)
+
+#### 显示该会议室预约情况
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695005096939-f6a82b7a-70c4-4027-8203-382361900664.png)
+
+##### 代码注释
+
+1、qf\_field.\{会议室$$178A8997A$$\}、qf\_field.\{预约开始日期（筛选）$$1793BA08D$$\}、qf\_field.\{预约结束日期（筛选）$$1793BA08E$$\}对应【会议室】应用表单的对应字段
+
+2、这里的queid对应分别是会议室字段的queid，以及预约开始日期（筛选）的queid
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695004827712-b1a2e6c9-2b9f-4608-a2f7-22782aa4dd29.png)
+
+##### 完整代码
+
+```javascript
+const axios = require('axios');
+
+let key = qf_field.{会议室$$178A8997A$$};  // 定义变量 'key' 并将其设置为 null
+
+// 检查 key 是否为 null。如果为 true，则输出一个空数组到控制台
+if (key === null) {
+ //return [];
+ const reslist=[];
+ qf_output={reslist}
+} else {
+  let data = JSON.stringify({
+    "pageSize": "50",
+    "pageNum": "1",
+    "queries": [
+        {
+            "queId": 166744302,
+            "searchKey": key  // 使用变量 'key' 的值作为 "searchKey"
+        },
+        {
+            "queType": 14,
+            "scope": 1,
+            "queId":167075915,
+            "minValue":qf_field.{预约开始日期（筛选）$$1793BA08D$$},
+            "maxValue":qf_field.{预约结束日期（筛选）$$1793BA08E$$} 
+        }
+    ]
+  });
+
+  let config = {
+    method: 'post',
+    url: 'https://api.qingflow.com/app/16365e01/apply/filter',
+    headers: {
+      'accessToken': 'd866db1d-79ca-42c5-9e9c-0b1ce21135d2',
+      'Content-Type': 'application/json'
+    },
+    data: data
+  };
+
+  axios(config)
+    .then(function (res) {
+      const msg = res.data;
+      const result = msg.result.result;
+      const reslist = [];
+
+      result.forEach(value => {
+          const res_msg = {};
+
+          value.answers.forEach(v => {
+              const queId = v.queId;
+              const queTitle = v.queTitle;
+
+              if (queId === 166744302 || queId === 166753788)  {
+                  const values = v.values;
+                  const dataValue = values[0].dataValue;
+                  res_msg[queTitle] = dataValue;
+              }
+          });
+
+          reslist.push(res_msg);
+      });
+  reslist.sort((a, b) => {
+      const timeA = new Date(a['预约会议起止时间'].split('~')[0]);
+      const timeB = new Date(b['预约会议起止时间'].split('~')[0]);
+      return timeA - timeB;
+    });
+    qf_output={reslist}
+    //console.log(reslist);  
+  });
+
+}
+```
+
+##### 代码测试
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694760632318-784437de-3ea8-400f-9279-33ab02cd080d.png)
+
+##### 解析规则配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694761090493-4ebf52a6-943a-4f53-865b-c314225dc883.png)
+
+##### 字段接收配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695005059399-f1885c07-5537-428e-9f23-865ce87de077.png)
+
+#### 校验时段时分能被5整除![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695005019051-17bb13f4-5df4-4b05-8c8e-c6172a2a033b.png)
+
+##### 代码注释
+
+qf\_field.\{预约会议起止时间$$178A98D01$$\}：表单中预约会议起止时间字段
+
+##### 完整代码
+
+```javascript
+function validateTime(time) {
+    // 分割起止时间
+    const [startTime, endTime] = time.split("~");
+    
+    // 提取起始时间的时分部分
+    const [startHour, startMinute] = startTime.split(" ")[1].split(":");
+    
+    // 提取结束时间的时分部分
+    const [endHour, endMinute] = endTime.split(" ")[1].split(":");
+    
+    // 将时分转换为分钟
+    const startTotalMinutes = parseInt(startHour) * 60 + parseInt(startMinute);
+    const endTotalMinutes = parseInt(endHour) * 60 + parseInt(endMinute);
+    
+    // 校验条件：时分换算成分之后，除以5能被整除，时分为00:00的话除外
+    if (startTotalMinutes === 0 && endTotalMinutes === 0) {
+      return true; // 时分为00:00，通过校验
+    } else {
+      return (startTotalMinutes % 5 === 0) && (endTotalMinutes % 5 === 0);
+    }
+  }
+  
+  // 测试校验函数
+  const date = qf_field.{预约会议起止时间$$178A98D01$$};
+  const isValid = (date === null) ? true: validateTime(date);
+  qf_output={isValid}
+  //console.log(isValid); // 输出 true 或者 false
+```
+
+##### 代码测试
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695002764918-f3a8e223-24e5-495d-aa7e-4fd44d768c00.png)
+
+##### 解析规则配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695002773929-e47bfe17-1bbb-4c49-8b0a-da8a04ca1e60.png)
+
+##### 字段接收配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695005035902-b5872004-5610-4586-adbf-9ce721a24f8e.png)
+
+#### 今天会议室预约情况
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695004743350-2cef67f2-2370-4b5a-b694-2f5308b947d2.png)
+
+##### 代码注释
+
+请参考【9】显示该会议室预约情况代码块注释
+
+##### 完整代码
+
+```javascript
+const axios = require('axios');
+// 导入`date-fns`模块中与日期相关的函数
+const { format, toDate } = require('date-fns');
+
+// 获取当前日期
+const currentDate = new Date();
+// 格式化并输出当前日期
+const formattedDate = format(currentDate, 'yyyy-MM-dd');
+
+let key = qf_field.{会议室$$178A8997A$$};  // 定义变量 'key' 并将其设置为 null
+
+// 检查 key 是否为 null。如果为 true，则输出一个空数组到控制台
+if (key === null) {
+ //return [];
+ const reslist=[];
+ qf_output={reslist}
+} else {
+  let data = JSON.stringify({
+    "pageSize": "50",
+    "pageNum": "1",
+    "queries": [
+        {
+            "queId": 166744302,
+            "searchKey": key  // 使用变量 'key' 的值作为 "searchKey"
+        },
+        {
+            "queType": 14,
+            "scope": 1,
+            "queId":167075915,
+            "minValue":formattedDate,
+            "maxValue":formattedDate 
+        }
+    ]
+  });
+
+  let config = {
+    method: 'post',
+    url: 'https://api.qingflow.com/app/16365e01/apply/filter',
+    headers: {
+      'accessToken': 'd866db1d-79ca-42c5-9e9c-0b1ce21135d2',
+      'Content-Type': 'application/json'
+    },
+    data: data
+  };
+
+  axios(config)
+    .then(function (res) {
+      const msg = res.data;
+      const result = msg.result.result;
+      const reslist = [];
+
+      result.forEach(value => {
+          const res_msg = {};
+
+          value.answers.forEach(v => {
+              const queId = v.queId;
+              const queTitle = v.queTitle;
+
+              if (queId === 166744302 || queId === 166753788)  {
+                  const values = v.values;
+                  const dataValue = values[0].dataValue;
+                  res_msg[queTitle] = dataValue;
+              }
+          });
+
+          reslist.push(res_msg);
+      });
+  reslist.sort((a, b) => {
+      const timeA = new Date(a['预约会议起止时间'].split('~')[0]);
+      const timeB = new Date(b['预约会议起止时间'].split('~')[0]);
+      return timeA - timeB;
+    });
+    qf_output={reslist}
+    //console.log(reslist);  
+  });
+
+}
+```
+
+##### 代码测试
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695004900068-acf93a0c-0692-47f9-a43b-6ce5f5685510.png)
+
+##### 解析规则配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695004944538-9c3c2ffe-3dbc-4d9e-a15d-2d407c817776.png)
+
+##### 字段接收配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695004971031-8ae123f7-7482-4759-b201-dbd73e5283eb.png)
+
+#### 数据提交校验设置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695002622563-34eefdc2-7b6e-47b3-9d0a-461531c7b6e0.png)
+
+##### 校验1
+
+作用：需要预约开始时间大于当前时间
+
+公式：(DATETOTIMESTAMP(预约开始日期(校验)-DATETOTIMESTAMP(DATE(YEAR(NOW()),MONTH(NOW()),DAY(NOW()),HOUR(NOW()),MINUTE(NOW()))))>=0
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694764075659-5786749f-9309-417e-8411-3c81c27d976f.png)
+
+##### 校验2
+
+作用：预约时长至少30分钟起步，如果有需要可以做相应的修改
+
+公式：((DATETOTIMESTAMP(预约结束日期(校验)-DATETOTIMESTAMP(预约开始日期(校验)))/60000)>=30
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694764383404-61ed58c3-ec98-4601-896d-a965de71cbb9.png)
+
+##### 校验3
+
+作用：该时段已被预约，请重新选择时段
+
+公式：预约时间是否没有被占用=="true"
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694764577374-9e7f77e4-b0d2-4fb4-b1f7-ad7b533367ed.png)
+
+##### 校验4
+
+作用：预约时段分钟需要以5分钟为精度
+
+公式：预约时段时分是否能被5整除=="true"
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695003311250-8cf2bae5-864d-4bf5-bd61-2d6435b2d184.png)
+
+### 门户创建
+
+作用：方便个人通过门户查询当日的预约会议室的情况
+
+1、会议室预约应用中创建对应数据表
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694765873906-05a66afe-78dc-4bc7-884c-df524757f975.png)
+
+2、数据范围设置为：当前用户发起的数据
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694765992045-3bd71bea-a8ea-45c3-a992-566c51e72578.png)
+
+3、门户设置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694766057927-e703ce2f-87d2-47ee-94bb-e860f1d77695.png)
+
+4、门户筛选组配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694766122970-add4d8b3-a4e4-4529-aa8c-d3cd173c9326.png)
+
+### 取消会议室预约
+
+作用：如果预约后会议之后，需要取消预约的会议室
+
+实现逻辑：在门户中点击对应的那条数据，然后点击取消预约按钮，然后进行取消
+
+#### 表单设计
+
+对应字段设置为仅可见
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694766322888-36e9e3f1-670a-43f8-a649-bf6f268a8299.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694766457706-3d58c944-f82b-463f-af8f-f6ff6f912b34.png)
+
+注意点：预约起止时间需要格式设置为年月日时分秒
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694766356060-6f0d58f4-7c6e-4bb0-aea1-8a1a9d20ef2b.png)
+
+#### webhook配置
+
+接口文档（删除应用数据）：[https://help.qingflow.com/help-docs?type=qingCode&docId=2cc84e266428e9c7070e75f351e7eeba&parentId=](https://help.qingflow.com/help-docs?type=qingCode&docId=2cc84e266428e9c7070e75f351e7eeba&parentId=)
+
+配置
+
+一些参数获取位置：[https://help.qingflow.com/help-docs?type=qingCode&docId=7cd57ede6425a9c9001147b15f1940a7&parentId=](https://help.qingflow.com/help-docs?type=qingCode&docId=7cd57ede6425a9c9001147b15f1940a7&parentId=)
+
+appkey:应用的唯一标识，获取方式
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695016846665-67bd99c0-194f-4cc7-b96f-16973f91ae49.png)
+
+accesstoken：轻商城——拓展插件——openAPI
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695016900893-22208e10-c8c1-4948-ba9a-04323ef8e330.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694766595659-b7670bb1-d056-4380-a56d-ba23d5d0630b.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694766675204-d9b4d2ac-7357-4e62-afde-715ead661240.png)
+
+```json
+curl --location --request DELETE 'https://api.qingflow.com/app/16365e01/apply' \
+--header 'accessToken: d866db1d-79ca-42c5-9e9c-0b1ce211**2' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: JSESSIONID=4CB16898060AD091BBEDC26821599F59' \
+--data '{
+
+  "queries": [
+    {
+      "queId": 167092295,
+      "searchKey": "1111"
+    },
+    {
+      "queId": 166744302,
+      "searchKey": "地球"
+    },
+    {
+      "queId": 166753788,
+      "searchKey": "2023-09-15 16:06:00~2023-09-16 18:10:00"
+    }
+  ]
+}'
+```
+
+3、自定义按钮配置
+
+会议室预约——拓展设置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694766961744-e214f2e9-b5b6-41ed-940b-00d3a3eea8ae.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694766998589-30fcaaca-2fa4-4d89-93ff-ffce1220cee3.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694767011948-4cc0bbad-ced6-4b51-a620-f83cf9c07ce4.png)
+
+#### 对应报表中添加自定义按钮
+
+在会议室预约-个人会议室预约详情报表中选择自定义按钮进行配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694767087417-f0deab1e-0eac-493d-a2d4-190f6219dc2d.png)
+
+#### 实现效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694766798336-7da0da5e-b441-470b-a78b-f412ec0e2908.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694766824308-387d3353-283c-471b-bddb-416b4c675c6d.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694766834619-f4b03180-437f-47a0-aad4-be8923e69f49.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694766900252-a5335df6-710e-4da8-99d5-a72b31774f87.png)
+
+​
+
+​
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/nzt0e8m6199np20t?singleDoc#)

@@ -1,0 +1,107 @@
+---
+title: "更新应用基本信息"
+description: "调用本接口，更新应用的基本信息。1. 权限说明「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有对应应用编辑权限。2. 请求请求方式：POST请求地址：https://api.qingflow.com/app/APPKEY（公有云..."
+slug: "/帮助文档/轻代码/openapi/轻流应用接口/更新应用基本信息"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/kfuwe2nqm2ez81ui?singleDoc#"
+source_updated_at: "2024-10-15T03:35:10.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "轻流应用接口"
+  - "更新应用基本信息"
+---
+调用本接口，更新应用的基本信息。
+
+---
+
+### **权限说明**
+
+「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有对应应用编辑权限。
+
+### 请求
+
+**请求方式：**POST
+
+**请求地址：**https://api.qingflow.com/app/APPKEY（公有云版本）
+
+> 请求地址中APPKEY为需要替换的变量，根据实际获取值更新，示例如下：
+
+```javascript
+POST https://api.qingflow.com/app/faea1906
+```
+
+**其他版本请求地址：**
+
+钉钉版本：[https://api.ding.qingflow.com/app/faea1906](https://api.ding.qingflow.com/app/faea1906)
+
+专有轻流：http(s)://xxx.xx(自有域名)/openApi/app/faea1906
+
+##### **2.1 参数说明(路径参数)：**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| appKey | 是 | 应用ID，获取方式参考基本概念介绍——appKey |
+
+##### **2.2 请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+
+##### **2.3 请求体（Body）**
+
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| tagIds |  | array | 更新应用所属的应用包，此处只能选择自定义应用包。不可选系统默认应用包 |
+| appIcon |  | string | 应用的图标 |
+| appAuth |  | int | 应用的可见权限, 1-2分别代表：工作区可查看，指定用户 |
+| authMembers |  | object | 指定用户可见的时候，可见的用户列表（因此appAuth为1时下列参数无需填写） |
+| userIds |  | array | 用户id列表 |
+| deptIds |  | array | 部门id列表 |
+| roleIds |  | array | 角色id |
+| includeSubDeparts |  | Boolean | 是否动态包含已选部门下的子部门 |
+
+##### **2.4 请求体示例**
+
+```json
+{
+"tagIds":[4388,3959],
+"appAuth":2,
+"authMembers":
+{
+"userIds":[9050,9015]
+}
+}
+```
+
+### 返回
+
+##### 3.1 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| questionRelations |  |  | 关联的设置，这里没用 |
+| result | 是 | object | 返回结果 |
+| appKey |  | string | 应用key |
+
+##### 3.2 返回体示例
+
+```json
+{
+    "errCode": 0,
+    "errMsg": null,
+    "questionRelations": [],
+    "result": {
+        "appKey": "faea1906"
+    }
+}
+```
+
+##### 3.3 错误码相关
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/kfuwe2nqm2ez81ui?singleDoc#)

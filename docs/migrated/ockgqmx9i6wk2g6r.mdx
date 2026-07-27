@@ -1,0 +1,76 @@
+---
+title: "如何解决表格行序号生成方案中，多行文本字符限制问题"
+description: "1. 场景/问题描述方案：表格序号如何自动生成？在 表格序号自动生成 方案中，有个方案用到了多行文本拼接随机码以实现查询并生成序号，但客户实际业务遇到行数特别多的情形，5000个字符的限制使得客户在这类场景下没办法使用这个方案。2. 思路逻辑通过代码块缩短随机码，实现一一对应的唯一码的方式来..."
+slug: "/搭建技巧/按功能分类/表格使用/特殊用法/如何解决表格行序号生成方案中-多行文本字符限制问题"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/ockgqmx9i6wk2g6r?singleDoc#"
+source_updated_at: "2024-10-15T03:38:10.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "表格使用"
+  - "特殊用法"
+  - "如何解决表格行序号生成方案中，多行文本字符限制问题"
+---
+## 场景/问题描述
+
+方案：[表格序号如何自动生成？](https://exiao.yuque.com/enzu8l/oy1eh8/hkl3rq)
+
+在 表格序号自动生成 方案中，有个方案用到了多行文本拼接随机码以实现查询并生成序号，但客户实际业务遇到行数特别多的情形，5000个字符的限制使得客户在这类场景下没办法使用这个方案。
+
+## 思路逻辑
+
+通过代码块缩短随机码，实现一一对应的唯一码的方式来增加客户可用行数
+
+## 配置过程
+
+### 表单设计
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1698807969855-de3c269c-2389-47ec-9b45-52645ea702c1.png)
+
+### 代码块配置
+
+```javascript
+var table = qf_field.{表格$$18B5AA9BD$$};
+
+// 生成短网址，随机码唯一，生成的短随机码也唯一
+function generateShortURL() {
+  var chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  var shortURL = '';
+  var length = 6; // 要生成的短码长度
+
+  for (var i = 0; i < length; i++) {
+    var randomIndex = Math.floor(Math.random() * chars.length);
+    shortURL += chars.charAt(randomIndex);
+  }
+
+  return shortURL;
+}
+
+// 更新数组中的shortURL属性
+function updateShortURL(table) {
+  for (var i = 0; i < table.length; i++) {
+    var randomCode = table[i].randomCode;
+    var shortURL = generateShortURL();
+    table[i].field_179265346 = shortURL;
+  }
+}
+
+// 调用函数更新shortURL属性
+updateShortURL(table);
+
+qf_output = {r : table}
+```
+
+### 表格关联配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1698808017163-2adb8202-3fa8-4d13-a773-9c222499c541.png)
+
+## 实现效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1698808057578-1268ed4b-7dd9-4636-927f-a4d7002a5548.png)
+
+将原来36位的随机码减少到6位，极大增加了客户可使用的行数
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/ockgqmx9i6wk2g6r?singleDoc#)

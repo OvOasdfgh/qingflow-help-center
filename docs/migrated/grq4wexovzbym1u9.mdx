@@ -1,0 +1,365 @@
+---
+title: "商品如何按照批次号进行出库？"
+description: "1. 场景/问题描述使用轻流系统搭建商品多批次号的出入库，实现按照商品的采购单的多个入库批次号进行商品出库操作。并且实现按照批次号录入的先后顺序进行出库。保证批次号在前的优先出库。注意点：1、批次号是根据日期+序号生成，所以出库优先顺序是根据批次号的日期+序号来判断的2、当入库或者出库超过采购..."
+slug: "/搭建技巧/按场景分类/进销存-仓库/商品如何按照批次号进行出库"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/grq4wexovzbym1u9?singleDoc#"
+source_updated_at: "2024-10-15T03:37:57.000Z"
+keywords:
+  - "搭建技巧"
+  - "按场景分类"
+  - "进销存/仓库"
+  - "商品如何按照批次号进行出库？"
+---
+## 场景/问题描述
+
+使用轻流系统搭建商品多批次号的出入库，实现按照商品的采购单的多个入库批次号进行商品出库操作。并且实现按照批次号录入的先后顺序进行出库。保证批次号在前的优先出库。
+
+注意点：
+
+1、批次号是根据日期+序号生成，所以出库优先顺序是根据批次号的日期+序号来判断的
+
+2、当入库或者出库超过采购的数量或者库存的数量，会提示相应报错
+
+## 思路逻辑
+
+由于一个采购单号会有多个生产批次号，而对于该采购单号进行商品出库时，需要进行批次号的优先级进行依次出库。所以这里使用代码块的来完成上述操作。
+
+注意：由于代码块在表单中触发，所以进行出库时，避免多人同时发起数据，会导致出库数据出错。后续代码块节点上线可以解决该问题
+
+## 配置过程
+
+### 表单设计
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695275388514-18be4069-2eb8-4431-84ea-c0031b4e03d8.png)
+
+#### 商品信息
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695275627234-15ddb6b0-f84d-4c8e-87a7-8fa254329623.png)
+
+#### 采购单
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695275662137-10e9844b-da17-4d8e-934f-9e3e2a3119ae.png)
+
+##### 采购单号
+
+使用公式生成单号：CONCAT("CG-", TEXT(CURDATE(),"YYYYMMDD"), "-", RIGHT(CONCAT("000",RECNO()),3))
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695275769943-f64fb03b-4082-4c7f-b125-809235cc4737.png)
+
+##### 采购明细
+
+- 采购明细-商品名称
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695275819481-2d583dce-b4cc-4eca-a8b2-118e35c53931.png)
+
+##### 成本价
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695276240065-f002f00f-4361-4e90-800b-aab6931caf53.png)
+
+##### 采购价
+
+公式：采购明细.成本价\*采购明细.采购数量
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695275908700-76dfbb3c-9bc8-459b-b6a4-120b651a1145.png)
+
+#### 入库单
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695276380096-d381d06f-4394-4336-885f-9180a430a588.png)
+
+##### 采购单号
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695276426963-11472ac4-b80c-4214-9709-594e70e88dad.png)
+
+##### 入库批次号
+
+公式：CONCAT("RK-", TEXT(CURDATE(),"YYYYMMDD"), "-", RIGHT(CONCAT("000",RECNO()),3))
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695276470581-550ed1fc-77aa-4703-8264-806ae378a943.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695277027538-aea7cbf7-438d-4f80-be68-845f8d163712.png)
+
+##### 入库日期
+
+日期格式：年月日
+
+公式：CURDATE()
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695276548719-f47807b3-d9d8-4942-aad7-756fbe73e0d9.png)![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695276512670-8307df4b-bb5b-49ab-8fee-b29683de2a92.png)
+
+##### 商品入库明细
+
+###### 商品入库明细-商品名称
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695276597827-a157a3b9-2c6a-4f02-a26b-7212637fdda9.png)
+
+###### 商品入库明细-采购数量
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695276718403-5d5c8503-dd98-4d2f-ac3d-0e26b75a7ea8.png)
+
+###### 商品入库明细-入库总数量
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695276777867-635e790a-8093-4860-9dda-1483ac52f1ac.png)
+
+###### 商品入库明细-剩余采购数量
+
+公式：商品入库明细.采购数量- NUM(商品入库明细.入库总数量)-商品入库明细.本批次入库数量
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695276885867-a7fe07c7-217c-4554-baf0-df3afd4ba200.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695276844821-189c4aa3-cca7-4be8-932a-61be4ef60bdb.png)
+
+##### 提交校验
+
+公式：AND(SEARCH("-",商品入库明细.剩余采购数量)==0)
+
+作用：防止入库数量超过采购数量
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695277337268-17216fd1-d178-4d92-9228-e2816e828647.png)
+
+##### 流程配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695277489507-483867f2-f111-458c-85f2-86b70f483efd.png)![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695277508299-e97b165d-4bcd-4ecb-9af0-6695dfd12e50.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695277520595-583abb8d-831a-4953-af3f-cfe450dea2ac.png)
+
+#### 库存明细
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695277914309-9d9165c4-72f5-4040-ae4e-3e4feae02b6f.png)
+
+#### 出库单![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695277966561-335889a6-0bc4-4a89-93cf-c5a0ad028fb5.png)
+
+##### ![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695277989180-cefc125f-4c0d-4073-bf2c-168549643703.png)
+
+##### 出库日期
+
+公式：CURDATE()
+
+格式：年月日
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695278107882-3fe091de-47b9-4174-b099-36e26d08af96.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695278124801-dd7b16ea-d8ac-4ff6-b6a3-2ae0d74679a0.png)
+
+##### 采购单号
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695278178893-0b787931-da5f-4372-ac51-7018f54189b8.png)
+
+##### 商品出库
+
+###### 商品出库-商品名称
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695278232711-e5df94ef-282f-45ae-8a3c-2eee0808f83e.png)
+
+###### 商品名称-库存总和
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695278288784-ae927882-7215-4763-8ba3-9426dc541466.png)
+
+##### 代码块
+
+###### 代码注释
+
+qf\_field.\{采购单号$$17AA76919$$\}：表单中采购单号字段
+
+queId: 167888878——表示采购单号字段的字段ID
+
+URL为获取应用数据接口，文档参考：[https://help.qingflow.com/help-docs?type=qingCode&docId=fc8e64656428ea3a06fe9b406b9b7be9&parentId=](https://help.qingflow.com/help-docs?type=qingCode&docId=fc8e64656428ea3a06fe9b406b9b7be9&parentId=)
+
+queid的获取方式：[https://exiao.yuque.com/rlf3k1/oanb79/ub34vw3b7cdqvovg?singleDoc#](https://exiao.yuque.com/rlf3k1/oanb79/ub34vw3b7cdqvovg?singleDoc#) 《调用添加数据接口，如何写body内容》
+
+accessToken：轻商城——拓展设置——openAPI——超管token
+
+这里图中的queid代表【库存明细】应用中的商品名称、本批次库存数量、入库批次号、采购单号字段
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695278586484-13c1fb03-19b1-4e4f-8cd8-cf1d6fd521f5.png)
+
+qf\_field.\{商品出库$$179C49908$$\}：表单中表格商品出库字段
+
+field\_167904381：表格中的商品名称字段的ID
+
+field\_167904382：表格中的出库数量字段的ID
+
+field\_id获取方式[https://exiao.yuque.com/rlf3k1/oanb79/ml0u7lgb3wa0vhiz?singleDoc#](https://exiao.yuque.com/rlf3k1/oanb79/ml0u7lgb3wa0vhiz?singleDoc#) 《如何在代码块中分辨表格的不同列》
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695278716492-4c9d61d2-fd70-4082-9074-e04ecb8181e9.png)
+
+```javascript
+const axios = require('axios');
+
+let data = JSON.stringify({
+    "pageSize": "50",
+    "pageNum": "1",
+    "queries": [
+        {
+          "queId": 167888878,
+          "searchKey":qf_field.{采购单号$$17AA76919$$}
+        }
+      ]
+});
+
+let config = {
+    method: 'post',
+    url: 'https://api.qingflow.com/app/a82c5f67/apply/filter',
+    headers: {
+        'accessToken': '9d6be42a-a2d9-441e-958b-585dcbc2c9**',
+        'Content-Type': 'application/json'
+    },
+    data: data
+};
+axios(config)
+    .then(function (res) {
+        const msg = res.data;
+        const result = msg.result.result;
+        const reslist = [];
+        result.forEach(value => {
+            const res_msg = {};
+
+            value.answers.forEach(v => {
+                const queId = v.queId;
+                const queTitle = v.queTitle;
+
+                if (queId === 167888961 || queId === 167888962 || queId === 167888879|| queId === 167888878) {
+                    const values = v.values;
+                    const dataValue = values[0].dataValue;
+                    res_msg[queTitle] = dataValue;
+                }
+            });
+
+            reslist.push(res_msg);
+        });
+
+        const table = qf_field.{商品出库$$179C49908$$};
+        let resCopy = deepClone(reslist);
+
+        // 对 reslist 进行排序
+        const sortedReslist = reslist.sort((a, b) => {
+            const batchNumberA = a['入库批次号'];
+            const batchNumberB = b['入库批次号'];
+            // 提取日期+序号部分进行比较
+            const sortKeyA = batchNumberA.substr(3);
+            const sortKeyB = batchNumberB.substr(3);
+            return sortKeyA.localeCompare(sortKeyB);
+        });
+
+        // 计算并添加商品出库剩余总量字段
+        for (const item of sortedReslist) {
+            const productName = item['商品名称'];
+            const totalStockQuantity = sortedReslist
+                .filter(entry => entry['商品名称'] === productName)
+                .reduce((sum, entry) => sum + parseInt(entry['本批次库存数量']), 0);
+            const outgoingQuantity = table
+                .filter(entry => entry['field_167904381'] === productName)
+                .reduce((sum, entry) => sum + entry['field_167904382'], 0);
+            item['该商品出库剩余总量'] = (totalStockQuantity - outgoingQuantity).toString();
+        }
+
+        // 出库操作函数
+        const performOutbound = (productName, quantity) => {
+            const selectedItems = sortedReslist.filter(item => item['商品名称'] === productName);
+            let remainingQuantity = quantity;
+            for (const item of selectedItems) {
+                const currentQuantity = parseInt(item['本批次库存数量']);
+
+                if (currentQuantity >= remainingQuantity) {
+                    item['本批次库存数量'] = (currentQuantity - remainingQuantity).toString();
+                    break;
+                } else {
+                    item['本批次库存数量'] = '0';
+                    remainingQuantity -= currentQuantity;
+                }
+            }
+        };
+
+        // Perform outbound operations based on table
+        for (const item of table) {
+            const productName = item['field_167904381'];
+            const outboundQuantity = item['field_167904382'];
+            performOutbound(productName, outboundQuantity);
+        }
+         // 计算并添加该批次已出库数量字段
+        for (const item of sortedReslist) {
+            const productName = item['商品名称'];
+            const picinum=item['入库批次号'];
+         
+            const StockQuantity = sortedReslist
+            .find(entry => entry['商品名称'] === productName &&
+                entry['入库批次号'] === picinum)['本批次库存数量'];
+            const outgoing = resCopy
+                .find(entry => entry['商品名称'] === productName
+                &&entry['入库批次号'] === picinum)['本批次库存数量'];
+            item['该批次已出库数量'] = (outgoing - StockQuantity).toString();
+        }
+        const filteredReslist = sortedReslist.filter(item => {
+            const productName = item['商品名称'];
+            const batchNumber = item['入库批次号'];
+            const stockQuantity = parseInt(item['本批次库存数量']);
+
+            return resCopy.some(entry => {
+                return entry['商品名称'] === productName &&
+                    entry['入库批次号'] === batchNumber &&
+                    stockQuantity - parseInt(entry['本批次库存数量']) < 0;
+            });
+        });
+        qf_output={filteredReslist}
+        //console.log(filteredReslist);        
+    });
+// deep copy
+function deepClone(obj) {
+    return JSON.parse(JSON.stringify(obj));
+  }
+```
+
+###### 代码测试
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695278870080-42e5351c-20d6-4dcc-b0c9-fde3c746dce3.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695278859300-a80d739f-2627-457d-a553-fe43d9793d23.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695278880161-b390809a-f743-4c88-b1ed-32ade9332823.png)
+
+###### 解析规则配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695278893734-cf123a24-8d4e-4027-ac64-9375f6f3f9f2.png)
+
+###### 接收字段配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695278939556-809e9f30-a120-4ffe-a2a9-ead45e78d2d1.png)
+
+##### 提交校验
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695278985593-4748c802-f5c4-4cf1-b101-3c412471b5d9.png)
+
+公式：AND(SEARCH("-",出库后明细.库存总剩余量)==0)
+
+作用：防止出库数量大于现有库存！！！
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695278997558-bb0271b5-0d12-472e-82ca-73244b5ec49e.png)
+
+##### 流程设置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695279140813-1cdd68de-064e-4fac-b318-25fed8557de8.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695279151638-a648a64e-d1a5-4555-9fbf-5e0a5deb03e3.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695279161021-ac99628b-d351-486a-98e3-6359757f87cf.png)
+
+#### 出库明细
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695279209705-96c87414-9e48-4b23-a3dc-58978bcfe757.png)
+
+#### 库存明细
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695279239808-68c2f5f8-ea5d-4e09-9636-21723662854b.png)
+
+## 实现效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698914898663-ce26cebe-2456-48cb-b38e-15ce65446c5b.png)
+
+​
+
+​
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/grq4wexovzbym1u9?singleDoc#)

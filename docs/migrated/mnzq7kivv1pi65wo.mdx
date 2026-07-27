@@ -1,0 +1,99 @@
+---
+title: "工单管理系统"
+description: "场景在工单有定期巡检、客户报修、技术自检三种来源，本系统中对工单的客户满意度、处理效率进行管理，提高工单管理效率🔗安装方案业务逻辑在「工单汇总」中汇中工单的客户信息、合同信息、工单处理人、客户满意度，用来管理客户满意度，在各类型工单中使用流程权限控制不同的角色处理对应需要处理的字段内容，其中..."
+slug: "/搭建技巧/按场景分类/工单-售后/工单管理系统"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/mnzq7kivv1pi65wo?singleDoc#"
+source_updated_at: "2024-10-15T03:38:04.000Z"
+keywords:
+  - "搭建技巧"
+  - "按场景分类"
+  - "工单/售后"
+  - "工单管理系统"
+---
+### 场景
+
+在工单有定期巡检、客户报修、技术自检三种来源，本系统中对工单的客户满意度、处理效率进行管理，提高工单管理效率
+
+🔗[安装方案](https://qingflow.com/center/template/detail/59d526fe?type=3&tab=2&name=%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5)
+
+### 业务逻辑
+
+在「工单汇总」中汇中工单的客户信息、合同信息、工单处理人、客户满意度，用来管理客户满意度，在各类型工单中使用流程权限控制不同的角色处理对应需要处理的字段内容，其中「巡检工单」由「合同信息」非流程Q-Robot自动发起
+
+### 系统逻辑
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/384859/1631675154092-6f1af530-38f4-4cc0-979b-5ccac28ba9a0.png)
+
+### 场景搭建
+
+#### 「合同信息」
+
+##### 表单设置
+
+合同信息中记录了客户的基本信息和合同详细内容，着重展示需要巡检的内容，后续工单发起都从合同信息里进行关联
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/384859/1631676223831-38d2cc2c-15f4-4c58-99dd-31196388e3f2.png)
+
+##### 拓展设置
+
+设定按周期发起工单至巡检工单应用
+
+第一步：
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/384859/1631688151271-aaddb44b-ba98-488f-84de-6c4020257c7b.png)
+
+第二步：
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/384859/1631688189080-939a8c6d-79a2-4aff-a5b0-0f6459a5d599.png)
+
+设置完成
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/384859/1631676658321-7a480afc-2153-4b7a-996f-fbb3127151ff.png)
+
+#### 「检修工单」
+
+##### 表单设置
+
+检修工单由「合同信息」非流程Q-Robot自动发起，将【客户信息】、【合同编号】、【客户邮箱】、【巡检内容】、【巡检详述】传递过来
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/384859/1631686898274-869dfc4c-7610-4904-b864-9a5b0ccbb245.png)![image.png](https://cdn.nlark.com/yuque/0/2021/png/384859/1631686922113-e16809db-0858-4550-9e97-96a2ece562f4.png)![image.png](https://cdn.nlark.com/yuque/0/2021/png/384859/1631686933001-12b156c1-153c-4c00-9d50-2473e70bc29a.png)
+
+##### 流程设置
+
+流程中先由技术人员按合同中描述的巡检内容进行检修，若发现问题则标记为有问题，进入维修流程，若没有发现问题，则进入客户满意度调查流程
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/384859/1631687646500-8ad7f3a8-312e-41df-ae1d-68945068b8e7.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/384859/1631688374946-23e5a633-a49f-41c1-8f11-e4cd04238a1a.png)
+
+#### 「客户报修」
+
+##### 表单设置
+
+客户报修工单由客户发起，【客户信息】需要从「合同信息」里关联过来，以保证客户是真实存在且合同在有效期内
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/384859/1631689293231-df0d8761-16c8-481a-8a36-115bfeee42d8.png)![image.png](https://cdn.nlark.com/yuque/0/2021/png/384859/1631689310835-fb584fcc-edd6-4f1e-9227-7e9c3da19199.png)
+
+##### 流程设置
+
+流程中先由客服人员进行指派工单，技术接到工单后进行工单处理，处理完成后填写处理结果，之后处理结果抄送给客户并填写满意度调查
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/384859/1631691104329-b5de4b6a-5d3e-4fe2-948a-e00036fd9708.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/384859/1631691129508-2b4e299c-0ce2-4eec-8e7a-47a19ba4efb4.png)
+
+#### 「技术自检」
+
+##### 表单设置
+
+技术自检工单由技术自己发起，发起人即为工单处理人，发起后仅需部门主管进行审批通过即可
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/384859/1631690879378-2ef3372e-c05e-41b6-ba4f-e654b3ed2859.png)
+
+##### 流程设置
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/384859/1631761228236-35d0a9b5-8cf3-48a9-b375-84c3dfb3a904.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/mnzq7kivv1pi65wo?singleDoc#)

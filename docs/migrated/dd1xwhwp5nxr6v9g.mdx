@@ -1,0 +1,106 @@
+---
+title: "新增单条数据的留言"
+description: "新增留言1. 权限说明「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有对应应用的权限。2. 请求请求方式：POST请求地址：https://api.qingflow.com/{appKey}/apply/{applyId}/co..."
+slug: "/帮助文档/轻代码/openapi/应用数据接口/数据内容/新增单条数据的留言"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/dd1xwhwp5nxr6v9g?singleDoc#"
+source_updated_at: "2024-11-20T02:59:59.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "应用数据接口"
+  - "数据内容"
+  - "新增单条数据的留言"
+---
+新增留言
+
+---
+
+### **权限说明**
+
+「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有对应应用的权限。
+
+### 请求
+
+**请求方式：**POST
+
+**请求地址：**https://api.qingflow.com/\{appKey\}/apply/\{applyId\}/comment（公有云版本）
+
+> 请求地址中:applyId为需要替换的变量，根据实际获取值更新，示例如下：
+
+```javascript
+POST https://api.qingflow.com/123456/apply/123456/comment
+```
+
+**其他版本请求地址：**
+
+钉钉版本：[https://api.ding.qingflow.com/\{appKey\}/apply/\{applyId\}/comment](https://api.ding.qingflow.com/apply/:applyId/comment)
+
+专有轻流：http(s)://xxx.xx(自有域名)/openApi/\{appKey\}/apply/\{applyId\}/comment
+
+#### **参数说明(路径参数)：**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| appKey | 是 | 应用 id，获取方式详见：[基本概念介绍](https://exiao.yuque.com/ixwxsb/bgzs0e/cl59vxilcqdkmq1h) |
+| applyId | 是 | 数据 id，获取方式详见：[基本概念介绍](https://exiao.yuque.com/ixwxsb/bgzs0e/cl59vxilcqdkmq1h) |
+
+#### **参数说明(查询参数)：**
+
+无
+
+#### **请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+| userId |  | 发起留言的人的外部用户Id；userId为空时，默认使用工作区创建人的身份调用接口。 |
+
+#### **请求体（Body）**
+
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| commentId |  | \[number\] | 留言的id，添加时不用填 |
+| commentMsg | 是 | string | 留言的内容 |
+| mentionUserIds |  | \[array\] | 被@的人的userId |
+
+#### **请求体示例**
+
+```json
+{
+    "commentId": 88888,
+    "commentMsg": "留言内容",
+    "mentionUserIds": ["user123"、"user456"]
+}
+```
+
+### 返回
+
+#### 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| result | 是 | object | 返回结果 |
+| commentId |  | \[number\] | 留言的id |
+| commentMsg |  | string | 留言的内容 |
+| mentionUserIds |  | \[array\] | 被@的人的userId |
+
+#### 返回体示例
+
+```json
+{
+	"errCode": 0,
+	"errMsg": null,
+	"result": {
+			"commentId": 88888,
+	    "commentMsg": "留言内容",
+	    "mentionUserIds": [“user123”、”user456”]
+			}
+}
+```
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/dd1xwhwp5nxr6v9g?singleDoc#)

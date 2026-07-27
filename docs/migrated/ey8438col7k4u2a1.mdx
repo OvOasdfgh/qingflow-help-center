@@ -1,0 +1,87 @@
+---
+title: "Webhook节点"
+description: "1 功能介绍1.1 功能简介Webhook是轻流应用中，流程上的一个节点（如下图）。在这个节点，您可以通过简单的配置，当数据流经该节点时，自动触发并使用您所需的第三方系统API提供的功能，如向钉钉系统增加新成员，调用谷歌日历，发送邮件，Trello增加卡片，github增加Issue等等。您也..."
+slug: "/帮助文档/流程引擎/流程节点类型/webhook节点"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/ey8438col7k4u2a1?singleDoc#"
+source_updated_at: "2024-10-15T03:29:42.000Z"
+keywords:
+  - "帮助文档"
+  - "流程引擎"
+  - "流程节点类型"
+  - "Webhook节点"
+---
+### 1 功能介绍
+
+#### 1.1 功能简介
+
+Webhook是轻流应用中，流程上的一个节点（如下图）。在这个节点，您可以通过简单的配置，当数据流经该节点时，自动触发并使用您所需的第三方系统API提供的功能，如向钉钉系统增加新成员，调用谷歌日历，发送邮件，Trello增加卡片，github增加Issue等等。您也可以基于轻流进行二次开发，与公司已有的系统进行对接
+
+![9b0d1ac123cd0d1bb84ebadd6ad0d0af\_1699264971773-63415483-e9d1-4f22-934f-8ace2c8e5e94\_x-oss-process=image%2Fresize%2Cw\_825%2Climit\_0.png](https://cdn.nlark.com/yuque/0/2023/png/39106918/1699264984584-ce3986fc-a57e-42c0-a92f-274e1453e9c3.png)
+
+Webhook也支持全局配置，在轻商城-插件中心-第三方连接-webhook配置界面进行配置后保存，即可以配置并生成全局可用的Webhook模版，方便您的后续使用
+
+![插件webhookGIF 2023-11-6 18-05-42.gif](https://cdn.nlark.com/yuque/0/2023/gif/39106918/1699265188460-666cfdee-f4d7-44ad-9f59-b4c008653029.gif)
+
+目前Webhook功能仅对企业版用户开放，如需试用或升级，请联系与您对接的轻流同事
+
+### 2 设置步骤
+
+#### 2.2 功能入口
+
+进入应用编辑界面，点击添加流程，即可添加Webhook节点，即可进行Webhook节点的设置
+
+![添加webhookGIF 2023-11-6 18-12-33.gif](https://cdn.nlark.com/yuque/0/2023/gif/39106918/1699265596276-e2841bf8-8c05-4177-a1be-6259fac26503.gif)
+
+#### 2.2 配置方式
+
+##### 2.2.1 设置节点名称
+
+可以设置审批节点的名称，方便区分不同的节点
+
+选择已添加的Webhook节点，点击「未命名节点」右侧的「铅笔图标」，即可设置节点名称
+
+![设置wbhokk名称GIF 2023-11-6 18-16-09.gif](https://cdn.nlark.com/yuque/0/2023/gif/39106918/1699265793059-e9e9c2a7-3843-4cdd-8232-0dec85cc5bdd.gif)
+
+##### 2.2.2 删除节点
+
+可以删除不需要的审批节点
+
+方式一
+
+选择一个已添加的审批节点，点击节点右上角的「X」，选择删除，即可完成操作
+
+![wbh删除1GIF 2023-11-6 18-19-30.gif](https://cdn.nlark.com/yuque/0/2023/gif/39106918/1699265999848-cd05faa6-5e40-4310-8c90-5d7989e535d4.gif)
+
+方式二
+
+选择一个已添加的填写节点，点击右上角的「垃圾桶」按钮，选择删除，即可完成操作
+
+![WH删除2GIF 2023-11-6 18-21-14.gif](https://cdn.nlark.com/yuque/0/2023/gif/39106918/1699266100010-207e788c-86f4-41ca-93f2-cda0f6bfd5a1.gif)
+
+##### 2.2.3设置Webhook配置项
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/39106918/1699266325742-fa77a8c3-7bc5-4890-b384-14c467461182.png)
+
+各个配置项说明
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/39106918/1699266391590-322f7496-8f0c-40c5-83a8-03257c514396.png)
+
+### 3 注意事项
+
+插入字段时，实际插入的内容
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/39106918/1699266481797-228f27ab-c401-4c5f-805e-0949ca0f51bd.png)
+
+企业微信用户不支持插入申请人、成员与部门字段
+
+「数组格式」的结果关联到单值格式字段（如：单行文本）时，只取数组第一个对象值填入
+
+表格字段的JSON Path解析结果必须为数组
+
+超时时间为60s
+
+###
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/ey8438col7k4u2a1?singleDoc#)

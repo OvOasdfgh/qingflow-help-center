@@ -1,0 +1,69 @@
+---
+title: "SQL Server"
+description: "1. 介绍实现对SQL Server数据库的增改查操作2. 鉴权信息申请得到token之后将其配置在连接器的accesstoken中注意事项企业版客户需要试用请联系轻流技术支持申请token，试用token可以调用500次接口更高自定义程度配置，请在webhook/q-linker全局配置中自..."
+slug: "/帮助文档/轻代码/连接中心/连接器/数据处理/sql-server"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/ta91273i1r5yx8ix?singleDoc#"
+source_updated_at: "2024-11-26T08:30:18.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "连接中心"
+  - "连接器"
+  - "数据处理"
+  - "SQL Server"
+---
+### 介绍
+
+实现对SQL Server数据库的增改查操作
+
+### 鉴权信息
+
+申请得到token之后将其配置在连接器的accesstoken中
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/-o6kLdIfUxWvO-PQsBsQq5JZzs8W5W9C_.png)
+
+##### 注意事项
+
+*企业版客户需要试用请联系轻流技术支持申请token，试用token可以调用500次接口*
+
+*更高自定义程度配置，请在webhook/q-linker全局配置中自行配置，可联系轻流技术支持*
+
+### 事件信息
+
+| 事件 | 描述 |
+| --- | --- |
+| 新增数据 | 在数据库中新增一行数据 |
+| 修改数据 | 修改数据库中某行数据 |
+| 查询数据 | 查询数据库中表信息 |
+
+### 配置演示
+
+##### 查询数据
+
+1.在连接中心配置数据库相关信息
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/g6SBxsk6ma5aoH3gnzaf6jDFuQ5BcJXp_.png)
+
+（如果涉及到多个数据库，需要在表单设计页面匹配变量填入对应数据）
+
+2.表单设计，将没设置默认值的变量 添加到表单中
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/a99IFwpHiRBZ9FPEDiSgixdmpBeB3KzH_.png)
+
+3.添加webhook节点，配置模式选择连接中心模版，对没有默认值的变量做匹配字段
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/zbzCFXE0UyUO56_9pa_0TmvHjcDm0TaL_.png)
+
+4.在表单填入sql语句即可例如
+
+```latex
+SELECT LastName,FirstName FROM Persons
+```
+
+### 试用申请
+
+试用版轻流用户可点击链接**免费**申请500次连接器调用次数，申请链接：[**https://qingflow.com/f/1893429e**](https://qingflow.com/f/1893429e)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/ta91273i1r5yx8ix?singleDoc#)

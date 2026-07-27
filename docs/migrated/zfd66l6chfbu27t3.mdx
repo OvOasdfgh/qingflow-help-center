@@ -1,0 +1,86 @@
+---
+title: "表格序号如何自动生成？"
+description: "1. 场景/描述关于如何实现表单内表格序号自动生成，每增加一行，就自动生成一个序号，序号按顺序自增，呈现效果如1.2.3.4……该形式。注：如果是自定义打印中需要打印表格序号，那么可以直接在自定义模版中配置，参照文章：https://exiao.yuque.com/docs/share/86e..."
+slug: "/搭建技巧/按功能分类/表格使用/特殊用法/表格序号如何自动生成"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/zfd66l6chfbu27t3?singleDoc#"
+source_updated_at: "2024-10-15T03:38:09.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "表格使用"
+  - "特殊用法"
+  - "表格序号如何自动生成？"
+---
+## 场景/描述
+
+关于如何实现表单内表格序号自动生成，每增加一行，就自动生成一个序号，序号按顺序自增，呈现效果如1.2.3.4……该形式。
+
+注：如果是自定义打印中需要打印表格序号，那么可以直接在自定义模版中配置，参照文章：[https://exiao.yuque.com/docs/share/86edaa8b-d6b2-4ab1-8c45-a004c59e3f39?#](https://exiao.yuque.com/docs/share/86edaa8b-d6b2-4ab1-8c45-a004c59e3f39?#) 《Word打印模板--表格行如何设置》
+
+​
+
+## 配置过程
+
+### 方式一. 公式配置（推荐隐藏后进行重计算）
+
+实现逻辑：通过表格内字段自动生成随机码，再整合到随机码集合，利用SEARCH函数来查找随机码在随机码集合中所处的位置，由于随机码固定为36位，那么查询到的位置-1，再除以36，再+1，即可以得到序号。
+
+缺点：实际过程中由于随机码字符过程，所以可能很快就超过多行文字的5000的字符的限制。所以可以采用：
+
+[如何解决表格行序号生成方案中，多行文本字符限制问题​](https://exiao.yuque.com/enzu8l/oy1eh8/ngivxvz9lg0dkqr6)
+
+表格·随机码自动生成：RDID()
+
+随机码集合自动生成：CONCAT(表格·随机码)
+
+表格·产品编号自动生成：(SEARCH(表格·随机码,随机码集合)-1)/36+1
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1661829662872-18bfd65c-65ab-4990-a43b-23076007bcea.png)
+
+### 方式二. 代码块配置
+
+```javascript
+var table = qf_field.{表格$$753377AE$$};
+var date = new Date();
+var year = date.getFullYear();
+var month = date.getMonth() + 1;
+var day = date.getDate();
+month = (month > 9 ? month : "0" + month);
+day = ( day >9 ? day : "0" + day);
+var today = year + month + day;
+for (var i = 0; i < table.length; i++ ){
+  table[i].序号 = (i+1);
+  if(i > 98){
+    table[i].编号 = today + (i+1);
+  }else if(i > 8){
+    table[i].编号 = today + "0" +(i+1);
+  }else{
+    table[i].编号 = today + "00" +(i+1);
+  }
+}
+qf_output={表格: table}
+```
+
+注意：qf\_field.\{表格$$753377AE$$\}请手动替换为应用内表格字段
+
+​
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1661831622925-7fe12293-1d92-490d-b6f4-4bb83bb3f695.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1661831693162-e20253f4-1669-4f89-ab9b-8cb30e78c7c9.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1661831731900-deac3a47-66e4-40d7-94be-5cea5e0f8cae.png)
+
+## 实现效果
+
+公式配置效果：[https://qingflow.com/f/03fce1b5](https://qingflow.com/f/03fce1b5)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1661831833144-a2563d97-f5d3-4d82-8ac1-81d050d6f02e.png)
+
+代码块配置效果：[https://qingflow.com/f/c6516616](https://qingflow.com/f/c6516616)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1661831791177-ae5295da-f273-4d27-9907-4e0c8715191b.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/zfd66l6chfbu27t3?singleDoc#)

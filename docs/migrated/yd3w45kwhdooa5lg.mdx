@@ -1,0 +1,51 @@
+---
+title: "微盟云open api获取客户信息配置实例"
+description: "接入的前置工作确保当前账户为付费用户，微盟设置为付费用户才可调用开放接口确保当前账户有已发布的店铺页面，相应的需要店铺下属有数据可供查询，本例中为店铺的会员信息。具体查询方式见下图确保当前账户有开发者应用，具体配置步骤见下主界面点击营销-开发者中心，在应用列表中添加应用，保存之后返回开发者中心..."
+slug: "/搭建技巧/按功能分类/第三方集成/微盟云/微盟云open-api获取客户信息配置实例"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/yd3w45kwhdooa5lg?singleDoc#"
+source_updated_at: "2024-10-15T03:38:15.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "第三方集成"
+  - "微盟云"
+  - "微盟云open api获取客户信息配置实例"
+---
+### 接入的前置工作
+
+1. 确保当前账户为付费用户，微盟设置为付费用户才可调用开放接口
+2. 确保当前账户有已发布的店铺页面，相应的需要店铺下属有数据可供查询，本例中为店铺的会员信息。
+具体查询方式见下图
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1638775/1594107455220-34773ae1-20ff-4644-ae17-a1cf37eb41c0.png)
+3. 确保当前账户有开发者应用，具体配置步骤见下
+
+1. 主界面点击营销-开发者中心，在应用列表中添加应用，保存之后返回开发者中心进行配置和授权，具体见下图
+首先是配置项，需要填入一个能够接收数据的跳转地址，本例仅供测试
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1638775/1594109037617-3f83017b-07a0-4720-ab09-042aa7a6d8d8.png)
+接下来在授权项中选择对象，授权完成后会弹出页面如下（注：本案例应用跳转地址仅供测试使用，实际配置需要选择可用的url）![image.png](https://cdn.nlark.com/yuque/0/2020/png/1638775/1594110160249-8876aa78-dee1-461a-ad24-7739a92de821.png)
+记录下url栏中返回的code参数，后续获取access token需要
+2. 单击刚刚建立的应用后API权限一栏，记录下CLIENT\_ID和CLIENT\_SECRET两项，作为后续步骤获取access token的凭证，到此完成前置工作
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1638775/1594109603966-17c764b7-9dde-4440-99cd-bdff4855c5f6.png)
+
+### 接入和使用api获取数据
+
+1. 换取access token
+
+POST方式请求如下地址，以POSTMAN为例，参数code、client\_secret、client\_id均由前置步骤获取, grant\_type=authorization\_code, redirect\_url与前置步骤填写的应用跳转地址保持一致
+[https://dopen.weimob.com/fuwu/b/oauth2/token](https://dopen.weimob.com/fuwu/b/oauth2/token)
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1638775/1594110529216-fbbc6a87-43be-4441-aeaf-a8346d665691.png)
+ 请求成功后返回Body如图，高亮栏为获取的access token，需要注意的是之前获取的code和本步骤获取的access token均有有效时间限制，code为一次性参数，有效时间10min，access token有效时间2h，刷新的接口也已给出见refresh\_token
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1638775/1594111085110-a5939d3f-94b7-4f8b-9828-e71577f165c3.png)
+至此完成access token的获取
+
+1. （例）获取客户列表页
+
+POST请求[https://dopen.weimob.com/api/1\_0/mc/member/getMemberDetail](https://dopen.weimob.com/api/1_0/mc/member/getMemberDetail)，参数accessToken输入刚才获取的access token，另外所需参数cursor为滚动游标初始位置，可填0。size为滚动数量，最大值100。
+请求成功则返回json格式的客户信息列表，下图仅供参考（转自微盟开发者文档）
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1638775/1594111703927-c747d3f6-b6ff-43c3-9829-b990c2b27673.png)
+
+###
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/yd3w45kwhdooa5lg?singleDoc#)

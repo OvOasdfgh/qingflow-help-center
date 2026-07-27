@@ -1,0 +1,98 @@
+---
+title: "发送提醒"
+description: "1. 简介1.1 功能简介更加灵活的提醒方式，可以指定时间，指定方式，指定数据，指定提醒人。2. 使用场景自定义提醒的自由组合设置可用于非常广泛的场景：当库存低于安全阈值时对库管员进行预警提醒合同即将到期时，对客户经理进行提醒，从而提前进行续费对接的准备项目进度更新时，自动对下一阶段的相关负责..."
+slug: "/帮助文档/q-robot/流程外q-robot/触发动作/发送提醒"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/fcet99h82nhb3t0x?singleDoc#"
+source_updated_at: "2025-07-23T02:28:28.000Z"
+keywords:
+  - "帮助文档"
+  - "Q-Robot"
+  - "流程外Q-Robot"
+  - "触发动作"
+  - "发送提醒"
+---
+## 简介
+
+### 1.1 功能简介
+
+更加灵活的提醒方式，可以指定时间，指定方式，指定数据，指定提醒人。
+
+## 使用场景
+
+自定义提醒的自由组合设置可用于非常广泛的场景：
+
+- 当库存低于安全阈值时对库管员进行预警提醒
+- 合同即将到期时，对客户经理进行提醒，从而提前进行续费对接的准备
+- 项目进度更新时，自动对下一阶段的相关负责人进行提醒，及时提前准备
+
+## 设置步骤
+
+### 3.1 入口
+
+在 **应用编辑-拓展设置-Q-Robot** 中，点击添加自定义提醒
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-07/B9NskU89msYHazoULY6F7nbV97R6pG3H_.png)
+
+### 3.2 选择提醒方式
+
+#### 3.2.1 微信提醒
+
+需要先关注微信服务号，并绑定微信账号。
+
+#### 3.2.2 邮件提醒
+
+消耗邮件份额。
+
+（注意：邮件提醒成员时，必须已在个人中心中激活邮箱的成员才会成功收到提醒内容）
+
+#### 3.3.3 短信提醒
+
+需要提前设置短信模板，且会消耗短信份额。
+
+### 3.3 设置提醒内容
+
+设置内容时，不限字数，且支持插入表单内字段
+
+以创建周常会议提醒为例
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-07/8sGHnEPSv4IAxI_Zo0WcyeWTxy6TDtJA_.png)
+
+使用效果如下：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-07/SEZDEftnq3CHiS-xHwRbNHJMZ73646ez_.png)
+
+### 3.4 设置提醒开始时间
+
+- 新增数据时：当前应用内有新的数据添加时，对指定人进行提醒。[**点击了解详情**](https://qingflow.com/help/docs/5f48704621f11600160916e1)
+- 更新数据时：当前应用内的已有数据被更新时，对指定人进行提醒。[**点击了解详情**](https://qingflow.com/help/docs/5f48704721f11600160916e2)
+- 根据表单内字段：根据当前应用表单内的日期字段设置定时提醒。
+
+### 3.5 选择被提醒人
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-07/PGOYKkdR3jqeKtD9B-cI8CvDASwUFzUD_.jpg)
+
+被提醒人的可选范围及提醒规则如下：
+
+![文档图片](https://hc.qingflow.com/wp-content/uploads/2019/10/WX20191028-181619.png)
+
+**提醒数据范围**
+
+设置提醒数据范围后，只会对符合筛选条件的数据进行提醒，
+
+如图设置所示：只有“部门为产品”或者“部门为设计”的数据会进行提醒。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-07/TMd5pJc6zk0BObtfTS-cqyXgR-udMN11_.png)
+
+## 注意事项
+
+1、特殊情况下，如果设置“数据被修改时”触发提醒，则修改后符合数据范围的，会收到提醒。上例中，如将“部门”，从“产品”修改到“运营”，不会触发提醒。但是从“运营”修改到“产品”会触发提醒。
+
+2、在网络不稳定，或消息高峰时期，自定义提醒的时间有可能会出现误差，误差在1小时内。
+
+3、由于服务商限制：自定义和Q-Robot执行失败时，不会触发微信提醒
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/fcet99h82nhb3t0x?singleDoc#)

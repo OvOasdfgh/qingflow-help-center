@@ -1,0 +1,99 @@
+---
+title: "如何获取与A应用项目有交集的所有数据？"
+description: "1. 场景/问题描述客户在轻流A表单内记录了任务及任务参与人信息，需要在轻流B表单内发起数据进行通知所有涉及到任一任务相关参与人。2. 思路逻辑使用代码块来进行筛选另一个应用的数据，当选择好了多项选择的内容，通过代码块来进行讲多项选择的内容与应用的所有数据进行对比筛选，如果两者有交集就符合条件..."
+slug: "/搭建技巧/按功能分类/数据管理/应用数据处理/如何获取与a应用项目有交集的所有数据"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/mxh1ck2dgruo6wff?singleDoc#"
+source_updated_at: "2024-10-15T03:38:14.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "数据管理"
+  - "应用数据处理"
+  - "如何获取与A应用项目有交集的所有数据？"
+---
+## 场景/问题描述
+
+客户在轻流A表单内记录了任务及任务参与人信息，需要在轻流B表单内发起数据进行通知所有涉及到任一任务相关参与人。
+
+## 思路逻辑
+
+使用代码块来进行筛选另一个应用的数据，当选择好了多项选择的内容，通过代码块来进行讲多项选择的内容与应用的所有数据进行对比筛选，如果两者有交集就符合条件，就会将对应数据提取出来
+
+## 配置过程
+
+### 表单设计
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/29217731/1698818838316-01c5e760-f407-4c1b-9d98-d69ae9359b19.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/29217731/1698819343880-761b34bc-96f5-4f34-b3fc-340318cfac2c.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/29217731/1698819368816-1890c39c-3038-4323-9240-92d097a154c4.png)
+
+### 代码块内容
+
+```javascript
+const axios = require('axios');  
+let data = JSON.stringify({
+  "pageSize": "50",
+  "pageNum": "1"
+});
+let config = {  
+  method: 'post',
+  url: 'https://api.qingflow.com/app/请替换appkey/apply/filter',  
+  headers: {   
+    'accessToken': '请替换accessToken',
+    'Content-Type': 'application/json'
+  } ,
+  data: data
+};  
+
+axios(config)  
+  .then(function (res) {  
+    const msg = res.data;
+    const result = msg.result.result;
+    const res_list = [];
+
+    result.forEach(value => {
+      const res_msg = {};
+
+      value.answers.forEach(v => {
+        const queId = v.queId;
+        const queTitle = v.queTitle;
+
+        if (queId ===请替换多项选择的queId) {
+          const values = v.values;
+          const dataValue =values.map((value) => value.dataValue).join(',');
+          res_msg[queTitle] = dataValue;
+        };
+        if (queId === 请替换参与人字段queId || queId === 请替换邮箱字段queId) {
+          const values = v.values;
+          const dataValue = values[0].dataValue;
+          res_msg[queTitle] = dataValue;
+        }
+
+      });
+
+      res_list.push(res_msg);
+    });
+    const a = 请替换多项选择字段; 
+    var str = a.join(","); 
+    let result1 = res_list.filter(obj => {  
+      return str.split(",").some(val => obj.请替换多项选择字段名.split(",").includes(val));  
+    });  
+    qf_output = {result1};
+  });
+```
+
+## 实现效果
+
+B表单数据录入情况：
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/29217731/1698823788648-7f7077cf-2683-4ecc-9fe7-f48baaea69e7.png)
+
+A表单代码块效果：
+
+![企业微信截图\_16988088891409.png](https://cdn.nlark.com/yuque/0/2023/png/29217731/1698823941583-5e96ac09-7b80-49f6-bf43-e4792b697c22.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/mxh1ck2dgruo6wff?singleDoc#)

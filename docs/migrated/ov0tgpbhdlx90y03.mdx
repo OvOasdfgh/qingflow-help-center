@@ -1,0 +1,465 @@
+---
+title: "轻流 x 金蝶云星空"
+description: "应用场景通过轻流应用表单实现与金蝶云星空进行对接目前接口支持：暂存：draft ：不会触发金蝶数据校验保存：save ：会触发金蝶的数据校验，保存失败提交：submit：提交数据审核：audit ：审批反审核：un_audit 查看：view ：查看单条数据详细信息下推：push:下推数据单据..."
+slug: "/搭建技巧/按功能分类/第三方集成/金蝶云星空/轻流-x-金蝶云星空"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/ov0tgpbhdlx90y03?singleDoc#"
+source_updated_at: "2024-10-15T03:38:17.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "第三方集成"
+  - "金蝶云星空"
+  - "轻流 x 金蝶云星空"
+---
+## 应用场景
+
+通过轻流应用表单实现与金蝶云星空进行对接
+
+目前接口支持：
+
+1. 暂存：draft ：不会触发金蝶数据校验
+2. 保存：save ：会触发金蝶的数据校验，保存失败
+3. 提交：submit：提交数据
+4. 审核：audit ：审批
+5. 反审核：un\_audit
+6. 查看：view：查看单条数据详细信息
+7. 下推：push:下推数据
+8. 单据查询：executeBillQuery ：返回某一张表单的所有数据（可筛选）
+9. 财务报表查询：getSysReportData：查询金蝶财务报表数据
+
+以下图为例：
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694486582053-634c462b-0307-474b-a585-6d72082e658a.png)
+
+与金蝶的大致交互路径：
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694486708418-33ba39c1-5b96-4c62-8faa-8aa8f0d7373a.png)
+
+ps:
+
+公有云环境下，连接金蝶需要确保所连接的金蝶可以在外网环境下访问，否则无法进行连接。
+
+私有化环境下，需要部署对应的连接器，然后根据运维提供的访问地址进行对接金蝶。
+
+## 落地方案
+
+![原文画板](https://cdn.nlark.com/yuque/0/2023/jpeg/28884377/1694497427373-41230baf-c709-45ad-9392-b7ff00a5de75.jpeg)
+
+## 图文/视频演示
+
+## 帮助文档
+
+### 一、进行第三方登录授权操作
+
+具体金蝶授权文档：
+
+[https://vip.kingdee.com/knowledge/specialDetail/229961573895771136?category=229963554177453824&id=298030366575393024&productLineId=1](https://vip.kingdee.com/knowledge/specialDetail/229961573895771136?category=229963554177453824&id=298030366575393024&productLineId=1)
+
+需要获取到的参数：
+
+- dcId：数据中心ID（帐套ID）
+- appId：应用ID
+- appSecret：应用密钥
+- username：集成用户
+- serverUrl：k3cloud服务地址，需要后缀/k3cloud，公有云8.1版本以上可以不用传值即可
+- lcId：默认值2052
+
+具体位置可以看下方两张图：
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693994250283-2794778c-0ba3-45b3-acbc-3fa8f43709b6.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693994164711-1057a056-c2a5-4ae5-8497-0c22aff4b029.png)
+
+### 二、获取access\_token
+
+请求头（Header）
+
+| ​参数 | 是否必填 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 企业版客户需要试用请联系轻流技术支持申请token，试用token可以调用500次接口购买企业版客户，首次有10000次使用额度，后续使用完可联系客户成功人员进行增购。专有云/私有化客户，运维会单独提供token进行使用。 |
+
+### 三、查询金蝶的单据数据
+
+1. 接口说明：用户调用金蝶各种类型的单据查询接口
+2. 接口地址：
+
+1. 公有云接口地址：https://connect.oalite.com/api/k3cloudApi/executeBillQuery
+2. 私有化/专有云接口地址：https://xxxx.xxxx.xxx/k3cloudApi/executeBillQuery
+
+1. 请求方式：POST
+2. 请求头（Header）：accessToken
+3. 请求体（body）：
+
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| params |  | object |  |
+| formId | 是 | string | 业务对象表单Id |
+| fieldKeys | 是 | string | 需查询的字段key集合，字符串类型，格式："key1,key2,..."（必录）注（查询单据体内码,需加单据体Key和下划线,如：FEntryKey\_FEntryId） |
+| filterString | 是 | string | 过滤条件，如："FDATE>='2022-10-01' AND (FStatus='4' OR FStatus='3')" |
+| orderString | 是 | string | 排序字段，字符串类型（非必录） |
+| topRowCount | 是 | int | 返回总行数，整型（非必录），默认为0 |
+| startRow | 是 | int | 开始行索引，整型（非必录），默认为0 |
+| limit | 是 | int | 最大行数，整型，默认为0，不能超过10000（非必录） |
+| userInfo |  | object | 用户信息 |
+| dcId | 是 | string | 数据中心ID（账套ID） |
+| appId | 是 | string | 应用ID |
+| appSecret | 是 | string | 应用密钥 |
+| username | 是 | string | 集成用户 |
+| serverUrl | 是 | string | k3cloud服务地址，需要后缀/k3cloud |
+| lcId | 是 | int | 默认值2052 |
+
+1. ​请求示例：
+
+```json
+curl --location 'https://connect.oalite.com/api/k3cloudApi/executeBillQuery' \
+--header 'accessToken: 5276e36e1a2340ff86592****' \
+--header 'Content-Type: application/json' \
+--data '{
+  "params": {
+    "formId": "PRD_MO",
+    "filterString": "FDATE>='2022-10-01' AND (FStatus='4' OR FStatus='3')",
+    "filedKeys": "FStatus,FBillNo,FBillType.FName,FDate,FDocumentStatus.FCaption,FWorkShopID0,FPrdOrgId.FName,FPlannerId,FWorkGroupId,FDescription,FQty",
+    "limit": 0,
+    "startRow": 0,
+    "topRowCount": 0,
+    "orderString": ""
+  },
+  "userInfo":{
+    "dcId":"20180*****3818",
+    "appId":"218084_5Y7I78HH7vn/X*******TcWsnJ",
+    "appSecret":"f413f4ab7dd34b0e8f97944****862d",
+    "username":"qingliu",
+    "serverUrl":"https://haohai.ik3cloud.com/k3cloud",
+    "lcId":2052
+  }
+
+}'
+```
+
+1. 响应示例
+
+```json
+{
+    "errCode": 0,
+    "data": [
+        {
+            "FBillNo": "SCYL2022111669",
+            "FPickedQty": 0.0,
+            "FMustQty": 0.0,
+            "FEntity_Link_FSBillId": "",
+            "FMaterialID2.FNumber": "10.03.02.341",
+            "FEntity_FEntryId": 131754,
+            "FMOBillNO": "SCDD2022111040",
+            "FMOEntryID": 102404,
+            "FLot": 0,
+            "FMoEntrySeq1": 1,
+            "FOptQueue": "0",
+            "FSaleOrderEntryId": 0,
+            "FOperID": 10,
+            "FWorkShopID": 170850,
+            "FSaleOrderId": 0,
+            "FReplaceGroup": 1,
+            "FMoBillNo1": "SCDD2022111040",
+            "FMaterialModel": "Horn-X2 Pro V1.6 3.2kg 无logo",
+            "FBOMID.FName": "12.04.01.006",
+            "FID": 102309,
+            "FMaterialId": 326879,
+            "FParentOwnerTypeId": "BD_OwnerOrg",
+            "FMaterialModel1": "192.6*157*78mm AL6061 减重 供应商代码",
+            "FReqSrc": " ",
+            "FSupplyType.FCaption": "",
+            "FParentOwnerId.FNumber": "100",
+            "FMaterialID.FNumber": "12.04.01.006",
+            "FMaterialName": "Pro V1.6 3.2kg",
+            "FUnitID2": 109434,
+            "FSALEORDERNO": " ",
+            "FEntity_Link_FSId": "",
+            "FMoId": 102015,
+            "FSaleOrderEntrySeq": 0,
+            "FMaterialType.FCaption": "标准件"
+        },
+        {
+            "FBillNo": "SCYL2022111669",
+            "FPickedQty": 0.0,
+            "FMustQty": 70.0,
+            "FEntity_Link_FSBillId": "",
+            "FMaterialID2.FNumber": "10.03.02.294",
+            "FEntity_FEntryId": 131755,
+            "FMOBillNO": "SCDD2022111040",
+            "FMOEntryID": 102404,
+            "FLot": 0,
+            "FMoEntrySeq1": 1,
+            "FOptQueue": "0",
+            "FSaleOrderEntryId": 0,
+            "FOperID": 10,
+            "FWorkShopID": 170850,
+            "FSaleOrderId": 0,
+            "FReplaceGroup": 1,
+            "FMoBillNo1": "SCDD2022111040",
+            "FMaterialModel": "Horn-X2 Pro V1.6 3.2kg 无logo",
+            "FBOMID.FName": "12.04.01.006",
+            "FID": 102309,
+            "FMaterialId": 326879,
+            "FParentOwnerTypeId": "BD_OwnerOrg",
+            "FMaterialModel1": "192.6*157*78mm AL6061 减重",
+            "FReqSrc": " ",
+            "FSupplyType.FCaption": "",
+            "FParentOwnerId.FNumber": "100",
+            "FMaterialID.FNumber": "12.04.01.006",
+            "FMaterialName": "Pro V1.6 3.2kg",
+            "FUnitID2": 109434,
+            "FSALEORDERNO": " ",
+            "FEntity_Link_FSId": "",
+            "FMoId": 102015,
+            "FSaleOrderEntrySeq": 0,
+            "FMaterialType.FCaption": "替代件"
+        },
+        {
+            "FBillNo": "SCYL2022111669",
+            "FPickedQty": 0.0,
+            "FMustQty": 0.0,
+            "FEntity_Link_FSBillId": "",
+            "FMaterialID2.FNumber": "10.03.02.342",
+            "FEntity_FEntryId": 131756,
+            "FMOBillNO": "SCDD2022111040",
+            "FMOEntryID": 102404,
+            "FLot": 0,
+            "FMoEntrySeq1": 1,
+            "FOptQueue": "0",
+            "FSaleOrderEntryId": 0,
+            "FOperID": 10,
+            "FWorkShopID": 170850,
+            "FSaleOrderId": 0,
+            "FReplaceGroup": 2,
+            "FMoBillNo1": "SCDD2022111040",
+            "FMaterialModel": "Horn-X2 Pro V1.6 3.2kg 无logo",
+            "FBOMID.FName": "12.04.01.006",
+            "FID": 102309,
+            "FMaterialId": 326879,
+            "FParentOwnerTypeId": "BD_OwnerOrg",
+            "FMaterialModel1": "183*157*48mm AL6061 减重 供应商代码",
+            "FReqSrc": " ",
+            "FSupplyType.FCaption": "",
+            "FParentOwnerId.FNumber": "100",
+            "FMaterialID.FNumber": "12.04.01.006",
+            "FMaterialName": "Pro V1.6 3.2kg",
+            "FUnitID2": 109434,
+            "FSALEORDERNO": " ",
+            "FEntity_Link_FSId": "",
+            "FMoId": 102015,
+            "FSaleOrderEntrySeq": 0,
+            "FMaterialType.FCaption": "标准件"
+        }
+    ],
+    "errMsg": null
+}
+```
+
+注意：对于获取金蝶单据数据，如果想要将数据获取到表格中，就使用q-linker获取。如果想要将数据存放在应用中，就使用Q source主动进行获取。具体场景看具体使用。这里是以QS主动为例
+
+##### 1、postman测试
+
+- 具体先在postman测试成功之后，再将具体配置移至到轻流中
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694484936447-d637554c-7df0-4358-b03a-166c5590619f.png)
+
+##### 2、QS主动配置获取单据数据
+
+- 表单设计具体接收返回的参数内容，这里简单举例获取单据数据中的FBillNo、FBillTypeID.FName
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694485021457-1882a5c8-1db8-43fc-8f2f-6b7bb82caa76.png)
+
+- 轻流QS主动配置信息
+- QS主动说明：[https://help.qingflow.com/help-docs?type=qingCode&docId=392ae32f64245c50001bc7f07deaee9e&parentId=](https://help.qingflow.com/help-docs?type=qingCode&docId=392ae32f64245c50001bc7f07deaee9e&parentId=)
+
+![QS主动基础设置](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694485344969-724e5101-0515-4ded-8ca2-74f4b9ae0cc4.png)
+
+![QS主动接口信息配置](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694485538036-88c158a5-ed0d-4c07-b37f-170c6dc77d8d.png)
+
+![QS主动post方法body设置](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694485579695-3bb353d3-1251-4c7d-a180-aa45d79c64b6.png)
+
+![QS主动返回内容数组解析](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694485641966-868db0bd-718f-4207-952b-e0e1f32bcc7c.png)
+
+![QS主动返回内容字段解析配置](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694485810887-0257992c-9694-49bb-9273-543e1a19a878.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694486003258-636a6396-3454-47de-9852-77a0130eed69.png)
+
+##### 3、实际效果
+
+- 这里我点击手动运行，看下具体效果，其中申请人会默认以管理员身份
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694486141184-93c1171e-5779-46d8-98ba-c0ae7f0d6c3d.png)​
+
+### 四、保存/暂存金蝶表单数据
+
+1. 接口说明：用户调用金蝶保存/暂存接口进行表单数据保存
+2. 接口地址：
+
+1. 公有云接口地址：https://connect.oalite.com/api/k3cloudApi/save（draft）
+2. 私有化/专有云接口地址：https://xxxx.xxxx.xxx/k3cloudApi/save（draft）
+
+1. 请求方式：POST
+2. 请求头（Header）：accessToken
+3. 请求体（body）：
+
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| params | 是 | object |  |
+| formId | 是 | string | 业务对象表单Id |
+| data | 是 | object |  |
+| ...... |  |  | 具体保存/暂存传参，查阅金蝶对应接口文档[https://openapi.open.kingdee.com/ApiDoc?operateId=916006752541657090](https://openapi.open.kingdee.com/ApiDoc?operateId=916006752541657090) |
+| userInfo |  | object | 用户信息 |
+| dcId | 是 | string | 数据中心ID（账套ID） |
+| appId | 是 | string | 应用ID |
+| appSecret | 是 | string | 应用密钥 |
+| username | 是 | string | 集成用户 |
+| serverUrl | 是 | string | k3cloud服务地址，需要后缀/k3cloud |
+| lcId | 是 | int | 默认值2052 |
+
+1. 请求示例
+
+注意：金蝶中的基本字段对应轻流表格外字段，金蝶所有明细字段都需要放在轻流的表格内
+
+```javascript
+{
+    "params":{
+        "formId":"PRD_FeedMtrl",
+        "data":{
+            "Model":{
+                "FID":0,
+                "FBillType":{
+                    "FNUMBER":"SCBLD01_SYS"
+                },
+                "FDate":"2022-12-06 00:00:00",
+                "FStockOrgId":{
+                    "FNumber":"100"
+                },
+                "FPrdOrgId":{
+                    "FNumber":"100"
+                },
+                "FOwnerTypeId0":"BD_OwnerOrg",
+                "FEntity":[
+                    {
+                        "FParentMaterialId":{
+                            "FNumber":"13.01.07.001"
+                        },
+                        "FReserveType":"1",
+                        "FBaseStockActualQty":22,
+                        "FMaterialId":{
+                            "FNumber":"10.02.01.012"
+                        },
+                        "FUnitID":{
+                            "FNumber":"ge"
+                        },
+                        "FAppQty":22,
+                        "FActualQty":22,
+                        "FStockId":{
+                            "FNumber":".001"
+                        },
+                        "FStockStatusId":{
+                            "FNumber":"KCZT01_SYS"
+                        },
+                        "FMoBillNo":"SCDD2022121070",
+                        "FMoEntryId":102452,
+                        "FOwnerTypeId":"BD_OwnerOrg",
+                        "FStockAppQty":22,
+                        "FStockActualQty":22,
+                        "FMoId":102052,
+                        "FMoEntrySeq":1,
+                        "FBaseAppQty":22,
+                        "FPPBomBillNo":"SCYL2022121706",
+                        "FBaseUnitId":{
+                            "FNumber":"ge"
+                        },
+                        "FStockUnitId":{
+                            "FNumber":"ge"
+                        },
+                        "FEntryWorkShopId":{
+                            "FNumber":"BM000003"
+                        },
+                        "FBaseActualQty":22,
+                        "FOwnerId":{
+                            "FNumber":"100"
+                        },
+                        "FEntrySrcInterId":102351,
+                        "FEntrySrcBillType":"PRD_PPBOM",
+                        "FEntrySrcBillNo":"SCYL2022121706",
+                        "FParentOwnerTypeId":"BD_OwnerOrg",
+                        "FParentOwnerId":{
+                            "FNumber":"100"
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "userInfo":{
+        "dcId":"20210222142620903",
+        "appId":"237748_249MRwvG3lrZ0VyG1d1qQzwI6I4X7qru",
+        "appSecret":"122b38c24b3f444fb39e2cc3ac204897",
+        "username":"轻流",
+        "serverUrl":"https://benewake.test.ik3cloud.com/k3cloud",
+        "lcId":2052
+    }
+}
+```
+
+1. 响应内容
+
+```javascript
+{
+    "errCode": 0,
+    "data": {
+        "result": {
+            "id": "100341",
+            "responseStatus": {
+                "errorCode": null,
+                "errors": [],
+                "successEntitys": [
+                    {
+                        "dindex": 0,
+                        "number": "SCBL00000292",
+                        "billNo": null,
+                        "id": "100341"
+                    }
+                ],
+                "isSuccess": true
+            }
+        },
+        "successfully": true
+    },
+    "errMsg": null
+}
+```
+
+对于推送数据，主要使用的是轻流的webhook功能，所以这里就以上述做个简单配置
+
+##### 1、webhook配置保存金蝶表单数据
+
+- 表单设计，这里只做简单配置演示，具体推送字段需要根据具体需求做判断
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694489902263-9746c373-015c-49c9-a4b2-141cc6e48b08.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694490042368-5877954e-bea4-40e7-9cf8-020a4b8e9087.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694490150694-1f779750-f9b9-4e86-b338-76afadde386e.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694490246406-33a126ea-c32e-4584-a888-23ce62f25ad8.png)
+
+##### 2、实际效果
+
+完成配置后，点击保存发布后，后续发起表单数据，就会触发webhook，进行金蝶表单数据的保存操作
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694490445027-ac00fa7b-897f-48ca-80a0-737671e36a94.png)
+
+​
+
+​
+
+​
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/ov0tgpbhdlx90y03?singleDoc#)

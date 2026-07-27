@@ -1,0 +1,212 @@
+---
+title: "两个文本控制流水号的生成"
+description: "1. 场景/问题描述一、如果判断第一个文本框内的值为“外购”返回“1.”，值为“自制”返回“2.”，值为“外协”返回“3.”，值为“组件”返回“4.”.二、判断第二个文本框内的值为“压铸”返回“01.”，值为“冲压”返回“02.”，值为“型材”返回“03.”，值为“注塑”返回“04.”，值为“..."
+slug: "/搭建技巧/按行业分类/制造业/两个文本控制流水号的生成"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/owctwxsu2xqdus76?singleDoc#"
+source_updated_at: "2024-10-15T03:38:05.000Z"
+keywords:
+  - "搭建技巧"
+  - "按行业分类"
+  - "制造业"
+  - "两个文本控制流水号的生成"
+---
+## 场景/问题描述
+
+一、如果判断第一个文本框内的值为“外购”返回“1.”，值为“自制”返回“2.”，值为“外协”返回“3.”，值为“组件”返回“4.”.
+二、判断第二个文本框内的值为“压铸”返回“01.”，值为“冲压”返回“02.”，值为“型材”返回“03.”，值为“注塑”返回“04.”，值为“线缆”返回“05.”，值为“辅料”返回“05.”.
+三、流水号（当一个全新码出现时，流水号是从0001开始的）
+
+例如：如果是外购压铸，返回的编号就是1010001，自制型材，返回编号就是2030001
+
+## 思路逻辑
+
+方式1:主要使用数据关联功能来进行编号的递增处理，辅助字段过多
+
+方式2:直接使用代码块来进行数据的处理
+
+针对方式2由于是跟自身应用数据进行对比，所以如果数据并发的话，可能会出现编号重复的情况，后续代码块节点上线可以解决
+
+## 配置过程
+
+### 方式1:轻流公式实现
+
+#### 表单字段配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692860424978-3ff8a9ab-0eab-4132-831b-6b2d07ac615f.png)
+
+##### 第一个数字
+
+IFS(文本一=="外购",1,文本一=="自制",2,文本一=="外协",3,文本一=="组件",4)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692860457903-dec2aeff-2397-4d1b-a5a7-3aa5ee74ee13.png)
+
+##### 第二个数字
+
+IFS(文本二=="压铸","01",文本二=="冲压","02",文本二=="型材","03",文本二=="注塑","04",文本二=="线缆","05",文本二=="辅料","06")
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692860503214-b80a48a7-fba6-46ee-a116-275ab0e2878d.png)
+
+##### 前置码
+
+CONCAT(第一个数字,第二个数字)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692860525763-6b0f85f0-fdd2-46b6-abbe-50c5988a9a07.png)
+
+##### 流水码
+
+IF(数据关联!=null,RIGHT(CONCAT("0000",NUM(数据关联)+1),4),"0001")
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692860556628-e7050ded-4cf6-4e31-af75-888c55b28fee.png)
+
+##### 数据关联
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692860590459-a6b96dd7-731c-49ad-a63f-ba768da269f4.png)
+
+##### 编码
+
+CONCAT(前置码,流水码)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692860680193-f2f7cbf2-0cc6-4952-84d3-1ecfbdf057bb.png)
+
+#### 实现效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692860774147-f6c9203e-2817-41de-bf95-7d4ea74de93d.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692860797526-b24e1bc6-9955-429f-8c72-4dbc64f7ce4c.png)
+
+### 方式2：代码块实现
+
+#### 代码与测试
+
+##### 表单设计
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692864449662-5ec05cb7-1126-46f8-ba74-01bc241a23f3.png)
+
+##### 代码注释
+
+URL：替换成获取应用数据接口
+
+token：超管token
+
+queId：分别对应value1、value2、流水号字段的字段ID
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693878523082-c8b6402b-788c-49e1-947e-b2d33998069b.png)
+
+```javascript
+const axios = require('axios');
+
+function getNextSerialNumber(value1, value2, res_list) {
+    if (value1 === null || value2 === null) {
+      return ''; // 如果 value1 或 value2 为空，则返回空字符串
+    }
+  
+    const value1Map = {
+      '外购': '1',
+      '自制': '2',
+      '外协': '3',
+      '组件': '4'
+    };
+  
+    const value2Map = {
+      '压铸': '01',
+      '冲压': '02',
+      '型材': '03',
+      '注塑': '04',
+      '线缆': '05',
+      '辅料': '06'
+    };
+  
+    const matchingItems = res_list.filter(item => item.value1 === value1 && item.value2 === value2);
+  
+    if (matchingItems.length > 0) {
+      // 根据已存在的流水号进行排序取最大值
+      const previousSerialNumbers = matchingItems.map(item => parseInt(item['流水号'], 10));
+      const maxPreviousSerialNumber = Math.max(...previousSerialNumbers);
+      const nextSerialNumber = (maxPreviousSerialNumber + 1).toString().padStart(7, '0');
+  
+      return nextSerialNumber;
+    } else {
+      const defaultSerialNumber = `${value1Map[value1]}${value2Map[value2]}0001`;
+  
+      return defaultSerialNumber;
+    }
+  }
+  
+
+// 调用接口获取应用数据并处理
+const fetchData = async () => {
+  const data = JSON.stringify({
+    "pageSize": "50",
+    "pageNum": "1"
+  });
+
+  const config = {
+    method: 'post',
+    maxBodyLength: Infinity,
+    url: 'https://api.qingflow.com/app/551b8be9/apply/filter',
+    headers: {
+      'accessToken': '8121b22f-40b4-40d6-a8cf-a863962ef8**',
+      'Content-Type': 'application/json',
+      'Cookie': 'JSESSIONID=F8953EA331EA8DEECF62B316EA4E314F; acw_tc=707c9fc516910311626161583e19f22f71de013243edf8ebfaf5adae3c88f2'
+    },
+    data: data
+  };
+
+  const res = await axios(config);
+  const msg = res.data;
+  const result = msg.result.result;
+  const res_list = [];
+  const res_dict = new Map();
+
+  result.forEach(value => {
+    const res_msg = new Map();
+    const answers = value.answers;
+
+    answers.forEach(v => {
+      const queId = v.queId;
+      const queTitle = v.queTitle;
+
+      if (queId === 160784791) {
+        const values = v.values;
+        const dataValue = values[0].dataValue;
+        res_msg[queTitle] = dataValue;
+      }
+      if (queId === 160784792) {
+        const values = v.values;
+        const dataValue = values[0].dataValue;
+        res_msg[queTitle] = dataValue;
+      }
+      if (queId === 160784800) {
+        const values = v.values;
+        const dataValue = values[0].dataValue;
+        res_msg[queTitle] = dataValue;
+        res_list.push(res_msg);
+      }
+    });
+  });
+
+  const nextSerialNumber = getNextSerialNumber(qf_field.{value1$$172AC9D19$$}, qf_field.{value2$$172AC9D1A$$}, res_list);
+  //console.log(nextSerialNumber);
+  qf_output={nextSerialNumber}
+};
+
+// 调用函数获取数据并处理
+fetchData();
+
+```
+
+##### 字段配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692864467028-c14e1e1c-5109-4c59-b1e0-b17eb64dbc85.png)
+
+#### 实现效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692864499446-9661f292-65dc-40a3-aafd-e51000644da2.png)
+
+​
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/owctwxsu2xqdus76?singleDoc#)

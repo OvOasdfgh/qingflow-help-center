@@ -1,0 +1,69 @@
+---
+title: "百度网盘"
+description: "1. 介绍基于为您提供文件的网络备份、同步和分享服务。空间大、速度快、安全稳固,支持教育网加速,支持手机端。2. 鉴权信息获取access_token是调用百度网盘API接口的第一步，相当于创建了一个登录凭证，其它的业务API接口，都需要依赖于access_token来鉴权调用者身份。百度网盘..."
+slug: "/帮助文档/轻代码/连接中心/连接器/企业服务/百度网盘"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/tys0yxb7mpedgzw6?singleDoc#"
+source_updated_at: "2024-11-26T08:30:19.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "连接中心"
+  - "连接器"
+  - "企业服务"
+  - "百度网盘"
+---
+### 介绍
+
+基于为您提供文件的网络备份、同步和分享服务。空间大、速度快、安全稳固,支持教育网加速,支持手机端。
+
+### 鉴权信息
+
+获取access\_token是调用百度网盘API接口的第一步，相当于创建了一个登录凭证，其它的业务API接口，都需要依赖于access\_token来鉴权调用者身份。百度网盘的access\_token是要通过oauth2.0协议标准来获取的。
+
+操作步骤：
+
+1.访问[**百度网盘开放平台**](https://pan.baidu.com/union/product?type=basic) — 开放能力 — 基础能力 — 立即申请
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/3Y7raZDm6Acbmw-mXHH_PB-pOVeg5BDQ_.png)
+
+2.进入申请接入界面 — 选择接入类型认证 — **创建应用**
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/7GsHKRticzTH2u8FagZy3tQgX_FmD3QK_.png)
+
+3.应用类型选择软件 输入应用名称即创建完成
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/9OrUBkBrQGhsHJPiX2iz2HLdJs7vXJrv_.png)
+
+4.在 轻商城—连接中心—百度网盘 配置密钥信息
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/szGK9_CkfFzZ5nIDvkanSdHiMLdEyhu9_.png)
+
+#### 注意事项
+
+### 事件信息
+
+| 事件 | 描述 |
+| --- | --- |
+| 获取用户信息 | 获取用户的基本信息，包括账号、头像地址、会员类型等。 |
+| 获取网盘容量信息 | 获取用户的网盘空间使用情况。 |
+| 获取文件列表 | 获取用户网盘中指定目录下的文件列表。返回的文件列表支持排序、分页等操作。 |
+| 搜索文件 | 获取用户指定目录下，包含指定关键字的文件列表。 |
+
+### 配置演示
+
+#### 获取文件列表
+
+1、创建应用，编辑表单。可以在连接中心中查看事件模版变量与返回结果别名，对照创建表单字段。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/TIN6AJ2TZ7iBhdFetsKUmWwqfy0xMwY8_.png)
+
+2.配置Q-linker，设置变量与关联规则
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/IZQTDvHjQvmIptc5Q_jQdEVzswUA9qAf_.png)
+
+3.设置好Q-linker需要保存一下再配置表格，并设置表格与别名的关联规则
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/EczAV1yqTnDS9iJk_P2XgEVdBC4s4pje_.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/tys0yxb7mpedgzw6?singleDoc#)

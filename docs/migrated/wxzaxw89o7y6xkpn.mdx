@@ -1,0 +1,77 @@
+---
+title: "删除角色"
+description: "调用本接口，删除角色1. 权限说明仅支持专有轻流「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有通讯录权限。2. 请求请求方式：DELETE请求地址：http(s)://xxx.xx(自有域名)/openApi/role/:ro..."
+slug: "/帮助文档/轻代码/openapi/通讯录/角色/删除角色"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/wxzaxw89o7y6xkpn?singleDoc#"
+source_updated_at: "2024-12-12T03:36:43.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "通讯录"
+  - "角色"
+  - "删除角色"
+---
+调用本接口，删除角色
+
+---
+
+### **权限说明**
+
+仅支持专有轻流
+
+「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有通讯录权限。
+
+### 请求
+
+**请求方式：DELETE**
+
+**请求地址：**http(s)://xxx.xx(自有域名)/openApi/role/:roleId
+
+> 请求地址中自有域名xxx.xx与:roleId为需要替换的变量，根据实际获取值更新，示例如下：
+
+```javascript
+DELETE https://xxxx.qingflow.com/openApi/role/888888
+```
+
+#### **2.1 参数说明(路径参数)：**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| roleId | 是 | 角色id，可通过文档接口获取 |
+
+#### **2.2 参数说明(查询参数)：**
+
+#### **2.3 请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+
+### 返回
+
+#### 3.1 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| questionRelations |  |  | 关联的设置，这里没用 |
+| result | 是 | object | 返回结果 |
+| roleId |  | int | 角色Id |
+
+#### 3.2 返回体示例
+
+```json
+{
+	"errCode": 0,
+	"errMsg": "ok",
+	"result": {
+		"roleId": 888888
+		}
+}
+```
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/wxzaxw89o7y6xkpn?singleDoc#)

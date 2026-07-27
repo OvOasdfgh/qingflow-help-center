@@ -1,0 +1,374 @@
+---
+title: "基础出入库"
+description: "基础出入库这个问题本质上是如何使用轻流实现基础进销存功能，在本文中将通过第一部分对基础出入库的业务流程和第二部分如何通过使用轻流搭建场景对该场景进行剖析🔗安装方案第一部分 业务流程业务逻辑销售订单申请通过后，对当前订单申请出库/发货；当发货单通过并完成后，库存流水表中自动新增这条流水即可采购..."
+slug: "/搭建技巧/按场景分类/进销存-仓库/基础出入库"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/nh24bg44b0l1sbsz?singleDoc#"
+source_updated_at: "2024-10-15T03:37:59.000Z"
+keywords:
+  - "搭建技巧"
+  - "按场景分类"
+  - "进销存/仓库"
+  - "基础出入库"
+---
+## 基础出入库
+
+**这个问题本质上是如何使用轻流实现基础进销存功能，在本文中将通过第一部分对基础出入库的业务流程和第二部分如何通过使用轻流搭建场景对该场景进行剖析**
+
+🔗[安装方案](https://qingflow.com/center/template/detail/03fbfe0c?type=3&tab=2&name=%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5)
+
+### 第一部分 业务流程
+
+#### 业务逻辑
+
+![文档图片](https://cdn.nlark.com/yuque/0/2021/png/21727618/1629104976314-8f526e08-8fe8-4623-be5a-fd084d5bf217.png)
+
+1. 销售订单申请通过后，对当前订单申请出库/发货；当发货单通过并完成后，库存流水表中自动新增这条流水即可
+2. 采购订单申请通过后，对当前订单申请入库；当入库单通过并完成后，库存流水表中自动新增这条流水即可
+
+#### 数据逻辑
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21727618/1629704075050-1e3b7534-3598-4934-9b45-2bda2e475452.png)
+
+##### 销售部分
+
+> 销售订单 中销售单号为唯一标识字段（即一个订单号对应一个销售订单），出库单 中销售单号字段用来拉取当前销售订单中的销售商品信息当前库存字段采用数据关联功能关联库存流水表 中最新库存出库单 通过并完成后自动将该条出库单记录新增至 库存流水表
+
+##### 采购部分
+
+> 采购订单 中采购单号为唯一标识字段（即一个订单号对应一个采购订单），入库单 中采购单号字段用来拉取当前采购订单中的采购商品信息当前库存字段采用数据关联功能关联库存流水表 中最新库存入库单 通过并完成后自动将该条入库记录新增至 库存流水表
+
+### 第二部分 场景搭建
+
+#### 商品信息
+
+先创建一个基础应用表「商品信息」，后续需要商品信息时可以直接从该应用中[关联](https://help.qingflow.com/help-docs?type=nocode&docId=6bbc66c96426af0e001610fc177685c5&parentId=)获取，设置[单行文字](https://help.qingflow.com/help-docs?type=nocode&docId=cadf63486426ad3700128d217f9d8079&parentId=)字段
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1631152907212-9bb9569a-cf8f-4c9e-824a-333c6c47e9c5.png)
+
+#### 库存流水
+
+库存流水表是通过[Q-robot自动添加数据](https://help.qingflow.com/help-docs?type=nocode&docId=3a5fb385641ffcf7000866c453826086&parentId=)功能将「出库单」「入库单」中数据进行汇总，不需要人为进行填写编辑。除了【当前库存】【最新库存】其他字段的内容都是系统自动添加的，这里只需对这两个字段进行另外的设置
+
+##### 表单设计
+
+![文档图片](https://cdn.nlark.com/yuque/0/2021/png/21727618/1629105009536-01b7dcbd-cbe6-4b9f-b128-8213a5c9a765.png)
+
+| 标题 | 使用字段 | 子字段 | 配置说明 |
+| --- | --- | --- | --- |
+| 订单号 | [单行文字](https://help.qingflow.com/help-docs?type=nocode&docId=cadf63486426ad3700128d217f9d8079&parentId=) | - | 【默认内容】-【自定义】 |
+| 单据操作单号 | [单行文字](https://help.qingflow.com/help-docs?type=nocode&docId=cadf63486426ad3700128d217f9d8079&parentId=) | - | 【默认内容】-【自定义】 |
+| 商品名称 | [单行文字](https://help.qingflow.com/help-docs?type=nocode&docId=cadf63486426ad3700128d217f9d8079&parentId=) | - | 【默认内容】-【自定义】 |
+| 当前库存 | [数据关联](https://help.qingflow.com/help-docs?type=nocode&docId=6bbc66c96426af0e001610fc177685c5&parentId=) | - | 【关联设置】选择【库存流水】-【最新库存】聚合方式选择【最新数据】筛选条件：\{商品名称\}==\{出库明细·商品名称\} |
+| 入库数量 | [数字](https://help.qingflow.com/help-docs?type=nocode&docId=d642fb56641eed44000cce6f7556abed&parentId=) | - | 【默认内容】-【自定义】 |
+| 出库数量 | [数字](https://help.qingflow.com/help-docs?type=nocode&docId=d642fb56641eed44000cce6f7556abed&parentId=) | - | 【默认内容】-【自定义】 |
+| 最新库存 | [数字](https://help.qingflow.com/help-docs?type=nocode&docId=d642fb56641eed44000cce6f7556abed&parentId=) | - | 【默认内容】-【通过公式计算】 |
+
+【订单号】：添加「入库单」「出库单」中的采购单号/销售单号
+
+【单据操作单号】：添加「入库单」「出库单」中的【入库单号】/【出库单号】
+
+【入库数量】/【出库数量】：添加「入库单」「出库单」中的【本次入库数量】/【本次出库数量】
+
+【当前库存】：一笔入库/出库添加过来时这个商品的库存是多少
+
+添加字段[**数据关联**](https://help.qingflow.com/help-docs?type=nocode&docId=6bbc66c96426af0e001610fc177685c5&parentId=)，关联应用「库存流水」中的字段【最新库存】，获取到每一笔流水中这个字段的数据，设置筛选条件：应用中的商品名称相同，获得当前商品的所有流水中这个字段的数据，再通过**聚合方式-最新数据**获取流水中该商品最新一条流水数据中字段【最新库存】的值
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21727618/1629686303416-9fb9e0bc-5872-43d9-831f-97ab7cb0a052.png)
+
+【最新库存】：该笔入库/出库数据添加过来后是多少库存
+
+公式中参与计算的字段需要是数字字段，如果不是数字字段需要在公式中的字段前添加[函数NUM()](https://help.qingflow.com/help-docs?type=nocode&docId=7e2dc5fb641faf3700000a21211b52fe&parentId=)，使其转换为数字再参与公式计算，如图中的【当前库存】
+
+![文档图片](https://cdn.nlark.com/yuque/0/2021/png/21727618/1629105010585-ee676c53-96ea-4959-9cac-3d381d9bb73f.png)
+
+![文档图片](https://cdn.nlark.com/yuque/0/2021/png/21727618/1629105011153-11534c32-e9fd-43c2-b3ff-3e9d692a7315.png)
+
+```plain
+公式解读
+   NUM():返回文本中的数字
+```
+
+##### 流程添加
+
+数据从其他应用中被添加过来后，不会触发应用中的公式和数据关联这些功能，需要在节点-高级设置中开启“[提交/通过时重新触发数据关联或公式](https://help.qingflow.com/help-docs?type=nocode&docId=5b7869c5641ff9d700066d7a2f393c20&parentId=)”这个功能，选择需要重新触发的字段【当前库存】【最新库存】，**这里需要考虑到触发顺序，先触发了【当前库存】才能计算【最新库存】，所以选择时需要将【当前库存】的顺序放在前面**
+
+![企业微信截图\_28676333-ae3a-4b98-bedc-045caa67b7af.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1629712632474-4dd80b08-e430-47c5-8a9c-391bd380e0f6.png)
+
+#### 销售订单
+
+##### 表单设计
+
+![企业微信截图\_4859a83b-bf70-453a-855c-b8e0975e0755.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1629714708397-37d14328-a7a9-4d90-9c39-e5da8dc7319e.png)
+
+【销售单号】
+
+| 标题 | 使用字段 | 子字段 | 配置说明 |
+| --- | --- | --- | --- |
+| 销售单号 | [单行文字](https://help.qingflow.com/help-docs?type=nocode&docId=cadf63486426ad3700128d217f9d8079&parentId=) | - | 销售订单通常使用通过公式进行计算 |
+| 客户名称 | [单行文字](https://help.qingflow.com/help-docs?type=nocode&docId=cadf63486426ad3700128d217f9d8079&parentId=) | - | - |
+
+###### 第一步 【默认内容】选择【通过公式计算】
+
+![企业微信截图\_0ba14661-0535-4e44-ae2c-037e264f5208.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1629714749749-ac7a5338-08cd-456b-b5df-334052bc78a8.png)
+
+###### 第二步 使用【公式】计算销售单号字段的生成规则
+
+![文档图片](https://cdn.nlark.com/yuque/0/2021/png/21727618/1629104980243-80d17068-2f01-4301-b1d0-87fb8750cb1a.png)
+
+```plain
+公式解读
+CONCAT():字符串连接函数，连接函数中的所有字段
+TEXT():将日期字段的值转化为特定格式的文本或数字
+CURDATE():返回当前日期 注： "YYYYMMDD"表示日期格式为年月日
+RIGHT():从一个字段的右数第一个字符开始返回指定个数的字符
+RECNO():累计器，依据当前表单被新打开的次数进行不断累加计算，起始值为1。可用于流水号的自动生成
+```
+
+【销售明细】
+
+| 标题 | 使用字段 | 子字段 | 使用字段 | 配置说明 |
+| --- | --- | --- | --- | --- |
+| 销售明细 | 表格 | 商品名称 | [数据关联](https://help.qingflow.com/help-docs?type=nocode&docId=6bbc66c96426af0e001610fc177685c5&parentId=) | 【关联设置】选择【商品信息表】-【商品名称】 |
+| 销售数量 | [数字](https://help.qingflow.com/help-docs?type=nocode&docId=d642fb56641eed44000cce6f7556abed&parentId=) | 【默认内容】选择【自定义】 |  |  |
+| 单价 | [数字](https://help.qingflow.com/help-docs?type=nocode&docId=d642fb56641eed44000cce6f7556abed&parentId=) | 【默认内容】选择【自定义】 |  |  |
+| 小计金额 | [数字](https://help.qingflow.com/help-docs?type=nocode&docId=d642fb56641eed44000cce6f7556abed&parentId=) | 【默认内容】选择【通过公式计算】设置公式为\{销售数量\}\*\{单价\} |  |  |
+
+【商品名称】：添加[数据关联](https://help.qingflow.com/help-docs?type=nocode&docId=6bbc66c96426af0e001610fc177685c5&parentId=)字段，关联应用「商品信息」中字段【商品名称】
+
+![企业微信截图\_125019a4-58aa-4f21-87bd-3f5d2957e570.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1629714834239-3a552727-3068-4000-9c77-4ea60a5f949f.png)
+
+【小计金额】：设置[公式](https://help.qingflow.com/help-docs?type=nocode&docId=fc8e64656426afd706dabb0a7fb69e48&parentId=)
+
+![企业微信截图\_fe2fa028-a063-48fe-8a05-1b4de5903702.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1629714896618-10d4cced-8fca-4c7a-903c-d16533c79806.png)
+
+![文档图片](https://cdn.nlark.com/yuque/0/2021/png/21727618/1629104989498-4fc875c0-a3f8-4245-a073-f4f9457b6dab.png)
+
+【总金额】
+
+| 标题 | 使用字段 | 子字段 | 配置说明 |
+| --- | --- | --- | --- |
+| 总金额 | [数字](https://help.qingflow.com/help-docs?type=nocode&docId=d642fb56641eed44000cce6f7556abed&parentId=) | - | 【默认内容】选择【通过公式计算】 |
+
+![文档图片](https://cdn.nlark.com/yuque/0/2021/png/21727618/1629104990370-9fa4244c-9602-410e-9109-61fd12b1c4b7.png)
+
+```plain
+公式解读
+   SUM():返回参与字段中数值的总和
+```
+
+目前为止，所有 *销售订单* 搭建已基本完成，点击【保存并发布】即可；如果业务中需要对 *销售订单* 进行相关审批操作配置，可点击【+】添加节点即可
+
+---
+
+#### 出库单/发货单
+
+##### 表单设计
+
+![文档图片](https://cdn.nlark.com/yuque/0/2021/png/21727618/1629104991864-6cb65635-43ad-439d-8964-cc68811c03a5.png)
+
+【出库单号】
+
+| 标题 | 使用字段 | 子字段 | 配置说明 |
+| --- | --- | --- | --- |
+| 出库单号 | [单行文字](https://help.qingflow.com/help-docs?type=nocode&docId=cadf63486426ad3700128d217f9d8079&parentId=) | - | 【默认内容】选择【通过公式计算】 |
+
+###### 第一步 【默认内容】选择【通过公式计算】
+
+![文档图片](https://cdn.nlark.com/yuque/0/2021/png/21727618/1629104993278-47dba12e-3684-437c-9f9c-9ebfb2eed31d.png)
+
+###### 第二步 使用【公式】计算出库单号字段的生成规则
+
+![文档图片](https://cdn.nlark.com/yuque/0/2021/png/21727618/1629104994426-4d3eb740-f6e3-4d31-93f9-d6122abda23a.png)
+
+```plain
+公式解读
+   CONCAT():字符串连接函数，连接函数中的所有字段
+   TEXT():将日期字段的值转化为特定格式的文本或数字
+   CURDATE():返回当前日期
+   RIGHT():从一个字段的右数第一个字符开始返回指定个数的字符
+   RECNO():累计器，依据当前表单被新打开的次数进行不断累加计算，起始值为1。可用于流水号的自动生成
+```
+
+【销售单号】：关联「销售订单」中的销售单号，填写时选择对应的销售订单进行出库
+
+| 标题 | 使用字段 | 子字段 | 配置说明 |
+| --- | --- | --- | --- |
+| 销售单号 | [数据关联](https://help.qingflow.com/help-docs?type=nocode&docId=6bbc66c96426af0e001610fc177685c5&parentId=) | - | 【关联设置】选择【销售订单】-【销售单号】 |
+
+![文档图片](https://cdn.nlark.com/yuque/0/2021/png/21727618/1629104995336-38aad02f-1c90-4c08-b35d-90848b1f3c35.png)
+
+###### 出库明细
+
+| 标题 | 使用字段 | 子字段 | 使用字段 | 配置说明 |
+| --- | --- | --- | --- | --- |
+| 出库明细 | 表格 | 商品名称 | [单行文字](https://help.qingflow.com/help-docs?type=nocode&docId=cadf63486426ad3700128d217f9d8079&parentId=) | 【默认内容】选择【关联已有表格】-【销售订单·销售明细】筛选条件：\{销售单号\}==\{销售单号\}关联规则：\{商品名称\}==\{商品名称\}；\{销售数量\}==\{销售数量\} |
+| 销售数量 | [数字](https://help.qingflow.com/help-docs?type=nocode&docId=d642fb56641eed44000cce6f7556abed&parentId=) |  |  |  |
+| 当前库存 | [数据关联](https://help.qingflow.com/help-docs?type=nocode&docId=6bbc66c96426af0e001610fc177685c5&parentId=) | 【关联设置】选择【库存流水】-【最新库存】聚合方式选择【最新数据】筛选条件：\{商品名称\}==\{出库明细·商品名称\} |  |  |
+| 已出库数量 | [数据关联](https://help.qingflow.com/help-docs?type=nocode&docId=6bbc66c96426af0e001610fc177685c5&parentId=) | 【关联设置】选择【库存流水】-【出库数量】聚合方式选择【求和】筛选条件：\{商品名称\}==\{出库明细·商品名称\}；\{订单号\}==\{销售单号\} |  |  |
+| 本次出库数量 | [数字](https://help.qingflow.com/help-docs?type=nocode&docId=d642fb56641eed44000cce6f7556abed&parentId=) | 【默认内容】选择【自定义】 |  |  |
+
+表格【出库明细】中添加字段【商品名称】【销售数量】，设置[**关联已有表格**](https://help.qingflow.com/help-docs?type=nocode&docId=fc8e64656426aeac06daa1a75193f882&parentId=)，关联应用「销售订单」中的表格【销售明细】，筛选条件：两个应用中的销售单号相同，再设置关联规则：
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21727618/1629685550663-582c647d-8db2-41e0-b9b3-2ade1515bf94.png)
+
+【当前库存】：设置逻辑与「库存流水」中【当前库存】相同
+
+![文档图片](https://cdn.nlark.com/yuque/0/2021/png/21727618/1629104996984-3f7f241c-c03e-496d-9e84-fcd2d7b6dea5.png)
+
+【已出库数量】：需要知道这笔销售单号中的商品已经分别出库了多少商品数量
+
+通过添加字段[**数据关联**](https://help.qingflow.com/help-docs?type=nocode&docId=6bbc66c96426af0e001610fc177685c5&parentId=)关联库存流水中的【出库数量】，将流水中所有出库数量的数据获取过来，并通过筛选条件进一步缩小数据范围，即筛选条件：两个应用中的订单号和商品名称相同，分别获得当前销售订单中每种商品每次出库的数量，最后再用**聚合方式-求和**将每次出库的数量进行**求和**（将库存流水中符合同一销售订单和同一商品条件的数据中出库数量进行求和）
+
+![文档图片](https://cdn.nlark.com/yuque/0/2021/png/21727618/1629104997981-c931f6d4-a62f-4ae8-8ce4-5e7e3f4eaa53.png)
+
+【本次出库数量】
+
+![文档图片](https://cdn.nlark.com/yuque/0/2021/png/21727618/1629104998846-6b70c5cd-414c-4eec-8f36-82c8e355fee5.png)
+
+##### 添加流程
+
+设置“[提交校验](https://help.qingflow.com/help-docs?type=nocode&docId=5f0f3cec6426b1580000617731f64d3b&parentId=)”，添加校验条件-[应用校验](https://help.qingflow.com/help-docs?type=nocode&docId=265e542a6426b2160016458e59f3d505&parentId=)**（选择应用，若被选择的应用正在被添加或更新数据，则无法通过校验）**，选择应用「库存流水」
+
+设置意义：当「库存流水」在被添加数据时，无法提交「出库单」，确保获取到的【当前库存】【已出库数量】是最新的正确数据
+
+![企业微信截图\_37123217-c0ac-43ba-bd8a-5aa6c75d7189.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1629715091217-bea69017-1cfe-4e11-ae8f-353996237405.png)
+
+开启“[提交/通过时重新触发数据关联或公式](https://help.qingflow.com/help-docs?type=nocode&docId=5b7869c5641ff9d700066d7a2f393c20&parentId=)”，选择重新触发的字段【当前库存】【已出库数量】
+
+**设置意义：确保即使同一销售订单有多笔出库单在同一时间被填写，提交后这两个字段被重新触发，获取正确数值**
+
+![企业微信截图\_9c178dc3-0141-4b54-aa54-2cbbc9b5ebc4.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1629715526674-0055ca89-704c-49c5-b4c8-1a4c8b330d7c.png)
+
+点击【+】选择[【Q-robot】添加数据](https://help.qingflow.com/help-docs?type=nocode&docId=3a5fb385641ffcf7000866c453826086&parentId=)节点，将出库信息添加到库存流水中
+
+![文档图片](https://cdn.nlark.com/yuque/0/2021/png/21727618/1629105001719-8409df3d-bb17-4ef0-8e7c-b163fb60e88d.png)
+
+![文档图片](https://cdn.nlark.com/yuque/0/2021/png/21727618/1629105002236-dff5f5d5-eaef-4335-9736-b1411870f888.png)
+
+目前为止，所有 *出库单/发货单* 搭建已基本完成，点击【保存并发布】即可；如果业务中需要对 *出库单* 进行相关审批操作配置，可选择【添加流程】即可
+
+---
+
+#### 采购订单
+
+##### 表单设计
+
+![企业微信截图\_36cb6a9c-63d2-4f90-a314-49ee35d4d002.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1629715810937-be9e1724-1123-409b-8116-658002afdd8b.png)
+
+【采购单号】
+
+| 标题 | 使用字段 | 子字段 | 配置说明 |
+| --- | --- | --- | --- |
+| 采购单号 | [单行文字](https://help.qingflow.com/help-docs?type=nocode&docId=cadf63486426ad3700128d217f9d8079&parentId=) | - | 【默认内容】选择【通过公式计算】 |
+
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/21727618/1629685765994-0262588b-d959-47f8-8641-ef6972728823.png)
+
+```plain
+公式解读：
+   CONCAT():字符串连接函数，连接函数中的所有字段
+   TEXT():将日期字段的值转化为特定格式的文本或数字
+   CURDATE():返回当前日期
+   RIGHT():从一个字段的右数第一个字符开始返回指定个数的字符
+   RECNO():累计器，依据当前表单被新打开的次数进行不断累加计算，起始值为1。可用于流水号的自动生成
+```
+
+###### 采购明细
+
+| 标题 | 使用字段 | 子字段 | 使用字段 | 配置说明 |
+| --- | --- | --- | --- | --- |
+| 采购明细 | 表格 | 商品名称 | [数据关联](https://help.qingflow.com/help-docs?type=nocode&docId=6bbc66c96426af0e001610fc177685c5&parentId=) | 【关联设置】选择【商品信息表】-【商品名称】 |
+| 采购数量 | [数字](https://help.qingflow.com/help-docs?type=nocode&docId=d642fb56641eed44000cce6f7556abed&parentId=) | 【默认内容】选择【自定义】 |  |  |
+| 单价 | [数字](https://help.qingflow.com/help-docs?type=nocode&docId=d642fb56641eed44000cce6f7556abed&parentId=) | 【默认内容】选择【自定义】 |  |  |
+| 小计金额 | [数字](https://help.qingflow.com/help-docs?type=nocode&docId=d642fb56641eed44000cce6f7556abed&parentId=) | 【默认内容】选择【通过公式计算】设置公式为\{采购数量\}\*\{单价\} |  |  |
+
+**配置图解可参照如上销售订单中的**[**销售明细**](#销售订单)
+
+**​**
+
+**【总金额】**
+
+| 标题 | 使用字段 | 子字段 | 配置说明 |
+| --- | --- | --- | --- |
+| 总金额 | [数字](https://help.qingflow.com/help-docs?type=nocode&docId=d642fb56641eed44000cce6f7556abed&parentId=) | - | 【默认内容】选择【通过公式计算】配置公式如下 |
+
+![文档图片](https://cdn.nlark.com/yuque/0/2021/png/21727618/1629105003820-8da4ac98-e94a-4f40-a6cb-6a165362af9b.png)
+
+```plain
+公式解读
+   SUM():返回所有参与字段中数值的总和
+```
+
+目前为止，所有 *采购订单* 搭建已基本完成，点击【保存并发布】即可；如果业务中需要对 *采购订单* 进行相关审批操作配置，可点击【+】添加节点即可
+
+---
+
+#### 入库单
+
+##### 表单设计
+
+![文档图片](https://cdn.nlark.com/yuque/0/2021/png/21727618/1629105005475-3f4b6ff4-93fc-463d-8871-4c6f7e87edf8.png)
+
+【入库单号】
+
+| 标题 | 使用字段 | 子字段 | 配置说明 |
+| --- | --- | --- | --- |
+| 入库单号 | [单行文字](https://help.qingflow.com/help-docs?type=nocode&docId=cadf63486426ad3700128d217f9d8079&parentId=) | - | 【默认内容】选择【通过公式计算】 |
+
+![文档图片](https://cdn.nlark.com/yuque/0/2021/png/21727618/1629105006575-95b78b72-d0f0-4732-93ce-d8398e3439d9.png)
+
+```plain
+公式解读
+   CONCAT():字符串连接函数，连接函数中的所有字段
+   TEXT():将日期字段的值转化为特定格式的文本或数字
+   CURDATE():返回当前日期
+   RIGHT():从一个字段的右数第一个字符开始返回指定个数的字符
+   RECNO():累计器，依据当前表单被新打开的次数进行不断累加计算，起始值为1。可用于流水号的自动生成
+```
+
+【采购单号】：关联「采购订单」中的采购单号，填写时选择对应的采购订单进行
+
+| 标题 | 使用字段 | 子字段 | 配置说明 |
+| --- | --- | --- | --- |
+| 采购单号 | [数据关联](https://help.qingflow.com/help-docs?type=nocode&docId=6bbc66c96426af0e001610fc177685c5&parentId=) | - | 【关联设置】选择【采购订单】-【采购单号】 |
+
+![文档图片](https://cdn.nlark.com/yuque/0/2021/png/21727618/1629105006987-47478c1f-fcff-437f-933f-473ac79acea9.png)
+
+【入库明细】
+
+| 标题 | 使用字段 | 子字段 | 使用字段 | 配置说明 |
+| --- | --- | --- | --- | --- |
+| 入库明细 | 表格 | 商品名称 | [单行文字](https://help.qingflow.com/help-docs?type=nocode&docId=cadf63486426ad3700128d217f9d8079&parentId=) | 【默认内容】选择【关联已有表格】-【采购订单·采购明细】筛选条件：\{采购单号\}==\{采购单号\}关联规则：\{商品名称\}==\{商品名称\}；\{采购数量\}==\{采购数量\} |
+| 采购数量 | [数据关联](https://help.qingflow.com/help-docs?type=nocode&docId=6bbc66c96426af0e001610fc177685c5&parentId=) |  |  |  |
+| 当前库存 | [数据关联](https://help.qingflow.com/help-docs?type=nocode&docId=6bbc66c96426af0e001610fc177685c5&parentId=) | 【关联设置】选择【库存流水】-【最新库存】聚合方式选择【最新数据】筛选条件：\{商品名称\}==\{入库明细·商品名称\} |  |  |
+| 已入库数量 | [数据关联](https://help.qingflow.com/help-docs?type=nocode&docId=6bbc66c96426af0e001610fc177685c5&parentId=) | 【关联设置】选择【库存流水】-【入库数量】聚合方式选择【求和】筛选条件：\{商品名称\}==\{入库明细·商品名称\}；\{订单号\}==\{采购单号\} |  |  |
+| 本次入库数量 | [数字](https://help.qingflow.com/help-docs?type=nocode&docId=d642fb56641eed44000cce6f7556abed&parentId=) | 【默认内容】选择【自定义】 |  |  |
+
+**配置图解可参照如上出库单中的**[**出库明细**](#出库明细)
+
+##### 添加流程
+
+![文档图片](https://cdn.nlark.com/yuque/0/2021/png/21727618/1629105007557-7446013c-dbc4-4883-8916-958a7b0e4885.png)
+
+设置“[提交校验](https://help.qingflow.com/help-docs?type=nocode&docId=5f0f3cec6426b1580000617731f64d3b&parentId=)”，添加校验条件-[应用校验](https://help.qingflow.com/help-docs?type=nocode&docId=265e542a6426b2160016458e59f3d505&parentId=)，选择应用「库存流水」
+
+![企业微信截图\_cbd28a97-296d-44d1-8515-a56ffff8ad8b.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1629716127789-928ea184-50db-42a5-a121-bd9664b3df75.png)
+
+开启“[提交/通过时重新触发数据关联或公式](https://help.qingflow.com/help-docs?type=nocode&docId=5b7869c5641ff9d700066d7a2f393c20&parentId=)”，选择字段【当前库存】【已入库数量】
+
+​![企业微信截图\_dae61bc3-2874-4a47-b632-d7132d354d7f.png](https://cdn.nlark.com/yuque/0/2021/png/21388903/1629716196435-597c8f6a-6ab3-4f44-b03f-b730fd650aa0.png)
+
+添加库存流水
+
+![文档图片](https://cdn.nlark.com/yuque/0/2021/png/21727618/1629105008042-389c3ddb-c9f9-4d66-91ab-39419f6ab9df.png)
+
+目前为止，所有 *出库单/发货单* 搭建已基本完成，点击【保存并发布】即可；如果业务中需要对 *出库单* 进行相关审批操作配置，可选择【添加流程】即可
+
+​
+
+[https://exiao.yuque.com/docs/share/9754e9e4-07cb-4119-be1c-1b512417b8bf?#](https://exiao.yuque.com/docs/share/9754e9e4-07cb-4119-be1c-1b512417b8bf?#) 《入库时如何只筛选出尚未完成入库的采购单号》
+
+---
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/nh24bg44b0l1sbsz?singleDoc#)

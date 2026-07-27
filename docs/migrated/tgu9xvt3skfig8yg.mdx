@@ -1,0 +1,77 @@
+---
+title: "如何将成员与日期批量添加到表格？"
+description: "1. 场景/问题描述客户需要快速将人员和日期范围生成对应的表格行，例如多成员和日期段8-1至8-3，写入表格得到——张三 8-1；张三 8-2 ；李四 8-1；李四 8-2 。以此得以在业务中，需要繁琐写入信息的地方可以一键生成想要的表格模板，得以在实际业务中简化操作~2. 思路逻辑通过代码..."
+slug: "/搭建技巧/按功能分类/表格使用/添加/如何将成员与日期批量添加到表格"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/tgu9xvt3skfig8yg?singleDoc#"
+source_updated_at: "2024-10-15T03:38:08.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "表格使用"
+  - "添加"
+  - "如何将成员与日期批量添加到表格？"
+---
+## 场景/问题描述
+
+客户需要快速将人员和日期范围生成对应的表格行，例如多成员和日期段8-1至8-3，写入表格得到——张三 8-1；张三 8-2 ；李四 8-1；李四 8-2 。以此得以在业务中，需要繁琐写入信息的地方可以一键生成想要的表格模板，得以在实际业务中简化操作~
+
+## 思路逻辑
+
+通过代码块输出想要的结构
+
+## 配置过程
+
+### 表单设计
+
+### ![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1693533293967-979c4719-5e42-4908-a613-ecb88c6a760b.png)
+
+### 代码块
+
+```javascript
+var beginDate = qf_field.{开始日期$$618897CE$$};
+var endDate = qf_field.{结束日期$$618897C0$$};
+var dateArray = [];
+
+// 将日期字符串转换为日期对象
+var currentDate = new Date(beginDate);
+var targetDate = new Date(endDate);
+
+// 循环遍历日期范围内的每一天
+while (currentDate <= targetDate) {
+  // 获取当前日期的字符串表示
+  var dateString = currentDate.toISOString().split('T')[0];
+
+  // 将日期添加到数组对象中
+  dateArray.push({ "Date": dateString });
+
+  // 增加一天
+  currentDate.setDate(currentDate.getDate() + 1);
+}
+
+var menber = qf_field.{成员$$618897DC$$};
+//输出最后结果的数组
+var result = [];
+
+menber.forEach(menberItem => {
+  dateArray.forEach(dateItem => {
+    result.push({ "menber": menberItem, "Date": dateItem["Date"] });
+  });
+});
+
+// 输出最终结果
+qf_output = {result : result}
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1693533321462-590e6b10-9478-44ca-99bb-4369711c5944.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1693533352847-92c4a4c0-b1b0-4247-90ab-76be7c0e2391.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1693533363247-e84e3eae-1c13-47e3-abe8-1b6beed12277.png)
+
+## 实现效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1693533394418-7ecd51d8-cbce-45fc-a620-535e17789900.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/tgu9xvt3skfig8yg?singleDoc#)

@@ -1,0 +1,149 @@
+---
+title: "轻流 x 企业微信---创建/更改/删除日程"
+description: "应用场景背景：很多企业都已经使用企业微信来协调办公，提升效率。A企业是轻流的客户，已经通过轻流实现了企业大多数事务的流程化。现在想要让企业微信的日程也可以在轻流中进行管理，实现信息互通。注意：大概2023年6月之前，企业微信的自建应用还可以正常创建日程等一系列操作，如果需要在后台加入企业IP白..."
+slug: "/搭建技巧/按功能分类/第三方集成/企业微信/轻流-x-企业微信-创建-更改-删除日程"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/nrusqt3hkg925xbb?singleDoc#"
+source_updated_at: "2024-10-15T03:38:19.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "第三方集成"
+  - "企业微信"
+  - "轻流 x 企业微信---创建/更改/删除日程"
+---
+## 应用场景
+
+背景：很多企业都已经使用**企业微信**来协调办公，提升效率。
+
+A企业是轻流的客户，已经通过轻流实现了企业大多数事务的流程化。现在想要让企业微信的日程也可以在轻流中进行管理，实现信息互通。
+
+​
+
+注意：大概2023年6月之前，企业微信的自建应用还可以正常创建日程等一系列操作，如果需要在后台加入企业IP白名单的话，在轻流中就无法调用该接口。
+
+## 落地方案
+
+![原文画板](https://cdn.nlark.com/yuque/0/2021/jpeg/2997244/1611729793416-0b7d69cc-fcae-4a69-8281-092dcaea30e8.jpeg)
+
+## 图文/视频演示
+
+[企业微信日程管理.MP4](https://exiao.yuque.com/attachments/yuque/0/2024/mp4/26393678/1728963499704-faa80731-1dd4-4866-8442-337a27653e03.mp4)
+
+## 帮助文档
+
+配置文档
+
+## 一、获取access\_token
+
+企业微信开放平台链接：[https://open.work.weixin.qq.com/api/doc/90000/90135/91039](https://open.work.weixin.qq.com/api/doc/90000/90135/91039)
+
+#### 1、corpid
+
+每个企业都拥有唯一的corpid
+
+**路径**：
+
+管理后台---我的企业－-企业信息----企业ID
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1607673943137-ff8471d9-9b3e-445d-ab70-841ea436e2a5.png)
+
+#### 2、corpsecret
+
+企业微信的每一个应用都有一个独立的访问密钥。
+
+- 自建应用secret。在管理后台->“应用与小程序”->“应用”->“自建”，点进某个应用，即可看到。
+- 基础应用secret。某些基础应用（如“审批”“打卡”应用），支持通过API进行操作。在管理后台->“应用与小程序”->“应用->”“基础”，点进某个应用，点开“API”小按钮，即可看到。
+![文档图片](https://cdn.nlark.com/yuque/0/2020/png/2898265/1607674121449-92faf08e-a2a5-42fa-8c0b-009bf8109055.png)
+- 通讯录管理secret。在“管理工具”-“通讯录同步”里面查看（需开启“API接口同步”）；
+- 外部联系人管理secret。在“客户联系”栏，点开“API”小按钮，即可看到。
+![文档图片](https://cdn.nlark.com/yuque/0/2020/jpeg/2898265/1607674121468-e8ca3c91-b055-4edf-938d-f19f7caaedb6.jpeg)
+
+#### 3、获取accesstoken
+
+##### （1）通过Q-linker获取
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1607674934513-cefefbfb-d191-4785-9259-df23b92d8756.png)
+
+Q-Linker配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1607675230463-5d70d3a8-6e52-49ce-9cc5-e321ceb676d1.png)
+
+输入参数配置，匹配表单字段中输入的企业ID和secret，也可以直接在URL后拼接。
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1607675261869-49462fd8-84ab-4fce-a990-390dd9f4dce8.png)
+
+json path 配置，回调accesstoken到表单字段
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1607675278094-31998061-8705-41f2-8cc6-f706e237f17c.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1607675403792-3171769d-f91f-4b90-a174-b95dc43fdfe5.png)
+
+##### （2）通过temporary token 配置模板，然后直接调用。
+
+**​**
+
+**a.新建鉴权模板**
+
+**路径：**
+
+插件中心---鉴权---配置选择temporary token。
+
+具体配置情况见下图：和Q-linker差不多
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1607912966922-8741bb2b-e980-485c-9755-06b6832f86e5.png)![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1607913138183-2f16f9f5-c178-499e-bf01-3684af78efa7.png)
+
+**b.在鉴权中选择****temporary**
+
+**参考文档：**[https://qingflow.com/help/docs/5f7409f712c11f00168c7a15](https://qingflow.com/help/docs/5f7409f712c11f00168c7a15)
+
+## 二、通过webhook 发送请求
+
+#### 1、创建日程
+
+按照企业微信开放平台的文档，进行配置：[https://work.weixin.qq.com/api/doc/90000/90135/92622](https://work.weixin.qq.com/api/doc/90000/90135/92622)
+
+（1）在webhook中的配置
+
+在轻流中设置需要的请求参数为适合的表单字段，然后在webhook中配置发送的请求体。
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1607913725588-2c7337ee-c8dc-4eb4-8ff9-13de2f3e953f.png)![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1607913758098-21809ec6-2710-4389-8bac-8a7c5142053c.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1607913770042-664008dd-32eb-42ed-a267-0d8e5fc542dc.png)
+
+tips：
+
+a.注意回调日程ID，删除日程要用。
+
+b.请求参数中的日程时间用的时间戳，可以通过“数据关联”--“公式”--选择时间戳公式得出。
+
+#### 2、更新日程
+
+同“创建日程”参考企业微信开放平台配置文档：[https://work.weixin.qq.com/api/doc/90000/90135/92623](https://work.weixin.qq.com/api/doc/90000/90135/92623)
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1607914540597-720f4472-9153-477e-a60c-3a501b5df4f5.png)![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1607914557316-d84ca833-8981-440f-a718-7ee266fa922b.png)
+
+tips：
+
+a.更新日程的日程组织人不能换！
+
+#### 3、删除日程
+
+同上，参考文档：[https://work.weixin.qq.com/api/doc/90000/90135/92625](https://work.weixin.qq.com/api/doc/90000/90135/92625)
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1607914660680-0a42ed40-897b-40e4-9e4f-9f191fa16ac0.png)![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1607914669387-ae9e58c3-c746-4e29-acff-7fb5bb4ac885.png)
+
+## 三、一些注意的点：
+
+1.日程参与人和组织人都是userid，需要从企业微信管理后台获取
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1607915261502-eb800171-b816-4a4c-a99b-61027889c3ba.png)
+
+2.对于一些需要隐藏的字段，可以通过字段提交重计算的方法隐藏。
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1607915395022-55903c32-40e6-4b62-9d82-983d50e66761.png)![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1607915423072-652cea5c-5a76-407d-8495-e137713d5bb9.png)
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/nrusqt3hkg925xbb?singleDoc#)

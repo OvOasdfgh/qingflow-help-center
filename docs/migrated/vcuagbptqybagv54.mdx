@@ -1,0 +1,146 @@
+---
+title: "获取个人在当前工作区全部事项信息"
+description: "获取个人在当前工作区全部事项信息1. 权限说明仅专有轻流支持；「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有对应应用的权限。2. 请求请求方式：GET请求地址：https://xxx.xx(自有域名)/openApi/dyna..."
+slug: "/帮助文档/轻代码/openapi/应用数据接口/数据内容/获取个人在当前工作区全部事项信息"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/vcuagbptqybagv54?singleDoc#"
+source_updated_at: "2025-09-25T05:57:52.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "应用数据接口"
+  - "数据内容"
+  - "获取个人在当前工作区全部事项信息"
+---
+获取个人在当前工作区全部事项信息
+
+---
+
+### **权限说明**
+
+仅专有轻流支持；
+
+「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有对应应用的权限。
+
+### 请求
+
+**请求方式：**GET
+
+**请求地址：**https://xxx.xx(自有域名)/openApi/dynamic/audits
+
+#### **参数说明(路径参数)：**
+
+无
+
+#### **参数说明(查询参数)：**
+
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| pageSize | 是 | int | 每页数量 |
+| pageNum | 是 | int | 页码 |
+| userId | 是 | string | 用户id |
+| type |  | int | 1:待办事项； 2：我的申请； 3：抄送； 4：草稿； 5：已办事项 |
+| status |  | int | 根据type值进行进一步筛选：type为1（待办事项）时：1: 全部，4:催办，5:即将超时，6:已超时 ；type为2（我的申请）时：1: 全部，2:通过，3:拒绝，4:待完善，5:流程中；type为3（抄送）时：1: 全部，3：未读；type为4（草稿）时：1：全部；type为5（已办事项）时： 1: 全部，2:通过，3:拒绝，5:流程中 |
+
+#### **请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+| userId |  | 用户的userid，非必填 |
+
+#### **请求体（Body）**
+
+无
+
+#### **请求体示例**
+
+无
+
+### 返回
+
+#### 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| result | 是 | object | 返回结果 |
+| pageNum | 是 | string | 页码 |
+| pageAmount | 是 | string | 页数 |
+| pageSize | 是 | string | 每页数量 |
+| resultAmount | 是 | string | 结果数量 |
+| result | 是 | array | 结果 |
+| applyId |  | number | 数据唯一标识id |
+| appKey |  | string | 应用唯一标识id |
+| applyNum |  | number | 数据编号 |
+| formTitle |  | string | 应用名称 |
+| curAuditors |  | array | 当前节点 |
+| auditorName |  | string | 节点名称 |
+| timeoutDate |  | \[datetime\] | 超时时间 |
+| preTimeoutDate |  | \[datetime\] | 预超时时间 |
+| applyUser |  | object | 申请人基本信息 |
+| uid |  | number | 用户的uid |
+| status |  | boolean | 是否激活邮箱，true：已激活 |
+| email |  | string | 用户注册使用的邮箱 |
+| nickName |  | string | 用户自己定义的昵称 |
+| headImg |  | string | 用户的头像 |
+| accepted |  | boolean | 是否接受当前工作区的邀请，true：已接收邀请 |
+| auth |  | number | 用户权限，0:普通用户，1:管理员，2:工作区创建人 |
+| remark |  | string | 备注 |
+| mobileNum |  | string | 手机 |
+| applyTime |  | \[datetime\] | 申请时间 |
+| applyStatus |  | int | 流程状态，1：草稿，2:流程中（已经有用户处理过），3:已通过（有流程），4:已拒绝，5:待完善（退回申请人），6:已通过（无流程），7：流程中（没有用户处理过） |
+| beingUrged |  | boolean | 是否被催办 |
+| beingUnread | 是 | boolean | 是否已读 |
+| formId | 是 | string | 应用id |
+| tagIds | 是 | array | 应用所属的应用包 |
+| updateTime | 是 | \[datetime\] | 修改时间 |
+
+#### 返回体示例
+
+```json
+{
+    "errMsg": "",
+    "errCode": 0,
+    "result": {
+        "pageNum": "",
+        "pageAmount": "",
+        "pageSize": "",
+        "resultAmount": "",
+        "result": [{
+            "applyId": 0,
+            "appKey": "",
+            "applyNum": 0,
+            "formTitle": "",
+            "curAuditors": [{
+                "auditorName": "",
+                "timeoutDate": "",
+                "preTimeoutDate": ""
+            }],
+            "applyUser": {
+				"uid":"",
+				"status":"",
+				"email":"",
+				"nickName":"",
+				"headName":"",
+				"accepted":"",
+				"auth":"",
+				"remark":"",
+				"mobileNum":""
+				},
+    				"applyTime": "",
+    				"applyStatus": "",
+    				"beingUrged": false,
+    				"beingUnread": false,
+       			"formId": "",
+        		"tagIds": [],
+        		"updateTime": ""
+    		}]
+  	}
+}
+```
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/vcuagbptqybagv54?singleDoc#)

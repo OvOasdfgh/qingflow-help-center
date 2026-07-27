@@ -1,0 +1,146 @@
+---
+title: "调用添加数据接口，body内容中如何写主字段以及表格字段，queid获取方式"
+description: "1. 场景/问题描述常常会遇到我们调用openAPI添加数据接口时，不清楚如何写body内容2. 配置过程2.1. 表单主字段写法{ \"answers\": [ { \"queId\": 80949684, \"queType\":..."
+slug: "/搭建技巧/按功能分类/轻代码/openapi/调用添加数据接口-body内容中如何写主字段以及表格字段-queid获取方式"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/to5cbms03tbcobxf?singleDoc#"
+source_updated_at: "2024-10-15T03:38:14.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "轻代码"
+  - "OPENAPI"
+  - "调用添加数据接口，body内容中如何写主字段以及表格字段，queid获取方式"
+---
+## 场景/问题描述
+
+常常会遇到我们调用openAPI添加数据接口时，不清楚如何写body内容
+
+## 配置过程
+
+### 表单主字段写法
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690774634894-f9f7fe26-9465-4982-8cfa-d9f7654f16c2.png)
+
+```json
+{
+    "answers": [
+        {
+            "queId": 80949684,
+            "queType": 2,
+            "values": [
+                {
+                    "value": "测试2"
+                }
+            ]
+        },
+        {
+            "queId": 80949685,
+            "queType": 2,
+            "values": [
+                {
+                    "value": "50"
+                }
+            ]
+        },
+        {
+            "queId": 80949686,
+            "queType": 2,
+            "values": [
+                {
+                    "value": "千克"
+                }
+            ]
+        }
+    ]
+}
+```
+
+### 表单表格字段写法
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690774805790-984f627d-2acd-46e3-a678-91417e95418f.png)
+
+```json
+{
+    "answers": [
+        {
+            "queId": 80949681,
+            "queType": 18,
+            "values": [],
+            "tableValues": [
+                [
+                    {
+                        "queId": 80949682,
+                        "queType": 2,
+                        "values": [
+                            {
+                                "value": "测试1"
+                            }
+                        ]
+                    },
+                    {
+                        "queId": 80949683,
+                        "queType": 2,
+                        "values": [
+                            {
+                                "value": "10"
+                            }
+                        ]
+                    }
+                ],
+                [
+                    {
+                        "queId": 80949682,
+                        "queType": 2,
+                        "values": [
+                            {
+                                "value": "测试2"
+                            }
+                        ]
+                    },
+                    {
+                        "queId": 80949683,
+                        "queType": 2,
+                        "values": [
+                            {
+                                "value": "20"
+                            }
+                        ]
+                    }
+                ]
+            ]
+        }
+    ]
+}
+```
+
+## 关于其中que ID如何获取的问题
+
+- 方式1、通过调用获取应用表单信息接口
+
+[https://qingflow.com/help/docs/61dbf7eb328afe0041810d5c](https://qingflow.com/help/docs/61dbf7eb328afe0041810d5c)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690775227313-9dd0ffff-2b1c-4df6-81a5-4010fb148484.png)
+
+- 方式2、通过后台开发者工具去获取，打开浏览器按Fn+12
+
+点击network，然后清除数据
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690775349546-3f2d3ccb-f88a-4b73-9cd8-b0f5a06b5b82.png)
+
+点击打开某条数据，然后点击该条数据的applyid,在预览中找到到该字段的queid
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690775455556-8b324192-cae6-4d50-8e4c-510f0f3a3af1.png)
+
+- 方式3、直接发起一条数据，然后在右侧的apply，右击拷贝为curl，导入到postman中
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690782397069-e42543a1-f063-43ba-b095-100cea0599a8.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690782466474-ea78a622-3818-4894-acae-911265027ef7.png)
+
+​
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/to5cbms03tbcobxf?singleDoc#)

@@ -1,0 +1,233 @@
+---
+title: "表格录入产品数据，产品编号根据已有数据进行递增"
+description: "1. 场景/问题描述当表格录入产品信息时，产品编号需要可以根据其他应用已有数据的编号进行递增，也为了方便进行数据批量打印2. 思路逻辑使用代码块来进行实现，逻辑为获取产品流水表的应用数据，然后根据筛选出对应产品的最新编号，然后在此基础上进行编号递增，并根据产品录入件数进行拆分成单条单条数据，最..."
+slug: "/搭建技巧/按功能分类/数据管理/应用数据处理/表格录入产品数据-产品编号根据已有数据进行递增"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/gw04azggx9g0dzrs?singleDoc#"
+source_updated_at: "2024-10-15T03:38:12.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "数据管理"
+  - "应用数据处理"
+  - "表格录入产品数据，产品编号根据已有数据进行递增"
+---
+## 场景/问题描述
+
+当表格录入产品信息时，产品编号需要可以根据其他应用已有数据的编号进行递增，也为了方便进行数据批量打印
+
+## 思路逻辑
+
+使用代码块来进行实现，逻辑为获取产品流水表的应用数据，然后根据筛选出对应产品的最新编号，然后在此基础上进行编号递增，并根据产品录入件数进行拆分成单条单条数据，最后将拆的数据添加至流水表中
+
+## 配置过程
+
+### 表单设计
+
+三个应用：【产品编码】、【产品录入】、【产品流水表】
+
+- 【产品编码】应用时记录不同产品以及类型的编码
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694151513309-9d3574cd-c97d-4fa9-884a-bd8259c16554.png)
+
+- 【产品录入】应用是实际录入产品的应用，当选中产品名称以及产品类型后，选择录入件数后，代码块会自动针对产品明细表进行检索从而生成对应编号，如果没有该产品以及对应类型时，请点击按钮【添加新产品】进行添加产品以及产品编码
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694151594939-e5b1d05c-a2db-473b-ba1a-2bd3cb9a1cba.png)
+
+- 【产品流水表】当产品录入后，会自动生成对应数据在产品流水表中
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694151778777-d92678ec-6967-46c5-bdd4-65717456520b.png)
+
+### 代码与测试
+
+#### 代码注释
+
+table：对应【产品录入表】应用中的购买录入表格字段
+
+发起第一个 Axios 请求：
+
+URL：对应的是请求获取【产品流水表】应用的数据
+
+queid：分别对应该应用的产品名称、产品类型、产品编号字段的字段ID
+
+queid的获取方式：[https://exiao.yuque.com/rlf3k1/oanb79/ub34vw3b7cdqvovg?singleDoc#](https://exiao.yuque.com/rlf3k1/oanb79/ub34vw3b7cdqvovg?singleDoc#) 《调用添加数据接口，如何写body内容》
+
+发起第二个 Axios 请求：
+
+URL : 对应的是请求获取【产品编码】应用的数据
+
+queid：分别对应该应用的产品名称、产品分类、产品编码字段的字段ID
+
+field\_164914191：对应【产品录入表】应用中的购买录入表格字段中件数的ID
+
+field\_164914189：对应【产品录入表】应用中的购买录入表格字段中产品名称的ID
+
+field\_164938267：对应【产品录入表】应用中的购买录入表格字段中产品类型的ID
+
+field\_id获取方式[https://exiao.yuque.com/rlf3k1/oanb79/ml0u7lgb3wa0vhiz?singleDoc#](https://exiao.yuque.com/rlf3k1/oanb79/ml0u7lgb3wa0vhiz?singleDoc#) 《如何在代码块中分辨表格的不同列》
+
+```javascript
+const axios = require('axios');
+
+// 定义你的 table
+const table = qf_field.{购买录入$$176C59701$$};
+
+const resListPromises = [];
+
+// 发起第一个 Axios 请求
+const firstApiPromise = axios({
+    method: 'post',
+    url: 'https://api.qingflow.com/app/bd93f115/apply/filter',
+    headers: {
+        'accessToken': 'd866db1d-79ca-42c5-9e9c-0b1ce21135*',
+        'Content-Type': 'application/json'
+    },
+    data: JSON.stringify({
+        "pageSize": "50",
+        "pageNum": "1"
+    })
+})
+.then(function (res) {
+    const msg = res.data;
+    const result = msg.result.result;
+    const res_list = [];
+
+    result.forEach(value => {
+        const res_msg = {};
+
+        value.answers.forEach(v => {
+            const queId = v.queId;
+            const queTitle = v.queTitle;
+
+            if (queId === 165159451 || queId === 164910190 || queId === 164910226) {
+                const values = v.values;
+                const dataValue = values[0].dataValue;
+                res_msg[queTitle] = dataValue;
+            }
+        });
+
+        res_list.push(res_msg);
+    });
+
+    return res_list;
+});
+
+resListPromises.push(firstApiPromise);
+
+// 发起第二个 Axios 请求
+const secondApiPromise = axios({
+    method: 'post',
+    url: 'https://api.qingflow.com/app/09fa95bc/apply/filter',
+    headers: {
+        'accessToken': 'd866db1d-79ca-42c5-9e9c-0b1ce21135*',
+        'Content-Type': 'application/json'
+    },
+    data: JSON.stringify({
+        "pageSize": "50",
+        "pageNum": "1"
+    })
+})
+.then(function (res) {
+    const msg = res.data;
+    const result = msg.result.result;
+    const reslist = [];
+
+    result.forEach(value => {
+        const res_msg = {};
+
+        value.answers.forEach(v => {
+            const queId = v.queId;
+            const queTitle = v.queTitle;
+
+            if (queId === 164990271 || queId === 164990272 || queId === 164990273) {
+                const values = v.values;
+                const dataValue = values[0].dataValue;
+                res_msg[queTitle] = dataValue;
+            }
+        });
+
+        reslist.push(res_msg);
+    });
+
+    return reslist;
+});
+
+resListPromises.push(secondApiPromise);
+
+Promise.all(resListPromises)
+.then(function (resListArray) {
+    const resList1 = resListArray[0];
+    const resList2 = resListArray[1];
+
+    // 处理数据的代码在此处
+    const newList = [];
+
+    table.forEach(item => {
+        const itemCount = parseInt(item["field_164914191"]);
+        for (let i = 0; i < itemCount; i++) {
+            let matchingRes = resList1.filter(res => res["产品名称"] === item["field_164914189"] && res["产品类型"] === item["field_164938267"]);
+            if (matchingRes.length === 0) {
+                matchingRes = resList2.filter(res => res["产品分类"] === item["field_164938267"] && res["产品名称"] === item["field_164914189"]);
+
+                matchingRes.forEach(matchingItem => {
+                    const newNumber = i + 1;
+                    const newProduct = {
+                        "产品名称": item["field_164914189"],
+                        "件数": "1",
+                        "产品类型": item["field_164938267"],
+                        "产品编号": matchingItem["产品编码"] + newNumber.toString().padStart(3, "0")
+                    };
+                    newList.push(newProduct);
+                });
+            } else {
+                // 对matchingRes根据产品编号进行排序
+                matchingRes.sort((a, b) => {
+                    const numberA = parseInt(a["产品编号"].substring(3));
+                    const numberB = parseInt(b["产品编号"].substring(3));
+                    return numberA - numberB;
+                });
+
+                // 获取每个分组的最大产品编号
+                const maxProductNumber = matchingRes.length > 0 ? parseInt(matchingRes[matchingRes.length - 1]["产品编号"].substring(3)) : 0;
+
+                // 递增产品编号并添加到新的列表中
+                const newNumber = maxProductNumber + i + 1;
+                const newProduct = {
+                    "产品名称": item["field_164914189"],
+                    "件数": "1",
+                    "产品类型": item["field_164938267"],
+                    "产品编号": matchingRes.length > 0 ? matchingRes[0]["产品编号"].substring(0, 3) + newNumber.toString().padStart(3, "0") : ""
+                };
+                newList.push(newProduct);
+            }
+        }
+    });
+    qf_output={newList}
+   // console.log(newList);
+});
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694152301949-195815f0-51c7-4dc0-b7e3-1115b10feb35.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694152316182-feb2bc52-fc0e-43b9-b961-07c16646ac06.png)
+
+#### 解析规则配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694152329187-f1c5c4e0-563c-4bc9-b1cf-9a96dd51e273.png)
+
+#### 字段接收配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694152352299-8b7e2018-337e-4929-bccf-4f777d1563d2.png)
+
+#### PS：
+
+- 产品名称以及产品分类为数据关联字段，关联的是【产品编码】应用的数据。并且添加了自定义按钮，方便快速新增新产品编码
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694152382999-f2118227-c046-4f5c-84e4-1bb13889c64e.png)
+
+- 【产品录入表】实现自动生成数据在【产品流水表】中，通过创建一个QR添加数据来实现
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694152491868-cd350e2a-40d5-4b15-98d9-a21ca94e7cf2.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/gw04azggx9g0dzrs?singleDoc#)

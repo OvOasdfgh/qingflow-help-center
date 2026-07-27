@@ -1,0 +1,91 @@
+---
+title: "查询单个部门详情"
+description: "调用本接口，实现获取单个部门的详细信息1. 权限说明「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有通讯录权限。2. 请求请求方式： GET请求地址： https://api.qingflow.com/department/:d..."
+slug: "/帮助文档/轻代码/openapi/通讯录/部门/查询单个部门详情"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/zs4ntz1guohhvtb6?singleDoc#"
+source_updated_at: "2024-10-15T03:35:07.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "通讯录"
+  - "部门"
+  - "查询单个部门详情"
+---
+调用本接口，实现获取单个部门的详细信息
+
+---
+
+### 权限说明
+
+「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有通讯录权限。
+
+### 请求
+
+**请求方式：** GET
+
+**请求地址：** https://api.qingflow.com/department/:deptId（公有云版本）
+
+请求地址中:deptId为需要替换的变量，根据实际获取值更新，示例如下：
+
+```javascript
+GET https://api.qingflow.com/department/888888
+```
+
+**其他版本请求地址：**
+
+钉钉版本：[https://api.ding.qingflow.com/department/:deptId](https://api.ding.qingflow.com/department/:deptId)
+
+专有轻流：http(s)://自有域名/openApi/department/:deptId
+
+#### 2.1 参数说明（路径参数）：
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| deptId | 是 | 部门 ID |
+
+#### 2.2 请求头（Header）
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“获取OpenAPI accessToken”接口文档 |
+
+### 返回
+
+#### 3.1 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| questionRelations | 是 | array | 关联的设置，本接口可忽略 |
+| result | 是 | array | 返回结果 |
+| deptId | 是 | int | 部门 ID |
+| name | 是 | string | 部门名 |
+| deptLeader | 是 | array | 部门主管的 userId |
+| parentId | 是 | int | 父部门 ID |
+| ordinal | 是 | int | 父部门下顺序值 |
+
+#### 3.2 返回体示例
+
+```plain
+{
+    "errCode": 0,
+    "errMsg": null,
+    "questionRelations": [],
+    "result": {
+        "deptId": 290144,
+        "deptLeader": [
+            "1848991",
+            "123"
+        ],
+        "name": "设计部",
+        "ordinal": 0,
+        "parentId": 286324
+    }
+}
+```
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/zs4ntz1guohhvtb6?singleDoc#)

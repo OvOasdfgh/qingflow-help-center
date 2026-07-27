@@ -1,0 +1,100 @@
+---
+title: "如何排查接口问题"
+description: "1. 场景/问题描述我们常常当遇到接口在轻流中调用不通的情况，不知道如何排查。2. 思路逻辑2.1. postman测试、检查参数先根据接口文档去检查参数位置以及参数书写是否正确（最好是先使用postman工具把接口先调用通之后再去轻流中配置）2.2. 回调接口测试（当body有内容时）pos..."
+slug: "/搭建技巧/按功能分类/轻代码/openapi/如何排查接口问题"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/ey8bra7d6iqo58h0?singleDoc#"
+source_updated_at: "2024-10-15T03:38:14.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "轻代码"
+  - "OPENAPI"
+  - "如何排查接口问题"
+---
+## 场景/问题描述
+
+我们常常当遇到接口在轻流中调用不通的情况，不知道如何排查。
+
+## 思路逻辑
+
+### postman测试、检查参数
+
+先根据接口文档去检查参数位置以及参数书写是否正确（最好是先使用postman工具把接口先调用通之后再去轻流中配置）
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690770462595-f465a2e3-81d6-433f-b09f-48509e061112.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690771295075-9050f61a-af01-45be-ab0d-6642c5b27cfd.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690770825975-a57b213f-7a7a-472d-9b9a-b8b712a0280a.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690770868993-27f51d5b-732a-458a-81d0-33a6315808f5.png)
+
+### 回调接口测试（当body有内容时）
+
+postman 测试正常，并且参数也的位置也是正确的时候，但是在轻流中依旧还是调用不通，这时候可以使用回调接口(https://connect.oalite.com/api/returnAll)去排查body中插入字段是否需要加引号（因为系统有时候会自动加引号）
+
+tips：如果body中开启了该按钮，数据会以字段内容本身插入，不会加引号的，但是如果body中有数组，数组内内容字段会自动加引号（数字字段除外）
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690772820092-dc66107f-b151-4f07-8c7a-e51e53bcdefe.png)
+
+操作路径：将URL替换成回调接口，只需要保留body的内容，其他参数全部删除
+
+method：post
+
+body内容：不动
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690772730166-2e277988-974f-4d37-805a-745ac7a314b9.png)
+
+body内容配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690772675279-8ad2d48a-176a-4851-8c81-28e7366c569f.png)
+
+json解析配置：目的是为了查看body内容是否需要加引号
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690772194959-dd161ac1-16d3-41af-a926-fd94b6abe493.png)
+
+配置多行文本字段接受
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690772701763-a0f7021e-95b2-402b-9741-da8820e8f379.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690772411368-72985ce6-6db9-4ca4-9a04-38cbcf42643d.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690772465772-399d8938-d1bd-4f26-848c-076bf1b53c1b.png)
+
+修改之后正确的结果
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1690772581832-93ba8c30-0426-47b6-a28a-eacdd1356b7f.png)
+
+### 如果配置了鉴权情况
+
+排查下鉴权是否配置有问题。
+
+需要先用postman测试通接口之后，再去配置鉴权
+
+参数位置是否配置正确
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693280866579-ff597523-d3df-4921-81d1-bab14860bc65.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693281088324-757c5fde-6b34-4f21-aa3c-ac3f4ab4f2f3.png)
+
+###### PS：参数失效机制
+
+1、调用一次即失效，即每次调用其他接口都会先调用一次鉴权获取token
+
+2、有效期内可重复调用：在点击保存之后，会请求一次鉴权，然后将获取的token进行保存，按照有效时间进行保存。例如，这里设置7200秒，即7200秒之后会再次获取token进行保存。这样每次调用其他接口都是去拿保存的token进行调用。
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1693281248923-cc07c084-ff03-4ca7-9c2d-01a59297e65f.png)
+
+### 判断接口是否做了限制
+
+如果测试下来依旧没有问题，引号全部都是正确的，客户postman测试也是可行的。如果我们使用postman测试无法调用通，有可能对方设置了白名单，需要将轻流的IP白名单给到客户。如果我们使用postman测试也是正常的，并且检查配置也正常，可以提工单让研发排查下
+
+​
+
+​
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/ey8bra7d6iqo58h0?singleDoc#)

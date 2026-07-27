@@ -1,0 +1,164 @@
+---
+title: "获取工作区子管理员配置"
+description: "获取工作区子管理员配置情况1. 权限说明仅「超管accessToken」拥有调用权限。（权限组accessToken无法调用）2. 请求请求方式：GET请求地址：https://api.qingflow.com/manager/sub（公有云版本）钉钉版本：https://api.ding.q..."
+slug: "/帮助文档/轻代码/openapi/通讯录/子管理员/获取工作区子管理员配置"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/bwpbxc7ruzhgwywl?singleDoc#"
+source_updated_at: "2024-10-15T03:35:09.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "通讯录"
+  - "子管理员"
+  - "获取工作区子管理员配置"
+---
+获取工作区子管理员配置情况
+
+---
+
+### **权限说明**
+
+仅「超管accessToken」拥有调用权限。（权限组accessToken无法调用）
+
+### 请求
+
+**请求方式：**GET
+
+**请求地址：**https://api.qingflow.com/manager/sub（公有云版本）
+
+钉钉版本：[https://api.ding.qingflow.com/manager/sub](https://api.ding.qingflow.com/manager/sub)
+
+专有轻流：http(s)://xxx.xx(自有域名)/openApi/manager/sub
+
+#### **2.1 参数说明(路径参数)：**
+
+无
+
+#### **2.2 参数说明(查询参数)：**
+
+无
+
+#### **2.3 请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+
+#### **2.4 请求体（Body）**
+
+无
+
+#### **2.5 请求体示例**
+
+无
+
+### 返回
+
+#### 3.1 返回体
+
+| 参数名 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| errCode | string | 是 | 错误码 |
+| errMsg | string | 是 | 错误描述 |
+| result | object | 是 |  |
+| subManagers | \[array\] | 是 | 子管理员配置 |
+| subManagerId | string | 是 | 子管理员id |
+| submanagerName | string | 是 | 子管理员名称 |
+| authMemberConfig | object | 是 | 子管理员权限配置 |
+| users | array | 是 | 用户id集合 |
+| userId | number | 是 | 用户id |
+| userName | string | 是 | 用户名称 |
+| departs | array |  | 部门id集合 |
+| deptId | number | 是 | 部门id |
+| deptName | string | 是 | 部门名称 |
+| roles | array |  | 角色id集合 |
+| roleId | number | 是 | 角色id |
+| roleName | string | 是 | 角色名称 |
+| beingSubDepart | boolean | 是 | 是否包含子部门 |
+| appAuthConfig | object | 是 | 应用权限配置 |
+| beingAuthApp | boolean | 是 | 应用权限配置 |
+| beingEditApp | boolean | 是 | 应用权限是否开启 |
+| beingAddApp | boolean | 是 | 应用编辑权限 |
+| beingDelApp | boolean | 是 | 删除应用权限 |
+| beingDataManage | boolean | 是 | 数据管理权限 |
+| beingEditTag | boolean | 是 | 应用包编辑权限不能为空 |
+| authScope | object | 是 | 应用/门户权限 |
+| apps | array | 是 | appKey 应用唯一标识 |
+| appKey | string | 是 | 应用key |
+| appName | string | 是 | 应用名称 |
+| dashs | array |  | 门户唯一标识 |
+| dashKeys | string | 是 | 门户唯一标识 |
+| dashName | string | 是 | 门户名称 |
+| tags | array | 是 | 应用包id |
+| tagId | string | 是 | 应用包id |
+| tagName | string | 是 | 应用包名称 |
+| authContactConfig | object | 是 | 通讯录权限配置 |
+| beingAuthContact | boolean | 是 | 通讯录权限 |
+| qingStoreAuthConfig | object | 是 |  |
+| beingUseSolution | boolean | 是 | 解决方案是否开启 |
+| beingUsePlugins | boolean | 是 | 插件是否开启 |
+| beingUseConnection | boolean | 是 | 连接中心是否开启 |
+
+#### 3.2 返回体示例
+
+```json
+{
+    "errCode": 0,
+    "errMsg": "",
+    "result": {
+        "subManagers": [{
+            "subManagerId": xxxxx,
+            "subManagerName": "xxxxx",
+            "authMemberConfig": {
+                "users": [{
+                    "userId": "xxxxx",
+                    "userName": "xxxxx"
+                }],
+                "departs": [{
+                    "deptId": "xxxxx",
+                    "deptName": "xxxxx"
+                }],
+                "roles": [{
+                    "roleId": "xxxxx",
+                    "roleName": "xxxxx"
+                }],
+                "beingSubDepart": true
+            },
+            "authAppConfig": {
+                "beingAuthApp": true,
+                "beingEditApp": true,
+                "beingAddApp": true,
+                "beingDelApp": true,
+                "beingDataManage": true,
+                "beingEditTag": true,
+                "authScope": {
+                    "apps": [{
+                        "appKey": "xxxxx",
+                        "appName": "xxxxx"
+                    }],
+                    "dashs": [{
+                        "dashKeys": "xxxxx",
+                        "dashName": "xxxxx"
+                    }],
+                    "tags": [{
+                        "tagId": "xxxxx",
+                        "tagName": "xxxxx"
+                    }]
+                }
+            },
+            "authContactConfig": {
+                "beingAuthContact": false
+            },
+            "qingStoreAuthConfig": {
+                "beingUseSolution": false,
+                "beingUsePlugins": false,
+                "beingUseConnection": false
+            }
+        }]
+    }
+}
+```
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/bwpbxc7ruzhgwywl?singleDoc#)

@@ -1,0 +1,155 @@
+---
+title: "如何实现库存盘点"
+description: "场景商品数量、状态等在日常的进出存过程中，可能会出现一些偏差，导致系统数量就和实物数量不一致， 通过库存盘点可以发现这些不一致，并进行调整达到账物相符🔗安装方案请先学习出入库的系统搭建逻辑与方法：基础出入库：https://qingflow.com/dashboard/28d66ded/vi..."
+slug: "/搭建技巧/按场景分类/进销存-仓库/如何实现库存盘点"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/bw2kqzf2oefk4tgt?singleDoc#"
+source_updated_at: "2024-10-15T03:37:57.000Z"
+keywords:
+  - "搭建技巧"
+  - "按场景分类"
+  - "进销存/仓库"
+  - "如何实现库存盘点"
+---
+### 场景
+
+商品数量、状态等在日常的进出存过程中，可能会出现一些偏差，导致系统数量就和实物数量不一致， 通过库存盘点可以发现这些不一致，并进行调整达到账物相符
+
+🔗[安装方案](https://qingflow.com/center/template/detail/aa145c43?type=3&tab=2&name=%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5)
+
+​
+
+**请先学习出入库的系统搭建逻辑与方法：**
+
+基础出入库：[https://qingflow.com/dashboard/28d66ded/view](https://qingflow.com/dashboard/28d66ded/view)
+
+出入库-移动加权平均法：[https://qingflow.com/dashboard/ede182d4/view](https://qingflow.com/dashboard/ede182d4/view)
+
+​
+
+### 搭建步骤
+
+#### 表单设置
+
+**「库存流水」应用的设置请通过出入库内容进行学习**
+
+##### 「库存盘点」
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/21388903/1644388227703-c674c9ca-647f-4379-82b1-66782daeb15c.png)
+
+【盘点人员】：成员
+
+设置默认内容-自定义-动态-当前用户
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/21388903/1644388484665-df5f8f44-696c-41bb-887c-6e60b067b873.png)
+
+【盘点日期】：日期-设置公式
+
+*CURDATE()：返回当前日期*
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/21388903/1644388591797-e89739ad-51fb-40e1-8874-78ae3952eae1.png)
+
+【盘点明细】：表格
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/21388903/1644388641921-7767801f-2505-4fbb-b50b-786f340f72bb.png)
+
+【盘点明细·商品名称】：单行文字
+
+【盘点明细·当前库存】：数据关联-聚合方式“最新数据”
+
+关联「库存流水」应用中的字段【最新库存】，筛选条件：商品名称相同，聚合方式：最新数据
+
+设置意义：获取库存流水中当前商品最新的库存数量
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/21388903/1644388798627-ab8ef166-d0f6-44bd-8040-5124f5a1fc8f.png)
+
+【盘点明细·实际库存】：数字
+
+【盘点明细·账实差额】：数字-设置公式
+
+*NUM()：返回文本中的数字*
+
+当前库存是数据关联字段，需要先通过NUM()将其字段值转换为数字再参与公式计算
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/21388903/1644389196222-609844ed-d8b9-4fd5-8864-4ebea36b5b75.png)
+
+【盘点明细·盘点结果】：单行文字-设置公式
+
+*IFS()：检查是否满足一个或多个条件，且返回符合第一个 TRUE 条件的值*
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/21388903/1644389503708-cd6a4940-af0a-43d2-80e2-a20f9043d9a2.png)
+
+【盘点明细·出库/入库】：单行文字-设置公式
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/21388903/1644389686023-bfc68205-a7b3-4779-9582-1dec903a0db9.png)
+
+【盘点明细·入库数量】：数字-设置公式
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/21388903/1644389719778-52cfc7b9-05d0-4b78-83f0-b7a7fc055aa8.png)
+
+【盘点明细·出库数量】：数字-设置公式
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/21388903/1644389744258-9e8c847b-dcc9-451e-aebb-542b8f2bf64c.png)
+
+【盘点明细·当前库存金额】：数据关联-聚合方式“最新数据”
+
+关联「库存流水」应用中的字段【最新库存金额】，筛选条件：商品名称相同，聚合方式：最新数据
+
+设置意义：获取库存流水中当前商品最新的库存金额
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/21388903/1644389798388-f0fe6dad-4aa2-4cc5-914a-125b2d4c400e.png)
+
+【盘点明细·当前平均成本单价】：数据关联-聚合方式“最新数据”
+
+关联「库存流水」应用中的字段【最新平均成本单价】，筛选条件：商品名称相同，聚合方式：最新数据
+
+设置意义：获取库存流水中当前商品最新的平均成本单价
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/21388903/1644389958065-d321e2d5-75b2-4ec1-a0e8-f2c06d9edbc3.png)
+
+【盘点明细·入库金额】：数字-设置公式
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/21388903/1644390272919-aeb8ffa3-e7f3-4ef0-a4f3-2c7d981ba256.png)
+
+【盘点明细·出库金额】：数字-设置公式
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/21388903/1644390295416-609d95ae-b53e-42b1-970b-7d917d0a6288.png)
+
+【盘点明细·引用】：引用
+
+引用「商品信息」应用中的数据，显示字段：商品名称，字段填充：「商品信息」应用中的商品名称填充到当前表格中的商品名称，勾选“作为表格数据来源”（点击“添加商品”可批量添加商品到表格）
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/21388903/1648447903342-1ff3c67a-e8b9-4b08-8ead-3e0018aa55ce.png)
+
+#### 流程设置
+
+##### 「库存盘点」
+
+在申请人节点-高级设置中开启“提交/通过时重新触发数据关联或公式”，选择需要重新触发的字段（如图）
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/21388903/1644390667262-97c1596e-92df-4407-9de7-18850cda958e.png)
+
+添加节点Q-Robot添加数据，往目标应用「库存流水」中添加数据，调整库存数量与库存金额，添加规则如图
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/21388903/1644390722304-d33ca452-619e-4cdd-ab5d-3495618bc6f6.png)
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/bw2kqzf2oefk4tgt?singleDoc#)

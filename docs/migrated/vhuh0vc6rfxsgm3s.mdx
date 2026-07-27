@@ -1,0 +1,88 @@
+---
+title: "案例：百度营销推送线索到轻流"
+description: "场景描述用户希望在轻流系统中，对百度营销的线索进行跟进与经营。解决方案针对上述场景，轻流推荐使用【Q-Source被动模式】功能与百度营销进行对接，实现将百度营销推送线索到轻流。操作步骤第一步：在轻流中新建应用新增三个单行文本字段：手机号、账号、线索ID（如下图）保存后在申请人节点-高级设置中..."
+slug: "/帮助文档/轻代码/集成中心/q-sourse/q-source被动/案例-百度营销推送线索到轻流"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/vhuh0vc6rfxsgm3s?singleDoc#"
+source_updated_at: "2024-11-26T08:30:13.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "集成中心"
+  - "Q-Sourse"
+  - "Q-Source被动"
+  - "案例：百度营销推送线索到轻流"
+---
+## 场景描述
+
+用户希望在轻流系统中，对百度营销的线索进行跟进与经营。
+
+## 解决方案
+
+针对上述场景，轻流推荐使用【Q-Source被动模式】功能与百度营销进行对接，实现将百度营销推送线索到轻流。
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/Cms-images/6/%E7%99%BE%E5%BA%A6%E8%90%A5%E9%94%80qsource%E8%A2%AB%E5%8A%A8%E6%A1%88%E4%BE%8B1.1.gif?sign=5c612957d247b964f676f71a7dc363d5&t=1683626799)​
+
+## 操作步骤
+
+### 第一步：在轻流中新建应用
+
+新增三个单行文本字段：手机号、账号、线索ID（如下图）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/ijB728By4AurBbNa8kEtkJmMebCGEN3n_.png)
+
+保存后在申请人节点-高级设置中添加Q-Source被动来源（下图）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/wG5w3JIv0L8jqza5hIwsIyyDbyMj0ogl_.png)
+
+然后配置Q-Source被动：将应用中字段与Json Path对应（Json Path别名可以自定义）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/AA89zOHA-rnjvV1wq_aYRdcGgg9_8skO_.png)
+
+可以设置更新条件，每当有数据更新时，按照更新条件更新对应数据
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/MSrcs01SSVY0RE0eQYP1dxviyWqa3fU2_.png)
+
+配置好之后将URL地址（下图）复制下来就可以发布应用了。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/cs6ljoqLprblJqu6QN5ZOM4ipKe4VvKs_.png)
+
+### 第二步：在百度营销中配置线索推送
+
+设置入口： 营销服务-->营销通-->账户设置-->线索接收-->API导出-->推送POST（见下图，可参考[**文档**](https://dev2.baidu.com/content?sceneType=0&pageId=101426&nodeId=669&subhead=)）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/JkciqzrAVc4j2zL2wl_F7BJGZeua0FtK_.png)
+
+然后点击新建规则（下图）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/ejkLpMYA8t5o5pXolsb-jCkwYxOLXVFd_.png)
+
+进入配置页面（下图），填写复制的Q-Source被动的URL地址、设置映射关系
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/D722cczEQTQLQVSRNxQxWMY3drGi8t9v_.png)
+
+点击下一步，可以设置数据发送格式（下图，无需更改）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/Myf0QvnOrd8LgprXOSE1-rE2SePzjwm__.png)
+
+### 第三步：发送测试数据
+
+点击下一步后，可见下图，点击「发送测试数据」后，可以获得轻流接口的返回信息
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/vzRfROOrAyXiW10U5sfqJbrQuTyNDwmn_.png)
+
+在轻流应用中可以查看到测试数据，说明已经配置成功，可以在百度营销中点击「新建」完成配置。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/QMt_GL_f-KC51xpsLRjtSN-3st6bVIDT_.png)
+
+### 第四步：在百度营销中启动配置
+
+启动配置后，新线索会被推送至您的轻流应用中
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/LhWKm5k-dllE_c55YmICZYljHwcCFH0k_.png)
+
+## 注意事项
+
+请保护好您的Q-source被动地址
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/vhuh0vc6rfxsgm3s?singleDoc#)

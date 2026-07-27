@@ -1,0 +1,58 @@
+---
+title: "如何实现订单分仓发货"
+description: "1.场景同一个订单中会有不同仓库的商品，希望可以把同一个仓库的商品汇总到一起进行发货2.实现思路要实现把订单子表格中的商品信息分仓库添加到发货表中，有几个仓库就代表需要添加成几条数据，然后把同一个仓库的商品添加到同一条数据里面，可以通过把仓库名称作为分支条件，总的有几个仓库就设置几个分支，在分..."
+slug: "/常见问题-faq/表单/如何实现订单分仓发货"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/xzsv1y9qpqs3ti96?singleDoc#"
+source_updated_at: "2025-02-18T02:40:21.000Z"
+keywords:
+  - "常见问题（FAQ）"
+  - "表单"
+  - "如何实现订单分仓发货"
+---
+## 1.场景
+
+同一个订单中会有不同仓库的商品，希望可以把同一个仓库的商品汇总到一起进行发货
+
+## 2.实现思路
+
+要实现把订单子表格中的商品信息分仓库添加到发货表中，有几个仓库就代表需要添加成几条数据，然后把同一个仓库的商品添加到同一条数据里面，可以通过把仓库名称作为分支条件，总的有几个仓库就设置几个分支，在分支下面走对应QR添加数据的流程，QR中添加表格可以设置添加部分行，筛选条件为仓库名称，就可以实现这个场景了。
+
+## 3.搭建示例
+
+### 3.1应用配置
+
+该场景一共涉及以下两个应用，把「订单表」中的商品分仓库添加到「发货表」
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1732760997350-a28bb377-12f4-4559-bb11-83687f5e0b3b.png)
+
+3.1表单设置
+
+**订单表**
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1732763307364-07221bda-9995-4cc4-917e-d7bb45ef3852.png)
+
+PS：此场景中的仓库数量是固定不变的，如果后期要增加的话可以增加分支
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1732763409109-61c1941b-5be7-4b95-8ac6-60ef561c9363.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1732763491457-b8ef572c-f53d-40e5-bc98-f13ee440cf9c.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1732763541138-a80c97cd-711b-492b-a6e7-9d7805d227e7.png)
+
+**发货表**
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1732764161402-3ce53076-531e-4199-96bf-04a0549028b5.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1732764262021-1e93af58-a4f6-4039-871d-57f0dc91b7b2.png)
+
+### 3.2实现效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1732764578671-c11a18ad-be9e-4875-b4fa-dd91187b96fa.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1732764667610-6fae8b69-1e6d-4b01-8e3a-a7847ffa2ca8.png)
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/xzsv1y9qpqs3ti96?singleDoc#)

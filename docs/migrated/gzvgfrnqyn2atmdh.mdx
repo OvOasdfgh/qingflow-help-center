@@ -1,0 +1,426 @@
+---
+title: "轻流 x 旺店通（旗舰版）"
+description: "应用场景产品介绍：旺店通是一款专门为电商量身定做的电商ERP系统软件,致力于提供专业的电子商务ERP解决方案,能全面覆盖线上电商、网店以及线下实体店进销存管理及wms仓储管理系统等官网：https://www.wangdian.cn/API文档：https://open.wangdian.cn..."
+slug: "/搭建技巧/按功能分类/第三方集成/旺店通/轻流-x-旺店通-旗舰版"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/gzvgfrnqyn2atmdh?singleDoc#"
+source_updated_at: "2024-10-15T03:38:17.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "第三方集成"
+  - "旺店通"
+  - "轻流 x 旺店通（旗舰版）"
+---
+## 应用场景
+
+产品介绍：
+
+旺店通是一款专门为电商量身定做的电商ERP系统软件,致力于提供专业的电子商务ERP解决方案,能全面覆盖线上电商、网店以及线下实体店进销存管理及wms仓储管理系统等
+
+官网：[https://www.wangdian.cn/](https://www.wangdian.cn/)
+
+API文档：[https://open.wangdian.cn/qjb/open/apidoc](https://open.wangdian.cn/qjb/open/apidoc)
+
+实现目标：
+
+通过轻流应用表单实现与旺店通（旗舰版）进行对接
+
+Ps:
+
+1、目前批量获取数据暂时只能存放在表格中并且只能获取部分数据，体验上会有点不好。
+
+不过后续产品QS主动支持代码块处理即可实现定时轮训获取。如果不想要放在表格中，可以采用定制开发来实现
+
+## 落地方案
+
+![原文画板](https://cdn.nlark.com/yuque/0/2023/jpeg/28884377/1697175834497-1042801b-4eb0-4ce5-8638-56c99d642a22.jpeg)
+
+## 图文/视频演示
+
+## 帮助文档
+
+### 一、旺店通（旗舰版）接入
+
+- 接入指南：[https://open.wangdian.cn/qjb/open/guide?path=qjbguide\_kfzn](https://open.wangdian.cn/qjb/open/guide?path=qjbguide_kfzn)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697175875012-549289cf-ae25-4e92-800b-852d94ec1e53.png)
+
+- 获取必要参数，这里是测试环境测试用
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697175993963-2c22e20b-5e3c-43cf-b887-a8776531b99c.png)
+
+- 正式环境必要参数获取位置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697176029703-c4de77c7-b499-4628-9a6f-65754fcc815a.png)
+
+注意点：
+
+接口规范：[https://open.wangdian.cn/qjb/open/guide?path=qjbguide\_jkgf](https://open.wangdian.cn/qjb/open/guide?path=qjbguide_jkgf)
+
+- REST风格的API，使用HTTPS协议发送POST请求调用接口。
+- HTTP请求头类型为 Content-Type: application/json 或者 Content-Type: application/xml
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697176089534-21eddbf0-2d92-4e0c-ab3d-c40242cdcd98.png)
+
+### 二、签名算法
+
+#### 1、签名sign介绍
+
+- 算法说明：[https://open.wangdian.cn/qjb/open/guide?path=qjbguide\_signsf](https://open.wangdian.cn/qjb/open/guide?path=qjbguide_signsf)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697176125701-519a359f-9e89-4f6a-bd46-39be1ede5d1f.png)
+
+- 这里算法说明示例是以重量回传为例的
+- 接口文档地址：[https://open.wangdian.cn/qjb/open/apidoc/doc?path=wms.stockout.Sales.weighingExt](https://open.wangdian.cn/qjb/open/apidoc/doc?path=wms.stockout.Sales.weighingExt)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697177172992-5a348055-2f91-472a-87d1-45361bc0726a.png)
+
+#### 2、代码块实现
+
+以文档所举为示例，其中timestamp计算规则：秒级时间戳, 当前时间戳减去 2012-01-01 00:00:00(1325347200), 时间与服务器时间差120s内即合法。
+
+```javascript
+const crypto = require('crypto');
+const { differenceInSeconds } = require('date-fns');
+// 当前时间
+const currentDate = new Date();
+// 2012-01-01 00:00:00 的时间
+const startDate = new Date(2012, 0, 1, 0, 0, 0);
+// 时间戳差值
+const timestampDiff = differenceInSeconds(currentDate, startDate);
+
+// 第一步：将 appsecret 分割为 secret 和 salt
+const appsecret = '693f9fed686bfe13441385da98b436b6:dd488d0802b1e431e4c72cd355847853';
+const [secret, salt] = appsecret.split(':');
+
+// 第二步：定义请求参数
+const params = {
+  key: 'czhc',
+  salt: salt,
+  method: 'wms.stockout.Sales.weighingExt',
+  timestamp: timestampDiff,
+  v: '1.0',
+  sid: 'wdterp30',
+  body: '["xc109393939393939","",1.2,0,false]'
+};
+
+// 第三步：按键名对参数进行排序
+const sortedParams = Object.keys(params).sort().reduce((acc, key) => {
+  acc[key] = params[key];
+  return acc;
+}, {});
+
+// 第四步：拼接排序后的键值对
+const concatenatedString = `${secret}${Object.entries(sortedParams).map(([key, value]) => `${key}${value}`).join('')}${secret}`;
+
+// 第五步：计算 MD5 哈希值
+const sign = crypto.createHash('md5').update(concatenatedString).digest('hex');
+
+// 第六步：将 sign 参数添加到 params 对象中
+params.sign = sign;
+
+qf_output={params}
+
+```
+
+#### 3、代码测试
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697176475743-10207a31-9558-48ac-bb08-72e832b24eb0.png)
+
+### 三、**订单查询**为例
+
+对应的接口文档：[https://open.wangdian.cn/qjb/open/apidoc/doc?path=sales.TradeQuery.queryWithDetail](https://open.wangdian.cn/qjb/open/apidoc/doc?path=sales.TradeQuery.queryWithDetail)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697177481323-f781a218-883a-4032-aa1d-7960e7a4d1a9.png)
+
+#### 1、代码块实现
+
+- 具体查询参数内容根据接口文档去填写，填写至params中
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697182416785-4f8723c6-de2b-4618-89dd-4e9c71216070.png)
+
+- appkey、appsecret以及sid需替换为咱们旺店通所提供的具体参数内容
+- 这里end\_time、start\_time为插入表单中的字段
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697008935076-97170c60-a471-4fba-ac99-31e7d82ef01d.png)
+
+这里最后代码中的处理是对于接口返回的数据进行处理，由于order是数组，每个元素中又有数组detail\_list，在轻流中相当于表格行中嵌入表格，轻流并不支持，所以将数组处理进行整合。
+
+处理逻辑是：将order每个元素的数据除了detail\_list数组以外的数据放进detail\_list的每个元素中，然后最后整合输出新的list数组
+
+```javascript
+const { differenceInSeconds } = require('date-fns');
+const crypto = require('crypto');
+const axios = require('axios');
+
+// 当前时间
+const currentDate = new Date();
+// 2012-01-01 00:00:00 的时间
+const startDate = new Date(2012, 0, 1, 0, 0, 0);
+// 时间戳差值
+const timestampDiff = differenceInSeconds(currentDate, startDate);
+
+// 第一步：将 appsecret 分割为 secret 和 salt
+const appsecret = '693f9fed686bfe13441385da98b436b6:dd488d0802b1e431e4c72cd355847853';
+const [secret, salt] = appsecret.split(':');
+
+let data = JSON.stringify([
+    {
+      "start_time": qf_field.{开始日期$$18639AE02$$},
+      "end_time": qf_field.{结束日期$$18639AE18$$}
+    }
+  ]);
+let parsedData = JSON.parse(data);
+
+// 第二步：定义请求参数
+const params = {
+  key: 'czhc',
+  salt: salt,
+  method: 'sales.TradeQuery.queryWithDetail',
+  timestamp: timestampDiff,
+  v: '1.0',
+  sid: 'wdterp30',
+  page_size:50,
+  page_no:0,
+  body: data
+};
+
+// 第三步：按键名对参数进行排序
+const sortedParams = Object.keys(params).sort().reduce((acc, key) => {
+  acc[key] = params[key];
+  return acc;
+}, {});
+
+// 第四步：拼接排序后的键值对
+const concatenatedString = `${secret}${Object.entries(sortedParams).map(([key, value]) => `${key}${value}`).join('')}${secret}`;
+
+// 第五步：计算 MD5 哈希值
+const sign = crypto.createHash('md5').update(concatenatedString).digest('hex');
+
+// 第六步：将 sign 参数添加到 params 对象中
+params.sign = sign;
+
+let config = {
+  method: 'post',
+  maxBodyLength: Infinity,
+  url: `http://wdt.wangdian.cn/openapi?sid=${params.sid}&key=${params.key}&salt=${params.salt}&method=${params.method}&v=${params.v}&timestamp=${params.timestamp}&sign=${params.sign}`,
+  headers: { 
+    'Content-Type': 'application/json'
+  },
+  data : data
+};
+if(parsedData[0].start_time==null || parsedData[0].end_time==null){
+    qf_output={'data':null}
+}else{
+axios(config)
+.then(function (res) {
+    const resdata=res.data;
+    const orders = resdata.data.order;
+    const newList = [];
+//由于order中有数组detail_list，在轻流中相当于表格行中嵌入表格，轻流并不支持，所以将数组处理进行整合
+orders.forEach(order => {
+    const detailList = order.detail_list;
+
+    detailList.forEach(detail => {
+        const newDetail = { ...detail, ...order };
+        delete newDetail.detail_list;
+        newList.push(newDetail);
+    });
+});
+qf_output={'list':newList}
+});
+}
+```
+
+#### 2、字段接收配置
+
+- 这里只配置了部分字段，可以根据自己的需求去具体配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697184716216-1981f866-d1d6-4ebb-ada4-eb902df3629c.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697184740677-820ea382-e27c-4814-9b12-259fa9449320.png)
+
+### 四、**供应商信息推送**为例
+
+对应的接口文档：[https://open.wangdian.cn/qjb/open/apidoc/doc?path=setting.PurchaseProvider.push](https://open.wangdian.cn/qjb/open/apidoc/doc?path=setting.PurchaseProvider.push)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697185567538-d1157c16-9314-4dfb-ad6a-7ada2d49481b.png)
+
+#### 1、代码块实现
+
+- 表单配置参考
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697186226697-49d0035a-0bb2-4d51-add2-6f86b520424d.png)
+
+- 这里的请求参数根据具体接口文档去修改
+- qf\_field.\{供应商编号$$18644BC92$$\} ：表单中供应商编号字段，其余插入字段参考该字段
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697186290693-d47df895-3272-46fb-b7e2-2a10a0ea6428.png)
+
+- appkey、appsecret以及sid需替换为咱们旺店通所提供的具体参数内容
+
+```javascript
+const { differenceInSeconds } = require('date-fns');
+const crypto = require('crypto');
+const axios = require('axios');
+
+// 当前时间
+const currentDate = new Date();
+// 2012-01-01 00:00:00 的时间
+const startDate = new Date(2012, 0, 1, 0, 0, 0);
+// 时间戳差值
+const timestampDiff = differenceInSeconds(currentDate, startDate);
+
+// 第一步：将 appsecret 分割为 secret 和 salt
+const appsecret = '693f9fed686bfe13441385da98b436b6:dd488d0802b1e431e4c72cd355847853';
+const [secret, salt] = appsecret.split(':');
+
+let data = JSON.stringify([
+    {
+      "provider_no":qf_field.{供应商编号$$18644BC92$$} ,
+      "provider_name": qf_field.{供应商名称$$18644BCA8$$},
+      "contact": qf_field.{联系人$$18644BCA9$$}
+    }
+  ]);
+
+// 第二步：定义请求参数
+const params = {
+  key: 'czhc',
+  salt: salt,
+  method: 'setting.PurchaseProvider.push',
+  timestamp: timestampDiff,
+  v: '1.0',
+  sid: 'wdterp30',
+  body: data
+};
+
+// 第三步：按键名对参数进行排序
+const sortedParams = Object.keys(params).sort().reduce((acc, key) => {
+  acc[key] = params[key];
+  return acc;
+}, {});
+
+// 第四步：拼接排序后的键值对
+const concatenatedString = `${secret}${Object.entries(sortedParams).map(([key, value]) => `${key}${value}`).join('')}${secret}`;
+
+// 第五步：计算 MD5 哈希值
+const sign = crypto.createHash('md5').update(concatenatedString).digest('hex');
+
+// 第六步：将 sign 参数添加到 params 对象中
+params.sign = sign;
+
+let config = {
+  method: 'post',
+  maxBodyLength: Infinity,
+  url: `http://wdt.wangdian.cn/openapi?sid=${params.sid}&key=${params.key}&salt=${params.salt}&method=${params.method}&v=${params.v}&timestamp=${params.timestamp}&sign=${params.sign}`,
+  headers: { 
+    'Content-Type': 'application/json'
+  },
+  data : data
+};
+    axios(config)
+    .then(function (res) {
+        const resdata=res.data;
+      qf_output={resdata}
+    });
+```
+
+##### 字段接收配置
+
+- 上述配置完成后，点击代码块，推送的结果信息会推到对应字段中
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697186423939-2dc9a658-5290-4289-8739-58c81a21e924.png)![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697186525505-26d8873f-2c49-46dd-b143-5da7b85fb962.png)
+
+#### 2、webhook实现
+
+- 通过代码块计算签名之后，提交数据进入流程触发webhook去完成调用接口
+
+- 注意点：生成签名后，需要在2min之内提交数据触发webhook,因为旺店通旗舰版时间与服务器时间差120s内即合法。
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697187060001-c162a6fb-f81f-4c7c-ad9a-c47c4b77e21f.png)
+
+##### 实现路径
+
+- 代码块签名
+
+```javascript
+const { differenceInSeconds } = require('date-fns');
+const crypto = require('crypto');
+const axios = require('axios');
+
+// 当前时间
+const currentDate = new Date();
+// 2012-01-01 00:00:00 的时间
+const startDate = new Date(2012, 0, 1, 0, 0, 0);
+// 时间戳差值
+const timestampDiff = differenceInSeconds(currentDate, startDate);
+
+// 第一步：将 appsecret 分割为 secret 和 salt
+const appsecret = '693f9fed686bfe13441385da98b436b6:dd488d0802b1e431e4c72cd355847853';
+const [secret, salt] = appsecret.split(':');
+
+let data = JSON.stringify([
+    {
+      "provider_no":qf_field.{供应商编号$$18644DBE9$$},
+      "provider_name":qf_field.{供应商名称$$18644DBEA$$},
+      "contact": qf_field.{联系人$$18644DBEB$$}
+    }
+  ]);
+
+// 第二步：定义请求参数
+const params = {
+  key: 'czhc',
+  salt: salt,
+  method: 'setting.PurchaseProvider.push',
+  timestamp: timestampDiff,
+  v: '1.0',
+  sid: 'wdterp30',
+  body: data
+};
+
+// 第三步：按键名对参数进行排序
+const sortedParams = Object.keys(params).sort().reduce((acc, key) => {
+  acc[key] = params[key];
+  return acc;
+}, {});
+
+// 第四步：拼接排序后的键值对
+const concatenatedString = `${secret}${Object.entries(sortedParams).map(([key, value]) => `${key}${value}`).join('')}${secret}`;
+
+// 第五步：计算 MD5 哈希值
+const sign = crypto.createHash('md5').update(concatenatedString).digest('hex');
+
+// 第六步：将 sign 参数添加到 params 对象中
+params.sign = sign;
+
+qf_output={params}
+```
+
+##### 字段接收配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697081941010-0be6b354-65d6-4bcc-90da-6c1629dc7666.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697187119086-a8259cbb-f810-48fd-ab6e-43b785da013f.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697187220586-503daf5d-293c-4e44-bed6-aa4cb35bc1d5.png)
+
+- webhook配置
+- 只需要配置param以及body中内容即可，Method和URL是固定的
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697187400624-3f4b385d-e7a5-4b49-b302-bca7551644c1.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697187421662-14e30766-572e-444e-b31e-27b305432fc3.png)
+
+​
+
+##### ​
+
+##### 
+
+#### 
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/gzvgfrnqyn2atmdh?singleDoc#)

@@ -1,0 +1,543 @@
+{
+  "generatedAt": "2026-07-26T16:38:56.060Z",
+  "bookId": 56599228,
+  "nodes": 1068,
+  "directories": 101,
+  "total": 967,
+  "migrated": 933,
+  "placeholders": 34,
+  "images": 8301,
+  "attachments": 18,
+  "videos": 40,
+  "retries": 96,
+  "unknownCards": {},
+  "failures": [
+    {
+      "order": 209,
+      "title": "字段类型与配置",
+      "path": [
+        "帮助文档",
+        "表单引擎",
+        "字段类型与配置"
+      ],
+      "sourceSlug": "db3k8uim1f4n072h",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/db3k8uim1f4n072h?singleDoc#",
+      "targetSlug": "/帮助文档/表单引擎/字段类型与配置",
+      "targetFile": "docs/migrated/db3k8uim1f4n072h.mdx",
+      "status": "placeholder",
+      "error": "Converted Markdown is empty"
+    },
+    {
+      "order": 247,
+      "title": "表格工具类",
+      "path": [
+        "帮助文档",
+        "表单引擎",
+        "字段类型与配置",
+        "表格工具类"
+      ],
+      "sourceSlug": "zxhl8msigd70gdvs",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/zxhl8msigd70gdvs?singleDoc#",
+      "targetSlug": "/帮助文档/表单引擎/字段类型与配置/表格工具类",
+      "targetFile": "docs/migrated/zxhl8msigd70gdvs.mdx",
+      "status": "placeholder",
+      "error": "API returned empty content"
+    },
+    {
+      "order": 295,
+      "title": "只有申请人节点可配置的属性（补充）",
+      "path": [
+        "帮助文档",
+        "流程引擎",
+        "流程属性设置",
+        "高级设置",
+        "只有申请人节点可配置的属性（补充）"
+      ],
+      "sourceSlug": "meprc0g78p31z9v8",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/meprc0g78p31z9v8?singleDoc#",
+      "targetSlug": "/帮助文档/流程引擎/流程属性设置/高级设置/只有申请人节点可配置的属性-补充",
+      "targetFile": "docs/migrated/meprc0g78p31z9v8.mdx",
+      "status": "placeholder",
+      "error": "API returned empty content"
+    },
+    {
+      "order": 304,
+      "title": "移动端打印（小程序、H5）",
+      "path": [
+        "帮助文档",
+        "流程引擎",
+        "流程属性设置",
+        "高级设置",
+        "节点通用属性",
+        "打印模版",
+        "移动端打印（小程序、H5）"
+      ],
+      "sourceSlug": "rq5zylhv09t6ynpf",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/rq5zylhv09t6ynpf?singleDoc#",
+      "targetSlug": "/帮助文档/流程引擎/流程属性设置/高级设置/节点通用属性/打印模版/移动端打印-小程序-h5",
+      "targetFile": "docs/migrated/rq5zylhv09t6ynpf.mdx",
+      "status": "placeholder",
+      "error": "HTTP 401"
+    },
+    {
+      "order": 308,
+      "title": "签章审批",
+      "path": [
+        "帮助文档",
+        "流程引擎",
+        "流程属性设置",
+        "高级设置",
+        "节点通用属性",
+        "签章审批"
+      ],
+      "sourceSlug": "zh4q8u2tq0mex3r7",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/zh4q8u2tq0mex3r7?singleDoc#",
+      "targetSlug": "/帮助文档/流程引擎/流程属性设置/高级设置/节点通用属性/签章审批",
+      "targetFile": "docs/migrated/zh4q8u2tq0mex3r7.mdx",
+      "status": "placeholder",
+      "error": "API returned empty content"
+    },
+    {
+      "order": 314,
+      "title": "支付信息",
+      "path": [
+        "帮助文档",
+        "流程引擎",
+        "流程属性设置",
+        "高级设置",
+        "节点通用属性",
+        "在线支付",
+        "支付信息"
+      ],
+      "sourceSlug": "ao0r73lyav34vvtu",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/ao0r73lyav34vvtu?singleDoc#",
+      "targetSlug": "/帮助文档/流程引擎/流程属性设置/高级设置/节点通用属性/在线支付/支付信息",
+      "targetFile": "docs/migrated/ao0r73lyav34vvtu.mdx",
+      "status": "placeholder",
+      "error": "API returned empty content"
+    },
+    {
+      "order": 464,
+      "title": "我的空间",
+      "path": [
+        "帮助文档",
+        "其它",
+        "我的空间"
+      ],
+      "sourceSlug": "yr44yxwfcy3rtal7",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/yr44yxwfcy3rtal7?singleDoc#",
+      "targetSlug": "/帮助文档/其它/我的空间",
+      "targetFile": "docs/migrated/yr44yxwfcy3rtal7.mdx",
+      "status": "placeholder",
+      "error": "HTTP 401"
+    },
+    {
+      "order": 466,
+      "title": "轻代码",
+      "path": [
+        "帮助文档",
+        "轻代码"
+      ],
+      "sourceSlug": "de9yymw35ioh3ahw",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/de9yymw35ioh3ahw?singleDoc#",
+      "targetSlug": "/帮助文档/轻代码",
+      "targetFile": "docs/migrated/de9yymw35ioh3ahw.mdx",
+      "status": "placeholder",
+      "error": "API returned empty content"
+    },
+    {
+      "order": 555,
+      "title": "通讯录",
+      "path": [
+        "帮助文档",
+        "轻代码",
+        "OPENAPI",
+        "通讯录"
+      ],
+      "sourceSlug": "gguvnt565592bc3x",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/gguvnt565592bc3x?singleDoc#",
+      "targetSlug": "/帮助文档/轻代码/openapi/通讯录",
+      "targetFile": "docs/migrated/gguvnt565592bc3x.mdx",
+      "status": "placeholder",
+      "error": "API returned empty content"
+    },
+    {
+      "order": 556,
+      "title": "角色",
+      "path": [
+        "帮助文档",
+        "轻代码",
+        "OPENAPI",
+        "通讯录",
+        "角色"
+      ],
+      "sourceSlug": "kq3di9xarce4gn51",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/kq3di9xarce4gn51?singleDoc#",
+      "targetSlug": "/帮助文档/轻代码/openapi/通讯录/角色",
+      "targetFile": "docs/migrated/kq3di9xarce4gn51.mdx",
+      "status": "placeholder",
+      "error": "API returned empty content"
+    },
+    {
+      "order": 564,
+      "title": "部门",
+      "path": [
+        "帮助文档",
+        "轻代码",
+        "OPENAPI",
+        "通讯录",
+        "部门"
+      ],
+      "sourceSlug": "bt4i1k7lkgq9tzc3",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/bt4i1k7lkgq9tzc3?singleDoc#",
+      "targetSlug": "/帮助文档/轻代码/openapi/通讯录/部门",
+      "targetFile": "docs/migrated/bt4i1k7lkgq9tzc3.mdx",
+      "status": "placeholder",
+      "error": "API returned empty content"
+    },
+    {
+      "order": 615,
+      "title": "应用数据接口",
+      "path": [
+        "帮助文档",
+        "轻代码",
+        "OPENAPI",
+        "应用数据接口"
+      ],
+      "sourceSlug": "nu8kk3ols3b4i7ew",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/nu8kk3ols3b4i7ew?singleDoc#",
+      "targetSlug": "/帮助文档/轻代码/openapi/应用数据接口",
+      "targetFile": "docs/migrated/nu8kk3ols3b4i7ew.mdx",
+      "status": "placeholder",
+      "error": "API returned empty content"
+    },
+    {
+      "order": 668,
+      "title": "最佳实践",
+      "path": [
+        "帮助文档",
+        "轻翼",
+        "最佳实践"
+      ],
+      "sourceSlug": "qviy0fvu2kwfzgiz",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/qviy0fvu2kwfzgiz?singleDoc#",
+      "targetSlug": "/帮助文档/轻翼/最佳实践",
+      "targetFile": "docs/migrated/qviy0fvu2kwfzgiz.mdx",
+      "status": "placeholder",
+      "error": "API returned empty content"
+    },
+    {
+      "order": 685,
+      "title": "进销存/仓库",
+      "path": [
+        "解决方案",
+        "按场景分类",
+        "进销存/仓库"
+      ],
+      "sourceSlug": "ggcxv9oafr2kro68",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/ggcxv9oafr2kro68?singleDoc#",
+      "targetSlug": "/解决方案/按场景分类/进销存-仓库",
+      "targetFile": "docs/migrated/ggcxv9oafr2kro68.mdx",
+      "status": "placeholder",
+      "error": "API returned empty content"
+    },
+    {
+      "order": 692,
+      "title": "客户/销售",
+      "path": [
+        "解决方案",
+        "按场景分类",
+        "客户/销售"
+      ],
+      "sourceSlug": "hhvkvgivhbmy1aa8",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/hhvkvgivhbmy1aa8?singleDoc#",
+      "targetSlug": "/解决方案/按场景分类/客户-销售",
+      "targetFile": "docs/migrated/hhvkvgivhbmy1aa8.mdx",
+      "status": "placeholder",
+      "error": "API returned empty content"
+    },
+    {
+      "order": 696,
+      "title": "ERP/生产",
+      "path": [
+        "解决方案",
+        "按场景分类",
+        "ERP/生产"
+      ],
+      "sourceSlug": "oa0vk7lm0h7l6gzd",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/oa0vk7lm0h7l6gzd?singleDoc#",
+      "targetSlug": "/解决方案/按场景分类/erp-生产",
+      "targetFile": "docs/migrated/oa0vk7lm0h7l6gzd.mdx",
+      "status": "placeholder",
+      "error": "API returned empty content"
+    },
+    {
+      "order": 698,
+      "title": "人事/行政",
+      "path": [
+        "解决方案",
+        "按场景分类",
+        "人事/行政"
+      ],
+      "sourceSlug": "ymw453z0spevr3b2",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/ymw453z0spevr3b2?singleDoc#",
+      "targetSlug": "/解决方案/按场景分类/人事-行政",
+      "targetFile": "docs/migrated/ymw453z0spevr3b2.mdx",
+      "status": "placeholder",
+      "error": "API returned empty content"
+    },
+    {
+      "order": 702,
+      "title": "项目/任务",
+      "path": [
+        "解决方案",
+        "按场景分类",
+        "项目/任务"
+      ],
+      "sourceSlug": "awl9muwmikuauhiz",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/awl9muwmikuauhiz?singleDoc#",
+      "targetSlug": "/解决方案/按场景分类/项目-任务",
+      "targetFile": "docs/migrated/awl9muwmikuauhiz.mdx",
+      "status": "placeholder",
+      "error": "API returned empty content"
+    },
+    {
+      "order": 708,
+      "title": "财务/报销",
+      "path": [
+        "解决方案",
+        "按场景分类",
+        "财务/报销"
+      ],
+      "sourceSlug": "vqgo36z94y98xasy",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/vqgo36z94y98xasy?singleDoc#",
+      "targetSlug": "/解决方案/按场景分类/财务-报销",
+      "targetFile": "docs/migrated/vqgo36z94y98xasy.mdx",
+      "status": "placeholder",
+      "error": "API returned empty content"
+    },
+    {
+      "order": 710,
+      "title": "设备/巡检",
+      "path": [
+        "解决方案",
+        "按场景分类",
+        "设备/巡检"
+      ],
+      "sourceSlug": "mpsgtr014yuega3g",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/mpsgtr014yuega3g?singleDoc#",
+      "targetSlug": "/解决方案/按场景分类/设备-巡检",
+      "targetFile": "docs/migrated/mpsgtr014yuega3g.mdx",
+      "status": "placeholder",
+      "error": "API returned empty content"
+    },
+    {
+      "order": 712,
+      "title": "工单/售后",
+      "path": [
+        "解决方案",
+        "按场景分类",
+        "工单/售后"
+      ],
+      "sourceSlug": "mvpnezg7nh5egib4",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/mvpnezg7nh5egib4?singleDoc#",
+      "targetSlug": "/解决方案/按场景分类/工单-售后",
+      "targetFile": "docs/migrated/mvpnezg7nh5egib4.mdx",
+      "status": "placeholder",
+      "error": "API returned empty content"
+    },
+    {
+      "order": 714,
+      "title": "采招/供应",
+      "path": [
+        "解决方案",
+        "按场景分类",
+        "采招/供应"
+      ],
+      "sourceSlug": "cpw8zegz718g0rfp",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/cpw8zegz718g0rfp?singleDoc#",
+      "targetSlug": "/解决方案/按场景分类/采招-供应",
+      "targetFile": "docs/migrated/cpw8zegz718g0rfp.mdx",
+      "status": "placeholder",
+      "error": "API returned empty content"
+    },
+    {
+      "order": 720,
+      "title": "零售贸易",
+      "path": [
+        "解决方案",
+        "按行业分类",
+        "零售贸易"
+      ],
+      "sourceSlug": "tlgwwea91v3ygam5",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/tlgwwea91v3ygam5?singleDoc#",
+      "targetSlug": "/解决方案/按行业分类/零售贸易",
+      "targetFile": "docs/migrated/tlgwwea91v3ygam5.mdx",
+      "status": "placeholder",
+      "error": "API returned empty content"
+    },
+    {
+      "order": 723,
+      "title": "互联网科技",
+      "path": [
+        "解决方案",
+        "按行业分类",
+        "互联网科技"
+      ],
+      "sourceSlug": "kitztxkccrvz3mng",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/kitztxkccrvz3mng?singleDoc#",
+      "targetSlug": "/解决方案/按行业分类/互联网科技",
+      "targetFile": "docs/migrated/kitztxkccrvz3mng.mdx",
+      "status": "placeholder",
+      "error": "API returned empty content"
+    },
+    {
+      "order": 725,
+      "title": "企业服务",
+      "path": [
+        "解决方案",
+        "按行业分类",
+        "企业服务"
+      ],
+      "sourceSlug": "quplts39xl33xmu0",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/quplts39xl33xmu0?singleDoc#",
+      "targetSlug": "/解决方案/按行业分类/企业服务",
+      "targetFile": "docs/migrated/quplts39xl33xmu0.mdx",
+      "status": "placeholder",
+      "error": "API returned empty content"
+    },
+    {
+      "order": 727,
+      "title": "建筑工程",
+      "path": [
+        "解决方案",
+        "按行业分类",
+        "建筑工程"
+      ],
+      "sourceSlug": "tgbfnr0b1c07uao5",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/tgbfnr0b1c07uao5?singleDoc#",
+      "targetSlug": "/解决方案/按行业分类/建筑工程",
+      "targetFile": "docs/migrated/tgbfnr0b1c07uao5.mdx",
+      "status": "placeholder",
+      "error": "API returned empty content"
+    },
+    {
+      "order": 729,
+      "title": "教育培训",
+      "path": [
+        "解决方案",
+        "按行业分类",
+        "教育培训"
+      ],
+      "sourceSlug": "pgrghagoge8apmvb",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/pgrghagoge8apmvb?singleDoc#",
+      "targetSlug": "/解决方案/按行业分类/教育培训",
+      "targetFile": "docs/migrated/pgrghagoge8apmvb.mdx",
+      "status": "placeholder",
+      "error": "API returned empty content"
+    },
+    {
+      "order": 735,
+      "title": "政府公益",
+      "path": [
+        "解决方案",
+        "按行业分类",
+        "政府公益"
+      ],
+      "sourceSlug": "eqa1zai4rfktuq4t",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/eqa1zai4rfktuq4t?singleDoc#",
+      "targetSlug": "/解决方案/按行业分类/政府公益",
+      "targetFile": "docs/migrated/eqa1zai4rfktuq4t.mdx",
+      "status": "placeholder",
+      "error": "API returned empty content"
+    },
+    {
+      "order": 737,
+      "title": "地产物业",
+      "path": [
+        "解决方案",
+        "按行业分类",
+        "地产物业"
+      ],
+      "sourceSlug": "nbekbxr84nxd2xme",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/nbekbxr84nxd2xme?singleDoc#",
+      "targetSlug": "/解决方案/按行业分类/地产物业",
+      "targetFile": "docs/migrated/nbekbxr84nxd2xme.mdx",
+      "status": "placeholder",
+      "error": "API returned empty content"
+    },
+    {
+      "order": 738,
+      "title": "医疗健康",
+      "path": [
+        "解决方案",
+        "按行业分类",
+        "医疗健康"
+      ],
+      "sourceSlug": "pbknn8iqwsuymgnt",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/pbknn8iqwsuymgnt?singleDoc#",
+      "targetSlug": "/解决方案/按行业分类/医疗健康",
+      "targetFile": "docs/migrated/pbknn8iqwsuymgnt.mdx",
+      "status": "placeholder",
+      "error": "API returned empty content"
+    },
+    {
+      "order": 739,
+      "title": "交通运输",
+      "path": [
+        "解决方案",
+        "按行业分类",
+        "交通运输"
+      ],
+      "sourceSlug": "ddmi5m3ovwuonbiw",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/ddmi5m3ovwuonbiw?singleDoc#",
+      "targetSlug": "/解决方案/按行业分类/交通运输",
+      "targetFile": "docs/migrated/ddmi5m3ovwuonbiw.mdx",
+      "status": "placeholder",
+      "error": "API returned empty content"
+    },
+    {
+      "order": 740,
+      "title": "能源矿产",
+      "path": [
+        "解决方案",
+        "按行业分类",
+        "能源矿产"
+      ],
+      "sourceSlug": "caen2i30vqb4p892",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/caen2i30vqb4p892?singleDoc#",
+      "targetSlug": "/解决方案/按行业分类/能源矿产",
+      "targetFile": "docs/migrated/caen2i30vqb4p892.mdx",
+      "status": "placeholder",
+      "error": "API returned empty content"
+    },
+    {
+      "order": 741,
+      "title": "金融业",
+      "path": [
+        "解决方案",
+        "按行业分类",
+        "金融业"
+      ],
+      "sourceSlug": "iwwytyw7yx9g323s",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/iwwytyw7yx9g323s?singleDoc#",
+      "targetSlug": "/解决方案/按行业分类/金融业",
+      "targetFile": "docs/migrated/iwwytyw7yx9g323s.mdx",
+      "status": "placeholder",
+      "error": "API returned empty content"
+    },
+    {
+      "order": 1068,
+      "title": "联系我们",
+      "path": [
+        "联系我们"
+      ],
+      "sourceSlug": "nszsbaxspbc1gifq",
+      "sourceUrl": "https://exiao.yuque.com/ixwxsb/bgzs0e/nszsbaxspbc1gifq?singleDoc#",
+      "targetSlug": "/联系我们",
+      "targetFile": "docs/migrated/nszsbaxspbc1gifq.mdx",
+      "status": "placeholder",
+      "error": "Converted Markdown is empty"
+    }
+  ]
+}

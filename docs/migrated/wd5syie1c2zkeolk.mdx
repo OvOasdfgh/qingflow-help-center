@@ -1,0 +1,137 @@
+---
+title: "如何实现表格数据去重统计"
+description: "1. 场景/功能描述2. 思路流程2.1. 方法一：Q-Robot2.2. 方法二：代码块3. 配置过程3.1. 表单和流程设计（方法一）3.1.1. A应用主表单：销售单号填入表格：商品名称、销售地区、销售数量填入Q-Robot添加销售单号到B应用，在B应用中创建一条数据。Q-Robot拆分..."
+slug: "/常见问题-faq/表单/如何实现表格数据去重统计"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/wd5syie1c2zkeolk?singleDoc#"
+source_updated_at: "2024-11-14T16:06:35.000Z"
+keywords:
+  - "常见问题（FAQ）"
+  - "表单"
+  - "如何实现表格数据去重统计"
+---
+## 场景/功能描述
+
+![原文画板](https://cdn.nlark.com/yuque/0/2022/jpeg/27174367/1662632728450-43c47066-6414-42d2-960b-4f61cf921342.jpeg)
+
+## 思路流程
+
+### 方法一：Q-Robot
+
+![原文画板](https://cdn.nlark.com/yuque/0/2022/jpeg/27174367/1662687484706-0c7a7969-649c-4db2-a5db-6dd0c023eb38.jpeg)
+
+### 方法二：代码块
+
+![原文画板](https://cdn.nlark.com/yuque/0/2022/jpeg/27174367/1662633123213-7464c43e-3412-4e41-8d62-3f0e2675f540.jpeg)
+
+## 配置过程
+
+### 表单和流程设计（方法一）
+
+#### A应用
+
+主表单：销售单号填入
+
+表格：商品名称、销售地区、销售数量填入
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1662692340205-379680b9-1383-4682-a4e2-c85b3942a0a2.png)
+
+Q-Robot添加销售单号到B应用，在B应用中创建一条数据。
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1662694654362-7ab0c1d4-a174-4d55-8e72-b79640a2aaaa.png)
+
+Q-Robot拆分表格行数据到中间应用，只传入销售单号和商品名称。
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1662694668299-083075b2-bc2d-4bfc-b70a-35b196adc193.png)
+
+#### 中间应用
+
+主表单：销售单号、商品名称自动传入
+
+销售数量自动关联
+
+关联A应用的“销售数量”，筛选同一销售单号和商品名称，聚合方式求和
+
+去重校验自动关联
+
+关联当前应用即中间应用的“商品名称”，筛选同一销售单号和商品名称，聚合方式计数
+
+若结果不为空，那就出现了重复。
+
+​
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1662692449337-e3bc8058-b634-4057-99f7-0032cf5e1760.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1662692470261-6938ab75-cd9a-4b57-bf77-27db302be6af.png)
+
+因销售数量和去重校验，不是通过Q-Robot自动传入的数据，因此需要开启提交重新计算。
+
+去重校验字段，需要设置提交校验：ISEMPTY(去重校验) 仅当为空时，才允许通过。
+
+![截屏2022-09-09 上午11.38.20.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1662694762232-8a2e7e3d-d5e7-4edb-84ac-7ffbc949d0ef.png)
+
+数据提交后，Q-Robot更新，实现添加表格行到B应用（商品名称、销售数量）
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1662694792352-341c0e1b-ff97-47ae-b00e-85776a28658d.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1662694803821-92d4baf3-0536-41f2-ad69-e466306c1b6f.png)
+
+#### B应用
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1662692496799-1a20e87c-de7c-4419-8ebc-97acb71b459a.png)
+
+### 代码块和公式（方法二）
+
+#### 代码块去重
+
+```javascript
+var tableA = qf_field.{A$$79665CAD$$};
+for(var i =0 ;i< tableA.length ;i++){
+for(var j = i+1 ; j< tableA.length ; j++){
+if(tableA[i].field_78431747 == tableA[j].field_78431747){
+tableA.splice(j,1);
+ j--;
+}
+}
+}
+qf_output = {tableA : tableA}
+```
+
+​
+
+注：qf\_field.\{A$$79665CAD$$\}需要手动更改为应用的A表格字段；field\_78431747是A表格子字段ID（需要去重的字段ID），需要根据运行结果得到数据后，手动更改为应用内的字段代码。
+
+![截屏2022-09-09 下午1.29.55.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1662701620679-f3a1252e-2a74-48d0-a809-eca85d579e98.png)
+
+![截屏2022-09-09 下午1.22.12.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1662701202888-c7433272-da9d-429a-9996-746f7311a516.png)
+
+![截屏2022-09-09 下午1.27.26.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1662701334155-91d22f19-e269-4049-b338-fb7ba9474a0c.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1662702365083-d90c4ae2-3a6e-4649-9e08-c509b704aa94.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1662702384812-159121e7-18bf-4bdc-a0bf-d1917c54a0a9.png)
+
+#### 公式汇总
+
+B表格的“销售数量”
+
+使用公式计算= SUMIF(A·商品名称, B·商品名称, A·销售数量)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1662702420859-1e90d26b-4c85-442d-b3be-fed538bd72cb.png)
+
+## 实现效果
+
+### 方法一
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1662700613988-4dea76c8-f80b-43ed-a15d-d84d08bdc6f9.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1662700639604-b28e8310-44ab-4d02-8029-626e30d4356c.png)
+
+### 方法二
+
+前往演示链接：[https://qingflow.com/f/a693ac09](https://qingflow.com/f/a693ac09)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1662703374638-58d0b7fa-7424-4421-b5b5-58bbe9ffbc45.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/wd5syie1c2zkeolk?singleDoc#)

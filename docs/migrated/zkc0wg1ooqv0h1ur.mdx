@@ -1,0 +1,119 @@
+---
+title: "更新门户基本信息"
+description: "调用本接口，更新门户基本信息1. 权限说明仅「超管accessToken」拥有调用权限。（权限组accessToken无法调用）「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有对应门户编辑权限的子权限组都可以权限。2. 请求请求..."
+slug: "/帮助文档/轻代码/openapi/轻流门户接口/更新门户基本信息"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/zkc0wg1ooqv0h1ur?singleDoc#"
+source_updated_at: "2024-10-15T03:35:12.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "轻流门户接口"
+  - "更新门户基本信息"
+---
+调用本接口，更新门户基本信息
+
+---
+
+### **权限说明**
+
+仅「超管accessToken」拥有调用权限。（权限组accessToken无法调用）
+
+「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有对应门户编辑权限的子权限组都可以权限。
+
+### 请求
+
+**请求方式：**POST
+
+**请求地址：**https://api.qingflow.com/dash/:dashKey（公有云版本）
+
+> 请求地址中:dashKey为需要替换的变量，根据实际获取值更新，示例如下：
+
+```javascript
+POST https://api.qingflow.com/dash/:45cx6
+```
+
+**其他版本请求地址：**
+
+钉钉版本：[https://api.ding.qingflow.com/dash/:dashKey](https://api.ding.qingflow.com/dash/:dashKey)
+
+专有轻流：http(s)://xxx.xx(自有域名)/openApi/dash/:dashKey
+
+##### **参数说明(路径参数)：**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| dashKey | 是 | 门户ID |
+
+##### **请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+
+##### **请求体（Body）**
+
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| dashName |  | string | 门户名字 |
+| tagIds | 是 | \[array\] | 新增应用所属的应用包，此处只能选择自定义应用包。不可选系统默认应用包 |
+| dashIcon |  | string | 门户图标 |
+| dashAuth |  | number | 门户的可见权限：1-工作区可见，(默认值)2-指定用户可见，3-所有人可见； |
+| authMembers |  | object | 指定用户可见的时候，可见的用户列表，不填则默认管理员可见 |
+| userIds |  | string | 可见的用户列表；外部用户id列表 |
+| deptIds |  | string | 可见的部门列表；外部部门id列表 |
+| roleIds |  | string | 可见的角色列表；外部角色id列表 |
+| includeSubDeparts |  | Boolean | 是否动态包含已选部门下的子部门，默认包含 |
+
+##### **请求体示例**
+
+```json
+{
+  "tagIds":[4386],
+	"dashName":"new",
+	"dashIcon":"{"icon":null,"iconColor":"qing-orange","iconName":null}",
+	"dashAuth":1
+}
+```
+
+### 返回
+
+##### 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| questionRelations |  |  | 关联的设置，这里没用 |
+| result | 是 | object | 返回结果 |
+| dashKey |  | string | 门户ID |
+
+##### 返回体示例
+
+```json
+{
+	"errCode": 0,
+	"errMsg": "ok",
+	"result": {
+			"dashKey": "45cx6"
+			}
+}
+```
+
+##### 错误码相关
+
+### 注意事项
+
+1、新增「所有人可见」门户前，请确保工作区「所有人可见」门户余额足够。
+
+2、请求参数中，dashIcon参数为门户的图标，支持传入图片链接
+
+- 默认为橙色+首字，值为：\{"icon":null,"iconColor":"qing-orange","iconName":null\}，效果如图：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/AwWNkJecWcuPlDcaRQ_gZzSPJECP1KyV_.png)
+
+- 图标底色（iconColor）/组件（iconName）可选值可参考
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/zkc0wg1ooqv0h1ur?singleDoc#)

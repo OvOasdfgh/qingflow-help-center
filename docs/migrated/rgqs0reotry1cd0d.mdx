@@ -1,0 +1,86 @@
+---
+title: "查询应用的appkey及所有字段queid"
+description: "表单访问链接：https://qingflow.com/f/9cah24om64021. 文档介绍主要介绍该应用表单中，需要填写的字段内容如何获取，以及应用表单的具体作用。2. 操作说明2.1. AccessToken为调用轻流OPENAPI接口的超级管理员Token，获取方式如下图路径：注意..."
+slug: "/常见问题-faq/表单/查询应用的appkey及所有字段queid"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/rgqs0reotry1cd0d?singleDoc#"
+source_updated_at: "2025-02-18T02:37:53.000Z"
+keywords:
+  - "常见问题（FAQ）"
+  - "表单"
+  - "查询应用的appkey及所有字段queid"
+---
+- 表单访问链接：[https://qingflow.com/f/9cah24om6402](https://qingflow.com/f/9cah24om6402)
+
+## 文档介绍
+
+主要介绍该应用表单中，需要填写的字段内容如何获取，以及应用表单的具体作用。
+
+## 操作说明
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1734580773330-cf1f4af4-9e13-4385-a8e6-58ffd3cde4a7.png)
+
+### AccessToken
+
+为调用轻流OPENAPI接口的超级管理员Token，获取方式如下图路径：
+
+注意：若插件未安装，请先安装，以及Token初始化重置。
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1734580884995-d5b4cd4b-f120-4941-aa1c-3a34574690eb.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1734580925695-d6255113-56ca-42c3-8975-7036ffb331f1.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1734580946743-f001b140-2f29-4706-a5bf-ffc0935912be.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1734580968173-92ddab7a-ebfd-4af0-9862-6b84341a50ec.png)
+
+### 工作区环境
+
+选择当前工作区的使用环境。公有云/钉钉/专有云。
+
+如何判断：根据访问工作区的域名判断即可。如果访问域名是[https://qingflow.com](https://qingflow.com)，即为公有云，如果访问域名是：[https://app4355.eapps.dingtalkcloud.com](https://app4355.eapps.dingtalkcloud.com)，即为钉钉。专有云为私有化部署http(s)://xxxx.com。
+
+当选择专有云时，需要手动填写访问域名。
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1734581416190-28cda352-c11a-4475-b1df-09b50cac1b7d.png)
+
+### 工作区所有应用名称
+
+上述内容填写完成后，点击【查询工作区全部应用】按钮，就可在【工作区所有应用名称】框中选择具体待查询的应用了。
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1734581551813-6225fd71-bb1d-42c1-8ac8-aea2277c6228.png)
+
+## 具体效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1734586751457-5327d620-4dd1-44f0-8d64-28eba45a9cba.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1734581615973-767ddd69-6b7a-485b-b681-3465fc83f465.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1734581636061-24eb893c-7e65-44ca-b42f-1ec259684d68.png)
+
+## 查询说明
+
+### **应用appkey**
+
+即查询选择的应用名称的appkey。
+
+### 应用表单字段信息
+
+注意：如果表单超过200个字段，需要使用其他方式获取对应字段queid。比如使用postman调用接口或者浏览器开发者工具查找。
+
+#### 选项内容及ID
+
+其中选项内容及ID，只有当字段类型为【选择类】类型的时候，才会有值。
+
+输出内容说明：输出是以optionValue:optionId进行换行拼接的。
+
+#### 表格子字段
+
+其中表格子字段，只有当字段类型为【表格】类型时，才会有值。
+
+输出内容说明：输出是以queTitle:queId进行换行拼接的。当有【选择类】类型字段时，后面会以---拼接，并携带选项值以及选项ID（optionValue:optionId）。
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/rgqs0reotry1cd0d?singleDoc#)

@@ -1,0 +1,463 @@
+---
+title: "如何实现支付宝扫码支付？"
+description: "一、场景使用轻流系统实现与支付宝进行支付操作，该场景是实现支付宝扫码付的场景。二、实现效果1、发起支付订单2、确认支付订单并进行扫码支付3、确认订单支付状态4、退款申请三、具体配置1、准备工作登录支付宝开放平台：https://open.alipay.com进行后台，创建网页应用绑定产品——【..."
+slug: "/搭建技巧/按功能分类/第三方集成/支付宝/如何实现支付宝扫码支付"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/fweegxgnwnryevpz?singleDoc#"
+source_updated_at: "2024-10-15T03:38:18.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "第三方集成"
+  - "支付宝"
+  - "如何实现支付宝扫码支付？"
+---
+### 一、场景
+
+使用轻流系统实现与支付宝进行支付操作，该场景是实现支付宝扫码付的场景。
+
+### 二、实现效果
+
+#### 1、发起支付订单
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695607552834-a781e868-2149-4cc4-9a4d-944aba2e65e7.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695607589389-0d7c3b33-459c-4936-8e2d-aeb286c40311.png)
+
+#### 2、确认支付订单并进行扫码支付
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695607626395-eaef656c-97bb-478f-976b-27ab3cf064af.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695607669627-ec036e3a-74c4-490c-bb3b-00eaf166651f.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695607728317-92dfff83-749e-4d5f-bf3c-a595281e2a0d.png)
+
+#### 3、确认订单支付状态
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695607755261-c417ca3d-64b6-4d7c-a7b4-fd231eadd705.png)
+
+![企业微信截图\_385a5a6c-65b1-419a-bce6-aa690659cc83.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695607766390-6daf48e1-19dc-4492-8cc5-080d1b648ab4.png)
+
+#### 4、退款申请
+
+![企业微信截图\_ca8a7b66-7441-4eac-9ad3-a40b3fe5a5c6.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695607786734-d088b9dd-7e48-4f36-8366-5ff23c0468c5.png)
+
+![企业微信截图\_0c692d39-78e1-489f-b4e2-28e5a08d5a3c.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695607795537-b221761e-c922-4be2-b7b6-48a094635388.png)
+
+### 三、具体配置
+
+#### 1、准备工作
+
+- 登录支付宝开放平台：[https://open.alipay.com](https://open.alipay.com/)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695607887176-337490c6-c350-4787-ad3b-0ba105068a5c.png)
+
+- 进行后台，创建网页应用
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695607991909-bbdf386d-e9a2-467d-8f0c-b9cb872c19d4.png)
+
+- 绑定产品——【当面付】，并进行开通
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695608053864-9d4773f5-8c68-4eac-b0a6-06858c2553e6.png)
+
+- 接口加签方式设置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695611909724-f3965b62-9edd-42c6-858e-2fa8af989d9e.png)
+
+#### 2、获取调用接口所需具体公共参数
+
+以扫码付接口为例：
+
+[https://opendocs.alipay.com/open/f540afd8\_alipay.trade.precreate?pathHash=d3c84596&ref=api&scene=19](https://opendocs.alipay.com/open/f540afd8_alipay.trade.precreate?pathHash=d3c84596&ref=api&scene=19)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695612383044-5cad3d49-f3f0-40d5-b0fd-4736eac09f58.png)
+
+- appid:应用ID
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695612434542-91b93f70-3d6d-46a0-91bb-57df770a51f3.png)
+
+其余参数根据文档要求来进行获取
+
+#### 3、表单设计
+
+##### 支付宝订单预创建并支付
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695612558824-3683335e-ee67-45b8-b918-2f8bd8a139e1.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695612632438-c15a1193-8d6c-4462-9b91-58836981b2ce.png)
+
+其中【生成支付链接】与【确认支付状态】为代码块
+
+###### 生成支付链接
+
+###### 代码注释
+
+具体调用接口文档：
+
+[https://opendocs.alipay.com/open/f540afd8\_alipay.trade.precreate?pathHash=d3c84596&ref=api&scene=19](https://opendocs.alipay.com/open/f540afd8_alipay.trade.precreate?pathHash=d3c84596&ref=api&scene=19)
+
+注意：所生成的二维码有效时间为2小时
+
+app\_id：需要替换成具体调用的应用ID
+
+qf\_field.\{商品列表信息$$17B54DD0C$$\}，为表单中商品列表信息表格字段
+
+其中以field\_169208787为例，表示商品列表信息表格中商品数量子字段ID
+
+field\_id获取方式[https://exiao.yuque.com/rlf3k1/oanb79/ml0u7lgb3wa0vhiz?singleDoc#](https://exiao.yuque.com/rlf3k1/oanb79/ml0u7lgb3wa0vhiz?singleDoc#) 《如何在代码块中分辨表格的不同列》
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695613159948-40217fa4-5b0e-410c-a714-ea11a741f348.png)
+
+qf\_field.\{商户订单号$$17B54DD0A$$\}，为表单中商户订单号字段
+
+qf\_field.\{订单总金额(单位为元)$$17B54DD0B$$\}，为表单中订单总金额(单位为元)字段
+
+qf\_field.\{订单标题$$17B44C092$$\}，为表单中订单标题字段
+
+应用私钥：只需要替换成具体调用的应用私钥
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695612979894-258b9b09-2fc6-4a9d-958c-79669a625cd1.png)
+
+```javascript
+const axios = require('axios');
+const crypto = require('crypto');
+const { format } = require('date-fns');
+
+const currentDate = new Date();
+const formattedDate = format(currentDate, 'yyyy-MM-dd HH:mm:ss');
+// 原始数据
+const data = {
+    "timestamp":formattedDate,
+    "method": "alipay.trade.precreate",
+    "app_id": "2021003155650***",
+    "sign_type": "RSA2",
+    "version": "1.0",
+    "charset": "UTF-8"
+};
+const table = qf_field.{商品列表信息$$17B54DD0C$$};
+
+const goodsDetail = table.map(item => {
+    const newItem = {
+        "quantity": item.field_169208787,
+        "goods_name": item.field_169208786,
+        "goods_id": item.field_169208785,
+        "price": item.field_169208788
+    };
+    return newItem;
+});
+
+//将新的 goods_detail 赋值给 data 中的 biz_content
+data.biz_content =`{"out_trade_no": qf_field.{商户订单号$$17B54DD0A$$},"total_amount":qf_field.{订单总金额(单位为元)$$17B54DD0B$$},"subject":qf_field.{订单标题$$17B44C092$$},"goods_detail":${JSON.stringify(goodsDetail)}}`;
+
+// 第一步：剔除sign字段
+const { sign, ...dataWithoutSign } = data;
+
+// 第二步：剔除值为空的参数
+const filteredData = Object.fromEntries(Object.entries(dataWithoutSign).filter(([key, value]) => value !== ''));
+
+// 第三步：按键的ASCII码值递增排序
+const sortedParams = Object.keys(filteredData).sort();
+
+// 第四步：将排序后的参数与其对应的值按照"参数=参数值"的格式组合起来
+const concatenatedParams = sortedParams.map(key => `${key}=${filteredData[key]}`).join('&');
+
+// 第五步：生成待签名字符串
+const signString = concatenatedParams;
+
+// 使用私钥对待签名字符串进行加密
+const privateKey = `-----BEGIN PRIVATE KEY-----
+MI****DANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCSDlNKcCP4F68iQFV4ytD5yQ0BI4med+ol2rKOKG3Zy8QKJlmUqMSaOM6zBIGknf8BsWwFuj48MC7KPuRusENpk5A9FJ01qr+yQo1JuAvm+VMTqXPHfDAYhl0HW6vYuwJ/i35Utca+r3q9nn6QmLp9mtigFLj3kwWewz5mEkPacx5p4XhXtUcWCpKJ+Fluu8Y3x0/SoodoIu+7w/gjFpFi4d/eXBsAb/7uS2ko8Q3i02RilR7SSqBHJ9WkHTDlDia2/JHmwBeqgLW60ipLG9cUpLrE2DIVPUw5Sf94FQKfJOju7HWDlDM/WvhlLhB8cRhsaV9BOlafdaoGPYMKnCRDAgMBAAECggEAKRa4nddgdxoKngMlSH8ePTcvXmOmApvPlmipFM8Q4FWvx/8z8ltsO8rBc6FP64S7SbmlHxNfEMWpVCJPV0hlHp1x1Y0oEQIBPd/1KYkKaCc6FOz18mfgi/W41CoY9TbfJAyVNLWSvPBXAmNFTd55kH5wdNB/nL6StTBOLJ700c5h5vjhcY0rZrEhmD4QChlmghHXSeFTyAHaLy1hUKVhIACWQNnSSwlg3WOjS4ddonwdXRi3L203FxlmyJBM1Gb3fv7KFZPnNjLfU8szuvL8SzJSLnRqfnafiA5x7ulxByst/KqoGArYWV37zOAzHj9YMckYGG6S00C8LLPwGrx0yQKBgQD/4AD1e2r1uzvbda70lLO2y0CsBXye7WYTRbYVX3u5Z8D++I3b2beebSPflS9wWWsw2urYj8AKSzGiUuVh8/Gy3hcWZ2GyPdNlywe8UkmgN4BjVcj5THoW5VPi+o1FbfPitKLsL9ccXYKTBnwNTuVMyblEGzWZx3uSoBNUqHImTwKBgQCSIJbRKqZAeOq7OcgCKvnDlztSbK35H4DxuAdMI04sV3fvRs5bE4H9hUySy2mfgrCrewdQkxjmtTzrRJFHVHnU1doDH0/HMDE2ry0I0RX79esaEJAartZerqxW+8EyTgAQL3nG1BfyvH1c38kMRDbMaUhmVEK0EheefsgSU35ZzQKBgQCa8gTiopgEshrvLHaDuUCSosZI5RGwE8ZKSV6X1rhPb9rZC56r0U117FVa4TZW7G8SqJ6qAXKjSSGHUHeDN3vXetG0SWpJy1KmQ6otig73rGRcwufuvzb3gmun+V1u+8RCNmyqZdX3YVDew4B/dpU4SLed3HQ66SeVhMXv8Akf1QKBgEPuBm5iBzs9etFigQoQ9F7qdNdSUmXXMVgtFqdcWkDewJBpOBC6ttkmGHy9NvLCDGMLJFFesFq/sfwkueyQ5rn8WAbPjYSpcJddQ/AvUqr4nTxWqsbctCb7yH3/Nsat3/WmPFQj0KY03YpJNesP4vGPl+qKDSAssPIrOdLbIYeZAoGADyKnem0BQK2dTRETTcH2AlYw3E4gVZipqmge2FziMM+QKwzKUa2w0m7ReamForpwoVD/rjPnhP8kf/wtM2R8BnQD25tEN9uplZfJguHEvhDrt9xKkshntFQz0Qcwk7CiHvQH2+zOJLykcu0HU2K9oEoxTkZzsoHLAbzI7CLKF4k=
+-----END PRIVATE KEY-----`;
+
+const signer = crypto.createSign('RSA-SHA256');
+signer.update(signString, 'utf8');
+const signature = signer.sign(privateKey);
+const sig=signature.toString('base64');
+const encodedSig = encodeURIComponent(sig);
+
+let config = {
+  method: 'get',
+  maxBodyLength: Infinity,
+  url: `https://openapi.alipay.com/gateway.do?timestamp=${formattedDate}&method=${data.method}&app_id=${data.app_id}&sign_type=${data.sign_type}&sign=${encodedSig}&version=${data.version}&charset=${data.charset}&biz_content=${data.biz_content}`
+};
+
+axios(config).then(function (res) {
+ qf_output={'data':res.data}
+});
+```
+
+###### 代码测试
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695613368380-9cda8fc3-3501-40e5-aae4-7ce63e3e5a1f.png)
+
+###### 解析配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695613395595-464334d6-f4fd-430b-85f5-984d10419acf.png)
+
+###### 字段接收配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695613432030-dc38d899-aeb2-4579-96f6-64f3906d810e.png)
+
+###### 生成支付二维码
+
+该字段为Q\_Linker，调用接口将支付链接转为支付二维码
+
+具体接口文档：
+
+[https://www.mxnzp.com/doc/detail?id=2](https://www.mxnzp.com/doc/detail?id=2)
+
+- 需要点击申请appid，去获取对应的app\_id和app\_srcret
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695613539589-10252d9a-8f17-4cad-b0c1-f74407d6849c.png)
+
+###### Q-linker配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695613683054-cac6c460-4a9f-4f34-9828-8fe6d0f2c479.png)
+
+- URL：https://www.mxnzp.com/api/qrcode/create/single
+- QueryParam：
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695613754767-c62fcebf-e425-463e-bcd5-207b8680cc0e.png)
+
+- Method：GET
+- Json path：
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695613802029-2cad673c-5f85-483c-b056-b8ea4a01898e.png)
+
+- 字段接收配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695613835000-e99a531a-1606-41fd-9e79-4967940cb3f7.png)
+
+###### 确认支付状态
+
+###### 代码注释
+
+具体调用接口文档：
+
+[https://opendocs.alipay.com/open/02ekfh?pathHash=925e7dfc&ref=api&scene=23](https://opendocs.alipay.com/open/02ekfh?pathHash=925e7dfc&ref=api&scene=23)
+
+app\_id：需要替换成具体调用的应用ID
+
+qf\_field.\{商户订单号$$17B54DD0A$$\}，为表单中商户订单号字段
+
+应用私钥：只需要替换成具体调用的应用私钥
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695612979894-258b9b09-2fc6-4a9d-958c-79669a625cd1.png)
+
+```javascript
+const axios = require('axios');
+const crypto = require('crypto');
+const { format } = require('date-fns');
+
+const currentDate = new Date();
+const formattedDate = format(currentDate, 'yyyy-MM-dd HH:mm:ss');
+// 原始数据
+const data = {
+    "timestamp":formattedDate,
+    "method": "alipay.trade.query",
+    "app_id": "2021003155650***",
+    "sign_type": "RSA2",
+    "version": "1.0",
+    "charset": "UTF-8"
+};
+data.biz_content =`{"out_trade_no": qf_field.{商户订单号$$17B54DD0A$$}}`;
+// 第一步：剔除sign字段
+const { sign, ...dataWithoutSign } = data;
+
+// 第二步：剔除值为空的参数
+const filteredData = Object.fromEntries(Object.entries(dataWithoutSign).filter(([key, value]) => value !== ''));
+
+// 第三步：按键的ASCII码值递增排序
+const sortedParams = Object.keys(filteredData).sort();
+
+// 第四步：将排序后的参数与其对应的值按照"参数=参数值"的格式组合起来
+const concatenatedParams = sortedParams.map(key => `${key}=${filteredData[key]}`).join('&');
+
+// 第五步：生成待签名字符串
+const signString = concatenatedParams;
+
+// 使用私钥对待签名字符串进行加密
+const privateKey = `-----BEGIN PRIVATE KEY-----
+MII****BgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCSDlNKcCP4F68iQFV4ytD5yQ0BI4med+ol2rKOKG3Zy8QKJlmUqMSaOM6zBIGknf8BsWwFuj48MC7KPuRusENpk5A9FJ01qr+yQo1JuAvm+VMTqXPHfDAYhl0HW6vYuwJ/i35Utca+r3q9nn6QmLp9mtigFLj3kwWewz5mEkPacx5p4XhXtUcWCpKJ+Fluu8Y3x0/SoodoIu+7w/gjFpFi4d/eXBsAb/7uS2ko8Q3i02RilR7SSqBHJ9WkHTDlDia2/JHmwBeqgLW60ipLG9cUpLrE2DIVPUw5Sf94FQKfJOju7HWDlDM/WvhlLhB8cRhsaV9BOlafdaoGPYMKnCRDAgMBAAECggEAKRa4nddgdxoKngMlSH8ePTcvXmOmApvPlmipFM8Q4FWvx/8z8ltsO8rBc6FP64S7SbmlHxNfEMWpVCJPV0hlHp1x1Y0oEQIBPd/1KYkKaCc6FOz18mfgi/W41CoY9TbfJAyVNLWSvPBXAmNFTd55kH5wdNB/nL6StTBOLJ700c5h5vjhcY0rZrEhmD4QChlmghHXSeFTyAHaLy1hUKVhIACWQNnSSwlg3WOjS4ddonwdXRi3L203FxlmyJBM1Gb3fv7KFZPnNjLfU8szuvL8SzJSLnRqfnafiA5x7ulxByst/KqoGArYWV37zOAzHj9YMckYGG6S00C8LLPwGrx0yQKBgQD/4AD1e2r1uzvbda70lLO2y0CsBXye7WYTRbYVX3u5Z8D++I3b2beebSPflS9wWWsw2urYj8AKSzGiUuVh8/Gy3hcWZ2GyPdNlywe8UkmgN4BjVcj5THoW5VPi+o1FbfPitKLsL9ccXYKTBnwNTuVMyblEGzWZx3uSoBNUqHImTwKBgQCSIJbRKqZAeOq7OcgCKvnDlztSbK35H4DxuAdMI04sV3fvRs5bE4H9hUySy2mfgrCrewdQkxjmtTzrRJFHVHnU1doDH0/HMDE2ry0I0RX79esaEJAartZerqxW+8EyTgAQL3nG1BfyvH1c38kMRDbMaUhmVEK0EheefsgSU35ZzQKBgQCa8gTiopgEshrvLHaDuUCSosZI5RGwE8ZKSV6X1rhPb9rZC56r0U117FVa4TZW7G8SqJ6qAXKjSSGHUHeDN3vXetG0SWpJy1KmQ6otig73rGRcwufuvzb3gmun+V1u+8RCNmyqZdX3YVDew4B/dpU4SLed3HQ66SeVhMXv8Akf1QKBgEPuBm5iBzs9etFigQoQ9F7qdNdSUmXXMVgtFqdcWkDewJBpOBC6ttkmGHy9NvLCDGMLJFFesFq/sfwkueyQ5rn8WAbPjYSpcJddQ/AvUqr4nTxWqsbctCb7yH3/Nsat3/WmPFQj0KY03YpJNesP4vGPl+qKDSAssPIrOdLbIYeZAoGADyKnem0BQK2dTRETTcH2AlYw3E4gVZipqmge2FziMM+QKwzKUa2w0m7ReamForpwoVD/rjPnhP8kf/wtM2R8BnQD25tEN9uplZfJguHEvhDrt9xKkshntFQz0Qcwk7CiHvQH2+zOJLykcu0HU2K9oEoxTkZzsoHLAbzI7CLKF4k=
+-----END PRIVATE KEY-----`;
+
+const signer = crypto.createSign('RSA-SHA256');
+signer.update(signString, 'utf8');
+const signature = signer.sign(privateKey);
+const sig=signature.toString('base64');
+const encodedSig = encodeURIComponent(sig);
+let config = {
+  method: 'get',
+  maxBodyLength: Infinity,
+  url: `https://openapi.alipay.com/gateway.do?timestamp=${formattedDate}&method=${data.method}&app_id=${data.app_id}&sign_type=${data.sign_type}&sign=${encodedSig}&version=${data.version}&charset=${data.charset}&biz_content=${data.biz_content}`
+};
+axios(config).then(function (res) {
+  qf_output={'data':res.data}
+});
+```
+
+###### 代码测试
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695614092158-52bfa855-ef73-4118-9787-0eb4bed8025a.png)
+
+###### 解析配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695614126218-90023aaa-d681-427c-8551-7f635509dbfc.png)
+
+###### 字段接收配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695614182833-63b452b4-4077-48d5-8a72-0926b029ca6a.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695614200058-239db4a3-9cda-4b75-8e83-7ded72673368.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695614244168-80050e4c-7716-404f-8610-623761e68501.png)
+
+###### 流程配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695614341231-d341d22c-1640-4c0a-958d-efa5ee988f3b.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695620428192-f86bb026-6e92-42dc-ac4b-7e69c13b9ef5.png)
+
+###### 申请人节点配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695614606709-962a95d5-11ad-44c4-8e91-bb58378ace2d.png)
+
+###### 确认支付信息并扫码支付
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695614687400-36df2fa6-8155-417e-aa8f-4a8d279e674f.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695614735565-18931115-a3bc-4a69-bf64-e76c56c9bf72.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695614779379-a72279fd-3e0f-40e2-8b4e-4e80791ea8be.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695614899257-9382d423-4a2e-4dd5-8b44-18f94f85c8ec.png)
+
+###### 告知用户
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695619982119-bfcb1fa5-527d-47a9-aae4-40000f4095f2.png)
+
+###### webhook节点
+
+具体接口文档：
+
+[https://help.qingflow.com/help-docs?type=qingCode&docId=fc8e64656428e08a06fdf030002e2a74&parentId=](https://help.qingflow.com/help-docs?type=qingCode&docId=fc8e64656428e08a06fdf030002e2a74&parentId=)
+
+- accessToken:轻商城——拓展插件——openAPI
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695620057413-a44295c6-c82c-4848-8d9a-88d68a1a5e88.png)
+
+- 节点ID获取方式
+
+可以调用接口来进行获取：
+
+[https://help.qingflow.com/help-docs?type=qingCode&docId=0122a5876428e120070b62b8001478f4&parentId=](https://help.qingflow.com/help-docs?type=qingCode&docId=0122a5876428e120070b62b8001478f4&parentId=)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695620223643-ddf50f56-6649-429b-b5c2-061f24a364c9.png)
+
+##### 支付宝申请订单退款
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695620486789-48e64e57-a9b6-4f06-ba04-6cc8874caa1d.png)
+
+###### 商户订单号
+
+- 数据关联字段
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695620540884-f0545c95-e635-401b-9f50-6712cce0eb86.png)
+
+###### 订单总金额
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695620578392-da23d692-9abb-4cf1-8d45-575617f2799a.png)
+
+###### 退款
+
+###### 代码注释
+
+具体调用接口文档：
+
+[https://opendocs.alipay.com/open/02ekfk?pathHash=b45b14f7&ref=api&scene=common](https://opendocs.alipay.com/open/02ekfk?pathHash=b45b14f7&ref=api&scene=common)
+
+注意：交易超过约定时间（签约时设置的可退款时间）的订单无法进行退款。
+
+app\_id：需要替换成具体调用的应用ID
+
+qf\_field.\{商户订单号$$17B598970$$\}：表单中商户订单号字段
+
+qf\_field.\{退款金额$$17B598089$$\}：表单中退款金额字段
+
+qf\_field.\{退款原因说明$$17B59808A$$\}：表单中退款原因说明字段
+
+应用私钥：只需要替换成具体调用的应用私钥
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695612979894-258b9b09-2fc6-4a9d-958c-79669a625cd1.png)
+
+```javascript
+const axios = require('axios');
+const crypto = require('crypto');
+const { format } = require('date-fns');
+
+const currentDate = new Date();
+const formattedDate = format(currentDate, 'yyyy-MM-dd HH:mm:ss');
+// 原始数据
+const data = {
+    "timestamp":formattedDate,
+    "method": "alipay.trade.refund",
+    "app_id": "2021003155650***",
+    "sign_type": "RSA2",
+    "version": "1.0",
+    "charset": "UTF-8"
+};
+data.biz_content =`{"out_trade_no":qf_field.{商户订单号$$17B598970$$},"refund_amount":qf_field.{退款金额$$17B598089$$},"refund_reason":qf_field.{退款原因说明$$17B59808A$$}}`;
+// 第一步：剔除sign字段
+const { sign, ...dataWithoutSign } = data;
+
+// 第二步：剔除值为空的参数
+const filteredData = Object.fromEntries(Object.entries(dataWithoutSign).filter(([key, value]) => value !== ''));
+
+// 第三步：按键的ASCII码值递增排序
+const sortedParams = Object.keys(filteredData).sort();
+
+// 第四步：将排序后的参数与其对应的值按照"参数=参数值"的格式组合起来
+const concatenatedParams = sortedParams.map(key => `${key}=${filteredData[key]}`).join('&');
+
+// 第五步：生成待签名字符串
+const signString = concatenatedParams;
+
+// 使用私钥对待签名字符串进行加密
+const privateKey = `-----BEGIN PRIVATE KEY-----
+MII*****NBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCSDlNKcCP4F68iQFV4ytD5yQ0BI4med+ol2rKOKG3Zy8QKJlmUqMSaOM6zBIGknf8BsWwFuj48MC7KPuRusENpk5A9FJ01qr+yQo1JuAvm+VMTqXPHfDAYhl0HW6vYuwJ/i35Utca+r3q9nn6QmLp9mtigFLj3kwWewz5mEkPacx5p4XhXtUcWCpKJ+Fluu8Y3x0/SoodoIu+7w/gjFpFi4d/eXBsAb/7uS2ko8Q3i02RilR7SSqBHJ9WkHTDlDia2/JHmwBeqgLW60ipLG9cUpLrE2DIVPUw5Sf94FQKfJOju7HWDlDM/WvhlLhB8cRhsaV9BOlafdaoGPYMKnCRDAgMBAAECggEAKRa4nddgdxoKngMlSH8ePTcvXmOmApvPlmipFM8Q4FWvx/8z8ltsO8rBc6FP64S7SbmlHxNfEMWpVCJPV0hlHp1x1Y0oEQIBPd/1KYkKaCc6FOz18mfgi/W41CoY9TbfJAyVNLWSvPBXAmNFTd55kH5wdNB/nL6StTBOLJ700c5h5vjhcY0rZrEhmD4QChlmghHXSeFTyAHaLy1hUKVhIACWQNnSSwlg3WOjS4ddonwdXRi3L203FxlmyJBM1Gb3fv7KFZPnNjLfU8szuvL8SzJSLnRqfnafiA5x7ulxByst/KqoGArYWV37zOAzHj9YMckYGG6S00C8LLPwGrx0yQKBgQD/4AD1e2r1uzvbda70lLO2y0CsBXye7WYTRbYVX3u5Z8D++I3b2beebSPflS9wWWsw2urYj8AKSzGiUuVh8/Gy3hcWZ2GyPdNlywe8UkmgN4BjVcj5THoW5VPi+o1FbfPitKLsL9ccXYKTBnwNTuVMyblEGzWZx3uSoBNUqHImTwKBgQCSIJbRKqZAeOq7OcgCKvnDlztSbK35H4DxuAdMI04sV3fvRs5bE4H9hUySy2mfgrCrewdQkxjmtTzrRJFHVHnU1doDH0/HMDE2ry0I0RX79esaEJAartZerqxW+8EyTgAQL3nG1BfyvH1c38kMRDbMaUhmVEK0EheefsgSU35ZzQKBgQCa8gTiopgEshrvLHaDuUCSosZI5RGwE8ZKSV6X1rhPb9rZC56r0U117FVa4TZW7G8SqJ6qAXKjSSGHUHeDN3vXetG0SWpJy1KmQ6otig73rGRcwufuvzb3gmun+V1u+8RCNmyqZdX3YVDew4B/dpU4SLed3HQ66SeVhMXv8Akf1QKBgEPuBm5iBzs9etFigQoQ9F7qdNdSUmXXMVgtFqdcWkDewJBpOBC6ttkmGHy9NvLCDGMLJFFesFq/sfwkueyQ5rn8WAbPjYSpcJddQ/AvUqr4nTxWqsbctCb7yH3/Nsat3/WmPFQj0KY03YpJNesP4vGPl+qKDSAssPIrOdLbIYeZAoGADyKnem0BQK2dTRETTcH2AlYw3E4gVZipqmge2FziMM+QKwzKUa2w0m7ReamForpwoVD/rjPnhP8kf/wtM2R8BnQD25tEN9uplZfJguHEvhDrt9xKkshntFQz0Qcwk7CiHvQH2+zOJLykcu0HU2K9oEoxTkZzsoHLAbzI7CLKF4k=
+-----END PRIVATE KEY-----`;
+
+const signer = crypto.createSign('RSA-SHA256');
+signer.update(signString, 'utf8');
+const signature = signer.sign(privateKey);
+const sig=signature.toString('base64');
+const encodedSig = encodeURIComponent(sig);
+let config = {
+  method: 'get',
+  maxBodyLength: Infinity,
+  url: `https://openapi.alipay.com/gateway.do?timestamp=${formattedDate}&method=${data.method}&app_id=${data.app_id}&sign_type=${data.sign_type}&sign=${encodedSig}&version=${data.version}&charset=${data.charset}&biz_content=${data.biz_content}`
+};
+
+axios(config).then(function (res) {
+  qf_output={'data':res.data}
+});
+```
+
+###### 解析配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695620908441-10eb1bc2-f653-45c9-9f3a-1caa637c121c.png)
+
+###### 字段接收配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1695620935144-8ef65288-8f8e-433f-a8bf-9c9186621533.png)
+
+​
+
+​
+
+​
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/fweegxgnwnryevpz?singleDoc#)

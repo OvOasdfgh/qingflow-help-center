@@ -1,0 +1,50 @@
+---
+title: "案例：鸡兔同笼"
+description: "1. 问题笼子中装了一些鸡和兔子。已经知道有a个头，b只脚，问笼中多少只兔子？有多少只鸡？2. 解题思路假设：鸡x只，兔子y只有x+y=a;2x+4y=b3. 功能演示https://qingflow.com/f/45f8b1e24. 代码块配置注意需要把a和b替换为表单字段插入var a =..."
+slug: "/帮助文档/轻代码/云编程中心/代码块/案例-鸡兔同笼"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/mc390cy7aexgytyh?singleDoc#"
+source_updated_at: "2024-11-26T08:30:20.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "云编程中心"
+  - "代码块"
+  - "案例：鸡兔同笼"
+---
+### 问题
+
+笼子中装了一些鸡和兔子。已经知道有a个头，b只脚，问笼中多少只兔子？有多少只鸡？
+
+### 解题思路
+
+假设：鸡x只，兔子y只
+
+有x+y=a;2x+4y=b
+
+### 功能演示
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/1nRt1bDCysb-NUBLPMcsXLlZTA33gXHp_.png)
+
+[**https://qingflow.com/f/45f8b1e2**](https://qingflow.com/f/45f8b1e2)​
+
+### 代码块配置
+
+**注意需要把a和b替换为表单字段插入**
+
+```javascript
+var a =qf_field.{头（个）$$6239986A$$};
+var b = qf_field.{脚（只）$$6239986B$$};
+var x ;
+var y ;
+for(x=0;x<a ;x++){
+y=a-x;
+if( 2*x+4*y==b ){
+ break
+}
+};
+ qf_output={鸡:x,兔:y};
+```
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/mc390cy7aexgytyh?singleDoc#)

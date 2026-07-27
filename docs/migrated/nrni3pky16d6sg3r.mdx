@@ -1,0 +1,148 @@
+---
+title: "获取个人在当前工作区全部待办或已办信息"
+description: "调用本接口，获取个人在当前工作区全部待办或已办信息1. 权限说明仅专有轻流可用，「超管accessToken」可调用。2. 请求请求方式：GET请求地址：http(s)://xxx.xx(自有域名)/openAp"
+slug: "/帮助文档/轻代码/openapi/应用数据接口/数据内容/获取个人在当前工作区全部待办或已办信息"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/nrni3pky16d6sg3r?singleDoc#"
+source_updated_at: "2026-07-24T09:59:43.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "应用数据接口"
+  - "数据内容"
+  - "获取个人在当前工作区全部待办或已办信息"
+---
+调用本接口，获取个人在当前工作区全部待办或已办信息
+
+---
+
+### **权限说明**
+
+仅专有轻流可用，「超管accessToken」可调用。
+
+### 请求
+
+**请求方式：GET**
+
+**请求地址：**http(s)://xxx.xx(自有域名)/openApi/env/dynamic/tasks
+
+#### **参数说明（查询参数 )**
+
+| **参数** | **必填** | **说明** |
+| --- | --- | --- |
+| status | - | 流程状态筛选 |
+| type | 是 | 类型 1待办 2我发起的 3抄送 5已办 |
+| pageSize | - | 页容量，默认10 |
+| pageNum | 是 | 页码 |
+| userId | 是 | 用户的id |
+
+#### **请求头（Header）**
+
+| **参数** | **必填** | **说明** |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看基本概念介绍 |
+
+### 返回
+
+#### 返回体
+
+| **参数** | **类型** | **必含** | **说明** |
+| --- | --- | --- | --- |
+| errCode | \[int\] | 是 | 错误码 |
+| errMsg | \[string\] | 是 | 错误信息 |
+| result | \[object\] | 是 |  |
+| pageSize | \[int\] | 是 | 每页大小 |
+| pageNum | \[int\] | 是 | 当前页码 |
+| resultAmount | \[int\] | 是 | 总条数 |
+| pageAmount | \[int\] | 是 | 总页数 |
+| result | \[ array -object \] | 是 |  |
+| beingUnread | \[boolean\] | - | 是否未读 |
+| beingUrged | \[boolean\] | - | 是否催办 |
+| canUrged | \[boolean\] | - | 是否能催办 |
+| dataSnapshot | \[ array -object \] | 是 | 数据快照列表 |
+| fieldAnswer | \[string\] | 是 | 字段答案,纯文本 |
+| fieldId | \[number\] | 是 | 字段id |
+| fieldTitle | \[string\] | 是 | 字段表头 |
+| fieldType | \[queType\]更多 | 是 | 字段类型 |
+| nodeInfo | \[object\] | 是 | 节点相关信息 |
+| currentNodeList | \[ array -object \] | 是 | 当前节点列表-针对非待办使用 |
+| nodeId | \[number\] | 是 | 节点id |
+| nodeName | \[string\] | 是 | 节点名称 |
+| dealTime | \[string\] | 是 | 处理时间，13位时间戳 |
+| nodeId | \[number\] | 是 | 节点id-针对待办 |
+| nodeName | \[string\] | 是 | 节点名称-针对待办 |
+| preTimeoutTime | \[string\] | 是 | 超时预警时间，13位时间戳 |
+| receiveTime | \[string\] | 是 | 产生待办/已办等时间，13位时间戳 |
+| timeoutTime | \[string\] | 是 | 超时时间，13位时间戳 |
+| rowRecordInfo | \[object\] | 是 | 申请相关信息 |
+| appKey | \[string\] | 是 | 应用的appKey |
+| applyNum | \[string\] | 是 | 申请的编号 |
+| applyTime | \[string\] | 是 | 申请的时间，13位时间戳 |
+| applyUser | \[object\] | 是 | 申请人信息 |
+| email | \[string\] | 是 | 邮箱 |
+| exUserId | \[string\] | 是 | 用户id |
+| headImg | \[string\] | 是 | 头像 |
+| name | \[string\] | 是 | 名称 |
+| processStatus | \[applyStatus\]更多 | 是 | 当前流程状态 |
+| rowRecordId | \[string\] | 是 | 申请的id |
+| worksheetId | \[number\] | 是 | 表单的id |
+| worksheetName | \[string\] | 是 |  |
+| workspaceId | \[number\] | 是 | 工作区的id |
+
+#### 返回体示例
+
+```json
+{
+    "errCode": 0,
+    "errMsg": "",
+    "result": {
+        "pageSize": 0,
+        "pageNum": 0,
+        "resultAmount": 0,
+        "pageAmount": 0,
+        "result": [{
+            "beingUnread": null,
+            "beingUrged": null,
+            "canUrged": true,
+            "dataSnapshot": [{
+                "fieldAnswer": "11xx",
+                "fieldId": 343070738,
+                "fieldTitle": "单行文字",
+                "fieldType": "2"
+            }],
+            "nodeInfo": {
+                "currentNodeList": [{
+                    "nodeId": 17659253,
+                    "nodeName": "未命名节点"
+                }],
+                "dealTime": "1745314829352",
+                "nodeId": 17659253,
+                "nodeName": "未命名节点",
+                "preTimeoutTime": "1745314829352",
+                "receiveTime": "1745314829352",
+                "timeoutTime": "1745314829352"
+            },
+            "rowRecordInfo": {
+                "appKey": "ak9v5gkg7c02",
+                "applyNum": "4",
+                "applyTime": "1745314814729",
+                "applyUser": {
+                    "email": "Test6120@exiao.tech",
+                    "exUserId": "1602941",
+                    "headImg": "null",
+                    "name": "测试"
+                },
+                "processStatus": "2",
+                "rowRecordId": "383172297458188289",
+                "worksheetId": 5205316,
+                "worksheetName": "测试回退问题",
+                "workspaceId": 110260
+            }
+        }]
+    }
+}
+```
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/nrni3pky16d6sg3r?singleDoc#)

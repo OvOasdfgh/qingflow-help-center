@@ -1,0 +1,65 @@
+---
+title: "易快报"
+description: "1. 介绍易快报是敏捷的企业报销与费控管理平台，为企业提供移动报销、全程费控、预算管理、商旅管理、票据管理的一站式解决方案。2. 鉴权信息需要管理员操作1.获取接入账号以及密码：入易快报的应用中心——搜索开放接口——查看详情——商品配置 查看appKey和appSecurity （可点击下方网..."
+slug: "/帮助文档/轻代码/连接中心/连接器/企业服务/易快报"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/wm7whid8iqqo2rec?singleDoc#"
+source_updated_at: "2024-11-26T08:30:19.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "连接中心"
+  - "连接器"
+  - "企业服务"
+  - "易快报"
+---
+### 介绍
+
+易快报是敏捷的企业报销与费控管理平台，为企业提供移动报销、全程费控、预算管理、商旅管理、票据管理的一站式解决方案。
+
+### 鉴权信息
+
+*需要管理员操作*
+
+1.[**获取接入账号以及密码**](https://www.ekuaibao.com/help/openapi/getting-started/question-answer.html)：入易快报的应用中心——搜索开放接口——查看详情——商品配置 查看appKey和appSecurity （可点击下方网页查看）
+
+[常见问题总结 · 易快报api 文档](https://www.ekuaibao.com/help/openapi/getting-started/question-answer.html)
+
+2.在轻流订阅连接器并将appKey和appSecurity填入：轻商城——连接中心——易快报连接器——配置 填入密钥即可
+
+##### 注意事项
+
+### 事件信息
+
+| 事件 | 描述 |
+| --- | --- |
+| 获取单据列表 | 此接口只能获取单据状态为paying待支付，processing支付中，paid已支付的单据。单据类型：报销单:expense; 借款单:loan; 还款记录:repayment;付款单:payment 申请单:requisition; 通用审批单:custompowercode：如无特殊说明，传入219902或者219904即可。 |
+| 获取费用类型 | 返回费用类型所有列表,包括已停用 |
+| 获取企业名称 |  |
+| 获取档案类别 | 即易快报桌面端档案设置 > 自定义档案界面的列表中展示的那些档案大类。例如项目就是一个自定义档案类别。 |
+| 获取当前版本单据模板列表 | 报销单:expense, 借款单:loan,申请单:requisition,付款单:payment,通用审批单(基础单据):custom |
+
+### 配置演示
+
+#### 获取单据列表
+
+1、创建应用，编辑表单。可以在连接中心中查看事件模版变量与返回结果别名，对照创建表单字段。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/Odm4COpO0Ax6O30wXPCN7hQ7c0sLySTe_.png)
+
+*单据类型type填入英文：报销单:expense、借款单:loan、还款记录:repayment、付款单:payment、申请单:requisition、通用审批单:custom*
+
+*powercode：如无特殊说明，传入219902或者219904即可。*
+
+2、表单设计好之后在，流程中添加webhook流程节点
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/mpbRpUJoVjNNMZbE8adPD4r_cgWmyBiM_.png)
+
+3、将模板变量和表单字段进行配置
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/XeTAtaPggDlPnfffUDK5lbXeYv6dOKxL_.png)
+
+更新配置，保存应用并发布即可
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/wm7whid8iqqo2rec?singleDoc#)

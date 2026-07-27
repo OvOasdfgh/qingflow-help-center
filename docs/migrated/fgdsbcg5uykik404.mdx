@@ -1,0 +1,208 @@
+---
+title: "添加应用数据"
+description: "添加数据到应用1. 权限说明「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有对应应用权限。2. 请求请求方式：POST请求地址：https://api.qingflow.com/app/:appKey/apply（公有云版本）请..."
+slug: "/帮助文档/轻代码/openapi/应用数据接口/数据内容/添加应用数据"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/fgdsbcg5uykik404?singleDoc#"
+source_updated_at: "2025-06-09T12:04:07.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "应用数据接口"
+  - "数据内容"
+  - "添加应用数据"
+---
+添加数据到应用
+
+---
+
+### **权限说明**
+
+「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有对应应用权限。
+
+### 请求
+
+**请求方式：**POST
+
+**请求地址：**https://api.qingflow.com/app/:appKey/apply（公有云版本）
+
+> 请求地址中:appKey为需要替换的变量，根据实际获取值更新，示例如下：
+
+```javascript
+POST https://api.qingflow.com/app/888888/apply
+```
+
+**其他版本请求地址：**
+
+钉钉版本：[https://api.ding.qingflow.com/app/888888/apply](https://api.ding.qingflow.com/app/888888/apply)
+
+专有轻流：http(s)://xxx.xx(自有域名)/openApi/app/888888/apply
+
+#### **2.1 参数说明(路径参数)：**
+
+| 参数 | 类型 | 必须 | 说明 |
+| --- | --- | --- | --- |
+| appKey | string | 是 | 应用的appKey，可在轻流中应用的URL查询，或通过【获取工作区所有应用】接口获取 |
+
+#### **2.2 参数说明(查询参数)：**
+
+无
+
+#### **2.3 请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+| userId |  | userId为空时，默认使用工作区创建人的身份调用接口。 |
+
+#### **2.4 请求体（Body）**
+
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| applyUser |  | object |  |
+| email | 是 | string | 操作人的邮箱，如果不传就以“匿名用户”身份添加数据 |
+| areaCode |  | string | 地区代码 |
+| mobile |  | string | 电话 |
+| answers |  | \[array\] |  |
+| queId | 是 | number | 字段id |
+| queTitle |  | number | 字段名称 |
+| queType | 是 | int | 字段类型，queType可见文档 |
+| values | 是 | \[array\] | \["$ref:answerValue"\] 表格字段以外的字段类型必填 |
+| value |  | string | 问题的结果值 |
+| otherInfo |  | string | 问题结果的其他信息,上传文件这里是文件名,选择类的其他选项这里是其他选项填写的内容 |
+| id |  | number | 选择类型，为optId，成员类型，为uid；成员字段 ，当前用户: -1；地址字段，1-4：省、市、区、详细地址 |
+| tableValues |  | \[array\] | \[\["$ref:answerDetail"\]\] 表格类型字段必填 |
+
+#### **2.5 请求体示例**
+
+```json
+{
+    "applyUser": {
+        "email": "",
+        "areaCode": "",
+        "mobile": ""
+    },
+    "answers": [
+        {
+            "queId": 123456,
+            "queTitle": "",
+            "queType": 2,//单行文字字段
+            "values": [
+                {
+                    "value": "",
+                    "otherInfo": "",
+                    "id": ""
+                }
+            ]
+        },
+        {
+            "queId": 8888,
+            "queTitle": "",
+            "queType": 18,//表格字段
+            "values":[],
+            "tableValues": [
+              [
+                    {
+                        "queId": 80949682,
+                        "queType": 2,
+                        "values": [
+                            {
+                                "value": "测试1"
+                            }
+                        ]
+                    },
+                    {
+                        "queId": 80949683,
+                        "queType": 2,
+                        "values": [
+                            {
+                                "value": "10"
+                            }
+                        ]
+                    }
+                ],
+                [
+                    {
+                        "queId": 80949682,
+                        "queType": 2,
+                        "values": [
+                            {
+                                "value": "测试2"
+                            }
+                        ]
+                    },
+                    {
+                        "queId": 80949683,
+                        "queType": 2,
+                        "values": [
+                            {
+                                "value": "20"
+                            }
+                        ]
+                    }
+                ]
+            ]
+        }
+
+    ]
+}
+```
+
+### 返回
+
+#### 3.1 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，0表示成功，非0表示失败（注：结果只代表请求发送是否成功，不代表执行结果是否成功，执行结果可使用返回的reqesutId通过“查询操作结果”接口查询 |
+| errMsg | 是 | string | 错误描述 |
+| questionRelations | 否 | array | 与表单题目相关的逻辑关系（如显隐、依赖等），成功时为空，只有在某些接口需要时才返回具体内容。 |
+| result | 是 | object | 返回结果 |
+| applyId | 否 | string/null | 通常为单条表单数据的 ID |
+| applyIds | 否 | array | 当操作为批量提交、批量查询时，返回所有相关 ID。为空数组表示没有数据或是单条操作。 |
+| requestId | 是 | string | 请求ID |
+
+#### 3.2 返回体示例
+
+```json
+{
+    "errCode": 0,
+    "errMsg": null,
+    "questionRelations": [],
+    "result": {
+        "applyId": null,
+        "applyIds": [],
+        "requestId": "6ba86d27-86c7-4414-98e8-60941875fb0f"
+    }
+}
+```
+
+### ​
+
+#### 注意事项
+
+1、添加数据后您可在对应数据的流程日志中查看到更新记录（如下图）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-10/3G_ke9pnRSHi_DVN6wsWjFgTRCU8WPvR_.png)
+
+2、若您添加的数据中，有成员字段，请注意：
+
+我们增加了"optionId"参数（非必填），您可以在这个参数中使用您在通讯录中获取的成员userId代替原来的"id"参数。示例如下：
+
+```json
+"answers":[
+    {
+    "queId":4233988,  
+    "queTitle":"成员字段", 
+    "queType":5, 
+    "values":[
+        {"optionId": "12345",
+	      "queId": 4233988,
+	      "value": "刘XX"} ]
+    }
+]
+```
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/fgdsbcg5uykik404?singleDoc#)

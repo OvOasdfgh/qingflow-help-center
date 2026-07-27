@@ -1,0 +1,138 @@
+---
+title: "Word打印模版表格序号自动生成"
+description: "1. 问题描述我们常常配置word打印模版时，需要打印数据的表格内容时，希望可以带上表格序号。如何在配置word打印模版时自动带上呢？本文档介绍不希望先在表单中配置一个表格子字段来作为序号，再来进行打印。如果就是希望可以表格增加一列作为序号的话，可以参考文档：表格序号如何自动生成？2. 解决思..."
+slug: "/搭建技巧/按功能分类/其他/模板问题/word打印模版表格序号自动生成"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/swwzuvvp3e86e4qq?singleDoc#"
+source_updated_at: "2025-02-18T02:47:33.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "其他"
+  - "模板问题"
+  - "Word打印模版表格序号自动生成"
+---
+## 问题描述
+
+我们常常配置word打印模版时，需要打印数据的表格内容时，希望可以带上表格序号。如何在配置word打印模版时自动带上呢？
+
+本文档介绍不希望先在表单中配置一个表格子字段来作为序号，再来进行打印。
+
+如果就是希望可以表格增加一列作为序号的话，可以参考文档：[表格序号如何自动生成？](https://exiao.yuque.com/ixwxsb/cqfg2y/hkl3rq?singleDoc#%20《表格序号如何自动生成？》)
+
+​
+
+## 解决思路
+
+可以利用word文档自带的编号功能来实现打印数据时编号自动生成
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731392110394-086fc193-a929-417f-94db-ca084983a358.png)
+
+## 具体配置
+
+以图中数据字段为例，以及使用WPS文档编辑为例，其他文档软件操作原理相同。
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/2056184/1739846835746-02a87da2-18da-41b7-8338-91a2afd4dfac.png)
+
+### 单条数据打印
+
+- 先在word中插入表格，并配置好插入字段代码，并第一列定义为序号列
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731392196928-3434b232-d025-44d9-ba1b-100eafb20e57.png)
+
+- 选择合适的编号，进行插入
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731392362143-af26c9ed-45f4-4b29-bc2d-1c8df9479635.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731392399782-7e5bc22a-eb44-43ca-a298-d533bc6bb3c6.png)
+
+- 如果不想存在1后面的点的话，再次点击编号，进行自定义配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731392468844-58895ed3-b4e5-4939-ab41-22bea782b2b3.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731392486045-9c9fe8e1-05a2-423f-a552-253d3fda21b1.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731392522516-4c6cbc07-a188-4404-91e9-8d2fce07afad.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731392532146-f0010652-e82c-434b-a832-5157761517dd.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731392547034-0caad8ac-22a0-4640-a991-c8bf180b5549.png)
+
+- 进行保存，上传打印模版，并进行打印测试
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731392619874-a9ae8df9-732a-481a-8d9b-256d92d53bfe.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731392841302-233058f6-16d2-4f57-b2be-19cc0698eb59.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731392705977-71da1bb7-8cb3-4608-80c5-8c9af9b15138.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731392742098-985af007-2acc-47f8-9fe4-a221b8f9ccb9.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731392776933-a988a89c-3198-4ae3-9a09-416a3dfd4ba4.png)
+
+### 批量数据打印
+
+- 如果使用上述模版进行批量打印，选择分页打印或者连续打印的话，会存在序号时连续的，并不是每一个表格的序号时独立的。
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731393065227-3a384aba-a848-4dcf-b7f5-817b10dc1a72.png)
+
+上述模版的分页打印效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731393137445-ed4f50d8-a80e-4613-9b4c-4ec1a96a417a.png)
+
+上述模版的连续打印效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731393200871-9657c4d5-d562-4f9e-b361-6a751e47eab7.png)
+
+如果就是我们想要的效果的话，可以不需要修改word打印模版，如果是需要每个表格序号独立，请按照下面方法仅修改
+
+- 先在表格序号上面写下**1. **再按下空格键，如果看到编号被选中，则操作成功
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731393367208-c7be267b-de4b-4447-a21d-4d11ac1aaafa.png)
+
+- 再在表格序号第一列中写下**1.1. **再按下空格键，如果看到编号被选中，则操作成功
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731393536922-6b4ceab7-bc45-44b5-90a5-6fda7eac997b.png)
+
+- 点击编号，选择自定义编号，选择自定义
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731393714277-25151f7d-6936-459f-b6a8-08911445a279.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731393727816-278f92ae-486b-402d-b2b1-2a10b5006ef7.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731393744496-532eab8c-f69e-4760-a656-a367faf72855.png)
+
+- 修改编号格式，不想要最后的点，可以进行删除，以及需要将前面的1.进行删除
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731393769354-52f0e0d5-9acb-4109-ab6b-26cb84b6152d.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731393843085-dfe3fd62-b3bd-4c29-8d68-393d308b87c0.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731393855808-f05dbb6e-63d8-438b-b723-40d440864e9d.png)
+
+- 看是否成功，可以增加表格行，和复制整体表格看一下效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731393941395-aea34136-8223-404b-a467-b0e6e3b5594e.png)
+
+- 最后操作，将表格上方的1.进行字段白色化
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731394003358-eaee0d79-32bc-4721-a155-1dc2a14c1426.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731394021160-e95f3eb8-94ab-4877-acfb-266946b16ea7.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731394033524-12750ace-0df5-49ba-8a52-4d8f6bbf58af.png)
+
+- 进行保存，上传打印模版，并进行打印测试
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731394097581-ae0e2bc1-5f44-4601-98c0-d2be522963f4.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731394112976-1d8f2f76-1cde-47bf-8ed9-81a55dd361b8.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731394142875-d4cbbb77-b808-4319-8493-825928b483f5.png)
+
+- 连续打印具体效果如下
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1731394167334-4c75c928-c350-44cd-8682-f521769393e7.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/swwzuvvp3e86e4qq?singleDoc#)

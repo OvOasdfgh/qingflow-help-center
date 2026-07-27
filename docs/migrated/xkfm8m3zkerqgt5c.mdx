@@ -1,0 +1,163 @@
+---
+title: "文本函数"
+description: "1 功能介绍1.1 功能简介工作中经常需要对数据中的文本字符进行提取、查找和替换等操作。文本函数，可以帮助我们在公式中编辑处理文字串信息。2 设置步骤CONCAT将多个文本字符串合并成一个文本字符串。函数用法：CONCAT(text1,text2, …)注：字段或者函数之间，用逗号隔开；如果是..."
+slug: "/帮助文档/表单引擎/字段常用设置/默认内容/通过公式计算/文本函数"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/xkfm8m3zkerqgt5c?singleDoc#"
+source_updated_at: "2024-11-18T06:02:14.000Z"
+keywords:
+  - "帮助文档"
+  - "表单引擎"
+  - "字段常用设置"
+  - "默认内容"
+  - "通过公式计算"
+  - "文本函数"
+---
+## 1 功能介绍
+
+### 1.1 功能简介
+
+工作中经常需要对数据中的文本字符进行提取、查找和替换等操作。
+
+文本函数，可以帮助我们在公式中编辑处理文字串信息。
+
+## 2 设置步骤
+
+### CONCAT
+
+将多个文本字符串合并成一个文本字符串。
+
+> 函数用法：CONCAT(text1,text2, …)注：字段或者函数之间，用逗号隔开；如果是字符串，需要用引号包裹起来。
+
+**函数示例：**
+
+将客户所在地和客户姓名连接成具体的客户信息。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700126381728-a5905cc2-ab22-463f-ae79-26ccfc49d052.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700126557295-8781556c-9abf-484b-b5fa-44fbf02f0f5a.png)
+
+### MID
+
+返回文本字符串中从指定位置开始的特定数目的字符，该数目由用户指定。
+
+> 函数用法：MID(text, start\_num, num\_chars)text: 必需。 包含要提取字符的文本字符串。start\_num: 必需。 文本中要提取的第一个字符的位置。 文本中第一个字符的 start\_num 为 1，以此类推。num\_chars: 必需。 指定希望从文本中返回字符的个数。
+
+**函数示例：**
+
+通过 MID 函数提取身份证号的第 7 到 10 位，后面接“-”，提取身份证号的 11、12 位，接“-”，最后提取身份证号的 13、14 位。最后，采用 CONCATENATE 函数将提取出来数字和“-”连接符相连。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700126429765-727ac905-8239-4289-8ff9-eda4ef9a8604.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700126596002-b8011217-3555-49e8-90cc-f4235222e190.png)
+
+### LEFT
+
+从文本字符串的左侧第一个字符开始返回指定个数的字符。
+
+> 函数用法：LEFT(text,\[num\_chars\])
+
+**函数示例：**
+
+取身份证号前3位。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700127393821-ce4e3055-9aa4-4447-b899-50a604a00feb.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700127371424-c7dd98d2-d8b7-4385-8a06-cb189bebf57a.png)
+
+### RIGHT
+
+从文本字符串的右侧第一个字符开始返回指定个数的字符。
+
+> 函数用法：RIGHT(text,\[num\_chars\])text: 必需。包含要提取字符的文本字符串。num\_chars: 可选。指定希望提取的字符数。
+
+**函数示例：**
+
+取身份证号后4位。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700127408092-e4dfbd61-bb07-420a-999a-d35714a5fa1f.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700127378575-2f4208ad-6706-4d74-8a8a-84cb6afed398.png)
+
+### LEN
+
+返回文本字符串中的字符个数。（空格也将作为字符进行计数）
+
+> 函数用法：LEN(text)
+
+**函数示例：**
+
+LEN函数与IF函数连用：判断会员等级，假设会员码三位数的为高级会员，会员码五位数的为普通会员。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700126461733-59f3cda2-ad8e-4343-a5c5-9bdb283330f2.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700126631513-86e0d60d-7cf0-43d1-be0e-41cf7690db4f.png)![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700126641907-d134eda4-14f2-49be-990e-518f44ea34d8.png)
+
+### UPPER
+
+将一个文本字符串中的所有小写字母转换为大写字母。
+
+> 函数用法：UPPER(text)
+
+**函数示例：**
+
+将小写单词转为大写单词。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700127675416-8405421d-263b-442f-9a68-fa8c26a08fd4.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700127726739-b9dd12eb-f4ae-405b-8b28-2662f789045c.png)
+
+### LOWER
+
+将一个文本字符串中的所有大写字母转换为小写字母。
+
+> 函数用法：LOWER(text)
+
+**函数示例：**
+
+将大写单词转为小写单词。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700127690509-f5b217f3-724a-4a9c-a8de-cda250d2e6b2.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700127737222-31a041fb-aa8b-46bc-8a6e-6340ba98827a.png)
+
+### REPLACE
+
+根据指定的字符数，将部分文本字符串替换为不同的文本字符串。
+
+> 函数用法：REPLACE(old\_text, start\_num, num\_chars, new\_text)old\_text: 必需。要替换其部分字符的文本。start\_num: 必需。old\_text 中要替换为 new\_text 的字符位置。num\_chars: 必需。old\_text 中希望使用 new\_text 来进行替换的字符数。new\_text: 必需。将替换 old\_text 中字符的文本。
+
+**函数示例：**
+
+为保护隐私，用REPLACE函数替代手机号码中间四位。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700126490709-d14c1ac4-f4ff-4633-9dd3-cca3044fcc29.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700126665761-d4dec8d6-1f49-4491-a0af-4d9334cb77d4.png)
+
+### SEARCH
+
+返回第一个文本字符串在第二个文本字符串中第一次出现的位置序号，从左到右查找，忽略英文字母的大小写；返回 0 则表示未查找到。
+
+> 函数用法：SEARCH(find\_text,within\_text,\[start\_num\])find\_text: 必需。要查找的文本。within\_text: 必需。字符所在文本。start\_num: 可选。within\_text 中从第几个字符开始查找；未填写则默认从第一个开始查找。
+
+**函数示例：**
+
+【你周天一天都有时间吗？】，查找“天”所在的位置；
+
+【你周天一天都有时间吗？】，从第四个字符开始，查找“天”所在的位置。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700128153610-37c4b97f-b009-4a68-b171-0d1c6b7b5760.png)查找“天”所在的位置![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700128220345-ae433c11-3b19-40fd-920f-e50ba8f11e3e.png)从第四个字符开始，查找“天”所在的位置**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700128175259-2b5c6552-bc79-427e-a835-0c64c3061579.png)![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700128264539-633b44f8-2ae0-48e4-b27c-7c5152492155.png)
+
+### TEXT
+
+将日期转换成特定格式的文本。
+
+> 函数用法：TEXT(date, text\_format)其中 text\_format 的含义如下：yy 表示年，显示为 15yyyy 表示年，显示为 2015M 表示月，显示为 6MM 表示月，显示为 06MMM 表示月，显示为六月d 表示日，显示为 9dd 表示日，显示为 09HH 表示 24 小时制的时（0 点 10 分将显示为 0:10）hh 表示 12 小时制的时（0 点 10 分将显示为 12:10）mm 表示分ss 表示秒E 表示星期，结果为 0~6，分别表示星期日~星期六EE 表示星期，例如：日、一、二等EEE 表示星期，例如：星期日、星期一、星期二等
+
+**函数示例：**
+
+输入日期，显示为日月年；
+
+输入日期，显示为“周几”。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700126707978-3685ddea-fffe-4a1e-91a0-ccccc6061d02.png)![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700126720298-20d8be59-dbc1-4485-9506-6b12b383e618.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700126689754-8fc364c5-71c6-437f-8a13-dfb05252d2d6.png)
+
+### JOIN
+
+​可通过连接符将数组的值连成文本。
+
+> 函数用法：JOIN("连接符",数组)
+
+**函数示例：**
+
+将多项选择中勾选的选项通过”-“组合在一起。
+
+**公式设置**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700128564849-edba860e-00f9-4a62-aad7-90c25d25fa1b.png)**效果展示**![image.png](https://cdn.nlark.com/yuque/0/2023/png/21683170/1700128546085-deb06780-0ac4-4962-b4df-a5b39cbdb5e0.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/xkfm8m3zkerqgt5c?singleDoc#)

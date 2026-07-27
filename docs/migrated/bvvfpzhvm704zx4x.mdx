@@ -1,0 +1,103 @@
+---
+title: "JumpServer"
+description: "1. 介绍Jumpserver 是全球首款完全开源、符合 4A 规范（Authentication、Authorization、Accounting、Auditing）的运维安全审计系统，Jumpserver 通过软件订阅服务或者软硬件一体机的方式，向企业级用户交付多云环境下更好用的堡垒机。2..."
+slug: "/帮助文档/轻代码/连接中心/连接器/数据处理/jumpserver"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/bvvfpzhvm704zx4x?singleDoc#"
+source_updated_at: "2024-11-26T08:30:18.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "连接中心"
+  - "连接器"
+  - "数据处理"
+  - "JumpServer"
+---
+### 介绍
+
+Jumpserver 是全球首款完全开源、符合 4A 规范（Authentication、Authorization、Accounting、Auditing）的运维安全审计系统，Jumpserver 通过软件订阅服务或者软硬件一体机的方式，向企业级用户交付多云环境下更好用的堡垒机。
+
+### 鉴权信息
+
+需要参照jumpServer提供的private key获取方式，来获取永久可用的token，比较推荐使用管理员权限token，因为目前主要的事件都是基于管理员权限
+
+#### 注意事项
+
+需要在jumpServer后台输入命令来获取此指令
+
+### 事件信息
+
+| 事件 | 描述 |
+| --- | --- |
+| 获取全部应用信息 | 获取堡垒机内全部应用数据，包括id、名称等 |
+| 获取全部资产信息 | 获取堡垒机内全部资产数据，包括id、名称等 |
+| 添加应用 | 跟随流程自动添加数据库/k8s等应用 |
+| 添加资产 | 跟随流程自动添加资产/服务器 |
+| 添加应用授权 | 入参为应用id、系统用户id、用户id，创建新的应用授权 |
+| 添加资产授权 | 入参为资产id、系统用户id、用户id，创建新的资产授权 |
+
+### 配置演示
+
+1、首先在命令行中输入如下代码，获取到永久有效的private token，可以参照jumpServer官方文档：[**https://docs.jumpserver.org/zh/master/dev/rest\_api/**](https://docs.jumpserver.org/zh/master/dev/rest_api/)
+
+```latex
+docker exec -it jms_core /bin/bash
+cd /opt/jumpserver/apps
+python manage.py shell
+from users.models import User
+u = User.objects.get(username='admin')
+u.create_private_token()
+```
+
+2、在连接中心前-连接器中找到JumpServer后，点击订阅，进入配置页面，鉴权管理-变量，在Private Token输入框中需要填写：Token+英文空格+获取到的private token
+
+格式如：Token 6f36xxxxxxxxxxxxxxxxxxxx1e0bd1cfafecbf5be
+
+其次选择您需要触发的事件，获取全部应用/资产信息为Qlinker可触发的事件，添加应用/资产，添加应用/资产授权为webhook可触发的事件
+
+### 获取全部应用信息：
+
+以获取全部应用为例，首先在配置页面需要填写如下内容：
+
+主域名：[**http://xxx.xxxxxxx.com**](http://jp.oalite.com) 后面不要加/
+
+可以获取到列表形式展示的应用信息：
+
+| 子别名 | 含义 |
+| --- | --- |
+| name | 应用名称 |
+| id | 应用id |
+| category | 类别 |
+| category\_display | 类别名称 |
+| type | 类型 |
+| type\_display | 类型名称 |
+| date\_created | 创建日期 |
+| date\_updated | 最后更新日期 |
+| created\_by | 创建人 |
+
+具体在轻流系统中使用时，可在
+
+1、Qlinker的配置模式中直接选择「使用连接中心模板」，之后会关联出所有工作区已订阅的连接器；
+
+2、在执行事件中选中「获取全部应用信息」之后，在绑定变量中新增一行，选中主域名，配置上默认值或关联字段（若已在连接中心配置页面做过配置可忽略此步骤）
+
+3、表单中新增一个表格字段，按自己需要配置需要抓取的子字段，以创建人、应用名称，应用id三个字段为例，在默认内容中选择「关联已有表格」，关联应用选择「Qlinker的名称」，选择关联表格选「applicationInfo」，之后在子字段关联中将表格子字段关联上需要的别名就可以直接使用了
+
+#### 添加资产
+
+添加资产需要在webhook中使用，需要的入参有：
+
+| 变量名 | 含义 |
+| --- | --- |
+| 主域名 | 堡垒机服务器的主域名，不要加/ |
+| 名称 | 新建资产/服务器的名称 |
+| ip | 新建资产/服务器的ip |
+| 系统平台 | 操作系统，可取值mysql, oracle, postgresql, mariadb, chrome, mysql\_workbench, vmware\_client, custom, k8s |
+| 端口 | 新增资产/服务器的端口 |
+
+在连接中心配置页面做的配置可以作为全工作区可用的常量，如需绑定表单变量或单个应用可用的常量可以在单个应用的webhook中单独配置
+
+出参需要在应用的webhook中单独配置，以关联到具体的表单字段，目前支持返回创建资产的id、创建时间、资产名称
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/bvvfpzhvm704zx4x?singleDoc#)

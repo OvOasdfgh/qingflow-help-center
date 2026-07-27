@@ -1,0 +1,112 @@
+---
+title: "数据库直连"
+description: "调用本接口，直连mysql，sqlserver，oracle类型数据库1. 权限说明调用本接口前，确保您购买过（或已经申请试用）我们的数据库接口。否则请联系轻流技术支持。2. 请求请求方式：post数据库操接口地址接口请求路径：https://connect.oalite.com/api/da..."
+slug: "/帮助文档/轻代码/openapi/其他/数据库直连"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/hqqqu91mnece4rcc?singleDoc#"
+source_updated_at: "2024-10-15T03:35:13.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "其他"
+  - "数据库直连"
+---
+调用本接口，直连mysql，sqlserver，oracle类型数据库
+
+### 权限说明
+
+调用本接口前，确保您购买过（或已经申请试用）我们的数据库接口。
+
+否则请联系轻流技术支持。
+
+### 请求
+
+请求方式：post
+
+#### 数据库操接口地址
+
+接口请求路径：[https://connect.oalite.com/api/database/XXXXX](https://connect.oalite.com/api/database/XXXXX)
+
+（XXXXX为数据库类型，可填写mysql / sqlserver / oracle，请依据数据库类型选择相应地址）
+
+示例：
+
+```json
+POST https://connect.oalite.com/api/database/mysql
+```
+
+**请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证 |
+
+### **请求体（Body）**
+
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| url | 是 | \[array\] | 数据库地址 |
+| port | 是 | string | 端口号 |
+| dbName | 是 | string | 数据库名称 |
+| username | 是 | string | 用户名 |
+| password | 是 | \[array\] | 密码 |
+| sqlType | 是 | \[array\] | sql类型 只支持：select/update/insert |
+| sql | 是 | \[array\] | sql语句 |
+
+请求示例：
+
+```latex
+{
+    "url":"111.22.33.444",
+    "port":"1234",
+    "dbName":"xxxx",
+    "username":"xxxx",
+    "password":"xxxxxx",
+    "sqlType":"select",
+    "sql":"select * from staff_data"
+}
+```
+
+### 返回
+
+#### 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| code | 是 | int | 错误码，非0表示失败 |
+| data | 是 | \[array\] | 数据内容 |
+
+返回示例
+
+```latex
+{
+    "code":0,
+    "data":[
+        {
+            "join_date":"2021-18-02",
+            "sex":"男",
+            "name":"小赵",
+            "start_end_date":"2021-01-07~2021-01-09",
+            "id":"1001",
+            "dept":"测试部门",
+            "salary":"7000",
+            "age":"18"
+        },
+        {
+            "join_date":"2021-19-03",
+            "sex":"女",
+            "name":"小钱",
+            "start_end_date":"2021-01-01~2021-01-30",
+            "id":"1002",
+            "dept":"测试部门",
+            "salary":"6000",
+            "age":"18"
+        }
+    ],
+    "msg":null
+}
+```
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/hqqqu91mnece4rcc?singleDoc#)

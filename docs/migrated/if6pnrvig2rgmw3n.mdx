@@ -1,0 +1,62 @@
+---
+title: "QR更新数据如何重新触发公式和关联？"
+description: "1.场景Q-Robot更新目标应用中的对应数据的字段信息，但是目标应用中与该字段相关的公式字段或关联字段并不会再次触发计算和关联，希望公式和关联字段可以再次触发计算和关联。2.实现思路轻流系统中只有在流程中才可以触发公式和关联，要实现更新某一个字段，该字段相关的公式字段和关联的字段都同步计算，..."
+slug: "/常见问题-faq/q-robot/qr更新数据如何重新触发公式和关联"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/if6pnrvig2rgmw3n?singleDoc#"
+source_updated_at: "2025-02-18T02:35:36.000Z"
+keywords:
+  - "常见问题（FAQ）"
+  - "Q-Robot"
+  - "QR更新数据如何重新触发公式和关联？"
+---
+## 1.场景
+
+Q-Robot更新目标应用中的对应数据的字段信息，但是目标应用中与该字段相关的公式字段或关联字段并不会再次触发计算和关联，希望公式和关联字段可以再次触发计算和关联。
+
+## 2.实现思路
+
+轻流系统中只有在流程中才可以触发公式和关联，要实现更新某一个字段，该字段相关的公式字段和关联的字段都同步计算，可以在这个字段更新的时候触发由原应用向辅助应用中添加数据，在辅助应用中把值计算出来，再由辅助应用通过QR更新目标应用中的数据
+
+![原文画板](https://cdn.nlark.com/yuque/0/2024/jpeg/21779625/1735115838784-0be249e5-7872-4879-977e-f15f7c66823f.jpeg)
+
+## 3.搭建示例
+
+该场景一共涉及以下两个应用，当「原数据」中数据被更新的时候触发流程外QR添加数据到「辅助应用」
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1735201870694-19f07a6e-dbfa-49ed-8c3a-ce908940d8fa.png)
+
+#### 3.1表单设置
+
+**原数据**
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1735205251967-db974779-c234-47df-8fc7-0ffc963e6923.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1735205267192-6f0eba1d-edff-46e2-9dbb-b5a110d410ea.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1735205422095-b50cbdcb-2067-4baf-a03f-354d851b90d6.png)
+
+**辅助应用**
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1735269639078-8b2773f9-597f-473f-9f3e-9c4b33db0136.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1735269664233-ca1f6826-95b3-453f-b6de-440694030277.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1735270183100-f28753ad-a966-411b-b4cb-552cd8bbcc7b.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1735270222183-2d5a318e-5e48-4da7-a8e2-d7f68d1cf90d.png)
+
+#### 3.2实现效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1735279293345-181fbcab-fa25-4122-8815-c3a120f9ffdc.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1735279750601-5aae398c-9e24-432c-9b0a-ee6bd734dbb6.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1735279879296-6d3f56b2-0fe1-4a53-9b80-2e72f47c5384.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1735279949716-d00c259b-e644-48df-a9d0-b790febca775.png)
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/if6pnrvig2rgmw3n?singleDoc#)

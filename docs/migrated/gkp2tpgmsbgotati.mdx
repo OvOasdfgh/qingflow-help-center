@@ -1,0 +1,86 @@
+---
+title: "自动识别填写设备巡检时不同设备的拍照上传必填与非必填"
+description: "1.场景描述客户有许多设备每周需要巡检，其中部分非重要设备被巡检的时候拍照上传非必填，而重要的设备巡检的时候要求拍照上传必填，希望可以实现自动判断2.解决思路可以有两种方案：a、如果普通设备序号规则为XX-01~XX-N，重要的设备是ZZ-01,ZZ-02，就可以给节点设置提交校验公式，如果设..."
+slug: "/常见问题-faq/表单/自动识别填写设备巡检时不同设备的拍照上传必填与非必填"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/gkp2tpgmsbgotati?singleDoc#"
+source_updated_at: "2025-02-18T02:59:02.000Z"
+keywords:
+  - "常见问题（FAQ）"
+  - "表单"
+  - "自动识别填写设备巡检时不同设备的拍照上传必填与非必填"
+---
+### 1.场景描述
+
+客户有许多设备每周需要巡检，其中部分非重要设备被巡检的时候拍照上传非必填，而重要的设备巡检的时候要求拍照上传必填，希望可以实现自动判断
+
+### 2.解决思路
+
+可以有两种方案：
+
+a、如果普通设备序号规则为XX-01~XX-N，重要的设备是ZZ-01,ZZ-02，就可以给节点设置提交校验公式，如果设备编号非常复杂又很多的时候公式非常长会比较麻烦；
+
+b、用辅助应用设置好设置是否重要，关联相关数据控制选择类字段的内容，选择类字段关联到重要设置的时候展示一个必填的附件字段，其他时候展示非必填的附件字段
+
+### 3.表单设计
+
+3.1设备编号录入应用表单及录入的数据如下：
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1737961080220-4a7cf759-9c78-41b4-9484-343ea27e9b6c.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1737961352883-ddba2583-5532-447d-abfc-742d7ffee0eb.png)
+
+3.2方案一（在类型较少的时候可以写公式用提交校验来实现）：
+
+（1）设备名称设置成数据关联，这样可以手动选择到其中一个：
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1737961562126-5b017875-c9b6-4b9e-842b-d2935d033cd8.png)
+
+（2）编号就由设备名称自动关联出来，在申请人节点设置为仅可见：
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1737961577888-782b35ea-5ac4-4691-858b-5b8027a36e58.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1737961774028-fa383733-a65b-4b5b-a8b5-d89caa0a7cc0.png)
+
+（3）在申请人节点的高级设置，设置提交校验中的字段校验，公式为：IF(AND(SEARCH("ZZ",设备编号)!=0,ISEMPTY(设备照片)),false,true)
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1737961678635-6146c699-406e-4486-ad61-f662a14cff9e.png)
+
+可以配合提示文案设置如下：
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1737961915411-ad700cdd-e244-49fa-a60d-a995d53ed5e4.png)
+
+​
+
+3.3方案二（配合逻辑表单功能来实现自动判断）：
+
+（1）设备名称设置成数据关联，这样可以手动选择到其中一个，并且设置两个附件字段，一个必填另外一个非必填：
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1737962597709-58a66e51-ffad-48f5-957b-fbf44c07b0a7.png)
+
+（2）编号就由设备名称自动关联出来，在申请人节点设置为仅可见：
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1737961577888-782b35ea-5ac4-4691-858b-5b8027a36e58.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1737962385514-11c2b1ec-7671-482e-bf0b-4df9f41f8016.png)
+
+（3）设置一个设备类型字段，保证内容跟【设备编号】应用中的一致，自动关联设备编号中的设备类型，并设置表单内隐藏，最后设置逻辑表单如下：
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1737962135538-d9c5932e-4ffe-4500-a5a1-c1e9cec3fba7.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1737962504220-44cc2af9-a594-45d3-9a39-b3314820ae15.png)
+
+### 4.实现效果
+
+4.1方案一：![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1737962799345-59e609c2-8859-4028-bc39-d44805723219.png)
+
+4.1方案二：
+
+特殊设备填写时![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1737962729358-e1bd86ea-3495-445b-992c-8331ae9db00c.png)
+
+非特殊设备填写时
+
+![image.png](https://cdn.nlark.com/yuque/0/2025/png/34394013/1737962753930-de58acb1-7c37-447a-a4a8-af7c64195b2f.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/gkp2tpgmsbgotati?singleDoc#)

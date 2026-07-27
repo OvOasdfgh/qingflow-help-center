@@ -1,0 +1,106 @@
+---
+title: "如何实现应用数据的去重计数？"
+description: "1. 场景/问题描述由于目前数据关联只有已填计数和未填计数，并没有去重计数该功能比如我想要计数产品名称有多少个产品，去重之后为2个2. 思路逻辑通过代码块调用获取应用数据之后再进行筛选去重计算3. 配置过程这里仅仅演示获取某个应用的数据去重3.1. 代码与测试3.1.1. 代码注释URL：换成..."
+slug: "/搭建技巧/按功能分类/数据管理/应用数据处理/如何实现应用数据的去重计数"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/rxur3k0i9f5nzi72?singleDoc#"
+source_updated_at: "2024-10-15T03:38:14.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "数据管理"
+  - "应用数据处理"
+  - "如何实现应用数据的去重计数？"
+---
+## 场景/问题描述
+
+由于目前数据关联只有已填计数和未填计数，并没有去重计数该功能
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692773035128-7f696e14-d7de-4227-9fbe-3d067c4bd8fd.png)
+
+比如我想要计数产品名称有多少个产品，去重之后为2个
+
+## 思路逻辑
+
+通过代码块调用获取应用数据之后再进行筛选去重计算
+
+## 配置过程
+
+这里仅仅演示获取某个应用的数据去重
+
+### 代码与测试
+
+#### 代码注释
+
+URL：换成获取应用数据接口，其中需要替换是appkey
+
+accesstoken：拓展插件——openAPI
+
+queid:换成数据关联字段的字段ID
+
+item：换成数据关联字段的字段名称
+
+#### 完整代码
+
+```javascript
+const axios = require('axios');
+let data = JSON.stringify({
+  "pageSize": "5000",
+  "pageNum": "1"
+});
+
+let config = {
+  method: 'post',
+  maxBodyLength: Infinity,
+  url: 'https://api.qingflow.com/app/1c53385d/apply/filter',
+  headers: {
+    'accessToken': '8121b22f-40b4-40d6-a8cf-a863962ef***',
+    'Content-Type': 'application/json'
+  },
+  data: data
+};
+
+async function fetchData() {
+    const res = await axios(config);
+    var msg = res.data;
+    var result = msg.result.result;
+    var res_list = [];
+  
+    result.forEach((value, index) => {
+      var res_msg = new Map();
+      var answers = value.answers;
+      answers.forEach((value, index) => {
+        var queId = value.queId;
+        var queTitle = value.queTitle;
+        if (queId == 160418421) {
+          var values = value.values;
+          var dataValue = values[0].dataValue;
+          res_msg[queTitle] = dataValue;
+          res_list.push(res_msg);
+        }
+      });
+    });
+  
+    return res_list;
+  }
+  
+  fetchData().then((res_list) => {
+    // 去重计数
+    const uniqueCount = new Set(res_list.map((item) => item["产品名称"])).size;
+    qf_output={uniqueCount}
+  
+  });
+```
+
+#### 解析规则与字段配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692773257400-a2bb919e-d356-49f2-bec9-48f7403ac5e9.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692773157624-c175bda2-bda2-47d7-bd4f-818966862c33.png)
+
+## 实际效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692773326431-a5fa284e-24cd-4c5d-899a-89b0b98a3ce3.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/rxur3k0i9f5nzi72?singleDoc#)

@@ -1,0 +1,104 @@
+---
+title: "如何在表单中获取成员userid？"
+description: "1. 场景/问题描述比如需要调用重新指派申请人接口就需要对应成员的userid（只适合获取单个成员的ID）2. 思路逻辑使用Q-linker调用接口获取，可以调用有关获取成员的接口3. 配置过程3.1. Q- Linker实现3.1.1. 方法一通过获取工作区全部成员接口对应接口文档：http..."
+slug: "/搭建技巧/按功能分类/轻代码/q-linker/如何在表单中获取成员userid"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/dgv2hs83dxumhdud?singleDoc#"
+source_updated_at: "2024-10-15T03:38:15.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "轻代码"
+  - "Q-Linker"
+  - "如何在表单中获取成员userid？"
+---
+## 场景/问题描述
+
+比如需要调用重新指派申请人接口就需要对应成员的userid（只适合获取单个成员的ID）
+
+## 思路逻辑
+
+使用Q-linker调用接口获取，可以调用有关获取成员的接口
+
+## 配置过程
+
+### Q- Linker实现
+
+#### 方法一
+
+- 通过获取工作区全部成员接口
+- 对应接口文档：[https://help.qingflow.com/help-docs?type=qingCode&docId=704de8fa6428f55b00034a922410c9bb&parentId=](https://help.qingflow.com/help-docs?type=qingCode&docId=704de8fa6428f55b00034a922410c9bb&parentId=)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692244271705-b2190f2e-38b1-4bd5-9ffe-d088d26078b5.png)
+
+##### URL
+
+https://api.qingflow.com/user（以公有云为例）
+
+##### Param
+
+pagesize：建议写大点（比通讯录人数多即可，因为Q-linker并不支持分页）
+
+pagenum:1（默认）
+
+##### header
+
+accessToken：
+
+轻商城——拓展插件——openAPI获取
+
+##### json path解析
+
+$.result.result\[?(@.email== '成员')\].userId
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692244515863-4b18f715-f891-427a-a0d9-c513d802ba2a.png)
+
+##### 字段解析配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692244528695-f7029f3d-81c5-424b-bee6-59b67000d3d1.png)
+
+实际效果：
+
+[https://qingflow.com/f/f6e279c4](https://qingflow.com/f/f6e279c4)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692244670573-5fabc421-5f16-4bbe-ba33-d494de2ab5cd.png)
+
+#### 方法二
+
+- 通过邮箱或者手机号获取成员ID
+- 接口文档：[https://help.qingflow.com/help-docs?type=qingCode&docId=97331e4564e2d58101db4aea2f1a6519&parentId=](https://help.qingflow.com/help-docs?type=qingCode&docId=97331e4564e2d58101db4aea2f1a6519&parentId=)
+
+```bash
+curl --location 'https://api.qingflow.com/user/getId?email=june1790812261%40163.com' \
+--header 'accessToken: d866db1d-79ca-42c5-9e9c-0b1ce21135d2' \
+--header 'Cookie: JSESSIONID=A2D6C486F566FAE11FFCDAB18DBCCA2B'
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692245345820-b5cd0ec5-8270-452a-bade-13bdc8cf3138.png)
+
+##### URL
+
+https://api.qingflow.com/user/getId（以公有云为例）
+
+##### Param
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692245379547-d621d2f7-e12b-4a94-8cf1-5873d8281e2f.png)
+
+##### header
+
+accessToken：
+
+轻商城——拓展插件——openAPI获取
+
+##### json path解析
+
+$.result.result\[0\].userId
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692245401131-7926a793-3929-4ac8-89c8-8d1ee332bd22.png)
+
+##### 字段解析配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692245414086-f9104df0-0494-4a40-b290-037344be26b4.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/dgv2hs83dxumhdud?singleDoc#)

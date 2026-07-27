@@ -1,0 +1,433 @@
+---
+title: "5.3.0功能更新日志"
+description: "功能更新日志内容来源：（1）新模块新功能上线；（2）已有模块新功能上线。用户可通过此日志了解新功能和新的场景案例。1 无代码1.1 表单1.1.1 关联引擎重构升级新版关联引擎有以下方面的优化及提升1、性能提升数据关联字段、使用关联已有数据配置的字段，加载速度提升有效减少使用这两类字段较多的表..."
+slug: "/更新动态/更新日志/专有轻流/5-3-0功能更新日志"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/soy0rgy4mb0gxugz?singleDoc#"
+source_updated_at: "2024-10-15T03:37:02.000Z"
+keywords:
+  - "更新动态"
+  - "更新日志"
+  - "专有轻流"
+  - "5.3.0功能更新日志"
+---
+功能**更新**日志内容来源：
+（1）新模块新功能上线；
+（2）已有模块新功能上线。
+用户可通过此日志了解新功能和新的场景案例。
+
+## 1 无代码
+
+### 1.1 表单
+
+#### 1.1.1 关联引擎重构升级
+
+新版关联引擎有以下方面的优化及提升
+1、性能提升
+数据关联字段、使用关联已有数据配置的字段，加载速度提升
+有效减少使用这两类字段较多的表单，加载卡顿的现象
+
+2、功能增强
+
+数据关联字段的聚合方式，新增：未填计数和总计数的聚合类型
+关联已有数据，新增排序设置配置项。开启后，关联已有数据的值为：排序后的第一条数据
+
+3、逻辑一致性提升
+
+统一了数据关联和关联已有数据对空值的处理逻辑，关联到符合条件的第一条数据对应的字段值不论该字段是否为空值，都会返回空值默认值或对应数值
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/iiy3kPtO3ta1KOcVnAuRoLefkoiAPXkE_.png)
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/gjdEH1D02YxStT4-HpHtfzSn95vKBXzt_.png)
+
+#### 1.1.2 支持查看CAD文件
+
+附件字段支持预览查看CAD工业图纸类文件，支持轻量批注、爆炸、剖切、测量等功能
+
+覆盖主流CAD 文件格式，比如stl、gcode、brep、obj、3mf、fbx、gltf、glb、dae、e3dx、step、stp、stpz、igs、iges、sldprt、sldasm、ipt、iam、catpart、catproduct、cgr、3dxml、x\_b、x\_t、prt、3dm、jt、dwg、dxf等
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/PYVPxKVeJQ0VYsRmRQB4q97pGTI_MXeB_.png)
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/uIt59wZJg6_gHrJet7k2TfzJ_GrSun7O_.png)
+
+### 1.2 流程
+
+#### 1.2.1「暂存」交互表现调整
+
+点击待办数据的「保存」，弹窗不会被关闭
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/eTGL41z2DiQgHIdyaOZi6iwTyyhlWUQg_.gif)
+
+#### 1.2.2 Q-Robot更新成员/部门字段优化逻辑
+
+在QRobot更新部门/成员字段时，会同时对比部门/成员的ID+名称，若任一值与当前字段不同均会被更新
+
+#### 1.2.3 提交二次确认
+
+在申请人、审批、填写节点的「高级设置」中开启提交预览后
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/tZYkYHr_4VYClEz9dPNlkIhWWOr-g-lx_.png)
+
+在申请、待办、草稿等状态下，点击提交、通过、后加签时，会弹出预览页面
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/jPY3-qFcONqZ6DbaVm1edY3BPE77GGhN_.png)
+
+#### 1.2.4 审批加签、流转规则、流程状态
+
+- 新增审批加签：此次更新， 增加了审批加签 功能
+支持在审批节点中增加临时审批人。可以在审批节点-基础设置 中开启加签功能
+同时在处理待办 时点击更多-加签 ，即可加签审批人
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/Jv26hnZlj7dHA-5Y3SM8wpnbt6qRI4yl_.png)
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/nHY91CAo3G1IFoOiSihue3n_LqontbYx_.png)
+- 新增流转规则
+
+增加了可配置自动化节点流转规则。默认「到达节点时进入下一节点」，可切换为「执行完成后进入下一节点 」，以保证业务流程严格按顺序执行
+
+可用的节点类型 ：Q-Robot 新增数据、Q-Robot 更新数据、Webhook节点。
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/ZYkBsJyl6HSHlKffzRI84Q0NQ1TMZg4c_.png)
+需要注意的是：当流程进入自动化节点，流程被回退或撤回，已经在执行的自动化节点，会继续执行完毕；还未开始执行的自动化节点，会停止执行
+
+- 新增流程状态
+
+新增当流程进入自动化节点 时，流程将处于「自动化进行中 」状态：
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/HA-3ufONJXxx2iMa_3qURwqhxey0SKZU_.png)
+需要注意的是：自动化节点长时间未执行完毕（状态为“进行中”时），可在节点流程日志中手动重试
+
+#### 1.2.5 支持回退至逐级审批节点
+
+先在当前审批节点开启「逐级审批」和「流程回退」
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/lUvr9X4sSKhaOVNMLcca2OIVr2lX3pXB_.png)
+
+回退范围：包含后续有回退操作的节点（根据实际情况选择之前的所有节点/上一节点/指定节点）
+被回退的数据重新提交后：选择直达当前节点
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/n98F-5hlOVizFgFJP7rnF0XY1kmFg_O-_.png)
+
+使用说明：1、审批人选择回退至逐级审批节点-指定等级
+选择回退等级时，可展示相应等级及节点负责人，被回退的数据重新提交后，会从相应等级开始顺序审批
+
+例如，某个逐级审批节点有1、2、3、4、5、6级主管，6级主管审批时将申请回退至1级主管，1级主管收到被回退的待办，重新提交后从2级开始依次审批
+
+### 1.3 数据
+
+#### 1.3.1 可选择是否导出QR、Webhook日志
+
+导出数据时，在「同时导出流程日志」选项下，增加一个子项：导出Q-Robot、Webhook流程日志
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/a0oNn_OMfE2KH-fqECxw04Oy-AVZPqzx_.png)
+
+#### 1.3.2 引用字段与数据ID支持导入导出
+
+「引用字段」和「数据ID」支持导入及导出为Excel，并以数据ID格式存储
+
+#### 1.3.3 数据表和视图修改数据时校验字段设置
+
+修改数据时系统会正确校验设置的字段，如果字段不符合字段格式校验或者字段配置想设置的条件，则不允许通过数据修改操作
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/HqH0Gh6tKAZPUs2tU3jUjLwo4B_R9fkd_.png)
+
+#### 1.3.4 数据详情按钮顺序调整
+
+为提高产品的一致性和可用性，调整了表单主按钮的顺序，以确保用户能够更轻松地理解并使用产品功能
+
+更新前:
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/ATBiY_N0W96rCD3thENAHFQfikaYi073_.png)
+
+更新后：
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/S4SAGTxQXP1FxkFRJ6IeoU-8nzBTPmLX_.png)
+
+#### 1.3.5 【视图】甘特视图·依赖关系
+
+甘特视图支持标记出有前后置关系的任务，便于任务规划、调整
+
+#### 1.3.6 【视图】甘特视图·时间变更时自动校准有依赖关系的其他数据
+
+增加了自动校准功能，打开后将遵循以下校准规则 ：
+
+- **当自动校准任务之间为关系时结束 - 开始时**
+当后置任务的开始时间变更时，前置任务自动顺延/提前对应时长
+当前置任务的结束时间变更时，后置任务自动顺延/提前对应时长
+- **当任务之间为开始 - 结束关系时**
+当前置任务的开始时间变更，后置任务自动顺延/提前对应时长
+当后置任务的结束时间变更，前置任务自动顺延/提前对应时长
+- **当任务之间为开始 - 开始关系时**
+开始时间变更，依赖任务的开始时间自动顺延/提前对应时长
+- **当任务之间为结束 - 结束关系时**
+结束时间变更，依赖任务的结束时间自动顺延/提前对应时长
+
+当任务阶段出现意外，某一阶段时间出现变化时，该功能会自动调整其它任务时间，便于其他编辑人员进行时间上的调整
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/Nl1NWynpD1xRAZlyA9CuyiS4Dq7rBnVm_.gif)
+
+需要注意的是：成员需要具备作为「开始时间」和「结束时间」的日期字段的编辑权限，才能使用自动校准功能
+
+#### 1.3.7 【视图】层级视图
+
+层级视图用于有1对多，且多层级关系的BOM管理、产品管理、OKR管理、人员信息展示等场景中
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/uo0CCHWHGm_3vzU_UygJOF9dZK_0RcKW_.gif)
+
+### 1.4 门户
+
+#### 1.4.1 筛选条件&报表删除后组件表现优化
+
+门户筛选组件筛选内容支持保留，设置筛选条件的默认内容时，对报表新增/删除进行操作，仍保留已设置过的默认筛选内容![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-27/sX-mUXZzQtO-nBw59EOLvR9v5LC17MgR_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-27/hP6SYHTa64ecOWx_fAnD2AZ_SB82Fgtu_.png)
+
+门户报表删除后，在之前设置的筛选条件内也会被直接删除![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-27/5HP-N2QjoYG-PkPLvQfXM-LroA8-7zKl_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-27/YwD734WOCOz5teTc9NO19lfVbbFvEul1_.png)
+
+#### 1.4.2 链接图标支持直接选择系统图标
+
+此次更新 ，在设置外部链接的显示图标时，除了使用系统默认、上传自定义的图标，新增直接调用系统图标的选项
+
+在使用宫格链接来源时，在没有合适的icon图片时，能便捷地使用自定义icon，设置统一的、符合业务场景的系统入口，提升系统美观度
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/DoAMhXmaD12_apFicGGm4Uq6tlg79K3o_.png)
+
+### 1.5 拓展功能
+
+#### 1.5.1 优化部分场景下预览/打印会失败的问题
+
+优化部分场景下预览/打印会失败的问题
+
+#### 1.5.2 自定义打印模版支持拼接到一张纸上打印
+
+批量打印处，新增「连续打印」
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/m0Y9Ecuj2XL0oe-l4Ljjr2Lh_u6-vt2M_.png)
+注意事项：
+
+- 连续打印中，数据与数据之间的行间距为4倍行间距
+- 一条数据连着上一条数据打印的前提是，在这张纸上，该数据能够打印完整。若不能打印完整，还是另起一页
+
+### 1.6 基础服务
+
+#### 1.6.1 【权限】新增外部用户体系
+
+为了满足工作区内成员与外部用户协作的场景，轻流上线了外部用户功能。「外部用户」为企业或组织提供了对外协作的能力，企业组织架构以外的用户能够自行注册和登录系统，以特定权限访问页面，并查看、创建、修改数据。可点此查看功能[帮助文档](https://https//help.qingflow.com/help-docs?type=nocode&docId=41d77edc652f40d00797ca2461f01d77&parentId=)，了解配置详情。
+
+管理员可在工作区中添加和管理外部用户，为外部用户设置权限。
+
+1、进入「通讯录」页面，选择「外部用户」。点击「添加外部用户」，即可批量添加或链接/二维码邀请外部用户
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/ue_Kt9BC6M6EYI7JOMPiZ_yTErrTWidI_.png)
+
+2、在通讯录中点击用户列表右侧按钮，即可编辑、启用、禁用或删除外部用户
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/DiHZb2-lzTS8U4R5r0-TE9oHuBcktvlt_.png)
+
+3、在应用包、应用/门户、视图等可见权限配置处，勾选「外部用户可见」
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/C9kqhUBe16r0793IFTyo4mqmdGcau93t_.png)
+外部用户登录后可进入相应的应用包、应用/门户或视图页面，以个人身份发起、查看及修改数据
+
+用户点击进入外部**用户邀请或分享链接/二维码后** ，即可注册外部用户账号（如已有账号，可以直接登录）
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/8FY3Heg7MuY5MWEBvKCX3U_BpwICm02M_.png)
+
+外部用户点击资源的分享链接，可进入对应的页面，以个人身份发起、查看及修改数据
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/KP71rqpPNPq7kwiPeSdymND4RLSweURK_.png)
+
+#### 1.6.2 【日志】工作区日志
+
+增加了能够查看工作区日志的功能。
+
+工作区日志分为登录日志 和资源日志，资源日志中又包含：平台管理日志 、应用管理日志 、应用用户日志 。
+
+日志能够显示操作者的用户姓名、邮箱、手机号、ip地址、操作时间、操作的工作区名称、资源类型、操作方式，还可筛选数据
+
+以平台管理日志为例：
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/joyBSUQtMYqF6VhzvG-LJWPuNvJrKVlx_.png)
+
+适用场景：工作区日志可以帮助开发人员分析系统性能问题，从而优化、提高系统稳定和用户体验，并且有助于监测潜在安全漏洞和异常行为。通过监听日志及分析，可以降低业务风险，还可以帮助开发人员在出现问题时快速定位，从而进行错误修正
+
+#### 1.6.3 【安全】“非自行注册”的账号的初始密码置空
+
+此次更新， 对账号安全进行了加固 。通过单点登录、接口登录的方式首次登录轻流的用户，密码为空，首次登录时无法通过账号密码登录系统。在个人中心补充密码后，可使用账号和密码登录。此功能仅对上线后的新用户生效
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/A-pY9vQkvjH16H0y59Io8YAGZlKeiOSJ_.png)
+
+#### 1.6.4 【安全】“安全信息”功能的判断逻辑变更
+
+此次更新，对账号安全进行了加固。 当用户在个人中心的安全信息补充或修改密码、邮箱或手机号时，需进行身份验证。以单点登录方式首次进入工作区的用户，若想使用账号密码登录，可在【个人中心-安全信息】中补充密码。若专有轻流客户未购买邮件或短信服务，邮箱或手机号验证的功能将不可用
+
+## 2 轻代码
+
+### 2.1 连接中心
+
+#### 2.1.1 连接中心后台开放
+
+支持环境内指定工作区（需要在配置文件中配置对应工作区ID）进入开发者后台（位置：工作区左下角-更多-轻代码）配置连接器，并在QMC进行发布管理。
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/vrjK-az7CF3v7Cz-Itfm0GfT1dI0eotS_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/bTL8Xt0xTJCCIHSKPkaPV1Qg49bg3y1t_.png)
+
+#### 2.1.2 连接中心支持定义字段格式
+
+连接中心变量支持定义格式，并支持绑定表格字段传输
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/tOXL0Cfs61p11G2Bb4b5aOgCT7tcsPpx_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/FxOJqbCptf8Tz6MoKq38VBdQ3JeLn6co_.png)
+注意，可用版本为：专有云，除钉钉外全平台
+
+### 2.2 集成中心
+
+#### 2.2.1 批量同步更新数据不记录流程日志
+
+Q-Source主动、Q-Database更新数据时，若数据无更新，不记录流程/更新日志。
+
+更多详情可见以下链接[https://exiao.yuque.com/ixwxsb/ku1qbu/ge51rv?singleDoc#](https://exiao.yuque.com/ixwxsb/ku1qbu/ge51rv?singleDoc#) 《轻流环境级接口文档》
+
+#### 2.2.2 Q-Database异常通知变更
+
+此次更新 ，增加了Q-Database异常时的通知功能，可以选择当Q-Database拉取数据失败/异常时通知的对象 ，通知的方法 （站内信提醒，邮件提醒）和异常通知频率限制
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/j4WN6KdBZHR9Th65yWQR6-3KKTIMayHo_.png)
+
+#### 2.2.3 支持自定义对接短信服务商
+
+专有轻流的创建/更新模板、发送短信等场景可对接二开服务，并由二开实现与各短信服务商的对接
+
+#### 2.2.4 【提醒推送】支持选择工作区全部应用
+
+此次更新 ，支持用户选择消息推送的范围，在【自定义范围】的基础上，新增【全部应用】的选项
+
+当工作区每个应用包基本都需要推送的情况下，新增【全部应用】的选项，支持动态新增的应用包/应用自动加入通知范围，可有效减少管理人员手动调整通知范围的重复性工作
+
+【自定义范围】：默认勾选自定义范围，点击「添加推送范围」，选择应用（包）。
+
+- 只有勾选的应用（包）才会推送，不包括新增的部分
+- 被勾选的应用（包）应用删除后如果被恢复，提醒推送会恢复
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/7aqI2MTv02W9fzaTrpC-D-zVMg-MxdR__.png)
+【全部应用】：手动勾选全部应用，工作区全部应用都在推送范围内
+- 需要注意的是，全部应用包含动态新增的应用包/应用 ，不包含被删除的应用
+- 删除的应用如果被恢复，提醒推送会恢复
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/S4m6RB4yxYfskUXuY8Nqv5PECic18Hgv_.png)
+
+#### 2.2.5 【提醒推送】配置数量扩展
+
+增加了专有云可用配置项设置提醒推送数量上限（默认10个）
+
+### 2.3 OPEN API
+
+#### 2.3.1 获取单条数据的详细信息接口返回应用信息
+
+原接口返回参数：
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/czoHG-XdFjjgc7SMoKUb9I5yRlQyZMtR_.png)
+
+此次更新，result对象中，增加参数 如下，便于用户根据applyid查询相关应用id
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/i1jnAm_87TzM35dH1rdO0PtcXZPKdMOa_.png)
+
+#### 2.3.2 删除工作区
+
+环境级OPEN API支持删除工作区，工作区无法再次使用 更多详情可见以下链接[https://exiao.yuque.com/ixwxsb/ku1qbu/ge51rv?singleDoc#](https://exiao.yuque.com/ixwxsb/ku1qbu/ge51rv?singleDoc#) 《轻流环境级接口文档》
+
+可用版本：仅环境级合作伙伴，仅官网
+
+#### 2.3.3 调用工作区OPEN API不受白名单限制
+
+环境级token换取的的工作区级token，在调用工作区级接口时不受插件中心的IP白名单限制，原先只有在白名单内的IP地址才允许被使用
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/YNeenp8EDPj9NuQcBF5Vv_8dXsB-RQP1_.png)
+可用版本：仅环境级合作伙伴，仅官网
+
+#### 2.3.4 更新用户密码接口
+
+新增发送验证码、更新用户密码接口 更多详情可见以下链接[https://exiao.yuque.com/ixwxsb/ku1qbu/ge51rv?singleDoc#](https://exiao.yuque.com/ixwxsb/ku1qbu/ge51rv?singleDoc#) 《轻流环境级接口文档》
+
+可用版本：仅环境级合作伙伴，仅官网
+
+## 3 轻析
+
+### 3.1 数据源
+
+#### 3.1.1 Mysql数据库连接
+
+此次更新，增加了Mysql数据库作为数据源，用户可以新建Mysql数据库并选择相应的数据表，同步到数据源
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-10-16/ZN6tpAaCPy-lN-AZOu1QTsoXjVG7Q27f_.png)
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-10-16/yMz_6fEu6Rs31gYxp31vn3J-qH85xmXM_.gif)
+还能够设置成员对数据源的编辑权限和使用权限，以及**定时同步** 功能，开启后数据库会在指定时间自动执行更新，可以设置更新的周期
+
+可用版本：全版本，PC端
+
+#### 3.1.2 表格拆分优化
+
+优化了表格字段多个共存时，在轻析的拆分效果，更加符合主流预期
+
+### 3.2. 数据集
+
+#### 3.2.1 数据集面板优化
+
+在数据集中可对下方数据栏进行拖动，扩展了功能配置界面，让搭建更顺畅
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/%E9%9D%A2%E6%9D%BF%E4%BC%98%E5%8C%96_sign%3Dc6e208b1648b496ef8c9d39a7529eb89%26t%3D1692001666.gif?sign=fa69be7ee3ab371cb71014769b44bfb4&t=1698983024)
+
+#### 3.2.2 新增分组汇总节点
+
+轻析数据集新增分组汇总节点，对数据来源进行分组，再针对分组后的数据进行汇总计算
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/ldbgJfkKM-ZS5qLQI4ifBlrY2Wblw3c3_.png)
+
+### 3.3 报表
+
+#### 3.3.1 数据集报表支持门户中手动更新
+
+此次更新 ，门户中的【轻析报表组件】针对数据源为“数据集”的报表，新增按钮「 显示数据更新信息」和 「更新数据」
+
+需要注意的是：
+
+- 当数据来源为数据集，且用户有该数据集使用权限，展示「更新数据」按钮；来源轻流应用，则不显示该按钮
+- 点击「更新数据」按钮 = 点击数据集的「手动更新」按钮，此处的更新频率与数据集的「手动更新】保持一致
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/u4Zzo7_-cBJX4AZp1XJUSAowjfnJ_oci_.png)
+
+#### 3.3.2 关联报表支持轻析报表
+
+在应用编辑的拓展设置-关联报表处，可以选择关联轻析报表
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/VvHo6aFyoZfTquJR8Yxqu3CEosMediee_.png)
+
+#### 3.3.3 轴显示文字优化
+
+条形图、柱状图、折线图、散点图、组合图X轴标签，新增「显示规则」配置项 。
+
+1.支持配置默认显示规则：即线上目前表现，随着屏宽减小，轴标签文字过多放不下时间隔显示（隐藏部分）
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/EWC1iVLsXWRtFQI-xZ6e-rplk2rYXaX7_.png)
+
+2.支持配置智能显示规则：随着屏宽减小，轴标签文字过多放不下时进行旋转，最大旋转角度为顺时针45度
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/vD3yPgtPSEnG6RHNcCE_PxYTJWUNCw5m_.png)
+
+#### 3.3.4 汇总方式支持选择最新数据
+
+此次更新，支持汇总方式选择最新/最旧数据 ，不同情况下的可选情况有所区别：
+
+- 除明细表外，对所有指标字段中的汇总方式新增最新数据、最旧数据选项，汇总结果受所选数据源中的日期字段影响
+- 所选数据源中仅包含单个日期字段时，无需承载次级选项，可直接选择最新/旧数据
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/hTfQx-4w1Sf2dGodg8J9ZFItwa8sK5pA_.png)
+- 所选数据源中包含多个日期字段时，在选择最新/旧数据时需增加次级选项，汇总结果受所选的时间字段影响
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/4Yfv2HjUQc_QocADtYjHOnahYoQJZdt0_.png)
+- 所选数据源中无日期字段时，在选择汇总方式时隐藏最新/旧数据
+
+#### 3.3.5 部门筛选动态覆盖子部门
+
+对报表、数据集、数据源进行权限编辑时，勾选父级部门，默认包含子部门
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/ai-9v8flum51T7rMk9ef8smD7u6y6xrT_.png)
+
+## 4 QMC
+
+### 4.1 自定义主站密码强度
+
+在QMC中可以自定义主站的密码设置规则，包括密码长度、字符类型等。密码强度对主站用户注册、修改密码等功能生效
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/k1qNlhDyqX__s0v413PfBwDVGF3BOHwG_.png)
+
+### 4.2增加分享功能控制
+
+在QMC中可以控制整个环境中的资源是否可公开分享
+
+## 5 其他
+
+### 5.1【安全】OSS私有读写
+
+支持了私有读写，附件、打印模版、手写签名、电子签章四种附件将会在私有桶中进行存储
+
+### 5.2 【安全】文件上传限制
+
+支持配置文件上传格式黑名单
+
+前置条件：
+
+1、有「存储安全设置」模块的qmc管理员可见
+
+2、打开按钮，可见 新增黑名单模块
+
+可设置文件格式黑名单，设置的扩展名展示在黑名单列表中
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/StYMFPW4ZkVcVTC3u1cg7t1QA48drWs__.png)
+
+### 5.3 【安全】优化专有云环境中成员的初始密码
+
+拆分了专有云环境的“邀请成员”和“创建成员”
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/-q_a6t_aqj7rXpQUxHq9g3P50CB0bViZ_.png)
+
+并支持选择初始密码的生成策略
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/QUEAUbLRfh9JD1rlqQ4hR44Nr0710lNP_.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/soy0rgy4mb0gxugz?singleDoc#)

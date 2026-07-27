@@ -1,0 +1,187 @@
+---
+title: "数据结构"
+description: "queType枚举值类型说明1int描述文字2int单行文字3int多行文字4int日期时间5int成员字段6int邮箱7int手机8int数字9int链接10int单项选择11int下拉选择12int多项选择13int上传附件14int起止时间15int图片选择16int富文本17int定位..."
+slug: "/帮助文档/轻代码/openapi/其他/数据结构"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/zbtowhw0pyk9ur3g?singleDoc#"
+source_updated_at: "2025-04-29T02:20:51.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "其他"
+  - "数据结构"
+---
+### queType
+
+| 枚举值 | 类型 | 说明 |
+| --- | --- | --- |
+| 1 | int | 描述文字 |
+| 2 | int | 单行文字 |
+| 3 | int | 多行文字 |
+| 4 | int | 日期时间 |
+| 5 | int | 成员字段 |
+| 6 | int | 邮箱 |
+| 7 | int | 手机 |
+| 8 | int | 数字 |
+| 9 | int | 链接 |
+| 10 | int | 单项选择 |
+| 11 | int | 下拉选择 |
+| 12 | int | 多项选择 |
+| 13 | int | 上传附件 |
+| 14 | int | 起止时间 |
+| 15 | int | 图片选择 |
+| 16 | int | 富文本 |
+| 17 | int | 定位字段 |
+| 18 | int | 表格 |
+| 19 | int | 数据关联 |
+| 20 | int | Q-Linker |
+| 21 | int | 地址字段 |
+| 22 | int | 部门字段 |
+| 23 | int | ocr字段 |
+| 24 | int | 段落 |
+| 25 | int | 引用 |
+| 26 | int | 代码块 |
+
+### questionRelation
+
+| 参数名 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| queId | int |  | 设置了数据关联的字段 |
+| matchRuleType | int |  | 筛选类型，1：简易模式，2：高级模式 |
+| matchRules | array |  | 简易模式下的筛选条件 |
+| xxx | array | 是 | 数组中内容见下方\[matchRule\] |
+| matchRuleFormula | string |  | 高级模式下的筛选条件公式 |
+| tableMatchRules | array |  | 表格子问题的关联设置 |
+| subQueId | int |  | 当前表格子字段id |
+| relatedSubQueId | int |  | 关联表格子字段id |
+
+### matchRule
+
+| 参数名 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| queId | int |  | 关联应用中被筛选字段的queId |
+| queTitle | string |  | 关联应用中被筛选字段的标题 |
+| judgeType | int |  | 比较的类型，枚举值见下方\[judgeType\] |
+| matchType | int |  | 比较值的类型，1为自定义，2为匹配字段 |
+| judgeValueQueIds | array |  | 匹配类型为”匹配字段“时，当前表单字段id列表 |
+
+### judgeType
+
+| 枚举值 | 类型 | 说明 |
+| --- | --- | --- |
+| 1 | int | 不等于 |
+| 2 | int | 包含 |
+| 3 | int | 不包含 |
+| 4 | int | 大于 |
+| 5 | int | 大于等于 |
+| 6 | int | 小于 |
+| 7 | int | 小于等于 |
+| 8 | int | 动态范围 |
+| 9 | int | 等于任意一个 |
+| 10 | int | 不等于任意一个 |
+| 11 | int | 为空值 |
+
+### specialQueId
+
+| 枚举值 | 类型 | 说明 |
+| --- | --- | --- |
+| 1 | int | 申请人 |
+| 2 | int | 申请时间 |
+| 3 | int | 最近更新时间 |
+| 4 | int | 数据当前所处节点 |
+| 5 | int | 申请人的部门主管（不入库，question不存入） |
+| 6 | int | 当前用户（成员字段）（不入库，question不存入） |
+| 7 | int | 当前节点负责人 （超时提醒）（不入库，question不存入） |
+| 0 | int | 编号 |
+| -1 | int | 数据来源 |
+| -2 | int | 当前用户所处部门（表单中部门字段的可选范围/默认值使用）（不入库，question不存入） |
+| -3 | int | 流程节点（数据经过过的所有审批、填写节点） |
+| -4 | int | 节点负责人 （处理过数据的所有负责人） |
+| -5 | int | 流程处理状态（数据在该节点最终的处理状态 正常处理、流程超时、超时预警） |
+| -6 | int | 流程处理时长 |
+| -7 | int | 流程超时时长 |
+| -8 | int | 聚合时，后端特殊处理所占用，前端可忽略 |
+| -9 | int | 支付信息 |
+| -10 | int | 支付信息·支付状态（supid为-9） |
+| -11 | int | 支付信息·节点名（supid为-9） |
+| -12 | int | 支付信息·支付内容（supid为-9） |
+| -13 | int | 支付信息·支付金额（supid为-9） |
+| -14 | int | 支付信息·支付方式（supid为-9） |
+| -15 | int | 支付信息·订单号（supid为-9） |
+| -16 | int | 支付信息·支付时间（supid为-9） |
+| -17 | int | 数据唯一标识(applyId) |
+| -19 | int | 删除时间 |
+| -20 | int | 删除人 |
+| -21 | int | 处理节点 |
+| -22 | int | 抄送节点 |
+| -23 | int | 处理时间 |
+| -24 | int | 抄送时间 |
+| -25 | int | 接收时间 |
+| -30 | int | 应用ID appkey |
+| -31 | int | 工作区ID wsid |
+
+### answerValue
+
+| 参数名 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| value | string |  | 问题的结果值 |
+| otherInfo | string |  | 问题结果的其他信息,上传文件这里是文件名,选择类的其他选项这里是其他选项填写的内容 |
+| id | int |  | 选择类型，为optId，成员类型，为uid；成员字段 ，当前用户: -1；地址字段，1-4：省、市、区、详细地址 |
+
+### auditResult
+
+| 枚举值 | 类型 | 说明 |
+| --- | --- | --- |
+| 1 | int | 提交处理 |
+| 2 | int | 通过 |
+| 3 | int | 拒绝 |
+| 4 | int | 退回数据 |
+| 5 | int | 发起申请/申请人草稿提交 |
+| 6 | int | 退回申请人完善 |
+| 7 | int | 抄送 |
+| 8 | int | 处理中 |
+| 9 | int | 移交数据 |
+| 10 | int | 申请人撤销申请 |
+| 11 | int | 处理人撤销处理 |
+| 12 | int | 创建人/处理人更新数据 |
+| 13 | int | qrobot添加数据 |
+| 14 | int | qrobot更新数据 |
+| 15 | int | 管理员重新指派负责人 |
+| 16 | int | qrobot触发创建数据 |
+| 17 | int | qrobot触发更新数据 |
+| 18 | int | qrobot触发发送邮件 |
+| 19 | int | 创建人更新数据 |
+| 20 | int | qrobot触发发送短信 |
+| 21 | int | qrobot触发webhook |
+| 22 | int | webhook更新数据 |
+| 23 | int | 任务委托 |
+| 24 | int | 回退重新提交 |
+| 25 | int | 节点无负责人转交给自定义负责人 |
+| 26 | int | 删除申请数据 |
+| 27 | int | 恢复申请数据 |
+| 28 | int | 自动通过 |
+| 29 | int | 加签 |
+| 30 | int | 重新指派负责人 |
+| 31 | int | 流程外 QRobot 触发提醒 |
+
+### 应用/门户/应用包图标的枚举值：
+
+#### iconColor的值
+
+（对应下图中的颜色）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/c7cyjFL5P0628yk5zXHwy9wDyqak4nr3_.png)
+
+\["qing-orange", "yellow", "green", "emerald", "blue","azure", "indigo", "qing-purple", "purple", "pink", "red", "orange"\]
+
+#### iconName的值
+
+（对应系统内下图中组件，图中仅展示部分，第一个组件「显示名称首字」是null值的结果）:
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/bpKoTx4m-fXqo6C_CqW18isNGr70ZCD8_.png)
+
+\[ 'user', 'user-group','user-remove', 'user-add','user-circle', 'base-camera','view-grid', 'inbox', 'inbox-in', 'share', 'sitemap', 'airplane', 'template', 'music-note', 'movie-play', 'clock', 'document', 'document-search', 'clipboard-check', 'document-download','document-text', 'clipboard-copy', 'presentation-chart-bar', 'chart-square-bar', 'database', 'server', 'calendar', 'mail', 'annotation', 'chat', 'bell', 'key', 'shopping-bag', 'download', 'eye', 'eye-off', 'emoji-happy', 'emoji-sad', 'sun', 'moon', 'cloud', 'lightning-bolt', 'fire', 'star', 'sparkles', 'heart', 'cake', 'gift', 'light-bulb', 'exclamation', 'cog', 'thumb-up', 'thumb-down', 'cloud-download', 'cloud-upload', 'printer', 'phone-incoming', 'phone-missed-call', 'terminal', 'search-circle', 'x-circle', 'check-circle', 'exclamation-circle', 'question-mark-circle', 'information-circle', 'academic-cap', 'briefcase', 'home', 'phone', 'photograph', 'puzzle', 'color-swatch', 'lock-open', 'lock-closed', 'shield-check', 'shield-exclamation', 'currency-dollar', 'currency-yen', 'globe', 'at-symbol', 'slack', 'microphone', 'speakerphone', 'trash', 'book-open', 'truck', 'filter', 'essetional-filter-search', 'essetional-filter-tick', 'table', 'calculator', 'location-radar', 'essetional-weight', 'school-award', 'comp-cloud-connection', 'comp-cloud-remove', 'comp-cpu-charge', 'comp-cpu-setting', 'comp-cpu', 'comp-devices', 'comp-driver-2' 'comp-driver-refresh', 'location-global', 'location-location', 'location-map', 'location-gps', 'essetional-ranking', 'chart-bar', 'business-graph', 'business-status-up', 'business-trend-down', 'business-trend-up', 'business-presention-chart', 'business-favorite-chart', 'business-health', 'receipt-refund', 'receipt-tax', 'money-receipt-2-1', 'money-transaction-minus', 'action-hourglass-full', 'action-work', 'bug-f', 'essetional-pet', 'files-folder', 'badge-check', 'money-wallet-1', 'money-ticket', 'money-money', 'money-tag', 'money-wallet-2', 'business-personalcard', 'car-airplane', 'car-bus', 'car-car', 'car-driving', 'car-gas-station', 'car-smart-car', 'car-ship', 'location-map-1', 'location-route-square', 'cone', 'design-brush-4', 'paint-roll', 'wrench-f', 'essetional-reserve', 'essetional-broom', 'design-brush-2', 'essetional-judge', 'design-bucket', 'palette', 'comp-electricity', 'vial', 'beaker', 'leaf-f', 'cursor-click', 'solid-search-alt-2', 'md-library', 'building-3', 'office-building', 'building-hospital', 'school', 'store', 'video-camera-vintage-f', 'comp-monitor', 'delivery-truck', 'delivery-box-1', 'delivery-box-add', 'delivery-box-remove', 'settings-setting-3', 'document-duplicate', 'essetional-flag-2', 'flag', 'icon-currency-dollar', 'clipboard-list', 'save-as', 'wifi', 'status-online', 'scissors', 'globe-alt', 'ban', 'finger-print', 'qrcode', 'paper-clip', 'translate', 'cube-transparent', 'variable', 'switch-vertical', 'sports-baseball', 'sports-basketball', 'sports-soccer', 'sports-football', 'sports-volleyball'\]
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/zbtowhw0pyk9ur3g?singleDoc#)

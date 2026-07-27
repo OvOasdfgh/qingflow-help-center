@@ -1,0 +1,158 @@
+---
+title: "获取单条数据的详细信息"
+description: "1. 权限说明「权限组accessToken」可调用，「权限组accessToken」须具有该报表对应应用的权限。2. 请求请求方式：GET请求地址：https://api.qingflow.com/{appKey}/apply/{applyId} （公有云版本）请求地址中:applyId为需..."
+slug: "/帮助文档/轻代码/openapi/应用数据接口/数据内容/获取单条数据的详细信息"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/mztqo2d4ph2dnfy5?singleDoc#"
+source_updated_at: "2024-11-20T02:47:19.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "应用数据接口"
+  - "数据内容"
+  - "获取单条数据的详细信息"
+---
+### **权限说明**
+
+「权限组accessToken」可调用，「权限组accessToken」须具有该报表对应应用的权限。
+
+### 请求
+
+**请求方式：**GET
+
+**请求地址：**https://api.qingflow.com/\{appKey\}/apply/\{applyId\} （公有云版本）
+
+> 请求地址中:applyId为需要替换的变量，根据实际获取值更新，示例如下：
+
+```javascript
+GET https://api.qingflow.com/123456/apply/123456
+```
+
+**其他版本请求地址：**
+
+钉钉版本：[https://api.ding.qingflow.com](https://api.ding.qingflow.com/apply/:applyId)/\{appKey\}/apply/\{applyId\}
+
+专有轻流：http(s)://xxx.xx(自有域名)/openApi/\{appKey\}/apply/\{applyId\}
+
+#### **2.1 参数说明(路径参数)：**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| appKey | 是 | 应用ID，获取方式参考：基本概念介绍 |
+| applyId | 是 | 数据ID，获取方式参考：基本概念介绍 |
+
+#### **2.2 请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+
+### 返回
+
+#### 3.1 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| result | 是 | object | 返回结果 |
+| answers |  | \[array\] |  |
+| queId | 是 | int | 字段id，specialQueId可见文档 |
+| queTitle | 是 | string | 字段名称 |
+| queType | 是 | int | 字段类型。1、描述文字；2、单行文字；3、多行文字；4、日期时间；5、成员字段；6、邮箱；7、手机；8、数字；9、链接；10、单项选择；11、下拉选择；12、多项选择；13、上传附件；14、起止时间；15、图片选择；16、富文本；17、定位字段；18、表格；19、数据关联；20、Q-Linker；21、地址字段；22、部门字段； |
+| tableValues | 是 | \[array\] | \[\["$ref:answerDetail"\]\] 表格类型字段必填 |
+| values | 是 | \[array\] | \["$ref:answerValue"\] 表格字段以外的字段类型必填 |
+| appKey | 是 | string | 应用的id |
+| appName | 是 | string | 应用的名称 |
+| id |  | number | 选择类型，为optId，成员类型，为uid；成员字段 ，当前用户: -1；地址字段，1-4：省、市、区、详细地址 |
+| otherInfo |  | string | 问题结果的其他信息,上传文件这里是文件名,选择类的其他选项这里是其他选项填写的内容 |
+| value |  | string | 问题的结果值 |
+| applyBaseInfo |  | object | 申请的基础信息 |
+| applyNum |  | number | 数据的编号 |
+| applyTime |  | datetime | 申请时间 |
+| applyUser |  | object | 申请人 |
+| email |  | string | 用户注册使用的邮箱 |
+| headImg |  | string | 用户头像 |
+| mobileNum |  | string | 用户的电话号码 |
+| nickName |  | string | 用户自己定义的昵称 |
+| remark |  | string | 备注 |
+| uid |  | number | 用户的uid |
+| userName |  | object | 用户的姓名 |
+| wxOpenId |  | string | 如果用户存在客户微信下的openID，这里会返回 |
+| dataSource |  | string | 数据来源 |
+| lastUpdateTime |  | datetime | 最后更新时间 |
+| applyId |  | object | 这条数据的id |
+
+#### 3.2 返回体示例
+
+```json
+{
+    "errCode": 0,
+    "errMsg": null,
+    "questionRelations": [],
+    "result": {
+        "answers": [
+            {
+                "associatedQueType": null,
+                "queId": 35922733,
+                "queTitle": "全部信息",
+                "queType": 3,
+                "referValues": [],
+                "supId": null,
+                "tableValues": [],
+                "values": [
+                    {
+                        "dataValue": "",
+                        "email": null,
+                        "id": null,
+                        "ordinal": null,
+                        "otherInfo": null,
+                        "pluginValue": null,
+                        "queId": 35922733,
+                        "value": ""
+                    }
+                ]
+            }
+        ],
+        "applyBaseInfo": {
+            "applyNum": "3",
+            "applyTime": "2021-11-10T11:43:05",
+            "applyUser": {
+                "accepted": null,
+                "auth": null,
+                "beingThirdPartyAdmin": null,
+                "email": null,
+                "headImg": "",
+                "mobileNum": null,
+                "nickName": null,
+                "remark": "钢丝",
+                "status": null,
+                "uid": 83571,
+                "userId": "83571",
+                "userName": "钢丝",
+                "wxOpenId": null
+            },
+            "currentAuditNodes": [
+                {
+                    "auditNodeId": 3,
+                    "auditNodeName": "已通过",
+                    "preTimeoutDate": null,
+                    "timeoutDate": null
+                }
+            ],
+            "dataSource": null,
+            "formTitle": "手机号码归属地查询",
+            "lastUpdateTime": "2021-11-10T11:43:06"
+        },
+        "applyId": 54683694
+    }
+}
+```
+
+---
+
+1.
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/mztqo2d4ph2dnfy5?singleDoc#)

@@ -1,0 +1,79 @@
+---
+title: "轻流 x Jira"
+description: "应用场景Jira作为Alpha公司研发部门内部协作工具，实现研发部门日常功能开发与缺陷管理。轻流作为Alpha公司信息化系统，其中包含了公司的人事管理模块、财务管理模块、CRM模块、自动化营销模块等。Alpha公司的工单系统由轻流提供服务。客户可以在Alpha公司官网或公众号提交工单，工单提交..."
+slug: "/搭建技巧/按功能分类/第三方集成/jira/轻流-x-jira"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/hu3p90g7iswg86gq?singleDoc#"
+source_updated_at: "2024-10-15T03:38:15.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "第三方集成"
+  - "Jira"
+  - "轻流 x Jira"
+---
+## 应用场景
+
+Jira作为Alpha公司研发部门内部协作工具，实现研发部门日常功能开发与缺陷管理。轻流作为Alpha公司信息化系统，其中包含了公司的人事管理模块、财务管理模块、CRM模块、自动化营销模块等。
+
+Alpha公司的工单系统由轻流提供服务。客户可以在Alpha公司官网或公众号提交工单，工单提交后，由Alpha公司客户成功部门进行初步沟通和工单分类，如果工单反馈问题判定为系统缺陷，**则****需将工单相关信息移交研发部门**。研发部门确认修复后，**需****把处理结果反馈给客户。**
+
+## 
+
+## 落地方案
+
+![原文画板](https://cdn.nlark.com/yuque/0/2020/jpeg/1638775/1608260523115-3b91eed8-67e2-42a7-8793-caaae907a1bf.jpeg)
+
+## 图文/视频演示：
+
+## 帮助文档：
+
+## 轻流 x Jira 方案概览
+
+Jira是一款国内外知名研发协作软件，很多IT部门采用Atlassian研发解决方案进行团队内部的协作管理。本文将从一个小的场景，介绍如何**无代码**的实现轻流与jira的对接。
+
+背景：Jira作为Alpha公司研发部门内部协作工具，实现研发部门日常功能开发与缺陷管理。轻流作为Alpha公司信息化系统，其中包含了公司的人事管理模块、财务管理模块、CRM模块、自动化营销模块等。
+
+场景：Alpha公司的工单系统由轻流提供服务。客户可以在Alpha公司官网或公众号提交工单，工单提交后，由Alpha公司客户成功部门进行初步沟通和工单分类，如果工单反馈问题判定为系统缺陷，**需将工单相关信息移交研发部门**。研发部门确认修复后，需**把处理结果反馈给客户。**
+
+轻流中的工单系统如下图，工单类型为BUG反馈时，需要客户/客户成功部门提供缺陷概述、复现链接、复现步骤、预期行为和观察到的行为五个内容。
+
+![image.png](https://cdn.nlark.com/yuque/0/2019/png/86168/1571209785924-21f1e8cf-cf3f-45c4-bede-779acfcef7d6.png)
+
+Jira缺陷管理如下图，缺陷发现后需要自动添加到缺陷确认中，由技术人员进行确认，决定进入修复环节或判定为非缺陷类型。
+
+![image.png](https://cdn.nlark.com/yuque/0/2019/png/86168/1571380463144-671298b2-4c27-4985-8062-b2cfca6015bd.png)
+
+### 轻流将缺陷信息移交给研发部门
+
+1. 获取用户的jira api token [参考链接](https://confluence.atlassian.com/cloud/api-tokens-938839638.html) [获取API Token.mov](https://exiao.yuque.com/attachments/yuque/0/2024/qt/26393678/1728963495665-82bcd298-ccc8-48ef-8e5d-b6c77b638fce.qt)
+
+1. 浏览器中打开创建API token链接 [https://id.atlassian.com/manage/api-tokens](https://id.atlassian.com/manage/api-tokens)![image.png](https://cdn.nlark.com/yuque/0/2019/png/86168/1571665381438-30628b01-7dd9-4e8c-a9d4-63ab4b0e07e6.png)
+2. 点击“创建 API 令牌”
+3. 创建名称，复制刚刚创建的API令牌
+
+1. jira中 添加新issue时所需信息的准备工作 [自助查询所需issue信息](https://qingflow.com/f/7d6fd776)
+
+1. issue创建时必须的信息包含：项目id，issue type id，自定义字段的ID
+2. [项目id和issue type id的获取接口](https://developer.atlassian.com/cloud/jira/platform/rest/v3/#api-rest-api-3-issue-createmeta-get)
+3. [自定义字段的id](https://developer.atlassian.com/cloud/jira/platform/rest/v3/#api-rest-api-3-field-get)
+4. [自助查询 创建issue时所需的所有信息.mov](https://exiao.yuque.com/attachments/yuque/0/2024/qt/26393678/1728963496637-b5119d74-fab1-4ea3-a687-44327f171f87.qt)
+
+1. 在轻流的流程中添加webhook节点，新增缺陷待确认时，使用webhook将数据发送到jira中
+
+要点：
+
+1. 工单可对外 也可以只对内
+2. 工单指派环境，由售后服务团队进行。分拣工单类型、缺陷类型工单需要识别优先级
+3. 技术处理完成后，需要更新工单状态，且自动通知给客户（使用短信通知即可）
+4. 通知客户内容需要包含修复结果，如非bug需告知用户原因
+
+### 
+
+## 参考资料
+
+1. jira cloud openApi [https://developer.atlassian.com/cloud/jira/platform/rest/v3/#authentication](https://developer.atlassian.com/cloud/jira/platform/rest/v3/#authentication)
+2. jira api token生成方法 [https://confluence.atlassian.com/cloud/api-tokens-938839638.html](https://confluence.atlassian.com/cloud/api-tokens-938839638.html)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/hu3p90g7iswg86gq?singleDoc#)

@@ -1,0 +1,92 @@
+---
+title: "电子签章有效性验证"
+description: "1. 现象描述在使用Adobe Reader PDF阅读器浏览电子签名的PDF文件时软件会提示至少一个签名有问题或签名有效性未知的情况如下图，该情况是由于Adobe Reader本身的机制决定的。2. 造成原因由于Adobe Reader属于国际型应用软件，国内CA机构颁发的证书不在Adobe..."
+slug: "/常见问题-faq/流程/电子签章有效性验证"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/srdh1gz7y76c1vma?singleDoc#"
+source_updated_at: "2024-10-15T03:38:50.000Z"
+keywords:
+  - "常见问题（FAQ）"
+  - "流程"
+  - "电子签章有效性验证"
+---
+## 现象描述
+
+在使用Adobe Reader PDF阅读器浏览电子签名的PDF文件时软件会提示至少一个签名有问题或签名有效性未知的情况如下图，该情况是由于Adobe Reader本身的机制决定的。
+
+![文档图片](https://cdn.nlark.com/yuque/0/2019/png/432598/1568851723981-22dabf18-d9e7-4890-aab4-99ca9fa383e7.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_14%2Ctext_6L275rWB%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10%2Fresize%2Cw_317%2Climit_0)
+
+## 造成原因
+
+由于Adobe Reader属于国际型应用软件，国内CA机构颁发的证书不在Adobe Reader的证书信任链接中，同时由于e签宝的电子签名使用的是国内CA颁发的CA证书。
+
+## 解决方法
+
+使用Adobe Reader进行电子签名有效性验证的时候需要先将国内CA的根证书导入到Adobe Reader的信任链接中。
+
+- **步骤一：下载e签宝国内合作CA机构根证书**
+[📎e签宝合作CA机构根证书.zip](https://qianxiaoxia.yuque.com/attachments/yuque/0/2019/zip/432598/1568853372381-2890ed10-46ff-444e-8d1c-337c577b26ba.zip)
+- **步骤二：安装CA机构根证书**
+[点击查看 Mac系统中如何安装根证书](https://qianxiaoxia.yuque.com/docs/share/0b9a47dc-e79c-4f9e-8785-1e4c376aedcd)，然后将e签宝合作CA机构根证书.zip中的所有根证书进行安装。
+推荐安装顺序为先安装顶级根证书，后安装二级根证书。
+以下为Windwos系统中根证书安装方法。
+**顶级根证书安装方法**
+**2.1.1.选中某个“顶级根证书.cer”文件，鼠标右键-“安装证书”。**
+ ![文档图片](https://cdn.nlark.com/yuque/0/2019/png/432598/1568853552772-082e6165-d7f0-402d-a381-165121bb464a.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_18%2Ctext_6L275rWB%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10%2Fresize%2Cw_636%2Climit_0)
+
+**2.1.2.选择 “本地计算机”**
+ ![文档图片](https://cdn.nlark.com/yuque/0/2019/png/432598/1568853682115-f19a70b9-843f-4d95-939e-32bc4761663f.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_18%2Ctext_6L275rWB%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10%2Fresize%2Cw_628%2Climit_0)
+
+**2.1.3.选择 “将所有的证书都放入下列存储”-“浏览”-****“受信任的根证书颁发机构”**
+![文档图片](https://cdn.nlark.com/yuque/0/2019/png/432598/1568854923170-50c29953-dbf9-4f29-bb60-99a270549685.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_25%2Ctext_6L275rWB%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10%2Fresize%2Cw_889%2Climit_0)
+
+ ![文档图片](https://cdn.nlark.com/yuque/0/2019/png/432598/1568853955316-5016ad01-2ce4-443e-aebf-42f598703b43.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_17%2Ctext_6L275rWB%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10%2Fresize%2Cw_612%2Climit_0)
+
+![文档图片](https://cdn.nlark.com/yuque/0/2019/png/432598/1568854085158-f43bb204-e533-47c1-a3b0-56b45a3dd13b.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_14%2Ctext_6L275rWB%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10%2Fresize%2Cw_502%2Climit_0)
+
+![文档图片](https://cdn.nlark.com/yuque/0/2019/png/432598/1568853995741-1463e58d-0fd0-4bf1-9573-78ee2bfb4ed0.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_9%2Ctext_6L275rWB%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10%2Fresize%2Cw_174%2Climit_0)
+
+（Windows部分机型可能无此界面）
+
+**二级根证书安装方法**
+**2.2.1.选中某个“二级根证书.cer”文件，鼠标右键-“安装证书”。**
+ ![文档图片](https://cdn.nlark.com/yuque/0/2019/png/432598/1568854294620-edb7f53f-2cac-4bb8-99c7-36f2f365663d.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_19%2Ctext_6L275rWB%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10%2Fresize%2Cw_653%2Climit_0)
+
+**2.2.2.选择 “本地计算机”**
+
+ ![文档图片](https://cdn.nlark.com/yuque/0/2019/png/432598/1568854322441-571cfa32-7b98-4e6d-9352-84265fadcde6.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_17%2Ctext_6L275rWB%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10%2Fresize%2Cw_612%2Climit_0)
+
+**2.2.3.选择 “将所有的证书都放入下列存储”-“浏览”-****“中间证书颁发机构”****
+**
+
+![文档图片](https://cdn.nlark.com/yuque/0/2019/png/432598/1568854849438-3b2b9a4e-22c5-42f9-8b77-7d616ccfc8d5.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_27%2Ctext_6L275rWB%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10%2Fresize%2Cw_948%2Climit_0)
+
+![文档图片](https://cdn.nlark.com/yuque/0/2019/png/432598/1568853995741-1463e58d-0fd0-4bf1-9573-78ee2bfb4ed0.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_9%2Ctext_6L275rWB%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10%2Fresize%2Cw_174%2Climit_0)
+
+**参考步骤二中的方法安装e签宝合作CA机构根证书.zip中的所有根证书
+步骤三：设置Adobe Reader软件识别本机安装的根证书**
+在Adobe Reader软件中设置“针对以下项目信任Windows证书存储区中的所有根证书”以实现打开Pdf文档后默认显示签名有效。
+**3.1.1. 双击**![文档图片](https://cdn.nlark.com/yuque/0/2019/png/432598/1568855246946-fb35b8ce-c608-4ebf-8601-248633743058.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_9%2Ctext_6L275rWB%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10%2Fresize%2Cw_87%2Climit_0)**打开Adobe Reader PDF阅读软件。**
+**3.1.2. 【编辑】-【首选项】-进行相关设置**
+
+![文档图片](https://cdn.nlark.com/yuque/0/2019/png/432598/1568855215839-0670a0e2-2d15-4f59-83be-8f03663f8b8a.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_15%2Ctext_6L275rWB%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10%2Fresize%2Cw_338%2Climit_0)
+
+![文档图片](https://cdn.nlark.com/yuque/0/2019/png/432598/1568855324510-45e5b49e-b4bf-448a-9352-c571391c78ca.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_16%2Ctext_6L275rWB%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10%2Fresize%2Cw_554%2Climit_0)
+
+![文档图片](https://cdn.nlark.com/yuque/0/2019/png/432598/1568855340030-374a34e7-e5d0-4436-aff0-7cc171f8037b.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_13%2Ctext_6L275rWB%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10%2Fresize%2Cw_447%2Climit_0)
+**步骤四：添加时间戳的根证书**
+使用Adobe Reader 打开已经盖章的PDF文档，找到签名位置，双击签名（印章），在弹出的签名验证状态里点击“签名属性”性，打开签名属性，打开在之后打开的签名属性上点击“高级属性”按钮，在高级签名属性界面中再点击“显示证书”，具体步骤如下：
+
+![文档图片](https://cdn.nlark.com/yuque/0/2019/png/432598/1568855764811-209b83d6-cba1-489d-bb06-90c2d962d2c6.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_16%2Ctext_6L275rWB%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10%2Fresize%2Cw_554%2Climit_0)
+
+![文档图片](https://cdn.nlark.com/yuque/0/2019/png/432598/1568855919472-ef6964ea-2139-44c9-932c-880cdc753073.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_16%2Ctext_6L275rWB%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10%2Fresize%2Cw_348%2Climit_0)
+
+![文档图片](https://cdn.nlark.com/yuque/0/2019/png/432598/1568856128365-2b02d9a7-6a7b-4954-b6aa-fac637a9bc6a.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_17%2Ctext_6L275rWB%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10%2Fresize%2Cw_604%2Climit_0)
+
+（将红色框内全部勾选）
+点击【确定】后关闭Adobe Reader 软件重新打开后即可。
+
+若有收获，就点个赞吧
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/srdh1gz7y76c1vma?singleDoc#)

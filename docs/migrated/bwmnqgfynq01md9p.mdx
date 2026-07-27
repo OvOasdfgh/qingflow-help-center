@@ -1,0 +1,119 @@
+---
+title: "Json path解析"
+description: "1.了解 JSON 结构在开始学习 JSON Path 之前，首先要了解 JSON 的结构。JSON 是一种轻量级的数据交换格式，常用于表示结构化的数据。其数据结构由一组键值对（key-value pairs）组成，可以包含对象（object）、数组（array）、字符串（string）、数字..."
+slug: "/搭建技巧/按功能分类/轻代码/q-linker/json-path解析"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/bwmnqgfynq01md9p?singleDoc#"
+source_updated_at: "2024-10-15T03:38:15.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "轻代码"
+  - "Q-Linker"
+  - "Json path解析"
+---
+### 1.了解 JSON 结构
+
+在开始学习 JSON Path 之前，首先要了解 JSON 的结构。JSON 是一种轻量级的数据交换格式，常用于表示结构化的数据。其数据结构由一组键值对（key-value pairs）组成，可以包含对象（object）、数组（array）、字符串（string）、数字（number）、布尔值（boolean）和 null 值。
+
+以下是一个 JSON 示例：
+
+```json
+{
+  "name": "John",
+  "age": 30,
+  "email": "john@example.com",
+  "address": {
+    "street": "123 Main St",
+    "city": "New York",
+    "country": "USA"
+  },
+  "hobbies": ["reading", "music", "traveling"]
+}
+
+```
+
+### 2.基本路径表达式
+
+JSON Path 使用简洁的路径表达式来查询和提取 JSON 数据。下面是一些基本的路径表达式：
+
+- $：根节点
+- .：当前节点
+- ..：递归地搜索子节点
+- \[\]：按索引或属性过滤数组或对象
+
+例如，使用 $ 进行路径表达式查询，将返回整个 JSON 对象：
+
+```json
+$   // 返回整个 JSON 对象
+```
+
+使用 .key 来访问某个键的值：
+
+```json
+$.name   // 返回 "John"
+```
+
+使用 .\[index\] 来访问数组值：
+
+```json
+$.hobbies[0]   // 返回 "reading"
+```
+
+### 3.进阶路径表达式
+
+JSON Path 还提供了更复杂的路径表达式来进行常见的查找操作。
+
+例如，使用 \* 来匹配所有子节点：
+
+```json
+$.address.*   
+// 返回所有地址的值，即 {"street": "123 Main St", "city": "New York", "country": "USA"}
+```
+
+使用 \[\] 来根据条件过滤数组：
+
+```json
+$.hobbies[?(@ == 'music')]   // 返回 ["music"]，匹配值为 "music" 的元素
+```
+
+使用 . 来组合路径表达式：
+
+```json
+$.address.city   // 返回 "New York"
+```
+
+### 4.高级路径表达式
+
+除了基本和进阶路径表达式外，JSON Path 还支持更复杂的操作，例如使用比较运算符、逻辑运算符以及函数调用来进行过滤和操作。
+
+使用比较运算符：
+
+```json
+$.age > 25   // 返回 true，如果年龄大于 25
+```
+
+使用逻辑运算符：
+
+```json
+$[?(@.age > 25 && @.name == 'John')]   // 返回满足年龄大于 25 并且名字为 "John" 的对象
+```
+
+使用函数调用：
+
+```json
+$.hobbies[?(@.length() > 5)]   // 返回长度大于 5 的元素
+```
+
+测试用的解析工具：[http://www.atoolbox.net/Tool.php?Id=792](about:blank)
+
+tips：
+
+对于key1.key2如何解析
+
+$.\["key1.key2"\]或者$.\['key1.key2'\]
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/bwmnqgfynq01md9p?singleDoc#)

@@ -1,0 +1,90 @@
+---
+title: "订货宝"
+description: "1. 介绍阿商信息技术公司旗下的实时网上订货管理平台。2. 鉴权信息由于订货宝接口的特殊要求，目前在连接中心无法使用鉴权，仅能通过单独的事件获取鉴权数据，配置如下：1、在订货宝erp系统中获取接口账号（序列号）和对应的密码。2、在轻流系统-连接中心-订货宝-获取用户令牌（鉴权）事件中进行配置，..."
+slug: "/帮助文档/轻代码/连接中心/连接器/企业服务/订货宝"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/yodtvf9wmayz2u2h?singleDoc#"
+source_updated_at: "2024-11-26T08:30:19.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "连接中心"
+  - "连接器"
+  - "企业服务"
+  - "订货宝"
+---
+## 介绍
+
+阿商信息技术公司旗下的实时网上订货管理平台。
+
+## 鉴权信息
+
+由于订货宝接口的特殊要求，目前在连接中心无法使用鉴权，仅能通过单独的事件获取鉴权数据，配置如下：
+
+1、在订货宝erp系统中获取接口账号（序列号）和对应的密码。
+
+2、在轻流系统-连接中心-订货宝-获取用户令牌（鉴权）事件中进行配置，即可通过该事件返回的token调用其他接口。
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/Taei20HUFU95Kan44Z2bTb5hrBsd2NS3_.png)
+
+## 事件信息
+
+| 事件 | 描述 |
+| --- | --- |
+| 获取用户令牌（鉴权） | 作为鉴权事件获取token，以访问其他接口。 |
+| 获取商品分类 | 批量获取客户ERP系统中的商品分类（全量获取）。 |
+| 同步商品分类 | 同步客户ERP系统中的商品分类，可进行新增或者修改操作。 |
+| 获取订单列表 | 批量获取客户ERP系统中的订单列表，可按指定订单数量、订单时间、订单状态获取。 |
+| 获取收款单列表 | 获取客户ERP系统中的收款单列表，可按指定收款单数量、时间、状态获取。 |
+
+## 配置演示
+
+#### 4.1 获取用户令牌（鉴权）
+
+1、建议首先在连接中心中配置账号和密码，避免在应用表单中进行暴露。详见上文**鉴权信息。**
+
+2、应用编辑中，以Q-Linker为例，进行下图所示配置，拿到访问令牌（token），便可通过该token访问其他接口。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/p2W2KoqYFhEEhYznADBWMUi5K2-Cwi17_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/YY1Dhz4eZbcUGgXxA0ebUMVOcycnwpPJ_.png)
+
+#### 4.2 获取商品分类
+
+1、首先按照**获取用户令牌（鉴权）**事件进行配置，拿到访问令牌（token）。
+
+2、可根据连接中心建立表单。以Q-Linker为例进行以下配置。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/bdYOmrszopFjdmRXUwp3339YX5mLfMUP_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/hVgW2Jd0BMITTvlO28U8i3yePnsTOJln_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/grq7HKydftyCV2iDjtqKTiGeHart3zMd_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/XJZiOSDpigLbIVmne1gpfcCtIGL0yq8u_.png)
+
+3、保存应用并发布，即可正常使用。
+
+#### 4.3 同步商品分类
+
+1、首先按照**获取用户令牌（鉴权）**事件进行配置，拿到访问令牌（token）。
+
+2、可在连接中心查看该事件的变量和返回结果别名，对照建立应用表单。需要注意的是，变量中所标注的必填项是必须传输的。另外，该事件中返回结果仅包含该同步操作是否成功的信息，没有其他实际意义，用户可选择性获取。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/QVCmlDtSnyNg8XH8nygn_LkSiM_Ljeie_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/uwJghX1bHK-LsdYYV-EaCmXi90E00O-k_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/dwOuLnNeLrLc1mMSRrHZ0-7sd2tWunMC_.png)
+
+3、保存应用并发布，即可正常使用。
+
+#### 4.4 获取订单列表
+
+配置步骤与上文**获取商品分类**相似，在此不再赘述。
+
+#### 4.5 获取收款单列表
+
+配置步骤与上文**获取商品分类**相似，在此不再赘述。
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/yodtvf9wmayz2u2h?singleDoc#)

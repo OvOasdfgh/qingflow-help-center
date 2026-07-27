@@ -1,0 +1,106 @@
+---
+title: "纷享销客"
+description: "纷享销客——为超过60万家企业提供专业的连接型CRM解决方案，以助力企业销售增长为目标，纷享销客基于灵活的PaaS平台，为企业提供包括内外互联、销售、营销、服务等产品，实现以客户为中心的全生命周期管理。并为品牌商、渠道商、代理商、服务商提供个性化方案。1. 鉴权信息操作步骤：创建自建应用注册成..."
+slug: "/帮助文档/轻代码/连接中心/连接器/系统集成/纷享销客"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/om3eathqz43yggle?singleDoc#"
+source_updated_at: "2024-11-26T08:30:17.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "连接中心"
+  - "连接器"
+  - "系统集成"
+  - "纷享销客"
+---
+纷享销客——为超过60万家企业提供专业的连接型CRM解决方案，以助力企业销售增长为目标，纷享销客基于灵活的PaaS平台，为企业提供包括内外互联、销售、营销、服务等产品，实现以客户为中心的全生命周期管理。并为品牌商、渠道商、代理商、服务商提供个性化方案。
+
+### 鉴权信息
+
+**操作步骤：**
+
+1. **创建自建应用**
+
+注册成功后登录到纷享销客网页版，进入应用管理页面，如下图：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/S8V0KR0rVcnPSfOa1PwqRATtmdTI4e1J_.png)
+
+在自建应用页签下，点击创建应用：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/NaPMlveZzVyhSwr1jMfKTyGsAk3Q7gvV_.png)
+
+1. **开启开发模式**
+
+进入自建应用的配置页面,点击启用：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/WB4jpca8HSVpArFjS3G5pgWswo6nOgup_.png)
+
+点击启用开发者模式：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/lKB6IZDoaNymNKrehsUGt2IOY9jzuv2X_.png)
+
+1. **获取APPID、 APPSecret和永久授权码**
+
+您可以在上图的页面中获取到APPID、 APPSecret和永久授权码，并将它填入轻商城-连接中心-纷享销客连接器的鉴权配置中。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/qG846CVkrKjN4rlO7VRCkWxCfgYZJcaa_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/i3nDQ4eyDEKpfyBLam3HugNuQ7xN5cyV_.gif)
+
+通过以上步骤，您可以完成纷享销客的鉴权，省去每次使用连接器重新获取鉴权的步骤。
+
+#### 注意事项
+
+### 事件信息
+
+| 事件 | 描述 |
+| --- | --- |
+| 根据手机号查询员工 | 根据员工手机号，查询员工详细信息 |
+| 获取部门列表 | 通过通信录管理接口，获取所在企业的部门列表。 |
+| 获取部门详情 | 获取企业内指定部门的详细信息。 |
+| 根据Id查询员工信息 | 根据员工的openUserId查询员工信息 |
+| 添加角色 | 通过本事件向您的企业中添加新的角色。 |
+
+### 配置演示
+
+#### 根据Id查询员工信息
+
+**效果展示：**
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/KCzUJjzRTYl6fY-8WWTX-j7WN9Ii4aTI_.png)
+
+**前置条件：**
+
+需要确定您在连接中心-纷享销客连接器中配置了鉴权信息（配置方法见上文鉴权信息）
+
+**配置步骤：**
+
+1. 创建一个应用，添加员工id（单行文本）字段，添加Q-Linker字段，「配置模式」选连接中心里对应模版，并点击右上角保存（这里一定要注意保存，关系到下一步的配置）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/PuIUbbBJxdjA2fFVhX8dl4rHrf1fr4mP_.png)
+
+1. 添加单行文本字段、表格字段，按照连接中心-纷享销客连接器-对应事件中的参数要求与实际需求编辑单行文本和表格
+
+（事件中要求的字段见下图）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/BSE68jm0UpLoYomHoIIup_t1H-Dq27yi_.png)
+
+（按照实际需求，应用中单行文本、表格的配置字段见下图）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/4ikx9bqOFMY6jIh0f98d8qWYH-wmFgWS_.png)
+
+1. 点击Q-Linker字段，绑定变量
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/RLZwVpDGY04ho6CwkN3ldCOkXq9P0ONq_.png)
+
+1. 关联单行文本，依次点击文本字段，在右侧配置框中：默认内容-关联已有数据-XXX（Q-linker名称）-XXX（对应参数），将每一个需要显示返回参数的单行文本字段都进行配置（图中以账号字段为例）。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/dDUYAA5ZsNRS856jynm4YBrok2GYtWUb_.png)
+
+1. 关联表格，点击你的表格，右侧配置框中：默认内容-关联已有数据-XXX（Q-linker名称）-表单信息；关联子字段（如下图，将您的表格字段与连接器事件中表格子别名关联起来）
+
+**结果展示**
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/5gPlkRj7ylOhE5gw6Xq9in7Woqz10SSo_.gif)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/om3eathqz43yggle?singleDoc#)

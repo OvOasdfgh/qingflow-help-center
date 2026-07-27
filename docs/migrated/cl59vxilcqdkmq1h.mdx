@@ -1,0 +1,148 @@
+---
+title: "基本概念介绍"
+description: "基本概念： accesstoken appKey applyId auditNodeId auditRcdId chartKey deptId requestId roleId userId wsId wsSecretaccesstoken accesstoken指请求..."
+slug: "/帮助文档/轻代码/openapi/开发前必读/基本概念介绍"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/cl59vxilcqdkmq1h?singleDoc#"
+source_updated_at: "2024-10-25T02:28:43.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "开发前必读"
+  - "基本概念介绍"
+---
+```latex
+基本概念：
+	accesstoken
+	appKey
+	applyId
+	auditNodeId
+	auditRcdId
+	chartKey
+	deptId
+	requestId
+	roleId
+	userId
+	wsId
+	wsSecret
+```
+
+### accesstoken
+
+- accesstoken指请求轻流openAPI接口的访问令牌，在调用openAPI接口的时候会用到。
+- 轻流系统中定义了三种accesstoken：
+
+- 超级管理员accesstoken：可直接在轻流系统中获取
+- 子管理员accesstoken：需通过获取
+- 登录接口专用accesstoken：需通过获取
+
+#### **获取路径**
+
+【轻商城】——【插件中心】——【第三方连接】——「openapi」
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/YvezZo9VuOvKSlxlrB3J3NT08JebNYt3_.png)
+
+##### **超级管理员accesstoken：**
+
+拥有工作区创建者权限，可以调用除「code登录接口」外所有openAPI接口。可直接在轻流系统中获取，如下：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-06-28/6BPtIl5KXPcSf89oJDhzI_3G824l6IhP_.png)
+
+##### **子管理员accesstoken：**
+
+子管理员accesstoken拥有对应子管理员的权限，能调用这个子管理员权限内可调用的接口。
+
+- 获取方式为：首先生成关联子管理员权限secret（如下图），再通过接口，由wsid（下文有详解）和secret获取。
+- 重置secret会让已获取过的accesstoken失效。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/9xJe2fzRbF5lG1hzjvP4JKoQQRBcX8Io_.png)
+
+#### 登录接口专用accesstoken：
+
+- 登录接口专用accesstoken仅可用于调用接口。
+- 获取方式为：首先生成登录接口专用secret（如下图），再通过调用接口，由wsid（下文有详解）和secret获取。
+- 重置secret会让已获取的accesstoken失效。
+- 仅专有轻流可用。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-06-28/ZCsXkgRK8dP6JdlzOOhsfUHBQ45TZD1Y_.png)
+
+### **白名单**
+
+- 配置白名单，则只有该服务器地址，可以调用接口。可以设置多个白名单地址。当调用 openapi 触发白名单限制时，在返回错误信息中可查看请求 IP 地址。
+- 不配置白名单，则任何ip都可以调用。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-06-28/oI6IMi9xfz2F4uhLdwfAvOyZucpUMlYC_.png)
+
+### appKey
+
+应用id，点击某应用，即可在链接地址中获取，如下图：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-06-28/bE59imLB869w3nrgi5xRGeeNLydFSgvz_.png)
+
+也可以在应用基本信息中获得（下图）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-06-28/Z5SnciFVr2g2HNkl_R2SxMKfsAPsjNKD_.png)
+
+### applyId
+
+数据id，点击某条数据，即可在链接地址中获取，如下图：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-06-28/GMRcgPOUbPQhHlyPTmeMqhEHqsGPlI5e_.png)
+
+### auditNodeId
+
+流程节点id，可通过调用 获取单条数据的流程日志接口获取。
+
+### auditRcdId
+
+日志id，可通过调用获取单条数据的流程日志接口获取。
+
+### chartKey
+
+报表id，点击某报表，即可在链接地址中获取，如下图：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/-5PaX0h3F_rZToNuHpRf-dSK2Sxc8hXQ_.png)
+
+也可以在报表信息可查看（如下图）。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/e0JdX21SBXD625VJTtXM5o-auTlJ6023_.png)
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-06-28/aRW411Ij_Qe7qDFY6IlhNzBvoAfTUN6R_.png)
+
+### deptId
+
+部门id， 可以在部门信息中查看
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-06-28/eKhryfIqI0wkjb0IAr8Onbt43bocoxIG_.png)
+
+### roleId
+
+角色id。可以在角色信息中查看：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-06-28/RbcYUsnD2J84CjhRCaWglvLadZK3lsz8_.png)
+
+### requestId
+
+单个请求响应情况的id，可通过调用添加应用数据接口获取。
+
+### userId
+
+成员外部id，可在【通讯录】-每个成员的「成员信息」中查看。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-06-28/yLvlv4Ceg7TlO0WJn8__EqyoEro3j6O-_.png)
+
+### wsId（工作区id）
+
+工作区id，可在「管理后台」——基本信息看到
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-06-28/QqFas63JFyAfP_Uic7j0JC2q85vvcLDr_.png)
+
+### wsSecret
+
+- 包括子管理员secret和登录接口专用secret两种。
+- 获取途径：【轻商城】—【插件中心】—【第三方连接】—「OPEN API」
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-06-28/DlUl4AdFRKXaRaoadUSYDudWMFQV4H_A_.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/cl59vxilcqdkmq1h?singleDoc#)

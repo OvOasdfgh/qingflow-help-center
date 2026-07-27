@@ -1,0 +1,102 @@
+---
+title: "案例：微盟云OAuth2.0鉴权配置"
+description: "前置工作1.登录微盟云2.点击营销—开发者中心3.点击添加应用，填写应用名称及简介并保存4.点击应用的API权限，获取client_id和client_secretOAuth2.0鉴权配置进入插件中心，点击鉴权—配置—添加新的配置。填写模板名称，选择鉴权方式OAuth2.0。基础设置按照微盟云..."
+slug: "/帮助文档/轻代码/集成中心/鉴权/案例-微盟云oauth2-0鉴权配置"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/zek0uynk24kw4s70?singleDoc#"
+source_updated_at: "2024-11-26T08:30:16.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "集成中心"
+  - "鉴权"
+  - "案例：微盟云OAuth2.0鉴权配置"
+---
+### 前置工作
+
+1.登录微盟云
+
+2.点击营销—开发者中心
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/eRdkZTro3sgiaAqhQzskdphQX_X2iNqy_.png)
+
+3.点击添加应用，填写应用名称及简介并保存
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/FkioY8n6I4TxZiAMJkF4XbrmbO9CGmlr_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/LvL34PDiR0DPiNKLtszGoWTZxXT9hTL4_.png)
+
+4.点击应用的API权限，获取client\_id和client\_secret
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/4DZnMUy_Lc_0WjeIaVo5kfy3DPpE9z-c_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/QMfOy08XHhYbniyJcVfQuAgQPTPHBE6Y_.png)
+
+### OAuth2.0鉴权配置
+
+进入插件中心，点击鉴权—配置—添加新的配置。填写模板名称，选择鉴权方式OAuth2.0。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/fjB5GPlYM3fb0vi1Qw9hf-VxAXnLGoMY_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/zXL98znZiTlKSpWQbjIklqrPxXOI6pyM_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/IM5LkdQIiBPuvaeF0HSEp7NkjTeCMkef_.png)
+
+#### 基础设置
+
+按照微盟云开发指南填写设置中的参数。
+
+[微盟云，国内领先的开发者云平台](http://yun.weimob.com/saas/word/detail.html?tag=564&menuId=2)
+
+将前置工作中获取的client\_id和client\_secret填入
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/aRq0yH_FuPc_lmyqzpPp5-At9guhpGtU_.png)
+
+复制基础设置中的Redirect URI。回到微盟云，点击应用中的配置，粘贴到应用跳转地址（去掉后面的state）并保存。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/p4b_3-rOURv-ngUCPvb1fljRaKSMduJy_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/dcbyOstRQzgU0Ils1VK4w6rizqtCl25W_.png)
+
+#### 请求用户授权设置
+
+按照微盟云开发指南，添加enter和scope参数，redirect\_uri填写应用中的应用跳转地址。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/ynLYyRhGMruvveB8ZoVKJllMLjMaICUV_.png)
+
+#### 请求Token设置
+
+按照微盟云开发指南，redirect\_uri填写应用中的应用跳转地址。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/Vjzkn4JxX_5GBsFBP8P3MD4eOCBIV4Ah_.png)
+
+按照提示为回调参数配置别名
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/ApKDE1k_VWvzA7Zg93hMpHnP8Ahcne_g_.png)
+
+#### 刷新Token设置
+
+redirect\_uri填写应用中的应用跳转地址
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/esWEhSITyzXPWvlnRvlkSUyn4lrjClsx_.png)
+
+#### access Token设置
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/7F8QSoOm56lpYq7waJnOM5rYLT0qV_at_.png)
+
+点击保存—绑定账号并激活
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/Khk_LDNmfcx9ZyL5unghp2JTQC8VOzxf_.png)
+
+在跳转的页面选择需要授权的对象并点击授权
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/rPfD5qgOgcFvVfgVU5H9m6JhA-Q1Puec_.png)
+
+授权成功
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/5AKnzIxa1ZkcZ_-nFhNqoqzePdYVESjM_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/ftN7rOahYcp169UbY9qrcZ8BHWUj3j01_.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/zek0uynk24kw4s70?singleDoc#)

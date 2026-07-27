@@ -1,0 +1,82 @@
+---
+title: "实时汇率换算"
+description: "场景描述当我们的表单中涉及到根据实时的汇率进行计算时，此时我们就需要获取到最新的汇率情况。解决方案针对上述场景，这个时候就可以通过Q-Linker从第三方的汇率查询服务中获取到汇率，然后再轻流的表单中进行换算。效果如图所示：操作步骤第一步：选择汇率查询服务商在阿里云市场中选取合适的汇率服务商，..."
+slug: "/帮助文档/轻代码/集成中心/q-linker/q-linker使用案例/实时汇率换算"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/ufre6w66254s70on?singleDoc#"
+source_updated_at: "2024-11-26T08:30:14.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "集成中心"
+  - "Q-Linker"
+  - "Q-Linker使用案例"
+  - "实时汇率换算"
+---
+## 场景描述
+
+当我们的表单中涉及到根据实时的汇率进行计算时，此时我们就需要获取到最新的汇率情况。
+
+## 解决方案
+
+针对上述场景，这个时候就可以通过Q-Linker从第三方的汇率查询服务中获取到汇率，然后再轻流的表单中进行换算。效果如图所示：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/sGNCsLrlNWlhUeV3SP24lU1tYe-1gMIC_.gif)
+
+## 操作步骤
+
+### 第一步：选择汇率查询服务商
+
+在阿里云市场中选取合适的汇率服务商，本次案例以此服务商为例：[**点击链接查看**](https://market.aliyun.com/products/57000002/cmapi010841.html?spm=5176.2020520132.101.6.253e72187E5xnk#sku=yuncode484100003)
+
+### 第二步：添加表单字段
+
+以美元转换澳币为例（可以设置任意两种货币之间的转换）
+
+在轻流中新建应用，增加澳币金额字段(数字类型) ，美元金额字段(数字类型) 和Q-Linker查询按钮 ，如图：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/NlYDpUQulnn6sgvHMqznz4uA_bIeEML0_.png)
+
+### 第三步：配置Q-Linker字段
+
+先查看API提供的使用说明，链接：
+
+[易源数据-外汇牌价汇率查询转换【最新版】*数据API\_API*金融-云市场-阿里云](https://market.aliyun.com/products/57000002/cmapi010841.html?spm=5176.2020520132.101.8.61cc7218qcCThV#sku=yuncode484100003)
+
+配置Q\_Linker，配置项详见下文：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/1qC2tSt8IuObMpqSMaWvoxaj8jGCCMQP_.png)
+
+1、URL：http(s)://ali-waihui.showapi.com/waihui-transform
+
+2、QueryParama：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/omKOKnm_v7TdLhnt5VLritIgOvbKxksu_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/OMyJYnUcatmwXsCB1kj49y9Rnn7acfV0_.png)
+
+3、Method：GET
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/K7_T8nZDvFkSltLJoK1Lix8tZfury6Es_.png)
+
+4、Header：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/pP4g5kSEw5BT_2rTiXdw2z_ImaFLAxc9_.png)
+
+认证方式有两种：简单身份认证/签名认证，详细介绍如下：
+
+[调用API商品 - API 网关 - 阿里云](https://help.aliyun.com/document_detail/157953.html?spm=5176.product-detail.content.7.7f4c5a86p8GNS4)
+
+5、配置JSON Path：
+
+- **Result Format**: JSON
+- **Json Path: **$.showapi\_res\_body.money
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/jz1-9adfr0EbiVRdB1wg_Bp51sdrwEpD_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/9NZAO3t-rM1oVXxUAfN8pPU6SP_k0JC9_.png)
+
+### 第四步：发布应用
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/ufre6w66254s70on?singleDoc#)

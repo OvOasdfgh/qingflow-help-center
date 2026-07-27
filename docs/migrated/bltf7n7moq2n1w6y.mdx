@@ -1,0 +1,104 @@
+---
+title: "JSON Path配置规则"
+description: "开启Q-Linker:获取Q-Linker使用权限：目前仅开放给企业版及以上用户，如需试用可以联系我们在轻商城-插件中心开启Q-Linker功能 开启成功后，在表单设计中的高级字段中，就会看到Q-Linker字段了配置Q-Linker根据你想要获取的第三方系统的具体内容，编辑设置内容。具体Q..."
+slug: "/帮助文档/轻代码/集成中心/q-linker/q-linker的配置方法/json-path配置规则"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/bltf7n7moq2n1w6y?singleDoc#"
+source_updated_at: "2024-11-26T08:30:14.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "集成中心"
+  - "Q-Linker"
+  - "Q-Linker的配置方法"
+  - "JSON Path配置规则"
+---
+## 开启Q-Linker:
+
+- 获取Q-Linker使用权限：目前仅开放给企业版及以上用户，如需试用可以联系我们
+- 在轻商城-插件中心开启Q-Linker功能[ ](https://hc.qingflow.com/wp-content/uploads/2018/12/image-14.png)[ ](https://hc.qingflow.com/wp-content/uploads/2018/12/image-14.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/3GqVSnRFApa23oaTo_Qco8IF1pMxfFBu_.png)
+
+- 开启成功后，在表单设计中的高级字段中，就会看到Q-Linker字段了
+
+## 配置Q-Linker
+
+根据你想要获取的第三方系统的具体内容，编辑设置内容。具体Q-Linker配置设置方式如下：（下图是轻流应用中Q-Linker的配置框）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/_p1eZCeqfIaFIoJP6xga_-s7X_BeqVTK_.png)
+
+### 配置项的具体解释：
+
+| 配置项名称 | 介绍 | 可填内容 | 补充描述 |
+| --- | --- | --- | --- |
+| URL | 第三方系统api的资源地址 | URL;支持插入字段 |  |
+| Method | 请求类型/方式 | GET/POST/PUT/DELETE |  |
+| Header | 请求所需提供给第三方系统的信息，当第三方系统要求提供这类信息时才需要设置 | 固定值 |  |
+| Body | 固定值;支持插入字段 |  |  |
+| Result Format | 第三方系统api返回内容的格式 | JSON/XML/TEXT |  |
+| Json Path | 用于获取API的返回内容中的指定内容 | 仅返回内容的格式为JSON时，可填 | 详细介绍请看： [https://www.w3school.com.cn/json/index.asp](https://www.w3school.com.cn/json/index.asp) |
+| XPath | 用于获取返回内容中的指定内容 | 返回为XML时，可填 | 详细介绍请看：[http://www.w3school.com.cn/xpath/index.asp](http://www.w3school.com.cn/xpath/index.asp) |
+| 正则表达式 | 可用于获取返回内容中的指定内容 | 返回为TEXT时，可填 | 详细介绍请看：[http://www.runoob.com/regexp/regexp-syntax.html](http://www.runoob.com/regexp/regexp-syntax.html) |
+
+### 具体配置
+
+下面以一个提供免费api的网站[**阿里云**](https://www.aliyun.com/?spm=5176.2020520132.top-nav.dlogo.51b27218BjubnW)为例，您可根据下面的案例，在自取该网站的免费API后（可以参考），尝试去调取该网站的其他数据，比如轻流帮助文档中qlinker的其他案例：
+
+比如，若想要获取某城市现在的气温，您可以申请「免费版气象天气服务（cityid）-墨迹天气」的api免费试用次数，并找到它的API文档（如下），并根据api文档配置Q-Linker：
+
+1. 创建一个应用，根据需求配置字段（在本例中，填写城市编码，点击查询天气，获得对应城市温度，因此配置如下）。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/cwl3yoS9IIhFG1zLG1xPivaZ27CLXwEP_.png)
+
+1. 将调用地址、请求方式、返回类型填写至Q-Linker配置框的对应配置项中
+
+(左侧为API的说明文档，右侧为轻流中Q-Linker配置框)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/q0eOsIPBodwzZy2zVEA1cSSpxDonLKdI_.png)
+
+1. 将请求参数填写至Query Param中，匹配应用中您添加的的的对应字段。（文档中，所有的请求参数都是可选项，我们想用城市邮编来查询指定城市天气，因此只填写需要的查询参数：城市邮编）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/bEIy4NB7D-mlNkBHs8W16Fvg0iswZKVW_.png)
+
+1. 将API文档中要求的鉴权内容填写进header中（其他API要求的鉴权方式、参数位置可能不同，需要根据API文档的要求填写，本次操作是根据对应[**身份认证说明文档**](https://help.aliyun.com/document_detail/157953.html?spm=5176.product-detail.content.21.5b7c28dcjm8qXv)配置的）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/J72Db3m7K-7KVz4kIKNAeFANDlQTSIBS_.png)
+
+1. 将需要的指定返回的参数路径填写至JSON Path中，这样能帮助您精准获取需要的数据（如下图，我们想要获取的是当前温度，JSON Path如下）
+
+（左侧为该API请求返回的所有值，右侧为轻流应用中配置方式）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/MPvvoHkcsKzzajOXlHkx5m3KvWyGfWSq_.png)
+
+注意：当Q-Linker内容配置完毕后，必须点击保存，才是完全配置Q-Linker完毕
+
+### **设置关联**
+
+Q-Linker只是获取第三方系统的指定内容到轻流，如需调取使用，我们可以通过“数据关联”字段/或字段默认内容的“关联已有数据”，将数据关联过来。
+
+在获取天气的例子中，需要将您应用中对应字段与Jason Path中的别名关联起来，如下图（result就是我们配置JSON Path时设置的别名）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/1jA12MhwdDFjzI3jWXv8sMs2_6N-QYkH_.png)
+
+这样Q-Linker的使用就全部完成了！效果如下（200000为上海市邮编）：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/8uZN2eQfHVmrhhub_I5sQHQfk0NDr1Dg_.gif)
+
+## 视频课程
+
+您也可以点击轻流学院的教学视频来学习如何使用Q-Linker功能。
+
+[SP1 Q-Linker配置详解](https://learn.qingflow.com/detail/v_605c0c32e4b0da01d75b498d/3)​
+
+## 注意事项
+
+- 在轻流钉钉版使用Q-Linker前 ，需向轻流申请白名单，否则会影响功能的正常使用
+- 企业微信用户不支持插入申请人、成员与部门字段
+- 「数组格式」的结果关联到单值格式字段（如：单行文本）时，只取数组第一个对象值填入
+- http请求状态码200-207的情况即显示Q-Linker执行成功，其他情况会显示执行失败
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/bltf7n7moq2n1w6y?singleDoc#)

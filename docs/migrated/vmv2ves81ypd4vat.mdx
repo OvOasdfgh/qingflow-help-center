@@ -1,0 +1,569 @@
+---
+title: "如何实现微信Native支付？"
+description: "1. 场景/问题描述如何实现在轻流中使用微信Native支付进行收款2. 思路逻辑通过使用代码块功能进行调用相关微信支付接口，从而生成付款二维码，以及后续去查询订单付款状态，或者客户申请退款，通过直接调用接口去处理退款申请3. 配置过程3.1. 准备工作开通接入Native支付https://..."
+slug: "/搭建技巧/按功能分类/第三方集成/微信/如何实现微信native支付"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/vmv2ves81ypd4vat?singleDoc#"
+source_updated_at: "2024-10-15T03:38:19.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "第三方集成"
+  - "微信"
+  - "如何实现微信Native支付？"
+---
+## 场景/问题描述
+
+如何实现在轻流中使用微信Native支付进行收款
+
+## 思路逻辑
+
+通过使用代码块功能进行调用相关微信支付接口，从而生成付款二维码，以及后续去查询订单付款状态，或者客户申请退款，通过直接调用接口去处理退款申请
+
+## 配置过程
+
+### 准备工作
+
+- 开通接入Native支付
+- [https://pay.weixin.qq.com/static/applyment\_guide/applyment\_detail\_website.shtml](https://pay.weixin.qq.com/static/applyment_guide/applyment_detail_website.shtml)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699432346758-e2c6d412-5a80-49dc-a59d-622583bb2057.png)
+
+注意：申请商户号成功之后，需要绑定APPID，否则无法进行支付操作
+
+接入准备说明文档：[https://pay.weixin.qq.com/wiki/doc/apiv3/open/pay/chapter2\_7\_1.shtml](https://pay.weixin.qq.com/wiki/doc/apiv3/open/pay/chapter2_7_1.shtml)
+
+其余操作根据接入指引完成操作即可
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699432463515-897f3f91-0184-4e96-a610-6999ce569a09.png)
+
+- API证书申请完成之后，需要将序列号保存下来，后续参数serial\_no需要填写
+- APIV3密钥设置好之后，需要保存下来，后续回调通知内容解密用
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699432650269-083a5454-fefb-4dbc-a570-590e169ebb8a.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699432687315-4ad66d83-45fe-45e1-a881-a9c9c5e2c9d1.png)
+
+- 完成上述操作后：会在本地电脑中生成一个压缩文件，进行解压打开
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699432744176-2f569fc2-44e5-47dc-bd86-54e844d138ad.png)
+
+- 打开该文件，并将私钥内容复制保存下来即可
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699432773825-9e69b2a9-c66c-41e6-9a47-7488a476af0e.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699432897057-92d8715b-0288-465c-8933-70287f825346.png)
+
+### 表单配置
+
+#### 微信Native支付订单创建
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699433005359-3de54e4f-eb19-4468-8fef-afabd02221f8.png)
+
+- 【1---》生成付款二维码】与【2--确认支付状态】为代码块
+- 由于微信接口文档关于金额需要单位为分，所以这里做了个计算去转换为【总金额，单位为分】：总金额\*100
+- ![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699434282007-3315936f-54c9-4de4-ad9a-67d4359cc978.png)
+
+##### 1---》生成付款二维码
+
+###### 代码注释
+
+- 具体接口文档说明：
+
+[https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3\_4\_1.shtml](https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_4_1.shtml)
+
+​
+
+- qf\_field.\{商户订单号$$19466E8E9$$\}，qf\_field.\{商品描述$$19466E8EA$$\}，qf\_field.\{总金额，单位为分$$19466E8EC$$\}需要替换成表单中具体字段
+
+​
+
+- serial\_no、privateKey需要替换上面所保存下来的序列号和私钥内容
+
+- notify\_url：用于回调通知用，这里放的是轻流应用QS被动的接口。
+
+- 注：由于接口返回的是二维码链接，并不是二维码图片，所以这里做了处理，调用了生成二维码图片的接口
+
+- 具体接口文档：
+
+[https://www.mxnzp.com/doc/detail?id=2](https://www.mxnzp.com/doc/detail?id=2)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699433640072-1decee9e-7414-4a12-a3d9-1c98c36ce276.png)
+
+- 需要点击申请appid，去获取对应的app\_id和app\_srcret，将最后URL中的app\_id以及app\_sercet进行替换即可
+- ![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699433718797-e2e14e68-6326-44a1-b540-d5138ddfc904.png)
+
+```javascript
+const axios = require('axios');
+const crypto = require('crypto');
+const data = {
+    "mchid":"1658838350",
+    "serial_no":"42******4D6638CEBBB4C48697FB54",
+    "url": 'https://api.mch.weixin.qq.com/v3/pay/transactions/native',
+    "method": "POST"
+    
+};
+let reqdata = JSON.stringify({
+	"mchid": "1658838350",
+	"out_trade_no": qf_field.{商户订单号$$19466E8E9$$},
+	"appid": "wx9be66*****4686",
+	"description": qf_field.{商品描述$$19466E8EA$$},
+	"notify_url": "https://qingflow.com/api/qsource/13060b3c-8200-d9c000ef0",
+	"amount": {
+		"total": qf_field.{总金额，单位为分$$19466E8EC$$},
+		"currency": "CNY"
+	}
+});
+
+// 生成随机字符串
+function generateRandomString(length) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let randomString = '';
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      randomString += characters.charAt(randomIndex);
+    }
+    return randomString;
+  }
+
+const method=data.method;
+const timestamp = Math.floor(Date.now() / 1000);
+const nonce = generateRandomString(32); // 假设generateRandomString函数已经定义
+const body =reqdata;
+const urlParts = new URL(data.url);
+const canonicalUrl = `${urlParts.pathname}${urlParts.search}`;
+
+//私钥
+const privateKey = `-----BEGIN PRIVATE KEY-----
+Ha8ho0jCtZhh1M6+C02OWXZswqrXH35yRI75T/SpGD87lVLV8iFJ9kHz7db5SLyB
+OMGTflLX3QKBgB5aS3pCDSAR4jFBLEuylEpm1LxjJy6J6P7SBzqMRHHLWVV9YZHZ
+68x1CDrLmG3vA4YPu15kt6T4iIt+YpAuXmDleilNEJj8UGrdoENA2+Xdh+U8qib0
+A+2W7oWcw/YzPbLJtK44DVB3k+eBwl8XqqnvnW3jDpZZpndCTxALX54VAoGBAM/1
+hlmRPqX9UrNNZZ4U3o/rLgzdr9/oWaC96Mh+04NeaLzy2DpJYciKOUpd54MzdSTb
+5o2dY+15qVM8+jBApWgFlysXCkZ7Yw61s+H74a/oKPPzNdkk0ra7V7ESzkNO1BR4
+TAH60fAvchyY4kuURlQyBmKNnfohy5e+D/BFFFFBAoGBAMUS7DGX/66ckdWUvrzw
+DSQhtU6gFMMSuUikhg077C4eHtr++7mLy9BEfXroa3aH8Yqn9eyE77aqdQ7zmHV8
+kF155dImc0Gfrl8b+bcz+l+Z+ZE7QPliben4fwFCG9BGS/DCKi6vqDtknQHcrida
+fTm0lUYFLgYeRcvvVwUcCsK3
+-----END PRIVATE KEY-----`;
+
+const message =
+  `${method}\n` +
+  `${canonicalUrl}\n` +
+  `${timestamp}\n` +
+  `${nonce}\n` +
+  `${body}\n`;
+
+// 使用私钥创建签名对象
+const sign = crypto.createSign('RSA-SHA256');
+sign.write(message);
+sign.end();
+
+// 使用私钥对签名字符串进行签名
+const signature = sign.sign(privateKey, 'base64');
+
+const schema = 'WECHATPAY2-SHA256-RSA2048';
+const token =`mchid="${data.mchid}",nonce_str="${nonce}",timestamp="${timestamp}",serial_no="${data.serial_no}",signature="${signature}"`;
+
+  let config = {
+    method: data.method,
+    maxBodyLength: Infinity,
+    url: data.url,
+    headers: { 
+      'Authorization': `${schema} ${token}`,
+      'Content-Type': 'application/json'
+    },
+    data: reqdata
+  };
+
+  axios(config).then(function (res) {
+    var resdata=res.data
+    var code_url=resdata.code_url
+    let config1 = {
+      method: 'get',
+      maxBodyLength: Infinity,
+      url: `https://www.mxnzp.com/api/qrcode/create/single?content=${encodeURIComponent(code_url)}&type=0&app_id=0gggsysvv*****&app_secret=NkG46aFodgjDrC4jQ******`,
+      headers: {}
+    };
+    axios(config1)
+    .then(function (res1) {     
+      qf_output={'data':res1.data}
+    });
+  });
+```
+
+###### 代码测试与配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699433805842-3f2db16c-2f5e-4b30-9144-60c91f9c2d5d.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699433816882-574c196a-715b-418b-842e-6f613b81d41a.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699433832971-87fc20ac-923c-4830-bdc1-8627596a2f11.png)
+
+##### 2--确认支付状态
+
+###### 代码注释
+
+- 具体接口文档（根据商户订单号查询）：
+
+[https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3\_4\_2.shtml](https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_4_2.shtml)
+
+​
+
+- qf\_field.\{商户订单号$$19466E8E9$$\}替换成表单中对应字段
+
+​
+
+- data中的url需要替换成接口文档中的URL，具体拿什么内容参考图片红线部分
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699434044036-34c2bd0f-2a19-4ea0-a8f5-dd7a6c947eae.png)
+
+- serial\_no、privateKey需要替换上面所保存下来的序列号和私钥内容
+
+​
+
+```javascript
+const axios = require('axios');
+const crypto = require('crypto');
+const data = {
+    "mchid":"1658838350",
+    "out_trade_no":qf_field.{商户订单号$$19466E8E9$$},
+    "serial_no":"42363********8CEBBB4C48697FB54",
+    "url": "https://api.mch.weixin.qq.com/v3/pay/transactions/out-trade-no/",
+    "method": "GET"  
+};
+data.url = `${data.url}${data.out_trade_no}?mchid=${data.mchid}`;
+
+let reqbody = "";
+
+// 生成随机字符串
+function generateRandomString(length) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let randomString = '';
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      randomString += characters.charAt(randomIndex);
+    }
+    return randomString;
+  }
+
+const method=data.method;
+const timestamp = Math.floor(Date.now() / 1000);
+const nonce = generateRandomString(32); // 假设generateRandomString函数已经定义
+const body =reqbody;
+const urlParts = new URL(data.url);
+const canonicalUrl = `${urlParts.pathname}${urlParts.search}`;
+
+//私钥
+const privateKey = `-----BEGIN PRIVATE KEY-----
+68x1CDrLmG3vA4YPu15kt6T4iIt+YpAuXmDleilNEJj8UGrdoENA2+Xdh+U8qib0
+A+2W7oWcw/YzPbLJtK44DVB3k+eBwl8XqqnvnW3jDpZZpndCTxALX54VAoGBAM/1
+hlmRPqX9UrNNZZ4U3o/rLgzdr9/oWaC96Mh+04NeaLzy2DpJYciKOUpd54MzdSTb
+5o2dY+15qVM8+jBApWgFlysXCkZ7Yw61s+H74a/oKPPzNdkk0ra7V7ESzkNO1BR4
+TAH60fAvchyY4kuURlQyBmKNnfohy5e+D/BFFFFBAoGBAMUS7DGX/66ckdWUvrzw
+DSQhtU6gFMMSuUikhg077C4eHtr++7mLy9BEfXroa3aH8Yqn9eyE77aqdQ7zmHV8
+kF155dImc0Gfrl8b+bcz+l+Z+ZE7QPliben4fwFCG9BGS/DCKi6vqDtknQHcrida
+fTm0lUYFLgYeRcvvVwUcCsK3
+-----END PRIVATE KEY-----`;
+
+const message =
+  `${method}\n` +
+  `${canonicalUrl}\n` +
+  `${timestamp}\n` +
+  `${nonce}\n` +
+  `${body}\n`;
+
+// 使用私钥创建签名对象
+const sign = crypto.createSign('RSA-SHA256');
+sign.write(message);
+sign.end();
+
+// 使用私钥对签名字符串进行签名
+const signature = sign.sign(privateKey, 'base64');
+
+const schema = 'WECHATPAY2-SHA256-RSA2048';
+const token =`mchid="${data.mchid}",nonce_str="${nonce}",timestamp="${timestamp}",serial_no="${data.serial_no}",signature="${signature}"`;
+
+  let config = {
+    method: data.method,
+    maxBodyLength: Infinity,
+    url:data.url,
+    headers: { 
+      'Authorization': `${schema} ${token}`,
+      'Content-Type': 'application/json'
+    },
+    data: reqbody
+  };
+
+axios(config).then(function (res) {
+    qf_output={'data':res.data}
+  });
+```
+
+###### 代码测试与配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699434176296-59ff572c-d7fc-4087-a0b9-0771ac07f4d0.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699434204469-2c342f2a-2474-4f1a-ab31-923c557ec1fb.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699434239185-ac1fa9b5-b416-48a4-8f42-8036370447dd.png)
+
+##### 流程设计
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699434371945-baba9e41-05e1-46f2-9e6b-d196249034d8.png)
+
+- 申请人节点：企业员工发起支付订单
+- 支付人扫码支付订单节点：具体支付人进行扫码订单支付，如果支付人对于订单信息有问题，可以通过并在反馈中说明
+- 员工确认支付状态节点：企业员工进行确认支付订单状态，如果订单信息有误，可以修改订单，并重新生成二维码，回退给支付人进行扫码付款。
+
+###### 申请人
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699434631346-0c14bb5d-727f-40f9-ab0c-1ceba2139c26.png)
+
+###### 支付人扫码支付订单
+
+- 节点处理人选择成员字段为表单【订单支付人】
+- 其余字段设置为仅可见，红色框中设置为隐藏
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699434674540-23efcf78-e362-4e2f-b7eb-10ff316e497c.png)
+
+###### 员工确认支付状态
+
+- 节点负责人设置为表单【订单创建人】
+- 字段全部设置为可编辑
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699434769575-be9a1bda-789d-487a-9c4d-07d34772f504.png)
+
+#### 微信Native支付申请退款
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699434865023-27e3bc5f-0f45-4e49-94be-f958342a0afd.png)
+
+- 【---》退款】为代码块
+- 【商户订单号】为数据关联字段，关联【微信Native支付订单创建】应用的商户订单号
+
+- ![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699434970043-808914e0-6a6a-4260-afc0-496c03684df2.png)
+
+- 【原订单金额】设置为关联已有数据
+
+- ![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699435078756-08d20bf1-c69a-494f-8bae-888bcfcc3bad.png)
+
+- 【订单总金额，单位为分】和【退款金额，单位为分】计算逻辑为对应金额\*100
+
+- ![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699435135351-f4988c08-d7a0-4b26-ae88-670c14e0a439.png)
+
+##### ---》退款
+
+###### 代码注释
+
+- 具体接口文档：
+
+[https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3\_4\_9.shtml](https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_4_9.shtml)
+
+​
+
+- qf\_field.\{商户订单号$$1946966C9$$\}、qf\_field.\{商户订单号$$1946966C9$$\}、qf\_field.\{退款原因$$1946966D2$$\}、qf\_field.\{退款金额，单位为分$$19469798C$$\}替换成表单中对应字段
+
+- serial\_no、privateKey需要替换上面所保存下来的序列号和私钥内容
+
+- notify\_url：用于回调通知用，这里放的是轻流应用QS被动的接口。
+
+```javascript
+const axios = require('axios');
+const crypto = require('crypto');
+const data = {
+    "mchid":"1658838350",
+    "serial_no":"4236******CEBBB4C48697FB54",
+    "url": 'https://api.mch.weixin.qq.com/v3/refund/domestic/refunds',
+    "method": "POST"
+    
+};
+let reqbody = JSON.stringify({
+	"out_trade_no": qf_field.{商户订单号$$1946966C9$$},
+    "out_refund_no":qf_field.{商户订单号$$1946966C9$$},
+    "reason":qf_field.{退款原因$$1946966D2$$},
+	"notify_url": "https://qingflow.com/api/qsource/13060b3c-8200-00ef0",
+    "amount": {
+        "refund": qf_field.{退款金额，单位为分$$19469798C$$},
+        "total":qf_field.{订单总金额，单位为分$$1946C5010$$},
+        "currency": "CNY"
+      }
+});
+
+// 生成随机字符串
+function generateRandomString(length) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let randomString = '';
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      randomString += characters.charAt(randomIndex);
+    }
+    return randomString;
+  }
+
+const method=data.method;
+const timestamp = Math.floor(Date.now() / 1000);
+const nonce = generateRandomString(32); // 假设generateRandomString函数已经定义
+const body =reqbody;
+const urlParts = new URL(data.url);
+const canonicalUrl = `${urlParts.pathname}${urlParts.search}`;
+
+//私钥
+const privateKey = `-----BEGIN PRIVATE KEY-----
+OMGTflLX3QKBgB5aS3pCDSAR4jFBLEuylEpm1LxjJy6J6P7SBzqMRHHLWVV9YZHZ
+68x1CDrLmG3vA4YPu15kt6T4iIt+YpAuXmDleilNEJj8UGrdoENA2+Xdh+U8qib0
+A+2W7oWcw/YzPbLJtK44DVB3k+eBwl8XqqnvnW3jDpZZpndCTxALX54VAoGBAM/1
+hlmRPqX9UrNNZZ4U3o/rLgzdr9/oWaC96Mh+04NeaLzy2DpJYciKOUpd54MzdSTb
+5o2dY+15qVM8+jBApWgFlysXCkZ7Yw61s+H74a/oKPPzNdkk0ra7V7ESzkNO1BR4
+TAH60fAvchyY4kuURlQyBmKNnfohy5e+D/BFFFFBAoGBAMUS7DGX/66ckdWUvrzw
+DSQhtU6gFMMSuUikhg077C4eHtr++7mLy9BEfXroa3aH8Yqn9eyE77aqdQ7zmHV8
+kF155dImc0Gfrl8b+bcz+l+Z+ZE7QPliben4fwFCG9BGS/DCKi6vqDtknQHcrida
+fTm0lUYFLgYeRcvvVwUcCsK3
+-----END PRIVATE KEY-----`;
+
+const message =
+  `${method}\n` +
+  `${canonicalUrl}\n` +
+  `${timestamp}\n` +
+  `${nonce}\n` +
+  `${body}\n`;
+
+// 使用私钥创建签名对象
+const sign = crypto.createSign('RSA-SHA256');
+sign.write(message);
+sign.end();
+
+// 使用私钥对签名字符串进行签名
+const signature = sign.sign(privateKey, 'base64');
+
+const schema = 'WECHATPAY2-SHA256-RSA2048';
+const token =`mchid="${data.mchid}",nonce_str="${nonce}",timestamp="${timestamp}",serial_no="${data.serial_no}",signature="${signature}"`;
+
+  let config = {
+    method: data.method,
+    maxBodyLength: Infinity,
+    url: data.url,
+    headers: { 
+      'Authorization': `${schema} ${token}`,
+      'Content-Type': 'application/json'
+    },
+    data: reqbody
+  };
+
+ axios(config).then(function (res) {
+    qf_output={'data':res.data}
+  });
+```
+
+###### 代码测试与配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699435390832-6f473a80-3eb9-4648-8c85-a5a419a24ec8.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699435399009-236580a4-6b75-4c34-ae0b-448acc1c58a0.png)
+
+注意：这里【退款状态】为单项选择字段，并且这里的内容不可改动，需要为图中的内容，单项选择配置了逻辑表单
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699435419833-47e8474e-9572-40dc-9cc9-08974cd17e36.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699435555364-23eaabc1-11e0-46e0-b1e6-1a9233e1cc17.png)
+
+##### 流程设计
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699435645465-522e85ed-732f-4c89-985e-48abe49e93c3.png)
+
+- 申请人节点：需要具体订单支付人来进行申请
+- 处理退款节点：需要企业对应的员工来进行处理退款申请
+
+###### 申请人节点
+
+- 退款段落中所有字段设置为隐藏，因为申请人不需要看到
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699435752308-4df76e2b-501e-40d2-b568-66c56858bab2.png)
+
+###### 处理退款
+
+节点负责人设置为固定的一个人即可，代码块字段设置为可编辑，其余字段设置为仅可见。
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699435836578-0ba4d608-3498-4afb-b3d6-6ffb988aa9dc.png)
+
+#### 回调通知内容解析
+
+这里仅仅做演示解析，后续代码块节点功能上线后，可以作为自动接收回调用
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699497256046-f5282b1c-53c3-4911-9cb9-161db189ed8a.png)
+
+这里的URL就是上面notify\_url的内容
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699497273694-dc1dcf96-4e8d-4dde-b586-73e60b89e9e7.png)
+
+##### 表单设计
+
+这里只做解析演示，具体解析的字段内容，需要根据具体需求去做改动
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699497418608-ee1b4522-8d9a-4c10-ba44-947432a94e90.png)
+
+##### 解密
+
+###### 代码注释
+
+- qf\_field.\{具体回调内容$$19458800A$$\}替换成具体对应表单字段
+
+- key：对应上面保存下来的APIV3密钥内容
+
+​
+
+```javascript
+const crypto = require('crypto');
+
+const objString = qf_field.{具体回调内容$$19458800A$$}
+const obj = JSON.parse(objString);
+function decrypt(nonce, ciphertext, associatedData) {
+  const key = 'q888i777n66******22w111';
+  const keyBytes = Buffer.from(key, 'utf-8');
+  const nonceBytes = Buffer.from(nonce, 'utf-8');
+  const adBytes = Buffer.from(associatedData, 'utf-8');
+  const data = Buffer.from(ciphertext, 'base64');
+
+  const decipher = crypto.createDecipheriv('aes-256-gcm', keyBytes, nonceBytes);
+  decipher.setAuthTag(data.slice(-16));
+  decipher.setAAD(adBytes);
+
+  const decrypted = Buffer.concat([decipher.update(data.slice(0, -16)), decipher.final()]);
+  return decrypted.toString('utf-8');
+}
+
+const data = decrypt(obj.resource.nonce, obj.resource.ciphertext, obj.resource.associated_data);
+const objdata = JSON.parse(data);
+qf_output={objdata}
+
+```
+
+###### 代码测试与配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699497671628-03e3c88d-60e0-415b-bee0-26c3857f5a9e.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699497715802-b48bca81-3134-4380-a65d-dba6d440683e.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699497737663-0d1e5485-7f3c-4438-9e2a-746425e0efde.png)
+
+###### 具体效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699497764142-72763f4a-8968-4ca7-b69d-d17c958b41be.png)
+
+## 实际效果
+
+### 演示视频
+
+> 视频：微信支付DEMO.mov。请在[原文](https://exiao.yuque.com/ixwxsb/bgzs0e/vmv2ves81ypd4vat?singleDoc#)中查看。
+
+### 效果图
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699436313234-36b2fbad-06fa-436e-a341-4bcc07d76c96.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699436335100-bcec34b6-6f13-4eaf-88f9-ebd25d0010ce.png)
+
+​
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/vmv2ves81ypd4vat?singleDoc#)

@@ -1,0 +1,2590 @@
+---
+title: "代码块示例"
+description: "注意点：1、代码中像qf_field.{开始日期$$169ACB6B8$$}这种格式，需要替换成实际表单中的字段2、代码中像qf_output={变量名}表示输出最后结果。即表示console.log()3、代码中像field_140965942这个格式，表示表单中表格的对应的子字段ID，获取..."
+slug: "/帮助文档/轻代码/云编程中心/代码块/代码块示例"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/oaudly5zxbxoqwzv?singleDoc#"
+source_updated_at: "2024-11-26T08:30:20.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "云编程中心"
+  - "代码块"
+  - "代码块示例"
+---
+注意点：
+
+1、代码中像qf\_field.\{开始日期$$169ACB6B8$$\}这种格式，需要替换成实际表单中的字段
+
+2、代码中像qf\_output=\{变量名\}表示输出最后结果。即表示console.log()
+
+3、代码中像field\_140965942这个格式，表示表单中表格的对应的子字段ID，获取方式：
+
+在代码块中输入下面两行代码即可，其中qf\_field.\{表格$$16384E9DE$$\}换成表单对应表格字段，然后测试时输入一行测试示例，输出即可得到对应的field\_id.
+
+var key=qf\_field.\{表格$$16384E9DE$$\}
+
+qf\_output=\{key\}
+
+4、代码中像queid=4这种格式，表示表单中字段对应的字段ID，获取方式：[https://exiao.yuque.com/rlf3k1/oanb79/ub34vw3b7cdqvovg?singleDoc#](https://exiao.yuque.com/rlf3k1/oanb79/ub34vw3b7cdqvovg?singleDoc#) 《调用添加数据接口，如何写body内容》
+
+5、代码块测试完成后，需要进行生成内容解析，以及配置好表单字段的关联。
+
+6、如果插入字段后，发现代码依旧无法正常运行，可以检查下插入字段的类型，因为有可能代码块是string类型，但是插入的字段是int类型，就会导致运行不成功。
+
+## 日期相关代码块
+
+### 获取两个日期之间的月份区间
+
+- 需要将代码中qf\_field.\{开始日期$$169ACB6B8$$\}与qf\_field.\{结束日期$$169ACB6B9$$\}替换成实际表单中的日期字段
+
+```javascript
+const { format, eachMonthOfInterval } = require('date-fns');
+
+const startDate = new Date(qf_field.{开始日期$$169ACB6B8$$});
+const endDate = new Date(qf_field.{结束日期$$169ACB6B9$$});
+
+let monthRange = [];
+
+if (startDate && endDate && startDate.toString() !== 'Invalid Date' && endDate.toString() !== 'Invalid Date' && startDate.toISOString() !== '1970-01-01T00:00:00.000Z' && endDate.toISOString() !== '1970-01-01T00:00:00.000Z') {
+  monthRange = eachMonthOfInterval({
+    start: startDate,
+    end: endDate
+  }).map(date => ({ value: format(date, 'yyyy-MM') }));
+}
+
+qf_output={monthRange}
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698828134850-b40603b7-d483-4fda-be2e-5804786cfd93.png)
+
+### 将new Date()显示的日期格式，转为符合轻流的日期格式
+
+2024-01-24T03:49:00.060Z 转为 2024-01-24 03:49:33
+
+```javascript
+const { format } = require('date-fns');
+
+const getCurrentTime = () => {
+    const now = new Date();
+    const formattedTime = format(now, "yyyy:MM:dd HH:mm:ss");
+
+    qf_output={formattedTime};
+};
+
+getCurrentTime();
+```
+
+### 获取两个日期之间的月份区间并需要带上该月份的天数
+
+- 需要将代码中qf\_field.\{开始日期$$169ACB6B8$$\}与qf\_field.\{结束日期$$169ACB6B9$$\}替换成实际表单中的日期字段
+
+```javascript
+const { format, eachMonthOfInterval, getDaysInMonth } = require('date-fns');
+
+const startDate = new Date(qf_field.{开始日期$$17258EC18$$});
+const endDate = new Date(qf_field.{结束日期$$17258EC19$$});
+
+let monthRange = [];
+
+if (startDate && endDate && startDate.toString() !== 'Invalid Date' && endDate.toString() !== 'Invalid Date' && startDate.toISOString() !== '1970-01-01T00:00:00.000Z' && endDate.toISOString() !== '1970-01-01T00:00:00.000Z') {
+  monthRange = eachMonthOfInterval({
+    start: startDate,
+    end: endDate
+  }).map(date => {
+    const month = format(date, 'yyyy-MM');
+    const daysInMonth = getDaysInMonth(date);
+    return { value: month, days: daysInMonth };
+  });
+}
+
+qf_output = { monthRange };
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698828243462-ecbda25b-c19d-4612-8329-4e637c64ea2f.png)
+
+### 计算当前周的起始时间（周一为第一天）
+
+```javascript
+const today = new Date();
+
+// 周一在Date对象中的索引为1，因此将currentDay设置为1。
+const currentDay = 1;
+const currDate = today.getDate();
+const currDay = today.getDay();
+
+// 计算本周的开始日期
+const firstDayOfWeek = new Date(today.setDate(currDate - currDay + currentDay));
+
+// 计算本周的结束日期
+const lastDayOfWeek = new Date(today.setDate(firstDayOfWeek.getDate() + 6));
+
+// 格式化日期字符串
+const formatDate = date => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
+// 将结果存储在包含属性键值对的对象中
+const result = {
+  "start": formatDate(firstDayOfWeek),
+  "end": formatDate(lastDayOfWeek)
+};
+
+//console.log(result); // 输出 {"key1":"2021-11-29","key2":"2021-12-05"}
+qf_output={result}
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698832756727-84331c1f-50d0-4ff7-b164-6e2f4051f5fd.png)
+
+### 获取当前时间是本年的第几周
+
+```javascript
+let today = new Date();
+let firstDayOfYear = new Date(today.getFullYear(), 0, 1);
+let pastDaysOfYear = (today - firstDayOfYear) / 86400000;
+let weekNum = Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
+qf_output={rs:today.getFullYear() + "年" + (today.getMonth() + 1) + "月" + today.getDate() + "日是本年的第" + weekNum + "周"}
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698834127807-5a2d6347-2968-42a1-863a-f3f2b2bb13a6.png)
+
+### 获取指定时间是本年的第几周
+
+- 其中qf\_field.\{日期$$145789D8B$$\}换成表单具体日期字段
+
+```javascript
+let dateString = qf_field.{日期$$145789D8B$$}
+let targetDate = new Date(dateString);
+let firstDayOfYear = new Date(targetDate.getFullYear(), 0, 1);
+let pastDaysOfYear = (targetDate - firstDayOfYear) / 86400000;
+let weekNum = Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
+qf_output={rs:targetDate.getFullYear() + "年" + (targetDate.getMonth() + 1) + "月" + targetDate.getDate() + "日是本年的第" + weekNum + "周"}
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698834177990-ed7f6051-b44d-45a4-9dc7-a47956c3eb3f.png)
+
+### 获取指定时间是本年的第几周（以周一为本周的第一天）
+
+- 其中qf\_field.\{日期$$145789D8B$$\}换成表单具体日期字段
+
+```javascript
+// 自定义日期
+const customDate =qf_field.{日期$$145789D8B$$};
+
+// 将自定义日期转化为 Date 对象
+const customDateObj = new Date(customDate);
+
+// 判断自定义日期是本年的第几周
+const firstDayOfYear = new Date(customDateObj.getFullYear(), 0, 1);
+const dayOfYear = Math.floor((customDateObj - firstDayOfYear) / 86400000) + 1;
+const weekNumber = Math.ceil(dayOfYear / 7);
+
+// 计算自定义日期的星期几
+const weekDay = customDateObj.getDay();
+
+// 如果星期几是周日，将周数减 1，否则周数不变（因为这里规定每周的第一天是周一）
+const finalWeekNumber = weekDay === 0 ? weekNumber - 1 : weekNumber;
+qf_output={rs:`自定义日期 ${customDate} 在本年是第 ${finalWeekNumber} 周`};
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698834207763-3dafddbd-986d-4e65-b63a-7cedbf49491d.png)
+
+### 如何将日期全部转换为中文格式显示
+
+- qf\_field.\{日期$$729A9BD8$$\}为表单日期字段
+
+```javascript
+var dict = {
+"0": "零",
+"1": "一",
+"2": "二",
+"3": "三",
+"4": "四",
+"5": "五",
+"6": "六",
+"7": "七",
+"8": "八",
+"9": "九",
+"10": "十",
+"11":"十一",
+"12":"十二",
+"13":"十三",
+"14":"十四",
+"15":"十五",
+"16":"十六",
+"17":"十七",
+"18":"十八",
+"19":"十九",
+"20":"二十",
+"21":"二十一",
+"22":"二十二",
+"23":"二十三",
+"24":"二十四",
+"25":"二十五",
+"26":"二十六",
+"27":"二十七",
+"28":"二十八",
+"29":"二十九",
+"30":"三十",
+"31":"三十一"
+};
+var date = qf_field.{日期$$729A9BD8$$};
+var yy = date.substring(0,4);
+var mm = date.substring(5,7);
+var dd = date.substring(8,10);
+var yearStr = dict[yy[0]] + dict[yy[1]] + dict[yy[2]] + dict[yy[3]] + '年',
+ monthStr = dict[''+Number(mm)] + '月',
+ dayStr = dict[''+Number(dd)] + '日'; 
+var chinesedate = yearStr+monthStr+dayStr;
+qf_output = {中文日期 : chinesedate}
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698913544623-564ed66a-577f-4a00-81c8-6dc653174f6f.png)
+
+## 主字段相关问题
+
+### 银行卡号将卡号的空格去除
+
+- 其中qf\_field.\{单行文字$$16469E811$$\}换成表单OCR识别后的银行卡号
+
+```javascript
+// 定义变量value
+let value = qf_field.{单行文字$$16469E811$$};
+
+// 去除字符串中的空格
+const result = value.replace(/\s/g, '');
+
+// 输出结果
+//console.log('去除空格后的结果为：', result);
+qf_output={result}
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698833625703-34576920-0116-4772-aafd-80c352a8dd6a.png)
+
+### 按照特殊字符分割，形成数组格式
+
+```javascript
+// 定义输入的字符串
+const value =qf_field.{单行文字$$145779D99$$};
+
+// 声明一个空数组
+const data = [];
+
+// 以 "、" 分隔输入的字符串
+const entries = value.split("、");
+
+// 遍历每个分隔的项，提取姓名和手机号
+for (const entry of entries) {
+  // 以数字开始的为手机号，其他为姓名
+  const name = entry.replace(/[0-9]/g, "").trim(); // 去除数字并去除两端的空格
+  const phone = entry.replace(/[^\d]/g, ""); // 去除非数字字符
+  data.push({ name, phone }); // 将姓名和手机号添加到 data 数组中
+}
+
+// 构造最终的输出对象
+const result = { data };
+//var rs=JSON.stringify(result, null, 2)
+// 将结果打印到控制台
+//console.log(JSON.stringify(result, null, 2));
+qf_output={result}
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698834274704-a1742d0c-6c64-4cf4-8ed6-b764b19ce00e.png)
+
+### 按照每句话换行展示
+
+- qf\_field.\{单行文字$$1646897D8$$\}为表单的单行文字字段
+
+```javascript
+let str = qf_field.{单行文字$$1646897D8$$}
+let result = str.replace(/([, 。！？?])/g, "$1\n").replace(/[, 。！？?]/g, "");
+qf_output={rs:result}
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698834319014-6e2e26a7-7079-4db8-8d86-7b62cf0eba69.png)
+
+## 表格相关问题
+
+### 判断表格某一列数据是否一致
+
+- qf\_field.\{明细$$139B57BEA$$\}为表单中表格字段
+- field\_128127599为表格对应的子字段的field\_id
+
+```javascript
+//获取表格信息
+const table = qf_field.{明细$$139B57BEA$$}
+
+//默认赋值为是
+var type = "是"
+for(const o of table){
+  //库存列对应的表格列ID，获取步骤详见5
+  if(o.field_128127599 == "否"){
+    type = '否'
+  }
+}
+qf_output = {"result":type}
+```
+
+### 对表格行数据进行汇总分析
+
+- qf\_field.\{明细表格$$16A64DE09$$\}为表单的表格字段
+
+```javascript
+var table = qf_field.{明细表格$$16A64DE09$$};
+
+// 创建一个空对象来保存姓名计数结果
+var result = {};
+
+if (table && table.length > 0) {
+  // 遍历原始数组对象
+  table.forEach(function(item) {
+    var name = item["field_158308882"];
+
+    // 如果结果对象中已存在该姓名，则计数加一；否则，将该姓名添加到结果对象并初始化计数为一
+    if (result[name]) {
+      result[name]++;
+    } else {
+      result[name] = 1;
+    }
+  });
+}
+
+// 将结果对象转换为期望的数组对象格式
+var output = [];
+for (var name in result) {
+  output.push({
+    "名称": name,
+    "数量": result[name]
+  });
+}
+
+qf_output = {r:output}
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698991050509-76a4362f-03b3-4d6d-8063-08e4c0871df2.png)
+
+### 数据录入自动插入到表格第一行
+
+- qf\_field.\{统计表格$$195C6AD72$$\}为表单的表格字段
+- qf\_field.\{姓名$$195C6AD7E$$\}为表单的姓名字段
+- qf\_field.\{日期$$195C6AD70$$\}为表单的日期字段
+- field\_183925710、field\_183925711为表格的子字段的field\_id
+
+```javascript
+var table=qf_field.{统计表格$$195C6AD72$$};
+var name=qf_field.{姓名$$195C6AD7E$$};
+var date=qf_field.{日期$$195C6AD70$$};
+var obj={"field_183925710":name,"field_183925711":date};
+var newArr=[obj].concat(table);
+qf_output={result:newArr}
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1699843119180-7fcb0481-81ef-4c9d-b8a6-e7273041189d.png)
+
+### 扫码枪扫码自动录入到表格中
+
+- 扫码的内容需要连续录入到单行文字中，并且中间用逗号分隔。
+- 目的是为了连续扫码并且代码块自动运行
+- inputString为插入表单的单行文字字段
+
+```javascript
+function processString(inputString) {
+    // 去除字符串首尾的空格和逗号
+    const trimmedString = inputString.trim().replace(/(^,)|(,$)/g, '');
+
+    // 使用逗号分割字符串来形成一个数组
+    const items = trimmedString.split(',');
+
+    // 过滤掉空字符串，然后使用Set对象去除数组中的重复项
+    const uniqueItems = Array.from(new Set(items.filter(item => item.trim() !== '')));
+
+    // 将结果数组中的每个值封装成一个对象，键为'value'
+    const result = uniqueItems.map(item => ({ value: item.trim() }));
+
+    // 返回处理后的数组对象
+    return result;
+}
+
+// 示例输入
+const inputString = qf_field.{单行文字$$24B468B9D$$};
+if(inputString===null){
+  qf_output={'rs':null};
+}else{
+  // 处理并输出结果
+const processedData = processString(inputString);
+//console.log(processedData);
+qf_output={processedData};
+}
+```
+
+![企业微信截图\_9a722abe-0343-4206-9f1d-c7e216fdb6de.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1713148067618-837dfa25-bd36-4eab-992d-9fa80a397214.png)
+
+### 表格序号一键生成
+
+注意：需要先录入表格数据，然后需要手动点击代码块进行覆盖填充表格数据。
+
+解析json需要将表格中所有字段进行解析，否则会导致录入的表格数据丢失
+
+```javascript
+const table = qf_field.{表格$$26B976DE1$$};
+
+const list = table.map((item, index) => {
+    return {
+        ...item,
+        "序号": (index + 1).toString()
+    };
+});
+
+qf_output={list};
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1719310496277-b2bc8d8d-43e4-4983-813e-f44743a6b9db.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1719310506559-c23364de-92f9-450d-ba8b-b80cdfb609a3.png)
+
+## 附件上传相关问题
+
+### 获取excel表格特定区域数据
+
+- 前提：需要安装node-xlsx和date-fns模块
+- 其中qf\_field.\{附件上传$$164AC79D2$$\}换成附件上传字段
+- startRow、endRow、startCol、endCol为对应的excel起始行、结束行、起始列、结束列的索引
+- if (header === "birth") 中的birth为日期格式列
+
+```javascript
+const axios = require('axios');
+const xlsx = require('node-xlsx');
+const { format, addDays } = require('date-fns');
+
+/**
+* 读取轻流系统Excel附件中指定区域的数据
+* @param {string} qflowUrl 轻流附件URL
+* @param {number} startRow 起始行索引
+* @param {number} endRow 结束行索引（不包含）
+* @param {number} startCol 起始列索引
+* @param {number} endCol 结束列索引（不包含）
+* @returns {Promise<object[]>} Excel指定区域数据的JSON对象数组
+*/
+async function getExcelData(qflowUrl, startRow, endRow, startCol, endCol) {
+  const response = await axios.get(qflowUrl, { responseType: 'arraybuffer' });
+  const excel = xlsx.parse(response.data);
+  const data = excel[0].data;
+
+  const headers = data[startRow].slice(startCol, endCol); // 提取表头数据
+  const rows = data.slice(startRow + 1, endRow); // 提取行数据
+
+  const jsonData = rows.map(row => {
+    const obj = {};
+    headers.forEach((header, index) => {
+      const value = row[index + startCol];
+      if (header === "birth") {
+        const birthDate = addDays(new Date(1900, 0, 1), value - 1); // 使用date-fns将序列数转换为日期
+        obj[header] = format(birthDate, 'yyyy-MM-dd'); // 使用date-fns格式化日期为字符串
+      } else {
+        obj[header] = value;
+      }
+    });
+    return obj;
+  });
+
+  return jsonData;
+}
+
+const qflowUrl = qf_field.{附件上传$$164AC79D2$$};
+const startRow = 0;
+const endRow = 4;
+const startCol = 0;
+const endCol = 3;
+
+getExcelData(qflowUrl, startRow, endRow, startCol, endCol)
+  .then(res => {
+    // 数据处理
+    qf_output = { 'data': res };
+  });
+```
+
+```javascript
+const axios = require('axios');
+const xlsx = require('node-xlsx');
+const { format, parse, isValid } = require('date-fns');
+
+/**
+ * 读取轻流系统Excel附件中指定区域的数据
+ * @param {string} qflowUrl 轻流附件URL 
+ * @returns {Promise<object[]>} Excel指定区域数据的JSON对象数组 
+ */
+async function getAllExcelData(qflowUrl) { 
+  try {
+    const response = await axios.get(qflowUrl, { responseType: 'arraybuffer' });
+    const excel = xlsx.parse(response.data); 
+    const data = excel[0].data; 
+    const headers = data[0]; // 表头数据
+    const rows = data.slice(1); // 行数据 
+    const jsonData = rows.map(row => { 
+      const obj = {};
+      headers.forEach((header, index) => { 
+        const value = row[index];
+        if (header === "填报日期") { 
+          // 解析日期字符串
+          const parsedDate = parse(value, 'yyyy-MM-dd', new Date());
+          if (isValid(parsedDate)) {
+            obj[header] = format(parsedDate, 'yyyy-MM-dd');
+          } else {
+            obj[header] = value;
+          }
+        } else { 
+          obj[header] = value;
+        }
+      });
+      return obj; 
+    }); 
+    return jsonData;
+  } catch (error) {
+    return { error: '请求发生错误' };
+  }
+}
+
+const qflowUrl = "https://ebc.yclqjt.com/fileStora*****sad.xlsx";
+
+getAllExcelData(qflowUrl)
+  .then(res => { 
+    // 数据处理 
+    qf_output = { 'data': res, url: qflowUrl };
+  });
+
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698833962808-8e0c0d35-e786-4377-aecc-d31331bfc448.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698833968532-58c8d20e-1efc-4bee-bfe8-365866432e55.png)
+
+### 获取csv文件的内容
+
+- 前提：需要安装csv-parser模块
+- qf\_field.\{附件上传$$6155C697$$\}需要替换成表单附件上传字段
+
+```javascript
+const axios = require('axios');
+const csv = require('csv-parser');
+const { Transform } = require('stream');
+
+async function fetchCSV(url) {
+  try {
+    const response = await axios({
+      method: 'get',
+      url: url,
+      responseType: 'stream'
+    });
+
+    const data = [];
+    const parser = response.data.pipe(csv());
+
+    parser.on('data', (row) => {
+      data.push(row);
+    });
+
+    parser.on('end', () => {
+      qf_output={ data }; // 使用qf_output替换console.log
+    });
+
+    parser.on('error', (err) => {
+      return { error: '请求发生错误' };
+    });
+
+  } catch (error) {
+    return { error: '请求发生错误' };
+  }
+}
+
+// 示例URL
+const url = qf_field.{附件上传$$6155C697$$};
+fetchCSV(url);
+```
+
+### 将轻流附件上传至其他系统
+
+- qf\_field.\{ 附件上传$$6245DB81$$ \}为表单的附件上传字段
+
+```javascript
+var axios = require('axios');
+var FormData = require('form-data');
+
+/**
+ * 从轻流系统上传附件到第三方系统
+ * @param qflowUrl 轻流附件url
+ * @param url 第三方系统上传附件接口
+ */
+function upload(qflowUrl, url) {
+    axios.get(qflowUrl, {
+        responseType: 'stream'
+    }).then(res => {
+        const formData = new FormData();
+        formData.append('files', res.data);
+        axios({
+            url: url,
+            method: 'post',
+            data: formData,
+            headers: {
+                ...formData.getHeaders()
+            },
+        }).then(resp => {
+            qf_output = { 'url': resp.data.msg }
+        })
+    })
+}
+upload(qf_field.{ 附件上传$$6245DB81$$ }[0], 'http://test.com/upLoad/uploadFile');
+
+```
+
+## 成员/部门相关问题
+
+### 合并表格内成员到单个成员字段内
+
+- qf\_field.\{表格$$138376CBA$$\}为表单的表格字段
+- field\_126031644为表格对应成员字段的field\_id
+
+```javascript
+//获取表格数据
+const table = qf_field.{表格$$138376CBA$$}
+
+const emailList = []
+//遍历每行成员
+for (const info of table) {
+  //将表格中每行的成员放入数组，info后需要将上一步获取的key值填上
+  emailList.push(info.field_126031644[0])
+}
+
+//返回成员数组
+qf_output = {"users":emailList}
+
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698983109285-d8de82b3-d739-4ac3-902f-2239cacae725.png)
+
+### 成员字段成员拆分到表格中
+
+- qf\_field.\{成员$$152C4AA09$$\}为表单的成员字段
+
+```javascript
+var arr = qf_field.{成员$$152C4AA09$$};
+
+// table数组
+var table = [{"field_140965942":""}];
+
+// 根据arr数组中元素的个数，动态插入相应数量的对象到table数组中
+for (var i = 1; i < arr.length; i++) {
+  table.push({"field_140965942" : ""});
+}
+
+// 循环遍历arr数组，将每个元素添加到table数组的对象中作为a属性的值
+for (var i = 0; i < arr.length; i++) {
+  table[i].field_140965942 = arr[i];
+}
+
+qf_output = {result:arr,table:table}
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698991278278-a0ae5d01-2f82-4507-a339-b480ac041d34.png)
+
+### 部门字段部门拆分到表格部门字段中
+
+具体使用接口：
+
+- [查询单个部门详情](https://help.qingflow.com/help-docs?type=qingCode&docId=97331e4564e2fa7e01e1c6163d83374c&parentId=)
+
+- accessToken：轻商场——拓展插件——openAPI中获取
+
+- 注意：
+
+- 需要使用单行文字字段（部门IDs）来进行辅助完成，使用函数获取部门字段的ID
+- ![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1728543412924-10a94b77-0462-47b6-8037-dcaddae5bf20.png)
+- 代码块配置解析，表格部门列需要使用$。如果有其他参数传入表格，需要使用对象+键值对来进行输出，看第二版代码块以键值对输出。
+- ![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1728543510854-ef883ea0-46a6-4919-81f6-9f8a884d5486.png)
+
+```javascript
+const axios = require('axios');
+
+async function fetchDepartment(deptId, accessToken) {
+    try {
+        const response = await axios.get(`https://api.qingflow.com/department/${deptId}`, {
+            headers: {
+                'accessToken': accessToken
+            }
+        });
+        return response.data;
+    } catch (error) {
+        return { error: '请求发生错误' };
+    }
+}
+
+async function getFullDepartmentName(deptId, accessToken) {
+    let fullName = '';
+
+    while (deptId) {
+        const deptData = await fetchDepartment(deptId, accessToken);
+        if (deptData.error) return { error: '请求发生错误' };
+
+        const deptResult = deptData.result;
+        const currentDeptName = deptResult.name;
+        const parentId = deptResult.parentId;
+
+        // 构建部门名称路径，用 % 连接
+        fullName = fullName ? `${currentDeptName}%${fullName}` : currentDeptName;
+
+        deptId = parentId; // 更新为父部门ID，如果为null则停止
+    }
+
+    return fullName;
+}
+
+async function getDepartmentHierarchy(deptIds) {
+    const accessToken = 'd866db1d--0b1ce21135d2';
+    
+    const ids = deptIds.split(','); // 分割deptIds为数组
+    const result = [];
+
+    for (let id of ids) {
+        const fullDeptName = await getFullDepartmentName(id, accessToken);
+        if (!fullDeptName.error) {
+            result.push(fullDeptName);
+        }
+    }
+
+    // 最终结果输出
+    qf_output={list: result};
+}
+var deptids=qf_field.{部门IDs$$297C7AD88$$};
+if(deptids==null){
+    qf_output={list: null}
+}else{
+  // 示例调用
+getDepartmentHierarchy(deptids);
+}
+```
+
+```javascript
+const axios = require('axios');
+
+async function fetchDepartment(deptId, accessToken) {
+    try {
+        const response = await axios.get(`https://api.qingflow.com/department/${deptId}`, {
+            headers: {
+                'accessToken': accessToken
+            }
+        });
+        return response.data;
+    } catch (error) {
+        return { error: '请求发生错误' };
+    }
+}
+
+async function getFullDepartmentName(deptId, accessToken) {
+    let fullName = '';
+
+    while (deptId) {
+        const deptData = await fetchDepartment(deptId, accessToken);
+        if (deptData.error) return { error: '请求发生错误' };
+
+        const deptResult = deptData.result;
+        const currentDeptName = deptResult.name;
+        const parentId = deptResult.parentId;
+
+        // 构建部门名称路径，用 % 连接
+        fullName = fullName ? `${currentDeptName}%${fullName}` : currentDeptName;
+
+        deptId = parentId; // 更新为父部门ID，如果为null则停止
+    }
+
+    return fullName;
+}
+
+async function getDepartmentHierarchy(deptIds) {
+    const accessToken = 'd866db1d-70b1ce21135d2';
+    
+    const ids = deptIds.split(','); // 分割deptIds为数组
+    const result = [];
+
+    for (let id of ids) {
+        const fullDeptName = await getFullDepartmentName(id, accessToken);
+        if (!fullDeptName.error) {
+            result.push({
+                name: fullDeptName,
+                deptId: id
+            });
+        }
+    }
+
+    // 最终结果输出
+    qf_output={list: result};
+}
+var deptids=qf_field.{部门IDs$$297C7AD88$$};
+if(deptids==null){
+    qf_output={list: null}
+}else{
+  // 示例调用
+getDepartmentHierarchy(deptids);
+}
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1728543232010-d7105589-714e-4617-afdc-1a298c0eb54d.png)
+
+### 通过部门ID查询部门下成员，返回成员邮箱数组
+
+- 代码输入框支持插入「工作区ID」和「应用ID」。
+
+```javascript
+var axios = require('axios');
+/**
+ * 查询部门下成员
+ * @param {string} url 域名（专有轻流需要加/openApi）
+ * @param {number} deptId 部门ID
+ * @param {string} token openApi token
+ */
+async function findMemberByDeptId(url,deptId,token) {
+  var url = `${url}/department/${deptId}/user?fetchChild=false`
+  var resp = await axios.get(url,{headers:{
+    'accessToken': token
+  }})
+  var userList = resp.data.result.userList
+  var emailList = []
+  for (const user of userList) {
+    emailList.push(user.email)
+  }
+  qf_output = {"userList":emailList}
+}
+findMemberByDeptId(url,deptId,token)
+```
+
+### 返回成员所在部门信息
+
+具体使用的接口文档：
+
+1、[通过邮箱或手机号获取成员userId](https://help.qingflow.com/help-docs?type=qingCode&docId=97331e4564e2d58101db4aea2f1a6519&parentId=)
+
+2、[读取成员信息](https://help.qingflow.com/help-docs?type=qingCode&docId=eb36e5726428f51600020cf4691df37e&parentId=)
+
+3、[查询单个部门详情](https://help.qingflow.com/help-docs?type=qingCode&docId=97331e4564e2fa7e01e1c6163d83374c&parentId=)
+
+- accessToken：轻商场——拓展插件——openAPI中获取
+
+```javascript
+const axios = require('axios');
+async function getUserIdByEmail(email) {
+    try {
+        const response = await axios.get(`https://api.qingflow.com/user/getId?email=${email}`, {
+            headers: { accessToken: 'd866db1d-79c-0b1ce21135d2' }
+        });
+        return response.data.result[0].userId;
+        
+    } catch (error) {
+        return { error: '请求发生错误' };
+    }
+}
+
+async function getDepartmentsByUserId(userId) {
+    try {
+        const response = await axios.get(`https://api.qingflow.com/user/${userId}`, {
+            headers: { accessToken: 'd866db1d-7c-0b1ce21135d2' }
+        });
+        return response.data.result.department;
+    } catch (error) {
+        return { error: '请求发生错误' };
+    }
+}
+async function getDepartmentDetails(deptId) {
+    try {
+        const response = await axios.get(`https://api.qingflow.com/department/${deptId}`, {
+            headers: { accessToken: 'd866db1d--0b1ce21135d2' }
+        });
+        const result = response.data.result;
+        let fullName = result.name;
+
+        // 如果存在父部门，递归获取父部门名称
+        if (result.parentId) {
+            const parentName = await getDepartmentDetails(result.parentId);
+            fullName = `${parentName}%${fullName}`;
+        }
+
+        return fullName;
+    } catch (error) {
+        return { error: '请求发生错误' };
+    }
+}
+
+async function getFullDepartmentNames(departmentIds) {
+    const departmentNames = [];
+    for (let deptId of departmentIds) {
+        const deptName = await getDepartmentDetails(deptId);
+        departmentNames.push(deptName);
+    }
+    return departmentNames.join('&&&');
+}
+async function processEmail(email) {
+    const userId = await getUserIdByEmail(email);
+    if (userId.error) return userId;
+
+    const departmentIds = await getDepartmentsByUserId(userId);
+    if (departmentIds.error) return departmentIds;
+
+    const departmentNamesString = await getFullDepartmentNames(departmentIds);
+    //console.log(departmentNamesString);
+    qf_output={ departmentNamesString };
+}
+
+// 示例调用，用实际的email替换
+var email=qf_field.{成员$$22B9B7802$$};
+if(email==null){
+  qf_output={departmentNamesString:null}
+}else{
+  processEmail(email);
+}
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1709201511644-ccd5c3cc-a693-45ef-b2e5-7122820a5729.png)
+
+### 判断成员是否所属某部门下
+
+具体使用的接口文档：
+
+1、[通过邮箱或手机号获取成员userId](https://help.qingflow.com/help-docs?type=qingCode&docId=97331e4564e2d58101db4aea2f1a6519&parentId=)
+
+2、[读取成员信息](https://help.qingflow.com/help-docs?type=qingCode&docId=eb36e5726428f51600020cf4691df37e&parentId=)
+
+3、[查询单个部门详情](https://help.qingflow.com/help-docs?type=qingCode&docId=97331e4564e2fa7e01e1c6163d83374c&parentId=)
+
+- accessToken：轻商场——拓展插件——openAPI中获取
+
+```javascript
+const axios = require('axios');
+
+// 获取成员userid
+const getUserIdByEmail = async (email) => {
+    try {
+        // 发送GET请求，通过邮箱获取用户ID
+        const response = await axios.get(`https://api.qingflow.com/user/getId?email=${encodeURIComponent(email)}`, {
+            headers: {
+                'accessToken': 'd866db1d-9c-0b1ce21135d2'
+            }
+        });
+        // 检查响应是否成功并且结果不为空
+        if (response.data.errCode === 0 && response.data.result.length > 0) {
+            // 返回用户ID
+            return response.data.result[0].userId;
+        } else {
+            // 返回错误信息
+            return { error: '无法获取用户ID' };
+        }
+    } catch (error) {
+        // 捕获并返回请求错误
+        return { error: '请求发生错误' };
+    }
+};
+
+// 获取成员信息
+const getUserInfoById = async (userId) => {
+    try {
+        // 发送GET请求，通过用户ID获取用户信息
+        const response = await axios.get(`https://api.qingflow.com/user/${userId}`, {
+            headers: {
+                'accessToken': 'd866db1d5-9e9c-0b1ce21135d2'
+            }
+        });
+        // 检查响应是否成功
+        if (response.data.errCode === 0) {
+            // 返回用户所属部门列表
+            return response.data.result.department;
+        } else {
+            // 返回错误信息
+            return { error: '无法获取用户信息' };
+        }
+    } catch (error) {
+        // 捕获并返回请求错误
+        return { error: '请求发生错误' };
+    }
+};
+
+// 获取单个部门详情
+const getDepartmentDetail = async (deptId) => {
+    try {
+        // 发送GET请求，通过部门ID获取部门详情
+        const response = await axios.get(`https://api.qingflow.com/department/${deptId}`, {
+            headers: {
+                'accessToken': 'd866db1d-7-0b1ce21135d2'
+            }
+        });
+        // 检查响应是否成功
+        if (response.data.errCode === 0) {
+            // 返回部门详情
+            return response.data.result;
+        } else {
+            // 返回错误信息
+            return { error: '无法获取部门详情' };
+        }
+    } catch (error) {
+        // 捕获并返回请求错误
+        return { error: '请求发生错误' };
+    }
+};
+
+// 将部门ID进行拼接
+const getFullDepartmentHierarchy = async (deptId) => {
+    let hierarchy = [];
+    let currentDept = await getDepartmentDetail(deptId);
+
+    // 通过parentId逐级获取上级部门，直到parentId为null
+    while (currentDept && currentDept.parentId !== null) {
+        hierarchy.unshift(currentDept.deptId);
+        currentDept = await getDepartmentDetail(currentDept.parentId);
+    }
+
+    if (currentDept) {
+        hierarchy.unshift(currentDept.deptId);
+    }
+
+    // 返回部门ID的层级字符串
+    return hierarchy.join('%');
+};
+
+const main = async (email, ids) => {
+    // 获取用户ID
+    const userId = await getUserIdByEmail(email);
+    
+    if (userId.error) {
+        qf_output={ error: userId.error };
+        return;
+    }
+
+    // 获取用户所属部门列表
+    const departments = await getUserInfoById(userId);
+    
+    if (departments.error) {
+        qf_output={ error: departments.error };
+        return;
+    }
+
+    // 获取所有部门的层级结构
+    let deptHierarchyPromises = departments.map(deptId => getFullDepartmentHierarchy(deptId));
+    let deptHierarchies = await Promise.all(deptHierarchyPromises);
+
+    // 将层级结构转为字符串
+    let deptHierarchyStrings = deptHierarchies.map(hierarchy => hierarchy.toString());
+    
+    // 分割目标部门ID
+    const targetIds = ids.split(',');
+    // 检查是否包含任意一个目标部门ID
+    const hasTargetDept = deptHierarchyStrings.some(hierarchy => targetIds.some(id => hierarchy.includes(id)));
+
+    qf_output={ result: hasTargetDept };
+};
+
+// email和ids需要实际替换表单中字段
+var email = qf_field.{成员$$26A5DDD1A$$};
+var ids = qf_field.{单行文字$$26A5DDD1C$$};
+
+if (email == null || ids == null) {
+    qf_output={ result: null };
+} else {
+    main(email, ids);
+}
+
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1718898557369-deb44ac7-4c8b-4811-9019-0b16784f6336.png)
+
+### 返回多个部门中每一个成员到表格中
+
+- 代码注释
+
+- accessToken：轻商场——拓展插件——openAPI中获取
+- apiUrl：工作区域名URL
+- depart：使用插入字段，部门字段
+- departid：使用单行文字，名称为部门ID，设置公式：部门字段
+
+```javascript
+const axios = require('axios');
+
+const headers = {   
+  'accessToken': '4f8a1078-*******1d874454fbab',
+  'Content-Type': 'application/json'
+};
+
+const apiUrl = 'https://ql.966599.com';
+
+/**如果使用表格字段中部门字段
+const table = [
+    {"部门id":"231904","部门":"test"}
+];
+**/
+//如果使用主字段部门字段
+const depart = ["test", "test1", "test3"];
+const departid = "231904,231902,231905";
+
+// 将departid字符串分割为数组
+const departIds = departid.split(',');
+
+// 使用map函数将depart数组和departIds数组合并为所需的对象数组
+const table = depart.map((name, index) => {
+    return {
+        "部门": name,
+        "部门id": departIds[index]
+    };
+});
+
+async function getdepartuser(departmentId) {
+  const response = await axios.get(apiUrl + `/openApi/department/${departmentId}/user?fetchChild=true`, { headers });
+  return response.data.result.userList;
+}
+
+async function getEmailListForDepartments(departments) {
+  const list = [];
+
+  for (const department of departments) {
+    const userList = await getdepartuser(department['部门id']);
+    const emails = userList.map(user => user.email); // 假设userList中的每个元素都有一个email属性
+
+    // 对于每个部门，添加包含部门信息和邮箱列表的新对象
+    emails.forEach(email => {
+      list.push({ "部门id": department['部门id'], "部门": department['部门'], "email": [email] });
+    });
+  }
+
+  return list;
+}
+
+getEmailListForDepartments(table).then(list => {
+    console.log(list);
+  //qf_output={list};
+});
+
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1706874263759-26639906-0f96-4017-a89a-d29ffc2689e6.png)
+
+## 定位/地址字段相关问题
+
+### 根据定位字段的经纬度去获取距离最近的客户
+
+1、前提：需要有一个客户资料维护表用户存放每一个客户地址的经纬度
+
+2、具体使用接口文档：
+
+[获取应用数据](https://help.qingflow.com/help-docs?type=qingCode&docId=fc8e64656428ea3a06fe9b406b9b7be9&parentId=)
+
+3、注册[高德开发平台](https://console.amap.com/dev/key/app)，获取apikey
+
+```javascript
+const axios = require('axios');
+
+const headers = {   
+    'accessToken': '4f8a1078-94454fbab',
+    'Content-Type': 'application/json'
+  };
+  
+const apiUrl1 = 'https://ql.966599.com/openApi/app/910ba12d/apply/filter';
+const pageSize = 200;
+
+const queriesApi1 = [
+    {
+        "queId": 60687736,
+        "scope": 2
+    },
+    {
+        "queId": 60687737,
+        "scope": 2
+    }
+]; // API1的查询条件：筛选经纬度不为空的数据
+
+async function processPage(apiUrl, pageNum, queries) {
+  const postData = {
+    pageSize: pageSize.toString(), 
+    pageNum: pageNum.toString(),
+    queries: queries
+  };
+
+  const response = await axios.post(apiUrl, postData, { headers });
+  return response.data.result;
+}
+
+async function processAllPages(apiUrl, queries, extractQueIds) {
+  const firstPageData = await processPage(apiUrl, 1, queries);
+  let totalPages = firstPageData.pageAmount;
+
+  const promises = [];
+
+  for (let pageNum = 2; pageNum <= totalPages; pageNum++) {
+    promises.push(processPage(apiUrl, pageNum, queries));
+  }
+
+  const responses = await Promise.all(promises);
+  const reslist = extractData(firstPageData, extractQueIds);
+
+  responses.forEach((data) => {
+    const extractedData = extractData(data, extractQueIds);
+    reslist.push(...extractedData);
+  });
+
+  return reslist;
+}
+
+function extractData(response, queIds) {
+  const result = response.result;
+  const res_list = [];
+
+  result.forEach((value) => {
+    const res_msg = {};
+
+    value.answers.forEach((v) => {
+      const queId = v.queId;
+      const queTitle = v.queTitle;
+
+      if (queIds.includes(queId)) {
+        const values = v.values;
+        const dataValue = values[0].dataValue;
+        res_msg[queTitle] = dataValue;
+      }
+    });
+
+    res_list.push(res_msg);
+  });
+
+  return res_list;
+}
+
+(async () => {
+  const extractQueIdsApi1 =[60412694, 60687736,60687737]; // API1的提取queId
+
+  const reslist1 = await processAllPages(apiUrl1, queriesApi1, extractQueIdsApi1);
+
+ // 使用高德地图API获取地址的经纬度
+async function getAMapCoordinates(address, apiKey) {
+    const url = `https://restapi.amap.com/v3/geocode/geo?address=${encodeURIComponent(address)}&key=${apiKey}`;
+    try {
+        const response = await axios.get(url);
+        if (response.data.status === '1' && response.data.geocodes.length > 0) {
+            const location = response.data.geocodes[0].location.split(',');
+            const lng = parseFloat(location[0]); // 经度
+            const lat = parseFloat(location[1]); // 纬度
+            return { lat, lng };
+        } else {
+            return { error: '地理编码失败' };
+        }
+    } catch (error) {
+        return { error: '请求发生错误' };
+    }
+}
+
+// 计算两点之间的距离
+function calculateDistance(lat1, lng1, lat2, lng2) {
+    const R = 6371; // 地球半径，单位km
+    const radLat1 = lat1 * Math.PI / 180.0;
+    const radLat2 = lat2 * Math.PI / 180.0;
+    const a = radLat1 - radLat2;
+    const b = lng1 * Math.PI / 180.0 - lng2 * Math.PI / 180.0;
+    const s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+    return s * R;
+}
+
+// 找到最近的客户编码
+async function findNearestCustomer(table, address, apiKey) {
+    const { lat: addressLat, lng: addressLng, error } = await getAMapCoordinates(address, apiKey);
+
+    if (error) {
+        return { error: '无法获取地址的经纬度' };
+    }
+
+    let nearestDistance = Infinity;
+    let nearestCustomerCode = null;
+
+    table.forEach(customer => {
+        if (customer.经度 && customer.纬度) {
+            const distance = calculateDistance(addressLat, addressLng, parseFloat(customer.纬度), parseFloat(customer.经度));
+            if (distance < nearestDistance) {
+                nearestDistance = distance;
+                nearestCustomerCode = customer.客户编码;
+            }
+        }
+    });
+    //console.log(nearestCustomerCode);
+    qf_output={ nearestCustomerCode };
+}
+
+const address = "重庆彭水县联合乡蔡家坝村1组";//替换成具体的定位字段
+const apiKey = '3eb1e67c20371****15660'; // 替换为您的高德地图API Key
+
+if(address==null || address==""){
+ qf_output={nearestCustomerCode:null}
+}else{
+findNearestCustomer(reslist1, address, apiKey);
+}
+})();
+```
+
+### 根据定位和已有地址的经纬度进行两者的距离计算
+
+1、具体使用接口文档：[驾车规划路线](https://lbsyun.baidu.com/faq/api?title=webapi/guide/webservice-lwrouteplanapi/dirve)、[地理编码](https://lbsyun.baidu.com/faq/api?title=webapi/guide/webservice-geocoding-base)
+
+2、注册[百度地图开发平台](https://lbsyun.baidu.com/apiconsole/key/update?app-id=40638567#/home)，获取apikey
+
+```javascript
+const axios = require('axios');
+
+async function getCoordinates(apiKey, address) {
+  const apiUrl = 'http://api.map.baidu.com/geocoding/v3'; // 百度地图逆地理接口
+  const params = {
+    address: address,
+    ak: apiKey,
+    output: 'json',
+  };
+
+  try {
+    const response = await axios.get(apiUrl, { params });
+    const location = response.data.result.location;
+    return {
+      latitude: location.lat,
+      longitude: location.lng,
+    };
+  } catch (error) {
+    return { error: '获取坐标信息失败' };
+  }
+}
+
+async function calculateDistance(apiKey, lat1, lon1, lat2, lon2) {
+  const apiUrl = 'https://api.map.baidu.com/directionlite/v1/driving'; // 驾车规划路线接口
+  const params = {
+    origin: `${lat1},${lon1}`,
+    destination: `${lat2},${lon2}`,
+    ak: apiKey,
+    output: 'json',
+  };
+
+  try {
+    const response = await axios.get(apiUrl, { params });
+    const distance = response.data.result.routes[0].distance;
+    return distance;
+  } catch (error) {
+    return { error: '获取距离信息失败' };
+  }
+}
+
+const apiKey = 'G2OhFhLY9WV9Rh***SVe7sA3R';
+const targetAddress = "重庆市彭水苗族土家自治县绍庆街道阿依路重庆烟叶复烤有限公司彭水复烤厂";
+const originAddress = "重庆市彭水苗族土家族自治县阿依路186附1号"; // 新增原始地址字段
+
+(async () => {
+  if (targetAddress == null || originAddress == null) {
+    qf_output={ 'a': null };
+  } else {
+    try {
+      const originCoordinates = await getCoordinates(apiKey, originAddress);
+      if (originCoordinates.error) {
+        qf_output={ error: originCoordinates.error };
+        return;
+      }
+
+      const targetCoordinates = await getCoordinates(apiKey, targetAddress);
+      if (targetCoordinates.error) {
+        qf_output={ error: targetCoordinates.error };
+        return;
+      }
+
+      const lat1 = originCoordinates.latitude;
+      const lon1 = originCoordinates.longitude;
+      const lat2 = targetCoordinates.latitude;
+      const lon2 = targetCoordinates.longitude;
+
+      const distance = await calculateDistance(apiKey, lat1, lon1, lat2, lon2);
+      if (distance.error) {
+        qf_output={ error: distance.error };
+        return;
+      }
+
+      qf_output={
+        "经营地址GPS": {
+          "latitude": lat1,
+          "longitude": lon1
+        },
+        "定位地址GPS": {
+          "latitude": lat2,
+          "longitude": lon2
+        },
+        "距离": distance
+      };
+    } catch (error) {
+      qf_output={ error: '请求过程中发生错误' };
+    }
+  }
+})();
+```
+
+## 算法加密
+
+### 不可逆加密
+
+#### SHA256 加密
+
+```javascript
+const crypto = require('crypto');
+
+const secret = 'bbca32faa8f75c67f46f01c7ede3959a';
+
+const timestamp = new Date().getTime();
+/**
+ * sha256加密
+ * @param  text 加密内容
+ * @param  timestamp 时间戳
+ * @param  secret 密钥
+ * @returns 
+ */
+function sha256(text, timestamp, secret) {
+    return crypto
+        .createHmac('sha256', secret)
+        .update(text + timestamp)
+        .digest('hex');
+}
+//输出加密内容
+qf_output = { "a": sha256('123456', timestamp, secret) }
+```
+
+```javascript
+const crypto = require('crypto');
+/**
+ * 加密
+ * @param {string} text 
+ * @param {string} token 
+ * @returns 
+ */
+function sha256(text,token) {
+
+  return crypto
+    .createHash('sha256')
+    .update(JSON.stringify(text)+token)
+    .digest('hex');
+}
+//输出加密内容
+var data = {"corpid":"1","userId":"1"}
+var token = "123456789"
+qf_output={"sign":sha256(data,token)}
+```
+
+#### MD5 加密
+
+- qf\_field.\{单行文字$$6624968D$$\}为表单的具体字段
+
+```javascript
+const crypto = require('crypto');
+
+//加密密钥
+const secret = 'qingflow';
+
+/**
+ * md5加密
+ * @param  text 加密内容
+ * @returns 加密后内容
+ */
+function md5(text){
+    return crypto.createHash('md5').update(str).digest('hex');
+}
+
+/**
+ * md5带密钥加密
+ * @param  text 加密内容
+ * @param  secret 密钥
+ * @returns 加密后内容
+ */
+function md5Secret(text,secret){
+    return crypto.createHmac("md5",secret).update(str).digest('hex');
+}
+
+//输出
+qf_output ={md5:md5(qf_field.{单行文字$$6624968D$$}),md5Secret:md5Secret(qf_field.{单行文字$$6624968D$$},secret)}
+```
+
+### 可逆加密
+
+#### 3des 加解密：DESede/CBC/PKCS5Padding
+
+```javascript
+const crypto = require('crypto');
+/**
+* base64编码
+* @param text
+* @returns {Buffer}
+*/
+function base64(text) {
+  return Buffer.from(text, "base64");
+};
+/**
+* 加密
+*
+* @param text
+* @param secretKey
+* @returns {string}
+*/
+function encode(text, secretKey) {
+  secretKey = base64(secretKey);
+  const cipher = crypto.createCipheriv('des-ede3-cbc', secretKey, Buffer.alloc(8));
+  const encrypted = cipher.update(text, 'utf8', 'base64');
+  
+  return encrypted + cipher.final('base64');
+};
+
+/**
+* 解密
+* @param encryptedBase64
+* @param secretKey
+* @returns {string}
+*/
+function decode(encryptedBase64, secretKey) {
+  secretKey = base64(secretKey);
+  const decipher = crypto.createDecipheriv('des-ede3-cbc', secretKey, Buffer.alloc(8));
+  let decrypted = decipher.update(encryptedBase64, 'base64', 'utf8');
+  decrypted += decipher.final('utf8');
+  return decrypted;
+};
+//待加密内容，可以根据业务传轻流字段
+let idcard = '152630192012112391'
+//密钥
+let key = 'mdgIaBrQjIKU30IIEpZS1dsFNOLX73nQ';
+//加密内容
+let encrypted = encode(idcard, key);
+
+//解密
+qf_output = {"加密后内容":encrypted,"明文内容":decode(encrypted, key)}
+```
+
+#### AES加解密
+
+```javascript
+const crypto = require('crypto');
+
+//加密密钥
+const password = 'qingflow';
+//偏移量
+const iv = 'qflow955qflow955'
+
+/**
+ *  aes加密
+ * @param  text 加密内容
+ * @param  secret 密钥
+ * @param  iv 偏移量（16位）
+ * @returns 
+ */
+function aesEncode(text, secret, iv) {
+    const cipher = crypto.createCipheriv('aes-128-cbc', secret, iv)
+    cipher.update(text, 'utf8', 'hex')
+    return cipher.final('hex')
+}
+
+/**
+ * aes解密
+ * @param  encodeText 加密后的内容
+ * @param  secret 密钥
+ * @param  iv 偏移量（16位）
+ * @returns 
+ */
+function aesDecode(encodeText, secret, iv) {
+    const decipher = crypto.createDecipheriv('aes-128-cbc', password, iv)
+    decipher.update(encodeText, 'hex', 'utf8')
+    return decipher.final().toString();
+}
+
+//加密内容
+const encodeText = aesEncode('gaowenwei',password,iv)
+console.log('加密内容：'+encodeText);
+//解密内容
+const decodeText = aesDecode(encodeText,password,iv)
+console.log('解密内容：'+decodeText);
+
+```
+
+## axios 发送请求
+
+### post请求
+
+```javascript
+var axios = require('axios');
+//请求体
+var data = JSON.stringify({
+  "jobName": "updateTest"
+});
+
+var config = {
+  method: 'post',
+  url: 'http://test.com/test',
+  headers: { 
+    'accessToken': 'testToken', 
+    'Content-Type': 'application/json'
+  },
+  data : data
+};
+
+axios(config)
+.then(function (res) {
+  qf_output={'data':res.data}
+});
+
+```
+
+### get请求
+
+```javascript
+var axios = require('axios');
+
+var config = {
+  method: 'get',
+  url: 'https://test.com/getalltask',
+  headers: { 
+    'accessToken': 'testToken'
+  }
+};
+
+axios(config)
+.then(function (res) {
+  qf_output={'data':res.data}
+});
+```
+
+### 多个接口依次调用
+
+```javascript
+const axios = require('axios');
+
+async function first() {
+  let config = {
+    method: 'get',
+    // 配置第一个接口的请求参数
+  };
+  const response = await axios.request(config);
+  // 在第一个接口调用完成后执行其他操作
+  // ...
+  await second();
+}
+
+async function second() {
+  let config = {
+    method: 'get',
+    // 配置第二个接口的请求参数
+  };
+  const response = await axios.request(config);
+  // 在第二个接口调用完成后执行其他操作
+  // ...
+  await third();
+}
+
+async function third() {
+  let config = {
+    method: 'get',
+    // 配置第三个接口的请求参数
+  };
+  const response = await axios.request(config);
+  const res=response.data;
+  qf_output={res}
+  // 在第三个接口调用完成后执行其他操作
+  // ...
+}
+
+// 调用第一个接口，并等待它完成后再调用第二个接口
+first();
+
+```
+
+## 获取应用数据接口相关问题
+
+### 数据在200条以内
+
+注释：1、accessToken：轻商城--拓展插件-- openAPI获取
+
+2、url：[调用获取应用数据接口](https://help.qingflow.com/help-docs?type=qingCode&docId=fc8e64656428ea3a06fe9b406b9b7be9&parentId=)
+
+3、queId为表单的字段的ID，如何获取见文档开始注意点
+
+```javascript
+const axios = require('axios');  
+let data = JSON.stringify({
+    "pageSize": "50",
+    "pageNum": "1"
+  });
+let config = {  
+    method: 'post',
+    url: 'https://api.qingflow.com/app/09fa95bc/apply/filter',  
+    headers: {   
+      'accessToken': 'd866db1-0b1****35d2',
+      'Content-Type': 'application/json'
+    } ,
+    data: data
+};  
+  
+axios(config)  
+  .then(function (res) {  
+    const msg = res.data;
+    const result = msg.result.result;
+    const res_list = [];
+
+    result.forEach(value => {
+        const res_msg = {};
+
+        value.answers.forEach(v => {
+            const queId = v.queId;
+            const queTitle = v.queTitle;
+
+            if (queId === 164990271 || queId === 164990272 || queId === 164990273) {
+                const values = v.values;
+                const dataValue = values[0].dataValue;
+                res_msg[queTitle] = dataValue;
+            }
+        });
+
+        res_list.push(res_msg);
+    });
+    qf_output = {res_list}
+  });
+```
+
+### 超过200条，分页拉取（无筛选）
+
+注释：1、accessToken：轻商城--拓展插件-- openAPI获取
+
+2、apiUrl：[调用获取应用数据接口](https://help.qingflow.com/help-docs?type=qingCode&docId=fc8e64656428ea3a06fe9b406b9b7be9&parentId=)
+
+3、queId为表单的字段的ID，如何获取见文档开始注意点
+
+```javascript
+const axios = require('axios');
+
+const headers = {   
+  'accessToken': 'd866db1d-79********b1ce21135d2',
+  'Content-Type': 'application/json'
+};
+
+const apiUrl = 'https://api.qingflow.com/app/5pr6kokd3c02/apply/filter';
+const pageSize = 200;
+
+async function processPage(pageNum) {
+  const postData = { pageSize, pageNum };
+  const response = await axios.post(apiUrl, postData, { headers });
+  return response.data.result;
+}
+
+async function processAllPages() {
+  const firstPageData = await processPage(1);
+  let totalPages = firstPageData.pageAmount;
+
+  const promises = [];
+
+  // 从第2页开始，因为我们已经处理了第一页
+  for (let pageNum = 2; pageNum <= totalPages; pageNum++) {
+    promises.push(processPage(pageNum));
+  }
+
+  const responses = await Promise.all(promises);
+
+  // 包括第一页的数据
+  const reslist = extractData(firstPageData, [201831591, 201831592]);
+
+  responses.forEach((data) => {
+    const extractedData = extractData(data, [201831591, 201831592]);
+    reslist.push(...extractedData);
+  });
+
+  return reslist;
+}
+
+function extractData(response, queIds) {
+  const result = response.result;
+  const res_list = [];
+
+  result.forEach((value) => {
+    const res_msg = {};
+
+    value.answers.forEach((v) => {
+      const queId = v.queId;
+      const queTitle = v.queTitle;
+
+      if (queIds.includes(queId)) {
+        const values = v.values;
+        const dataValue = values[0].dataValue;
+        res_msg[queTitle] = dataValue;
+      }
+    });
+
+    res_list.push(res_msg);
+  });
+
+  return res_list;
+}
+
+(async () => {
+  const reslist = await processAllPages();
+  qf_output={reslist}
+})();
+
+```
+
+### 超过200条，分页拉取（有筛选）
+
+注释：1、accessToken：轻商城--拓展插件-- openAPI获取
+
+2、apiUrl：[调用获取应用数据接口](https://help.qingflow.com/help-docs?type=qingCode&docId=fc8e64656428ea3a06fe9b406b9b7be9&parentId=)
+
+3、queId为表单的字段的ID，如何获取见文档开始注意点
+
+```javascript
+const axios = require('axios');
+
+const headers = {   
+    'accessToken': '4f8a10*****54fbab',
+    'Content-Type': 'application/json'
+  };
+  
+const apiUrl1 = 'https://ql.966599.com/openApi/app/910ba12d/apply/filter';
+const pageSize = 200;
+
+const queriesApi1 = [
+    {
+        "queId": 60687736,
+        "scope": 2
+    },
+    {
+        "queId": 60687737,
+        "scope": 2
+    }
+]; // API1的查询条件：筛选经纬度不为空的数据
+
+async function processPage(apiUrl, pageNum, queries) {
+  const postData = {
+    pageSize: pageSize.toString(), 
+    pageNum: pageNum.toString(),
+    queries: queries
+  };
+
+  const response = await axios.post(apiUrl, postData, { headers });
+  return response.data.result;
+}
+
+async function processAllPages(apiUrl, queries, extractQueIds) {
+  const firstPageData = await processPage(apiUrl, 1, queries);
+  let totalPages = firstPageData.pageAmount;
+
+  const promises = [];
+
+  for (let pageNum = 2; pageNum <= totalPages; pageNum++) {
+    promises.push(processPage(apiUrl, pageNum, queries));
+  }
+
+  const responses = await Promise.all(promises);
+  const reslist = extractData(firstPageData, extractQueIds);
+
+  responses.forEach((data) => {
+    const extractedData = extractData(data, extractQueIds);
+    reslist.push(...extractedData);
+  });
+
+  return reslist;
+}
+
+function extractData(response, queIds) {
+  const result = response.result;
+  const res_list = [];
+
+  result.forEach((value) => {
+    const res_msg = {};
+
+    value.answers.forEach((v) => {
+      const queId = v.queId;
+      const queTitle = v.queTitle;
+
+      if (queIds.includes(queId)) {
+        const values = v.values;
+        const dataValue = values[0].dataValue;
+        res_msg[queTitle] = dataValue;
+      }
+    });
+
+    res_list.push(res_msg);
+  });
+
+  return res_list;
+}
+
+(async () => {
+  const extractQueIdsApi1 =[60412694, 60687736,60687737]; // API1的提取queId
+
+  const reslist1 = await processAllPages(apiUrl1, queriesApi1, extractQueIdsApi1);
+  console.log(reslist1);
+  //qf_output={combinedResList}
+})();
+
+```
+
+### 多应用数据分页进行汇总（无筛选）
+
+注释：1、accessToken：轻商城--拓展插件-- openAPI获取
+
+2、apiUrl：[调用获取应用数据接口](https://help.qingflow.com/help-docs?type=qingCode&docId=fc8e64656428ea3a06fe9b406b9b7be9&parentId=)
+
+3、queId为表单的字段的ID，如何获取见文档开始注意点
+
+注意：多应用的字段名称需要一致
+
+```javascript
+const axios = require('axios');
+
+const headers = {   
+  'accessToken': 'd866db1**********b1ce21135d2',
+  'Content-Type': 'application/json'
+};
+
+const apiUrl1 = 'https://api.qingflow.com/app/5t9168bii002/apply/filter';
+const apiUrl2 = 'https://api.qingflow.com/app/5t91ta4e8s01/apply/filter'; // 假设的第二个API
+const pageSize = 200;
+
+async function processPage(apiUrl, pageNum) {
+  const postData = { pageSize, pageNum };
+  const response = await axios.post(apiUrl, postData, { headers });
+  return response.data.result;
+}
+
+async function processAllPages(apiUrl, queIds) {
+  const firstPageData = await processPage(apiUrl, 1);
+  let totalPages = firstPageData.pageAmount;
+
+  const promises = [];
+
+  for (let pageNum = 2; pageNum <= totalPages; pageNum++) {
+    promises.push(processPage(apiUrl, pageNum));
+  }
+
+  const responses = await Promise.all(promises);
+  const reslist = extractData(firstPageData, queIds);
+
+  responses.forEach((data) => {
+    const extractedData = extractData(data, queIds);
+    reslist.push(...extractedData);
+  });
+
+  return reslist;
+}
+
+function extractData(response, queIds) {
+  const result = response.result;
+  const res_list = [];
+
+  result.forEach((value) => {
+    const res_msg = {};
+
+    value.answers.forEach((v) => {
+      const queId = v.queId;
+      const queTitle = v.queTitle;
+
+      if (queIds.includes(queId)) {
+        const values = v.values;
+        const dataValue = values[0].dataValue;
+        res_msg[queTitle] = dataValue;
+      }
+    });
+
+    res_list.push(res_msg);
+  });
+
+  return res_list;
+}
+
+(async () => {
+  const queIdsApi1 = [205160174, 205160175]; // API1的queId
+  const queIdsApi2 = [205161107, 205161108]; // API2的queId（示例值，请根据实际情况修改）
+
+  const reslist1 = await processAllPages(apiUrl1, queIdsApi1);
+  const reslist2 = await processAllPages(apiUrl2, queIdsApi2);
+
+  const combinedResList = reslist1.concat(reslist2);
+  console.log(combinedResList);
+ // qf_output={combinedResList}
+})();
+
+```
+
+### 多应用数据分页进行汇总（筛选）
+
+注释：1、accessToken：轻商城--拓展插件-- openAPI获取
+
+2、apiUrl：[调用获取应用数据接口](https://help.qingflow.com/help-docs?type=qingCode&docId=fc8e64656428ea3a06fe9b406b9b7be9&parentId=)
+
+3、queId为表单的字段的ID，如何获取见文档开始注意点
+
+注意：多应用的字段名称需要一致
+
+```javascript
+const axios = require('axios');
+
+const headers = {   
+    'accessToken': 'd866db1*********1ce21135d2',
+    'Content-Type': 'application/json'
+  };
+  
+const apiUrl1 = 'https://api.qingflow.com/app/5t9168bii002/apply/filter';
+const apiUrl2 = 'https://api.qingflow.com/app/5t91ta4e8s01/apply/filter'; // 第二个API的URL
+const pageSize = 200;
+
+const queriesApi1 = [{ queId: 205175568, searchKey: '女' }]; // API1的查询条件
+const queriesApi2 = [{ queId: 205175567, searchKey: '女' }]; // API2的查询条件
+
+async function processPage(apiUrl, pageNum, queries) {
+  const postData = {
+    pageSize: pageSize.toString(), 
+    pageNum: pageNum.toString(),
+    queries: queries
+  };
+
+  const response = await axios.post(apiUrl, postData, { headers });
+  return response.data.result;
+}
+
+async function processAllPages(apiUrl, queries, extractQueIds) {
+  const firstPageData = await processPage(apiUrl, 1, queries);
+  let totalPages = firstPageData.pageAmount;
+
+  const promises = [];
+
+  for (let pageNum = 2; pageNum <= totalPages; pageNum++) {
+    promises.push(processPage(apiUrl, pageNum, queries));
+  }
+
+  const responses = await Promise.all(promises);
+  const reslist = extractData(firstPageData, extractQueIds);
+
+  responses.forEach((data) => {
+    const extractedData = extractData(data, extractQueIds);
+    reslist.push(...extractedData);
+  });
+
+  return reslist;
+}
+
+function extractData(response, queIds) {
+  const result = response.result;
+  const res_list = [];
+
+  result.forEach((value) => {
+    const res_msg = {};
+
+    value.answers.forEach((v) => {
+      const queId = v.queId;
+      const queTitle = v.queTitle;
+
+      if (queIds.includes(queId)) {
+        const values = v.values;
+        const dataValue = values[0].dataValue;
+        res_msg[queTitle] = dataValue;
+      }
+    });
+
+    res_list.push(res_msg);
+  });
+
+  return res_list;
+}
+
+(async () => {
+  const extractQueIdsApi1 =[205160174, 205160175]; // API1的提取queId
+  const extractQueIdsApi2 =[205161107, 205161108]; // API2的提取queId
+
+  const reslist1 = await processAllPages(apiUrl1, queriesApi1, extractQueIdsApi1);
+  const reslist2 = await processAllPages(apiUrl2, queriesApi2, extractQueIdsApi2);
+
+  const combinedResList = reslist1.concat(reslist2);
+  console.log(combinedResList);
+  //qf_output={combinedResList}
+})();
+
+```
+
+### 如果表单某些字段本身没有值，但是需要返回
+
+注释：1、accessToken：轻商城--拓展插件-- openAPI获取
+
+2、url/apiUrl：[调用获取应用数据接口](https://help.qingflow.com/help-docs?type=qingCode&docId=fc8e64656428ea3a06fe9b406b9b7be9&parentId=)
+
+3、queId为表单的字段的ID，如何获取见文档开始注意点
+
+```javascript
+const axios = require('axios');
+let data = JSON.stringify({
+    "pageSize": "50",
+    "pageNum": "1"
+});
+let config = {
+    method: 'post',
+    url: 'https://api.qingflow.com/app/6kechv9d8801/apply/filter',
+    headers: {
+        'accessToken': 'd866db1d-79cb1ce21135d2',
+        'Content-Type': 'application/json'
+    },
+    data: data
+};
+
+axios(config)
+    .then(function (res) {
+        const msg = res.data;
+        const result = msg.result.result;
+        const res_list = [];
+
+        result.forEach(value => {
+            const res_msg = {
+                // 预设字段的值为null
+                '单行文字': null,
+                '单行w': null,
+                '单行文字1': null
+            };
+
+            value.answers.forEach(v => {
+                const queId = v.queId;
+                const queTitle = v.queTitle;
+
+                if (queId === 230540649 || queId === 230540650 || queId === 230540651) {
+                    const values = v.values;
+                    const dataValue = values.length > 0 ? values[0].dataValue : null; // 确保values不为空
+                    res_msg[queTitle] = dataValue;
+                }
+            });
+
+            res_list.push(res_msg);
+        });
+        // 使用自定义输出格式替换console.log
+        //console.log(res_list);
+        qf_output={res_list};
+    })
+    .catch(function (error) {
+        // 使用自定义错误处理
+        return { error: '请求发生错误' };
+    });
+
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {   
+  'accessToken': 'd866db1d-b1ce21135d2',
+  'Content-Type': 'application/json'
+};
+
+const apiUrl = 'https://api.qingflow.com/app/6kechv9d8801/apply/filter';
+const pageSize = 200;
+
+// 假设这是queId和queTitle的映射
+const queIdTitleMap = {
+  '230540649': '单行文字',
+  '230540650': '单行w',
+  '230540651':'单行文字1'
+  // 添加更多的queId和queTitle对应关系
+};
+
+async function processPage(pageNum) {
+  const postData = { pageSize, pageNum };
+  const response = await axios.post(apiUrl, postData, { headers });
+  return response.data.result;
+}
+
+async function processAllPages() {
+  const firstPageData = await processPage(1);
+  let totalPages = firstPageData.pageAmount;
+
+  const promises = [];
+
+  // 从第2页开始，因为我们已经处理了第一页
+  for (let pageNum = 2; pageNum <= totalPages; pageNum++) {
+    promises.push(processPage(pageNum));
+  }
+
+  const responses = await Promise.all(promises);
+
+  // 包括第一页的数据
+  const reslist = extractData(firstPageData);
+
+  responses.forEach((data) => {
+    const extractedData = extractData(data);
+    reslist.push(...extractedData);
+  });
+
+  return reslist;
+}
+
+function extractData(response) {
+  const result = response.result;
+  const res_list = [];
+
+  result.forEach((value) => {
+    // 预设字段的值为null
+    const res_msg = Object.keys(queIdTitleMap).reduce((acc, id) => {
+      acc[queIdTitleMap[id]] = null;  // 使用映射中的queTitle
+      return acc;
+    }, {});
+
+    value.answers.forEach((v) => {
+      const queId = v.queId.toString(); // 确保queId是字符串，因为Object.keys返回的是字符串数组
+
+      if (queId in queIdTitleMap) {
+        const values = v.values;
+        const dataValue = values.length > 0 ? values[0].dataValue : null; // 确保values不为空
+        res_msg[queIdTitleMap[queId]] = dataValue; // 使用映射中的queTitle
+      }
+    });
+
+    res_list.push(res_msg);
+  });
+
+  return res_list;
+}
+
+(async () => {
+  const reslist = await processAllPages();
+  // 使用自定义输出格式替换console.log
+  //console.log(reslist);
+  qf_output={reslist};
+})();
+```
+
+```javascript
+const axios = require('axios');
+
+const headers = {   
+    'accessToken': 'd866dbe21135d2',
+    'Content-Type': 'application/json'
+};
+
+const apiUrl1 = 'https://api.qingflow.com/app/6kechv9d8801/apply/filter';
+const pageSize = 200;
+
+const queriesApi1 = [
+    {
+        "queId": 60687736,
+        "scope": 2
+    },
+    {
+        "queId": 60687737,
+        "scope": 2
+    }
+]; // API1的查询条件：筛选经纬度不为空的数据
+
+// 定义queId与queTitle的映射
+const queIdTitleMapApi1 = {
+    '230540649': '单行文字',
+    '230540650': '单行w',
+    '230540651':'单行文字1',
+    // 根据需要添加更多映射
+};
+
+async function processPage(apiUrl, pageNum, queries) {
+    const postData = {
+        pageSize: pageSize.toString(),
+        pageNum: pageNum.toString(),
+        queries: queries
+    };
+
+    const response = await axios.post(apiUrl, postData, { headers });
+    return response.data.result;
+}
+
+async function processAllPages(apiUrl, queries, queIdTitleMap) {
+    const firstPageData = await processPage(apiUrl, 1, queries);
+    let totalPages = firstPageData.pageAmount;
+
+    const promises = [];
+
+    for (let pageNum = 2; pageNum <= totalPages; pageNum++) {
+        promises.push(processPage(apiUrl, pageNum, queries));
+    }
+
+    const responses = await Promise.all(promises);
+    const reslist = extractData(firstPageData, queIdTitleMap);
+
+    responses.forEach((data) => {
+        const extractedData = extractData(data, queIdTitleMap);
+        reslist.push(...extractedData);
+    });
+
+    return reslist;
+}
+
+function extractData(response, queIdTitleMap) {
+    const result = response.result;
+    const res_list = [];
+
+    result.forEach((value) => {
+        // 预设字段的值为null
+        const res_msg = Object.keys(queIdTitleMap).reduce((acc, id) => {
+            acc[queIdTitleMap[id]] = null; // 使用映射中的queTitle
+            return acc;
+        }, {});
+
+        value.answers.forEach((v) => {
+            const queId = v.queId;
+
+            if (queId in queIdTitleMap) {
+                const values = v.values;
+                const dataValue = values.length > 0 ? values[0].dataValue : null; // 确保values不为空
+                res_msg[queIdTitleMap[queId]] = dataValue; // 使用映射中的queTitle
+            }
+        });
+
+        res_list.push(res_msg);
+    });
+
+    return res_list;
+}
+
+(async () => {
+    const reslist1 = await processAllPages(apiUrl1, queriesApi1, queIdTitleMapApi1);
+    // 使用自定义输出格式替换console.log
+    console.log(reslist1);
+    //qf_output={reslist1};
+})();
+
+```
+
+### 汇总应用多条数据的表格数据
+
+注释：1、accessToken：轻商城--拓展插件-- openAPI获取
+
+2、apiUrl1：[调用获取应用数据接口](https://help.qingflow.com/help-docs?type=qingCode&docId=fc8e64656428ea3a06fe9b406b9b7be9&parentId=)
+
+```javascript
+const axios = require('axios');
+
+const headers = {
+    'accessToken': 'd866db1d-79****-0b1ce21135d2',
+    'Content-Type': 'application/json'
+};
+
+const apiUrl1 = 'https://api.qingflow.com/app/6i0q6tsg7802/apply/filter';
+const pageSize = 200;
+const lybh=qf_field.{来源编号$$2387B7818$$};
+//接口的筛选条件
+const queriesApi1 = [
+    {
+        "queId": 226449326,
+        "searchKey": lybh
+    }
+]; 
+
+async function processPage(apiUrl, pageNum, queries) {
+    const postData = {
+        pageSize: pageSize.toString(),
+        pageNum: pageNum.toString(),
+        queries: queries
+    };
+
+    const response = await axios.post(apiUrl, postData, { headers });
+    return response.data.result;
+}
+
+async function processAllPages(apiUrl, queries, tableId, rowIds) {
+    const firstPageData = await processPage(apiUrl, 1, queries);
+
+    let totalPages = firstPageData.pageAmount;
+
+    const promises = [];
+
+    for (let pageNum = 2; pageNum <= totalPages; pageNum++) {
+        promises.push(processPage(apiUrl, pageNum, queries));
+    }
+
+    const responses = await Promise.all(promises);
+    const reslist = extractTableValues(firstPageData, tableId, rowIds);
+
+    responses.forEach((data) => {
+        const extractedData = extractTableValues(data, tableId, rowIds);
+        reslist.push(...extractedData);
+    });
+
+    return reslist;
+}
+//处理每条数据的表格数据
+function extractTableValues(obj, tableId, rowIds) {
+    const result = [];
+
+    obj.result.forEach(element => {
+        //处理表格数据
+        const tableValues = element.answers.find(answer => answer.queId === tableId).tableValues;
+
+        tableValues.forEach(row => {
+            const rowObject = {};
+            row.forEach(cell => {
+                if (rowIds.includes(cell.queId)) {
+                    rowObject[cell.queTitle] = cell.values[0].value;
+                }
+            });
+            result.push(rowObject);
+        });
+    });
+    return result;
+
+}
+
+(async () => {
+  /*
+  tableId代表具体的表格字段ID
+  rowIdsApi1代表表格中每一列的子字段ID
+  */
+    const tableId = 226449327;
+    const rowIdsApi1 = [226449328, 226449329]; 
+    if(lybh==null){
+      qf_output={'reslist1':null}
+    }else{
+       const reslist1 = await processAllPages(apiUrl1, queriesApi1, tableId, rowIdsApi1);
+      qf_output={reslist1}
+    }
+   
+
+})();
+```
+
+实现效果：
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1710340681382-56bf9148-97b5-4e0f-8e0c-2e96f9129b7c.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1710340700482-c697e9fd-1374-419f-9787-210670fe0253.png)
+
+## 查询数据库SQLserver表
+
+- 前提：需要环境中安装mssql模版
+
+```javascript
+const sql = require('mssql');
+
+// 配置 SQL Server 连接
+const config = {
+  user: '',
+  password: '',
+  server: '', 
+  port: 1437,
+  database: '',
+  options: {
+    encrypt: false, // 如果连接到Azure SQL数据库，则需要设置为true
+    trustServerCertificate: true, // 如果使用了encrypt选项，并且SQL Server使用的是自签名证书，则需要设置此选项为true
+  }
+};
+
+// 查询数据库并返回 JSON
+async function queryDatabase() {
+  try {
+    // 创建并连接到 SQL Server
+    await sql.connect(config);
+
+    // 查询数据
+    const result = await sql.query`SELECT * FROM APP_DORD_CS_PROCESS_TIMETABLE`;
+
+    // 输出查询结果为 JSON
+    const data=result.recordset;
+    qf_output={data};
+    //console.log(data);
+  } catch (err) {
+    qf_output={'SQL error': err}
+    //console.error('SQL error', err);
+  } finally {
+    // 关闭连接
+    await sql.close();
+  }
+}
+
+// 执行查询
+queryDatabase();
+```
+
+```javascript
+const sql = require('mssql');
+
+const config = {
+  user: '',
+  password: '',
+  server: '',
+  port: 1437,
+  database: '',
+  options: {
+    encrypt: false,
+    trustServerCertificate: true
+  }
+};
+
+function queryDatabase() {
+  sql.connect(config, err => {
+    if (err) {
+      return { error: '请求发生错误' };
+    }
+
+    const request = new sql.Request();
+    request.query('SELECT * FROM APP_DORD_CS_PROCESS_TIMETABLE', (err, result) => {
+      if (err) {
+        return { error: '请求发生错误' };
+      }
+
+      // 输出结果
+      qf_output={ data: result.recordset };
+
+      // 关闭连接
+      sql.close(err => {
+        if (err) {
+          return { error: '请求发生错误' };
+        }
+      });
+    });
+  });
+
+  // 在连接发生错误时关闭连接
+  sql.on('error', err => {
+    return { error: '请求发生错误' };
+  });
+}
+
+queryDatabase();
+```
+
+```javascript
+const sql = require('mssql');
+
+const config = {
+  user: '',
+  password: '',
+  server: '',
+  port: 1437,
+  database: '',
+  options: {
+    encrypt: false,
+    trustServerCertificate: true
+  }
+};
+
+async function queryDatabase() {
+  let pool;
+  try {
+    // 连接到数据库
+    pool = await sql.connect(config);
+
+    // 执行查询
+    const result = await pool.request().query('SELECT * FROM APP_DORD_CS_PROCESS_TIMETABLE');
+
+    // 输出结果
+    qf_output={ data: result.recordset };
+  } catch (err) {
+    // 处理错误
+    return { error: '请求发生错误' };
+  } finally {
+    // 关闭连接
+    if (pool) {
+      try {
+        await pool.close();
+      } catch (err) {
+        return { error: '请求发生错误' };
+      }
+    }
+  }
+}
+
+queryDatabase();
+```
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/oaudly5zxbxoqwzv?singleDoc#)

@@ -1,0 +1,115 @@
+---
+title: "批量创建成员"
+description: "1. 权限说明仅专有轻流支持；「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有通讯录权限。2. 请求请求方式：POST请求地址：https://自有域名/openApi/user/batchPOST https://abcd.q..."
+slug: "/帮助文档/轻代码/openapi/通讯录/成员/批量创建成员"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/gspop0si4subqvui?singleDoc#"
+source_updated_at: "2024-10-15T03:35:08.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "通讯录"
+  - "成员"
+  - "批量创建成员"
+---
+### **权限说明**
+
+仅专有轻流支持；
+
+「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有通讯录权限。
+
+### 请求
+
+**请求方式：**POST
+
+**请求地址：**[https://自有域名/openApi/user/batch](https://xn--eqrt2gz0rng0a/openApi/user/batch)
+
+```javascript
+POST https://abcd.qingflow.com/openApi/user/batch
+```
+
+#### **2.1 参数说明(路径参数)：**
+
+无
+
+#### **2.2 参数说明(查询参数)：**
+
+无
+
+#### **2.3 请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+
+#### **2.4 请求体（Body）**
+
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| members | 是 | \[array\] |  |
+| userId |  | string | 用户的userId |
+| name |  | string | 用户名 |
+| areaCode |  | string | 区号，默认为86 |
+| mobileNum |  | string | 手机号 |
+| email |  | string | 邮箱 |
+| headImg |  | string | 头像 |
+| department |  | \[array\] | 同步部门id列表 |
+| role |  | \[array\] | 同步角色id列表 |
+| customRole |  | \[array\] | 成员所属自建角色列表（仅企业微信/钉钉/飞书等特殊工作区适用） |
+| customDepartment |  | \[array\] | 成员所在自建部门列表（仅企业微信/钉钉/飞书等特殊工作区适用） |
+| beingDisabled |  | boolean | 是否禁用成员 |
+| superiorId |  | string | 直属主管的外部id（仅限专有轻流） |
+
+#### **2.5 请求体示例**
+
+```json
+{
+    "members":[
+		{
+		"userId": "用户的userId",
+	    "name": "用户名",
+	    "areaCode": "86",
+	    "mobileNum": "手机号",
+	    "email": "邮箱",
+	    "headImg": "头像",
+	    "department":[],
+	    "role": [],
+	    "customRole": [],
+	    "customDepartment": [],
+	    "beingDisabled": "true"
+		}
+	]
+}
+```
+
+### 返回
+
+#### 3.1 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，0表示成功，非0表示失败（注：结果只代表请求发送是否成功，不代表执行结果是否成功，执行结果可使用返回的reqesutId通过“查询操作结果”接口查询 |
+| errMsg | 是 | string | 错误描述 |
+| questionRelations |  |  | 关联的设置，这里没用 |
+| result | 是 | object | 返回结果 |
+| requestId | 是 | string |  |
+
+#### 3.2 返回体示例
+
+```json
+{
+	"errCode": 0,
+	"errMsg": "ok",
+	"result": {
+		"requestId":"22222"
+	}
+}
+```
+
+### 注意事项
+
+1、邮箱已存在于轻流，且对应用户在当前工作区时，调用本接口会更新成员信息
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/gspop0si4subqvui?singleDoc#)

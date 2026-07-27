@@ -1,0 +1,129 @@
+---
+title: "获取工作区全部成员"
+description: "获取工作区全部成员信息1. 权限说明公有云专有轻流都可以调用。「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有通讯录全部成员权限。2. 请求请求方式：GET请求地址：https://api.qingflow.com/userGE..."
+slug: "/帮助文档/轻代码/openapi/通讯录/成员/获取工作区全部成员"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/pl193ohmm84aqht3?singleDoc#"
+source_updated_at: "2024-10-15T03:35:08.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "通讯录"
+  - "成员"
+  - "获取工作区全部成员"
+---
+获取工作区全部成员信息
+
+---
+
+### **权限说明**
+
+公有云专有轻流都可以调用。
+
+「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有通讯录全部成员权限。
+
+### 请求
+
+**请求方式：**GET
+
+**请求地址：**[https://api.qingflow.com/user](https://api.qingflow.com/user)
+
+```javascript
+GET https://api.qingflow.com/user
+```
+
+**其他版本请求地址：**
+
+钉钉版本：[https://api.ding.qingflow.com/user](https://api.ding.qingflow.com/user)
+
+专有轻流：http(s)://自有域名/openApi/user
+
+#### **2.1 参数说明(路径参数)：**
+
+无
+
+#### **2.2 参数说明(查询参数)：**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| pageSize | 是 | 分页大小，必填 |
+| pageNum | 是 | 分页页号，必填 |
+
+#### **2.3 请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+
+#### **2.4 请求体（Body）**
+
+无
+
+### 返回
+
+#### 3.1 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| result | 是 | object | 返回结果 |
+| pageSize | 是 | int | 分页大小 |
+| pageNum | 是 | int | 分页页号 |
+| resultAmount | 是 | int | 成员总数 |
+| pageAmount | 是 | int | 页总数 |
+| result | 是 | array |  |
+| userId | 是 | string | 用户的userId |
+| optionId |  | int |  |
+| email | 是 | string | 邮箱 |
+| name |  | string | 用户名称 |
+| areaCode |  | string | 区号 |
+| mobileNum |  | string | 手机号 |
+| headImg |  | string | 头像 |
+| department |  | array | 部门ID列表 |
+| role |  | array | 角色ID列表 |
+| customRole |  | array | 成员所属自建角色列表（仅企业微信/钉钉/飞书等特殊工作区的专有轻流工作区适用） |
+| customDepartment |  | array | 成员所在自建部门列表（仅企业微信/钉钉/飞书等特殊工作区适用） |
+| beingDisabled | 是 | boolean | 是否禁用成员 |
+| beingActive | 是 | boolean | 用户的激活状态 |
+
+#### 3.2 返回体示例
+
+```json
+{
+    "errCode": 0,
+    "errMsg": null,
+    "questionRelations": [],
+    "result": {
+        "pageAmount": 3,
+        "pageNum": 1,
+        "pageSize": 20,
+        "result": [
+            {
+                "areaCode": "86",
+                "beingActive": true,
+                "beingDisabled": false,
+                "customDepartment": [],
+                "customRole": [],
+                "department": [],
+                "email": "@exiao.tech",
+                "headImg": "https://file.qingflow.com/uploads/file.jpg",
+                "mobileNum": "12344452143",
+                "name": "xxx",
+                "optionId": 111111,
+                "role": [],
+                "userId": "111111"
+            }
+        ],
+        "resultAmount": 1
+    }
+}
+```
+
+### 注意事项
+
+1、企微版本公有云工作区，用户名（name参数）返回用户userid
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/pl193ohmm84aqht3?singleDoc#)

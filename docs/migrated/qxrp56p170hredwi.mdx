@@ -1,0 +1,73 @@
+---
+title: "轻流密码校验功能实现方法"
+description: "1、简要介绍在轻流中搭建A、B两张表单，A表单（DataBase，简称DB表单），B表单（Login表单，简称LN表单）DB表单作为数据库功能，类比为轻流招聘后台来使用，LN表单作为登录界面并进行密码校验，类比为前端界面。通过轻流的关联已有数据​​，进行ID与Password的匹配，然后通过公..."
+slug: "/搭建技巧/按功能分类/数据管理/数据校验/轻流密码校验功能实现方法"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/qxrp56p170hredwi?singleDoc#"
+source_updated_at: "2024-10-15T03:38:10.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "数据管理"
+  - "数据校验"
+  - "轻流密码校验功能实现方法"
+---
+### 1、简要介绍
+
+**在轻流中搭建A、B两张表单，A表单（DataBase，简称DB表单），B表单（Login表单，简称LN表单）**
+
+**DB表单作为数据库功能，类比为轻流招聘后台来使用，LN表单作为登录界面并进行密码校验，类比为前端界面。**
+
+**通过轻流的****关联已有数据****，进行ID与Password的匹配，然后通过****公式****检测Password是否相同，判断能否登录成功。并返回数据给前端界面。**
+
+### 2、具体实现方式
+
+##### 1、DataBase表单搭建
+
+DB表单作为数据库，需要录入求职者的个人信息，包括ID，password，姓名，性别等等所有必填信息以及选填信息。
+
+**（为了方便测试，表单中只添加了ID和Password）**![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1594371920662-094618d7-0bf0-43ae-bf8b-c1402f7a0c6b.png)
+
+##### 2、Login表单搭建
+
+Login表单作为登录界面以及密码校验表单，需要对密码进行检测，当用户输入ID后，会得到该ID的密码（**Password-new**）并与用户输入的密码（Password）作匹配，当**Password-new==****Password时，才显示用户登录成功。**
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1594372125813-73784a2f-40f2-4084-a7dd-87821275ddc6.png)
+
+##### 3、具体操作方法：![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1594372426566-ab731b8e-5e63-4950-a17e-e6c0e6b5a1df.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1594372795607-01f911ad-19bf-4b70-890a-779afba8d9f5.png)
+
+### 3、测试结果
+
+##### 1、DataBase表单数据![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1594372544614-bb7ac6ed-8f51-4653-a849-c284dc992c80.png)
+
+##### 2、Login测试结果
+
+**1、当ID与PW相匹配时，测试通过，可进入下一节点**
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1594372613501-1c919c20-4e31-4be6-8d51-46583f57abdb.png)
+
+**2、当ID与PW不匹配时，测试不通过，无法进入下一节点**![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1594372698939-83587e97-d86c-415c-a80f-40de308d0deb.png)
+
+### 4、补充条件（需要前端完成的）
+
+**1、DataBase表单获取数据的方法**
+
+由于Q-source无法获取附件，所以希望能够前端那边主动通过api的方式推送求职者信息给轻流，包括简历等附件内容。
+
+**2、求职者注册和登录时应当从前端进入不同的表单**
+
+当求职者注册时，应当进入DataBase表单，将ID和PW存储在DataBase表单中，同时校验用户名，手机号等是否已注册（轻流有限制字段重复的功能）。
+
+当求职者登录时，应当进入Login表单，做ID+PW的校验，由轻流返回是否登录成功给前端。
+
+3、前端的附加需求![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1594373329181-b7113e27-5cbe-43b5-898f-7768d68ffc62.png)
+
+轻流表单中的某些字段，需要前端做隐藏，在适当的流程节点给用户看。例如上图中的Password-new，在密码校验过程中应当一直隐藏**
+**
+
+**4、DataBase表单和Login表单需要和前端界面做信息交互，具体的信息交互方式后面商讨。**
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/qxrp56p170hredwi?singleDoc#)

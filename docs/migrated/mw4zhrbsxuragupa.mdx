@@ -1,0 +1,92 @@
+---
+title: "身份证实名核验"
+description: "场景描述有时填写表单，需要确认人员的身份信息是否属实；解决方案针对上述场景，通过Q-Linker我们可以轻松做到，效果如下；操作步骤第一步：选择身份证实名核验服务商在阿里云市场中选取合适的身份证实名核验服务商，本次案例以此服务商为例：API集市-API接口平台-云市场第二步：添加表单字段在轻流..."
+slug: "/帮助文档/轻代码/集成中心/q-linker/q-linker使用案例/身份证实名核验"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/mw4zhrbsxuragupa?singleDoc#"
+source_updated_at: "2024-11-26T08:30:14.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "集成中心"
+  - "Q-Linker"
+  - "Q-Linker使用案例"
+  - "身份证实名核验"
+---
+## 场景描述
+
+有时填写表单，需要确认人员的身份信息是否属实；
+
+## 解决方案
+
+针对上述场景，通过Q-Linker我们可以轻松做到，效果如下；
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/5YBFddOqWidYMKNN8B5nIk33sda6LpXj_.gif)
+
+## 操作步骤
+
+### 第一步：选择身份证实名核验服务商
+
+在阿里云市场中选取合适的身份证实名核验服务商，本次案例以此服务商为例：
+
+[API集市-API接口平台-云市场](https://market.aliyun.com/apimarket/myapi/api/cmapi028327?spm=5176.2334435.0.0.4d553121Ia78TW&header=false&time=1586762901701&accounttraceid=ab9616408d4345368e41d81a84319cddbyvr&keywords=&sideStatus=EXPAND&freeSku=1)
+
+### 第二步：添加表单字段
+
+在轻流中新建应用，增加字段，如下图：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/xg7sjKoOs_ed4zWCSHszEBBJg3uWk57-_.png)
+
+### 第三步：配置Q-Linker字段
+
+先查看API提供的使用说明：
+
+[API集市-API接口平台-云市场](https://market.aliyun.com/apimarket/myapi/api/cmapi028327?spm=5176.2334435.0.0.4d553121Ia78TW&header=false&time=1586762901701&accounttraceid=ab9616408d4345368e41d81a84319cddbyvr&keywords=&sideStatus=EXPAND&freeSku=1)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/nGSINlbr4JISOSpOMH-Vwnu-kH-l2m1I_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/Amy6wP4UU3_Sblx0f8NcXveONTk4ccJc_.png)
+
+1、URL：http(s)://checkid.market.alicloudapi.com/IDCard
+
+2、QueryParam（请求参数）：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/_SN1KAXhfwg4tvsZ1AyIzOVWkhtynqv-_.png)
+
+3、Method（请求方式）：GET
+
+4、Header（请求头）：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/6ol2JXIaPL-ug-hQ2XTK48pHq3yzixka_.png)
+
+认证方式有两种：简单身份认证/签名认证，详细介绍如下：
+
+[调用API商品 - API 网关 - 阿里云](https://help.aliyun.com/document_detail/157953.html?spm=5176.product-detail.content.7.7f4c5a86p8GNS4)
+
+5、配置JSON Path：
+
+- **Result Format**: JSON
+- **Json Path: **
+
+- $.msg
+- $.name
+- $.idCard
+
+注意：别名是将用于数据关联对JSON Path对应数据的调取,不可重复
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/enDFrwZiPZCrO38IlcEL92o09ZSumCpN_.png)
+
+6、设置字段数据关联；
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/6SwY3f9HZ0ju70rJA5sK68CtXJ971PMl_.png)
+
+### 第四步：发布应用
+
+​
+
+​
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/mw4zhrbsxuragupa?singleDoc#)

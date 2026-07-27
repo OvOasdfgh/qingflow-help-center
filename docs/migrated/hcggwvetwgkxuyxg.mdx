@@ -1,0 +1,352 @@
+---
+title: "Json数组格式处理展示格式"
+description: "1. 需求场景当我们想要将第三方系统获取的数组数据，需要处理成类似于Excel表按表头列的展示格式放在多行文字中或者富文本中，用于抄送给对应用户或者通过群机器人进行推送展示。2. 实现思路代码块处理对于json数组，我们可以通过代码块进行处理成字符串，并每一行中加空格和换行符，以便符合我们想要..."
+slug: "/常见问题-faq/轻代码/json数组格式处理展示格式"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/hcggwvetwgkxuyxg?singleDoc#"
+source_updated_at: "2025-02-18T02:55:18.000Z"
+keywords:
+  - "常见问题（FAQ）"
+  - "轻代码"
+  - "Json数组格式处理展示格式"
+---
+## 需求场景
+
+当我们想要将第三方系统获取的数组数据，需要处理成类似于Excel表按表头列的展示格式放在多行文字中或者富文本中，用于抄送给对应用户或者通过群机器人进行推送展示。
+
+​
+
+## 实现思路
+
+- **代码块处理**
+
+对于json数组，我们可以通过代码块进行处理成字符串，并每一行中加空格和换行符，以便符合我们想要的格式效果。
+
+> 注意：如果是需要插入到富文本中，如果对于字体格式或者颜色有要求的，需要使用轻流的样式进行展示。具体可以F12拿到对应的样式表示。比如图中配送中心的样式就是：&lt;strong class="ql-size-large" style="color: rgb(230, 0, 0);">配送中心&lt;/strong>
+
+- **q-linker处理**
+
+q-linker处理需要更多的辅助处理方式，需要通过表格中加一个辅助字段进行公示拼接处理，然后再通过回调接口将表格辅助字段进行输出展示
+
+> 注释：回调接口：https://connect.oalite.com/api/returnAll作用：可以将请求体body内容原样输出响应。请求方式：POST
+
+## 实现示例
+
+```json
+{
+    "data": {
+        "totalNum": 59,
+        "pageSize": 10,
+        "rows": [
+            {
+                "M_id": "id_2024-09-21",
+                "riqi": "2024-09-21",
+                "col3": "江北配送中心",
+                "col19": "江北直接送货本部",
+                "col20": "【YXA】渝西A",
+                "col21": "吴子真",
+                "Heji": 22.0,
+                "Det_id": "2024-09-21吴子真",
+                "row_num": 1
+            },
+            {
+                "M_id": "id_2024-09-21",
+                "riqi": "2024-09-21",
+                "col3": "江北配送中心",
+                "col19": "江北直接送货本部",
+                "col20": "【CXA】城西A",
+                "col21": "周芳",
+                "Heji": 21.0,
+                "Det_id": "2024-09-21周芳",
+                "row_num": 2
+            },
+            {
+                "M_id": "id_2024-09-21",
+                "riqi": "2024-09-21",
+                "col3": "江北配送中心",
+                "col19": "江北直接送货本部",
+                "col20": "【CNAG】城南A固",
+                "col21": "古秋洪",
+                "Heji": 19.6,
+                "Det_id": "2024-09-21古秋洪",
+                "row_num": 3
+            },
+            {
+                "M_id": "id_2024-09-21",
+                "riqi": "2024-09-21",
+                "col3": "江北配送中心",
+                "col19": "江北直接送货本部",
+                "col20": "【YXA】渝西A",
+                "col21": "谭克胜",
+                "Heji": 18.0,
+                "Det_id": "2024-09-21谭克胜",
+                "row_num": 4
+            },
+            {
+                "M_id": "id_2024-09-21",
+                "riqi": "2024-09-21",
+                "col3": "江北配送中心",
+                "col19": "江北直接送货本部",
+                "col20": "【CXA】城西A",
+                "col21": "欧治全",
+                "Heji": 17.6,
+                "Det_id": "2024-09-21欧治全",
+                "row_num": 5
+            },
+            {
+                "M_id": "id_2024-09-21",
+                "riqi": "2024-09-21",
+                "col3": "江北配送中心",
+                "col19": "江北直接送货本部",
+                "col20": "【CNAG】城南A固",
+                "col21": "王德全",
+                "Heji": 17.4,
+                "Det_id": "2024-09-21王德全",
+                "row_num": 6
+            },
+            {
+                "M_id": "id_2024-09-21",
+                "riqi": "2024-09-21",
+                "col3": "江北配送中心",
+                "col19": "江北直接送货本部",
+                "col20": "【CXB】城西B",
+                "col21": "王秋霞",
+                "Heji": 16.2,
+                "Det_id": "2024-09-21王秋霞",
+                "row_num": 7
+            },
+            {
+                "M_id": "id_2024-09-21",
+                "riqi": "2024-09-21",
+                "col3": "江北配送中心",
+                "col19": "江北直接送货本部",
+                "col20": "【CNAG】城南A固",
+                "col21": "罗园玲",
+                "Heji": 16.1,
+                "Det_id": "2024-09-21罗园玲",
+                "row_num": 8
+            },
+            {
+                "M_id": "id_2024-09-21",
+                "riqi": "2024-09-21",
+                "col3": "江北配送中心",
+                "col19": "江北直接送货本部",
+                "col20": "【CXA】城西A",
+                "col21": "毛丹",
+                "Heji": 16.0,
+                "Det_id": "2024-09-21毛丹",
+                "row_num": 9
+            },
+            {
+                "M_id": "id_2024-09-21",
+                "riqi": "2024-09-21",
+                "col3": "江北配送中心",
+                "col19": "江北直接送货本部",
+                "col20": "【CNBG】城南B固",
+                "col21": "罗艺",
+                "Heji": 15.4,
+                "Det_id": "2024-09-21罗艺",
+                "row_num": 10
+            }
+        ],
+        "pageNum": 1
+    },
+    "errCode": 0,
+    "requestId": "ac110b3f17271406142081280e0a0c",
+    "errMsg": "success",
+    "apiLog": null
+}
+```
+
+> 注释：我需要将rows数组中的col3作为表头【配送中心】，col20作为表头【线路编号】，col21作为表头【送货员】，Heji作为表头【合计重量】，row\_num作为表头【排名】。
+
+### 代码块
+
+#### 富文本
+
+> 注释：这里仅仅是作为输出展示效果，如果JSON体是通过接口获取的，可以直接在代码块中调用接口获取数据再处理格式输出。
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1727322997383-b13001f8-928d-4b26-966e-e8c3778152b6.png)
+
+##### 代码块注释
+
+- jsonStr：插入表单字段Json体
+- 表头的宽度headerWidths和行的宽度rowWidths：是可以自行调整的，以适应不同的展示
+- 构建表头：其中富文本的样式获取方式可以见上面描述
+
+```javascript
+const jsonStr = qf_field.{Json体$$2956D76BC$$};
+
+try {
+    const jsonData = JSON.parse(jsonStr);
+    const rows = jsonData.data.rows;
+
+    // 表头的宽度
+    const headerWidths = {
+        col3: 10,   // 配送中心
+        col20: 10,  // 线路编码
+        col21: 10,  // 送货员
+        Heji: 10,   // 合计重量
+        row_num: 5  // 排名
+    };
+
+    // 行的宽度
+    const rowWidths = {
+        col3: 12,   // 配送中心
+        col20: 20,  // 线路编码
+        col21: 20,  // 送货员
+        Heji: 15,    // 合计重量
+        row_num: 4  // 排名
+    };
+
+    const padSpaces = (text, length) => {
+        const textLength = text.length;
+        let spaces = '&nbsp;'.repeat(length - textLength);
+        return text + spaces;
+    };
+
+    // 构建表头
+    let result = `<p>
+        <strong class="ql-size-large" style="color: rgb(230, 0, 0);">${padSpaces("配送中心", headerWidths.col3)}</strong>
+        <strong class="ql-size-large" style="color: rgb(230, 0, 0);">${padSpaces("线路编码", headerWidths.col20)}</strong>
+        <strong class="ql-size-large" style="color: rgb(230, 0, 0);">${padSpaces("送货员", headerWidths.col21)}</strong>
+        <strong class="ql-size-large" style="color: rgb(230, 0, 0);">${padSpaces("合计重量", headerWidths.Heji)}</strong>
+        <strong class="ql-size-large" style="color: rgb(230, 0, 0);">${padSpaces("排名", headerWidths.row_num)}</strong>
+    </p>`;
+
+    // 遍历rows，格式化每行
+    rows.forEach(row => {
+        const { col3, col20, col21, Heji, row_num } = row;
+        result += `<p>${padSpaces(col3, rowWidths.col3)}${padSpaces(col20, rowWidths.col20)}${padSpaces(col21, rowWidths.col21)}${padSpaces(Heji.toString(), rowWidths.Heji)}${padSpaces(row_num.toString(), rowWidths.row_num)}</p>`;
+    });
+
+    // 输出结果
+    qf_output = { result };
+} catch (error) {
+    qf_output = { error: '请求发生错误' };
+}
+```
+
+##### 代码块测试与解析
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1727323449669-3c703afc-6ee7-42af-b82a-c5bfc07b8be6.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1727323478175-25e30fe1-e8a9-4b8a-b01c-8a5a7abd2447.png)
+
+##### 实现效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1727323531495-b8e89802-4a0a-4ebd-8b9a-ee096aaeee9c.png)
+
+#### 多行文字
+
+> 注释：这里仅仅是作为输出展示效果，如果JSON体是通过接口获取的，可以直接在代码块中调用接口获取数据再处理格式输出。
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1727329516400-693496e5-43c1-4e1e-ab6d-41eea4c5575d.png)
+
+##### 代码块注释
+
+- jsonStr：插入表单字段Json体
+- 表头的宽度headerWidths和数据列的宽度dataWidths：是可以自行调整的，以适应不同的展示
+
+```javascript
+// 假设传入的字符串是jsonStr
+const jsonStr = qf_field.{JSON体$$2956DD0BE$$};
+
+try {
+    // 解析字符串为JSON对象
+    const jsonData = JSON.parse(jsonStr);
+
+    // 提取rows数组
+    const rows = jsonData.data.rows;
+
+    // 定义表头宽度
+    const headerWidths = {
+        col3: 16,   // 配送中心
+        col20: 20,  // 线路编码
+        col21: 18,   // 送货员
+        Heji: 15,    // 合计重量
+        row_num: 4  // 排名
+    };
+
+    // 定义数据列宽度
+    const dataWidths = {
+        col3: 10,   // 配送中心
+        col20: 18,  // 线路编码
+        col21: 20,  // 送货员
+        Heji: 20,   // 合计重量
+        row_num: 6  // 排名
+    };
+
+    // 辅助函数：用于填充列内容
+    const padRight = (text, length) => {
+        const textStr = text.toString(); // 确保是字符串
+        return textStr + ' '.repeat(length - textStr.length);
+    };
+
+    // 构建表头
+    let result = `${padRight('配送中心', headerWidths.col3)}${padRight('线路编码', headerWidths.col20)}${padRight('送货员', headerWidths.col21)}${padRight('合计重量', headerWidths.Heji)}${padRight('排名', headerWidths.row_num)}\n`;
+
+    // 遍历rows，格式化每行数据
+    rows.forEach(row => {
+        result += `${padRight(row.col3, dataWidths.col3)}${padRight(row.col20, dataWidths.col20)}${padRight(row.col21, dataWidths.col21)}${padRight(row.Heji.toString(), dataWidths.Heji)}${padRight(row.row_num.toString(), dataWidths.row_num)}\n`;
+    });
+
+    // 输出结果
+    qf_output={result};
+} catch (error) {
+    qf_output={error: '请求发生错误'};
+}
+```
+
+##### 代码块测试与解析
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1727329737339-89ebcfc5-871d-4adb-bb89-4309faa83799.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1727329749646-d64512dc-f3c4-4e67-b204-f7dd60409be3.png)
+
+##### 实现效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1727329798002-e02a3091-1966-4715-9f37-3ec8bf1e2696.png)
+
+### q-linker
+
+#### 富文本
+
+> 注释：获取数据q-linker：具体为第三方系统获取数组数据的接口。这里不做解释表格：用于接收数组数据，其中表格的字字段为数组元素的对应的参数回调接口：用于将表格中辅助字段这一列内容整合输出到富文本中
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1727331738864-ba598795-f0ad-49f0-9fb6-02d6211702dd.png)
+
+> 具体内容配置详解表格辅助字段：公式： CONCAT(表格·col3, " ", 表格·col20, " ", 表格·col21, " ", NUM(表格·Heji), "公斤"," ",表格·row\_num,"\\n")解释：将表格每一行这五列内容进行拼接，中间使用空格隔开，以及拼接公斤和换行符效果：江北配送中心 【YXA】渝西A 吴子真 22公斤 1\\n回调接口q-linker：URL：https://connect.oalite.com/api/returnAllMethod：POSTHeader/Body：\{ "value":"&lt;p>&lt;strong class=\\"ql-size-large\\" style=\\"color: rgb(230, 0, 0);\\">配送中心&lt;/strong> &lt;strong class=\\"ql-size-large\\" style=\\"color: rgb(230, 0, 0);\\">线路编码&lt;/strong> &lt;strong class=\\"ql-size-large\\" style=\\"color: rgb(230, 0, 0);\\">送货员&lt;/strong> &lt;strong class=\\"ql-size-large\\" style=\\"color: rgb(230, 0, 0);\\">合计重量&lt;/strong> &lt;strong class=\\"ql-size-large\\" style=\\"color: rgb(230, 0, 0);\\">排名&lt;/strong>&lt;p>\\n\{表格 · 辅助字段$$2954AD89B$$\}"\}Result Format:$.value​
+
+##### 配置关联
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1727333252334-cdf56202-193d-4a16-aff1-e3dcacf4f1e2.png)
+
+##### 实现效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1727333411579-2d5f5382-2da0-440c-928c-abc35562ab30.png)
+
+#### 多行文字
+
+> 注释：获取数据q-linker：具体为第三方系统获取数组数据的接口。这里不做解释表格：用于接收数组数据，其中表格的字字段为数组元素的对应的参数回调接口：用于将表格中辅助字段这一列内容整合输出到多行文字中
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1727333677508-d53b23ae-3668-40c7-b56d-e0597b90220b.png)
+
+> 具体内容配置详解：公式： CONCAT(表格·col3, " ", 表格·col20, " ", 表格·col21, " ", NUM(表格·Heji), "公斤"," ",表格·row\_num,"\\n")解释：将表格每一行这五列内容进行拼接，中间使用空格隔开，以及拼接公斤和换行符效果：江北配送中心 【YXA】渝西A 吴子真 22公斤 1\\n回调接口q-linker：URL：https://connect.oalite.com/api/returnAllMethod：POSTHeader/Body：\{ "value":"配送中心 线路编码 送货员 合计重量 排名\\n \{表格 · 辅助字段$$29576BD1A$$\}"\}Result Format:$.value
+
+##### 配置关联
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1727333918603-2a25537b-0639-4bcf-83de-9beb99f9a98a.png)
+
+##### 实现效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1727333953941-076f4238-aa90-4dc5-884d-d722a8bf5988.png)
+
+​
+
+​
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/hcggwvetwgkxuyxg?singleDoc#)

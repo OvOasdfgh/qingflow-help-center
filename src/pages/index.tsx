@@ -37,7 +37,7 @@ const guides: Guide[] = [
   {
     title: '快速开始',
     description: '认识轻流、了解核心概念，完成第一次应用搭建。',
-    to: '/docs/getting-started/overview',
+    to: '/docs/新手指南',
     icon: Sparkles,
     tone: 'green',
     keywords: '入门 开始 登录 创建应用 新手',
@@ -45,7 +45,7 @@ const guides: Guide[] = [
   {
     title: '应用与数据',
     description: '组织表单、导入数据，并为团队建立清晰的数据入口。',
-    to: '/docs/getting-started/content-workflow',
+    to: '/docs/帮助文档/轻流简介/快速入门/核心功能速览/如何收集和流转数据',
     icon: Boxes,
     tone: 'coral',
     keywords: '应用 表单 数据 导入 markdown 内容',
@@ -53,7 +53,7 @@ const guides: Guide[] = [
   {
     title: '流程与审批',
     description: '设计业务流程、配置审批节点并追踪处理进度。',
-    to: '/docs/product-guides/workflow/approval-center',
+    to: '/docs/帮助文档/流程引擎',
     icon: Workflow,
     tone: 'blue',
     keywords: '流程 审批 节点 待办 自动化',
@@ -61,7 +61,7 @@ const guides: Guide[] = [
   {
     title: '成员与权限',
     description: '管理成员、角色和内容边界，让协作安全可控。',
-    to: '/docs/admin/content-governance',
+    to: '/docs/帮助文档/管理后台/工作区管理/权限管理',
     icon: ShieldCheck,
     tone: 'yellow',
     keywords: '成员 权限 角色 管理员 安全',
@@ -69,18 +69,18 @@ const guides: Guide[] = [
   {
     title: '开放平台',
     description: '通过 API 和集成能力连接现有系统与业务数据。',
-    to: '/docs/api/overview',
+    to: '/docs/帮助文档/轻代码/openapi',
     icon: Code2,
     tone: 'mint',
     keywords: 'API 开发 接口 集成 webhook',
   },
   {
-    title: '部署与运维',
-    description: '了解私有化部署拓扑、发布流程和日常维护。',
-    to: '/docs/admin/deployment-topology',
+    title: '搭建技巧',
+    description: '按业务场景查找系统搭建方法和实用配置技巧。',
+    to: '/docs/搭建技巧/按场景分类/进销存-仓库/如何在出库时进行出库数量的安全校验',
     icon: Settings2,
     tone: 'ink',
-    keywords: '私有化 部署 运维 版本 发布',
+    keywords: '搭建 技巧 场景 实践 配置',
   },
 ];
 
@@ -88,22 +88,22 @@ const popularQuestions = [
   {
     title: '如何快速找到需要处理的审批任务？',
     category: '流程与审批',
-    to: '/docs/product-guides/workflow/approval-center',
+    to: '/docs/帮助文档/流程引擎',
   },
   {
-    title: 'Markdown 文档如何进入内容发布流程？',
-    category: '内容管理',
-    to: '/docs/getting-started/content-workflow',
+    title: '如何收集和流转业务数据？',
+    category: '快速入门',
+    to: '/docs/帮助文档/轻流简介/快速入门/核心功能速览/如何收集和流转数据',
   },
   {
-    title: '私有化部署需要准备哪些基础资源？',
-    category: '部署与运维',
-    to: '/docs/admin/deployment-topology',
+    title: '如何配置工作区权限？',
+    category: '成员与权限',
+    to: '/docs/帮助文档/管理后台/工作区管理/权限管理',
   },
   {
-    title: '如何规划帮助中心的目录与版本？',
-    category: '内容治理',
-    to: '/docs/admin/content-governance',
+    title: '在哪里查看产品更新日志？',
+    category: '更新动态',
+    to: '/docs/更新动态/更新日志',
   },
 ];
 
@@ -234,10 +234,10 @@ export default function Home(): ReactNode {
             <HelpSearch />
             <nav className={styles.quickLinks} aria-label="常用入口">
               <span>常用入口</span>
-              <Link to="/docs/getting-started/overview">新手入门</Link>
-              <Link to="/docs/product-guides/workflow/approval-center">审批中心</Link>
-              <Link to="/docs/api/overview">API 文档</Link>
-              <Link to="/docs/releases/phase-1-scope">更新日志</Link>
+              <Link to="/docs/新手指南">新手入门</Link>
+              <Link to="/docs/帮助文档/流程引擎">流程引擎</Link>
+              <Link to="/docs/帮助文档/轻代码/openapi">API 文档</Link>
+              <Link to="/docs/更新动态/更新日志">更新日志</Link>
             </nav>
           </div>
         </div>
@@ -251,7 +251,7 @@ export default function Home(): ReactNode {
                 <p className={styles.sectionLabel}>浏览文档</p>
                 <Heading as="h2">你想了解什么？</Heading>
               </div>
-              <Link to="/docs/getting-started/overview" className={styles.textLink}>
+              <Link to="/docs/新手指南" className={styles.textLink}>
                 查看全部文档 <ArrowRight aria-hidden="true" size={17} />
               </Link>
             </div>
@@ -303,10 +303,10 @@ export default function Home(): ReactNode {
                 </div>
               </div>
               <div className={styles.supportActions}>
-                <Link className={styles.secondaryButton} to="/docs/getting-started/overview">
+                <Link className={styles.secondaryButton} to="/docs/新手指南">
                   <BookOpen aria-hidden="true" size={18} /> 浏览目录
                 </Link>
-                <Link className={styles.primaryButton} to="/docs/getting-started/content-workflow">
+                <Link className={styles.primaryButton} to="/docs/帮助文档/轻流简介">
                   <FileInput aria-hidden="true" size={18} /> 内容发布指南
                 </Link>
               </div>

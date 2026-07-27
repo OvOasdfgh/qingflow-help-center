@@ -1,0 +1,111 @@
+---
+title: "单条数据流程回退"
+description: "调用本接口，回退某条数据的流程。1. 权限说明「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有对应应用的数据管理权限。2. 请求请求方式：POST请求地址：https://api.qingflow.com/{appKey}/{a..."
+slug: "/帮助文档/轻代码/openapi/应用数据接口/数据流程/单条数据流程回退"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/rml9w8gwcadm91ao?singleDoc#"
+source_updated_at: "2024-11-20T03:05:45.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "应用数据接口"
+  - "数据流程"
+  - "单条数据流程回退"
+---
+调用本接口，回退某条数据的流程。
+
+---
+
+### **权限说明**
+
+「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有对应应用的数据管理权限。
+
+### 请求
+
+**请求方式：**POST
+
+**请求地址：**https://api.qingflow.com/\{appKey\}/\{applyId\}/audit/rollback（公有云版本）
+
+> 请求地址中:applyId为需要替换的变量，根据实际获取值更新，示例如下：
+
+```javascript
+POST https://api.qingflow.com/123456/123456/audit/rollback
+```
+
+**其他版本请求地址：**
+
+钉钉版本：[https://api.ding.qingflow.com/\{appKey\}/\{applyId\}/audit/rollback](https://api.ding.qingflow.com/:applyId/audit/rollback)
+
+专有轻流：http(s)://xxx.xx(自有域名)/openApi/\{appKey\}/\{applyId\}/audit/rollback
+
+#### **参数说明(路径参数)：**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| appKey | 是 | 应用 id，获取方式详见：[基本概念介绍](https://exiao.yuque.com/ixwxsb/bgzs0e/cl59vxilcqdkmq1h#appKey) |
+| applyId | 是 | 数据ID，可从url获取或文档接口获取 |
+
+#### **参数说明(查询参数)：**
+
+#### **请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+
+#### **请求体（Body）**
+
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| userId | 是 | string | 处理人外部id，须为对应数据的对应节点的负责人。 |
+| auditNodeId | 是 | int | 执行处理的处理节点id，可通过调用文档接口获取 |
+| targetAuditNodeId | 是 | int | 回退的目标节点id |
+| auditFeedback |  | string | 处理反馈内容，字符串长度上限为200 |
+
+#### **请求体示例**
+
+```json
+{
+    "userId": "5089",
+    "auditNodeId": 67839475,
+    "targetAuditNodeId": 67839471,
+    "auditFeedback": "申请人补充信息"
+}
+```
+
+### 返回
+
+#### 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| questionRelations |  |  | 关联的设置，这里没用 |
+| result | 是 | object | 返回结果 |
+
+#### 返回体示例
+
+```json
+{
+	"errCode": 0,
+	"errMsg": "ok",
+	"result": []
+}
+```
+
+#### 错误码相关
+
+### 注意事项
+
+1、目标回退节点需要满足应用内配置的节点范围。
+
+（如图，在对应流程节点-基础设置中配置）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/9Ysus4nyLZCgqUwuX2R52fWZt6E64mCC_.png)![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/GTggvdQU4vXmFo1k53Ml2DM0sA60j9IQ_.png)
+
+2、回退的数据被重新提交后，流程遵循节点配置（可选：按流程顺序审批、直达当前节点）
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/rml9w8gwcadm91ao?singleDoc#)

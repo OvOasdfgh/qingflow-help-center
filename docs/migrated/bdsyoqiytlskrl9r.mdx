@@ -1,0 +1,80 @@
+---
+title: "删除部门"
+description: "调用本接口，删除部门1. 权限说明仅支持专有轻流「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有通讯录权限。2. 请求请求方式：DELETE请求地址：http(s)://xxx.xx(自有域名)/openApi/departme..."
+slug: "/帮助文档/轻代码/openapi/通讯录/部门/删除部门"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/bdsyoqiytlskrl9r?singleDoc#"
+source_updated_at: "2024-10-15T03:35:07.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "通讯录"
+  - "部门"
+  - "删除部门"
+---
+调用本接口，删除部门
+
+---
+
+### **权限说明**
+
+仅支持专有轻流
+
+「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有通讯录权限。
+
+### 请求
+
+**请求方式：**DELETE
+
+**请求地址：**http(s)://xxx.xx(自有域名)/openApi/department/:deptId
+
+> 请求地址中自有域名xxx.xx与:deptId为需要替换的变量，根据实际获取值更新，示例如下：
+
+```javascript
+DELETE https://xxxx.qingflow.com/openApi/department/7465
+```
+
+**其版本不支持调用此接口**
+
+#### **参数说明(路径参数)：**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| deptId | 是 | 部门id，可通过文档接口获取 |
+
+#### **参数说明(查询参数)：**
+
+#### **请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+
+### 返回
+
+#### 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| questionRelations |  |  | 关联的设置，这里没用 |
+| result | 是 | object | 返回结果 |
+| deptId |  | int | 部门id |
+
+#### 返回体示例
+
+```json
+{
+    "errCode": 0,
+    "errMsg": null,
+    "questionRelations": [],
+    "result": {
+        "deptId": 7465
+    }
+}
+```
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/bdsyoqiytlskrl9r?singleDoc#)

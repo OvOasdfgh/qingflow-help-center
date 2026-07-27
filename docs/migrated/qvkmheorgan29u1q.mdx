@@ -1,0 +1,283 @@
+---
+title: "如何实现对接飞鹅小票机打印"
+description: "1. 场景/功能描述在轻流发起提交数据后，希望可以直接将该条数据打印显示出来。2. 思路流程方式一：使用代码块来实现缺点：需要每次手动点击触发 优点：配置内容较少逻辑思路：通过使用代码块直接调用飞鹅打印机接口进行打印，并返回操作结果方式二：通过使用代码块+webhook来进行实现缺点：配置内..."
+slug: "/搭建技巧/按功能分类/第三方集成/飞鹅/如何实现对接飞鹅小票机打印"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/qvkmheorgan29u1q?singleDoc#"
+source_updated_at: "2024-10-15T03:38:18.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "第三方集成"
+  - "飞鹅"
+  - "如何实现对接飞鹅小票机打印"
+---
+## 场景/功能描述
+
+在轻流发起提交数据后，希望可以直接将该条数据打印显示出来。
+
+## 思路流程
+
+方式一：使用代码块来实现
+
+缺点：需要每次手动点击触发 优点：配置内容较少
+
+逻辑思路：通过使用代码块直接调用飞鹅打印机接口进行打印，并返回操作结果
+
+方式二：通过使用代码块+webhook来进行实现
+
+缺点：配置内容较多 优点：可以实现数据提交即可打印，无需手动触发打印
+
+逻辑思路：通过使用代码块来进行签名以及时间戳的计算，流程中配置webhook来进行接口的调用
+
+## 配置过程
+
+这里均以方式二来进行配置完成
+
+### 调用API接口准备工作
+
+这里使用的是飞鹅（中国站）的接口，所以以调用飞鹅为例，其他打印机类接口请自行查找。
+
+飞鹅云后台： [https://admin.feieyun.com/](https://admin.feieyun.com/)
+
+飞鹅接口文档：[http://help.feieyun.com/home/doc/zh;nav=1-1](http://help.feieyun.com/home/doc/zh;nav=1-1)
+
+使用接口前先根据使用准备流程申请完成
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697523985130-0cc64d68-0ff4-4066-a02e-25eea88c65e4.png)
+
+【必接】添加打印机（可以通过调用接口去添加）或者在飞鹅管理后台进行人工添加
+
+这里以调用接口来进行添加为例：
+
+接口地址：[http://help.feieyun.com/home/doc/zh;nav=1-0](http://help.feieyun.com/home/doc/zh;nav=1-0)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697524256100-43c42669-5c26-413b-9fa5-f61c68d8ca55.png)
+
+#### 表单设计
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697527336735-5082546a-9d38-4824-8d70-6f6d75da4e27.png)
+
+##### 代码块(可以设置成自动触发)
+
+- 代码注释：
+
+- qf\_field.\{批量添加打印机$$186CB6091$$\}：表单批量添加打印机表格字段
+- field\_174971929和field\_174971930分别为批量添加打印机表格的子字段
+- field\_id获取方式[https://exiao.yuque.com/rlf3k1/oanb79/ml0u7lgb3wa0vhiz?singleDoc#](https://exiao.yuque.com/rlf3k1/oanb79/ml0u7lgb3wa0vhiz?singleDoc#) 《如何在代码块中分辨表格的不同列》
+- user和UKEY需要替换成后台具体值
+
+```javascript
+const crypto = require('crypto');
+
+ // 当前时间戳
+const stime = Math.floor(Date.now() / 1000).toString();
+
+const table = qf_field.{批量添加打印机$$186CB6091$$};
+
+const newtable = table.map(item => {
+  const newItem = {
+      "sn": item.field_174971929,
+      "key": item.field_174971930
+  };
+  return newItem;
+});
+
+let printerContent = "";
+
+for (let i = 0; i < newtable.length; i++) {
+  const { sn, key } = newtable[i];
+  printerContent += `${sn} # ${key}`;
+
+  if (i !== newtable.length - 1) {
+    printerContent += "\n";
+  }
+}
+
+// 请求参数  
+const params = {
+    printerContent: printerContent,
+    apiname: 'Open_printerAddlist',
+    user: 'name***ie@163.com',
+    UKEY: 'eJQj*******HULvb',
+    stime: stime,
+  };
+
+// 拼接参数
+const message = params.user + params.UKEY + params.stime;
+ 
+// 创建SHA1哈希对象
+const sha1 = crypto.createHash('sha1');
+
+// 对拼接后的字符串进行SHA1加密
+const encrypted = sha1.update(message).digest('hex');
+
+// 添加 sign 参数
+params.sig = encrypted;
+
+qf_output={params}
+```
+
+##### 代码测试
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697527199214-9115bcb6-5b01-462a-b4f9-1a37c8465f9b.png)
+
+##### 解析配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697527221695-8b168d02-e56f-4796-94d7-eeb4007ebce3.png)
+
+##### 字段接收配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697527260222-b1067b80-b523-4a3b-b6da-a3faef0f5a91.png)
+
+#### 流程webhook设计
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697527668192-b5d57858-2caf-46eb-bb8c-aaccc4397bca.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697527690516-6d12c54b-cb7a-4188-8717-6b69cb953e4c.png)
+
+#### 发起添加打印机
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697527612550-2ef73c7b-f7c9-4ec4-aa0f-480bf4fa1315.png)
+
+### 小票机打印表单设计
+
+接口地址：[http://help.feieyun.com/home/doc/zh;nav=1-1](http://help.feieyun.com/home/doc/zh;nav=1-1)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697528351375-f4a11508-a799-4794-a8f2-d9b54978226e.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697528369680-3a3ce012-ed89-4bec-9ce3-1d97d7ec3f55.png)
+
+比如这里我需要打印小票的排版为：标题居中放大，然后换行写内容，并且内容居中
+
+所以排版格式为：&lt;CB>标题&lt;/CB>&lt;BR>&lt;C>内容&lt;/C>
+
+#### 表单设计
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697528788334-9d79ba3f-83f7-4ef8-9694-b0e8e817a174.png)
+
+##### 代码块
+
+- 代码注释：
+
+- qf\_field.\{标题$$18735D670$$\}和qf\_field.\{内容$$18735D671$$\}为表单中标题以及内容字段
+- content：将排版格式配置好，之后需要将前面的标题title以及内容cont带入进来
+- sn、user和UKEY需要替换成具体后台的值
+
+```javascript
+const crypto = require('crypto');
+
+ // 当前时间戳
+const stime = Math.floor(Date.now() / 1000).toString();
+
+// 请求参数
+const title=qf_field.{标题$$18735D670$$};
+const cont=qf_field.{内容$$18735D671$$};
+const params = {
+    content: `<CB>${title}</CB><BR><C>${cont}</C>`,
+    sn: '92**7417',
+    apiname: 'Open_printMsg',
+    user: 'name***ie@163.com',
+    UKEY: 'eJQ***7HULvb',
+    stime: stime,
+  };
+
+// 拼接参数
+const message = params.user + params.UKEY + params.stime;
+ 
+// 创建SHA1哈希对象
+const sha1 = crypto.createHash('sha1');
+
+// 对拼接后的字符串进行SHA1加密
+const encrypted = sha1.update(message).digest('hex');
+
+// 添加 sign 参数
+params.sig = encrypted;
+
+qf_output={params}
+```
+
+##### 代码测试
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697529368940-7e25cf1d-48e1-4d6d-b23c-57e87070eb5d.png)
+
+##### 解析配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697529384565-886b9174-200c-48e5-b31e-00a84bd947ce.png)
+
+##### 字段接收配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697529409202-e75a00e4-5079-49bc-a005-158023945d01.png)
+
+#### 流程webhook设计
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697529481644-145ba02d-f800-4a4c-8a19-6d7b1664b849.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697529518631-6fed2c78-305b-4739-a87b-d57f34804992.png)
+
+#### 发起数据进行打印
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1697529552483-02f4d0c8-ad71-4b53-9d57-72c6df9d072a.png)
+
+### PS:
+
+使用方式一的话，这里只展示代码块的写法
+
+```javascript
+const crypto = require('crypto');
+const axios = require('axios');
+const qs = require('qs');
+ // 当前时间戳
+const stime = Math.floor(Date.now() / 1000).toString();
+
+// 请求参数
+const bt="标题";
+const nr="内容";
+const params = {
+    content: `<CB>${bt}</CB><BR><C>${nr}</C>`,
+    sn: '922447417',
+    apiname: 'Open_printMsg',
+    user: 'na*****63.com',
+    UKEY: 'eJQ***87HULvb',
+    stime: stime,
+  };
+
+// 拼接参数
+const message = params.user + params.UKEY + params.stime;
+ 
+// 创建SHA1哈希对象
+const sha1 = crypto.createHash('sha1');
+
+// 对拼接后的字符串进行SHA1加密
+const encrypted = sha1.update(message).digest('hex');
+
+// 添加 sign 参数
+params.sig = encrypted;
+
+console.log(params); // 输出加密后的签名
+
+//调用接口进行打印操作
+let data = qs.stringify(params);
+
+let config = {
+  method: 'post',
+  maxBodyLength: Infinity,
+  url: 'http://api.feieyun.cn/Api/Open/',
+  headers: { 
+    'Content-Type': 'application/x-www-form-urlencoded'
+  },
+  data : data
+};
+
+axios(config)
+.then(function (res) {
+    const resdata=res.data;
+   qf_output={'data':res.data}
+});
+
+```
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/qvkmheorgan29u1q?singleDoc#)

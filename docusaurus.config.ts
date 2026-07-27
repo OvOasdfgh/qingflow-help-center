@@ -71,8 +71,7 @@ const config: Config = {
           position: 'left',
           label: '产品指南',
         },
-        {to: '/docs/api/overview', label: 'API', position: 'left'},
-        {to: '/docs/releases/phase-1-scope', label: '更新日志', position: 'left'},
+        {to: '/docs/更新动态/更新日志', label: '更新日志', position: 'left'},
         {to: '/search', label: '搜索', position: 'right'},
         {
           href: 'https://github.com/nonepointer666/qingflow-help-center',
@@ -88,39 +87,43 @@ const config: Config = {
           title: '产品使用',
           items: [
             {
-              label: '快速开始',
-              to: '/docs/getting-started/overview',
+              label: '新手指南',
+              to: '/docs/新手指南',
             },
             {
-              label: '流程与审批',
-              to: '/docs/product-guides/workflow/approval-center',
+              label: '轻流简介',
+              to: '/docs/帮助文档/轻流简介',
             },
             {label: '搜索文档', to: '/search'},
           ],
         },
         {
-          title: '管理与运维',
+          title: '产品配置',
           items: [
             {
-              label: '部署拓扑',
-              to: '/docs/admin/deployment-topology',
+              label: '管理后台',
+              to: '/docs/帮助文档/管理后台',
             },
             {
-              label: '内容治理',
-              to: '/docs/admin/content-governance',
+              label: '权限管理',
+              to: '/docs/帮助文档/管理后台/工作区管理/权限管理',
             },
             {
-              label: '搜索与发布',
-              to: '/docs/operations/search-and-release-runbook',
+              label: '搭建技巧',
+              to: '/docs/搭建技巧/按场景分类/进销存-仓库/如何在出库时进行出库数量的安全校验',
             },
           ],
         },
         {
-          title: '开发资源',
+          title: '资源',
           items: [
             {
-              label: 'API 概览',
-              to: '/docs/api/overview',
+              label: 'OPENAPI',
+              to: '/docs/帮助文档/轻代码/openapi',
+            },
+            {
+              label: '解决方案',
+              to: '/docs/解决方案/按场景分类/进销存-仓库/进销存方案介绍',
             },
             {
               label: 'GitHub',

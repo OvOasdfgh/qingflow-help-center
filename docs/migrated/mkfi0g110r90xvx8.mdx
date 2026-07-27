@@ -1,0 +1,192 @@
+---
+title: "轻流 x 微软AD--单点登录"
+description: "应用场景通过轻流配置单点登录sso，实现微软AD授权登录至轻流。落地方案图文/视频演示帮助文档一、获取配置信息1、登录微软ADhttps://portal.azure.com/#home2、操作步骤路径1、点击进入Azure Active Directory2、进行应用注册3、获取client..."
+slug: "/搭建技巧/按功能分类/第三方集成/微软/轻流-x-微软ad-单点登录"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/mkfi0g110r90xvx8?singleDoc#"
+source_updated_at: "2024-10-15T03:38:16.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "第三方集成"
+  - "微软"
+  - "轻流 x 微软AD--单点登录"
+---
+## 应用场景
+
+通过轻流配置单点登录sso，实现微软AD授权登录至轻流。
+
+## 落地方案
+
+![原文画板](https://cdn.nlark.com/yuque/0/2023/jpeg/28884377/1692165293054-20e166a1-eb8f-48ce-8f43-64167bb09e82.jpeg)
+
+## 图文/视频演示
+
+## 帮助文档
+
+### 一、获取配置信息
+
+#### 1、登录微软AD
+
+[https://portal.azure.com/#home](https://portal.azure.com/#home)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692165336927-841bc7e9-f87b-48e5-9733-ad34bbcfa008.png)
+
+#### 2、操作步骤路径
+
+##### 1、点击进入Azure Active Directory
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692165441655-1a831c10-c189-4a10-be4c-92911d3decf1.png)
+
+##### 2、进行应用注册
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692165499686-d3e0c809-28ea-47a1-9784-7ad853e17847.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692165553648-ab3fa5e9-3889-4831-ba43-11816cfcd283.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692165714603-e435a839-8f7b-4776-bc38-2788b4d7c6ea.png)
+
+##### 3、获取client ID
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692165865249-faf7ce44-fa24-4d9d-80ca-85a6c2a973c4.png)
+
+##### 4、获取client secret
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692165926087-994d6722-ad31-43b0-8f9d-ec480e9b4a89.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692166047526-61f86da8-cfda-43ae-8cf8-8b9ef07e1e54.png)
+
+### 二、轻流配置单点登录sso
+
+配置文档参考：[https://learn.microsoft.com/zh-cn/graph/auth-v2-user?tabs=http](https://learn.microsoft.com/zh-cn/graph/auth-v2-user?tabs=http)
+
+#### 1、用户同意授权，获取code
+
+授权代码流中的第一步是让用户授权应用代表他们执行操作。
+
+在流中，应用将用户重定向到Microsoft 标识平台/authorize终结点。 通过此终结点，Azure AD 将用户登录并请求其同意应用请求的权限。 获得同意后，Azure AD 将向应用返回授权 代码 。 然后，应用可以在 Microsoft 标识平台 /token 终结点兑换此代码以获取访问令牌。
+
+```http
+// Line breaks for legibility only
+
+GET https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize?
+client_id=11111111-1111-1111-1111-111111111111
+&response_type=code
+&redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F
+&response_mode=query
+&scope=offline_access%20user.read%20mail.read
+&state=12345  HTTP/1.1
+```
+
+​
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692166623247-e938fbbf-683b-433e-bcbf-9c097e8b7f37.png)
+
+轻流中配置如下：
+
+其中租户ID需要放在URL中。
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692167996424-b7e79130-6799-48bf-860b-2b361562a24d.png)
+
+redirect\_uri=[https://accounts.qingflow.com/sso/cb](https://accounts.qingflow.com/sso/cb)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692166698329-b507813f-fd87-4229-9b88-0b87776e7473.png)
+
+#### 2、通过 code 换取网页授权access\_token
+
+首应用使用在上一步中收到的授权 code ，通过向终结点发送 POST 请求来请求 /token 访问令牌。
+
+```http
+// Line breaks for legibility only
+
+POST /{tenant}/oauth2/v2.0/token HTTP/1.1
+Host: https://login.microsoftonline.com
+Content-Type: application/x-www-form-urlencoded
+
+client_id=11111111-1111-1111-1111-111111111111
+&scope=user.read%20mail.read
+&code=OAAABAAAAiL9Kn2Z27UubvWFPbm0gLWQJVzCTE9UkP3pSx1aXxUjq3n8b2JRLk4OxVXr...
+&redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F
+&grant_type=authorization_code
+&client_secret=HF8Q~Krjqh4r...    // NOTE: Only required for web apps
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692166827207-662885ee-2fec-45f5-af89-f607293aef60.png)
+
+**返回说明**
+
+正确时返回的 JSON 数据包如下：
+
+```json
+HTTP/1.1 200 OK
+Content-type: application/json
+
+{
+    "token_type": "Bearer",
+    "scope": "Mail.Read User.Read",
+    "expires_in": 3736,
+    "ext_expires_in": 3736,
+    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik5HVEZ2ZEstZnl0aEV1Q...",
+    "refresh_token": "AwABAAAAvPM1KaPlrEqdFSBzjqfTGAMxZGUTdM0t4B4..."
+}
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692166886231-b8b1960d-c330-46ad-9115-438e3b3959c8.png)
+
+轻流中配置如下：
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692166996215-ef432aab-ea8d-4147-b76a-1c910bf5b5ea.png)
+
+#### 3、获取用户信息
+
+拥有访问令牌后，应用会使用它调用 Microsoft Graph，方法是将访问令牌作为 持有者 令牌附加到 HTTP 请求中的 Authorization 标头。 以下请求获取已登录用户的配置文件。
+
+```http
+GET https://graph.microsoft.com/v1.0/me  HTTP/1.1
+Authorization: Bearer eyJ0eXAiO ... 0X2tnSQLEANnSPHY0gKcgw
+Host: graph.microsoft.com
+```
+
+**返回说明**
+
+正确时返回的 JSON 数据包如下：
+
+```json
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+  "businessPhones": [],
+  "displayName": "zhangziqi",
+  "givenName": null,
+  "jobTitle": null,
+  "mail": null,
+  "mobilePhone": null,
+  "officeLocation": null,
+  "preferredLanguage": null,
+  "surname": null,
+  "userPrincipalName": "zhangziqi@hellogww126.onmicrosoft.com",
+  "id": "8d63372b-6f77-4ad3-9c53-6724118a9f6f"
+}
+```
+
+轻流中配置如下：
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692167189323-c8ad58d2-c312-40f8-9883-119f163312ff.png)
+
+### 三、实际测试
+
+#### 1、复制登录链接，在网页端打开
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/28884377/1657078240097-434ff5d9-5cfa-4ffe-a28c-2b2beeb2706c.png)
+
+#### 2、输入账号密码登录
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692167492828-e18a0de4-8e85-44b0-847c-bcfa1d8e9340.png)
+
+#### 3、登录成功
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1692167539261-bf6bc099-2dbc-4c47-b733-38000f678332.png)
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/mkfi0g110r90xvx8?singleDoc#)

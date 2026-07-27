@@ -1,0 +1,67 @@
+---
+title: "鉴权配置：获取企微的access_token"
+description: "1. 场景/功能描述比如企业微信开放了打卡应用的api，功能包括查询打卡数据，能获取到用户、地点、时间、打卡类型等信息，在轻流中可以基于以上数据做一段时间内的迟到/事假等统计，以及更深层数据处理，方便管理，而企微的access_token调用一次有效时间为72000s（2小时），不想每次使用都..."
+slug: "/搭建技巧/按功能分类/第三方集成/企业微信/鉴权配置-获取企微的access-token"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/imec4ztymprrfiwq?singleDoc#"
+source_updated_at: "2024-10-15T03:38:18.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "第三方集成"
+  - "企业微信"
+  - "鉴权配置：获取企微的access_token"
+---
+## 场景/功能描述
+
+比如企业微信开放了打卡应用的api，功能包括查询打卡数据，能获取到用户、地点、时间、打卡类型等信息，在轻流中可以基于以上数据做一段时间内的迟到/事假等统计，以及更深层数据处理，方便管理，而企微的access\_token调用一次有效时间为72000s（2小时），不想每次使用都调用
+
+## 思路流程
+
+可以通过配置鉴权实现自动调用access\_token的有效值
+
+参考企微的接口文档：[https://developer.work.weixin.qq.com/document/path/91039](https://developer.work.weixin.qq.com/document/path/91039)
+
+## 配置过程
+
+### 在企微后台查找相关参数的值
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/34394013/1697470866173-8eb426ac-1aca-402b-b0ee-aa6296450a6d.png)
+
+每个企业都拥有唯一的corpid，获取此信息可在管理后台“我的企业”－“企业信息”下查看“企业ID”（需要有管理员权限）
+![文档图片](https://cdn.nlark.com/yuque/0/2023/png/34394013/1697470885306-7c1ee4e6-24b0-401d-ab5c-d30140c247cf.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/34394013/1697470928471-0f6f647d-2865-4089-ad5b-cd15aa42e481.png)
+
+本接口调用SECRET应在【打卡】这个应用中获取
+
+### 鉴权设置
+
+在轻商城-拓展插件中找到【鉴权】并安装
+
+点击【配置】，再点击【添加新的配置】
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/34394013/1697470720415-0cb52e34-b63a-436a-9066-e6ad6d1cd424.png)
+
+![1697470042181.png](https://cdn.nlark.com/yuque/0/2023/png/34394013/1697470619122-2d8fadeb-45dd-489d-9018-f6d36039d633.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/34394013/1697470786975-f8cc9c45-3390-40d4-a4db-bdbc7f34336c.png)
+
+点击保存
+
+#### 在QS主动中进行调用鉴权
+
+在QSource主动设置页面将鉴权方式选为刚刚命名的模板名称
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/34394013/1697471063274-1f08ad37-b046-4ed4-b9a5-7007d2d3874e.png)
+
+然后这里的内容删掉就可以
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/34394013/1697506997013-39066ae3-468e-4922-9a7f-c16f82168efd.png)
+
+其他还按照这个中的配置进行填写[https://exiao.yuque.com/gh9szn/rddsr3/rbbo59?singleDoc#](https://exiao.yuque.com/gh9szn/rddsr3/rbbo59?singleDoc#)
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/imec4ztymprrfiwq?singleDoc#)

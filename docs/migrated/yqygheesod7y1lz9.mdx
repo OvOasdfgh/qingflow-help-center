@@ -1,0 +1,114 @@
+---
+title: "更新成员"
+description: "更新成员信息1. 权限说明仅支持专有轻流；「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有通讯录权限。2. 请求请求方式：POST请求地址：https://自有域名/openApi/user/:userId请求地址中:userI..."
+slug: "/帮助文档/轻代码/openapi/通讯录/成员/更新成员"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/yqygheesod7y1lz9?singleDoc#"
+source_updated_at: "2024-10-15T03:35:08.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "通讯录"
+  - "成员"
+  - "更新成员"
+---
+更新成员信息
+
+---
+
+### **权限说明**
+
+仅支持专有轻流；
+
+「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有通讯录权限。
+
+### 请求
+
+**请求方式：**POST
+
+**请求地址：**[https://自有域名/openApi/user/:userId](https://xn--eqrt2gz0rng0a/openApi/user/:userId)
+
+> 请求地址中:userId为需要替换的变量，根据实际获取值更新，示例如下：
+
+```javascript
+POST https://abcd.qingflow.com/openApi/user/88888
+```
+
+#### **2.1 参数说明(路径参数)：**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| userId | 是 | 用户ID，获取方式参考：基本概念介绍 |
+
+#### **2.2 参数说明(查询参数)：**
+
+无
+
+#### **2.3 请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+
+#### **2.4 请求体（Body）**
+
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| userId | 是 | string | 用户的userId |
+| name |  | string | 用户名 |
+| areaCode |  | string | 区号，传手机号时必填 |
+| mobileNum |  | string | 手机号 |
+| email | 是 | string | 邮箱 |
+| headImg |  | string | 头像 |
+| department |  | \[array\] | 同步部门id列表 |
+| role |  | \[array\] | 同步角色id列表 |
+| customRole |  | \[array\] | 成员所属自建角色列表（仅企业微信/钉钉/飞书等特殊工作区适用） |
+| customDepartment |  | \[array\] | 成员所在自建部门列表（仅企业微信/钉钉/飞书等特殊工作区的专有轻流工作区适用） |
+| beingDisabled |  | boolean | 是否禁用成员 |
+| superiorId |  | string | 不传不会更新直属主管、传空值会清空直属主管 |
+
+#### **2.5 请求体示例**
+
+```json
+{
+    "userId": "",  //必填
+    "name": "",
+    "areaCode": "86",
+    "mobileNum": "",
+    "email": "",  //邮箱，必填
+    "headImg": "",
+    "department":[],
+    "role": [],
+    "customRole": [],
+    "customDepartment": [],
+    "beingDisabled": "true"
+}
+```
+
+### 返回
+
+#### 3.1 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| questionRelations |  |  | 关联的设置，这里没用 |
+| result | 是 | object | 返回结果 |
+| userId |  | string | 用户的userId |
+
+#### 3.2 返回体示例
+
+```json
+{
+    "errCode": 0,
+    "errMsg": null,
+    "result": {
+        "userId": "用户的userId"
+    }
+}
+```
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/yqygheesod7y1lz9?singleDoc#)

@@ -1,0 +1,81 @@
+---
+title: "如何使用代码块查询多个文本中关键词的重复次数？"
+description: "1. 场景描述查询“文本框1”和“文本框2”中出现指定“关键字”的重复次数2. 思路逻辑定义一个变量s：即文本框1+文本框2的内容var s = qf_field.{文本框1$$62A99ADE$$}+qf_field.{文本框2$$62ABCD07$$};定义一个变量word：即要查询的“关..."
+slug: "/常见问题-faq/轻代码/如何使用代码块查询多个文本中关键词的重复次数"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/rpntfq1re5ngiiny?singleDoc#"
+source_updated_at: "2024-10-15T03:38:53.000Z"
+keywords:
+  - "常见问题（FAQ）"
+  - "轻代码"
+  - "如何使用代码块查询多个文本中关键词的重复次数？"
+---
+## 场景描述
+
+查询“文本框1”和“文本框2”中出现指定“关键字”的重复次数
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1656486194719-3e3b31d7-c5af-4e77-b696-775494e5c4f5.png)
+
+## 思路逻辑
+
+定义一个变量s：即文本框1+文本框2的内容
+
+var s = qf\_field.\{文本框1$$62A99ADE$$\}+qf\_field.\{文本框2$$62ABCD07$$\};
+
+定义一个变量word：即要查询的“关键字”
+
+var word = qf\_field.\{关键字$$62ABCDE0$$\};
+定义一个变量location：即查询的位置
+
+var location = 0;
+
+配置循环体
+
+定义一个变量x，即重复次数
+
+查询s中word的位置，从location位置开始查询：s.indexOf(word,location)；查询不到会返回-1，查询得到会返回指定位置
+
+当查询的到，返回不等于-1时，持续循环；查询不到，等于-1时，跳出循环
+
+每次循环，x加1：x++；查询的位置，等于上一次的查询到的返回位置+1
+
+for(var x = 0;s.indexOf(word,location) != -1;x++)\{
+
+location = s.indexOf(word,location) + 1;
+
+\}
+
+​
+
+使用：qf\_output，输出重复次数x
+
+qf\_output = \{重复次数:x\};
+
+公式复制（qf\_field.\{..\}为应用内字段，需手动调整）
+
+```javascript
+var s = qf_field.{文本框1$$62A99ADE$$}+qf_field.{文本框2$$62ABCD07$$};
+var word = qf_field.{关键字$$62ABCDE0$$};
+var location = 0;
+for(var x = 0;s.indexOf(word,location) != -1;x++){
+location = s.indexOf(word,location) + 1;
+}
+qf_output = {重复次数:x};
+```
+
+### 设置图解
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1656486325414-4bd3c338-474f-41ab-8883-7cba25ac87a7.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1656486349897-71bd608b-1732-4c83-b937-7071e997a3e4.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1656486379815-783b526b-82b9-41af-9e8b-55d5fb35178e.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1656486495476-5cc38e50-77e5-4945-a54d-4bd51e0aa576.png)
+
+## 前往演示
+
+[https://qingflow.com/f/e6268b33](https://qingflow.com/f/e6268b33)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/rpntfq1re5ngiiny?singleDoc#)

@@ -1,0 +1,112 @@
+---
+title: "高德地图"
+description: "1. 介绍高德地图是中国领先的数字地图内容、导航和位置服务解决方案提供商。拥有导航电子地图甲级测绘资质和互联网地图服务甲级测绘资质，其优质的电子地图数据库成为它的核心竞争力。2. 鉴权信息操作步骤：获取API Key 第一步，创建新应用进入控制台，创建一个新应用。如果您之前已经创建过应用，可直..."
+slug: "/帮助文档/轻代码/连接中心/连接器/企业服务/高德地图"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/vs86mv9p0vinf58g?singleDoc#"
+source_updated_at: "2024-11-26T08:30:19.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "连接中心"
+  - "连接器"
+  - "企业服务"
+  - "高德地图"
+---
+### 介绍
+
+高德地图是中国领先的数字地图内容、导航和位置服务解决方案提供商。拥有导航电子地图甲级测绘资质和互联网地图服务甲级测绘资质，其优质的电子地图数据库成为它的核心竞争力。
+
+### 鉴权信息
+
+**操作步骤：**
+
+1. **获取API Key **
+
+第一步，创建新应用
+
+进入[控制台](https://lbs.amap.com/dev/)，创建一个新应用。如果您之前已经创建过应用，可直接跳过这个步骤。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/ScKVckdCxPRbyoe97dooBQBTQYp_SS1F_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/41MCes4WHAx1L5CCOzVSMukjEHXlwV_i_.png)
+
+第二步，添加新Key
+
+在创建的应用上点击"添加新Key"按钮，在弹出的对话框中，依次：输入应用名名称，选择绑定的服务为“web服务API”，如下图所示：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/7WP70CVlddFFGIamSJbqPPEonGkSNQGI_.png)
+
+在阅读完高德地图API服务条款后，勾选此选项，点击“提交”，完成 Key 的申请，此时您可以在所创建的应用下面看到刚申请的 Key 了。
+
+1. **进入轻商城-连接中心中，选择连接器“高德地图”，点击“配置”，并填写API Key。**
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/HDeFsrir51vF1kZDxuXWpzI44OH4Jb4W_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/z7U8GLdYx7rlZyG41qlEf4NrREGUYBfM_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/DgHbvn00yQeDfL7UTMz6MWpikeQQUCDQ_.png)
+
+通过以上步骤，您可以完成高德地图的鉴权，省去每次使用连接器重新填写api key的步骤。
+
+##### 注意事项
+
+使用连接器前，请确保已经在插件中心中安装Q-Linker/Webhook
+
+### 事件信息
+
+| 事件 | 描述 |
+| --- | --- |
+| IP定位 | 通过输入IP信息获取实际的地理位置 |
+| 行政区域查询 | 行政区域查询。只支持单个关键词语搜索，关键词支持：行政区名称、citycode、adcode。 |
+| 地理编码查询 | 输入结构化地址（如：北京市朝阳区阜通东大街6号），查询地理编码 |
+| 逆地理编码 | 输入地理编码，查询到对应的地址 |
+
+### 配置演示
+
+##### IP定位
+
+**效果展示：**
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/sXG28jzjECIGlagKvKkWULSJvW60oqtM_.gif)
+
+**前置条件：**
+
+需要确定您在连接中心-高德地图连接器中配置了鉴权信息（配置方法见上文鉴权信息）
+
+**配置步骤：**
+
+1. 创建应用，根据连接中心-高德地图连接器-IP定位事件的要求，在表单中添加字段。
+
+事件中要求的字段见下图（事件变量是根据[**高德地图说明文档**](https://lbs.amap.com/api/webservice/guide/api/ipconfig)要求设置的）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/vPx4XBS85NzeMUVa_4ac8k6DKGY9St8r_.png)
+
+应用中表单的配置情况见下图，包括P地址（单行文本字段）、类型（数字/单行文本字段），定位查询（Q-Linker字段），定位结果（多行文本字段）四个字段，然后保存（一定要保存，关系到下一步Q-Linker的配置）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/Ic_4FpqIzeZhJIRoWEB_1QiK5aWXRd3g_.png)
+
+1. 选中Q-Linker字段，「配置模式」选连接中心里对应模版，绑定变量，然后点击右上角保存（这里一定要注意保存，关系到下一步的配置）
+
+（模版配置如下图）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/ugrb1Hnt4F5vMlUNPbRwHzrdNRImA5-B_.png)
+
+（绑定变量如下图，将变量与字段一一对应）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/Cqw_TqurEFa79wo6heV3-DELvh9s9Ceo_.png)
+
+1. 关联多行文本，点击多行文本字段，右侧配置框中：默认内容-关联已有数据-XXX（Q-linker名称）-all（对应参数）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/0O4pNMI-Mwzpmpmnk6QEkUkaV-cfwMrp_.png)
+
+到这里就配置完成，可以发布了。
+
+**结果展示**
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/ywu4j_GMr2rAvJ4FB0I4o-tnFMY1bLIa_.gif)
+
+注意：type的值填写4或6（4 表示 IPv4，6 表示 IPv6）
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/vs86mv9p0vinf58g?singleDoc#)

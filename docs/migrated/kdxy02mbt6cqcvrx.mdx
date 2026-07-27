@@ -1,0 +1,117 @@
+---
+title: "数据关联"
+description: "1 .功能简介“数据关联”字段是轻流系统中的高级字段，可通过下拉选择的形式加载工作区中任意应用中某个字段的历史数据，方便历史数据的直接调用。注：子管理员配置数据关联字段时，必须拥有目标应用的数据权限，才能关联到。例如，在填写「订单信息」时，系统自动获取「商品信息」中已录入的所有“商品编号”。2..."
+slug: "/帮助文档/表单引擎/字段类型与配置/连接工具类/数据关联"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/kdxy02mbt6cqcvrx?singleDoc#"
+source_updated_at: "2024-10-15T03:29:13.000Z"
+keywords:
+  - "帮助文档"
+  - "表单引擎"
+  - "字段类型与配置"
+  - "连接工具类"
+  - "数据关联"
+---
+### 1 .功能简介
+
+“数据关联”字段是轻流系统中的**高级字段**，可通过**下拉选择**的形式加载工作区中任意应用中某个字段的**历史数据**，方便历史数据的直接调用。
+
+注：子管理员配置数据关联字段时，必须拥有目标应用的数据权限，才能关联到。
+
+例如，在填写「订单信息」时，系统自动获取「商品信息」中已录入的所有“商品编号”。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-06-29/1eT1Dwh1XlQUxPQ40k-U1gt4pS23IPjD_.png)
+
+### 2 .配置方式
+
+#### 2.1 生成下拉选项
+
+想要在应用「订单信息」中，调用「商品信息」中已录入的商品编号，以下拉选项的形式呈现。
+
+在表单编辑页面左侧的字段菜单栏选择【数据关联】字段，在右侧的字段配置面板，修改【标题】为“商品编号”，并进行【关联设置】：关联应用为「商品信息」，关联字段为“商品编号”。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-06-29/4BCx2HJqEnXKcIA16D8Lxco6Crb0xiOn_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-06-29/FdQ7p9I9TH3KA8VsKhn-czXY1YUEH-YT_.png)
+
+#### 2.2 筛选下拉选项
+
+在2.1的基础上，想要筛选关联应用中调用来的值。例如：商品编号为QF0001的是绝版商品，不可以被购买，在生成选项时，需要将这个值筛选出去。
+
+选择【筛选数据】，通过简易模式或高级模式（公式函数）设置筛选条件。此处使用 「商品编号不包含QF0001 」和 「商品编号!="QF0001" 」的效果一致。
+
+注：高级模式下，使用公式函数可以设置更复杂的筛选条件；简易模式和高级模式不可同时使用。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-06-29/49hxTa3bqCNogt5akqnSVp61_IUtr2kL_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-06-29/OfS_E1wW9v9vorCCyjL3OQ62zADbI_3a_.png)
+
+#### 2.3 为下拉选项排序
+
+在2.1的基础上，想要将关联应用中调用来的所有值，根据目标应用字段进行排序，例如：按照商品编号的大小，从小到大排列。
+
+勾选【排序设置】，根据**关联应用**中的字段选择升序或降序的方式排序。可选的字段包括系统默认字段（数据ID、编号、申请人、申请时间）和自定义创建的字段（商品名称、商品单价、单价、数量），实现选项按录入系统的时间先后、价格大小、数量多少等不同规则排序。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-06-29/ahH9Z9EAidFI7q1HR17JhNi8d-YoQ9fn_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-06-29/K3gUvPrYYNtEcAb4Quuyohir1UXyVeAv_.png)
+
+#### 2.4 对选项进行聚合计算
+
+在2.1的基础上，想要对关联应用中调用来的所有值，执行计算并返回单一的值，如：求和、平均值、最大值、最小值、最新值、最旧值、计数。例如，想要统计最新的商品编号的个数，了解仓库中有多少个商品种类（假设一个商品编号对应一个商品种类）。
+
+勾选【聚合方式】，选择计数，即可返回「商品信息」应用中所有“商品编号”的数量。选择最新值或最旧值，可以返回最近一次录入系统的商品编号或最早录入系统的商品编号。
+
+注：
+
+- 只有数字字段中录入的数字，可以参与聚合方式中求和、平均值、最大值、最小值的计算。
+- 聚合方式的最新/最旧数据不受排序设置的影响
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-06-29/pBdm86NmWhh5TfsUIT6KZ19ZeOr1OKg2_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-06-29/C6wpFK8hl1hDGc0bBv44ndsq7B8TyNE8_.png)
+
+#### 2.5 实时新增选项
+
+在2.1的基础上，想要实时新增下拉选项。例如：仓库已入库编号为QF0010的新商品——升降桌，但还未录入系统，导致当前表单中无法选择这一商品，如何解决？
+
+勾选【自定义按钮】，选择当前应用中已创建好的按钮“新增商品”（一个数据关联字段只可选择一个按钮），跳转「商品信息」应用录入新的产品信息。
+
+注：自定义按钮是应用的拓展设置，需要在插件中心安装后创建。点击后可以实现向目标应用添加数据，或跳转指定的网页链接。目前，表单的【数据关联】字段和报表的【数据表】支持自定义按钮的使用 
+[点击此处了解详情](https://help.qingflow.com/help-docs?type=nocode&docId=93e4b6a0642024f00621fa113965aad3&parentId=)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-06-29/LQGuoq5t6efF_QwGLFSI7uHKMTXAH7rD_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/clip_image001.gif?sign=fb032f442829153364028f3bc68a07fd&t=1688351151)
+
+#### 2.6 字段脱敏
+
+对涉及隐私或其他重要信息的字段勾选「字段脱敏」后，该字段显示为“ ”
+
+注意：字段脱敏，是在数据生成后脱敏，并不是在填写表单时脱敏
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/%E6%95%B0%E6%8D%AE%E8%84%B1%E6%95%8F/%E6%95%B0%E6%8D%AE%E5%85%B3%E8%81%94.gif?sign=4602e9afe9defbf2b3578aeac37e95a0&t=1689154162)
+**如何为脱敏字段解密？**[点击此处了解详情](https://help.qingflow.com/help-docs?type=nocode&docId=6d59994e64a2436a0001af3f70e8c836&parentId=#2.2.620E884B1E6958FE5AD97E6AEB5E79A84E8A7A3E5AF86)
+
+### 3 注意事项
+
+1.除起止时间、图片选择、描述文字、富文本、段落、数据关联、引用、Q-Linker、代码块外，图示中可查看的字段都是可以被「数据关联」字段调用的数据类型。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-06-29/edz0V7bu_C6LgoeREm0KgOjDd17cHt36_.png)
+
+2.子管理员配置数据关联字段时，必须拥有目标应用的数据权限，才能关联到。
+
+3.数据筛选的高级模式下，使用公式函数可以设置更复杂的筛选条件，但简易模式和高级模式不可同时使用。
+
+4.只有数字字段中录入的数字，可以参与聚合方式中求和、平均值、最大值、最小值的计算。
+
+5.企业微信用户在关联申请人、成员、部门字段时，不显示具体名称，显示申请人、成员、部门ID。
+
+6.若数据关联字段关联了被脱敏的字段，该数据关联字段默认不脱敏。除非重新配置脱敏。脱敏字段在全掩盖的情况下不支持搜索。但可以作为筛选字段，也可以参与计算，参与计算后的value不脱敏。在打印时，按照脱敏后的样式打印。
+
+本文是否对您有帮助？点击链接给我们反馈吧~
+
+[https://qingflow.com/f/15b0b930](https://qingflow.com/f/15b0b930)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/kdxy02mbt6cqcvrx?singleDoc#)

@@ -1,0 +1,68 @@
+---
+title: "重新加签文件接口"
+description: "1. 权限说明增加对轻流传出的附件url重新进行加签的opneApi，方便企业版客户其他系统中使用轻流附件的url。使用场景：对于通过轻代码模块功能推送出来的附件url，过期之后可以重新通过这个接口进行加签。2. 请求请求方式：POST（HTTPS）请求地址：https://api.qingf..."
+slug: "/帮助文档/轻代码/openapi/其他/重新加签文件接口"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/sgsikhat15yfk6g2?singleDoc#"
+source_updated_at: "2024-12-18T09:16:20.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "其他"
+  - "重新加签文件接口"
+---
+### 权限说明
+
+增加对轻流传出的附件url重新进行加签的opneApi，方便企业版客户其他系统中使用轻流附件的url。
+
+**使用场景**：对于通过轻代码模块功能推送出来的附件url，过期之后可以重新通过这个接口进行加签。
+
+### 请求
+
+**请求方式：**POST（**HTTPS**）
+
+**请求地址：**https://api.qingflow.com/resignUrl
+
+**其他版本请求地址：**
+
+钉钉版本：https://api.ding.qingflow.com/resignUrl
+
+专有轻流：http(s)://xxx.xx(自有域名)/openApi/resignUrl
+
+**​**
+
+**请求头（header）**
+
+| 参数 | 是否必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| `accessToken` | 是 | string | 调用接口凭证 |
+
+**Body请求参数**
+
+| 参数 | 类型 | 必须 | 说明 |
+| --- | --- | --- | --- |
+| url | \[string\] | 是 | 需要重新加签的url |
+
+**返回参数**​
+
+| 参数 | ​<br /> | 必须 | 说明 |
+| --- | --- | --- | --- |
+| errCode | int | 是 | <br /> |
+| errMsg | string | 是 | ​<br /> |
+| result | string | 是 | 重新加签后的url |
+
+**参数****示例**
+
+```json
+{
+    "errCode": 0,
+    "errMsg": "",
+    "result": ""
+}
+```
+
+### ​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/sgsikhat15yfk6g2?singleDoc#)

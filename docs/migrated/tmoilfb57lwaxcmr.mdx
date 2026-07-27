@@ -1,0 +1,74 @@
+---
+title: "轻流（公有云）"
+description: "1. 介绍通过“无代码”技术重塑开发方式。打包轻流的所有openAPI，对接可以实现更多好玩场景。2. 鉴权信息1.通过轻商城-插件中心获取openApi的accessToken2.轻商城-连接中心配置鉴权，变量配好后全局可用注意事项3. 事件信息事件描述获取工作区所有应用接口地址：https..."
+slug: "/帮助文档/轻代码/连接中心/连接器/系统集成/轻流-公有云"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/tmoilfb57lwaxcmr?singleDoc#"
+source_updated_at: "2024-11-26T08:30:17.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "连接中心"
+  - "连接器"
+  - "系统集成"
+  - "轻流（公有云）"
+---
+### 介绍
+
+通过“无代码”技术重塑开发方式。打包轻流的所有openAPI，对接可以实现更多好玩场景。
+
+### 鉴权信息
+
+1.通过轻商城-插件中心获取openApi的accessToken
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/vhPUIHyLFMr1Hq2Dgaz3qhtmHmPdX9dZ_.png)
+
+2.轻商城-连接中心配置鉴权，变量配好后全局可用
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/8J-gpEZzSrr5NvHh32mmTNKwNC1oipLJ_.png)
+
+#### 注意事项
+
+### 事件信息
+
+| 事件 | 描述 |
+| --- | --- |
+| 获取工作区所有应用 | 接口地址：[https://api.qingflow.com/app](https://api.qingflow.com/app) |
+| 获取应用表单信息 | 接口地址：[https://api.qingflow.com/app/\{appKey\}/form](https://api.qingflow.com/app/%7BappKey%7D/form) |
+| 获取应用的数据 | 接口地址：[https://api.qingflow.com/app/\{appKey\}/apply/filter](https://api.qingflow.com/app/%7BappKey%7D/apply/filter) |
+| 添加数据 | 接口地址：[https://api.qingflow.com/app/\{appKey\}/apply](https://api.qingflow.com/app/%7BappKey%7D/apply) |
+| 查询操作结果 | 接口地址：[https://api.qingflow.com/operation/\{requestId\}](https://api.qingflow.com/operation/%7BrequestId%7D) |
+| 删除数据 | 接口地址：[https://api.qingflow.com/app/\{appKey\}/apply](https://api.qingflow.com/app/%7BappKey%7D/apply) |
+| 获取单条数据的详细信息 | 接口地址：[https://api.qingflow.com/apply/\{applyId\}](https://api.qingflow.com/apply/%7BapplyId%7D) |
+| 更新单条数据的信息 | 接口地址：[https://api.qingflow.com/apply/\{applyId\}](https://api.qingflow.com/apply/%7BapplyId%7D) |
+| 获取单条数据的流程日志 | 接口地址：[https://api.qingflow.com/apply/\{applyId\}/auditRecord](https://api.qingflow.com/apply/%7BapplyId%7D/auditRecord) |
+| 催办某条数据 | 接口地址：[https://api.qingflow.com/apply/\{applyId\}/urge](https://api.qingflow.com/apply/%7BapplyId%7D/urge) |
+| 处理某条数据 | 接口地址：[https://api.qingflow.com/\{applyId\}/audit](https://api.qingflow.com/%7BapplyId%7D/audit) |
+| 获取某条流程日志的详细信息 | 接口地址：[https://api.qingflow.com/apply/\{applyId\}/auditRecord/\{auditRcdId\}](https://api.qingflow.com/apply/%7BapplyId%7D/auditRecord/%7BauditRcdId%7D) |
+| 获取单条数据的留言信息 | 接口地址：[https://api.qingflow.com/apply/\{applyId\}/comment](https://api.qingflow.com/apply/%7BapplyId%7D/comment) |
+| 新增留言 | 接口地址：[https://api.qingflow.com/apply/\{applyId\}/comment](https://api.qingflow.com/apply/%7BapplyId%7D/comment) |
+| 读取成员 | 接口地址：[https://api.qingflow.com/user/\{userId\}](https://api.qingflow.com/user/%7BuserId%7D) |
+| 获取管理员列表 | 接口地址：[https://api.qingflow.com/manager/super](https://api.qingflow.com/manager/super) |
+| 获取角色成员 | 接口地址：[https://api.qingflow.com/role/\{roleId\}/user](https://api.qingflow.com/role/%7BroleId%7D/user) |
+| 获取角色列表 | 接口地址：[https://api.qingflow.com/role](https://api.qingflow.com/role) |
+| 删除角色 | 接口地址：[https://api.qingflow.com/role/\{roleId\}](https://api.qingflow.com/role/%7BroleId%7D) |
+| 获取部门成员列表 | 接口地址：[https://api.qingflow.com/department/\{deptId\}/user](https://api.qingflow.com/department/%7BdeptId%7D/user) |
+| 获取部门列表 | 接口地址：[https://api.qingflow.com/department](https://api.qingflow.com/department) |
+| 获取不在部门的成员 | 接口地址：[https://api.qingflow.com/user/undeparted](https://api.qingflow.com/user/undeparted) |
+
+### 配置演示
+
+#### 获取应用表单信息
+
+1.变量输入可以直接在「事件配置」里输入，成为全局默认值。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/3M6g_T83L_ACJY-wMUaCPbgm-B-NDECx_.png)
+
+2.应用中新建Q\_Linker字段，「配置模式」选连接中心里对应模版。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/yEdlmLp-ps60gRagYr0yrbEwKDDYxwQF_.png)
+
+3.根据连接中心事件的别名，以及自身业务场景，设置其他返回数据的字段。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/N_90s9wiYjpPOOYigwxnNQDedRoD-8Ns_.png)![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/BA8ec2LM8QXyH_CE-6On54UUxml5T0p7_.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/tmoilfb57lwaxcmr?singleDoc#)

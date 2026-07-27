@@ -1,0 +1,194 @@
+---
+title: "轻流 x 腾讯云函数：解析Excel文件内容至表格"
+description: "1. 场景/功能描述当用户在轻流平台上上传Excel文件时，Q-Linker 会自动触发腾讯云函数（Serverless Cloud Function，SCF）来解析该Excel文件的内容并将其写入到轻流的表格中。功能的主要作用是简化数据录入流程，并实现数据的统一管理和后续处理。2. 思路逻辑..."
+slug: "/搭建技巧/按功能分类/第三方集成/腾讯云/轻流-x-腾讯云函数-解析excel文件内容至表格"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/im6nlq0t0c3euii5?singleDoc#"
+source_updated_at: "2024-10-15T03:38:18.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "第三方集成"
+  - "腾讯云"
+  - "轻流 x 腾讯云函数：解析Excel文件内容至表格"
+---
+## 场景/功能描述
+
+当用户在轻流平台上上传Excel文件时，Q-Linker 会自动触发腾讯云函数（Serverless Cloud Function，SCF）来解析该Excel文件的内容并将其写入到轻流的表格中。功能的主要作用是简化数据录入流程，并实现数据的统一管理和后续处理。
+
+![原文画板](https://cdn.nlark.com/yuque/0/2023/jpeg/27174367/1690195743233-718f8852-68fc-4ba5-b879-6b600533634f.jpeg)
+
+## 思路逻辑
+
+> ⭐️ 相关教程 ⭐️：腾讯云函数：https://cloud.tencent.com/document/product/583Q-Linker配置说明：https://qingflow.com/help/docs/61a6d9292d94980041aedf1b​PS：直接使用代码块来解析excel表格数据：https://exiao.yuque.com/enzu8l/oy1eh8/kcwvneffzbschonp?singleDoc# 《代码块：获取excel表格特定区域数据》
+
+## 配置过程
+
+### 步骤一：前往[腾讯云官网](https://cloud.tencent.com/)，注册账号。
+
+如已有账号，请直接登录账号！按提示要求，完成相关身份认证。
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1690366975591-67cffd79-548a-4ede-9a74-5c0a4ebb8a33.png)
+
+### 步骤二：前往[云函数](https://console.cloud.tencent.com/scf/list?rid=4&ns=default)，进入函数服务。
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1690427891746-e7755afb-3aa1-40d8-84f4-f65c7804bdac.png)
+
+### 步骤三：新建函数，并完成相关配置。
+
+#### 新建空白函数
+
+点按“新建”按钮，进入到创建函数的页面。
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1690437460021-1bc867df-81df-4e1c-a5ab-f78408b993eb.png)
+
+选择“从头开始”
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1690442639600-4da53bf5-cd95-4400-8158-0cdca947f058.png)
+
+#### 完成基础配置
+
+函数类型，勾选为“事件函数”；运行环境，选择Nodejs；其他项可自行填写
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1690442666278-8e7dd818-b387-4f3b-be20-a8c2c4854478.png)
+
+#### 函数代码
+
+提交方法：本地上传zip包
+
+执行方法：index.main\_handler
+
+> 将以上的附件 my\_package.zip 下载至本地，然后上传至“函数代码”中。
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1690442599313-edb41c44-415a-4d72-8ad5-fc54ff60d8b5.png)
+
+#### 触发器配置
+
+触发方式：API网关触发
+
+请求方法：POST
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1690443328872-c3a4af70-7dff-49c3-80f0-52a2ea586bde.png)
+
+#### 完成创建
+
+勾选同意相关协议，点按完成，等待部署完成即可。
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1690443423305-3a792c95-77c9-4b87-a43b-2a55eefb2729.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1690443475835-0fd409b3-81a0-4615-a054-eea1da018fe6.png)
+
+#### 步骤四：从触发器中获取“访问路径”
+
+打开“触发管理”页面，拉至最底部，将“**访问路径**”提前保存好！
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1690443653966-c44c60f6-ad2f-42ca-88c0-4f873fe6409a.png)
+
+### 步骤五：前往[轻流系统](https://qingflow.com/index/home)，完成应用配置
+
+#### 附件上传
+
+勾选“**限制文件类型**”功能
+
+自定义：xlsx,xls
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1690444511883-07284be7-bbe2-4c85-b614-b5c8683a215f.png)
+
+#### Q-Linker
+
+#### URL：填入“访问路径”
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1690444785948-b8b35c21-7f66-4882-bc2b-f85f999bf363.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1690444833129-c1f1e0a5-e247-470b-b075-710070f7e711.png)
+
+#### Method：POST
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1690444899855-a80ff7f4-28f2-400d-adf1-1e521ea5ebb0.png)
+
+#### Header/Body
+
+Body Type：application/json
+
+JSON Body:
+
+\{
+
+"url":"插入附件上传字段"
+
+\}
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1690445064234-62473d01-fad5-4af3-b548-eab1f47d0574.png)
+
+#### 测试API请求
+
+将 EXCEL 测试文件上传后，点按测试后，查看右侧**“响应体”**。
+
+[文件.xlsx](https://exiao.yuque.com/attachments/yuque/0/2024/xlsx/26393678/1728963499463-7b553648-887f-4664-b45e-82ec2dd6c990.xlsx)（此为测试文件，您也可以上传自己的文件）
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1690445152691-c729b708-dcb0-4b8e-871f-9c1a02424865.png)
+
+#### Result Format：JSON
+
+配置JSON Path（ **请勿照搬**，需要根据**“响应体”**进行配置！！）
+
+表格别名 table
+
+JSON path $.table
+
+子别名 姓名
+
+JSON path $.姓名
+
+子别名 性别
+
+JSON path $.性别
+
+子别名 年龄
+
+JSON path $.年龄
+
+子别名 籍贯
+
+JSON path $.籍贯
+
+子别名 出生日期
+
+JSON path $.出生日期
+
+​
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1690445366019-4eee2a20-9efb-4748-aa0e-70a7c5d8d087.png)
+
+#### 表格配置
+
+添加需要解析的字段（姓名、性别、年龄、籍贯、出生日期）
+
+默认内容：关联已有表格 Q-Linker table
+
+子字段关联：姓名 匹配 姓名
+
+年龄 匹配 年龄
+
+……
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1690445705205-d416472a-81fd-4221-9f88-bc5f4641b4f4.png)
+
+## 实现效果
+
+### 功能实现效果
+
+将轻流（QingFlow）与腾讯云函数（Serverless Cloud Function，SCF）结合，实现解析Excel文件内容，并将解析结果显示在表格中。
+
+### 作用
+
+该功能的主要作用是通过轻流平台触发腾讯云函数的执行，实现对上传的Excel文件内容进行解析，然后将解析结果以表格的形式呈现出来。这对于需要处理大量Excel数据的场景非常有用，比如数据导入、数据清洗、统计分析等。
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/27174367/1690445890429-248b25b1-1a24-40ff-9b7a-e5a93df4e156.png)
+
+## 注意事项
+
+> ⚠️ EXCEL文件解析相关注意事项 ⚠️​费用注意：腾讯云函数在调用时会产生费用。在使用该功能之前，您可以了解下腾讯云函数的定价策略和费用详情，以避免超出预算或产生意外费用。计费概述：https://cloud.tencent.com/document/product/583/17299JSON Path规则：在填写Q-Linker的JSON Path规则时，确保准确地根据腾讯云函数返回的JSON响应体提取所需数据，否则可能导致解析错误或显示不完整，通常情况下，表格的第一行内容应该与JSON响应体的字段名相对应。数据格式处理：注意Excel文件中的数据格式，特别是日期格式。由于Excel底层存储日期为数字，解析后的日期可能会显示为数字而不是原始日期格式。确保在Excel中将日期的单元格格式设置为“文本”格式，以避免数据转换问题。填写范例：2023-07-27 （文本格式）。
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/im6nlq0t0c3euii5?singleDoc#)

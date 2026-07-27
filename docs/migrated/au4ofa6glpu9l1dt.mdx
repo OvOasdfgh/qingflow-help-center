@@ -1,0 +1,464 @@
+---
+title: "JSON body字段插入表现"
+description: "1. 问题描述在调用接口的时候，请求体中会存在插入表单中各个字段的情况，但是对于插入之后的表现是如何不清楚。所以该篇文档介绍了字段插入之后的表现。2. 文档作用帮助用户很好了解字段插入后呈现的表现形式是如何的3. 插入字段表现插入规则：当上述按钮【开启】时，单值字段(string类型/int类..."
+slug: "/常见问题-faq/表单/json-body字段插入表现"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/au4ofa6glpu9l1dt?singleDoc#"
+source_updated_at: "2025-02-18T02:38:58.000Z"
+keywords:
+  - "常见问题（FAQ）"
+  - "表单"
+  - "JSON body字段插入表现"
+---
+## 问题描述
+
+在调用接口的时候，请求体中会存在插入表单中各个字段的情况，但是对于插入之后的表现是如何不清楚。所以该篇文档介绍了字段插入之后的表现。
+
+​
+
+## 文档作用
+
+帮助用户很好了解字段插入后呈现的表现形式是如何的
+
+​
+
+## 插入字段表现
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1733991454110-8c698d53-2200-4411-825b-87bc15e47452.png)
+
+插入规则：
+
+当上述按钮【开启】时，单值字段(string类型/int类型)会以字段填入值插入，系统不会自动带上双引号。
+
+当上述按钮【关闭】时，单值字段(string类型)会以字段填入值插入，系统并且会自动带上双引号后插入。int类型字段（数字/电话字段），系统不会自动带上双引号。
+
+无论按钮【开启】/【关闭】时，多值字段（array类型），系统都会自动带上双引号后插入（仅针对一维数组有效，多维只生效最后一层）。
+
+​
+
+如果页面无该按钮时，一律视为按钮【关闭】处理。
+
+​
+
+字段类型分类：
+
+**单值字段(string类型)**：【单行文字】、【多行文字】、【链接】、【日期】、【起止时间】、【邮箱】、【单项选择】、【下拉选择】、【地址】、【描述文字】、【富文本】、【定位】、【数据关联】
+
+**单值字段(int类型)**:【数字】、【电话】
+
+**多值字段(array类型)**：【表格】、【多项选择】、【图片选择】、【附件上传】、【引用】、【成员】、【部门】
+
+注意：
+
+1、其中多值字段中，除了表格字段外，其他字段也可作为单值字段(string类型)输出，即只选择一个内容进行输出。
+
+2、body中数组插入【表格】子字段时，只能插入单值字段，无法插入**多值字段(array类型)，**否则json body体会报错。除非【表格】数组元素对象仅且只有一个时，才可插入**多值字段(array类型)。**
+
+3、body中数组如果是多维数组，系统只会对最后一层数组插入字段自动加上引号并且进行扩充。
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1734591202341-b434c944-9a70-46bd-8588-717254d03d9c.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1734591340466-d1d06d05-d3c1-4881-a2a6-efdbe5c93340.png)
+
+```javascript
+{
+    "表格": [
+        {
+            "表格列1":单行文字,
+            "表格列":表格列1 表格列2,
+            "tb": [
+                {
+                    "cc": "表格列11"
+                },
+                {
+                    "cc": "表格列22"
+                }
+            ]
+        }
+    ]
+}
+```
+
+### 字段为空时
+
+当字段为空值时，插入到json body中会以null值传入。
+
+#### 按钮【开启】时
+
+##### 单值字段(string类型)
+
+这里只以单行文字为例，其他同类型字段同理
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1733994024108-c30c2256-6947-4574-b4ef-0e3712539456.png)
+
+```javascript
+{
+    "单行文字": "null"
+}
+```
+
+##### 单值字段(int类型)
+
+这里只以数字为例，其他同类型字段同理
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1733994343923-6494f0a2-490e-4ce4-84e9-94187ab8edb0.png)
+
+```javascript
+{
+    "数字": null
+}
+```
+
+##### 多值字段(array类型)
+
+###### 表格
+
+数组元素对象中仅允许插入单值字段。除非【表格】数组元素对象仅且只有一个时（即表格行只有一行时），才可插入**多值字段(array类型)。**
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1733997274681-b0fd7326-4ef7-4de3-b14d-38f9a57bf919.png)
+
+```javascript
+{
+    "表格": [
+        {
+            "表格·单行文字": null,
+            "表格·数字": null
+        }
+    ]
+}
+```
+
+###### 多项选择
+
+【图片选择】、【附件上传】、【引用】、【成员】、【部门】这些字段同理
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1733994898527-1a4a062d-ddfb-46bb-8757-27ec82a40938.png)
+
+```javascript
+{
+    "多项选择": [
+        null
+    ]
+}
+```
+
+#### 按钮【关闭】时
+
+##### 单值字段(string类型)
+
+这里只以单行文字为例，其他同类型字段同理
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1733996527121-d65c87a1-d95f-4be3-af59-5ac82e5f763e.png)
+
+```javascript
+{
+    "单行文字": null
+}
+```
+
+##### 单值字段(int类型)
+
+这里只以数字为例，其他同类型字段同理
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1733996654477-abd766de-7676-4eb4-8394-2a3278e293fe.png)
+
+```javascript
+{
+    "数字": null
+}
+```
+
+##### 多值字段(array类型)
+
+###### 表格
+
+数组元素对象中仅允许插入单值字段。除非【表格】数组元素对象仅且只有一个时（即表格行只有一行时），才可插入**多值字段(array类型)。**
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1733997543147-578fa6be-bc45-4c19-8ce1-256dbbd79e02.png)
+
+```javascript
+{
+    "表格": [
+        {
+            "表格·单行文字": null,
+            "表格·数字": null
+        }
+    ]
+}
+```
+
+###### 多项选择
+
+【图片选择】、【附件上传】、【引用】、【成员】、【部门】这些字段同理
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1733996790557-c5fa76a8-f41e-40f1-a2bd-790ae6d1c7cb.png)
+
+```javascript
+{
+    "多项选择": [
+        null
+    ]
+}
+```
+
+### 字段不为空时
+
+#### 按钮【开启】时
+
+##### 单值字段(string类型)
+
+这里只以单行文字为例，其他同类型字段同理
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1733996900490-5ba21a18-fbbc-46d7-ab4c-2f2e5ee634a6.png)
+
+```javascript
+{
+    "单行文字": "单行文字"
+}
+```
+
+##### 单值字段(int类型)
+
+这里只以数字为例，其他同类型字段同理
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1733996981257-dbcaa4c1-9d98-4dbd-bd77-87122e6f52a2.png)
+
+```javascript
+{
+    "数字": 1
+}
+```
+
+##### 多值字段(array类型)
+
+###### 表格
+
+数组元素对象中仅允许插入单值字段。除非【表格】数组元素对象仅且只有一个时（即表格行只有一行时），才可插入**多值字段(array类型)。**
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1733997271958-cee5a01b-7800-4d30-a3ec-8a6a81771c84.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1733997596814-78723372-448c-4366-a702-085cbe068ce2.png)
+
+```javascript
+{
+    "表格": [
+        {
+            "表格·单行文字": "1",
+            "表格·数字": 1
+        },
+        {
+            "表格·单行文字": "2",
+            "表格·数字": 2
+        }
+    ]
+}
+```
+
+###### 多项选择
+
+【图片选择】、【附件上传】、【引用】、【成员】、【部门】这些字段同理
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1733997721300-e9f696b3-21dc-4f23-a99e-4484aac47a48.png)
+
+```javascript
+{
+    "多项选择": [
+        "未命名1",
+        "未命名2",
+        "未命名3"
+    ]
+}
+```
+
+#### 按钮【关闭】时
+
+##### 单值字段(string类型)
+
+这里只以单行文字为例，其他同类型字段同理
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1733996527121-d65c87a1-d95f-4be3-af59-5ac82e5f763e.png)
+
+```javascript
+{
+    "单行文字": "单行文字"
+}
+```
+
+##### 单值字段(int类型)
+
+这里只以数字为例，其他同类型字段同理
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1733996654477-abd766de-7676-4eb4-8394-2a3278e293fe.png)
+
+```javascript
+{
+    "数字": 1
+}
+```
+
+##### 多值字段(array类型)
+
+###### 表格
+
+数组元素对象中仅允许插入单值字段。除非【表格】数组元素对象仅且只有一个时（即表格行只有一行时），才可插入**多值字段(array类型)。**
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1733997543147-578fa6be-bc45-4c19-8ce1-256dbbd79e02.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1733997972383-4cda0fb2-5fb2-4b4f-bf0d-c184ded5bdf1.png)
+
+```javascript
+{
+    "表格": [
+        {
+            "表格·单行文字": "单行1",
+            "表格·数字": 1
+        },
+        {
+            "表格·单行文字": "单行2",
+            "表格·数字": 2
+        }
+    ]
+}
+```
+
+###### 多项选择
+
+【图片选择】、【附件上传】、【引用】、【成员】、【部门】这些字段同理
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1733996790557-c5fa76a8-f41e-40f1-a2bd-790ae6d1c7cb.png)
+
+```javascript
+{
+    "多项选择": [
+        "未命名1",
+        "未命名2"
+    ]
+}
+```
+
+### 特殊情况处理
+
+#### 情况1：空值字段需要传空字符串
+
+当业务接口，无法接收字段为空值时传入的是null，而是需要传空字符串，即""。
+
+处理方式：
+
+1、可以修改业务接口代码，或者封装中间件处理请求参数，将null替换成空字符串。
+
+2、表单代码块处理之后再传入body中
+
+这里说明代码块处理方式：
+
+注释：变量 ob该对象体替换为json body所需要输入的内容。插入字段无需再加上引号。
+
+```javascript
+/**
+ * 替换对象中的 null 值和恒等于 "null" 的字符串为 ""
+ * @param {Object} obj - 需要处理的对象
+ * @returns {Object} - 处理后的对象
+ */
+function replaceNullValues(obj) {
+    try {
+        if (Array.isArray(obj)) {
+            return obj.map(item => replaceNullValues(item)); // 处理数组每一项
+        } else if (obj && typeof obj === 'object') {
+            return Object.fromEntries(
+                Object.entries(obj).map(([key, value]) => [key, replaceNullValues(value)])
+            );
+        } else if (obj === null) {
+            return ''; // 替换 null 为 ""
+        } else if (typeof obj === 'string' && obj === 'null') {
+            return ''; // 替换字符串 "null" 为 ""
+        }
+        return obj; // 其他类型直接返回
+    } catch (error) {
+        return { error: '处理数据时发生错误' };
+    }
+}
+
+// 主函数调用
+function main(ob) {
+    try {
+        const result = replaceNullValues(ob);
+        qf_output = { data: result };
+    } catch (error) {
+        qf_output = { error: '执行主函数时发生错误' };
+    }
+}
+
+// 定义待处理对象变量 ob
+var ob = {
+    "t": qf_field.{单行文字$$3185C9CAC$$},
+    "field1": null,
+    "field2": "包含null的字符串null值",
+    "field3": {
+        "subField": null,
+        "subField2": "null"
+    },
+    "field4": [null, "null", "列表中的null", { "key": "null" }]
+};
+
+// 调用主函数并传递 ob 对象
+main(ob);
+```
+
+- 测试结果
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1733998966927-c9ff7489-b24f-41f8-b4e1-59faa65b5886.png)
+
+- 配置解析
+
+将处理后的内容全部返回，并用多行文字接收。
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1733999012938-6e826f6a-491b-45d0-9a40-3bb959085880.png)
+
+- json body中直接插入多行文字
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1733999116378-30594aa0-4f75-4835-8b90-8c62f05a7c3e.png)
+
+#### 情况2：数组需要传多值字段
+
+body中输入数组参数中，里面就需要插入多值字段，并且不止一行时，如何办？
+
+处理方式：因为body中插入表格数组时，元素对象中仅允许插入单值字段，所以需要想办法将多值字段转成单值字段。
+
+需要加一个辅助字段，使用公式转为字符串。
+
+注意：
+
+如果是附件上传字段，无法使用公式获取多个文件链接的。只能获取单个文件URL。
+
+如果是部门字段，只能获取对应部门的ID，无法获取到名称。
+
+如果是遇到上述两种情况，需要使用代码块进行处理。
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1734000276560-66cba8a9-0862-465f-b580-9a8d8d1e07f9.png)
+
+同理成员字段
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1734000306884-0250f779-4cc7-47b8-aa25-85a92b9adfc1.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1734000335425-1e96af7b-5e49-4e0a-a9ea-28bcb3fe3f90.png)![image.png](https://cdn.nlark.com/yuque/0/2024/png/28884377/1734000369549-5d9f450a-b449-4ccd-bb77-46de943fedfd.png)
+
+```javascript
+{
+    "表格": [
+        {
+            "表格·单行文字": "1",
+            "表格·数字": 1,
+            "表格·多项选择": "未命名1,未命名2,未命名3",
+            "表格·成员": "130000030146@126.com,zhangziqi@exiao.tech"
+        },
+        {
+            "表格·单行文字": "2",
+            "表格·数字": 2,
+            "表格·多项选择": "未命名2,未命名3",
+            "表格·成员": "130000030146@126.com,zhangziqi@exiao.tech"
+        }
+    ]
+}
+```
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/au4ofa6glpu9l1dt?singleDoc#)

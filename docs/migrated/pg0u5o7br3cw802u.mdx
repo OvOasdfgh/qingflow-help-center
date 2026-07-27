@@ -1,0 +1,106 @@
+---
+title: "轻流 x 企业微信--微信客服"
+description: "1. 场景描述在客户展示自己企业信息介绍时，或者展示企业门户页面时，常常会面临着有访客想要咨询我们具体的企业细节或者产品功能问题。这里主要演示一下，单个企业配置微信客服的操作路径。2. 思路流程使用企业微信—微信客服功能来实现3. 配置过程3.1. 准备工作登录企业微信管理后台登录链接http..."
+slug: "/搭建技巧/按功能分类/第三方集成/企业微信/轻流-x-企业微信-微信客服"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/pg0u5o7br3cw802u?singleDoc#"
+source_updated_at: "2024-10-15T03:38:19.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "第三方集成"
+  - "企业微信"
+  - "轻流 x 企业微信--微信客服"
+---
+## 场景描述
+
+- 在客户展示自己企业信息介绍时，或者展示企业门户页面时，常常会面临着有访客想要咨询我们具体的企业细节或者产品功能问题。
+
+- 这里主要演示一下，单个企业配置微信客服的操作路径。
+
+## 思路流程
+
+- 使用企业微信—微信客服功能来实现
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698298867920-17884a5d-f6d6-4834-b6d5-57842c01b23b.png)
+
+## 配置过程
+
+### 准备工作
+
+- 登录企业微信管理后台
+
+- 登录链接[https://work.weixin.qq.com/](https://work.weixin.qq.com/)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698299030938-489e688b-4b2b-4b74-8c52-de6e5e15ff64.png)
+
+- 进入之后，点击应用管理--微信客服
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698299102235-8e86ad6c-4908-4828-bfec-c780b124f6ed.png)
+
+- 是否有配置客服，如果没有就创建一个新的
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698299275646-f6f8cf30-89c9-4637-8ec1-2cec1b8c4cd0.png)
+
+- 客服具体详细配置信息根据需求具体配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698299404585-15183a60-03a0-4ca1-a1ce-badbe130e7af.png)
+
+- 选择接入场景，这里是在轻流中使用，所以选择在网页中接入
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698299487888-1f7dea2b-b448-4465-944c-b663be4d224b.png)
+
+- 将配置对应客服的链接以及二维码下载保存下来
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698299514572-50ec59d3-c678-4b96-bb8d-87b18c53b4ea.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698299618606-68d5d696-2391-4668-948f-8e27e290d3df.png)
+
+### 轻流配置
+
+- 这里以企业信息展示为例
+
+#### 创建企业信息应用表单
+
+- 这里的在线客服的链接以及二维码就是上一步保存下来的，可以点击或者扫码跳转到微信中打开聊天页面进行咨询
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698299733995-44a419a2-a164-4931-bb53-4e8487aa9e89.png)
+
+#### 创建企业门户页面
+
+- 点击二维码或者扫码即可进行聊天咨询
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698302604018-ff43a154-942b-4902-9d19-c36c3d08a804.png)
+
+- 二维码配置（参考）
+
+- 内容来源【企业信息】应用，轮播内容即为对应链接以及二维码
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698302690178-a4bd43a2-0125-4406-a4f2-102ba446f99d.png)
+
+## 实现效果
+
+### 网页端演示
+
+- 点击二维码，跳转到网页，进行手机微信扫码聊天
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698312026623-b897d6c6-9654-4157-9513-e4b577cced7b.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1698312063264-49e5aab0-cb80-47e1-90bd-5c3a83cb5f26.png)
+
+### 移动端演示
+
+- 点击二维码，自动跳转到微信端打开进行聊天
+
+> 视频：1698303137413218.mp4。请在[原文](https://exiao.yuque.com/ixwxsb/bgzs0e/pg0u5o7br3cw802u?singleDoc#)中查看。
+
+## Ps场景
+
+场景描述：当对于集团型企业，或者一个主体下有多家企业，总公司需要了解到每家企业的客服情况时，就需要微信客服组件，具体接入指引可查看该文档：[https://docs.qq.com/doc/p/640d1ff8921633d44c9afd4bfd7e2f01301f89dd?u=90c1cc40eb2a4495afe6d7b692a5beb0](https://docs.qq.com/doc/p/640d1ff8921633d44c9afd4bfd7e2f01301f89dd?u=90c1cc40eb2a4495afe6d7b692a5beb0)
+
+​
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/pg0u5o7br3cw802u?singleDoc#)

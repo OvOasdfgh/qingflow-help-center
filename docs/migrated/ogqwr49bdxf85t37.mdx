@@ -1,0 +1,125 @@
+---
+title: "如何实现抽签效果？"
+description: "1. 场景/问题描述客户希望下属单位每次发起数据抽签，得到不重复的序号。2. 思路逻辑创建一个抽签基础表，通过发起基础表数据来维护抽签情况，再通过抽签应用去进行抽签，对于已抽取到的签号通过qr把对应行更新。3. 配置过程3.1. 抽签基础表用于生成所需抽签号，以及记录是否已经被占用。funct..."
+slug: "/搭建技巧/按功能分类/其他/随机抽取/如何实现抽签效果"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/ogqwr49bdxf85t37?singleDoc#"
+source_updated_at: "2024-10-15T03:38:22.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "其他"
+  - "随机抽取"
+  - "如何实现抽签效果？"
+---
+## 场景/问题描述
+
+客户希望下属单位每次发起数据抽签，得到不重复的序号。
+
+## 思路逻辑
+
+创建一个抽签基础表，通过发起基础表数据来维护抽签情况，再通过抽签应用去进行抽签，对于已抽取到的签号通过qr把对应行更新。
+
+## 配置过程
+
+### 抽签基础表
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1693380401867-6c59f1f7-faf3-4f93-b9b3-172b5af64b75.png)
+
+用于生成所需抽签号，以及记录是否已经被占用。
+
+```javascript
+function generateArrayObjects(num) {
+  var array = [];
+
+  for (var i = 1; i <= num; i++) {
+    array.push({ "num": i });
+  }
+
+  return array;
+}
+
+var num = qf_field.{本轮抽签数$$1747DA07E$$};
+
+var resultArray = generateArrayObjects(num);
+
+qf_output = {result : resultArray}
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1693380454811-fece22b3-ebf7-48ce-84e3-698c3d9ae34e.png)![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1693380467549-dd177605-edf9-4fd0-b654-f949b772faa8.png)![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1693380474203-f5b32435-b3d4-45f4-ad03-8bcf77e50768.png)
+
+配置关联已有表格，自动生成序号记录表：
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1693380498715-c70f62d0-d7a5-433c-9e1b-478b9153e7a2.png)
+
+### 抽签应用
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1693380586676-f64934d9-2b7a-4da7-82e8-42b6a45f99cc.png)
+
+用于给各单位抽签。
+
+```javascript
+var table = qf_field.{表格$$1747DEE8A$$};
+
+function getRandomUnoccupiedNumber(array) {
+  // 保存状态为"未占用"的对象
+  var unoccupiedObjects = [{"field_162510244":"","field_162499813":null}];
+
+  // 遍历数组，找到状态为"未占用"的对象
+  for (var i = 0; i < array.length; i++) {
+    if (array[i]["field_162510244"] === "未占用") {
+      unoccupiedObjects.push(array[i]);
+    }
+  }
+
+  if(unoccupiedObjects.length>1){unoccupiedObjects.shift();}
+  // 从保存的对象数组中随机选择一个对象
+  var randomIndex = Math.floor(Math.random() * unoccupiedObjects.length);
+  var randomObject = unoccupiedObjects[randomIndex];
+
+  // 返回选中对象的序号属性
+
+  return randomObject["field_162499813"];
+}
+
+if(table==null){qf_output = {result : 0}}
+else{
+
+  // 获取随机未占用的序号
+  var randomUnoccupiedNumber = getRandomUnoccupiedNumber(table);
+
+  // 输出结果
+  qf_output = {result : randomUnoccupiedNumber}
+}
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1693380630011-13bd203a-4570-4989-9981-c073ec9039a6.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1693380638154-92d09a95-5ee1-4a42-8f80-5d8782b7246e.png)
+
+通过流程去更新基础表的抽签号状态
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1693380798870-fb6c556a-721b-44b9-a77f-12b20df0cbdb.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1693380809001-189dee95-fcde-495c-84a6-9f0f29a5b48a.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1693380817067-cf6e71ab-d755-4a90-bf63-cab5b5f27a69.png)
+
+申请人节点配置下提交校验-应用校验（用于避免有多个成员同时更新基础表的情况）
+
+![aeb219f55fa9f99cedeb702bbcfa8d89.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1693466877720-144a1700-fb95-400b-9eb7-83dbc57c3590.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/35868861/1693380920993-9471b5b2-a41b-4a42-9ccc-f89bcedde9b4.png)
+
+## 实现效果
+
+[数据管理-抽签基础表 - Google Chrome 2023-08-30 15-20-58.mp4](https://exiao.yuque.com/attachments/yuque/0/2024/mp4/26393678/1728963502974-338d4b30-004a-4c25-b5ca-4abd8e3c7347.mp4)
+
+[抽签应用-test - Google Chrome 2023-08-30 15-21-36.mp4](https://exiao.yuque.com/attachments/yuque/0/2024/mp4/26393678/1728963503352-4efaf39b-f21e-46b5-b8b2-1c2b07b43ed1.mp4)
+
+> 视频：抽签应用-test - Google Chrome 2023-08-30 15-21-36.mp4。请在[原文](https://exiao.yuque.com/ixwxsb/bgzs0e/ogqwr49bdxf85t37?singleDoc#)中查看。
+
+> 视频：数据管理-抽签基础表 - Google Chrome 2023-08-30 15-20-58.mp4。请在[原文](https://exiao.yuque.com/ixwxsb/bgzs0e/ogqwr49bdxf85t37?singleDoc#)中查看。
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/ogqwr49bdxf85t37?singleDoc#)

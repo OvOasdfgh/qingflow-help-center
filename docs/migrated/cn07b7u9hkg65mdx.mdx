@@ -1,0 +1,66 @@
+---
+title: "快递100"
+description: "1. 介绍快递物流服务商2. 鉴权信息快递100的接口都需要购买，一般会有一定的免费额度。选择对应的接口后，点击「授权密钥」拿到需要的参数在轻流对应的事件配置，输入这些参数为默认值即可。3. 事件信息目前只有：实时快递查询但快递100开放的接口都可以进行打包，如有需求请联系我们，加入我们的反馈..."
+slug: "/帮助文档/轻代码/连接中心/连接器/企业服务/快递100"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/cn07b7u9hkg65mdx?singleDoc#"
+source_updated_at: "2024-11-26T08:30:18.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "连接中心"
+  - "连接器"
+  - "企业服务"
+  - "快递100"
+---
+### 介绍
+
+快递物流服务商
+
+### 鉴权信息
+
+[**快递100的接口**](https://cloud.kuaidi100.com/platform/cloudmarket/all.shtml)都需要购买，一般会有一定的免费额度。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/EBkN9qL4O-SRODwN1cV8ivDULpjKrFaB_.png)
+
+选择对应的接口后，点击「授权密钥」拿到需要的参数
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/JAx1jGl2TAgpjIS8z0GPC8p1ws0E2tp1_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/vd9c3du2k7-tdSTJyPCT2bykGD8Zqmb7_.png)
+
+在轻流对应的事件配置，输入这些参数为默认值即可。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/gwUlwVLalQtsdDbbJDmaDufuqarKz2D8_.png)
+
+### 事件信息
+
+目前只有：[**实时快递查询**](https://cloud.kuaidi100.com/platform/productdetail/32164353180.shtml)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/3m-b6141FZoO1Tva999AD1-nsSQaqN39_.png)
+但快递100开放的接口都可以进行打包，如有需求请联系我们，加入我们的反馈群进行反馈。
+
+### 其他注意事项
+
+1、实时快递查询接口，param参数需要在轻流表单中使用公式和辅助字段进行拼接。五个辅助字段，内容分别为
+
+| 字段名称 | 字段内容 | 其他说明 |
+| --- | --- | --- |
+| 辅助字段1 | \{"com":" |  |
+| 辅助字段2 | ","num":" |  |
+| 辅助字段3 | "\} |  |
+| 快递公司编码 | 例如中通是zhongtong | 快递公司编码表：[http://poll.kuaidi100.com/manager/openapi/download/kdbm.do](http://poll.kuaidi100.com/manager/openapi/download/kdbm.do) |
+| 快递号 |  |  |
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/qFa6dfULrEWIbdIQJQTdZQVSbG3MGfRF_.png)
+
+param参数设置公式：
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/IPJgbFaM9bO6nIIE7nldiBSDcSzmtsKO_.png)
+
+### 配置演示
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/11111123432543254.gif?sign=a251151501a08d246008d40823a7edc0&t=1683541354)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/cn07b7u9hkg65mdx?singleDoc#)

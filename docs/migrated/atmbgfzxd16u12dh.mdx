@@ -1,0 +1,93 @@
+---
+title: "通过邮箱或手机号获取成员userId"
+description: "调用本接口，实现通过手机号或邮箱查询工作区内成员的userId1. 权限说明「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有通讯录权限。2. 请求请求方式： GET请求地址： https://api.qingflow.com/u..."
+slug: "/帮助文档/轻代码/openapi/通讯录/成员/通过邮箱或手机号获取成员userid"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/atmbgfzxd16u12dh?singleDoc#"
+source_updated_at: "2024-10-15T03:35:08.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "通讯录"
+  - "成员"
+  - "通过邮箱或手机号获取成员userId"
+---
+调用本接口，实现通过手机号或邮箱查询工作区内成员的userId
+
+---
+
+### 权限说明
+
+「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有通讯录权限。
+
+### 请求
+
+**请求方式：** GET
+
+**请求地址：** [https://api.qingflow.com/user/getId](https://api.qingflow.com/app%EF%BC%88%E5%85%AC%E6%9C%89%E4%BA%91%E7%89%88%E6%9C%AC%EF%BC%89)（公有云版本）
+
+示例如下：
+
+```http
+GET https://api.qingflow.com/user/getId
+```
+
+**其他版本请求地址：**
+
+钉钉版本：[https://api.ding.qingflow.com/](https://api.ding.qingflow.com/app)user/getId
+
+专有轻流：http(s)://xxx.xx(自有域名)/openApi/user/getId
+
+#### 2.1 参数说明（查询参数）
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| mobile |  | 手机号 |
+| email |  | 邮箱（与手机号同时传入时, 会使用邮箱查询成员信息） |
+
+#### 2.2 请求头（Header）
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“获取OpenAPI accessToken”接口文档 |
+
+### 返回
+
+#### 3.1 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| questionRelations | 是 | array | 关联的设置，本接口可忽略 |
+| result | 是 | array | 返回结果 |
+| areaCode | 是 | string | 地区码 |
+| email |  | string | 邮箱, 只在使用邮箱查询时返回 |
+| mobile |  | string | 手机号, 只在使用手机号查询时返回 |
+| userId | 是 | istring | 用户userID |
+
+#### 3.2 返回体示例
+
+```plain
+{
+    "errCode": 0,
+    "errMsg": null,
+    "questionRelations": [],
+    "result": [
+        {
+            "areaCode": "86",
+            "email": null,
+            "mobile": "18842034052",
+            "userId": "809142"
+        }
+    ]
+}
+```
+
+### 注意事项
+
+存在同一手机号注册了多个账户的情况，届时数组内将返回多个对象。
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/atmbgfzxd16u12dh?singleDoc#)

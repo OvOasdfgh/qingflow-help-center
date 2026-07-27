@@ -1,0 +1,108 @@
+---
+title: "轻流 x 钉钉--消息推送"
+description: "应用场景实现轻流的数据内容进行推送到钉钉群中落地方案图文/视频演示帮助文档配置文档一、接口权限申请操作链接：https://ding-doc.dingtalk.com/doc#/serverapi2/rnomdt/OhMEA1、创建应用以管理者身份在钉钉开放平台创建应用，会生成AgentId，..."
+slug: "/搭建技巧/按功能分类/第三方集成/钉钉/轻流-x-钉钉-消息推送"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/asgoomhtrzmdtm9b?singleDoc#"
+source_updated_at: "2024-10-15T03:38:20.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "第三方集成"
+  - "钉钉"
+  - "轻流 x 钉钉--消息推送"
+---
+## 应用场景
+
+实现轻流的数据内容进行推送到钉钉群中
+
+## 落地方案
+
+![原文画板](https://cdn.nlark.com/yuque/0/2021/jpeg/2997244/1611734106324-deafa1d4-455f-49da-b95c-fef817f677e7.jpeg)
+
+## 图文/视频演示
+
+## 帮助文档
+
+配置文档
+
+### 一、接口权限申请
+
+**操作链接：**[https://ding-doc.dingtalk.com/doc#/serverapi2/rnomdt/OhMEA](https://ding-doc.dingtalk.com/doc#/serverapi2/rnomdt/OhMEA)
+
+##### 1、创建应用
+
+以管理者身份在钉钉开放平台创建应用，会生成AgentId，Appkey和Appsecret
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1597715971317-a772fdcb-82ae-487d-8eb8-45670914c9c4.png)
+
+##### 2、申请接口权限
+
+根据消息推送的要求，需要添加企会话的权限
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1597716166532-6d2c50aa-3010-40da-aad9-d7f27c85723e.png)
+
+### 二、获取access\_Token：
+
+操作链接:[https://ding-doc.dingtalk.com/doc#/serverapi2/eev437](https://ding-doc.dingtalk.com/doc#/serverapi2/eev437)
+
+##### 1、access\_Token
+
+根据之前获得的appid和appkey来获取access\_token，注意，access\_Token只有2小时的有效期，过期需要重新获取
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1597716452994-31ac2917-dabb-452c-bfa5-23a02933084d.png)
+
+**postman测试**
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/2898265/1609306800468-fef513ea-af3d-462c-901b-f6655af859f1.png)
+
+##### 2、在轻流中的配置：
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1597720944019-f391211c-f889-47cb-9ce1-4095f0d54684.png)
+
+### 三、创建群会话
+
+##### 1、通过手机号获取用户userid
+
+操作链接：[https://ding-doc.dingtalk.com/doc#/serverapi2/ege851/soV11](https://ding-doc.dingtalk.com/doc#/serverapi2/ege851/soV11)
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1597719195753-c7f2922e-49b2-425a-ba83-3a1b860c7d4b.png)
+
+**postman测试：**
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1597719149522-1957876f-3205-4554-8432-518b34e40817.png)
+
+##### 2、创建会话
+
+操作链接：[https://ding-doc.dingtalk.com/doc#/serverapi2/fg9dze](https://ding-doc.dingtalk.com/doc#/serverapi2/fg9dze)
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1597719501979-b048a722-2688-4326-b04e-945401044e62.png)
+
+**postman测试：**
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1597719472939-98d4a533-ddf9-4351-8e1a-d6c3b6c38caa.png)
+
+### 四、发送群消息
+
+操作链接：[https://ding-doc.dingtalk.com/doc#/serverapi2/isu6nk](https://ding-doc.dingtalk.com/doc#/serverapi2/isu6nk)
+
+##### 1、发送消息
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1597719894049-2e4d5cf6-71da-45d9-8290-668fdf428bb1.png)
+
+消息类型和样例参考链接：[https://ding-doc.dingtalk.com/doc#/serverapi2/ye8tup](https://ding-doc.dingtalk.com/doc#/serverapi2/ye8tup)
+
+**postman测试：**
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1597719946153-72bd1161-e061-4b1b-a957-f50e06efb578.png)
+
+##### 2、在轻流中的配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1390536/1597721173295-0778110a-feb4-48ee-916d-4dbf8cc201c8.png)
+
+**​**
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/asgoomhtrzmdtm9b?singleDoc#)

@@ -1,0 +1,89 @@
+---
+title: "如何将地址字段拆分传入接口参数？"
+description: "1. 场景/问题描述有时候调用外部接口时，会出现需要分别传省、市、区、位置这些参数，但是轻流地址字段传入webhook格式为：北京市 北京市 东城区 ***，中间是以空格隔开的，并不能分别传入到对应参数中。2. 思路逻辑通过代码块做拆分处理输出3. 配置过程3.1. 表单设计其中完整地址字段使..."
+slug: "/常见问题-faq/轻代码/如何将地址字段拆分传入接口参数"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/xb2re5kkfxp9dvkx?singleDoc#"
+source_updated_at: "2024-10-15T03:38:53.000Z"
+keywords:
+  - "常见问题（FAQ）"
+  - "轻代码"
+  - "如何将地址字段拆分传入接口参数？"
+---
+## 场景/问题描述
+
+有时候调用外部接口时，会出现需要分别传省、市、区、位置这些参数，但是轻流地址字段传入webhook格式为：北京市 北京市 东城区 \*\*\*，中间是以空格隔开的，并不能分别传入到对应参数中。
+
+## 思路逻辑
+
+通过代码块做拆分处理输出
+
+## 配置过程
+
+### 表单设计
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694574521870-5709e356-8bef-4808-acee-c6757be8eeef.png)
+
+- 其中完整地址字段使用公式接收地址字段
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694574560637-3df5fb37-de52-4ffd-affe-a357775762ee.png)
+
+### 代码与测试
+
+#### 代码注释
+
+- address：替换成表单中完整地址字段
+
+```javascript
+function processData(address) {
+  let result;
+
+  // 检查address是否为null
+  if (address === null) {
+    result = "";
+  } else {
+    // 拆分地址
+    let [省, 市, 区, 位置] = address.split(",");
+
+    // 构建data对象
+    let data = {
+      "省": 省,
+      "市": 市,
+      "区": 区,
+      "位置": 位置
+    };
+
+    result = data;
+  }
+
+  return result;
+}
+
+let address = qf_field.{完整地址$$1784DDE80$$};
+let data = processData(address);
+qf_output={data}
+//console.log(output);
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694574637063-1996cf07-e56b-4b41-8eb3-71a9307eb7e7.png)
+
+#### 解析规则配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694574645539-dc22439b-97c6-46f1-9b8c-82ff7b452101.png)
+
+#### 字段接收配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694574664614-d39e812d-8562-4ab2-aa36-2a19de0353b1.png)
+
+## 实际效果
+
+[https://qingflow.com/f/645e1d3d](https://qingflow.com/f/645e1d3d)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694574691319-acc4d7ae-855e-4e5d-ab20-67bc029b7910.png)
+
+​
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/xb2re5kkfxp9dvkx?singleDoc#)

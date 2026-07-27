@@ -1,0 +1,109 @@
+---
+title: "创建应用"
+description: "调用本接口，向工作区内新增一个应用。1. 权限说明「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有对应应用包的创建权限。2. 请求请求方式：POST请求地址：https://api.qingflow.com/app（公有云版本）..."
+slug: "/帮助文档/轻代码/openapi/轻流应用接口/创建应用"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/mp6a9fb3gr8dsypm?singleDoc#"
+source_updated_at: "2024-10-15T03:35:10.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "轻流应用接口"
+  - "创建应用"
+---
+调用本接口，向工作区内新增一个应用。
+
+---
+
+### **权限说明**
+
+「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有对应应用包的创建权限。
+
+### 请求
+
+**请求方式：**POST
+
+**请求地址：**https://api.qingflow.com/app（公有云版本）
+
+> 示例如下：
+
+```javascript
+POST https://api.qingflow.com/app
+```
+
+**其他版本请求地址：**
+
+钉钉版本：[https://api.ding.qingflow.com/app](https://api.ding.qingflow.com/app)
+
+专有轻流：http(s)://xxx.xx(自有域名)/openApi/app
+
+##### **2.1 请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+
+##### **2.2 请求体（Body）**
+
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| appName |  | string | 应用名称，默认为“未命名应用” |
+| tagIds | 是 | array | 新增应用所属的应用包，此处只能选择自定义应用包。不可选系统默认应用包 |
+| appIcon |  | string | 应用的图标，默认为系统图标 |
+| userId |  | string | 应用的创建人userid，默认为工作区创建者 |
+| appAuth |  | int | 应用的可见权限, 1-2分别代表：工作区可查看，指定用户；默认为工作区可见 |
+| authMembers |  | object | 指定用户可见时，可见的用户列表（因此appAuth为1时下列参数无需填写）。不填则默认管理员可见 |
+| userIds |  | array | 可见的用户列表 |
+| deptIds |  | array | 可见的部门列表 |
+| roleIds |  | array | 可见的角色列表 |
+| includeSubDeparts |  | Boolean | 是否动态包含已选部门下的子部门，默认包含 |
+
+##### **2.3 请求体示例**
+
+```json
+{
+    "tagIds":[4334],
+    "appAuth":2,
+    "authMembers":{
+				"userIds":[9705,9701]
+}
+}
+```
+
+### 返回
+
+##### 3.1 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，非0表示失败 |
+| errMsg | 是 | string | 错误描述 |
+| questionRelations |  |  | 关联的设置，这里没用 |
+| result | 是 | object | 返回结果 |
+| appKey | 是 | string | 应用ID |
+
+##### 3.2 返回体示例
+
+```json
+{
+"errCode":0,
+"errMsg":null,
+"questionRelations": [],
+"result":{ 
+    "appKey": "4334"
+}  
+}
+```
+
+##### 3.3 错误码相关
+
+### 注意事项
+
+请求参数中，appIcon参数为应用的图标，支持传入图片链接
+
+- 默认为橙色+首字，值为：\{"icon":null,"iconColor":"qing-orange","iconName":null\}
+- 图标底色（iconColor）/组件（iconName）可选值可参考
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/mp6a9fb3gr8dsypm?singleDoc#)

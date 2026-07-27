@@ -1,0 +1,242 @@
+---
+title: "企业微信"
+description: "1. 介绍腾讯的办公协同应用。2. 鉴权信息获取access_token是调用企业微信API接口的第一步，相当于创建了一个登录凭证，其它的业务API接口，都需要依赖于access_token来鉴权调用者身份。操作步骤：1、【企业微信管理员操作】在企业微信的管理后台获取企业ID和应用Secret..."
+slug: "/帮助文档/轻代码/连接中心/连接器/消息推送/企业微信"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/zlgzf8u95s1gsub5?singleDoc#"
+source_updated_at: "2024-11-26T08:30:17.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "连接中心"
+  - "连接器"
+  - "消息推送"
+  - "企业微信"
+---
+### 介绍
+
+腾讯的办公协同应用。
+
+### 鉴权信息
+
+获取access\_token是调用企业微信API接口的第一步，相当于创建了一个登录凭证，其它的业务API接口，都需要依赖于access\_token来鉴权调用者身份。
+
+操作步骤：
+
+1、【企业微信管理员操作】在企业微信的管理后台获取[**企业ID**](https://work.weixin.qq.com/api/doc/90000/90135/91039#14953/corpid)和[**应用Secret**](https://work.weixin.qq.com/api/doc/90000/90135/91039#14953/secret)；
+
+2、【轻流系统工作区的管理员操作】在轻流连接中心-企业微信连接器-鉴权配置中输入上一步获取的企业ID和应用Secret，点击保存按钮便配置完成。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/oPSERBAtEMlAxfD38xsHoMmPqbCF4A0p_.png)
+
+#### 注意事项
+
+**企业微信中每个应用都有独立的secret。由于目前连接中心各事件无法为每个事件都配置独立的鉴权，所以使用不同的事件时需要配置不同的Secret。**
+
+为了可以同时使用不同的企业微信事件，当前的解决方案如下：
+
+管理员在企业微信管理后台自建一个应用，然后在所需要用的标准应用中（如日程应用）给自建应用开通调用权限，便可使用该自建应用的secret来调用日程接口。如果还需要调用其他标准应用，则继续在相应的标 准应用下给该自建应用开通调用权限。而后在轻流系统中鉴权配置时输入自建应用的secret，即可同时使用多个事件。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/pO16eLKaPNhpRYhqy4jjo92ybZp1jUJ__.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/MIdXsqQ_a1X8zAcjCZcTLkVM4Hhac9Su_.png)
+
+### 事件信息
+
+| 事件 | 描述 |
+| --- | --- |
+| 获取部门成员详情 | 获取指定部门所有成员的详细信息，包括姓名、手机号、邮箱、职位、用户ID、地址等等。详情可见获取部门成员详情 |
+| 创建日程 | 通过企业微信的用户ID为指定成员创建日程。详情可见创建日程 |
+| 创建群聊 | 通过企业微信群成员用户ID列表创建群聊。详情可见创建群聊会话 |
+| 发送消息到群聊 | 向指定的企业微信群聊中发送指定格式的消息。详情可见应用推送消息 |
+
+### 配置演示
+
+#### 获取部门成员详情
+
+**前置条件：**
+
+首先需要确定鉴权配置中的应用secret（corpsecret）具有调用企业微信通讯录的权限（见上文鉴权信息和注意事项部分）。
+
+其次，需要指定部门**ID**，获取方式详见[**基本概念介绍-部门id**](https://work.weixin.qq.com/api/doc/90000/90135/90665#%E9%83%A8%E9%97%A8id)
+
+**配置步骤：**
+
+1、创建应用，编辑表单。可以在连接中心中查看事件模版变量与返回结果别名，对照创建表单字段。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/hufb4vDuTWa2GAvCDOHAnD78T1qtjVs8_.png)
+
+2、点击Q-Linker字段进行配置，并设置返回结果别名与相应表单字段的关联规则。详情如下。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/MMYLWHVyWihTuhND3_hoRqK_G5p5_2TP_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/PbppS2-8NfKecpwNdL-084xb506c2AJq_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/RGQWEiksWQB3i-576_DQNQ8QuL4srWTE_.png)
+
+3、保存应用并发布，即可正常使用。
+
+#### 创建日程
+
+**前置条件：**
+
+首先需要确定鉴权配置中的应用secret（corpsecret）具有调用企业微信日程应用的权限（见上文鉴权信息和注意事项部分）。
+
+其次，调用企业微信创建日程接口需要指定**组织者和参与者的企业微信用户ID**，获取方式详见[**基本概念介绍-userid**](https://work.weixin.qq.com/api/doc/90000/90135/90665#userid)（可以手动输入，也可以通过Q-Source主动模式拉取企业微信获取成员信息接口的数据，建立基本人员信息库，再用数据关联功能调用，即可实现自动填充userid，具体配置方法见文末附录A）
+
+**配置步骤：**
+
+1、创建应用，编辑表单。可以在连接中心中查看事件模版变量，对照创建表单字段。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/AFx5e06oQJq8-zz4U6aOtryMmFBYJ5dD_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/JsJ-Ae1TBAS5UbU9cTHw7dKAyq_wdBkH_.png)
+
+2、点击保存表单，然后在添加流程页面点击创建webhook节点，并进行相应配置，详情如下图。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/QmmN9EUqVydMUU_h8FRGRv8JVcyUcdn0_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/7CQxGPJy5kuq4iXwgTIwNCRGeif35_Gl_.png)
+
+3、保存应用并发布，即可正常使用，最终效果如下。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/%E5%9B%BE%E7%89%87%E8%BF%81%E7%A7%BB/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62021-08-16%20%E4%B8%8B%E5%8D%885.19.42.gif?sign=3a19e3a3cc6dcb21967e858f032d0de5&t=1683560505)
+
+#### 创建群聊
+
+**前置条件：**
+
+首先需要确定鉴权配置中的应用secret（corpsecret）具有调用企业微信创建群聊的权限（一般自建应用默认都有）。
+
+其次，调用企业微信创建群聊接口需要指定群成员的企业微信用户ID，获取方式详见[**基本概念介绍-userid**](https://work.weixin.qq.com/api/doc/90000/90135/90665#userid)（可以手动输入，也可以通过Q-Source主动模式拉取企业微信获取成员信息接口的数据，建立基本人员信息库，再用数据关联功能调用，即可实现自动填充userid，具体配置方法见文末附录A）
+
+**配置步骤：**
+
+1、创建应用，编辑表单。可以在连接中心中查看事件模版变量，对照创建表单字段。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/tpNfskO-FGA8hHH6tbMOp4QjO-soZX05_.png)
+
+2、点击保存表单，然后在添加流程页面点击创建webhook节点，并进行相应配置，详情如下图。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/QWntRjkDg_9FtDm13pV-l4cNK49S1MqB_.png)
+
+3、保存应用并发布，即可正常使用。
+
+#### 发送文本消息到群聊
+
+**前置条件：**
+
+首先明确该接口只允许企业自建应用调用，即鉴权配置中的应用secret（corpsecret）必须为企业自建应用的，且该应用的可见范围必须是根部门。
+
+其次，需要指定所要推送到的群聊的ID（chatid），该群聊必须是该应用所创建的，chatid可以通过创建群聊接口的返回值获取。
+
+目前仅支持发送文本类型的消息。
+
+> 限制说明
+
+> 1、每企业消息发送量不可超过2万人次/分，不可超过30万人次/小时（若群有100人，每发一次消息算100人次）；
+
+> 2、每个成员在群中收到的应用消息不可超过200条/分，1万条/天，超过会被丢弃（接口不会报错）。
+
+> 摘自企业微信应用推送消息接口
+
+**配置步骤：**
+
+1、创建应用，编辑表单。可以在连接中心中查看事件模版变量，对照创建表单字段。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/bymax8TMiMmoHv9SwqX2yBBGRTHNSXdC_.png)
+
+2、点击保存表单，然后在添加流程页面点击创建webhook节点，并进行相应配置，详情如下图。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/0Bt017O0E7vn8DzTybrdGoxz_1_ChNlK_.png)
+
+3、保存应用并发布，即可正常使用。
+
+#### 查询线下会议室
+
+**前置条件：**
+
+首先需要确定鉴权配置中的应用secret（corpsecret）具有调用企业微信会议室应用的权限（见上文鉴权信息和注意事项部分）。
+
+**配置步骤：**
+
+1、创建应用，编辑表单。首先可以在连接中心中查看该事件的模版变量和别名，对照创建表单字段。**本事件无需传变量。**
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/IJRzosSehDrfQBZr64UvXcFOmt15cHs__.png)
+
+2、应用编辑中Q-Linker或Webhook的配置与其他事件同理，在此不再赘述。
+
+#### 添加线下会议室
+
+**前置条件：**
+
+首先需要确定鉴权配置中的应用secret（corpsecret）具有调用企业微信**会议室**应用的权限（见上文鉴权信息和注意事项部分）。
+
+**配置步骤：**
+
+与其他事件同理，在此不再赘述。
+
+#### 查询线下会议室预定信息
+
+**前置条件：**
+
+首先需要确定鉴权配置中的应用secret（corpsecret）具有调用企业微信**会议室**应用的权限（见上文鉴权信息和注意事项部分）。
+
+**配置步骤：**
+
+与其他事件同理，在此不再赘述。
+
+#### 预定线下会议室并创建日程
+
+**前置条件：**
+
+首先需要确定鉴权配置中的应用secret（corpsecret）具有调用企业微信**会议室**应用的权限（见上文鉴权信息和注意事项部分）。
+
+其次，调用该接口需要指定预定人的企业微信用户ID，获取方式详见[**基本概念介绍-userid**](https://work.weixin.qq.com/api/doc/90000/90135/90665#userid)（可以手动输入，也可以通过Q-Source主动模式拉取企业微信获取成员信息接口的数据，建立基本人员信息库，再用数据关联功能调用，即可实现自动填充userid，具体配置方法见文末附录A）
+
+**配置步骤：**
+
+与其他事件同理，在此不再赘述。
+
+需要注意的是，开始时间与结束时间通过10位时间戳的形式指定，可通过公式计算。
+
+#### 创建线上会议
+
+**前置条件：**
+
+首先需要确定鉴权配置中的应用secret（corpsecret）具有调用企业微信**会议**应用的权限（见上文鉴权信息和注意事项部分）。
+
+其次，调用该接口需要指定组织者的企业微信用户ID，获取方式详见[**基本概念介绍-userid**](https://work.weixin.qq.com/api/doc/90000/90135/90665#userid)（可以手动输入，也可以通过Q-Source主动模式拉取企业微信获取成员信息接口的数据，建立基本人员信息库，再用数据关联功能调用，即可实现自动填充userid，具体配置方法见文末附录A）
+
+**配置步骤：**
+
+与其他事件同理，在此不再赘述。
+
+需要注意的是，开始时间通过10位时间戳的形式指定，可通过公式计算。
+
+#### 附录A. 利用Q-Source主动模式建立企业微信成员信息库
+
+新建一个应用，利用Q-Source主动模式获取企业微信部门成员信息，作为基本信息库，即可在其他应用中快捷地调取企业微信成员数据。具体配置步骤如下：
+
+1、建立应用，根据需求设计表单，然后在添加流程界面申请人节点中新增Q-Source主动模式数据源；
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/ROQsaSz1wWVIkT7q1INnmk2VGC8LTfOm_.png)
+
+2、正确配置Q-Source主动模式（详见企业微信[**获取部门成员**](https://work.weixin.qq.com/api/doc/90000/90135/90200)和[**获取部门成员详情**](https://work.weixin.qq.com/api/doc/90000/90135/90201)接口，根据实际需求进行调用），将拉取的数据解析到表单，最终效果如下图所示（相当于建立了一个基础数据库）；
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/y0QNs6HOgnzt-pSQeSeRvuaRVXarnMfc_.png)
+
+3、在需要调用数据的应用中（如创建日程的应用）设置相应字段，详情如下；
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/motWAqkOjrw0NDKOJPXYgxXAGMTqHQFn_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/oQZ69mEnF8yBVD4ouAqTDiTC9DFHcQaH_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/I1SGHnpSKIzPPNrSDsmODj1TgvJ1k5Sd_.png)
+
+4、保存应用并发布，即可正常使用，最终效果如下。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/eKJgLTgB9-MSKS_vjhS38qc3UnJNpgi6_.gif)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/zlgzf8u95s1gsub5?singleDoc#)

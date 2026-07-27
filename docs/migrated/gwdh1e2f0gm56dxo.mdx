@@ -1,0 +1,149 @@
+---
+title: "表格引用字段，将表格引用数据进行拼接展示"
+description: "1. 场景/问题描述希望表格单独行引用数据时，可以实现将引用的多行数据，插入展示在表格行另一个字段中类似于下图2. 思路逻辑使用代码块将引用字段的字段内容拿到之后再进行数据处理拼接换行3. 配置过程3.1. 表单设计3.2. 代码与测试3.2.1. 代码注释table：插入该应用的表格字段fi..."
+slug: "/搭建技巧/按功能分类/表格使用/拆分-合并/表格引用字段-将表格引用数据进行拼接展示"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/gwdh1e2f0gm56dxo?singleDoc#"
+source_updated_at: "2024-10-15T03:38:09.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "表格使用"
+  - "拆分/合并"
+  - "表格引用字段，将表格引用数据进行拼接展示"
+---
+## 场景/问题描述
+
+希望表格单独行引用数据时，可以实现将引用的多行数据，插入展示在表格行另一个字段中
+
+类似于下图
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694071414750-b97c7af9-a3a2-46d1-b798-0fb8e8f2c1ea.png)
+
+## 思路逻辑
+
+使用代码块将引用字段的字段内容拿到之后再进行数据处理拼接换行
+
+## 配置过程
+
+### 表单设计
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694071579754-7ad2fe57-71df-4379-a1a4-221df830208f.png)
+
+### 代码与测试
+
+#### 代码注释
+
+table：插入该应用的表格字段
+
+field\_164771244：表格字段ID
+
+field\_id获取方式[https://exiao.yuque.com/rlf3k1/oanb79/ml0u7lgb3wa0vhiz?singleDoc#](https://exiao.yuque.com/rlf3k1/oanb79/ml0u7lgb3wa0vhiz?singleDoc#) 《如何在代码块中分辨表格的不同列》
+
+queId === 164770026：表示引用应用需要拼接的字段ID
+
+queid的获取方式：[https://exiao.yuque.com/rlf3k1/oanb79/ub34vw3b7cdqvovg?singleDoc#](https://exiao.yuque.com/rlf3k1/oanb79/ub34vw3b7cdqvovg?singleDoc#) 《调用添加数据接口，如何写body内容》
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694071880347-63e9306b-bd82-40e4-872c-a6d2cf21d6fe.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694071918171-5d3e6686-65c5-4ebf-b45d-969bd44bb709.png)
+
+#### 具体代码
+
+```javascript
+const axios = require('axios');
+
+const table = qf_field.{表格$$176AB68BA$$};
+
+// 定义一个异步函数来执行异步操作
+const fetchData = async () => {
+  let outputResult; // 创建一个变量来存储输出结果
+
+  // 添加条件来检查table是否为空
+  if (table.length === 0 ) {
+    // 如果满足条件，将空数组赋给outputResult
+    outputResult = [];
+  } else {
+    let allResponses = [];
+    let mergedResults = [];
+
+    // 使用 Promise.all 来等待所有请求完成
+    await Promise.all(table.map(async (element) => {
+      // 获取applyid中的值
+      const ids = element.field_164771244;
+
+      if (ids && ids.length > 0) {
+        // 遍历每个ID并发送请求
+        let res_list = [];
+        for (const id of ids) {
+          const response = await axios.get(`https://api.qingflow.com/apply/${id}`, {
+            method: 'get',
+            headers: {
+              'accessToken': 'd866db1d-79ca-42c5-9e9c-0b1ce2113**'
+            }
+          });
+          const result = response.data.result.answers;
+          for (const value of result) {
+            if (value.queId === 164770026) {
+              const values = value.values;
+              const dataValue = values[0].dataValue;
+              res_list.push({ [value.queTitle]: dataValue });
+            }
+          }
+        }
+
+        // 将拼接结果存储到productNames变量中
+        let productNames = '';
+        for (let i = 0; i < res_list.length; i++) {
+          productNames += res_list[i]['产品名称'] + '\n';
+        }
+
+        // 将处理后的结果合并到新的对象中，包括原始table的其他内容
+        let mergedResult = {
+          ...element,
+          "拼接结果": productNames
+        };
+
+        // 将合并后的结果添加到mergedResults数组中
+        mergedResults.push(mergedResult);
+      } else {
+        // 如果ids为空，拼接结果设为空字符串
+        let mergedResult = {
+          ...element,
+          "拼接结果": ""
+        };
+
+        // 将合并后的结果添加到mergedResults数组中
+        mergedResults.push(mergedResult);
+      }
+    }));
+
+    // 将mergedResults赋给outputResult
+    outputResult = mergedResults;
+  }
+  qf_output={outputResult}
+  //console.log(outputResult);
+};
+
+// 调用fetchData函数以启动异步操作
+fetchData();
+```
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694071966993-52acd8c0-5104-4532-a101-8f844b3ca07e.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694071977052-5ac5a2e5-b880-45fe-9b9e-8d580f3e9b2a.png)
+
+#### 解析规则
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694071987638-07340d4f-4d68-41c0-a85d-02ca2865d3fb.png)
+
+#### 字段接收配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694072013113-2af1e74a-7715-43ac-b83e-ae093c8a56b2.png)
+
+## 实际效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694072064492-a139073e-f3f1-47b8-9cc0-1e6ff0baacff.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/gwdh1e2f0gm56dxo?singleDoc#)

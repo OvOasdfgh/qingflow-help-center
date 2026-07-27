@@ -1,0 +1,117 @@
+---
+title: "获取数据关联的内容"
+description: "获取数据关联的内容1. 权限说明仅专有轻流支持；仅「系统管理员accessToken」可以调用。2. 请求请求方式：POST请求地址：http(s)://XXX.XXX.COM/openApi/data/queRel请求地址中XXX.XXX.COM为自有域名，根据实际情况更新，示例如下：POS..."
+slug: "/帮助文档/轻代码/openapi/应用数据接口/数据内容/获取数据关联的内容"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/ef76oafn6havixik?singleDoc#"
+source_updated_at: "2024-10-15T03:35:11.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "应用数据接口"
+  - "数据内容"
+  - "获取数据关联的内容"
+---
+获取数据关联的内容
+
+---
+
+### **权限说明**
+
+仅专有轻流支持；
+
+仅「系统管理员accessToken」可以调用。
+
+### 请求
+
+请求方式：POST
+
+请求地址：http(s)://XXX.XXX.COM/openApi/data/queRel
+
+> 请求地址中XXX.XXX.COM为自有域名，根据实际情况更新，示例如下：
+
+```javascript
+POST https://dedign.youzan.com/openApi/data/queRel
+```
+
+#### **参数说明(路径参数)：**
+
+无
+
+#### **参数说明(查询参数)：**
+
+无
+
+#### **请求头（Header）**
+
+无
+
+#### **请求体（Body）**
+
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| role |  | int | 发起请求的角色1：工作区管理员；2：申请人；3：处理人；4：qrobot；5：分享人；6：邮件处理人 |
+| pass |  | string | 申请人身份请求时如果表单有密码需要传入 |
+| auditNodeId |  | int | 如果调用接口时使用了userId，指定了调用者的身份，需要传递当前处理所在的auditNodeId |
+| searchKey |  | string | 需要搜索的关键字，对关联到的数据进行筛选 |
+| keyQueValues |  | \[array\] |  |
+| keyQueId |  | int | 作为筛选值的字段queId |
+| ordinal |  | int | 如果是表格子问题，为子问题所处表格行号 |
+| values |  | \[array\] | 作为筛选值的问题的的答案，是一个字符串数组 |
+| queryQuestions |  | \[array\] | 触发数据关联的字段 |
+| queId |  | int | 触发数据关联的字段queId |
+| ordinal |  | int | 如果是表格子问题，为子问题所处表格行号 |
+
+#### **请求体示例**
+
+```json
+{
+    "role": "",
+    "pass": "",
+    "auditNodeId": 0,
+    "searchKey": "",
+    "keyQueValues": [{
+        "keyQueId": 0,
+        "ordinal": 0,
+        "values": []
+    }],
+    "queryQuestions": [{
+        "queId": 0,
+        "ordinal": 0
+    }]
+}
+```
+
+### 返回
+
+#### 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| result | 是 | \[array\] |  |
+| queId |  | int | 答案字段的queId |
+| ordinal |  | int | 如果是表格子字段，ordinal表示行号 |
+| answers | 是 | \[array\] |  |
+| queId | 是 | number | 字段id |
+| queTitle |  | string | 字段名称 |
+| queType | 是 | number | 字段类型。1、描述文字；2、单行文字；3、多行文字；4、日期时间；5、成员字段；6、邮箱；7、手机；8、数字；9、链接；10、单项选择；11、下拉选择；12、多项选择；13、上传附件；14、起止时间；15、图片选择；16、富文本；17、定位字段；18、表格；19、数据关联；20、Q-Linker；21、地址字段；22、部门字段； |
+| values | 是 | \[answerValue\] | 表格字段以外的字段类型必填 |
+| tableValues |  | array | 表格类型字段必填 |
+
+#### 返回体示例
+
+```json
+{
+    "result": [{
+        "queId": 0,
+        "ordinal": 0,
+        "answers": [{
+            "xxx": ""
+        }]
+    }]
+}
+```
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/ef76oafn6havixik?singleDoc#)

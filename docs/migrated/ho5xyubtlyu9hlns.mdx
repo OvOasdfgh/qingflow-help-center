@@ -1,0 +1,159 @@
+---
+title: "5.3.0功能变更日志"
+description: "功能变更日志内容来源：（1）老的功能在新的稳定版上，有功能变更；（2）bug修复之后，功能最新的逻辑表现。用户可通过此日志掌握 bug 修复和更新的内容、适应操作体验的变化、及时了解已知问题和限制。1 无代码1.1 【密码】“非自行注册”的账号的初始密码置空此次更新， 对账号安全进行了加固。通..."
+slug: "/更新动态/更新日志/专有轻流/5-3-0功能变更日志"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/ho5xyubtlyu9hlns?singleDoc#"
+source_updated_at: "2024-10-15T03:37:02.000Z"
+keywords:
+  - "更新动态"
+  - "更新日志"
+  - "专有轻流"
+  - "5.3.0功能变更日志"
+---
+功能**变更**日志内容来源：
+（1）老的功能在新的稳定版上，有功能变更；
+（2）bug修复之后，功能最新的逻辑表现。
+用户可通过此日志掌握 bug 修复和更新的内容、适应操作体验的变化、及时了解已知问题和限制。
+
+## 1 无代码
+
+### 1.1 【密码】“非自行注册”的账号的初始密码置空
+
+此次更新， 对账号安全进行了加固。通过单点登录、接口登录的方式首次登录轻流的用户，密码为空，首次登录时无法通过账号密码登录系统。在个人中心补充密码后，可使用账号和密码登录。此功能仅对上线后的新用户生效
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/i_sxwzWLASlY6TBGbHjQIgfvD4iEqDsG_.png)
+
+### 1.2 【直接发布】「暂存」交互表现调整
+
+点击待办数据的「保存」，弹窗不会被关闭
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/bXYl6BLbI2ysxU0N-hGHkaxPK7ki9AIC_.gif)
+
+### 1.3 【Q-Source主动】代码重构&优化
+
+现在更新/发布服务、服务宕机情况下，能够关闭正在执行中的qsource主动
+
+### 1.4 【直接发布】数据详情按钮顺序调整
+
+为提高产品的一致性和可用性，调整了表单主按钮的顺序，以确保用户能够更轻松地理解并使用产品功能
+
+更新前:
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/-QPPHI9u3Pl1MG9uTrZhZ8xreUE-hh9Y_.png)
+更新后：
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/rELtAZk5N0l9KdyVBBs_1De_gAcvNrBG_.png)
+
+### 1.5 【数据关联】引擎重构升级
+
+新版关联引擎有以下方面的优化及提升
+
+1、性能提升
+
+- 数据关联字段、使用关联已有数据配置的字段，加载速度提升
+- 有效减少使用这两类字段较多的表单，加载卡顿的现象
+
+2、功能增强
+
+- 数据关联字段的聚合方式，新增：未填计数和总计数的聚合类型
+- 关联已有数据，新增排序设置配置项。开启后，关联已有数据的值为：排序后的第一条数据
+
+3、逻辑一致性提升
+
+统一了数据关联和关联已有数据对空值的处理逻辑，关联到符合条件的第一条数据对应的字段值不论该字段是否为空值，都会返回空值默认值或对应数值
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/LnMB2PkxlzM5SnjnLT4DugiSUIpH5U1X_.png)
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/38u2p63kUcd0m3W5qKRrSSimDziMQbc0_.png)
+
+### 1.6 门户筛选-筛选条件&报表删除后组件表现优化
+
+门户筛选组件筛选内容支持保留，设置筛选条件的默认内容时，对报表新增/删除进行操作，仍保留已设置过的默认筛选内容
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/hTrCj7I5npGR9OSp3BEuKkiIQ9DLrUw9_.png)
+门户报表删除后，在之前设置的第选条件内也会被直接删除
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/X9r9udLP7_xBj3i4rsDbqx1MDRgyY-6j_.png)
+
+### 1.7 流程重构
+
+当流程进入自动化节点，流程被回退或撤回，已经在执行的自动化节点，会继续执行完毕；还未开始执行的自动化节点，会停止执行。
+
+- 新增流程状态
+
+新增当流程进入自动化节点 时，流程将处于「自动化进行中 」状态：
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/pyVYhAJ7efHaBMgqvIsdDSa_hM-R6-gF_.png)
+
+### 1.8 数据关联请求合并
+
+数据关联、关联已有数据性能优化、功能增强
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/90V7VGSUUrs2h-aSX6whtP8nqSZ6ec50_.png)
+
+## 2 轻代码
+
+### 2.1批量同步更新数据不记录流程日志
+
+Q-Source主动、Q-Database更新数据时，若数据无更新，不记录流程/更新日志。
+
+更多详情可见以下链接[https://exiao.yuque.com/ixwxsb/ku1qbu/ge51rv?singleDoc#](https://exiao.yuque.com/ixwxsb/ku1qbu/ge51rv?singleDoc#) 《轻流环境级接口文档》
+
+### 2.2【OPEN API】获取单条数据的详细信息接口返回应用信息
+
+原接口返回参数：
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/DTT0z9Ft3NDbVFLoLuna4uDLm_qhou_q_.png)
+此次更新，result对象中，增加参数 如下，便于用户根据applyid查询相关应用id
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/Ok2k15nehQPwYinsYEwD7TLrusDeFsIP_.png)
+
+### 2.3 【提醒推送】配置数量扩展
+
+增加了专有云可用配置项设置提醒推送数量上限（默认10个）
+
+### 2.4 【环境级】调用工作区级OPEN API不受白名单限制
+
+环境级token换取的的工作区级token，在调用工作区级接口时不受插件中心的IP白名单限制，原先只有在白名单内的IP地址才允许被使用
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/YGaqAbKHQevNEJeJ72ZowKBI__fDJH85_.png)
+注意可用版本：仅环境级合作伙伴，仅官网
+
+### 2.5【专有轻流】支持自定义对接短信服务商
+
+专有轻流的创建/更新模板、发送短信等场景可对接二开服务，并由二开实现与各短信服务商的对接
+
+### 2.6 【轻析】数据集面板优化
+
+在数据集中可对下方数据栏进行拖动，扩展了功能配置界面，让搭建更顺畅
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/%E4%B8%80%E6%AC%A1%E6%80%A7.gif?sign=d5df1bfc8e6bf2166fa76ab84a59f982&t=1699005082)
+
+## 3 轻析
+
+### 3.1 【密码】优化专有云环境中成员的初始密码
+
+将邀请成员改为添加成员，添加成员的方式有邀请成员和创建成员
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-06/-jd7NJb2u1sTAlK9_H-u4Flo4LY_Cmye_.png)
+
+并支持选择初始密码的生成策略。「创建成员」OPEN API的初始密码也可自定义。
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/E_-jljCFkJRX6SLFPAUmzmNWNHic4N-K_.png)
+
+### 3.2 【直接发布】表格拆分优化
+
+优化了表格字段多个共存时，在轻析的拆分效果，更加符合主流预期
+
+### 3.3 【轻析】汇总方式支持选择最新数据
+
+此次更新，支持汇总方式选择最新/最旧数据 ，不同情况下的可选情况有所区别：
+
+- 除明细表外，对所有指标字段中的汇总方式新增最新数据、最旧数据选项，汇总结果受所选数据源中的日期字段影响
+- 所选数据源中仅包含单个日期字段时，无需承载次级选项，可直接选择最新/旧数据
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/UPpizNian-w_LYsaKDqNpx0QNxq8oB7p_.png)
+- 所选数据源中包含多个日期字段时，在选择最新/旧数据时需增加次级选项，汇总结果受所选的时间字段影响
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/STa2rdPcRY0p6Chscnp0gwbIf2Mz9DHD_.png)
+- 所选数据源中无日期字段时，在选择汇总方式时隐藏最新/旧数据
+
+### 3.4 【轻析】部门筛选动态覆盖子部门
+
+对报表、数据集、数据源进行权限编辑时，勾选父级部门，默认包含子部门
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/hviDmiqu1w3TubwlmEjomFgQTIza8aZZ_.png)
+
+## QMC
+
+### 4.1【QMC】自定义主站密码强度
+
+在QMC中可以自定义主站的密码设置规则，包括密码长度、字符类型等。密码强度对主站用户注册、修改密码等功能生效
+
+在QMC的「密码安全设置」中，将「密码强度约束」改为「自定义密码强度」,可自定义密码长度、字符类型、是否包含邮箱等
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-11-03/MrDp4vP735R1qfOe7wfwjg-XBLzx_OYe_.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/ho5xyubtlyu9hlns?singleDoc#)

@@ -1,0 +1,92 @@
+---
+title: "公有云数据添加表格如何每200行一条数据？"
+description: "1. 场景/问题描述公有云版本由于表格行限制200行，所以应用A数据添加至应用B时，如何每200条数据在B应用中生成一条数据？2. 解决思路需要在表单中有两个字段【递增编号】=系统编号，【数字】为计算当前编号是该应用的第多少条数据推送到B应用中去3. 配置过程3.1. 推送表格数据源3.1.1..."
+slug: "/搭建技巧/按功能分类/数据管理/应用数据处理/公有云数据添加表格如何每200行一条数据"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/pdl7re75umlq42se?singleDoc#"
+source_updated_at: "2024-10-15T03:38:13.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "数据管理"
+  - "应用数据处理"
+  - "公有云数据添加表格如何每200行一条数据？"
+---
+## 场景/问题描述
+
+公有云版本由于表格行限制200行，所以应用A数据添加至应用B时，如何每200条数据在B应用中生成一条数据？
+
+​
+
+## 解决思路
+
+需要在表单中有两个字段【递增编号】=系统编号，【数字】为计算当前编号是该应用的第多少条数据推送到B应用中去
+
+​
+
+## 配置过程
+
+### 推送表格数据源
+
+#### 表单设计
+
+- 其中单行文字就是表格中的子字段
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1703054158721-53f0ca04-2cb1-47ce-9b0e-57774e016db5.png)
+
+- 数字：INT(递增编号/10)+1
+
+这里只演示每10条数据一个表格，如果是200条数据一个表格，可以修改为200
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1703054209150-a97fedda-72e7-45e8-8ad9-c0eb7c33452c.png)
+
+#### 流程设计
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1703054316709-172263e1-1a79-4646-9a5f-16db96361785.png)
+
+- 第一个QR更新配置
+
+目的：将系统编号推送给自己
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1703054551030-afbfd77f-d6b1-428e-be22-eb560b91fe02.png)
+
+- 超时自动提交配置
+
+目的：数字字段重新提交重计算下
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1703054621865-cb88fe0e-eb6f-44be-85ca-25933cc446a9.png)
+
+- 第二个QR更新配置
+
+推送到应用B的表格数据中，目的：如果没有在应用中找到该数字，就添加该数字过去
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1703054688962-a6c211c3-964a-49f9-9894-721e5493211f.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1703054992459-d7ee0f94-3595-47e5-9ee7-d31e32afc0b3.png)
+
+- 第三个QR更新配置
+
+目的是为往表格中插入数据
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1703055255094-ef886c41-71fd-4e1b-8476-045ffe78d769.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1703055299830-fbfdff94-f759-437e-adb5-b6d3543d9f28.png)
+
+### 表格接收数据9条一条
+
+- 其中【可忽略，用于更新而已】可以设置为表单隐藏
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1703055355473-f52d87c9-49b0-48ae-9f4b-183ba5bc6732.png)
+
+## 实际效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1703055331972-af663ac0-621e-4aec-9820-6a969f2f5f1b.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1703055436311-0dd9fa37-67fa-4d58-a77e-834154b3f097.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1703055447262-e85b693f-e7aa-4455-ab8c-37fa91c94cca.png)
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/pdl7re75umlq42se?singleDoc#)

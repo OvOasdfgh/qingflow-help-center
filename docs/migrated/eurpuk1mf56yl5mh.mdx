@@ -1,0 +1,80 @@
+---
+title: "定时轮训获取数组的特定元素数据"
+description: "1. 场景/问题描述需要每天早上定时向企业微信群发送天气预报，天气预报的信息是通过调用第三方接口获取的场景补充获取企业微信员工打卡数据，由于QS主动无法动态插入时间戳字段，所以也可以使用该方式去解决当前场景问题点但是使用QS主动第三方接口返回内容是数组的形式，但是我只需要获取数组中第一个元素的..."
+slug: "/搭建技巧/按功能分类/其他/自动推送/定时轮训获取数组的特定元素数据"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/eurpuk1mf56yl5mh?singleDoc#"
+source_updated_at: "2024-10-15T03:38:22.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "其他"
+  - "自动推送"
+  - "定时轮训获取数组的特定元素数据"
+---
+## 场景/问题描述
+
+需要每天早上定时向企业微信群发送天气预报，天气预报的信息是通过调用第三方接口获取的
+
+​
+
+**场景补充**
+
+获取企业微信员工打卡数据，由于QS主动无法动态插入时间戳字段，所以也可以使用该方式去解决
+
+​
+
+**当前场景问题点**
+
+但是使用QS主动第三方接口返回内容是数组的形式，但是我只需要获取数组中第一个元素的内容。
+
+## 思路逻辑
+
+流程外QR+Q-linker+提交重计算Q-linker
+
+使用流程外QR每天定时添加数据到某个应用自动触发Q-linker获取当日天气预报，然后流程再触发webhook推送内容至企微群中
+
+## 配置过程
+
+### 表单设计
+
+示例仅供参考
+
+#### 应用1
+
+- 【日期字段】是用于接收流程外QR的数据的。q-linker是具体配置的查询天气接口，这里【产品名称】就是对应天气查询返回的结果
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694161620025-a86f9946-e34e-40f7-9e89-cffb49c101ab.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694161672035-15fe9add-7be0-4471-a0ea-d85effeebb70.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694161599519-0e8b3682-03db-49f1-a476-e96478aaf395.png)
+
+- 提交重计算需要在申请人节点加上q-linker
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694161700954-08d4149a-30fe-4d0a-9740-4efa4037404e.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694161747793-07dd079f-f0b0-474d-bb9f-25dcbed612e6.png)
+
+#### 应用2
+
+- 流程外QR，定时触发设置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694161795492-56fca295-0c9a-4ae9-b3d7-4b5221d615d5.png)
+
+- 流程外QR设置，我这边设置是重复周期是每天，具体可以根据自己需求去设置，流程外配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694161839103-f42d394a-e1b2-45e8-97e7-a5f42cff0e52.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694161855975-b0d60d44-a434-483a-b6ed-1d9f29b5b6c7.png)
+
+- 设置完成后，需要发起一条数据，后续就会按照流程外QR的设置，每天重复执行
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694161880045-ed589d1f-49ea-453b-a7cd-8b8a690c4975.png)
+
+## 实际效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2023/png/28884377/1694161902513-ed68e829-30d7-493a-af8e-fdc76a0e4f54.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/eurpuk1mf56yl5mh?singleDoc#)

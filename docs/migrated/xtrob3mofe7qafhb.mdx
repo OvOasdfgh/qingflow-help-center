@@ -1,0 +1,136 @@
+---
+title: "金数据"
+description: "1. 介绍金数据是一款免费的表单设计和数据收集工具，可用来设计表单，制作在线问卷调查，组织聚会，询问意见，整理团队数据资料，获得产品反馈等。2. 鉴权信息操作步骤：获取API Key 和 Secret您可以在 [个人中心] —— [API]来开启你的API支持； [系统设置] —— [企业AP..."
+slug: "/帮助文档/轻代码/连接中心/连接器/企业服务/金数据"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/xtrob3mofe7qafhb?singleDoc#"
+source_updated_at: "2024-11-26T08:30:19.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "连接中心"
+  - "连接器"
+  - "企业服务"
+  - "金数据"
+---
+### 介绍
+
+金数据是一款免费的表单设计和数据收集工具，可用来设计表单，制作在线问卷调查，组织聚会，询问意见，整理团队数据资料，获得产品反馈等。
+
+### 鉴权信息
+
+**操作步骤：**
+
+1. **获取API Key 和 Secret**
+
+您可以在 \[个人中心\] —— \[API\]来开启你的API支持； \[系统设置\] —— \[企业API\]可获取企业API。具体可见 [获取 API &企业API Key/Secret](https://jinshuju.net/help/articles/api-auth.html)。
+
+**个人API**
+
+你可以在 \[个人中心\] —— \[API\] 中，找到自己的 API Key 和 Secret。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/PFe5bT19muieaVgH5yRKbRUP9RGgRMIe_.png)
+
+**企业API**
+
+您可以在 \[系统设置\] —— \[企业 API\]中，可找到企业的 API Key 和 Secret。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/1HMQXQ7K5Buw-_Jna4ofVAaCQERN5IBx_.png)
+
+1. **进入轻商城-连接中心中，选择连接器“金数据”，点击“配置”，并填写API Key和 API Secret。**
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/H6776rVcZylqo4f2NfBpNediAzNFwMAK_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/oN3vF5FOe8oe2WToGb5zDZbs2Td7Jgqc_.png)
+
+通过以上步骤，您可以完成金数据鉴权，省去每次使用连接器重新获取与填写api key与api secret的步骤。
+
+##### 注意事项
+
+### 事件信息
+
+| 事件 | 描述 |
+| --- | --- |
+| 获取某个表单的定义 | 金数据表单API用于获取表单结构 |
+| 获取账户下所有表单 token 、 表单名 、表单标签 | 获取您账户下表单数，以及所有的表单 token 、 表单名 、表单标签 |
+| 向金数据表单推送新数据 | 向金数据中指定的表单推送新数据 |
+| 获取金数据表单中的数据(前50条) | 获取金数据表单中的数据，最多可获取50条数据 |
+| 获取金数据表单中的数据(50条以外) | 获取金数据表单中的数据，请先获取金数据表单中的前50条数据后再使用 |
+
+### 配置演示
+
+##### 获取账户下所有表单 token 、 表单名 、表单标签
+
+**效果展示：**
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/%E5%9B%BE%E7%89%87%E8%BF%81%E7%A7%BB/2/23/%E9%87%91%E6%95%B0%E6%8D%AE.gif?sign=701ecabc2e782de7eab752fca5b1fd3e&t=1683565581)
+
+**前置条件：**
+
+需要确定您在连接中心-金数据连接器中配置了鉴权信息（配置方法见上文鉴权信息）
+
+**配置步骤：**
+
+1. 创建一个应用，应用中选Q-Linker字段，「配置模式」选连接中心里对应模版，并点击右上角保存（这里一定要注意保存，关系到下一步表格的配置）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/l8pald7CtAlC3vx1HiP6RFwr-WlyNGIN_.png)
+
+1. 添加单行文本字段、表格字段，按照连接中心-金数据连接器-对应事件中的参数要求编辑单行文本和表格
+
+（事件中要求的字段见下图）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/WaU7kOLFr2J1XrgXt0K5fFe1hd165DaP_.png)
+
+（应用中单行文本、表格的配置字段见下图）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/51b3vmdpm23yJfi_JmKDJK2boVFpPi2U_.png)
+
+1. 关联单行文本，点击文本字段，右侧配置框中：默认内容-关联已有数据-XXX（Q-linker名称）-XXX（对应参数）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/KzDXdyXf1Qi7N7ox5XXYxdFyrpcDWok3_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/LBmAk1vb7OBTIdL-9mJFRAQ8MgxlPTys_.png)
+
+1. 关联表格，点击你的表格，右侧配置框中：默认内容-关联已有数据-XXX（Q-linker名称）-表单信息；关联子字段（如下图，将您的表格字段与连接器事件中参数关联起来）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/6slKjulEigrkbFXlLjDDSlSNB3UcgG7j_.png)
+
+**结果展示**
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/8kgdI9xmyHszq72c9nIo7nNLVJk_lOFY_.gif)
+
+##### 向金数据表单推送新数据
+
+**前置条件：**
+
+1. 需要确定您在连接中心-飞书连接器中配置了鉴权信息（配置方法见上文鉴权信息）
+2. 若想向指定表单中插入数据，需要您输入表单的id（表单token），您可以在轻流中通过上一个事件【获取账户下所有表单 token 、 表单名 、表单标签】获得，也可以在金数据 中，通过表单填写的 URL 地址获取，例如表单填写链接为：[https://jinshuju.net/f/](https://jinshuju.net/f/)`ABC123`，则表单token 为 `ABC123`，表单 POST 地址为：[https://jinshuju.net/api/v1/forms/](https://jinshuju.net/api/v1/forms/)`ABC123`/entries 。
+
+**配置步骤：**
+
+1. 创建一个应用，添加单行文本字段、多行文本字段，按照连接中心-金数据连接器-对应事件中的参数要求编辑单行文本和表格。
+
+（事件中要求的字段见下图。其中“all”是返回参数，需要多行文本字段；其它的是发送至API的变量，需要在每次发起请求时在您的应用中填写。）
+
+（本事件支持插入10个字段的数据，您可以根据具体需求插入不大于10个数量的字段，如果字段数量不满足您的需求，请联系我们的产品经理/技术支持/其他工作人员，我们会帮您解决）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/yBRfWEPFTN_5mJ71IaNAGGd11Bg6x03X_.png)
+
+（应用中单行文本、多行文本的配置字段见下图，姓名年龄身份对应上图的第一个字段至第三个字段）
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/8QKTXG6gR5Rn6eIH3t3PDhhOczAOUjNn_.png)
+
+1. 新增Q-linker字段，关联连接中心模版、并绑定变量，然后点击右上角保存（这里一定要注意保存，关系到下一步多行文本的配置）
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/_iaNWEKVx4BkjQ1R5cqLkSyc_v1dwE3G_.png)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/ZZgDBE_YdpmodQjv_uMLLNg9sIbjq05q_.png)
+
+1. 关联多行文本，点击多行文本字段，右侧配置框中：默认内容-关联已有数据-XXX（Q-linker名称）-all（对应参数）；
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/WoeYqgy2FsdinjIJYvdG62Y5xun5zIB-_.png)
+
+完成，您可以向您的表单中插入新数据了（如下图）。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/TFLKQ0ouJBSycRMcmSGY8XVehgb3DXHl_.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/xtrob3mofe7qafhb?singleDoc#)

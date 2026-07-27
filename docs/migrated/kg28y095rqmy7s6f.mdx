@@ -1,0 +1,69 @@
+---
+title: "MySQL"
+description: "1. 介绍对MySQL数据库实现增改查2. 鉴权信息需要MySQL数据库权限token 配置在连接中心注意事项企业版客户需要试用请联系轻流技术支持申请token，试用token可以调用500次接口更高自定义程度配置，请在webhook/q-linker全局配置中自行配置，可联系轻流技术支持事件..."
+slug: "/帮助文档/轻代码/连接中心/连接器/数据处理/mysql"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/kg28y095rqmy7s6f?singleDoc#"
+source_updated_at: "2024-11-26T08:30:18.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "连接中心"
+  - "连接器"
+  - "数据处理"
+  - "MySQL"
+---
+### 介绍
+
+对MySQL数据库实现增改查
+
+### 鉴权信息
+
+需要MySQL数据库权限token 配置在连接中心
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/WbFuKR8hZsL8_MVtV7VHA7NE30j5Q9Ii_.png)
+
+##### 注意事项
+
+*企业版客户需要试用请联系轻流技术支持申请token，试用token可以调用500次接口*
+
+*更高自定义程度配置，请在webhook/q-linker全局配置中自行配置，可联系轻流技术支持*​
+
+#### 事件信息
+
+| 事件 | 描述 |
+| --- | --- |
+| 新增数据 | 新增数据到mysql数据库 |
+| 查询数据 | 查询数据库中某表数据 |
+| 修改数据 | 修改数据库中某条数据 |
+
+### 配置演示
+
+#### 新增数据
+
+1.可以在连接中心——事件管理配置一些相对固定的参数
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/XYpoDdnJ4XiFPhFY20d5ZXq4iVQhMr2g_.png)
+
+2.表单设计，将没设置默认值的变量 添加到表单中
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/iAkZoKJbbkLBud4zk6CRmm9E-gZoKk8J_.png)
+
+3.添加webhook节点选择连接中心模版，并将变量与字段匹配
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/bxW7nsdv0EhsqWvS_u24MkrnbyY_n_Ar_.png)
+
+4.在表单页面中输入sql语句直接提交即可 例如
+
+```latex
+insert into test values(1,'zhangsan',20)
+```
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-08/cz7Uv0sxg26YcYcwcHq3GCveIgNqKJP-_.png)
+
+### 试用申请
+
+试用版轻流用户可点击链接**免费**申请500次连接器调用次数，申请链接：[**https://qingflow.com/f/1893429e**](https://qingflow.com/f/1893429e)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/kg28y095rqmy7s6f?singleDoc#)

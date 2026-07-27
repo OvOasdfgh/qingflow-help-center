@@ -1,0 +1,72 @@
+---
+title: "轻流 x 企业微信---获取打卡数据"
+description: "应用场景企业微信开放了打卡应用的api，功能包括查询打卡数据，能获取到用户、地点、时间、打卡类型等信息，在轻流中可以基于以上数据做一段时间内的迟到/事假等统计，以及更深层数据处理，方便管理落地方案图文/视频演示帮助文档配置文档：第一步：获取access_token获取access_token是..."
+slug: "/搭建技巧/按功能分类/第三方集成/企业微信/轻流-x-企业微信-获取打卡数据"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/qfd284vsto9n9gvg?singleDoc#"
+source_updated_at: "2024-10-15T03:38:19.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "第三方集成"
+  - "企业微信"
+  - "轻流 x 企业微信---获取打卡数据"
+---
+## 应用场景
+
+企业微信开放了打卡应用的api，功能包括查询打卡数据，能获取到用户、地点、时间、打卡类型等信息，在轻流中可以基于以上数据做一段时间内的迟到/事假等统计，以及更深层数据处理，方便管理
+
+## 落地方案
+
+![原文流程图](https://cdn.nlark.com/yuque/0/2021/jpeg/2997244/1611729709472-728305d0-6df5-4635-9f44-8ce703d6a746.jpeg)
+
+## 图文/视频演示
+
+## 帮助文档
+
+配置文档：
+
+**第一步：获取access\_token**
+
+获取access\_token是调用企业微信API接口的第一步，相当于创建了一个登录凭证，其它的业务API接口，都需要依赖于access\_token来鉴权调用者身份。
+官网获取access\_token：[https://open.work.weixin.qq.com/api/doc/90000/90135/91039](https://open.work.weixin.qq.com/api/doc/90000/90135/91039)
+
+**第二步：获取打卡数据接口**
+
+请求地址：[https://qyapi.weixin.qq.com/cgi-bin/checkin/getcheckindata](https://qyapi.weixin.qq.com/cgi-bin/checkin/getcheckindata)
+
+请求方式：POST
+
+**第三步：Q\_source主动轮询设置**
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1638775/1608533709287-f68bdf85-2fde-46a0-98e0-2df740e8df36.png)
+参数配置
+1）URL：企业微信获取打卡数据API
+
+2）Query Params：第一步中获取的access\_token（token是有有效性的，需要两小时更新一次）
+3）Header：无
+4）Method：post
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1502701/1593596488331-a104b043-44c7-4e84-ae60-19c2f9100286.png)
+5）body Type:post
+
+6) body设置：请求参数
+ 官网要求请求参数starttime和endtime和返回 参数的的打卡时间是Unix时间戳格式，在轻流中设置一个公式转换即可
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1502701/1593596717739-d103421c-61e1-4e41-8402-83ade8497e48.png)
+7）返回内容解析：解析需要的字段
+​
+
+测试的一组数据示例：
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/1502701/1593596942920-e4683779-730f-44c1-9443-3f8d210cd48e.png)
+
+​
+
+​
+
+​
+
+​
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/qfd284vsto9n9gvg?singleDoc#)

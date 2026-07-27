@@ -1,0 +1,82 @@
+---
+title: "流程拒绝后怎么删除数据"
+description: "1. 场景 有个借阅书籍的表单，然后发起申请后，要有审批人审批。如果审批人拒绝，拒绝后不想保留这条数据 2. 实现思路由于流程拒绝不能触发任何操作，这时我们可以考虑使用提醒推送(专业版及以上版本可使用)加QS被动的方式，根据流程审批结果判断这条数据是否被拒绝，如果被拒绝，则进入流程使用web..."
+slug: "/常见问题-faq/流程/流程拒绝后怎么删除数据"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/ldnufgmnq0f0tava?singleDoc#"
+source_updated_at: "2025-02-18T02:33:55.000Z"
+keywords:
+  - "常见问题（FAQ）"
+  - "流程"
+  - "流程拒绝后怎么删除数据"
+---
+## 场景
+
+有个借阅书籍的表单，然后发起申请后，要有审批人审批。如果审批人拒绝，拒绝后不想保留这条数据
+
+## 实现思路
+
+由于流程拒绝不能触发任何操作，这时我们可以考虑使用提醒推送(专业版及以上版本可使用)加QS被动的方式，根据流程审批结果判断这条数据是否被拒绝，如果被拒绝，则进入流程使用webhook调删除数据的接口，删除该条数据。
+
+## 表单配置
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1735637280758-f83e0df4-aea2-4a77-8435-c3cd3826e040.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1735637398241-09f04c0b-d35e-43af-b456-22ac4cd22241.png)
+
+### QS被动配置
+
+接收提醒推送的应用配置QS被动，选择进入流程
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1735552147502-6d4fb4bd-7515-4653-8744-6f11a266aba6.png)
+
+### 提醒推送配置
+
+将QS被动的url复制进提醒推送的URL内
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1735552252645-b457ebd2-f6aa-429d-aa79-33a2d9251360.png)
+
+JSON体可自定义，需要哪些字段，就插入哪些字段
+
+这里的场景所必须的字段是：应用appKey，数据ID，当前流程状态
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1735552731641-b60576de-f7ef-4a44-b419-ad05b890b955.png)
+
+### JSON Path解析
+
+将JSON解析到接收提醒的应用内
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1735552763156-a8e209dd-899e-4c96-9376-648787c3ff29.png)
+
+### 流程配置
+
+设置分支，当审批结果字段为拒绝时，执行webhook调删除应用数据的接口
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1735552868654-d27f3b22-3d12-4fdf-a98f-18f4eb609793.png)
+
+### webhook配置
+
+appKey是应用ID，获取方式可参考文档
+
+删除应用数据接口文档：[https://exiao.yuque.com/ixwxsb/cqfg2y/dqe4rcxltq63zfli](https://exiao.yuque.com/ixwxsb/cqfg2y/dqe4rcxltq63zfli)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1735552969576-2f22df48-c38f-4bd4-92de-ebaf854f0211.png)
+
+虽然applyIds需要传数组形式，但是我们的场景是删除单条数据，将QS被动解析的数据ID传进请求体即可
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1735553013701-d85403ed-e136-4137-af68-9069122c6355.png)
+
+## 实现效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1735552842824-ba2c7784-f68b-462a-b950-1a60814a6a9b.png)
+
+补充：
+
+如果需要根据某条数据的不同状态执行不同流程，可在"接收提醒推送"内配置分支判断流程状态
+例：当流程被退回时，提醒特定的人，可通过分支判断QS被动解析出的审批结果，并在对应的流程分支内配置流程内QR邮件提醒
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1735637864300-867762aa-1f56-4244-afa6-24b3afb6ecf8.png)
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/ldnufgmnq0f0tava?singleDoc#)

@@ -1,0 +1,48 @@
+---
+title: "如何校验每人每天只提交数据的数量？"
+description: "1. 场景描述疫情填报每人每天只提交1次，便于数据统计业务需求：如果用户填写的表单被拒绝了是可以再填1次的，如果是被回退的情况，是不能再重新发起，只能在完善中的数据修改后提交拓展场景所有对个人提交次数的限制2. 思路逻辑数据关联计数+提交校验数据关联：https://help.qingflow..."
+slug: "/搭建技巧/按功能分类/数据管理/数据校验/如何校验每人每天只提交数据的数量"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/ucmhgd5dypmr6ds8?singleDoc#"
+source_updated_at: "2024-10-15T03:38:11.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "数据管理"
+  - "数据校验"
+  - "如何校验每人每天只提交数据的数量？"
+---
+## 场景描述
+
+疫情填报每人每天只提交1次，便于数据统计
+
+业务需求：如果用户填写的表单被拒绝了是可以再填1次的，如果是被回退的情况，是不能再重新发起，只能在完善中的数据修改后提交
+
+​
+
+**拓展场景**
+
+所有对个人提交次数的限制
+
+## 思路逻辑
+
+数据关联计数+提交校验
+
+数据关联：[https://help.qingflow.com/help-docs?type=nocode&docId=6bbc66c96426af0e001610fc177685c5&parentId=](https://help.qingflow.com/help-docs?type=nocode&docId=6bbc66c96426af0e001610fc177685c5&parentId=)
+
+提交校验：[https://help.qingflow.com/help-docs?type=nocode&docId=5f0f3cec6426b1580000617731f64d3b&parentId=](https://help.qingflow.com/help-docs?type=nocode&docId=5f0f3cec6426b1580000617731f64d3b&parentId=)
+
+## 配置过程
+
+![企业微信截图\_ed5c1802-aaad-43b0-a537-4aa96443596f.png](https://cdn.nlark.com/yuque/0/2022/png/12721080/1653284441419-34ed07f8-58f6-4d3a-ba9f-a16d9561e6d9.png)
+
+- 筛选条件当前流程状态不等于已拒绝，意思是只计算在流程中的数据总量
+- 提交次数为空说明当天没有提交数据，有值说明当天已经提交数据
+- 提交校验判断提交次数为空时可通过
+
+![企业微信截图\_6bc52c50-7647-4e2b-bd64-699eced5d8d6.png](https://cdn.nlark.com/yuque/0/2022/png/12721080/1653283642559-c654841b-681e-4b2f-a657-0ef4ec7a19c3.png)
+
+​
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/ucmhgd5dypmr6ds8?singleDoc#)

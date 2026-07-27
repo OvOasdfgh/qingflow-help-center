@@ -1,0 +1,124 @@
+---
+title: "部门"
+description: "1. 简介1.1 功能简介可以获取通讯录中的部门，方便以部门为单位进行信息的处理1.2 使用场景适用于需要处理工作区内部门信息的场景。例如在填写请假信息表时，可以使用部门字段直接显示填写者的所属部门1.3 效果展示如下图所示，使用部门字段直接填写部门信息，提高了使用效率2. 设置步骤2.1 功..."
+slug: "/帮助文档/表单引擎/字段类型与配置/成员部门类/部门"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/go7nvs7eanzyv6ih?singleDoc#"
+source_updated_at: "2024-10-15T03:29:13.000Z"
+keywords:
+  - "帮助文档"
+  - "表单引擎"
+  - "字段类型与配置"
+  - "成员部门类"
+  - "部门"
+---
+### 1. 简介
+
+#### 1.1 功能简介
+
+可以获取通讯录中的部门，方便以部门为单位进行信息的处理
+
+#### 1.2 使用场景
+
+适用于需要处理工作区内部门信息的场景。例如在填写请假信息表时，可以使用部门字段直接显示填写者的所属部门
+
+#### 1.3 效果展示
+
+如下图所示，使用部门字段直接填写部门信息，提高了使用效率
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-07/k3g8JevWmRRR5Im8fpmZgxG-dztLiTtx_.gif)
+
+### 2. 设置步骤
+
+#### 2.1 功能入口
+
+进入应用编辑界面，点击表单设计，在高级字段中选择「部门」，即可进行「部门」的设置
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-07/BQHxIadyiEQOvI2DDAEdOR6g4WOimXOq_.gif)
+
+#### 2.2 功能设置步骤
+
+##### 2.2.1 插入部门
+
+**方式一**
+
+直接点击高级字段中的「部门」，即可插入字段至表单中
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-07/HLMjGUT3Z1k_mZzmVwzpSUgauk9m7g99_.gif)
+
+**方式二**
+
+通过拖拽的方式，拖拽「部门」字段至表单中，即可完成操作
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-07/s-y6cDT4v1ozPwfrqHh5Vvv4COgfmDUG_.gif)
+
+##### 2.2.2 标题
+
+可以用于区分不同的字段，便于信息的填写。点击已添加的「部门」字段，即可设置标题内容
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-07/EK-hgrx_7x56GElOEqSfsw8SZHAXLlcU_.gif)
+
+##### 2.2.3 提示
+
+可以用于引导填写者填写内容。点击已添加的「部门」字段，即可设置提示内容
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-07/S8iCT7pJWZInvp8v1E_Gcm7xvJq7zEUg_.gif)
+
+##### 2.2.4 可选范围
+
+**可选范围**：能够选择的部门的范围。设置「可选范围」后，填写者只能选择「可选范围」内的部门。选择已添加的「部门」字段，点击「可选范围」的下拉三角，可以选择「工作区所有部门」、「自定义」或「关联已有部门」
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-07/HQjHnq2UlLNlRUlmdx-X7mak6JwLRgZQ_.gif)
+
+工作区所有部门：填写表单时，填写者可以在工作区所有部门中进行选择
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-07/TxKreBXT5TmM59ay4QKr7yeuU94pZMtB_.gif)
+
+自定义：可以根据部门或动态两个范围类型，选择一个或多个部门作为字段的可选范围。点击「+」可以添加目标部门，选择「全部」即可勾选全部部门。**当不添加部门时，填写者无法通过「部门」字段进行选择部门的操作**
+
+- 部门：可以直接选择目标部门加入可选范围
+- 动态：可以自动在字段的「可选范围」中加入当前填写或修改数据的用户所在的部门
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-07/bjjwEJiGlTj-Hm4vVQi0aX_uqUaURvEe_.gif)
+
+**关联已有部门**：可以使用同一工作区中已上传的部门字段的数据作为可选部门的范围
+
+[关联已有数据](https://help.qingflow.com/help-docs?type=nocode&docId=2cc84e26641faec00616218b55c4612d&parentId=null)
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-07/7TFFGwuZNYwxk8_5lRseLtKhYNGHq9wV_.gif)
+
+##### 2.2.5 默认内容
+
+**默认内容**：字段的初始值，填写表单时，初始值会自动填入字段中。在填写者不修改字段的情况下，表单会直接提交初始值
+
+选择已添加的「部门」字段，点击「默认内容」的下拉三角，可以选择「自定义」或「关联已有数据」
+
+- **自定义**：可以根据部门或动态两个范围类型，选择一个或多个部门作为字段的初始值，部门会自动填入字段中。不选择部门时，不会填入初始值
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-07/U3DHdoHDX_TxkGa0HzulTX05RWRkQ36Q_.gif)
+- **关联已有数据**：可以使用同一工作区中已上传的部门数据，作为「部门」字段的初始值
+
+[关联已有数据](https://help.qingflow.com/help-docs?type=nocode&docId=2cc84e26641faec00616218b55c4612d&parentId=null)
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-07/n2CQHr7vQxZu5TmRn5Y1p2bI6sr9pEtE_.gif)
+
+##### 2.2.6 字段占比
+
+可以调整字段在界面的占比。点击已添加的「部门」字段，可在25%、50%、75%、100%中选择字段占比
+
+- 25%：字段会占据四分之一行
+- 50%：字段会占据二分之一行
+- 75%：字段会占据四分之三行
+- 100%：字段会占据一整行
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-07/vUsywtu_W5XrC0xYzFESNPejwkxVw2pM_.gif)
+
+##### 2.2.7 必填项
+
+**必填项**：必须填写的字段。可以设置字段是否为必填，勾选后，不填写此字段将无法提交表单。点击已添加的「部门」字段，勾选「这是个必填项」，即可完成设置
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-07/L50mx9-7OJ7UFusQTzoXd1Lpewe0Qo6h_.gif)
+
+##### 2.2.8 限制选项
+
+可以对填写者能够选择的部门个数进行限制，当填写者选择部门的个数不在设置的范围内时，无法提交表单。点击已添加的「部门」字段，勾选「限制选项」，输入数字，即可完成设置 例如：当设置「限制选项」为2-4时，只有选择部门的个数为2、3或4个，才能提交表单
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-07/D68kActa-PI7jld7B45mA7Y_qHzM3p1Q_.gif)
+
+### 3. 注意事项
+
+- 使用「默认内容」功能时，只有「可选范围」内的部门才能填入字段
+- 对部门字段进行批量操作时，填入字段的部门数量不受「限制选项」功能的限制
+- 使用「关联已有数据」时，关联的部门数量需要在「限制选项」的范围内
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/go7nvs7eanzyv6ih?singleDoc#)

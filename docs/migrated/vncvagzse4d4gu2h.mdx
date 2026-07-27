@@ -1,0 +1,154 @@
+---
+title: "获取单条数据的数据日志"
+description: "调用本接口，获取单条数据的数据日志1. 权限说明「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有对应应用的权限。2. 请求请求方式：POST请求地址：https://api.qingflow.com/{appKey}/{appl..."
+slug: "/帮助文档/轻代码/openapi/应用数据接口/数据流程/获取单条数据的数据日志"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/vncvagzse4d4gu2h?singleDoc#"
+source_updated_at: "2025-07-03T07:08:04.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "应用数据接口"
+  - "数据流程"
+  - "获取单条数据的数据日志"
+---
+调用本接口，获取单条数据的数据日志
+
+---
+
+### **权限说明**
+
+「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有对应应用的权限。
+
+### 请求
+
+**请求方式：**POST
+
+**请求地址：**https://api.qingflow.com/\{appKey\}/\{applyId\}/rowrecord/log（公有云版本）
+
+请求地址中:applyId为需要替换的变量，根据实际获取值更新，示例如下：
+
+```javascript
+POST https://api.qingflow.com/123456/123456/rowrecord/log
+```
+
+**其他版本请求地址：**
+
+钉钉版本：[https://api.ding.qingflow.com/openApi/\{appKey\}/\{applyId\}/rowrecord/log](https://api.ding.qingflow.com/apply/:applyId/urge)
+
+专有轻流：http(s)://xxx.xx(自有域名)/openApi/\{appKey\}/apply/\{applyId\}/rowrecord/log
+
+#### **参数说明(路径参数）**
+
+| **参数** | **必填** | **说明** |
+| --- | --- | --- |
+| **appKey** | **是** | **应用 id，获取方式详见：**[基本概念介绍](https://exiao.yuque.com/ixwxsb/bgzs0e/cl59vxilcqdkmq1h) |
+| applyId | 是 | 数据的id，可在轻流的URL中获取，或通过调用【获取应用的数据】文档接口获取 |
+
+#### **请求头（Header）**
+
+| **参数** | **必填** | **说明** |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看基本概念介绍 |
+
+#### 请求体
+
+| **参数** | **必填** | **说明** |
+| --- | --- | --- |
+| fieldId |  | 字段ID，如果查询某个字段的修改记录，需要填写该ID |
+| pageSize | 是 | 页码大小，最大1000 |
+| pageNum | 是 | 当前页码，从1开始 |
+
+#### 请求体示例
+
+```json
+{
+    "fieldId": 0,
+    "pageSize": 0,
+    "pageNum": 0
+}
+```
+
+### 返回
+
+#### 返回体
+
+| **参数** | **类型** | **必含** | **说明** |
+| --- | --- | --- | --- |
+| errCode | \[int\] | 是 | 错误码 |
+| errMsg | \[string\] | 是 | 错误信息 |
+| result | \[object\] | 是 |  |
+| pageSize | \[int\] | 是 | 每页大小 |
+| pageNum | \[int\] | 是 | 当前页码 |
+| resultAmount | \[int\] | 是 | 总条数 |
+| pageAmount | \[int\] | 是 | 总页数 |
+| result | \[ array - object \] | 是 |  |
+| id | \[object\] | 是 | 数据日志ID |
+| channelInfo | \[object\] | 是 | 修改渠道信息 |
+| name | \[string\] | 是 | 修改渠道名称 |
+| key | \[string\] | 是 | 渠道key |
+| beingDeleted | \[object\] | 是 | 是否删除 |
+| referenceWorkSheet | \[object\] | - | 来源应用 |
+| name | \[string\] | - | 应用名换 |
+| appKey | \[string\] | - | 应用key |
+| rowRecordNumber | \[string\] | - | 应用 |
+| channel | \[ModifyChannelEnum\] | 是 | 修改渠道 |
+| operator | \[object\] | 是 | 操作人信息 |
+| exUserId | \[string\] | 是 | 操作人ID |
+| name | \[string\] | 是 | 名字 |
+| headImage | \[string\] | 是 | 头像 |
+| operationType | \[OperationTypeEnum\] | 是 | 操作类型 |
+| createTime | \[datetime\] | 是 | 操作时间 |
+| changeValueList | \[ array - object \] | 是 | 修改信息 |
+| queId | \[string\] | 是 | 字段ID |
+|  | \[string\] | 是 | 字段类型 |
+| queTitle | \[string\] | 是 | 字段名称 |
+| oldValue | \[answerDetail\] | 是 | 修改前的值 |
+| newValue | \[answerDetail\] | 是 | 修改后的 |
+
+#### 返回体示例
+
+```json
+{
+    "errCode": 0,
+    "errMsg": "",
+    "result": {
+        "pageSize": 0,
+        "pageNum": 0,
+        "resultAmount": 0,
+        "pageAmount": 0,
+        "result": [{
+            "id": {},
+            "channelInfo": {
+                "name": "",
+                "key": "",
+                "beingDeleted": {},
+                "referenceWorkSheet": {
+                    "name": "",
+                    "appKey": "",
+                    "rowRecordNumber": ""
+                },
+                "channel": ""
+            },
+            "operator": {
+                "exUserId": "",
+                "name": "",
+                "headImage": "",
+                "operationType": "",
+                "createTime": ""
+            },
+            "changeValueList": [{
+                "queId": "",
+                "queType": "",
+                "queTitle": "",
+                "oldValue": "",
+                "newValue": ""
+            }]
+        }]
+    }
+}
+```
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/vncvagzse4d4gu2h?singleDoc#)

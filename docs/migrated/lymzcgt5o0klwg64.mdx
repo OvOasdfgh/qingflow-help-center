@@ -1,0 +1,58 @@
+---
+title: "轻流 x sharepoint（处理列表和列表项）"
+description: "一、应用场景通过轻流系统处理产生的打分数据传输到sharepoint里储存以供后续其他系统调用二、落地方案通过轻流搭建打分表单填写数据推送至sharepoint三、关键点图文演示接口调用参数参考sharepoint接口文档 ：https://learn.microsoft.com/zh-cn/..."
+slug: "/搭建技巧/按功能分类/第三方集成/sharepoint/轻流-x-sharepoint-处理列表和列表项"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/lymzcgt5o0klwg64?singleDoc#"
+source_updated_at: "2024-10-15T03:38:15.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "第三方集成"
+  - "sharepoint"
+  - "轻流 x sharepoint（处理列表和列表项）"
+---
+## 一、应用场景
+
+通过轻流系统处理产生的打分数据传输到sharepoint里储存以供后续其他系统调用
+
+## 二、落地方案
+
+## 通过轻流搭建打分表单填写数据推送至sharepoint
+
+![原文画板](https://cdn.nlark.com/yuque/0/2023/jpeg/12966864/1673766925914-56d6f0c2-8289-4316-bb96-ac0fa79e90b2.jpeg)
+
+## 三、关键点图文演示
+
+接口调用参数参考sharepoint接口文档 ：[https://learn.microsoft.com/zh-cn/sharepoint/dev/sp-add-ins/working-with-lists-and-list-items-with-rest](https://learn.microsoft.com/zh-cn/sharepoint/dev/sp-add-ins/working-with-lists-and-list-items-with-rest)
+
+![3.png](https://cdn.nlark.com/yuque/0/2023/png/12966864/1673767344468-3ff28866-a706-48c9-80c0-7d6fc21d643f.png)
+
+### 1.获取系统调用权限access\_token
+
+在轻流系统中使用鉴权插件Temporary Token模式配置，调用接口获得返回access\_token
+
+![1.png](https://cdn.nlark.com/yuque/0/2023/png/12966864/1673767649446-9e966d69-c529-4423-977c-ed26ebb660c8.png)![2.png](https://cdn.nlark.com/yuque/0/2023/png/12966864/1673767655830-fdead25a-4adb-4ec9-8629-43fcfc39f9a1.png)
+
+### 2.创建应用表单和配置webhook
+
+配置收集打分数据的轻流表单，字段可根据需求更改，注意字段格式要跟sharepoint内字段格式对应，如单行文本对应单行文本，数字字段对应数字字段。
+
+![4.png](https://cdn.nlark.com/yuque/0/2023/png/12966864/1673767771658-9a05b5f6-81da-4c86-bb79-993d8bd91c23.png)
+
+配置webhook调用结果发送数据，webhook使用刚刚配置的鉴权插件模版。根据sharepoint接口文档配置对应url、header、result以及在json body中配置对应json数据结构。
+
+![5.png](https://cdn.nlark.com/yuque/0/2023/png/12966864/1673768512462-fa552fe7-8b11-4310-9bf8-f4a09705d192.png)
+
+​
+
+![6.png](https://cdn.nlark.com/yuque/0/2023/png/12966864/1673768518643-e4e6e6fc-a08d-4334-8431-fab7ca71025d.png)
+
+### 3.表单发起新数据并自动走webhook流程节点
+
+使用webhook调用接口，流程日志里可查看调用结果
+
+![截屏2023-01-15 15.44.58.png](https://cdn.nlark.com/yuque/0/2023/png/12966864/1673768703064-f819f5cc-6775-4eaf-be47-aa9a30b7460a.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/lymzcgt5o0klwg64?singleDoc#)

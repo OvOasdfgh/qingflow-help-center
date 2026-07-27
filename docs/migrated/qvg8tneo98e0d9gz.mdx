@@ -1,0 +1,136 @@
+---
+title: "删除应用数据"
+description: "https://help.qingflow.com/help-docs?type=qingCode&amp;docId=2cc84e266428e9c7070e75f351e7eeba&amp;parentId=删除轻流系统中指定应用的数据。1. 权限说明「超级管理员accessToken」和「权限组acce..."
+slug: "/帮助文档/轻代码/openapi/应用数据接口/数据内容/删除应用数据"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/qvg8tneo98e0d9gz?singleDoc#"
+source_updated_at: "2025-06-09T12:04:39.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "应用数据接口"
+  - "数据内容"
+  - "删除应用数据"
+---
+[https://help.qingflow.com/help-docs?type=qingCode&docId=2cc84e266428e9c7070e75f351e7eeba&parentId=](https://help.qingflow.com/help-docs?type=qingCode&docId=2cc84e266428e9c7070e75f351e7eeba&parentId=)删除轻流系统中指定应用的数据。
+
+---
+
+### **权限说明**
+
+「超级管理员accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有该应用的权限，以及数据管理的权限。
+
+![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-10/Vvq3LtAXyfyMNsxFNdsXlN7Q4e0aECob_.png)
+
+### 请求
+
+**请求方式：**DELETE
+
+**请求地址：**https://api.qingflow.com/app/:appkey/apply（公有云版本）
+
+> 请求地址中:appkey为需要替换的变量，根据实际获取值更新，示例如下：
+
+```javascript
+DELETE https://api.qingflow.com/app/8888888/apply
+```
+
+**其他版本请求地址：**
+
+钉钉版本：[https://api.ding.qingflow.com/app/:appkey/apply](https://api.ding.qingflow.com/app/:appkey/apply)
+
+专有轻流：http(s)://xxx.xx(自有域名)/openApi/app/:appkey/apply
+
+#### **2.1 参数说明(路径参数)：**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| appKey | 是 | 应用ID，获取方式参考：基本概念介绍 |
+
+#### **2.2 请求头（Header）**
+
+| 参数 | 必须 | 说明 |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看“文档” |
+
+#### **2.3 请求体（Body）**
+
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| pageSize | 是 | int | 每页数据条数 |
+| pageNum | 是 | int | 请求页码 |
+| type |  | int | 1：获取待办数据，8（默认值，可不传）：获取全部数据 |
+| sorts |  | \[array\] | 排序情况 |
+| queId |  | int | 字段Id，specialQueId可见文档 |
+| isAscend |  | boolean | 是否升序，true：升序 |
+| queriesRel |  | string | 针对字段的查询条件之间逻辑关系，目前支持and、or，默认为and，目前仅部分灰度用户支持此功能 |
+| queries |  | \[array\] | 针对字段的查询条件 |
+| queId |  | int | 字段Id，specialQueId可见文档 |
+| searchKey |  | string | 搜索关键词 |
+| searchKeys |  | \[array\] | 目前仅部分灰度用户支持此功能,当searchKey不为null的时候此字段会被忽略，数组内的字段为或条件搜索 |
+| minValue |  | string | 数字模块中，是搜索结果中最小值，日期类型，就是最早日期 |
+| maxValue |  | string | 数字模块中，是搜索结果中最大值，日期类型，就是最晚日期 |
+| scope |  | int | 筛选数据范围， 1：全部，2：已填写，3：未填写 |
+| searchOptions |  | \[array\] | 单选多选中，搜索答案中包含这些选项的申请，由optionId组成 |
+| searchUserIds |  | \[array\] | 成员字段中，搜索答案中包含这些userId的申请 |
+| queryKey |  | string | 模糊搜索全部字段数据的key值 |
+| applyIds |  | \[array\] | 指定申请的applyId |
+
+#### **2.4 请求体示例**
+
+```json
+{
+    "pageSize": 50,
+    "pageNum": 1,
+    "type": 1,
+    "sorts": [{
+        "queId": 1,
+        "isAscend": true
+    }],
+    "queriesRel": "and",
+    "queries": [{
+        "queId": 0,
+        "searchKey": "ss",
+        "searchKeys": ["aa", "bb"],
+        "minValue": "",
+        "maxValue": "",
+        "scope": 1,
+        "searchOptions": [100],
+        "searchUserIds": ["abc"]
+    }],
+    "queryKey": "",
+    "applyIds": [1]
+}
+```
+
+### 返回
+
+#### 3.1 返回体
+
+| 参数 | 必含 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| errCode | 是 | int | 错误码，0表示成功，非0表示失败（注：结果只代表请求发送是否成功，不代表执行结果是否成功，执行结果可使用返回的reqesutId通过“查询操作结果”接口查询 |
+| errMsg | 是 | string | 错误描述 |
+| questionRelations | 否 | array | 与表单题目相关的逻辑关系（如显隐、依赖等），成功时为空，只有在某些接口需要时才返回具体内容。 |
+| result | 是 | object | 返回结果 |
+| applyId | 否 | string/null | 通常为单条表单数据的 ID |
+| applyIds | 否 | array | 当操作为批量提交、批量查询时，返回所有相关 ID。为空数组表示没有数据或是单条操作。 |
+| requestId | 是 | string | 请求ID |
+
+#### 3.2 返回体示例
+
+```json
+{
+    "errCode": 0,
+    "errMsg": null,
+    "questionRelations": [],
+    "result": {
+        "applyId": null,
+        "applyIds": [],
+        "requestId": "f4b1d1f1-410b-4b1e-ae88-f1f85b061c4d"
+    }
+}
+```
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/qvg8tneo98e0d9gz?singleDoc#)

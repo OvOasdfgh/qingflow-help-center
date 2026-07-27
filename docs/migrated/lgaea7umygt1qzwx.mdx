@@ -1,0 +1,53 @@
+---
+title: "如何利用时间戳函数计算两个日期之间历经时长"
+description: "1. 场景描述售后处理退换货问题，客户发起退货时间至商家处理完成时间，需计算出中途具体经历多长处理时间，并且以天/小时/分的格式显示。所需公式CONCAT()， INT ()， DATETOTIMESTAMP (),MOD (),公式具体介绍请参考：https://help.qingflow...."
+slug: "/搭建技巧/按功能分类/公式函数/如何利用时间戳函数计算两个日期之间历经时长"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/lgaea7umygt1qzwx?singleDoc#"
+source_updated_at: "2025-08-19T02:13:44.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "公式函数"
+  - "如何利用时间戳函数计算两个日期之间历经时长"
+---
+## 场景描述
+
+售后处理退换货问题，客户发起退货时间至商家处理完成时间，需计算出中途具体经历多长处理时间，并且以天/小时/分的格式显示。
+
+**​**
+
+**所需公式**
+
+CONCAT()， INT ()， DATETOTIMESTAMP (),MOD (),公式具体介绍请参考：
+
+[https://help.qingflow.com/help-docs?type=nocode&docId=7e2dc5fb641faf3700000a21211b52fe&parentId=](https://help.qingflow.com/help-docs?type=nocode&docId=7e2dc5fb641faf3700000a21211b52fe&parentId=)
+
+## 配置过程
+
+### 字段设置
+
+见下图设置：![截屏2022-09-06 18.22.38.png](https://cdn.nlark.com/yuque/0/2022/png/29411711/1662459787181-83378fe8-e9ce-411d-a5d7-1f51e3b05f86.png)
+
+### 时间差计算公式
+
+###### ![image.png](https://cdn.nlark.com/yuque/0/2025/png/43099917/1755569608668-9b6856ca-de0f-4e16-a502-2e0d051cb848.png)
+
+#### 说明
+
+** 1.CONCAT拼接各个函数计算结果**
+
+** 2.INT对计算来的内容向下取整，避免小数**
+
+** 3.MOD取余数，取总小时数除以24的余数（剩余小时数）和总分钟数除以60的余数（剩余分钟数）**
+
+## 实现效果
+
+![截屏2022-09-06 18.25.10.png](https://cdn.nlark.com/yuque/0/2022/png/29411711/1662459936893-ffb9eae9-bc25-4107-9970-917ca3c157c7.png)
+
+​
+
+**​**
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/lgaea7umygt1qzwx?singleDoc#)

@@ -38,60 +38,60 @@ type SearchState = 'idle' | 'loading' | 'ready' | 'error';
 
 const localDocuments: SearchDocument[] = [
   {
-    title: '帮助中心概览',
+    title: '新手指南',
     section: '快速开始',
-    content: '认识轻流帮助中心，了解推荐内容入口、版本策略和文档结构。',
-    url: '/docs/getting-started/overview',
+    content: '认识轻流，了解核心概念并开始使用产品。',
+    url: '/docs/新手指南',
     tags: ['入门', '帮助中心'],
   },
   {
-    title: '内容协作与发布流程',
+    title: '如何收集和流转数据',
     section: '快速开始',
-    content: '导入 Markdown 文档，通过 GitHub 协作、审核、修改和发布内容。',
-    url: '/docs/getting-started/content-workflow',
-    tags: ['Markdown', '发布'],
+    content: '使用表单和流程收集、处理并流转业务数据。',
+    url: '/docs/帮助文档/轻流简介/快速入门/核心功能速览/如何收集和流转数据',
+    tags: ['表单', '流程', '数据'],
   },
   {
-    title: '导航与搜索',
-    section: '产品使用',
-    content: '快速找到轻流功能、产品指南和常见问题，了解站内搜索方式。',
-    url: '/docs/product-guides/end-user/navigation-and-search',
-    tags: ['导航', '搜索'],
+    title: '轻流简介',
+    section: '快速开始',
+    content: '了解轻流的核心功能、应用场景和账号模式。',
+    url: '/docs/帮助文档/轻流简介',
+    tags: ['轻流', '入门'],
   },
   {
-    title: '审批中心',
+    title: '流程引擎',
     section: '流程与审批',
-    content: '审批中心怎么配置，如何查看待办任务、处理审批并追踪流程进度。',
-    url: '/docs/product-guides/workflow/approval-center',
+    content: '配置申请、审批、填写和抄送节点，管理业务流程。',
+    url: '/docs/帮助文档/流程引擎',
     tags: ['审批', '流程', '待办'],
   },
   {
-    title: '私有化部署拓扑',
-    section: '管理与运维',
-    content: '私有化部署需要的服务、网络、存储、搜索组件和推荐拓扑。',
-    url: '/docs/admin/deployment-topology',
-    tags: ['私有化', '部署'],
+    title: '权限管理',
+    section: '管理后台',
+    content: '配置工作区权限、高级权限和管理员角色。',
+    url: '/docs/帮助文档/管理后台/工作区管理/权限管理',
+    tags: ['权限', '管理员'],
   },
   {
-    title: '内容治理',
-    section: '管理与运维',
-    content: '维护帮助中心目录、角色、版本、多语言和内容审核机制。',
-    url: '/docs/admin/content-governance',
-    tags: ['目录', '版本', '权限'],
+    title: '更新日志',
+    section: '更新动态',
+    content: '查看轻流各版本的产品功能更新记录。',
+    url: '/docs/更新动态/更新日志',
+    tags: ['更新', '版本'],
   },
   {
-    title: 'API 概览',
+    title: 'OPENAPI',
     section: '开放平台',
-    content: '了解开放平台 API、接口文档和系统集成方式。',
-    url: '/docs/api/overview',
+    content: '了解轻流开放接口、鉴权方式和系统集成能力。',
+    url: '/docs/帮助文档/轻代码/openapi',
     tags: ['API', '开发'],
   },
   {
-    title: '搜索与发布运行手册',
-    section: '管理与运维',
-    content: '维护 Typesense 搜索索引、执行构建和发布帮助中心。',
-    url: '/docs/operations/search-and-release-runbook',
-    tags: ['搜索', '发布', '运维'],
+    title: '常见问题',
+    section: 'FAQ',
+    content: '查找轻流产品使用过程中常见问题的处理方法。',
+    url: '/docs/常见问题-faq/一句话qa',
+    tags: ['问题', 'FAQ'],
   },
 ];
 
@@ -329,7 +329,7 @@ export default function SearchPage(): ReactNode {
                   <FileSearch aria-hidden="true" size={30} />
                   <Heading as="h2">没有找到相关内容</Heading>
                   <p>试试缩短问题，或者使用功能名称重新搜索。</p>
-                  <Link to="/docs/getting-started/overview">浏览完整文档目录</Link>
+                  <Link to="/docs/新手指南">浏览完整文档目录</Link>
                 </div>
               ) : null}
 
@@ -352,7 +352,7 @@ export default function SearchPage(): ReactNode {
 
                   return (
                     <article key={`${document.url ?? 'result'}-${index}`} className={styles.resultRow}>
-                      <Link to={document.url ?? '/docs/getting-started/overview'}>
+                      <Link to={document.url ?? '/docs/新手指南'}>
                         <div className={styles.resultTopline}>
                           <span>{document.section ?? '帮助文档'}</span>
                           {document.version ? <small>{document.version}</small> : null}

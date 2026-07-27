@@ -1,0 +1,349 @@
+---
+title: "获取单条数据的流程日志"
+description: "调用该接口，获取单条数据的流程日志1. 权限说明「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有对应应用的权限。2. 请求请求方式：GET请求地址：https://api.qingflow.com/{appKey}/{apply..."
+slug: "/帮助文档/轻代码/openapi/应用数据接口/数据流程/获取单条数据的流程日志"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/stwz0vpymk76gcn3?singleDoc#"
+source_updated_at: "2026-02-10T05:48:53.000Z"
+keywords:
+  - "帮助文档"
+  - "轻代码"
+  - "OPENAPI"
+  - "应用数据接口"
+  - "数据流程"
+  - "获取单条数据的流程日志"
+---
+调用该接口，获取单条数据的流程日志
+
+---
+
+### **权限说明**
+
+「超管accessToken」和「权限组accessToken」都可以调用，「权限组accessToken」须具有对应应用的权限。
+
+### 请求
+
+**请求方式：GET**
+
+**请求地址：**https://api.qingflow.com/\{appKey\}/\{applyId\}/workflowNodeRecord（公有云版本）
+
+请求地址中:appKey和applyId为需要替换的变量，根据实际获取值更新，示例如下：
+
+```javascript
+GET https://api.qingflow.com/123456/123456/workflowNodeRecord
+```
+
+**其他版本请求地址：**
+
+钉钉版本：[https://api.ding.qingflow.com//\{appKey\}/\{applyId\}/workflowNodeRecord](https://api.ding.qingflow.com/:applyId/audit)
+
+专有轻流：http(s)://xxx.xx(自有域名)/openApi/\{appKey\}/\{applyId\}/workflowNodeRecord
+
+#### **参数说明(路径参数)**
+
+| **参数** | **必须** | **说明** |
+| --- | --- | --- |
+| appKey | 是 | 应用 id，获取方式详见[基本概念介绍](https://exiao.yuque.com/ixwxsb/bgzs0e/cl59vxilcqdkmq1h) |
+| applyId | 是 | 数据的id，获取方式参考：基本概念介绍 |
+
+#### **参数说明(查询参数)**
+
+| **参数** | **必须** | **说明** |
+| --- | --- | --- |
+| pageNum | 是 | 数据页码 |
+| pageSize | 是 | 数据页数 |
+
+#### **请求头（Header）**
+
+| **参数** | **必填** | **说明** |
+| --- | --- | --- |
+| accessToken | 是 | 调用接口凭证。获取方法请查看基本概念介绍 |
+
+### 返回
+
+#### 返回体
+
+| **参数** | **类型** | **必含** | **说明** |
+| --- | --- | --- | --- |
+| errCode | int | 是 | 错误码，非0表示失败 |
+| errMsg | string | 是 | 错误描述 |
+| result | object | 是 | 返回为true：成功 |
+| pageSize | int | 是 | 每页大小 |
+| pageNum | int | 是 | 当前页码 |
+| resultAmount | int | 是 | 总条数 |
+| pageAmount | int | 是 | 总页数 |
+| result | array-object | 是 |  |
+| workflowNodeProcessRecordId | long | 是 | 工作流流转日志 id |
+| nodeId | int | 是 | 节点 id |
+| nodeName | string | 是 | 节点名称 |
+| nodeType | string | 是 | 节点类型 |
+| beingSync | string | 是 | 是否是同步节点 |
+| triggerSource | string | 是 | OpenAPI，QRobot，QSourceActive，QSourcePassive，QDatabase，externalQRobot，submit，import |
+| dealtWithUser | object | 是 | 待处理的节点处理人信息 |
+| user | array-object | 是 |  |
+| name | string | 是 | 用户名称 |
+| exUserId | string | 是 | 用户外部id |
+| headImage | string | 是 | 用户头像 |
+| email | string | 是 | 用户邮箱 |
+| dealtWithNode | array-object | 是 | 待处理的节点信息 |
+| auditLevel | int | 是 | 逐级审批待处理的层级 |
+| endType | int | 是 | 逐级审批的结束类型 |
+| maxLevel | int | 是 | 逐级审批的最大层级 |
+| gradedApproveType | int | 是 | 逐级审批的审批类型,或签会签 |
+| approveType | int | 是 | 常规审批的审批类型,或签会签 |
+| operationRecordList | array - object | 是 | 工作流节点操作记录 |
+| workflowNodeOperationRecordId | string | 是 | 工作流节点操作记录 id |
+| operationTime | string | 是 | 操作时间 |
+| operationType | int | 是 | 操作类型1-填写节点提交数据2-审批节点通过3-拒绝4-回退5-提交数据6-回退到申请人再次提交7-抄送8-处理中9-转交10-申请人撤销11-审批填写节点撤回 13-QR 添加（目标应用）15-管理员重新指派16-Q-Robot添加（源应用）17-Q-Robot更新（源应用）18-Q-Robot 发邮件20-Q-Robot 发短信21-webhook23-任务委托24-回退后重新提交25-节点无负责人转交给自定义负责人28-自动通过29-加签30-openAPI 重新指派负责人 |
+| operator | object | 是 | 操作者信息 |
+| name | string | 是 | 用户名称 |
+| exUserId | string | 是 | 用户外部id |
+| headImage | string | 是 | 用户头像 |
+| email | string | 是 | 用户邮箱 |
+| approval | object | 是 | 审批节点的审批操作 |
+| auditRemark | string | 是 | 处理反馈 |
+| handSignUrl | string | 是 | 手写签名 url |
+| beingTimeoutAutoSubmit | boolean | 是 | 是否超时自动提交 |
+| returnNodeName | string | 是 | 回退的节点名 |
+| returnNodeId | string | 是 | 回退的节点 id |
+| targetUser | array - object | 是 | 目标用户信息 |
+| name | string | 是 | 用户名称 |
+| exUserId | string | 是 | 用户外部id |
+| headImage | string | 是 | 用户头像 |
+| email | string | 是 | 用户邮箱 |
+| originalUser | array - object | 是 | 原始用户信息 |
+| name | string | 是 | 用户名称 |
+| exUserId | string | 是 | 用户外部id |
+| headImage | string | 是 | 用户头像 |
+| email | string | 是 | 用户邮箱 |
+| additionalApprovalType | string | 是 | 加签类型. |
+| filling | object | 是 | 填写节点的填写操作 |
+| auditRemark | string | 是 | 处理反馈 |
+| handSignUrl | string | 是 | 手写签名 url |
+| beingTimeoutAutoSubmit | boolean | 是 | 是否超时自动提交 |
+| targetUser | object | 是 | 目标用户信息 |
+| name | string | 是 | 用户名称 |
+| exUserId | string | 是 | 用户外部id |
+| headImage | string | 是 | 用户头像 |
+| email | string | 是 | 用户邮箱 |
+| originalUser | object | 是 | 原始用户信息 |
+| name | string | 是 | 用户名称 |
+| exUserId | string | 是 | 用户外部id |
+| headImage | string | 是 | 用户头像 |
+| email | string | 是 | 用户邮箱 |
+| cc | object | 是 | 抄送节点的抄送操作 |
+| ccUser | array - object | 是 |  |
+| name | string | 是 | 用户名称 |
+| exUserId | string | 是 | 用户外部id |
+| headImage | string | 是 | 用户头像 |
+| email | string | 是 | 用户邮箱 |
+| targetUser | array - object | 是 |  |
+| name | string | 是 | 用户名称 |
+| exUserId | string | 是 | 用户外部id |
+| headImage | string | 是 | 用户头像 |
+| email | string | 是 | 用户邮箱 |
+| originalUser | array - object | 是 |  |
+| name | string | 是 | 用户名称 |
+| exUserId | string | 是 | 用户外部id |
+| headImage | string | 是 | 用户头像 |
+| email | string | 是 | 用户邮箱 |
+| qRobotAdd | object | 是 | QRobot 添加 |
+| executeStatus | int | 是 | 执行状态 |
+| errorType | int | 是 | 错误类型 |
+| targetWorksheetId | string | 是 | 目标应用 id |
+| targetWorksheetName | string | 是 | 目标应用名称 |
+| reExecute | boolean | 是 | 是否重新执行 |
+| targetRowRecord | array - object | 是 | QRobot 添加目标信息QRobot 添加目标信息 |
+| rowRecordId | string | 是 | 申请 id |
+| rowRecordNumber | string | 是 | 数据编号 |
+| errorType | int | 是 | 错误类型 |
+| qRobotUpdate | object | 是 | QRobot 更新 |
+| executeStatus | int | 是 | 执行状态 |
+| errorType | int | 是 | 错误类型 |
+| targetWorksheetId | string | 是 | 目标应用 id |
+| targetWorksheetName | string | 是 | 目标应用名称 |
+| reExecute | boolean | 是 | 是否重新执行 |
+| targetApply | array - object | 是 | QRobot 更新目标信息 |
+| rowRecordId | string | 是 | 申请 id |
+| rowRecordNumber | string | 是 | 数据编号 |
+| errorType | int | 是 | 错误类型 |
+| webhook | object | 是 | webhook 执行操作 |
+| executeStatus | int | 是 | 执行状态 |
+| errorType | int | 是 | 错误类型 |
+| webhookResult | string | 是 | 执行结果 |
+| reExecute | boolean | 是 | 是否重新执行 |
+| qRobotSMS | object | 是 | QRobot 发短信操作 |
+| executeStatus | int | 是 | 执行状态成功失败部分成功 |
+| errorType | int | 是 | 错误类型 |
+| qRobotMail | object | 是 | QRobot 发邮件操作 |
+| executeStatus | int | 是 | 执行状态 |
+| errorType | int | 是 | 错误类型 |
+| applicant | object | 是 | 申请人节点操作 |
+| handSignUrl | string | 是 | 手写签名 url |
+| triggerRecord | object | 是 | 触发的记录 |
+| worksheetId | string | 是 | QR 更新或添加触发的(源)应用 id |
+| worksheetName | string | 是 | QR 更新或添加触发的(源)应用名 |
+| rowRecordNumber | string | 是 | QR 更新或添加触发的数据编号(源数据编号) |
+| nodeName | string | 是 | QR 更新或添加触发的(源节点)节点名 |
+| beingNoAuditor | string | 是 |  |
+| beingDeleted | string | 是 |  |
+| sourceName | string | 是 |  |
+
+#### 返回体示例
+
+```json
+{
+    "errCode": 0,
+    "errMsg": "",
+    "result": {
+        "pageSize": 0,
+        "pageNum": 0,
+        "resultAmount": 0,
+        "pageAmount": 0,
+        "result": [{
+            "workflowNodeProcessRecordId": 0,
+            "nodeId": 0,
+            "nodeName": "",
+            "nodeType": "",
+            "beingSync": "",
+            "triggerSource": "",
+            "dealtWithUser": {
+                "user": [{
+                    "name": "",
+                    "exUserId": "",
+                    "headImage": "",
+                    "email": ""
+                }]
+            },
+            "dealtWithNode": [{
+                "auditLevel": 0,
+                "endType": 0,
+                "maxLevel": 0,
+                "gradedApproveType": 0,
+                "approveType": 0
+            }],
+            "operationRecordList": [{
+                "workflowNodeOperationRecordId": "",
+                "operationTime": "",
+                "operationType": 0,
+                "operator": {
+                    "name": "",
+                    "exUserId": "",
+                    "headImage": "",
+                    "email": ""
+                },
+                "approval": {
+                    "auditRemark": "",
+                    "handSignUrl": "",
+                    "beingTimeoutAutoSubmit": false,
+                    "returnNodeName": "",
+                    "returnNodeId": "",
+                    "targetUser": {
+                        "name": "",
+                        "exUserId": "",
+                        "headImage": "",
+                        "email": ""
+                    },
+                    "originalUser": {
+                        "name": "",
+                        "exUserId": "",
+                        "headImage": "",
+                        "email": ""
+                    },
+                    "additionalApprovalType": ""
+                },
+                "filling": {
+                    "auditRemark": "",
+                    "handSignUrl": "",
+                    "beingTimeoutAutoSubmit": false,
+                    "targetUser": {
+                        "name": "",
+                        "exUserId": "",
+                        "headImage": "",
+                        "email": ""
+                    },
+                    "originalUser": {
+                        "name": "",
+                        "exUserId": "",
+                        "headImage": "",
+                        "email": ""
+                    }
+                },
+                "cc": {
+                    "ccUser": [{
+                        "name": "",
+                        "exUserId": "",
+                        "headImage": "",
+                        "email": ""
+                    }],
+                    "targetUser": [{
+                        "name": "",
+                        "exUserId": "",
+                        "headImage": "",
+                        "email": ""
+                    }],
+                    "originalUser": [{
+                        "name": "",
+                        "exUserId": "",
+                        "headImage": "",
+                        "email": ""
+                    }]
+                },
+                "qRobotAdd": {
+                    "executeStatus": 0,
+                    "errorType": 0,
+                    "targetWorksheetId": "",
+                    "targetWorksheetName": "",
+                    "reExecute": false,
+                    "targetRowRecord": [{
+                        "rowRecordId": "",
+                        "rowRecordNumber": "",
+                        "errorType": 0
+                    }]
+                },
+                "qRobotUpdate": {
+                    "executeStatus": 0,
+                    "errorType": 0,
+                    "targetWorksheetId": "",
+                    "targetWorksheetName": "",
+                    "reExecute": false,
+                    "targetApply": [{
+                        "rowRecordId": "",
+                        "rowRecordNumber": "",
+                        "errorType": 0
+                    }]
+                },
+                "webhook": {
+                    "executeStatus": 0,
+                    "errorType": 0,
+                    "webhookResult": "",
+                    "reExecute": false
+                },
+                "qRobotSMS": {
+                    "executeStatus": 0,
+                    "errorType": 0
+                },
+                "qRobotMail": {
+                    "executeStatus": 0,
+                    "errorType": 0
+                },
+                "applicant": {
+                    "handSignUrl": "",
+                    "triggerRecord": {
+                        "worksheetId": "",
+                        "worksheetName": "",
+                        "rowRecordNumber": "",
+                        "nodeName": ""
+                    }
+                }
+            }],
+            "beingNoAuditor": "",
+            "beingDeleted": "",
+            "sourceName": ""
+        }]
+    }
+}
+```
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/stwz0vpymk76gcn3?singleDoc#)

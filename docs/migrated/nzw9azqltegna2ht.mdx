@@ -1,0 +1,201 @@
+---
+title: "如何实现流程的自动通过/回退与小循环"
+description: "1. 场景/问题描述通过webhook功能，实现流程自动回退、小循环。【仅限企业版本】2. 思路逻辑使用webhook+审批，实现流程的自动回退和小循环，无需人为审批操作。仅当满足条件1时，流程自动通过；满足条件2时，自动退回至填写人1重新填写。3. 配置过程3.1. 流程回退-Webhook..."
+slug: "/搭建技巧/按功能分类/流程设计/如何实现流程的自动通过-回退与小循环"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/nzw9azqltegna2ht?singleDoc#"
+source_updated_at: "2024-10-15T03:38:10.000Z"
+keywords:
+  - "搭建技巧"
+  - "按功能分类"
+  - "流程设计"
+  - "如何实现流程的自动通过/回退与小循环"
+---
+## 场景/问题描述
+
+通过webhook功能，实现流程自动回退、小循环。**【仅限企业版本】**
+
+## 思路逻辑
+
+使用webhook+审批，实现流程的自动回退和小循环，无需人为审批操作。
+
+仅当满足条件1时，流程自动通过；满足条件2时，自动退回至填写人1重新填写。
+
+​
+
+![原文画板](https://cdn.nlark.com/yuque/0/2022/jpeg/27174367/1658211799456-11d2f710-a1b0-42c6-b5fc-8de7c596877c.jpeg)
+
+## 配置过程
+
+### 流程回退-Webhook设置
+
+[查询API文档：单条数据流程回退 ](https://help.qingflow.com/help-docs?type=qingCode&docId=fc8e64656428e08a06fdf030002e2a74&parentId=)
+
+#### URL
+
+根据API文档描述，调用URL：https://api.qingflow.com/xxx，单条数据流程回退：/\{applyId\}/audit/rollback
+
+URL: https://api.qingflow.com/\{数据ID$$-U1P8$$\}/audit/rollback （绿色部分请替换为应用内数据ID）
+
+每条数据申请时会自动生成唯一的数据ID, 可获取到当前申请数据的唯一ID。
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658214716570-4c0fd3eb-5bf7-42bd-9ce7-a34c50730689.png)
+
+​
+
+#### Method
+
+根据API文档描述，使用：POST
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1656938367755-b2b3e9fc-2b7c-4fc5-ba03-01764de1475c.png)
+
+#### 触发方式
+
+自定义
+
+#### Header
+
+accessToken 必填，通过[轻商城-拓展插件](https://qingflow.com/center/plugin/detail/20)获取
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1656938573788-341a8543-e72a-4eb7-be42-8a53337d1565.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1656938848349-7bf0e720-ee62-4f2b-96cd-6193fd440854.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1656939618477-b915ca50-5ad4-469a-b6aa-2d46091d6e25.png)
+
+#### Body Type
+
+application/json
+
+#### ​JSON Body
+
+根据API文档描述，复制预览数据至JSON Body处
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1656939147623-f08edb26-1f4d-4870-b918-77758d38be66.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1656939160030-52bcc3f8-6b67-4aec-a8f2-368e8256268a.png)
+
+##### "userId"
+
+处理人外部用户ID，在通讯录中查询
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1656939290943-51a3ad8c-e41e-4c28-8928-a6e4703ba1b3.png)
+
+##### "auditNodeId"
+
+审批节点ID
+
+查询方式1: 流程节点ID，需要打开浏览器的开发者工具，查询方法如下
+
+打开浏览器的开发者工具，或者右键页面-点击检查。选择到对应的审批节点。
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658215933156-8200fcc2-b15d-4fea-b5b9-28d1cce9afcd.png)
+
+展开后，找到对应节点的ID。
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658216043784-d1bef1d2-c669-4c22-bc40-3d74373eba25.png)
+
+查询方式2: Postman软件查询
+
+根据帮助文档配置：[https://qingflow.com/help/docs/61dbf7ec328afe0041810d61](https://qingflow.com/help/docs/61dbf7ec328afe0041810d61)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658216834100-96f2594a-3f8b-40ef-b639-b86eca58321f.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658216679393-b8940a9b-2796-4d92-b448-8f887006c428.png)
+
+##### "targetAuditNodeId"
+
+退回节点ID，查询方式同上述一致
+
+##### "auditFeedback
+
+审批退回反馈内容，自行设置
+
+​
+
+​
+
+### 流程通过-Webhook设置
+
+[查询API文档：处理单条数据  ](https://help.qingflow.com/help-docs?type=qingCode&docId=9e3f66766428e1a60000ed9a19c8c673&parentId=)
+
+#### URL
+
+根据API文档描述，调用URL：https://api.qingflow.com/xxx，处理单条数据：/\{applyId\}/audit
+
+URL: https://api.qingflow.com/\{数据ID$$-U1P8$$\}/audit （绿色部分请替换为应用内数据ID）
+
+每条数据申请时会自动生成唯一的数据ID, 可获取到当前申请数据的唯一ID。
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658217140656-7be5fdd1-586b-47c1-9e16-460fb667db01.png)
+
+​
+
+#### Method
+
+根据API文档描述，使用：POST
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658217384527-781d5405-bae8-44af-b4a0-fea43ef304c4.png)
+
+#### 触发方式
+
+自定义
+
+#### Header
+
+accessToken 必填，通过[轻商城-拓展插件](https://qingflow.com/center/plugin/detail/20)获取
+
+userId 必填，查看审批节点的负责人，在通讯录中查询获得外部用户ID
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658217413769-a1f3ea2c-ce91-4460-acd1-9805c3813afe.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1656938848349-7bf0e720-ee62-4f2b-96cd-6193fd440854.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1656939290943-51a3ad8c-e41e-4c28-8928-a6e4703ba1b3.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658217755930-2f246972-3e17-43cc-b3da-d7d7d8e67c95.png)
+
+#### Body Type
+
+application/json
+
+#### ​JSON Body
+
+根据API文档描述，复制预览数据至JSON Body处
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658217550728-2333c9c0-3e5a-46af-8b46-75afeb090c01.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658217564055-0d80a4d1-15e1-4998-86a0-88f4a97afce4.png)
+
+##### "auditResult"
+
+审批通过：2
+
+通过Api文档，可以查看如何表示通过。
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658217666876-779496d9-b437-42cd-a0d4-b7300fa3f58a.png)
+
+点击更多，可以查看到不同的数字代表的含义。
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658217689316-02deb6c9-c6d3-4397-bb02-345e94b6d670.png)
+
+##### "auditNodeId"
+
+审批节点ID
+
+##### "auditFeedback
+
+审批通过反馈内容，自行设置
+
+### 流程图
+
+![流程图片.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658216951984-ecedaf7e-8036-4850-a0c4-26f2d075aa0e.png)
+
+## 实现效果
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658220015083-5c84273d-cce6-42c8-afb1-e868f0154a71.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27174367/1658220466546-facf2423-b8a5-4fcd-922f-7f9d4a606511.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/nzw9azqltegna2ht?singleDoc#)

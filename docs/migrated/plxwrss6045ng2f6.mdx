@@ -1,0 +1,54 @@
+---
+title: "如何设置在短时间内只允许一个人提交数据"
+description: "场景描述在入库管理过程中，如果同一时间或者提交间隔非常短的时间内入库提交同一个产品，很容易造成库存计算错误，为了解决这个问题，需要能实现短时间内只允许一个人提交数据。实现思路在提交新数据的时候用本次提交数据的时间减去历史数据中最新提交的数据的申请时间，得到提交数据时间差，把这个时间差作为提交校..."
+slug: "/常见问题-faq/表单/如何设置在短时间内只允许一个人提交数据"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/plxwrss6045ng2f6?singleDoc#"
+source_updated_at: "2025-02-18T02:56:24.000Z"
+keywords:
+  - "常见问题（FAQ）"
+  - "表单"
+  - "如何设置在短时间内只允许一个人提交数据"
+---
+### 场景描述
+
+在入库管理过程中，如果同一时间或者提交间隔非常短的时间内入库提交同一个产品，很容易造成库存计算错误，为了解决这个问题，需要能实现短时间内只允许一个人提交数据。
+
+### 实现思路
+
+在提交新数据的时候用本次提交数据的时间减去历史数据中最新提交的数据的申请时间，得到提交数据时间差，把这个时间差作为提交校验，即可实现需求。
+
+### 实现示例
+
+##### 表单设置
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1727688768763-e4f9029a-575d-49ed-ad3b-7efe2b296000.png)
+
+###### 主要功能字段设置
+
+【历史数据最新提交时间】：日期字段——关联已有数据-商品入库-申请时间（日期格式：年月日时分秒）
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1727688823310-22b4873f-89ae-4980-b79e-5a19981a897b.png)
+
+【当前数据提交时间】：日期字段——通过公式得到 ——**NOW()**
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1727688893348-d5c14723-0513-4eef-ac08-a2ba13691ea9.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1727689021584-af703a7a-5c8e-40d4-bf11-9daec7318906.png)
+
+【时间差（秒）】：数字字段——通过公式得到 ——**(NUM(DATETOTIMESTAMP(【当前数据提交时间】))-NUM(DATETOTIMESTAMP(【历史数据最新提交时间】)))/1000**
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1727687892559-cc94d661-4e31-42f2-a7c7-d8bbf7f9ff74.png)
+
+##### 流程设置
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1727689117969-f97465eb-1b7e-4ffd-b91f-54e9c0abc533.png)
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1727688170068-94eb5a26-274e-4000-b26c-20fc8b07a4f8.png)![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1727688637930-909fdec8-2712-4826-8c50-21e458420e97.png)
+
+#### 实现效果
+
+##### ![image.png](https://cdn.nlark.com/yuque/0/2024/png/21779625/1727689226326-6e5f2c6d-5918-447e-bf5a-7c8f78da5cb5.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/plxwrss6045ng2f6?singleDoc#)

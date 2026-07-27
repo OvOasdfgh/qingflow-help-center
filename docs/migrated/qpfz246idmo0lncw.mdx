@@ -1,0 +1,198 @@
+---
+title: "如何根据请假时间计算出请假天数以及请假小时数"
+description: "1.问题描述：客户希望使用请假开始结束时间，计算出请假天数及请假小时数，并返回详情到表格中，以供后续追溯。2.解决思路：根据表单内的开始日期和结束日期，拿到请假时间段，就可以使用接口拿到该时间段内所有日期的信息，判断每一天是否是工作日，如果是工作日，则判断请假开始时间是否大于上班时间，结束时间..."
+slug: "/常见问题-faq/表单/如何根据请假时间计算出请假天数以及请假小时数"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/qpfz246idmo0lncw?singleDoc#"
+source_updated_at: "2025-02-18T02:44:22.000Z"
+keywords:
+  - "常见问题（FAQ）"
+  - "表单"
+  - "如何根据请假时间计算出请假天数以及请假小时数"
+---
+## 1.问题描述：
+
+客户希望使用请假开始结束时间，计算出请假天数及请假小时数，并返回详情到表格中，以供后续追溯。
+
+## 2.解决思路：
+
+根据表单内的开始日期和结束日期，拿到请假时间段，就可以使用接口拿到该时间段内所有日期的信息，判断每一天是否是工作日，如果是工作日，则判断请假开始时间是否大于上班时间，结束时间是否小于下班时间，计算当天实际工作小时数，并计算请假了多少天，请假多少小时。（请假天数根据每天应工作小时数计算，如：某公司每天应上班8小时，请假4小时，那这个员工请假0.5天）
+
+接口调用：万年历
+申请您专属的app\_id和app\_secret：[https://www.mxnzp.com/doc/detail?id=1](https://www.mxnzp.com/doc/detail?id=1)
+
+## 3.表单设计
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1727570856643-0b5e22a6-c31a-402f-a62a-37b7568fb8dd.png)
+
+## 4.代码块：
+
+注意：
+
+代码块中的qf\_field.\{请假开始日期$$2959CD0B0$$\}可替换为自己表单内的“请假开始日期”字段，qf\_field.\{请假结束日期$$2959CD0B1$$\}可替换为“请求结束日期”字段；工作时间设置的上下班时间可根据实际使用场景修改
+
+```javascript
+const axios = require('axios');  
+
+// 请假开始和结束时间字段  
+const Starttime = qf_field.{请假开始日期$$2959CD0B0$$}; // 请假开始时间  
+const Endtime = qf_field.{请假结束日期$$2959CD0B1$$}; // 请假结束时间  
+const leaveStartTime = new Date(Starttime);  
+const leaveEndTime = new Date(Endtime);  
+
+// 工作时间设置  
+const workStartTimeHour = 9; // 上班时间，小时  
+const workStartTimeMinute = 30; // 上班时间，分钟  
+const workEndTimeHour = 18; // 下班时间，小时  
+const workEndTimeMinute = 30; // 下班时间，分钟  
+const lunchBreakStartHour = 12; // 午休开始时间，小时  
+const lunchBreakStartMinute = 0; // 午休开始时间，分钟  
+const lunchBreakEndHour = 13; // 午休结束时间，小时  
+const lunchBreakEndMinute = 30; // 午休结束时间，分钟  
+
+// 拉取假期数据的配置  
+const config = {  
+  method: 'get',  
+  //替换专属的app_id和app_secret
+  url: 'https://www.mxnzp.com/api/holiday/list/year/2024?ignoreHoliday=false&app_id=cykanitnhs6fhpkl&app_secret=YjDy16L4UGmLRh2OixnHwzlpL3n5BOkw',  
+};  
+
+// 主函数，处理请假信息  
+axios(config)  
+  .then(function (res) {  
+    if (res.data.code === 1) {  
+      const holidayData = res.data.data.reduce((acc, monthData) => {  
+        return acc.concat(monthData.days);  
+      }, []); // 将假期数据平铺成一个数组  
+
+      const { leaveHoursArray, totalLeaveDays, totalLeaveHours } = calculateLeaveHours(leaveStartTime, leaveEndTime, holidayData);  
+
+      // 保留一位小数的总请假小时数  
+      const formattedLeaveHours = totalLeaveHours.toFixed(1);  
+      // 保留两位小数的总请假天数  
+      const formattedLeaveDays = totalLeaveDays.toFixed(2);   
+
+      qf_output = {  
+        请假小时数: formattedLeaveHours,  
+        请假天数: formattedLeaveDays,  
+        请假详情: leaveHoursArray   
+      };  
+    } else {  
+      qf_output = { "获取假期数据失败": res.data.msg };  
+    }  
+  })  
+  .catch(function (error) {  
+    qf_output = { "Error fetching holiday data ": error };  
+  });  
+
+// 计算工作时间（返回有效工作小时数）  
+function calculateWorkingHours(startTime, endTime) {  
+  const totalWorkHours = (endTime - startTime) / (1000 * 60 * 60); // 计算小时差  
+  return Math.max(totalWorkHours, 0); // 确保不会返回负值  
+}  
+
+// 判断请假时间是否在午休时间段内  
+function isInLunchBreak(startTime, endTime) {  
+  const lunchBreakStart = new Date(startTime);  
+  lunchBreakStart.setHours(lunchBreakStartHour, lunchBreakStartMinute, 0, 0);  
+  const lunchBreakEnd = new Date(startTime);  
+  lunchBreakEnd.setHours(lunchBreakEndHour, lunchBreakEndMinute, 0, 0);  
+
+  return (startTime < lunchBreakEnd && endTime > lunchBreakStart);  
+}  
+
+// 判断某一天是否为工作日  
+function isWorkingDay(typeDes) {  
+  return typeDes === '工作日';  
+}  
+
+// 计算请假时长及请假天数  
+function calculateLeaveHours(startDateTime, endDateTime, holidays) {  
+  const leaveHoursArray = [];  
+  let totalLeaveHours = 0;  
+
+  // 定义请假开始和结束的日期对象  
+  let currentDayStart = new Date(startDateTime);  
+
+  while (currentDayStart <= endDateTime) {  
+    const workStartTime = new Date(currentDayStart);  
+    workStartTime.setHours(workStartTimeHour, workStartTimeMinute, 0, 0); // 设置上班时间  
+    const workEndTime = new Date(currentDayStart);  
+    workEndTime.setHours(workEndTimeHour, workEndTimeMinute, 0, 0); // 设置下班时间  
+
+    // 查找当前日期在假期数据中的typeDes  
+    const holidayInfo = holidays.find(h => h.date === currentDayStart.toISOString().split('T')[0]);  
+    const isWorkingDayFlag = holidayInfo && isWorkingDay(holidayInfo.typeDes);  
+
+    let workHours = 0;  
+    let leaveHours = 0;  
+    let actualWorkHours = 0; // 记录实际工作小时  
+
+    // 计算有效工作时长  
+    if (isWorkingDayFlag) {  
+      const workStart = workStartTime >= startDateTime ? workStartTime : startDateTime;  
+      const workEnd = workEndTime <= endDateTime ? workEndTime : endDateTime;  
+      workHours = calculateWorkingHours(workStart, workEnd);  
+
+      // 调整工作时间，确保午休时间的扣除  
+      if (isInLunchBreak(workStart, workEnd)) {  
+        workHours -= 1.5; // 午休时间调整为1.5小时 （可根据需求修改）
+      }  
+
+      workHours = Math.max(workHours, 0); // 确保不会出现负数  
+      
+      // 计算请假小时数  
+      leaveHours = workHours;  
+      totalLeaveHours += leaveHours; // 累加请假小时数  
+            actualWorkHours = workHours - leaveHours; // 计算实际工作小时（工作小时 - 请假小时）  
+    } else {  
+      leaveHours = 0; // 非工作日请假时数为0  
+      actualWorkHours = 0; // 非工作日的实际工作小时数为0  
+    }  
+
+    // 记录每天请假和工作的信息  
+    leaveHoursArray.push({  
+      date: currentDayStart.toISOString().split('T')[0], // YYYY-MM-DD 格式  
+      leaveHours: leaveHours,  
+      workHours: isWorkingDayFlag ? actualWorkHours : 0, // 记录实际工作小时数  
+      isWorkingDay: isWorkingDayFlag,  
+      isHoliday: holidayInfo ? holidayInfo.typeDes : "非假日",  
+    });  
+
+    // 移动到下一天  
+    currentDayStart.setDate(currentDayStart.getDate() + 1); // 增加一天  
+  }  
+    //工作时长可根据需求自定义
+  const dailyWorkHours = 7.5; // 假定每天的工作时长为7.5小时  
+  const totalLeaveDays = (totalLeaveHours / dailyWorkHours); // 计算请假天数  
+
+  return {  
+    leaveHoursArray,  
+    totalLeaveDays,  
+    totalLeaveHours  
+  };  
+}
+```
+
+### 4.1测试运行
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1727570977562-431fc000-c6a1-453d-b29c-f67e343962a5.png)
+
+### 4.2解析规则
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1727570992566-369a66f4-abe6-469c-9b98-7e44f67004a8.png)
+
+### 4.3使用表格接收请假时间段的详情信息（请假日期、请假时长）
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1727571019977-4c72a399-a189-44e0-a6d4-e8e859481614.png)
+
+基础别名使用主字段接收
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1732530710810-901157b6-3ce2-438d-bc77-c339c25d5caa.png)
+
+## 5.实现效果：
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/43154275/1727571082794-e9cdd474-40df-4d29-8e89-ba5ee16890fb.png)
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/qpfz246idmo0lncw?singleDoc#)

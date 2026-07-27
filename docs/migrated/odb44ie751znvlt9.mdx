@@ -1,0 +1,49 @@
+---
+title: "OPEN API 分页参数限制变更"
+description: "1.预期上线时间为方便用户获取和查看轻流系统中指定应用的数据，轻流计划对OPEN API 分页参数限制变更进行变更。以下内容公有云、企业微信版本将在12月21日（钉钉版本于12月27日）上线，专有轻流预计将在6.0.0版本上线。2.变更事项2.1 OPEN API分页接口参数限制更新前轻流所有..."
+slug: "/更新动态/产品公告/open-api-分页参数限制变更"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/odb44ie751znvlt9?singleDoc#"
+source_updated_at: "2024-10-15T03:37:03.000Z"
+keywords:
+  - "更新动态"
+  - "产品公告"
+  - "OPEN API 分页参数限制变更"
+---
+## 1.预期上线时间
+
+为方便用户获取和查看轻流系统中指定应用的数据，轻流计划对**OPEN API 分页参数限制变更**进行变更。以下内容**公有云、企业微信版本**将在12月21日（钉钉版本于12月27日）上线，**专有轻流**预计将在6.0.0版本上线。
+
+## 2.变更事项
+
+### 2.1 OPEN API分页接口参数限制
+
+#### 更新前
+
+轻流所有OPEN API分页接口中，pageSize参数传值无限制。
+
+#### 更新后
+
+轻流所有OPEN API分页接口中，pageSize参数上限为200，如传值大于200，则按200每页返回数据。
+
+### 2.2 获取应用数据接口分页返回逻辑变更
+
+本内容曾在11.29日发过公告，上线后因其他原因回滚重发。
+
+#### 更新前
+
+「获取应用数据接口」中pageNum参数传入超大值，也仍然返回最后一页的数据。
+
+#### 更新后
+
+pageNum参数传入超大值时，result数组中为空。
+
+![文档图片](https://file.qingflow.com/documents/form/rtf/e746832384A487/519eb23b-a96f-49a5-af94-ea7ca9b3f49c.png)
+
+接口详情可查看：
+[帮助文档](https://help.qingflow.com/help-docs?type=qingCode&docId=fc8e64656428ea3a06fe9b406b9b7be9&parentId=)、[eolink文档](https://www.eolink.com/share/inside/Q7zHBt/api/1198137/detail/4230374)
+
+关于此更新，如有疑问，可联系与您对接的轻流客户成功经理，或拨打400-000-5276咨询。
+
+---
+
+[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/odb44ie751znvlt9?singleDoc#)
