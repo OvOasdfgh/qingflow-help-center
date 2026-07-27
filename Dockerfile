@@ -5,6 +5,9 @@ FROM harbor.oalite.com/build/node:20.11.0 AS builder
 
 WORKDIR /app
 
+# 设置国内 npm 镜像源
+RUN npm config set registry https://registry.npmmirror.com
+
 # 先复制依赖清单，利用 Docker 层缓存
 COPY package.json package-lock.json ./
 RUN npm ci --no-audit --no-fund
