@@ -1,7 +1,7 @@
 # ============================================================
 # Stage 1: 构建静态站点
 # ============================================================
-FROM node:20-alpine AS builder
+FROM harbor.oalite.com/build/node:20.11.0 AS builder
 
 WORKDIR /app
 
@@ -33,7 +33,7 @@ RUN npm run build
 # ============================================================
 # Stage 2: Nginx 提供静态服务
 # ============================================================
-FROM nginx:1.27-alpine AS production
+FROM harbor.oalite.com/build/nginx:1.31.3 AS production
 
 # 移除默认配置，使用自定义 nginx 配置
 RUN rm /etc/nginx/conf.d/default.conf
