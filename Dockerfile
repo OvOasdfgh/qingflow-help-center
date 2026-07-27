@@ -5,20 +5,27 @@ FROM harbor.oalite.com/build/node:20.11.0 AS builder
 
 WORKDIR /app
 
+# 设置国内 npm 镜像源
+RUN npm config set registry https://registry.npmmirror.com
+
 # 先复制依赖清单，利用 Docker 层缓存
 COPY package.json package-lock.json ./
+
+# 替换 lockfile 中的源地址为国内镜像（npm ci 严格按 lockfile resolved URL 下载）
+RUN sed -i 's|https://registry.npmjs.org|https://registry.npmmirror.com|g' package-lock.json
+
 RUN npm ci --no-audit --no-fund
 
 # 复制源码
 COPY . .
 
-# 构建时可通过 --build-arg 注入环境变量
-ARG DOCS_URL
-ARG DOCS_BASE_URL
-ARG TYPESENSE_HOST
-ARG TYPESENSE_COLLECTION
-ARG TYPESENSE_SEARCH_API_KEY
-ARG TYPESENSE_ENABLE_SEMANTIC
+# 构建时可通过 --build-arg 注入环境变量（提供默认值避免空字符串导致校验失败）
+ARG DOCS_URL=https://help.qingflow.com
+ARG DOCS_BASE_URL=/
+ARG TYPESENSE_HOST=""
+ARG TYPESENSE_COLLECTION=qingflow_help_docs
+ARG TYPESENSE_SEARCH_API_KEY=""
+ARG TYPESENSE_ENABLE_SEMANTIC=false
 
 ENV DOCS_URL=${DOCS_URL} \
     DOCS_BASE_URL=${DOCS_BASE_URL} \
