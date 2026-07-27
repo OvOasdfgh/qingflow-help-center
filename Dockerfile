@@ -10,6 +10,10 @@ RUN npm config set registry https://registry.npmmirror.com
 
 # 先复制依赖清单，利用 Docker 层缓存
 COPY package.json package-lock.json ./
+
+# 替换 lockfile 中的源地址为国内镜像（npm ci 严格按 lockfile resolved URL 下载）
+RUN sed -i 's|https://registry.npmjs.org|https://registry.npmmirror.com|g' package-lock.json
+
 RUN npm ci --no-audit --no-fund
 
 # 复制源码
