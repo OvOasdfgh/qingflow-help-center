@@ -5,7 +5,9 @@ import type * as Preset from '@docusaurus/preset-classic';
 const isGitHubPages = process.env.GITHUB_PAGES === 'true';
 const siteUrl =
   process.env.DOCS_URL ??
-  (isGitHubPages ? 'https://nonepointer666.github.io' : 'https://help.qingflow.com');
+  (isGitHubPages
+    ? 'https://nonepointer666.github.io'
+    : 'https://help-center.qingflow.com');
 const baseUrl =
   process.env.DOCS_BASE_URL ??
   (isGitHubPages ? '/qingflow-help-center/' : '/');
