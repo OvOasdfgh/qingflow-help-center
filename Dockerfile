@@ -19,13 +19,13 @@ RUN npm ci --no-audit --no-fund
 # 复制源码
 COPY . .
 
-# 构建时可通过 --build-arg 注入环境变量
-ARG DOCS_URL
-ARG DOCS_BASE_URL
-ARG TYPESENSE_HOST
-ARG TYPESENSE_COLLECTION
-ARG TYPESENSE_SEARCH_API_KEY
-ARG TYPESENSE_ENABLE_SEMANTIC
+# 构建时可通过 --build-arg 注入环境变量（提供默认值避免空字符串导致校验失败）
+ARG DOCS_URL=https://help.qingflow.com
+ARG DOCS_BASE_URL=/
+ARG TYPESENSE_HOST=""
+ARG TYPESENSE_COLLECTION=qingflow_help_docs
+ARG TYPESENSE_SEARCH_API_KEY=""
+ARG TYPESENSE_ENABLE_SEMANTIC=false
 
 ENV DOCS_URL=${DOCS_URL} \
     DOCS_BASE_URL=${DOCS_BASE_URL} \
