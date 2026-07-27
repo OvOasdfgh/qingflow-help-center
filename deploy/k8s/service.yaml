@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: qingflow-help-center
+  namespace: default
+  labels:
+    app: qingflow-help-center
+spec:
+  type: ClusterIP
+  selector:
+    app: qingflow-help-center
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+      protocol: TCP
