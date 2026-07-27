@@ -1,0 +1,51 @@
+# ============================================================
+# Stage 1: 构建静态站点
+# ============================================================
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+# 先复制依赖清单，利用 Docker 层缓存
+COPY package.json package-lock.json ./
+RUN npm ci --no-audit --no-fund
+
+# 复制源码
+COPY . .
+
+# 构建时可通过 --build-arg 注入环境变量
+ARG DOCS_URL
+ARG DOCS_BASE_URL
+ARG TYPESENSE_HOST
+ARG TYPESENSE_COLLECTION
+ARG TYPESENSE_SEARCH_API_KEY
+ARG TYPESENSE_ENABLE_SEMANTIC
+
+ENV DOCS_URL=${DOCS_URL} \
+    DOCS_BASE_URL=${DOCS_BASE_URL} \
+    TYPESENSE_HOST=${TYPESENSE_HOST} \
+    TYPESENSE_COLLECTION=${TYPESENSE_COLLECTION} \
+    TYPESENSE_SEARCH_API_KEY=${TYPESENSE_SEARCH_API_KEY} \
+    TYPESENSE_ENABLE_SEMANTIC=${TYPESENSE_ENABLE_SEMANTIC}
+
+# 执行构建（生成搜索索引 + docusaurus build）
+RUN npm run build
+
+# ============================================================
+# Stage 2: Nginx 提供静态服务
+# ============================================================
+FROM nginx:1.27-alpine AS production
+
+# 移除默认配置，使用自定义 nginx 配置
+RUN rm /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# 从构建阶段复制产物
+COPY --from=builder /app/build /usr/share/nginx/html
+
+EXPOSE 80
+
+# 健康检查
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD wget -qO- http://localhost/healthz || exit 1
+
+CMD ["nginx", "-g", "daemon off;"]
