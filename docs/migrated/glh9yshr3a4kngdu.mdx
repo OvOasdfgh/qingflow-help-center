@@ -68,7 +68,3 @@ keywords:
 开发者需要缓存accessToken，用于后续接口的调用（注意：不能频繁调用accessToken接口，否则会受到频率拦截）。当accessToken失效或过期时，需要重新获取。
 
 accessToken的有效期通过返回的expireTime来传达，正常情况下为7200秒（2小时）。每一次请求都会获取新的结果，并重新开始计时。且之前的accessToken会失效。同时在前台重置secret也会导致accessToken失效。
-
----
-
-[查看语雀原文](https://exiao.yuque.com/ixwxsb/bgzs0e/glh9yshr3a4kngdu?singleDoc#)
