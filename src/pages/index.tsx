@@ -4,6 +4,7 @@ import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
+import HomeFlowScene from '@site/src/components/HomeFlowScene';
 import {
   ArrowRight,
   BookOpen,
@@ -220,7 +221,7 @@ export default function Home(): ReactNode {
       title="轻流帮助中心"
       description="轻流产品帮助中心：查找产品操作、流程审批、权限管理、开放平台与私有化部署文档。">
       <header className={styles.homeHero}>
-        <div className={styles.heroPattern} aria-hidden="true" />
+        <HomeFlowScene className={styles.flowScene} />
         <div className="container">
           <div className={styles.heroContent}>
             <p className={styles.eyebrow}>
