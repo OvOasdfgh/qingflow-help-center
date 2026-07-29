@@ -1,4 +1,4 @@
-import {mkdir, readFile, readdir, writeFile} from 'node:fs/promises';
+import {mkdir, readFile, readdir, rm, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 
 const cwd = process.cwd();
@@ -6,6 +6,8 @@ const docsRoot = path.join(cwd, 'docs');
 const outputDir = path.join(cwd, '.tmp');
 const outputFile = path.join(outputDir, 'search-records.json');
 const publicOutputFile = path.join(cwd, 'static', 'search-records.json');
+const rawDocsDir = path.join(cwd, 'static', 'raw-docs');
+const llmsOutputFile = path.join(cwd, 'static', 'llms.txt');
 
 async function getMarkdownFiles(dir) {
   const entries = await readdir(dir, {withFileTypes: true});
@@ -65,7 +67,12 @@ function extractTitle(body, frontMatterTitle) {
   return firstHeading?.[1]?.trim() ?? 'Untitled';
 }
 
-function extractSection(relativePath) {
+function extractSection(relativePath, attributes) {
+  const slugSection = attributes.slug?.split('/').filter(Boolean)[0];
+  if (slugSection) {
+    return slugSection;
+  }
+
   const parts = relativePath.split(path.sep);
   return parts.length > 1 ? parts[0] : 'general';
 }
@@ -81,8 +88,23 @@ function normalizeContent(body) {
     .trim();
 }
 
-function inferTags(relativePath) {
-  const tags = new Set(relativePath.split(path.sep).filter(Boolean));
+function cleanMarkdown(body) {
+  return body
+    .replace(/\n---\s*\n+\[查看语雀原文\]\([^)]+\)\s*$/s, '')
+    .replace(/\n+请暂时访问语雀原文[^\n]*\s*$/s, '')
+    .trim();
+}
+
+function inferTags(relativePath, attributes, title) {
+  const slugTags = (attributes.slug ?? '')
+    .split('/')
+    .filter((part) => part && part !== title)
+    .slice(0, 4);
+  const fallbackTags = relativePath
+    .replace(/\.(md|mdx)$/i, '')
+    .split(path.sep)
+    .filter((part) => part && part !== 'migrated');
+  const tags = new Set(slugTags.length > 0 ? slugTags : fallbackTags);
   return Array.from(tags);
 }
 
@@ -98,42 +120,78 @@ function buildUrl(relativePath, attributes) {
 async function main() {
   const markdownFiles = await getMarkdownFiles(docsRoot);
   const records = [];
+  const rawWrites = [];
+
+  await rm(rawDocsDir, {recursive: true, force: true});
 
   for (const filePath of markdownFiles) {
     const relativePath = path.relative(docsRoot, filePath);
     const source = await readFile(filePath, 'utf8');
     const {attributes, body} = parseFrontMatter(source);
-    const title = extractTitle(body, attributes.title);
-    const content = normalizeContent(body);
+    const cleanBody = cleanMarkdown(body);
+    const title = extractTitle(cleanBody, attributes.title);
+    const content = normalizeContent(cleanBody);
+    const rawRelativePath = relativePath.replace(/\.(md|mdx)$/i, '.md');
+    const rawOutputPath = path.join(rawDocsDir, rawRelativePath);
+    const rawUrl = `/raw-docs/${rawRelativePath.replaceAll(path.sep, '/')}`;
+    const rawMarkdown = /^#\s+.+$/m.test(cleanBody)
+      ? `${cleanBody}\n`
+      : `# ${title}\n\n${cleanBody}\n`;
+
+    rawWrites.push(
+      mkdir(path.dirname(rawOutputPath), {recursive: true}).then(() =>
+        writeFile(rawOutputPath, rawMarkdown),
+      ),
+    );
 
     records.push({
       id: relativePath.replaceAll(path.sep, '-').replace(/\.(md|mdx)$/i, ''),
       title,
-      section: extractSection(relativePath),
+      section: extractSection(relativePath, attributes),
       content,
       url: buildUrl(relativePath, attributes),
       product: 'qingflow',
       version: 'current',
       language: 'zh-CN',
-      tags: inferTags(relativePath),
+      tags: inferTags(relativePath, attributes, title),
+      raw_url: rawUrl,
       updated_at: new Date().toISOString(),
       updated_at_ts: Date.now(),
     });
   }
 
   const serializedRecords = JSON.stringify(records, null, 2);
+  const siteUrl = (process.env.DOCS_URL ?? 'https://help-center.qingflow.com').replace(
+    /\/$/,
+    '',
+  );
+  const llmsText = [
+    '# 轻流帮助中心',
+    '',
+    '> 轻流产品使用指南、最佳实践、更新日志与开放平台文档。',
+    '',
+    '## 文档',
+    '',
+    ...records.map(
+      (record) =>
+        `- [${record.title}](${siteUrl}${record.url}): ${record.content.slice(0, 180)}`,
+    ),
+    '',
+  ].join('\n');
 
   await Promise.all([
     mkdir(outputDir, {recursive: true}),
     mkdir(path.dirname(publicOutputFile), {recursive: true}),
   ]);
   await Promise.all([
+    ...rawWrites,
     writeFile(outputFile, serializedRecords),
     writeFile(publicOutputFile, serializedRecords),
+    writeFile(llmsOutputFile, llmsText),
   ]);
 
   console.log(
-    `Generated ${records.length} search records at ${path.relative(cwd, outputFile)} and ${path.relative(cwd, publicOutputFile)}`,
+    `Generated ${records.length} search records, Markdown sources, and llms.txt`,
   );
 }
 

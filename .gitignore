@@ -9,6 +9,8 @@
 .cache-loader
 /.tmp
 /static/search-records.json
+/static/raw-docs
+/static/llms.txt
 
 # Misc
 .DS_Store
