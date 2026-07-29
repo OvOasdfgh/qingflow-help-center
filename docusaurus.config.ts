@@ -54,6 +54,7 @@ const config: Config = {
       } satisfies Preset.Options,
     ],
   ],
+  plugins: ['./plugins/build-metadata.mjs'],
   themeConfig: {
     image: 'img/qingflow-social-card.svg',
     colorMode: {

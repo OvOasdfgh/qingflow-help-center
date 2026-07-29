@@ -1,7 +1,13 @@
 node_modules
 build
 .tmp
-.git
+.git/*
+!.git/HEAD
+!.git/packed-refs
+!.git/refs/
+.git/refs/*
+!.git/refs/heads/
+!.git/refs/heads/**
 .github
 *.log
 .env
