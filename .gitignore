@@ -11,6 +11,7 @@
 /static/search-records.json
 /static/raw-docs
 /static/llms.txt
+/static/llms-full.txt
 
 # Misc
 .DS_Store

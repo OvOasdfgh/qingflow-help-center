@@ -7,7 +7,10 @@ export default function DocItemMetadata(): ReactNode {
   const {siteConfig} = useDocusaurusContext();
   const {metadata, frontMatter, assets} = useDoc();
   const sourceUpdatedAt = metadata.frontMatter.source_updated_at as string | undefined;
-  const canonicalUrl = new URL(metadata.permalink, siteConfig.url).toString();
+  const canonicalPath = metadata.permalink.endsWith('/')
+    ? metadata.permalink
+    : `${metadata.permalink}/`;
+  const canonicalUrl = new URL(canonicalPath, siteConfig.url).toString();
   const logoUrl = new URL(`${siteConfig.baseUrl}img/qingflow-logo.png`, siteConfig.url).toString();
   const article = {
     '@context': 'https://schema.org',

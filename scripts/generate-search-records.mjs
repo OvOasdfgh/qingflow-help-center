@@ -8,6 +8,58 @@ const outputFile = path.join(outputDir, 'search-records.json');
 const publicOutputFile = path.join(cwd, 'static', 'search-records.json');
 const rawDocsDir = path.join(cwd, 'static', 'raw-docs');
 const llmsOutputFile = path.join(cwd, 'static', 'llms.txt');
+const llmsFullOutputFile = path.join(cwd, 'static', 'llms-full.txt');
+
+const llmsSections = [
+  {
+    section: '新手指南',
+    title: '新手指南',
+    path: '/docs/新手指南/',
+    description: '认识轻流核心概念并开始搭建第一个应用。',
+  },
+  {
+    section: '帮助文档',
+    title: '产品帮助文档',
+    path: '/docs/帮助文档/轻流简介/',
+    description: '查阅表单、流程、权限、数据和开放平台等产品能力。',
+  },
+  {
+    section: '搭建技巧',
+    title: '搭建技巧',
+    path: '/docs/搭建技巧/按场景分类/进销存-仓库/如何在出库时进行出库数量的安全校验/',
+    description: '按功能和业务场景查找系统搭建方法。',
+  },
+  {
+    section: '常见问题-faq',
+    title: '常见问题',
+    path: '/docs/常见问题-faq/一句话qa/',
+    description: '快速定位产品使用中的高频问题。',
+  },
+  {
+    section: '解决方案',
+    title: '解决方案',
+    path: '/docs/解决方案/按场景分类/进销存-仓库/进销存方案介绍/',
+    description: '浏览按行业和场景整理的无代码解决方案。',
+  },
+  {
+    section: '更新动态',
+    title: '更新动态',
+    path: '/docs/更新动态/更新日志/',
+    description: '了解产品更新日志和重要公告。',
+  },
+  {
+    section: '视频中心',
+    title: '视频中心',
+    path: '/docs/视频中心/',
+    description: '通过视频教程学习轻流产品。',
+  },
+  {
+    section: '联系我们',
+    title: '联系我们',
+    path: '/docs/联系我们/',
+    description: '获取轻流服务与支持联系方式。',
+  },
+];
 
 async function getMarkdownFiles(dir) {
   const entries = await readdir(dir, {withFileTypes: true});
@@ -110,11 +162,15 @@ function inferTags(relativePath, attributes, title) {
 
 function buildUrl(relativePath, attributes) {
   if (attributes.slug) {
-    return `/docs${attributes.slug}`;
+    return withTrailingSlash(`/docs${attributes.slug}`);
   }
 
   const withoutExtension = relativePath.replace(/\.(md|mdx)$/i, '');
-  return `/docs/${withoutExtension.replaceAll(path.sep, '/')}`;
+  return withTrailingSlash(`/docs/${withoutExtension.replaceAll(path.sep, '/')}`);
+}
+
+function withTrailingSlash(url) {
+  return url.endsWith('/') ? url : `${url}/`;
 }
 
 async function main() {
@@ -170,13 +226,36 @@ async function main() {
     '',
     '> 轻流产品使用指南、最佳实践、更新日志与开放平台文档。',
     '',
-    '## 文档',
+    '## 主要入口',
     '',
-    ...records.map(
-      (record) =>
-        `- [${record.title}](${siteUrl}${record.url}): ${record.content.slice(0, 180)}`,
+    ...llmsSections.map(
+      (section) =>
+        `- [${section.title}](${siteUrl}${section.path}): ${section.description}`,
     ),
     '',
+    '## AI 资源',
+    '',
+    `- [完整文档索引](${siteUrl}/llms-full.txt): 包含全部 ${records.length} 篇文档的链接与摘要。`,
+    `- [站点地图](${siteUrl}/sitemap.xml): 包含所有可抓取页面。`,
+    '',
+  ].join('\n');
+  const llmsFullText = [
+    '# 轻流帮助中心完整文档索引',
+    '',
+    `> 共 ${records.length} 篇文档。精简入口请访问 ${siteUrl}/llms.txt。`,
+    '',
+    ...llmsSections.flatMap((section) => [
+      `## ${section.title}`,
+      '',
+      ...records
+        .filter((record) => record.section === section.section)
+        .sort((a, b) => a.title.localeCompare(b.title, 'zh-CN'))
+        .map(
+          (record) =>
+            `- [${record.title}](${siteUrl}${record.url}): ${record.content.slice(0, 180)}`,
+        ),
+      '',
+    ]),
   ].join('\n');
 
   await Promise.all([
@@ -188,10 +267,11 @@ async function main() {
     writeFile(outputFile, serializedRecords),
     writeFile(publicOutputFile, serializedRecords),
     writeFile(llmsOutputFile, llmsText),
+    writeFile(llmsFullOutputFile, llmsFullText),
   ]);
 
   console.log(
-    `Generated ${records.length} search records, Markdown sources, and llms.txt`,
+    `Generated ${records.length} search records, Markdown sources, llms.txt, and llms-full.txt`,
   );
 }
 
