@@ -21,6 +21,7 @@ const config: Config = {
   },
   url: siteUrl,
   baseUrl,
+  trailingSlash: true,
   organizationName: 'nonepointer666',
   projectName: 'qingflow-help-center',
   onBrokenLinks: 'throw',

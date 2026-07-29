@@ -20,7 +20,7 @@ RUN npm ci --no-audit --no-fund
 COPY . .
 
 # 构建时可通过 --build-arg 注入环境变量（提供默认值避免空字符串导致校验失败）
-ARG DOCS_URL=https://help.qingflow.com
+ARG DOCS_URL=https://help-center.qingflow.com
 ARG DOCS_BASE_URL=/
 ARG TYPESENSE_HOST=""
 ARG TYPESENSE_COLLECTION=qingflow_help_docs
