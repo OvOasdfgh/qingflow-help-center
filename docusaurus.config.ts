@@ -21,6 +21,13 @@ const config: Config = {
   },
   url: siteUrl,
   baseUrl,
+  scripts: [
+    {
+      src: 'https://umami.qingflow.com/script.js',
+      defer: true,
+      'data-website-id': '252d3c97-a671-4a72-b28b-02421e2066c8',
+    },
+  ],
   trailingSlash: true,
   organizationName: 'nonepointer666',
   projectName: 'qingflow-help-center',
@@ -94,7 +101,13 @@ const config: Config = {
           label: '产品指南',
         },
         {to: '/docs/更新动态/更新日志', label: '更新日志', position: 'left'},
-        {to: '/search', label: '搜索', position: 'right'},
+        {
+          to: '/search',
+          label: '搜索',
+          position: 'right',
+          'data-umami-event': 'search',
+          'data-umami-event-location': 'navbar',
+        },
         {
           href: 'https://github.com/nonepointer666/qingflow-help-center',
           label: 'GitHub',
@@ -116,7 +129,12 @@ const config: Config = {
               label: '轻流简介',
               to: '/docs/帮助文档/轻流简介',
             },
-            {label: '搜索文档', to: '/search'},
+            {
+              label: '搜索文档',
+              to: '/search',
+              'data-umami-event': 'search',
+              'data-umami-event-location': 'footer',
+            },
           ],
         },
         {

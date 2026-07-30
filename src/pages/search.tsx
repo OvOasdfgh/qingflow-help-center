@@ -284,7 +284,10 @@ export default function SearchPage(): ReactNode {
                   onChange={(event) => setQuery(event.target.value)}
                   autoFocus
                 />
-                <button type="submit">
+                <button
+                  type="submit"
+                  data-umami-event="search"
+                  data-umami-event-location="search-page">
                   搜索 <ArrowRight aria-hidden="true" size={18} />
                 </button>
               </form>

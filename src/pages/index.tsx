@@ -165,7 +165,11 @@ function HelpSearch() {
         <span className={styles.shortcut} aria-hidden="true">
           <Command size={13} />K
         </span>
-        <button type="submit" aria-label="提交搜索">
+        <button
+          type="submit"
+          aria-label="提交搜索"
+          data-umami-event="search"
+          data-umami-event-location="home">
           <ArrowRight size={19} />
         </button>
       </form>
