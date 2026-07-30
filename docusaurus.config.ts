@@ -57,6 +57,24 @@ const config: Config = {
   plugins: ['./plugins/build-metadata.mjs'],
   themeConfig: {
     image: 'img/qingflow-social-card.svg',
+    metadata: [
+      {
+        name: 'google-site-verification',
+        content: 'ITJmMPZJtrluqQhfEXCRtKwgBgRA_b0hiDR7xnuamlY',
+      },
+      {
+        name: 'msvalidate.01',
+        content: '19CBD6BE79CA5FADB70D1A935227F690',
+      },
+      {
+        name: 'baidu-site-verification',
+        content: 'codeva-9OBWaap2uX',
+      },
+      {
+        name: '360-site-verification',
+        content: '9b50ee3cb9cf6b1d1c4c94cf83110809',
+      },
+    ],
     colorMode: {
       defaultMode: 'light',
       disableSwitch: false,
