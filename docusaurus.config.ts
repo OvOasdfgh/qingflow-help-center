@@ -193,7 +193,8 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Qingflow`,
+      copyright:
+        '©2026 轻流 ｜ <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">沪ICP备 16014957号-7</a> ｜ <a href="https://beian.mps.gov.cn/#/query/webSearch?code=31011202008413" target="_blank" rel="noopener noreferrer">沪公网安备 31011202008413</a> ｜ 增值电信业务经营许可证 沪B2-20200405 ｜ 版权所有 上海易校信息科技有限公司',
     },
     prism: {
       theme: prismThemes.github,
