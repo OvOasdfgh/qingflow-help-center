@@ -61,7 +61,10 @@ const config: Config = {
       } satisfies Preset.Options,
     ],
   ],
-  plugins: ['./plugins/build-metadata.mjs'],
+  plugins: [
+    './plugins/legacy-url-redirects.mjs',
+    './plugins/build-metadata.mjs',
+  ],
   themeConfig: {
     image: 'img/qingflow-social-card.svg',
     metadata: [
@@ -100,7 +103,7 @@ const config: Config = {
           position: 'left',
           label: '产品指南',
         },
-        {to: '/docs/更新动态/更新日志', label: '更新日志', position: 'left'},
+        {to: '/docs/release-notes', label: '更新日志', position: 'left'},
         {
           to: '/search',
           label: '搜索',
@@ -123,11 +126,11 @@ const config: Config = {
           items: [
             {
               label: '新手指南',
-              to: '/docs/新手指南',
+              to: '/docs/getting-started',
             },
             {
               label: '轻流简介',
-              to: '/docs/帮助文档/轻流简介',
+              to: '/docs/product-guides/qingflow-introduction',
             },
             {
               label: '搜索文档',
@@ -142,15 +145,15 @@ const config: Config = {
           items: [
             {
               label: '管理后台',
-              to: '/docs/帮助文档/管理后台',
+              to: '/docs/product-guides/admin-console',
             },
             {
               label: '权限管理',
-              to: '/docs/帮助文档/管理后台/工作区管理/权限管理',
+              to: '/docs/product-guides/admin-console/permissions',
             },
             {
               label: '搭建技巧',
-              to: '/docs/搭建技巧/按场景分类/进销存-仓库/如何在出库时进行出库数量的安全校验',
+              to: '/docs/building-guides/inventory-outbound-validation',
             },
           ],
         },
@@ -159,11 +162,11 @@ const config: Config = {
           items: [
             {
               label: 'OPENAPI',
-              to: '/docs/帮助文档/轻代码/openapi',
+              to: '/docs/product-guides/qing-code/openapi',
             },
             {
               label: '解决方案',
-              to: '/docs/解决方案/按场景分类/进销存-仓库/进销存方案介绍',
+              to: '/docs/solutions/inventory-management',
             },
             {
               label: 'GitHub',

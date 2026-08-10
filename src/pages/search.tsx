@@ -41,56 +41,56 @@ const localDocuments: SearchDocument[] = [
     title: '新手指南',
     section: '快速开始',
     content: '认识轻流，了解核心概念并开始使用产品。',
-    url: '/docs/新手指南',
+    url: '/docs/getting-started',
     tags: ['入门', '帮助中心'],
   },
   {
     title: '如何收集和流转数据',
     section: '快速开始',
     content: '使用表单和流程收集、处理并流转业务数据。',
-    url: '/docs/帮助文档/轻流简介/快速入门/核心功能速览/如何收集和流转数据',
+    url: '/docs/product-guides/qingflow-introduction/collect-and-route-data',
     tags: ['表单', '流程', '数据'],
   },
   {
     title: '轻流简介',
     section: '快速开始',
     content: '了解轻流的核心功能、应用场景和账号模式。',
-    url: '/docs/帮助文档/轻流简介',
+    url: '/docs/product-guides/qingflow-introduction',
     tags: ['轻流', '入门'],
   },
   {
     title: '流程引擎',
     section: '流程与审批',
     content: '配置申请、审批、填写和抄送节点，管理业务流程。',
-    url: '/docs/帮助文档/流程引擎',
+    url: '/docs/product-guides/workflow-engine',
     tags: ['审批', '流程', '待办'],
   },
   {
     title: '权限管理',
     section: '管理后台',
     content: '配置工作区权限、高级权限和管理员角色。',
-    url: '/docs/帮助文档/管理后台/工作区管理/权限管理',
+    url: '/docs/product-guides/admin-console/permissions',
     tags: ['权限', '管理员'],
   },
   {
     title: '更新日志',
     section: '更新动态',
     content: '查看轻流各版本的产品功能更新记录。',
-    url: '/docs/更新动态/更新日志',
+    url: '/docs/release-notes',
     tags: ['更新', '版本'],
   },
   {
     title: 'OPENAPI',
     section: '开放平台',
     content: '了解轻流开放接口、鉴权方式和系统集成能力。',
-    url: '/docs/帮助文档/轻代码/openapi',
+    url: '/docs/product-guides/qing-code/openapi',
     tags: ['API', '开发'],
   },
   {
     title: '常见问题',
     section: 'FAQ',
     content: '查找轻流产品使用过程中常见问题的处理方法。',
-    url: '/docs/常见问题-faq/一句话qa',
+    url: '/docs/faq',
     tags: ['问题', 'FAQ'],
   },
 ];
@@ -332,7 +332,7 @@ export default function SearchPage(): ReactNode {
                   <FileSearch aria-hidden="true" size={30} />
                   <Heading as="h2">没有找到相关内容</Heading>
                   <p>试试缩短问题，或者使用功能名称重新搜索。</p>
-                  <Link to="/docs/新手指南">浏览完整文档目录</Link>
+                  <Link to="/docs/getting-started">浏览完整文档目录</Link>
                 </div>
               ) : null}
 
@@ -355,7 +355,7 @@ export default function SearchPage(): ReactNode {
 
                   return (
                     <article key={`${document.url ?? 'result'}-${index}`} className={styles.resultRow}>
-                      <Link to={document.url ?? '/docs/新手指南'}>
+                      <Link to={document.url ?? '/docs/getting-started'}>
                         <div className={styles.resultTopline}>
                           <span>{document.section ?? '帮助文档'}</span>
                           {document.version ? <small>{document.version}</small> : null}

@@ -1,7 +1,7 @@
 ---
 title: "空气质量查询"
 description: "场景描述在室外工作时，有时候在表单中需要获取当前精准的空气质量数据解决方案通过Q-Linker我们可以轻松实现这个需求：设置步骤1.选择空气质量查询服务商在阿里云市场中选取合适的空气质量查询服务商，本次案例以此服务商为例：易源数据2.添加表单字段在轻流中新建应用，输入城市(单行文本类型) ，p..."
-slug: "/帮助文档/轻代码/集成中心/q-linker/q-linker使用案例/空气质量查询"
+slug: "/product-guides/qing-code/zgtlzfwmhqwilv75"
 source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/zgtlzfwmhqwilv75?singleDoc#"
 source_updated_at: "2024-11-26T08:30:15.000Z"
 keywords:
@@ -38,7 +38,7 @@ keywords:
 
 先查看API提供的使用说明，红圈是所需的必要信息，如下图：
 
-![文档图片](https://hc.qingflow.com/wp-content/uploads/2020/04/2-8.png)
+![文档图片](/doc-assets/f1/f1ceeea4c25a98a7e85946ee.png)
 
 - **URL、QueryParam、Method**
 
@@ -51,7 +51,7 @@ keywords:
 
 如下图，发送请求想要得到回复是需要鉴权的，就好比古代打仗调集士兵是需要”军符“一样，此时我们需要的鉴权的密码就是API服务商提供的AppCode，所需要的Key是”Authorization“，Value值是下图红圈中的部分，相应格式按照API的要求配置
 
-![文档图片](https://hc.qingflow.com/wp-content/uploads/2020/04/4-2.png)
+![文档图片](/doc-assets/3d/3d3649cd2e6466c8a1c359b9.png)
 
 - **Result Format**: JSON
 - **Json Path: **
@@ -66,9 +66,9 @@ $.showapi\_res\_body.pm.quality
 
 别名是将用于数据关联对JSON Path对应数据的调取,不可重复
 
-![文档图片](https://hc.qingflow.com/wp-content/uploads/2020/04/5-1.png)
+![文档图片](/doc-assets/93/936824b6e7cb663ff5666445.png)
 
-![文档图片](https://hc.qingflow.com/wp-content/uploads/2020/04/6-8.png)
+![文档图片](/doc-assets/5f/5f62842cce971b0dbcc5c352.png)
 
 ### 4.配置相应字段用来显示结果
 
@@ -78,7 +78,7 @@ $.showapi\_res\_body.pm.quality
 
 ![文档图片](https://7169-qingmall-6goin5nh5aaec4fa-1304800004.tcb.qcloud.la/cloudbase-cms/upload/2023-05-09/QYAZQACQynIr-X9HF23iAxK4AgzrfIWH_.png)
 
-![文档图片](https://hc.qingflow.com/wp-content/uploads/2020/04/8-1.png)
+![文档图片](/doc-assets/75/75d0bcbaf8255b093cfe19fd.png)
 
 ### 5.发布应用 并使用
 

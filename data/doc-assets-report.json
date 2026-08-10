@@ -1,0 +1,11 @@
+{
+  "completedAt": "2026-08-10T07:41:29.709Z",
+  "recoverySources": 32,
+  "downloaded": 32,
+  "reused": 0,
+  "failed": 0,
+  "changedDocuments": 11,
+  "replacedReferences": 34,
+  "recoveredBytes": 11044142,
+  "failures": []
+}

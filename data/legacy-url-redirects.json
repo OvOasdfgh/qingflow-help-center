@@ -1,0 +1,3870 @@
+[
+  {
+    "from": "/帮助文档/表单引擎",
+    "to": "/product-guides/form-engine"
+  },
+  {
+    "from": "/帮助文档/表单引擎/表单基础设置",
+    "to": "/product-guides/form-engine/dh0mczvw94hxzaea"
+  },
+  {
+    "from": "/帮助文档/表单引擎/表单拓展设置",
+    "to": "/product-guides/form-engine/xrml30leat4s8y3b"
+  },
+  {
+    "from": "/帮助文档/表单引擎/表单拓展设置/创建自定义按钮",
+    "to": "/product-guides/form-engine/cfgfa395gx63e75d"
+  },
+  {
+    "from": "/帮助文档/表单引擎/表单拓展设置/创建自定义按钮/自定义按钮发起http请求",
+    "to": "/product-guides/form-engine/uud1hfvrkg2k06b5"
+  },
+  {
+    "from": "/帮助文档/表单引擎/表单拓展设置/申请人填写表单后显示",
+    "to": "/product-guides/form-engine/gxxq0eszhbfeseeo"
+  },
+  {
+    "from": "/帮助文档/表单引擎/表单拓展设置/申请人暂存数据后跳转",
+    "to": "/product-guides/form-engine/ni4lgmulwbuenfin"
+  },
+  {
+    "from": "/帮助文档/表单引擎/表单拓展设置/数据来源标记",
+    "to": "/product-guides/form-engine/xh7g3d5venwvg8gn"
+  },
+  {
+    "from": "/帮助文档/表单引擎/表头设置",
+    "to": "/product-guides/form-engine/facrh4wmvs2gos17"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段常用设置",
+    "to": "/product-guides/form-engine/slp3vwks9clpdtb4"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段常用设置/逻辑表单",
+    "to": "/product-guides/form-engine/dinm8hgfut1x00hl"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段常用设置/默认内容",
+    "to": "/product-guides/form-engine/sx1vgo1bkfel5qsr"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段常用设置/默认内容/关联已有数据",
+    "to": "/product-guides/form-engine/ab9y09qs7pcocusn"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段常用设置/默认内容/通过公式计算",
+    "to": "/product-guides/form-engine/mhn5u9p0ckxxe0f3"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段常用设置/默认内容/通过公式计算/高级函数",
+    "to": "/product-guides/form-engine/xcbzllg4kg1u8w60"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段常用设置/默认内容/通过公式计算/逻辑函数",
+    "to": "/product-guides/form-engine/ggb40c1ltaghu1ox"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段常用设置/默认内容/通过公式计算/时间函数",
+    "to": "/product-guides/form-engine/ksz4gllixt8zz7ke"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段常用设置/默认内容/通过公式计算/数字函数",
+    "to": "/product-guides/form-engine/irapz6yg4oqwtaf4"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段常用设置/默认内容/通过公式计算/文本函数",
+    "to": "/product-guides/form-engine/xkfm8m3zkerqgt5c"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段常用设置/筛选条件",
+    "to": "/product-guides/form-engine/qbw51cwqz1b8aqo0"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段常用设置/数据脱敏",
+    "to": "/product-guides/form-engine/abyn47ypf3gs419l"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段常用设置/数据id",
+    "to": "/product-guides/form-engine/mkbfppqegxzek431"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段常用设置/校验条件",
+    "to": "/product-guides/form-engine/xapr223hafnwh2ak"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段常用设置/字段标题-提示与字段占比",
+    "to": "/product-guides/form-engine/pl70fbf82e7f5813"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段常用设置/字段类型切换",
+    "to": "/product-guides/form-engine/kfd9cqqo9wngboug"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置",
+    "to": "/product-guides/form-engine/db3k8uim1f4n072h"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/表格工具类",
+    "to": "/product-guides/form-engine/zxhl8msigd70gdvs"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/表格工具类/表格",
+    "to": "/product-guides/form-engine/haauveql8yhz6rc4"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/表格工具类/表格/关联已有表格",
+    "to": "/product-guides/form-engine/rqt54vp7rbp8szds"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/布局工具类",
+    "to": "/product-guides/form-engine/zxnry00oyxkny20g"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/布局工具类/段落",
+    "to": "/product-guides/form-engine/evsxdxgvmedfix9r"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/布局工具类/描述文字",
+    "to": "/product-guides/form-engine/cvd5yv878cbhkuwe"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/成员部门类",
+    "to": "/product-guides/form-engine/sh809eov3cydyn1y"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/成员部门类/部门",
+    "to": "/product-guides/form-engine/go7nvs7eanzyv6ih"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/成员部门类/成员",
+    "to": "/product-guides/form-engine/iy46omgkxpmq8y3v"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/连接工具类",
+    "to": "/product-guides/form-engine/ve96sg3vvd4wt3w8"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/连接工具类/代码块",
+    "to": "/product-guides/form-engine/tzbzzsctuably0qv"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/连接工具类/数据关联",
+    "to": "/product-guides/form-engine/kdxy02mbt6cqcvrx"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/连接工具类/数据关联/功能解析-数据关联-v-s-关联已有数据",
+    "to": "/product-guides/form-engine/eofc6aqnpaspg2q3"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/连接工具类/数据关联/数据关联支持表格子字段",
+    "to": "/product-guides/form-engine/gk41o9zrlr0grbkk"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/连接工具类/数据关联/新版关联引擎",
+    "to": "/product-guides/form-engine/zgtphgm9u8figxgq"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/连接工具类/引用",
+    "to": "/product-guides/form-engine/mgqet1wwsnq5q3zz"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/特殊输入类",
+    "to": "/product-guides/form-engine/cchn7t9d7473kgrz"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/特殊输入类/地址",
+    "to": "/product-guides/form-engine/gs1gbnszzbnpuupm"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/特殊输入类/电话",
+    "to": "/product-guides/form-engine/euciyd9ew46x3dme"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/特殊输入类/定位",
+    "to": "/product-guides/form-engine/zpyl1mzmp2pzlbpd"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/特殊输入类/附件上传",
+    "to": "/product-guides/form-engine/vmck8l2wpukvk9vt"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/特殊输入类/链接",
+    "to": "/product-guides/form-engine/hflindmxp1r12oox"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/特殊输入类/起止时间",
+    "to": "/product-guides/form-engine/hiuf8yese238szwg"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/特殊输入类/嵌入字段",
+    "to": "/product-guides/form-engine/wvgntpt9fb8azh3n"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/特殊输入类/日期",
+    "to": "/product-guides/form-engine/ts0q9fn68mm3rn6d"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/特殊输入类/文字识别",
+    "to": "/product-guides/form-engine/wl1eqeq43riosyw0"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/特殊输入类/邮箱",
+    "to": "/product-guides/form-engine/fbnabhkzzm3u06nh"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/文字-数字输入类",
+    "to": "/product-guides/form-engine/vlo9k8gmwngazlu3"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/文字-数字输入类/单行文字",
+    "to": "/product-guides/form-engine/ei3okucwn44kmyqp"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/文字-数字输入类/单行文字/扫码录入",
+    "to": "/product-guides/form-engine/xfy7xh8wfen1pzt9"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/文字-数字输入类/单行文字/扫码录入/如何使用苹果手机替代扫码枪进行录入数据",
+    "to": "/product-guides/form-engine/fzagfasl4adgepia"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/文字-数字输入类/多行文字",
+    "to": "/product-guides/form-engine/rni2tc4wzc8wezq8"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/文字-数字输入类/富文本",
+    "to": "/product-guides/form-engine/wsrggggc9qzsxvr8"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/文字-数字输入类/加密文本",
+    "to": "/product-guides/form-engine/kqopk2lm1nwpto10"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/文字-数字输入类/数字",
+    "to": "/product-guides/form-engine/nuvpag0oquyzllua"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/选择类",
+    "to": "/product-guides/form-engine/biml5xfpe2576n5o"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/选择类/单项选择",
+    "to": "/product-guides/form-engine/bx5glgdm55ocqqqy"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/选择类/多项选择",
+    "to": "/product-guides/form-engine/fbyt33f8y098bqh6"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/选择类/图片选择",
+    "to": "/product-guides/form-engine/zi9qqazx1seea2vw"
+  },
+  {
+    "from": "/帮助文档/表单引擎/字段类型与配置/选择类/下拉选择",
+    "to": "/product-guides/form-engine/hvc1wxid66h427fm"
+  },
+  {
+    "from": "/帮助文档/工作区初始化配置",
+    "to": "/product-guides/workspace-setup"
+  },
+  {
+    "from": "/帮助文档/工作区初始化配置/创建-and-发布应用",
+    "to": "/product-guides/workspace-setup/eon5zwte9fskoi99"
+  },
+  {
+    "from": "/帮助文档/工作区初始化配置/创建-and-发布应用/安装解决方案",
+    "to": "/product-guides/workspace-setup/brbsghgsml14180b"
+  },
+  {
+    "from": "/帮助文档/工作区初始化配置/配置组织架构",
+    "to": "/product-guides/workspace-setup/zf67rt9ioikrm47b"
+  },
+  {
+    "from": "/帮助文档/工作区初始化配置/配置组织架构/通讯录",
+    "to": "/product-guides/workspace-setup/og552g6usihcrnwg"
+  },
+  {
+    "from": "/帮助文档/工作区初始化配置/配置组织架构/通讯录导出",
+    "to": "/product-guides/workspace-setup/paxa3sqnzwnq6mc2"
+  },
+  {
+    "from": "/帮助文档/工作区初始化配置/配置组织架构/外部用户",
+    "to": "/product-guides/workspace-setup/grgodcmrerqou4yn"
+  },
+  {
+    "from": "/帮助文档/工作区初始化配置/配置组织架构/外部用户及内部成员功能差异",
+    "to": "/product-guides/workspace-setup/dgnqf5d8o559mhhb"
+  },
+  {
+    "from": "/帮助文档/工作区初始化配置/认识轻流界面",
+    "to": "/product-guides/workspace-setup/mmwa2smzgg3p84wo"
+  },
+  {
+    "from": "/帮助文档/工作区初始化配置/设置个人中心/任务委托",
+    "to": "/product-guides/workspace-setup/gno4lg1s76ni9kks"
+  },
+  {
+    "from": "/帮助文档/工作区初始化配置/设置个人中心/账号注销流程",
+    "to": "/product-guides/workspace-setup/ps7e16tnhq7rccly"
+  },
+  {
+    "from": "/帮助文档/管理后台",
+    "to": "/product-guides/admin-console"
+  },
+  {
+    "from": "/帮助文档/管理后台/插件管理",
+    "to": "/product-guides/admin-console/lavwox1frqlwi722"
+  },
+  {
+    "from": "/帮助文档/管理后台/插件管理/电子签章/什么是电子签章",
+    "to": "/product-guides/admin-console/omzp8ruz2bkvkhgt"
+  },
+  {
+    "from": "/帮助文档/管理后台/插件管理/电子签章/数字证书服务协议",
+    "to": "/product-guides/admin-console/kf1s29hg3grngzd4"
+  },
+  {
+    "from": "/帮助文档/管理后台/插件管理/坚果云",
+    "to": "/product-guides/admin-console/ubmnan197mqwp456"
+  },
+  {
+    "from": "/帮助文档/管理后台/插件管理/cad文件查看",
+    "to": "/product-guides/admin-console/afmq6pnoia8gfetk"
+  },
+  {
+    "from": "/帮助文档/管理后台/插件管理/ocr文字识别/什么是ocr",
+    "to": "/product-guides/admin-console/qpsznf4609g4vm5k"
+  },
+  {
+    "from": "/帮助文档/管理后台/插件管理/ocr文字识别/自定义识别模版",
+    "to": "/product-guides/admin-console/gacetprtt119rszs"
+  },
+  {
+    "from": "/帮助文档/管理后台/订单管理/合同管理",
+    "to": "/product-guides/admin-console/gl4878793x2xafwy"
+  },
+  {
+    "from": "/帮助文档/管理后台/订单管理/账单明细",
+    "to": "/product-guides/admin-console/mkx9zaeva4qmtud0"
+  },
+  {
+    "from": "/帮助文档/管理后台/工作区管理/安全管理",
+    "to": "/product-guides/admin-console/dit1nlx7ywygwcnc"
+  },
+  {
+    "from": "/帮助文档/管理后台/工作区管理/成员搜索",
+    "to": "/product-guides/admin-console/gllqbag0kmnesqae"
+  },
+  {
+    "from": "/帮助文档/管理后台/工作区管理/导航菜单",
+    "to": "/product-guides/admin-console/gpl3e16ebzumyr2n"
+  },
+  {
+    "from": "/帮助文档/管理后台/工作区管理/工作区概览",
+    "to": "/product-guides/admin-console/zqyyxnbckdmvbd7d"
+  },
+  {
+    "from": "/帮助文档/管理后台/工作区管理/工作区日志",
+    "to": "/product-guides/admin-console/ks7gzngmk17of37l"
+  },
+  {
+    "from": "/帮助文档/管理后台/工作区管理/工作区日志/登录日志",
+    "to": "/product-guides/admin-console/oavvoaqvlxq81est"
+  },
+  {
+    "from": "/帮助文档/管理后台/工作区管理/工作区日志/资源日志",
+    "to": "/product-guides/admin-console/tx86olue33qkrz2a"
+  },
+  {
+    "from": "/帮助文档/管理后台/工作区管理/基本信息",
+    "to": "/product-guides/admin-console/cuexw4nk09urgu8u"
+  },
+  {
+    "from": "/帮助文档/管理后台/工作区管理/基本信息/轻流logo隐藏",
+    "to": "/product-guides/admin-console/aeqfix4x9nt65ago"
+  },
+  {
+    "from": "/帮助文档/管理后台/工作区管理/基本信息/身份认证",
+    "to": "/product-guides/admin-console/pkgig1qvtvw80dh7"
+  },
+  {
+    "from": "/帮助文档/管理后台/工作区管理/基本信息/转交超级管理员",
+    "to": "/product-guides/admin-console/cbolipe9eysyle63"
+  },
+  {
+    "from": "/帮助文档/管理后台/工作区管理/全部应用",
+    "to": "/product-guides/admin-console/grlgh55993sa0qc5"
+  },
+  {
+    "from": "/帮助文档/管理后台/工作区管理/全部应用/应用回收站",
+    "to": "/product-guides/admin-console/ep3flg8wy986gu2b"
+  },
+  {
+    "from": "/帮助文档/管理后台/工作区管理/权限管理",
+    "to": "/product-guides/admin-console/permissions"
+  },
+  {
+    "from": "/帮助文档/管理后台/工作区管理/权限管理/成员",
+    "to": "/product-guides/admin-console/ar6fgqyz3e0nxwfv"
+  },
+  {
+    "from": "/帮助文档/管理后台/工作区管理/权限管理/高级权限",
+    "to": "/product-guides/admin-console/olayrbydt1bz3dx5"
+  },
+  {
+    "from": "/帮助文档/管理后台/工作区管理/权限管理/管理员",
+    "to": "/product-guides/admin-console/uxvf76pk1kbigczo"
+  },
+  {
+    "from": "/帮助文档/管理后台/工作区管理/权限管理/管理员/轻析管理权限",
+    "to": "/product-guides/admin-console/sxecamuhgqgtmfbs"
+  },
+  {
+    "from": "/帮助文档/管理后台/工作区管理/权限管理/管理员/系统管理员",
+    "to": "/product-guides/admin-console/ip5s8g8c2ugfvo0b"
+  },
+  {
+    "from": "/帮助文档/管理后台/工作区管理/权限管理/管理员/子管理员",
+    "to": "/product-guides/admin-console/gadoe01igo4ya4hg"
+  },
+  {
+    "from": "/帮助文档/管理后台/连接器管理",
+    "to": "/product-guides/admin-console/fhg5dwmnmpzid5uw"
+  },
+  {
+    "from": "/帮助文档/流程引擎",
+    "to": "/product-guides/workflow-engine"
+  },
+  {
+    "from": "/帮助文档/流程引擎/待办中心",
+    "to": "/product-guides/workflow-engine/xionhzdw6vlgo187"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程基本设置",
+    "to": "/product-guides/workflow-engine/fxr216iszsppccad"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程基本设置/节点名称",
+    "to": "/product-guides/workflow-engine/ll3quhh63c20t47o"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程节点类型",
+    "to": "/product-guides/workflow-engine/qt3b2amcf1dyu617"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程节点类型/抄送节点",
+    "to": "/product-guides/workflow-engine/cyg5kppzbzadsspb"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程节点类型/审批节点",
+    "to": "/product-guides/workflow-engine/hk2oph0ob2qlmuv8"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程节点类型/审批节点/节点负责人",
+    "to": "/product-guides/workflow-engine/egsrvgkz1h8gzvt9"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程节点类型/审批节点/节点负责人/常规审批",
+    "to": "/product-guides/workflow-engine/bozhcr8p3he0nkfq"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程节点类型/审批节点/节点负责人/常规审批/成员-部门-角色作为负责人",
+    "to": "/product-guides/workflow-engine/ghmwbhca3ogt71nz"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程节点类型/审批节点/节点负责人/常规审批/动态负责人",
+    "to": "/product-guides/workflow-engine/nxcxr8ystih5t3p1"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程节点类型/审批节点/节点负责人/负责人为空",
+    "to": "/product-guides/workflow-engine/bp4xbcrflhbym2y5"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程节点类型/审批节点/节点负责人/逐级审批",
+    "to": "/product-guides/workflow-engine/sv7g6554odu2y3nw"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程节点类型/审批节点/审批类型",
+    "to": "/product-guides/workflow-engine/mgt2x69ryk0geli2"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程节点类型/填写节点",
+    "to": "/product-guides/workflow-engine/ixdk6gugunqd0bt2"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程节点类型/填写节点/申请人节点",
+    "to": "/product-guides/workflow-engine/twlscc6gh7x3ggg5"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程节点类型/q-robot节点",
+    "to": "/product-guides/workflow-engine/kevzr64wcc683kz6"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程节点类型/webhook节点",
+    "to": "/product-guides/workflow-engine/ey8438col7k4u2a1"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置",
+    "to": "/product-guides/workflow-engine/crvoogamugxyoqsc"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/高级设置",
+    "to": "/product-guides/workflow-engine/nqm4fnvmtfrya417"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/高级设置/节点通用属性",
+    "to": "/product-guides/workflow-engine/uclgspkmex12xssw"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/高级设置/节点通用属性/打印模版",
+    "to": "/product-guides/workflow-engine/ioula22nbx0xbl8g"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/高级设置/节点通用属性/打印模版/创建打印模版",
+    "to": "/product-guides/workflow-engine/hmfdgzfdxp6gz9w6"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/高级设置/节点通用属性/打印模版/创建打印模版/自定义打印文件",
+    "to": "/product-guides/workflow-engine/swpf4uw3qx94wb79"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/高级设置/节点通用属性/打印模版/移动端打印-小程序-h5",
+    "to": "/product-guides/workflow-engine/rq5zylhv09t6ynpf"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/高级设置/节点通用属性/关联设置",
+    "to": "/product-guides/workflow-engine/mv0xddtedov6udxg"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/高级设置/节点通用属性/关联设置/创建关联报表",
+    "to": "/product-guides/workflow-engine/bc5lznvm43r4ov9w"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/高级设置/节点通用属性/流程超时",
+    "to": "/product-guides/workflow-engine/zlshl1cxlaa5godu"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/高级设置/节点通用属性/批量操作",
+    "to": "/product-guides/workflow-engine/ts69dibdvtldlam3"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/高级设置/节点通用属性/签章审批",
+    "to": "/product-guides/workflow-engine/zh4q8u2tq0mex3r7"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/高级设置/节点通用属性/手写签名",
+    "to": "/product-guides/workflow-engine/lz2ga1fa0mm0u1q3"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/高级设置/节点通用属性/提交-通过时重新触发数据关联或公式",
+    "to": "/product-guides/workflow-engine/zacn7usxzzifp4tt"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/高级设置/节点通用属性/提交校验",
+    "to": "/product-guides/workflow-engine/qo7v1qp9yxqatb6r"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/高级设置/节点通用属性/提交预览",
+    "to": "/product-guides/workflow-engine/skgbhu4zinoafaub"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/高级设置/节点通用属性/在线支付",
+    "to": "/product-guides/workflow-engine/tcu4dgugkhqq0b6k"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/高级设置/节点通用属性/在线支付/配置微信支付",
+    "to": "/product-guides/workflow-engine/ybuhyqfftymw9015"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/高级设置/节点通用属性/在线支付/配置支付宝支付",
+    "to": "/product-guides/workflow-engine/ks7124ygpkra74zy"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/高级设置/节点通用属性/在线支付/支付信息",
+    "to": "/product-guides/workflow-engine/ao0r73lyav34vvtu"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/高级设置/只有申请人节点可配置的属性-补充",
+    "to": "/product-guides/workflow-engine/meprc0g78p31z9v8"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/高级设置/只有申请人节点可配置的属性-补充/数据来源-补充",
+    "to": "/product-guides/workflow-engine/chi9pindad2mtcxk"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/基础设置",
+    "to": "/product-guides/workflow-engine/niiodz2ywcztibap"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/基础设置/节点通用属性",
+    "to": "/product-guides/workflow-engine/vh61lnb71mze82zk"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/基础设置/节点通用属性/处理反馈",
+    "to": "/product-guides/workflow-engine/cfxpfnrq62bfc424"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/基础设置/节点通用属性/待办转交",
+    "to": "/product-guides/workflow-engine/pxcgyfx9hsqx71f3"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/基础设置/节点通用属性/加签",
+    "to": "/product-guides/workflow-engine/cw3c2g9mb8eqwyza"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/基础设置/节点通用属性/流程撤回",
+    "to": "/product-guides/workflow-engine/afnlumwadkvzwi08"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/基础设置/节点通用属性/流程回退",
+    "to": "/product-guides/workflow-engine/af15t3o3c69r9ouk"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/基础设置/节点通用属性/流程结束",
+    "to": "/product-guides/workflow-engine/on918e9qtedkyy8d"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/基础设置/节点通用属性/流程拒绝",
+    "to": "/product-guides/workflow-engine/kbv30ul7orucpm70"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/基础设置/节点通用属性/流程日志",
+    "to": "/product-guides/workflow-engine/zkuoxkm4tdx4g3g4"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/基础设置/节点通用属性/留言",
+    "to": "/product-guides/workflow-engine/mpplcnmysdkrfkke"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/基础设置/节点通用属性/自定义按钮文案",
+    "to": "/product-guides/workflow-engine/iadg77mi3xg7zc25"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/基础设置/只有申请人节点可配置的属性",
+    "to": "/product-guides/workflow-engine/um7labukq9sernba"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/基础设置/只有申请人节点可配置的属性/收集微信信息",
+    "to": "/product-guides/workflow-engine/csb2oqstsa6ygarz"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/基础设置/只有申请人节点可配置的属性/数据导入",
+    "to": "/product-guides/workflow-engine/df8l86qhwik776a6"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/基础设置/只有申请人节点可配置的属性/填写次数",
+    "to": "/product-guides/workflow-engine/vlzrif649fwcn3a0"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/基础设置/只有申请人节点可配置的属性/填写密码",
+    "to": "/product-guides/workflow-engine/gfv2mead1n1mnao0"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/基础设置/只有申请人节点可配置的属性/允许催办",
+    "to": "/product-guides/workflow-engine/ked766fonah2yxiq"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/基础设置/只有申请人节点可配置的属性/允许重新申请",
+    "to": "/product-guides/workflow-engine/roc4vopd56xvatux"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程属性设置/字段权限设置",
+    "to": "/product-guides/workflow-engine/azmwun3gq4orxf7z"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程拓展设置",
+    "to": "/product-guides/workflow-engine/ltmwy8xsoqvdtzd1"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程拓展设置/审批去重",
+    "to": "/product-guides/workflow-engine/fvkgum98gukvofgl"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程拓展设置/提醒设置",
+    "to": "/product-guides/workflow-engine/kgah5be1asyxkzrf"
+  },
+  {
+    "from": "/帮助文档/流程引擎/流程拓展设置/提醒设置/手机接收消息提醒",
+    "to": "/product-guides/workflow-engine/lphxkp0qo92yosqg"
+  },
+  {
+    "from": "/帮助文档/门户引擎",
+    "to": "/product-guides/portal-engine"
+  },
+  {
+    "from": "/帮助文档/门户引擎/门户基本设置",
+    "to": "/product-guides/portal-engine/ggswivwhe3g9fgoh"
+  },
+  {
+    "from": "/帮助文档/门户引擎/门户基本设置/自定义门户样式",
+    "to": "/product-guides/portal-engine/sh5xepg6f86l57nk"
+  },
+  {
+    "from": "/帮助文档/门户引擎/门户基本设置/自动刷新",
+    "to": "/product-guides/portal-engine/gcfs1xwi3wcp65m9"
+  },
+  {
+    "from": "/帮助文档/门户引擎/组件类型",
+    "to": "/product-guides/portal-engine/dw2re7zp64hfhbi9"
+  },
+  {
+    "from": "/帮助文档/门户引擎/组件类型/报表组件",
+    "to": "/product-guides/portal-engine/qg0x2xl6wcesmtvg"
+  },
+  {
+    "from": "/帮助文档/门户引擎/组件类型/报表组件/轻析报表组件",
+    "to": "/product-guides/portal-engine/oyqtftrvkrbu5yd5"
+  },
+  {
+    "from": "/帮助文档/门户引擎/组件类型/常用组件",
+    "to": "/product-guides/portal-engine/whrmcvlx5c2qiraz"
+  },
+  {
+    "from": "/帮助文档/门户引擎/组件类型/待办组件",
+    "to": "/product-guides/portal-engine/ytu4b3ztgnx4904u"
+  },
+  {
+    "from": "/帮助文档/门户引擎/组件类型/宫格组件",
+    "to": "/product-guides/portal-engine/rod89gn8tf8swahn"
+  },
+  {
+    "from": "/帮助文档/门户引擎/组件类型/链接组件",
+    "to": "/product-guides/portal-engine/gfvsasha8wpdzaoc"
+  },
+  {
+    "from": "/帮助文档/门户引擎/组件类型/轮播组件",
+    "to": "/product-guides/portal-engine/fsrcc615pii5d1rs"
+  },
+  {
+    "from": "/帮助文档/门户引擎/组件类型/筛选组件",
+    "to": "/product-guides/portal-engine/tews9np5ftnu1e95"
+  },
+  {
+    "from": "/帮助文档/门户引擎/组件类型/视图组件",
+    "to": "/product-guides/portal-engine/dgu73g0dguaazl9z"
+  },
+  {
+    "from": "/帮助文档/门户引擎/组件类型/文本组件",
+    "to": "/product-guides/portal-engine/lozpqo191d0g8bdy"
+  },
+  {
+    "from": "/帮助文档/平台版轻流",
+    "to": "/product-guides/platform-integrations"
+  },
+  {
+    "from": "/帮助文档/平台版轻流/钉钉/钉钉版本待办消息逻辑",
+    "to": "/product-guides/platform-integrations/nmng95nepiwr43cp"
+  },
+  {
+    "from": "/帮助文档/平台版轻流/钉钉/如何在钉钉上购买轻流",
+    "to": "/product-guides/platform-integrations/bh9yhgg8mk3d31gy"
+  },
+  {
+    "from": "/帮助文档/平台版轻流/钉钉/如何在钉钉上使用轻流",
+    "to": "/product-guides/platform-integrations/fz9q5m7w7o2qusym"
+  },
+  {
+    "from": "/帮助文档/平台版轻流/飞书/如何在飞书上购买轻流",
+    "to": "/product-guides/platform-integrations/ggdqa1wpxzg4ahm0"
+  },
+  {
+    "from": "/帮助文档/平台版轻流/飞书/如何在飞书上使用轻流",
+    "to": "/product-guides/platform-integrations/ncpl58f91qw6b92z"
+  },
+  {
+    "from": "/帮助文档/平台版轻流/企业微信/如何在企业微信上购买轻流",
+    "to": "/product-guides/platform-integrations/bf19becwdoewrn2w"
+  },
+  {
+    "from": "/帮助文档/平台版轻流/企业微信/如何在企业微信上使用轻流",
+    "to": "/product-guides/platform-integrations/ufv2q5mas6pph228"
+  },
+  {
+    "from": "/帮助文档/平台版轻流/微信服务号/如何配置微信服务号增强",
+    "to": "/product-guides/platform-integrations/xfbs7slf0p9zdhbh"
+  },
+  {
+    "from": "/帮助文档/其它/我的空间",
+    "to": "/product-guides/other/yr44yxwfcy3rtal7"
+  },
+  {
+    "from": "/帮助文档/其它/移动端导航",
+    "to": "/product-guides/other/xuv7xw1eoiultzba"
+  },
+  {
+    "from": "/帮助文档/其它/wps-在线预览与协同编辑",
+    "to": "/product-guides/other/fmxghlasxdv37k2i"
+  },
+  {
+    "from": "/帮助文档/轻代码",
+    "to": "/product-guides/qing-code"
+  },
+  {
+    "from": "/帮助文档/轻代码/附录-错误码",
+    "to": "/product-guides/qing-code/gl02gmn1yc86dikd"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心",
+    "to": "/product-guides/qing-code/bo98glg88uegztye"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/鉴权",
+    "to": "/product-guides/qing-code/sv8l9hxhgbfqh2w7"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/鉴权/案例-微盟云oauth2-0鉴权配置",
+    "to": "/product-guides/qing-code/zek0uynk24kw4s70"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/连接功能日志",
+    "to": "/product-guides/qing-code/uebexncsrzybv2qk"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/提醒推送",
+    "to": "/product-guides/qing-code/wmv0y8qairzig31p"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/提醒推送/案例-超时信息推送至企业微信群",
+    "to": "/product-guides/qing-code/hsrbguhczph6gtge"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/提醒推送/案例-待办信息推送至企业微信群",
+    "to": "/product-guides/qing-code/pg8klcia7o7icg1y"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/用户体系",
+    "to": "/product-guides/qing-code/ggq57avzvqehvu8q"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/用户体系/身份认证",
+    "to": "/product-guides/qing-code/fg4myqsms6d3gppc"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/用户体系/sso",
+    "to": "/product-guides/qing-code/yh4w77kxyu5d2k6a"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/用户体系/sso/oauth-2-0",
+    "to": "/product-guides/qing-code/flmiqx48rqq9qgg1"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/邮箱处理待办",
+    "to": "/product-guides/qing-code/lp6f51orce6z22pz"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/q-database",
+    "to": "/product-guides/qing-code/rbmhpe34n4350yhn"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/q-linker",
+    "to": "/product-guides/qing-code/kpblekmo4w46t46o"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/q-linker/q-linker的高级用法/q-linker全局配置",
+    "to": "/product-guides/qing-code/uag0engosuzp7yo7"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/q-linker/q-linker的高级用法/q-linker提交重计算",
+    "to": "/product-guides/qing-code/pyedci7glgfh5kbh"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/q-linker/q-linker的高级用法/q-linker自动触发",
+    "to": "/product-guides/qing-code/osdiggu6rmzaos5z"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/q-linker/q-linker的配置方法/表格别名",
+    "to": "/product-guides/qing-code/rs7l3x9uqodk7li3"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/q-linker/q-linker的配置方法/json-path配置规则",
+    "to": "/product-guides/qing-code/bltf7n7moq2n1w6y"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/q-linker/q-linker的配置方法/q-linker配置说明",
+    "to": "/product-guides/qing-code/sizot8etalixcgbc"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/q-linker/q-linker使用案例/阿里云市场选购相关服务",
+    "to": "/product-guides/qing-code/vly427xgvytgef2g"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/q-linker/q-linker使用案例/空气质量查询",
+    "to": "/product-guides/qing-code/zgtlzfwmhqwilv75"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/q-linker/q-linker使用案例/快递物流查询",
+    "to": "/product-guides/qing-code/lwlzixiiy2utcape"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/q-linker/q-linker使用案例/身份证实名核验",
+    "to": "/product-guides/qing-code/mw4zhrbsxuragupa"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/q-linker/q-linker使用案例/实时汇率换算",
+    "to": "/product-guides/qing-code/ufre6w66254s70on"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/q-sourse",
+    "to": "/product-guides/qing-code/kedsahcn31hg9mgr"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/q-sourse/q-source被动",
+    "to": "/product-guides/qing-code/lblasr6i055gu5ma"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/q-sourse/q-source被动/案例-百度营销推送线索到轻流",
+    "to": "/product-guides/qing-code/vhuh0vc6rfxsgm3s"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/q-sourse/q-source主动",
+    "to": "/product-guides/qing-code/bq8liw91yc10br77"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/q-sourse/q-source主动/案例-钉钉考勤数据同步",
+    "to": "/product-guides/qing-code/lu2nddx37kfra3e7"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/q-sourse/q-source主动/案例-轻流应用数据同步",
+    "to": "/product-guides/qing-code/lhs5hfqmuzt4l6s0"
+  },
+  {
+    "from": "/帮助文档/轻代码/集成中心/webhook",
+    "to": "/product-guides/qing-code/nw130m9yr4xsiqbs"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心",
+    "to": "/product-guides/qing-code/xshfygn6hs3m2yrn"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/企业服务/百度网盘",
+    "to": "/product-guides/qing-code/tys0yxb7mpedgzw6"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/企业服务/百度营销",
+    "to": "/product-guides/qing-code/lqa0gamuvd34ok8b"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/企业服务/订货宝",
+    "to": "/product-guides/qing-code/yodtvf9wmayz2u2h"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/企业服务/高德地图",
+    "to": "/product-guides/qing-code/vs86mv9p0vinf58g"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/企业服务/极速数据",
+    "to": "/product-guides/qing-code/btizugxoghdvu1lb"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/企业服务/金数据",
+    "to": "/product-guides/qing-code/xtrob3mofe7qafhb"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/企业服务/快递100",
+    "to": "/product-guides/qing-code/cn07b7u9hkg65mdx"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/企业服务/天眼查",
+    "to": "/product-guides/qing-code/dvikaaiugqklb3pq"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/企业服务/小鹅通",
+    "to": "/product-guides/qing-code/uf4g2hi2oki4xgbg"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/企业服务/小码短链接",
+    "to": "/product-guides/qing-code/ixol69eq4ohoiat8"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/企业服务/心知天气",
+    "to": "/product-guides/qing-code/ynpgc51xgsdw6t8u"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/企业服务/易快报",
+    "to": "/product-guides/qing-code/wm7whid8iqqo2rec"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/企业服务/api-shop",
+    "to": "/product-guides/qing-code/yfc94oudt5k1omd1"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/企业服务/deepseek",
+    "to": "/product-guides/qing-code/zww0co8rdsklltcg"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/企业服务/emq",
+    "to": "/product-guides/qing-code/yseuwpwy1skyhk53"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/数据处理/函数扩展工具",
+    "to": "/product-guides/qing-code/zkq9rzx00f9r8g3v"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/数据处理/jumpserver",
+    "to": "/product-guides/qing-code/bvvfpzhvm704zx4x"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/数据处理/mysql",
+    "to": "/product-guides/qing-code/kg28y095rqmy7s6f"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/数据处理/oracle",
+    "to": "/product-guides/qing-code/tpee2lu1y9sr5lco"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/数据处理/sql-server",
+    "to": "/product-guides/qing-code/ta91273i1r5yx8ix"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/系统集成/纷享销客",
+    "to": "/product-guides/qing-code/om3eathqz43yggle"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/系统集成/金蝶云星空",
+    "to": "/product-guides/qing-code/xfxgxth4m98cham3"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/系统集成/金蝶云星空/查询银行存款日记账报表",
+    "to": "/product-guides/qing-code/zx30saggcgyi83i8"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/系统集成/金蝶云星空/获取单据数据",
+    "to": "/product-guides/qing-code/xip99ufvgix18ok3"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/系统集成/金蝶云星空/金蝶采购订单的保存",
+    "to": "/product-guides/qing-code/wg2ie3y6ymgm3xnc"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/系统集成/轻流-公有云",
+    "to": "/product-guides/qing-code/tmoilfb57lwaxcmr"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/系统集成/用友u8",
+    "to": "/product-guides/qing-code/ryu5xsw4bp8wpmc1"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/系统集成/浙江药械采购平台",
+    "to": "/product-guides/qing-code/kmgb632oe2qa8vpy"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/消息推送/钉钉机器人",
+    "to": "/product-guides/qing-code/gvqwlzbwe8aswyc7"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/消息推送/飞书机器人",
+    "to": "/product-guides/qing-code/kmc2gww40b98rwvd"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/消息推送/飞书连接器事件",
+    "to": "/product-guides/qing-code/lpkgtkpm7ahgmm9a"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/消息推送/企业微信",
+    "to": "/product-guides/qing-code/zlgzf8u95s1gsub5"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/消息推送/企业微信-客户联系",
+    "to": "/product-guides/qing-code/qq01hbt6gs85kxxr"
+  },
+  {
+    "from": "/帮助文档/轻代码/连接中心/连接器/消息推送/企业微信群机器人",
+    "to": "/product-guides/qing-code/zsxsng5igluorv5q"
+  },
+  {
+    "from": "/帮助文档/轻代码/云编程中心/代码块",
+    "to": "/product-guides/qing-code/bb7lkydowecbl46c"
+  },
+  {
+    "from": "/帮助文档/轻代码/云编程中心/代码块/案例-鸡兔同笼",
+    "to": "/product-guides/qing-code/mc390cy7aexgytyh"
+  },
+  {
+    "from": "/帮助文档/轻代码/云编程中心/代码块/代码块-表格行数据按照分类以及行数整合",
+    "to": "/product-guides/qing-code/mcxugwlmftq03nf5"
+  },
+  {
+    "from": "/帮助文档/轻代码/云编程中心/代码块/代码块-根据入库日期筛选数据流水表",
+    "to": "/product-guides/qing-code/alue5ms8inxa1fkt"
+  },
+  {
+    "from": "/帮助文档/轻代码/云编程中心/代码块/代码块示例",
+    "to": "/product-guides/qing-code/oaudly5zxbxoqwzv"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi",
+    "to": "/product-guides/qing-code/openapi"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/接口更新日志",
+    "to": "/product-guides/qing-code/sq4usmgx1g1ckswo"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/开发前必读",
+    "to": "/product-guides/qing-code/cvrz11bbe0zg3lwp"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/开发前必读/获取openapi-accesstoken",
+    "to": "/product-guides/qing-code/glh9yshr3a4kngdu"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/开发前必读/基本概念介绍",
+    "to": "/product-guides/qing-code/cl59vxilcqdkmq1h"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/开发前必读/postman模版使用说明",
+    "to": "/product-guides/qing-code/ssne9vpfc437oe56"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/其他",
+    "to": "/product-guides/qing-code/pmt7glyy0pqxr9os"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/其他/查询操作结果",
+    "to": "/product-guides/qing-code/rq29i542immhvbaq"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/其他/登出用户",
+    "to": "/product-guides/qing-code/utlsdqgpuqh3xm6f"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/其他/获取登录用code",
+    "to": "/product-guides/qing-code/mgcbhq556k9w76o3"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/其他/旧-获取报表数据",
+    "to": "/product-guides/qing-code/xow3szy7bnhetavt"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/其他/旧-获取报表数据表列表数据",
+    "to": "/product-guides/qing-code/ifxecphf9z3zkh39"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/其他/上传单个文件",
+    "to": "/product-guides/qing-code/aph9kc30iwg8s287"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/其他/数据结构",
+    "to": "/product-guides/qing-code/zbtowhw0pyk9ur3g"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/其他/数据库直连",
+    "to": "/product-guides/qing-code/hqqqu91mnece4rcc"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/其他/重新加签文件接口",
+    "to": "/product-guides/qing-code/sgsikhat15yfk6g2"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/轻流门户接口",
+    "to": "/product-guides/qing-code/zghw2wneizs05eil"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/轻流门户接口/查询门户基本信息",
+    "to": "/product-guides/qing-code/tcce95ls9ydrzinl"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/轻流门户接口/创建门户",
+    "to": "/product-guides/qing-code/kpgfa72vy23wgxfz"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/轻流门户接口/更新门户基本信息",
+    "to": "/product-guides/qing-code/zkc0wg1ooqv0h1ur"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/轻流门户接口/获取工作区所有门户",
+    "to": "/product-guides/qing-code/er14fvgw5lazxv60"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/轻流门户接口/删除门户",
+    "to": "/product-guides/qing-code/ghg020703fodxymw"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/轻流应用包接口",
+    "to": "/product-guides/qing-code/kp59tpcycbmk21gb"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/轻流应用包接口/查询应用包基本信息",
+    "to": "/product-guides/qing-code/vpx636gdmewp4t9u"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/轻流应用包接口/创建应用包",
+    "to": "/product-guides/qing-code/eloepisaiahe56ag"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/轻流应用包接口/更新应用包",
+    "to": "/product-guides/qing-code/pdge6xobek42erd6"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/轻流应用包接口/获取工作区全部应用包信息",
+    "to": "/product-guides/qing-code/kxmpvoz83uggkp3r"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/轻流应用包接口/删除应用包",
+    "to": "/product-guides/qing-code/ygvs3rx8s3ewtstt"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/轻流应用接口",
+    "to": "/product-guides/qing-code/oynaiodrftbld6hw"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/轻流应用接口/创建应用",
+    "to": "/product-guides/qing-code/mp6a9fb3gr8dsypm"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/轻流应用接口/更新应用基本信息",
+    "to": "/product-guides/qing-code/kfuwe2nqm2ez81ui"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/轻流应用接口/获取工作区所有应用信息",
+    "to": "/product-guides/qing-code/bskn3m5zm8qsfnkr"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/轻流应用接口/获取应用基本信息",
+    "to": "/product-guides/qing-code/uti158995g1fh88a"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/轻流应用接口/获取应用word打印模版信息",
+    "to": "/product-guides/qing-code/qsc7ch3fz0vemk8n"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/轻流应用接口/获取指定应用详细信息",
+    "to": "/product-guides/qing-code/bydy6qn2otie1msn"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/轻流应用接口/删除应用",
+    "to": "/product-guides/qing-code/vkilgq09agghdtbu"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/任务委托",
+    "to": "/product-guides/qing-code/whga2ggfqe3qtwm1"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/任务委托/获取委托列表",
+    "to": "/product-guides/qing-code/gxraehkvy4481g5g"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/任务委托/结束委托",
+    "to": "/product-guides/qing-code/kx26agg2bedidmmc"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/任务委托/新增委托",
+    "to": "/product-guides/qing-code/tgbu7wh4nyr471f9"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录",
+    "to": "/product-guides/qing-code/gguvnt565592bc3x"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/部门",
+    "to": "/product-guides/qing-code/bt4i1k7lkgq9tzc3"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/部门/查询单个部门详情",
+    "to": "/product-guides/qing-code/zs4ntz1guohhvtb6"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/部门/创建部门",
+    "to": "/product-guides/qing-code/cw25n1p3y63812pb"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/部门/更新部门",
+    "to": "/product-guides/qing-code/bki7i0rlcnn4py7t"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/部门/获取不在部门的成员",
+    "to": "/product-guides/qing-code/ed38hwubl1xl1zfx"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/部门/获取部门成员列表",
+    "to": "/product-guides/qing-code/defngiucsvk341oi"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/部门/获取部门列表",
+    "to": "/product-guides/qing-code/tysw5r8vxoilgan3"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/部门/删除部门",
+    "to": "/product-guides/qing-code/bdsyoqiytlskrl9r"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/部门/移除部门成员",
+    "to": "/product-guides/qing-code/ron16x41hpoexlbw"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/部门/增加部门成员",
+    "to": "/product-guides/qing-code/zqgevahgs6m1mdk5"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/成员",
+    "to": "/product-guides/qing-code/waf0eichyp6gw2pi"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/成员/创建成员",
+    "to": "/product-guides/qing-code/eq7if7p6kw4ntrwb"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/成员/读取成员信息",
+    "to": "/product-guides/qing-code/rqbihakpmd20cc99"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/成员/根据成员字段获取成员信息",
+    "to": "/product-guides/qing-code/gugom4brekurpm0z"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/成员/更新成员",
+    "to": "/product-guides/qing-code/yqygheesod7y1lz9"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/成员/获取工作区全部成员",
+    "to": "/product-guides/qing-code/pl193ohmm84aqht3"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/成员/批量创建成员",
+    "to": "/product-guides/qing-code/gspop0si4subqvui"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/成员/删除成员",
+    "to": "/product-guides/qing-code/ev1v1ewxv9192sm0"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/成员/通过邮箱或手机号获取成员userid",
+    "to": "/product-guides/qing-code/atmbgfzxd16u12dh"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/管理员",
+    "to": "/product-guides/qing-code/smie7lhuvqb9qi89"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/管理员/获取管理员列表",
+    "to": "/product-guides/qing-code/ffuma4g9f80mfw26"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/管理员/删除管理员",
+    "to": "/product-guides/qing-code/acfbpfwqgf3y6dfi"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/管理员/增加管理员",
+    "to": "/product-guides/qing-code/btqi21n8zennbbhl"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/角色",
+    "to": "/product-guides/qing-code/kq3di9xarce4gn51"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/角色/创建角色",
+    "to": "/product-guides/qing-code/uz9ep48vgfdn4sa2"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/角色/更新角色",
+    "to": "/product-guides/qing-code/qvkargkhesaabn8t"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/角色/获取角色成员",
+    "to": "/product-guides/qing-code/ppx80u0am0i45b63"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/角色/获取角色列表",
+    "to": "/product-guides/qing-code/eufnwpa5s0x32dmg"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/角色/删除角色",
+    "to": "/product-guides/qing-code/wxzaxw89o7y6xkpn"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/角色/移除角色成员",
+    "to": "/product-guides/qing-code/usxpo7td1mp7czt2"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/角色/增加角色成员",
+    "to": "/product-guides/qing-code/rorgfypkwliefzk3"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/外部用户",
+    "to": "/product-guides/qing-code/git3z3ugiygan1n5"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/外部用户/创建外部用户",
+    "to": "/product-guides/qing-code/zrlfwfd2k6v1w72l"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/外部用户/更新外部用户",
+    "to": "/product-guides/qing-code/rqgtle66utod097t"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/外部用户/获取外部用户",
+    "to": "/product-guides/qing-code/teib7hngiw5hkilk"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/外部用户/删除外部用户",
+    "to": "/product-guides/qing-code/glmuhqwy579ieacx"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/外部组织",
+    "to": "/product-guides/qing-code/ggi3ucbf8m3ox6uo"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/外部组织/创建外部组织",
+    "to": "/product-guides/qing-code/gsxpv2u6avzyn5is"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/外部组织/更新外部组织",
+    "to": "/product-guides/qing-code/dgt47giqmipn48e0"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/外部组织/获取外部组织下的外部用户",
+    "to": "/product-guides/qing-code/hlg14rrz0c50e05f"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/外部组织/获取外部组织信息",
+    "to": "/product-guides/qing-code/kcqi1pkdga3mzavv"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/外部组织/删除外部组织",
+    "to": "/product-guides/qing-code/ibyl5kx7imfg8rqu"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/外部组织/删除外部组织下的外部用户",
+    "to": "/product-guides/qing-code/fgo9gv8ye4qwlrig"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/外部组织/在外部组织下添加外部用户",
+    "to": "/product-guides/qing-code/las9cphrq3er5ewa"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/子管理员",
+    "to": "/product-guides/qing-code/yn7i11cmokwg60lz"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/子管理员/创建子管理员",
+    "to": "/product-guides/qing-code/wmdiwzzxwqilbtqg"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/子管理员/更新子管理员",
+    "to": "/product-guides/qing-code/gpzbv1supiggpgnp"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/子管理员/获取工作区子管理员配置",
+    "to": "/product-guides/qing-code/bwpbxc7ruzhgwywl"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/通讯录/子管理员/删除子管理员",
+    "to": "/product-guides/qing-code/cmm5q376yl4vl7bw"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/应用数据接口",
+    "to": "/product-guides/qing-code/nu8kk3ols3b4i7ew"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/应用数据接口/数据流程",
+    "to": "/product-guides/qing-code/wbxvhrnkgkl4gpbn"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/应用数据接口/数据流程/处理某条数据",
+    "to": "/product-guides/qing-code/lqacwgsie3e9c99s"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/应用数据接口/数据流程/催办某条数据",
+    "to": "/product-guides/qing-code/laf2lkfacv8tg9uc"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/应用数据接口/数据流程/单条数据流程回退",
+    "to": "/product-guides/qing-code/rml9w8gwcadm91ao"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/应用数据接口/数据流程/单条数据重新指派",
+    "to": "/product-guides/qing-code/dlxogv5rabm5mffi"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/应用数据接口/数据流程/获取单条数据的流程日志",
+    "to": "/product-guides/qing-code/stwz0vpymk76gcn3"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/应用数据接口/数据流程/获取单条数据的数据日志",
+    "to": "/product-guides/qing-code/vncvagzse4d4gu2h"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/应用数据接口/数据内容",
+    "to": "/product-guides/qing-code/lz1kh6grw8zv4gsb"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/应用数据接口/数据内容/更新单条数据的信息",
+    "to": "/product-guides/qing-code/cv986qy3875cvxaf"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/应用数据接口/数据内容/获取单条数据的留言信息",
+    "to": "/product-guides/qing-code/hu5z8wwa8ga24zo1"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/应用数据接口/数据内容/获取单条数据的详细信息",
+    "to": "/product-guides/qing-code/mztqo2d4ph2dnfy5"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/应用数据接口/数据内容/获取单条数据对应打印模版文件",
+    "to": "/product-guides/qing-code/pc80uwa7zq9w1ro6"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/应用数据接口/数据内容/获取个人在当前工作区全部待办或已办信息",
+    "to": "/product-guides/qing-code/nrni3pky16d6sg3r"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/应用数据接口/数据内容/获取个人在当前工作区全部事项信息",
+    "to": "/product-guides/qing-code/vcuagbptqybagv54"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/应用数据接口/数据内容/获取数据关联的内容",
+    "to": "/product-guides/qing-code/ef76oafn6havixik"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/应用数据接口/数据内容/获取应用数据",
+    "to": "/product-guides/qing-code/nkrtwkdwxgxsx73e"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/应用数据接口/数据内容/删除应用数据",
+    "to": "/product-guides/qing-code/qvg8tneo98e0d9gz"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/应用数据接口/数据内容/添加应用数据",
+    "to": "/product-guides/qing-code/fgdsbcg5uykik404"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/应用数据接口/数据内容/新增单条数据的留言",
+    "to": "/product-guides/qing-code/dd1xwhwp5nxr6v9g"
+  },
+  {
+    "from": "/帮助文档/轻代码/openapi/api总览",
+    "to": "/product-guides/qing-code/htd8db5vau26h6k1"
+  },
+  {
+    "from": "/帮助文档/轻流简介",
+    "to": "/product-guides/qingflow-introduction"
+  },
+  {
+    "from": "/帮助文档/轻流简介/从excel到轻流/案例-信息收集与分析",
+    "to": "/product-guides/qingflow-introduction/information-collection-and-analysis"
+  },
+  {
+    "from": "/帮助文档/轻流简介/从excel到轻流/轻流表单与excel-工作自动化的新选择",
+    "to": "/product-guides/qingflow-introduction/qingflow-vs-excel"
+  },
+  {
+    "from": "/帮助文档/轻流简介/快速入门/从流程工单到复杂系统/轻流无代码系统构建原理",
+    "to": "/product-guides/qingflow-introduction/qehugpvmpomqc9f5"
+  },
+  {
+    "from": "/帮助文档/轻流简介/快速入门/从流程工单到复杂系统/无代码系统设计",
+    "to": "/product-guides/qingflow-introduction/gkpzdmo879sx9l5b"
+  },
+  {
+    "from": "/帮助文档/轻流简介/快速入门/核心功能速览",
+    "to": "/product-guides/qingflow-introduction/core-features"
+  },
+  {
+    "from": "/帮助文档/轻流简介/快速入门/核心功能速览/如何管理数据",
+    "to": "/product-guides/qingflow-introduction/vmz6ukzgsz7xt6pc"
+  },
+  {
+    "from": "/帮助文档/轻流简介/快速入门/核心功能速览/如何可视化数据",
+    "to": "/product-guides/qingflow-introduction/dx1stz3o26oeak54"
+  },
+  {
+    "from": "/帮助文档/轻流简介/快速入门/核心功能速览/如何让系统更自动化",
+    "to": "/product-guides/qingflow-introduction/zc6zvwakfr4fvav6"
+  },
+  {
+    "from": "/帮助文档/轻流简介/快速入门/核心功能速览/如何收集和流转数据",
+    "to": "/product-guides/qingflow-introduction/collect-and-route-data"
+  },
+  {
+    "from": "/帮助文档/轻流简介/快速入门/核心功能速览/什么是工作区",
+    "to": "/product-guides/qingflow-introduction/iz1pl0kwilkg187l"
+  },
+  {
+    "from": "/帮助文档/轻流简介/无代码概念介绍",
+    "to": "/product-guides/qingflow-introduction/what-is-no-code"
+  },
+  {
+    "from": "/帮助文档/轻流ai-让业务人员用自然语言完成系统搭建和业务自动化",
+    "to": "/product-guides/qingflow-ai"
+  },
+  {
+    "from": "/帮助文档/轻流ai-让业务人员用自然语言完成系统搭建和业务自动化/小q智能助手",
+    "to": "/product-guides/qingflow-ai/wrebzrh97dltpvun"
+  },
+  {
+    "from": "/帮助文档/轻流ai-让业务人员用自然语言完成系统搭建和业务自动化/ai按钮",
+    "to": "/product-guides/qingflow-ai/fo2cspdnl1he2tax"
+  },
+  {
+    "from": "/帮助文档/轻流ai-让业务人员用自然语言完成系统搭建和业务自动化/ai搭建/ai搭建应用",
+    "to": "/product-guides/qingflow-ai/bpt3ri9n71ki9zla"
+  },
+  {
+    "from": "/帮助文档/轻流ai-让业务人员用自然语言完成系统搭建和业务自动化/ai搭建/ai搭建自定义页面",
+    "to": "/product-guides/qingflow-ai/vhaelpp4nwkk0hu0"
+  },
+  {
+    "from": "/帮助文档/轻流ai-让业务人员用自然语言完成系统搭建和业务自动化/ai代码块",
+    "to": "/product-guides/qingflow-ai/mm0oap5z66p67mvx"
+  },
+  {
+    "from": "/帮助文档/轻流ai-让业务人员用自然语言完成系统搭建和业务自动化/ai公式",
+    "to": "/product-guides/qingflow-ai/vdylobiaeb0gwlbn"
+  },
+  {
+    "from": "/帮助文档/轻流ai-让业务人员用自然语言完成系统搭建和业务自动化/ai节点",
+    "to": "/product-guides/qingflow-ai/ctrlf9n1qk073efg"
+  },
+  {
+    "from": "/帮助文档/轻流ai-让业务人员用自然语言完成系统搭建和业务自动化/ai用量统计",
+    "to": "/product-guides/qingflow-ai/dl4c9y8bz2gcbh86"
+  },
+  {
+    "from": "/帮助文档/轻流ai-让业务人员用自然语言完成系统搭建和业务自动化/qingclaw盒子",
+    "to": "/product-guides/qingflow-ai/sigv97ziqu57969r"
+  },
+  {
+    "from": "/帮助文档/轻流ai-让业务人员用自然语言完成系统搭建和业务自动化/qingflow-mcp-cli",
+    "to": "/product-guides/qingflow-ai/pdwhowgks483t262"
+  },
+  {
+    "from": "/帮助文档/轻析报表",
+    "to": "/product-guides/analytics"
+  },
+  {
+    "from": "/帮助文档/轻析报表/轻析管理权限",
+    "to": "/product-guides/analytics/itvwf0g4utww3q60"
+  },
+  {
+    "from": "/帮助文档/轻析报表/轻析快速入门",
+    "to": "/product-guides/analytics/bn0sbg6pxhaxalse"
+  },
+  {
+    "from": "/帮助文档/轻析报表/数据集",
+    "to": "/product-guides/analytics/gm2gv0igsw3c4mgv"
+  },
+  {
+    "from": "/帮助文档/轻析报表/数据集/数据集快速入门",
+    "to": "/product-guides/analytics/niq72qggyanp7i26"
+  },
+  {
+    "from": "/帮助文档/轻析报表/数据集/数据加工",
+    "to": "/product-guides/analytics/qi3frxon63mixm9z"
+  },
+  {
+    "from": "/帮助文档/轻析报表/数据集/数据加工/分组汇总",
+    "to": "/product-guides/analytics/fl7iubw3kwrhw7h6"
+  },
+  {
+    "from": "/帮助文档/轻析报表/数据集/数据加工/连接节点",
+    "to": "/product-guides/analytics/xodtd255qyt5skph"
+  },
+  {
+    "from": "/帮助文档/轻析报表/数据集/数据加工/筛选节点",
+    "to": "/product-guides/analytics/cmrql72prgxoozqm"
+  },
+  {
+    "from": "/帮助文档/轻析报表/数据集/数据加工/输出",
+    "to": "/product-guides/analytics/pz1b4zqbnq1ly5qb"
+  },
+  {
+    "from": "/帮助文档/轻析报表/数据集/数据加工/数据来源",
+    "to": "/product-guides/analytics/sm131f2dr9y2k4id"
+  },
+  {
+    "from": "/帮助文档/轻析报表/数据集/数据加工/字段编辑",
+    "to": "/product-guides/analytics/pt4rh2wg29170ktc"
+  },
+  {
+    "from": "/帮助文档/轻析报表/数据集/数据加工/字段编辑/轻析数据集函数",
+    "to": "/product-guides/analytics/kg8za6kqoxsv3ny0"
+  },
+  {
+    "from": "/帮助文档/轻析报表/数据源",
+    "to": "/product-guides/analytics/ng1ubneticvg6c8b"
+  },
+  {
+    "from": "/帮助文档/轻析报表/数据源/数据源快速入门",
+    "to": "/product-guides/analytics/inu5czxzbe7hnlmn"
+  },
+  {
+    "from": "/帮助文档/轻析报表/数据源/数据源类型",
+    "to": "/product-guides/analytics/sg7tnoog9gg4kfl3"
+  },
+  {
+    "from": "/帮助文档/轻析报表/数据源/数据源类型/excel数据源",
+    "to": "/product-guides/analytics/ewoakhkwf5gq55uq"
+  },
+  {
+    "from": "/帮助文档/轻析报表/数据源/数据源类型/mysql数据库",
+    "to": "/product-guides/analytics/bmfxkhhsr1mfh6if"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表",
+    "to": "/product-guides/analytics/saz1pxq8791fhwu0"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/报表功能",
+    "to": "/product-guides/analytics/tbtpfrns93v7oiip"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/报表功能/辅助线",
+    "to": "/product-guides/analytics/mbsrxklep4iriswx"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/报表功能/计算字段",
+    "to": "/product-guides/analytics/zs2wzedtbrotayk7"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/报表功能/计算字段/轻析统计报表函数",
+    "to": "/product-guides/analytics/qq3qwpcvz9fx0lgz"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/报表功能/数据筛选",
+    "to": "/product-guides/analytics/bva4bdtus1q7sii0"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/报表功能/条件格式",
+    "to": "/product-guides/analytics/phswxb8zyukdgqun"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/报表功能/指标-and-轴的显示格式",
+    "to": "/product-guides/analytics/oebmyxcw0hvvt55t"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/报表功能/轴显示文字设置",
+    "to": "/product-guides/analytics/dwbmw7vy02vfagb2"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/报表类型",
+    "to": "/product-guides/analytics/ng49yvavfgc40msd"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/报表类型/饼状图",
+    "to": "/product-guides/analytics/llxvned1ns5xxfi1"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/报表类型/地图",
+    "to": "/product-guides/analytics/bnqf4ohseip6av6g"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/报表类型/环形图",
+    "to": "/product-guides/analytics/dznvg35gtntg9ssh"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/报表类型/汇总表",
+    "to": "/product-guides/analytics/nrl0xi33qgo4y05p"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/报表类型/矩形树图",
+    "to": "/product-guides/analytics/mb8getvv77a3ovbe"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/报表类型/雷达图",
+    "to": "/product-guides/analytics/dt9f0yafc9ftkmh2"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/报表类型/漏斗图",
+    "to": "/product-guides/analytics/ehz12cgebu77sow5"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/报表类型/玫瑰图",
+    "to": "/product-guides/analytics/ep5sb9mvpi3sxzfg"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/报表类型/面积图",
+    "to": "/product-guides/analytics/hvtis4vbmk5g9gr5"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/报表类型/明细表",
+    "to": "/product-guides/analytics/cc5swi9se9y0e18h"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/报表类型/瀑布图",
+    "to": "/product-guides/analytics/yzfrfg19yrs0nbdo"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/报表类型/热力图",
+    "to": "/product-guides/analytics/btlik7i3f3cn0tgx"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/报表类型/散点图",
+    "to": "/product-guides/analytics/qhbpdtpism4nt0hz"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/报表类型/时间轴图表",
+    "to": "/product-guides/analytics/iur60tggm63nhqhw"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/报表类型/条形图",
+    "to": "/product-guides/analytics/vmg6gxfpa2m4v4f3"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/报表类型/仪表盘",
+    "to": "/product-guides/analytics/ul2wlvku3ymgohbb"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/报表类型/折线图",
+    "to": "/product-guides/analytics/aznkqn07s5iqg0dz"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/报表类型/直方图",
+    "to": "/product-guides/analytics/tuzgm8f5vn955nlw"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/报表类型/指标看板",
+    "to": "/product-guides/analytics/nb1l2d4bkzeh8ysa"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/报表类型/柱状图",
+    "to": "/product-guides/analytics/mtfgehgimngbpw33"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/报表类型/组合图",
+    "to": "/product-guides/analytics/ovpgoi61az5m0emp"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/统计报表快速入门",
+    "to": "/product-guides/analytics/en8g8doz2lkdgcx5"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/统计报表快速入门/管理报表",
+    "to": "/product-guides/analytics/sqsq05eqfqo4y8ic"
+  },
+  {
+    "from": "/帮助文档/轻析报表/统计报表/统计报表快速入门/新建报表",
+    "to": "/product-guides/analytics/bqig57dw6andzc04"
+  },
+  {
+    "from": "/帮助文档/轻翼",
+    "to": "/product-guides/qingwing"
+  },
+  {
+    "from": "/帮助文档/轻翼/加入社群",
+    "to": "/product-guides/qingwing/gywcimr5i36e5gh0"
+  },
+  {
+    "from": "/帮助文档/轻翼/快速上手轻翼ai",
+    "to": "/product-guides/qingwing/xqdein8vhyr6i1r3"
+  },
+  {
+    "from": "/帮助文档/轻翼/轻流自定义按钮调用轻翼智能体",
+    "to": "/product-guides/qingwing/qyom7qv9upm5n1nt"
+  },
+  {
+    "from": "/帮助文档/轻翼/轻翼是什么",
+    "to": "/product-guides/qingwing/op8wbekh3grx4ppo"
+  },
+  {
+    "from": "/帮助文档/轻翼/如何写好提示词",
+    "to": "/product-guides/qingwing/pvti8hdwxssxg1q4"
+  },
+  {
+    "from": "/帮助文档/轻翼/通过api使用轻翼ai",
+    "to": "/product-guides/qingwing/tnfe5vaopb6ugvan"
+  },
+  {
+    "from": "/帮助文档/轻翼/在企业微信上使用轻翼ai",
+    "to": "/product-guides/qingwing/epwc8t61qad69vbg"
+  },
+  {
+    "from": "/帮助文档/轻翼/在轻流上使用轻翼ai",
+    "to": "/product-guides/qingwing/wfgxis5ege59erdz"
+  },
+  {
+    "from": "/帮助文档/轻翼/最佳实践",
+    "to": "/product-guides/qingwing/qviy0fvu2kwfzgiz"
+  },
+  {
+    "from": "/帮助文档/轻翼/最佳实践/ai场地推荐",
+    "to": "/product-guides/qingwing/xl6vpoqeozeqk7zp"
+  },
+  {
+    "from": "/帮助文档/数据引擎",
+    "to": "/product-guides/data-engine"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据管理",
+    "to": "/product-guides/data-engine/mt6vbbrg0ondsvrk"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据管理/全部数据",
+    "to": "/product-guides/data-engine/fdmrpn8ly4dn57gp"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据管理/全部数据/单条数据操作日志",
+    "to": "/product-guides/data-engine/dldsorhvacgyzdva"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据管理/全部数据/单条数据分享",
+    "to": "/product-guides/data-engine/qwzqt2egieytc938"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据管理/全部数据/导入数据",
+    "to": "/product-guides/data-engine/asfhxh4st1emh7ds"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据管理/全部数据/批量处理流程",
+    "to": "/product-guides/data-engine/mqcy4lng33oe4y8e"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据管理/全部数据/批量打印",
+    "to": "/product-guides/data-engine/pk4igufh97ugxiqb"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据管理/全部数据/批量修改数据",
+    "to": "/product-guides/data-engine/cayokkb9s4ms1w0m"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据管理/全部数据/批量重新指派负责人",
+    "to": "/product-guides/data-engine/qihmhmp7e63r2dfx"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据管理/全部数据/筛选数据",
+    "to": "/product-guides/data-engine/ofru6lyrouxsdfbg"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据管理/全部数据/视图切换",
+    "to": "/product-guides/data-engine/wi8bick6gahs19tg"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据管理/全部数据/数据导出",
+    "to": "/product-guides/data-engine/thybupxoswpglfex"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据管理/全部数据/搜索数据",
+    "to": "/product-guides/data-engine/iv2g6peps1u8i3ac"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据管理/全部数据/显示字段管理",
+    "to": "/product-guides/data-engine/gmu8n02xdsrugoso"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据管理/任务监测",
+    "to": "/product-guides/data-engine/nah28cgc5gvuargv"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据管理/时效分析",
+    "to": "/product-guides/data-engine/gk7tghbmdrxts6sb"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据管理/数据回收站",
+    "to": "/product-guides/data-engine/xbynvtxwafycvd5l"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据视图管理",
+    "to": "/product-guides/data-engine/vvbdg5h17l178zg0"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据视图管理/草稿箱",
+    "to": "/product-guides/data-engine/erefk70edmnhach6"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据视图管理/查询条件",
+    "to": "/product-guides/data-engine/cskg3n16ek3qws3r"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据视图管理/视图基本设置",
+    "to": "/product-guides/data-engine/if3divzntxv51lgb"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据视图管理/视图类型",
+    "to": "/product-guides/data-engine/sdyhxggn5sz58rkv"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据视图管理/视图类型/表格视图",
+    "to": "/product-guides/data-engine/kfsfrbzwcx1gt7mx"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据视图管理/视图类型/层级视图",
+    "to": "/product-guides/data-engine/ugkm5tkfhpk35vqg"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据视图管理/视图类型/甘特视图",
+    "to": "/product-guides/data-engine/are3f0tpohc9c4v6"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据视图管理/视图类型/甘特视图/依赖关系",
+    "to": "/product-guides/data-engine/cny38x5o2lurdoa2"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据视图管理/视图类型/卡片视图",
+    "to": "/product-guides/data-engine/da1yi0l6z7v5wy9w"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据视图管理/视图类型/看板视图",
+    "to": "/product-guides/data-engine/wi54lhqvw2eeggl6"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据视图管理/视图类型/日历视图",
+    "to": "/product-guides/data-engine/milw6nn7i8gxhh7l"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据视图管理/视图类型/系统默认视图",
+    "to": "/product-guides/data-engine/uzdhq7qcvsf5rwks"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据视图管理/视图数据筛选",
+    "to": "/product-guides/data-engine/fkw4u1xl8w7pgs19"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据视图管理/数据详情",
+    "to": "/product-guides/data-engine/dntrac90om8ce62k"
+  },
+  {
+    "from": "/帮助文档/数据引擎/数据视图管理/移动端视图",
+    "to": "/product-guides/data-engine/do6arywa8u5zydgi"
+  },
+  {
+    "from": "/帮助文档/q-robot",
+    "to": "/product-guides/q-robot"
+  },
+  {
+    "from": "/帮助文档/q-robot/流程内q-robot",
+    "to": "/product-guides/q-robot/zrrizxvwhhwlba4u"
+  },
+  {
+    "from": "/帮助文档/q-robot/流程内q-robot/触发动作",
+    "to": "/product-guides/q-robot/apo43aehoq3oucty"
+  },
+  {
+    "from": "/帮助文档/q-robot/流程内q-robot/触发动作/发送短信",
+    "to": "/product-guides/q-robot/hg7b40g9rbuhb2st"
+  },
+  {
+    "from": "/帮助文档/q-robot/流程内q-robot/触发动作/发送短信/创建短信模板",
+    "to": "/product-guides/q-robot/lttbcl3i7hf2zup8"
+  },
+  {
+    "from": "/帮助文档/q-robot/流程内q-robot/触发动作/发送短信/短信审核标准",
+    "to": "/product-guides/q-robot/elgwme3o8xpawhzg"
+  },
+  {
+    "from": "/帮助文档/q-robot/流程内q-robot/触发动作/发送邮件",
+    "to": "/product-guides/q-robot/nvxkehu02iqdg4ge"
+  },
+  {
+    "from": "/帮助文档/q-robot/流程内q-robot/触发动作/发送邮件/创建邮件模板",
+    "to": "/product-guides/q-robot/lzka3vl1ryi0i1yw"
+  },
+  {
+    "from": "/帮助文档/q-robot/流程内q-robot/触发动作/更新数据",
+    "to": "/product-guides/q-robot/ggkqroikkuaubhk8"
+  },
+  {
+    "from": "/帮助文档/q-robot/流程内q-robot/触发动作/更新数据/表格子字段-当前应用-表格-覆盖整表-目标应用",
+    "to": "/product-guides/q-robot/mifz7rf2gpi8dbap"
+  },
+  {
+    "from": "/帮助文档/q-robot/流程内q-robot/触发动作/更新数据/表格子字段-当前应用-表格-目标应用-添加新行",
+    "to": "/product-guides/q-robot/dndhmf8hl2se85k9"
+  },
+  {
+    "from": "/帮助文档/q-robot/流程内q-robot/触发动作/更新数据/表格子字段-当前应用-主表单字段-目标应用",
+    "to": "/product-guides/q-robot/quow71ge6lx47r4p"
+  },
+  {
+    "from": "/帮助文档/q-robot/流程内q-robot/触发动作/更新数据/主表单字段-当前应用-表格-更新已有行-目标应用",
+    "to": "/product-guides/q-robot/ik1eksyhbm2qpgog"
+  },
+  {
+    "from": "/帮助文档/q-robot/流程内q-robot/触发动作/更新数据/主表单字段-当前应用-表格-添加新行-目标应用",
+    "to": "/product-guides/q-robot/yrrohma85a6el7fy"
+  },
+  {
+    "from": "/帮助文档/q-robot/流程内q-robot/触发动作/更新数据/主表单字段-当前应用-主表单字段-目标应用",
+    "to": "/product-guides/q-robot/hwhm3l97eoqp64ox"
+  },
+  {
+    "from": "/帮助文档/q-robot/流程内q-robot/触发动作/添加数据",
+    "to": "/product-guides/q-robot/rxidu9hevvb2k54g"
+  },
+  {
+    "from": "/帮助文档/q-robot/流程内q-robot/触发动作/添加数据/q-robot添加数据支持添加表格子字段",
+    "to": "/product-guides/q-robot/ntlqwiub69hbazoy"
+  },
+  {
+    "from": "/帮助文档/q-robot/流程外q-robot",
+    "to": "/product-guides/q-robot/rl0m7bq9rpu80lgl"
+  },
+  {
+    "from": "/帮助文档/q-robot/流程外q-robot/触发动作",
+    "to": "/product-guides/q-robot/wv0l38bbv2bxu3c5"
+  },
+  {
+    "from": "/帮助文档/q-robot/流程外q-robot/触发动作/发送提醒",
+    "to": "/product-guides/q-robot/fcet99h82nhb3t0x"
+  },
+  {
+    "from": "/帮助文档/q-robot/流程外q-robot/触发动作/更新数据",
+    "to": "/product-guides/q-robot/gwzx5rc0i5xqwygh"
+  },
+  {
+    "from": "/帮助文档/q-robot/流程外q-robot/触发动作/添加数据",
+    "to": "/product-guides/q-robot/an3t8tulq193znnd"
+  },
+  {
+    "from": "/帮助文档/q-robot/流程外q-robot/触发规则",
+    "to": "/product-guides/q-robot/ayg8lg45fwff2h4e"
+  },
+  {
+    "from": "/帮助文档/q-robot/流程外q-robot/触发规则/根据表单内时间字段",
+    "to": "/product-guides/q-robot/psapwdr66nacvckl"
+  },
+  {
+    "from": "/帮助文档/q-robot/流程外q-robot/触发规则/更新数据时",
+    "to": "/product-guides/q-robot/sxs6vx56gyqieb1g"
+  },
+  {
+    "from": "/帮助文档/q-robot/流程外q-robot/触发规则/新增数据时",
+    "to": "/product-guides/q-robot/nsw83f06cznm62z1"
+  },
+  {
+    "from": "/帮助文档/q-robot/流程外q-robot/触发规则/q-robot执行失败时",
+    "to": "/product-guides/q-robot/yg6t0dq86365pw2t"
+  },
+  {
+    "from": "/帮助文档/q-robot/q-robot日志",
+    "to": "/product-guides/q-robot/axies65xg7gwf8xp"
+  },
+  {
+    "from": "/常见问题-faq/报表/报表数据如何实现根据指标字段进行筛选",
+    "to": "/faq/kezg2otb2gf0dwdz"
+  },
+  {
+    "from": "/常见问题-faq/报表/设置表格子字段作为报表数据筛选条件但不生效",
+    "to": "/faq/wmvp9dpe45xdh0p4"
+  },
+  {
+    "from": "/常见问题-faq/表单/表单控件状态变更",
+    "to": "/faq/ciktsto8lrg2ptg8"
+  },
+  {
+    "from": "/常见问题-faq/表单/表格引用字段",
+    "to": "/faq/ibxuymycycn6xm7x"
+  },
+  {
+    "from": "/常见问题-faq/表单/查询应用的appkey及所有字段queid",
+    "to": "/faq/rgqs0reotry1cd0d"
+  },
+  {
+    "from": "/常见问题-faq/表单/对聚合求和数据的每天自动更新",
+    "to": "/faq/gmehtvy0g8rlxy8q"
+  },
+  {
+    "from": "/常见问题-faq/表单/附件url安全升级及相关问题处理方法",
+    "to": "/faq/mcmgyd8eusez2yxi"
+  },
+  {
+    "from": "/常见问题-faq/表单/根据申请人所在角色控制成员字段的显隐",
+    "to": "/faq/nswbu9b8x84siy89"
+  },
+  {
+    "from": "/常见问题-faq/表单/公开表单配置详细说明",
+    "to": "/faq/ngnykxr0dxgb46i6"
+  },
+  {
+    "from": "/常见问题-faq/表单/逻辑表单控制的字段如何向右对齐",
+    "to": "/faq/lfkboy4tvcwa5x4q"
+  },
+  {
+    "from": "/常见问题-faq/表单/其他类型字段如何实现逻辑表单功能",
+    "to": "/faq/miflgrz4tpwzbha1"
+  },
+  {
+    "from": "/常见问题-faq/表单/如何根据请假时间计算出请假天数以及请假小时数",
+    "to": "/faq/qpfz246idmo0lncw"
+  },
+  {
+    "from": "/常见问题-faq/表单/如何根据身份证号码获取年龄-并且每年自动更新",
+    "to": "/faq/hdi4744sdrpmtfpe"
+  },
+  {
+    "from": "/常见问题-faq/表单/如何设置当前时间和某个日期字段的天数倒计时",
+    "to": "/faq/gin6pdwu7yg5l9bh"
+  },
+  {
+    "from": "/常见问题-faq/表单/如何设置在短时间内只允许一个人提交数据",
+    "to": "/faq/plxwrss6045ng2f6"
+  },
+  {
+    "from": "/常见问题-faq/表单/如何实现表格数据去重统计",
+    "to": "/faq/wd5syie1c2zkeolk"
+  },
+  {
+    "from": "/常见问题-faq/表单/如何实现订单分仓发货",
+    "to": "/faq/xzsv1y9qpqs3ti96"
+  },
+  {
+    "from": "/常见问题-faq/表单/数据关联-关联已有数据-关联已有表格的区别",
+    "to": "/faq/ninswlgkmhyucl4p"
+  },
+  {
+    "from": "/常见问题-faq/表单/提交校验限制用户提交",
+    "to": "/faq/capnn8cygo3xp2l7"
+  },
+  {
+    "from": "/常见问题-faq/表单/字段校验和字段隐藏的关系",
+    "to": "/faq/ro1i1se2x8nzzu01"
+  },
+  {
+    "from": "/常见问题-faq/表单/自动识别填写设备巡检时不同设备的拍照上传必填与非必填",
+    "to": "/faq/gkp2tpgmsbgotati"
+  },
+  {
+    "from": "/常见问题-faq/表单/json-body字段插入表现",
+    "to": "/faq/au4ofa6glpu9l1dt"
+  },
+  {
+    "from": "/常见问题-faq/流程/电子签章有效性验证",
+    "to": "/faq/srdh1gz7y76c1vma"
+  },
+  {
+    "from": "/常见问题-faq/流程/短信模板审核不通过如何处理",
+    "to": "/faq/liys097bxwndz16r"
+  },
+  {
+    "from": "/常见问题-faq/流程/流程拒绝后怎么删除数据",
+    "to": "/faq/ldnufgmnq0f0tava"
+  },
+  {
+    "from": "/常见问题-faq/流程/流程修改后-流程中数据的流转表现",
+    "to": "/faq/fgurmaicr5an8tdg"
+  },
+  {
+    "from": "/常见问题-faq/流程/如何暂停流程",
+    "to": "/faq/at4ciqwm0k1gm375"
+  },
+  {
+    "from": "/常见问题-faq/门户/门户设置了自动更新-为何到时间没有更新",
+    "to": "/faq/ydhrgc7m73e5owh9"
+  },
+  {
+    "from": "/常见问题-faq/门户/门户中的链接组件-为何有些网站无法预览",
+    "to": "/faq/gmfrg9g30hyo9tzx"
+  },
+  {
+    "from": "/常见问题-faq/门户/如何查询工作区中哪些门户设置了所有人可见",
+    "to": "/faq/ybq8wcxl67tgwoqf"
+  },
+  {
+    "from": "/常见问题-faq/门户/无标题文档",
+    "to": "/faq/af23lwuipizc1sd4"
+  },
+  {
+    "from": "/常见问题-faq/其他/从pc桌面上快速打开-轻流",
+    "to": "/faq/qtirir3gu0995bex"
+  },
+  {
+    "from": "/常见问题-faq/其他/前端部门-轻流表单的工作原理",
+    "to": "/faq/mk7a3tg6ygk19h37"
+  },
+  {
+    "from": "/常见问题-faq/其他/轻流是否可以对接符合mtconnect协议v1-0-1版本的机床设备",
+    "to": "/faq/yrdmggh23g85i7ii"
+  },
+  {
+    "from": "/常见问题-faq/轻代码/表格内部门字段去重后输出到另一个表格部门字段",
+    "to": "/faq/tgz7w106d44ne44t"
+  },
+  {
+    "from": "/常见问题-faq/轻代码/流程结束后能否再调用api",
+    "to": "/faq/zmtwwwh8tg37mp87"
+  },
+  {
+    "from": "/常见问题-faq/轻代码/轻流是否可以和除轻流第三方系统做对接",
+    "to": "/faq/lohicub69otew4cg"
+  },
+  {
+    "from": "/常见问题-faq/轻代码/轻流webhook的相关功能是否能实现到达流程节点将整个表单数据post到指定链接",
+    "to": "/faq/hlgzvqy77l0rbba8"
+  },
+  {
+    "from": "/常见问题-faq/轻代码/轻流webhook功能-如果不开启回调-会进行回调的操作吗",
+    "to": "/faq/ray1w800iorb5sgy"
+  },
+  {
+    "from": "/常见问题-faq/轻代码/如何将地址字段拆分传入接口参数",
+    "to": "/faq/xb2re5kkfxp9dvkx"
+  },
+  {
+    "from": "/常见问题-faq/轻代码/如何使用代码块查询多个文本中关键词的重复次数",
+    "to": "/faq/rpntfq1re5ngiiny"
+  },
+  {
+    "from": "/常见问题-faq/轻代码/如何使用代码块根据人数确定所需车辆组合",
+    "to": "/faq/bpsnmvlh98aqns73"
+  },
+  {
+    "from": "/常见问题-faq/轻代码/如何使用代码块实现获取中文的首字母",
+    "to": "/faq/ygz7gd6wpphx3sn3"
+  },
+  {
+    "from": "/常见问题-faq/轻代码/如何姓名转拼音",
+    "to": "/faq/hpa7sadl5oyvh9nz"
+  },
+  {
+    "from": "/常见问题-faq/轻代码/在企业微信版本的轻流上使用webhook插入字段-系统的申请人字段为何消失",
+    "to": "/faq/al6h68nt5x4xkx8v"
+  },
+  {
+    "from": "/常见问题-faq/轻代码/json数组格式处理展示格式",
+    "to": "/faq/hcggwvetwgkxuyxg"
+  },
+  {
+    "from": "/常见问题-faq/轻代码/q-linker-webhook配置json-body时插入字段是否会自动加引号",
+    "to": "/faq/izt47ad9tmvl4yar"
+  },
+  {
+    "from": "/常见问题-faq/轻代码/q-source被动新增topic功能",
+    "to": "/faq/yf34egrsanzobeza"
+  },
+  {
+    "from": "/常见问题-faq/数据/非管理员如何删除数据",
+    "to": "/faq/spwslg8852qq7pgu"
+  },
+  {
+    "from": "/常见问题-faq/数据/如何对数据去重",
+    "to": "/faq/ig5zzdxvvgah7ude"
+  },
+  {
+    "from": "/常见问题-faq/数据/如何解决修改-更新数据不能触发公式计算",
+    "to": "/faq/zb5x9omeat93w3cl"
+  },
+  {
+    "from": "/常见问题-faq/数据/如何修改数据",
+    "to": "/faq/polgqo9pkav27wsn"
+  },
+  {
+    "from": "/常见问题-faq/一句话qa",
+    "to": "/faq"
+  },
+  {
+    "from": "/常见问题-faq/q-robot/如何搭建定时控制器-实现数据的定时触发",
+    "to": "/faq/ezu02eisqa66s8w2"
+  },
+  {
+    "from": "/常见问题-faq/q-robot/如何实现流程外qr添加数据到子表格",
+    "to": "/faq/vfuko7ehk7nt9q54"
+  },
+  {
+    "from": "/常见问题-faq/q-robot/如何实现q-robot更新数据-主表单数据汇总至表格",
+    "to": "/faq/dxq998nv9adn6919"
+  },
+  {
+    "from": "/常见问题-faq/q-robot/q-robot更新节点-在不同的筛选条件下可以选择的更新表格类型",
+    "to": "/faq/lo910izkxs79i3co"
+  },
+  {
+    "from": "/常见问题-faq/q-robot/qr更新数据如何重新触发公式和关联",
+    "to": "/faq/if6pnrvig2rgmw3n"
+  },
+  {
+    "from": "/常见问题-faq/q-robot/qrobot-webhook-任务失败或阻塞后的处理办法",
+    "to": "/faq/dgiv7f7f2n59tfnk"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/财务-报销/如何实现财务流水",
+    "to": "/building-guides/dkq55u1hsz86zmr7"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/采招-供应/根据批量-材料等多维度匹配工厂并由工厂进行报价",
+    "to": "/building-guides/tsc7bwy8nzko02sc"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/采招-供应/流程节点如何选择外部用户",
+    "to": "/building-guides/xv4f6q8ltp2z46a7"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/采招-供应/如何根据供应商生成多个采购订单",
+    "to": "/building-guides/vvvgzeilbe597ohe"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/工单-售后/工单管理系统",
+    "to": "/building-guides/mnzq7kivv1pi65wo"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/进销存-仓库/表格录入商品出库如何表格上下行联动计算",
+    "to": "/building-guides/gxtcpupb8rnm695d"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/进销存-仓库/出入库-成本移动加权平均法",
+    "to": "/building-guides/ougrh28m7bvd08z0"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/进销存-仓库/基础出入库",
+    "to": "/building-guides/nh24bg44b0l1sbsz"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/进销存-仓库/如何根据每个商品进行安全库存提醒",
+    "to": "/building-guides/wn1dqcqcsnepu7qs"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/进销存-仓库/如何管理库存调拨",
+    "to": "/building-guides/kdxbm4xg0xi7hw5z"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/进销存-仓库/如何实现单品与套餐混合出售的库存管理",
+    "to": "/building-guides/gf9oagh11zyhdgns"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/进销存-仓库/如何实现多仓发货",
+    "to": "/building-guides/wkw7p58w187ug174"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/进销存-仓库/如何实现库存管理中的退换货",
+    "to": "/building-guides/ee0x3gtzg7z400ef"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/进销存-仓库/如何实现库存盘点",
+    "to": "/building-guides/bw2kqzf2oefk4tgt"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/进销存-仓库/如何实现历史库存盘点",
+    "to": "/building-guides/kz6l7l56illkyyrg"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/进销存-仓库/如何实现一物一码的库存管理",
+    "to": "/building-guides/wx69slvdq6xbkp9q"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/进销存-仓库/如何实现占用-在途-在库三种库存类型的管理",
+    "to": "/building-guides/svvxk7p3qcllum7f"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/进销存-仓库/如何在出库时进行出库数量的安全校验",
+    "to": "/building-guides/inventory-outbound-validation"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/进销存-仓库/入库时如何只筛选出尚未完成入库的采购单号",
+    "to": "/building-guides/nbzdnxs07wxi36tc"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/进销存-仓库/商品出库-根据入库日期来进行优先出库",
+    "to": "/building-guides/nhbn0pyl8vwg2rkp"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/进销存-仓库/商品出库-如何使得出库后库存不允许为负数",
+    "to": "/building-guides/izpee2p4z4grc3vu"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/进销存-仓库/商品如何按照批次号进行出库",
+    "to": "/building-guides/grq4wexovzbym1u9"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/客户-销售/多种满赠规则下如何计算出满赠数量",
+    "to": "/building-guides/glpn1fbr2pctdcyr"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/客户-销售/多种销售返利规则下如何计算返利金额",
+    "to": "/building-guides/dh5skwqnvlhtbr1r"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/客户-销售/分批请款时-如何保持不同状态请款额的变动计算",
+    "to": "/building-guides/vp29isgydeyon3k5"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/客户-销售/客户资金池-考虑信用额度",
+    "to": "/building-guides/ryqiaf3z3qoaxelv"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/客户-销售/如何实现会员等级管理",
+    "to": "/building-guides/of47p0gvq9n7kvbb"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/客户-销售/如何实现目标管理",
+    "to": "/building-guides/yrthnzuhno749n8t"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/客户-销售/如何实现业务员锁单",
+    "to": "/building-guides/bt5qwbb4y2e092m3"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/客户-销售/如何实现用户自主进行套餐打卡",
+    "to": "/building-guides/ywgi4o5otgq4gghx"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/客户-销售/如何实现自动分配线索",
+    "to": "/building-guides/qgg9bsv25yvq0f58"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/客户-销售/月结分批收款",
+    "to": "/building-guides/ygshe3a3xlyu06uq"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/人事-行政/如何计算请假时长",
+    "to": "/building-guides/gfer1fsvzc4x9xs2"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/人事-行政/如何将多个流程在一个应用内完成",
+    "to": "/building-guides/fiz9tvgyabo6h1ch"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/人事-行政/如何实现出差管理",
+    "to": "/building-guides/oylcl6p696qd4wdx"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/人事-行政/如何实现会议室预约",
+    "to": "/building-guides/nzt0e8m6199np20t"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/人事-行政/如何实现年假管理",
+    "to": "/building-guides/ziugb3t1dy9r4ecn"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/人事-行政/如何实现员工考勤打卡管理",
+    "to": "/building-guides/hg4bq6c1ek3yr6gq"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/设备-巡检/如何利用q-robot添加数据只添加满足条件的表格行到目标应用",
+    "to": "/building-guides/qr12pa8xnyndpo3n"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/设备-巡检/扫码录入自动填充到表格行",
+    "to": "/building-guides/ar2g7od2og2v2180"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/设备-巡检/实验室巡检",
+    "to": "/building-guides/pgedw1odmulmw93q"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/项目-任务/如何关联订单回款的多个项目信息",
+    "to": "/building-guides/trguxyiylbw92u82"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/项目-任务/如何进行项目任务分配与管理",
+    "to": "/building-guides/epqghxqogoxa0gx6"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/项目-任务/如何实现成员拆分",
+    "to": "/building-guides/ueholl8dx6a7niwv"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/项目-任务/如何实现定期跟进管理",
+    "to": "/building-guides/lfsstgkqu9p6rovw"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/项目-任务/如何实现项目评审",
+    "to": "/building-guides/lnantpq3via4anqu"
+  },
+  {
+    "from": "/搭建技巧/按场景分类/erp-生产/如何实现产品质量抽检并统计质检结果",
+    "to": "/building-guides/efklwkozccii7lvq"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/表格使用/拆分-合并/表格数据按照分类进行拆分重组",
+    "to": "/building-guides/kv6kk6ahg30lhvfc"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/表格使用/拆分-合并/表格引用字段-将表格引用数据进行拼接展示",
+    "to": "/building-guides/gwdh1e2f0gm56dxo"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/表格使用/拆分-合并/如何合并表格中多个附件",
+    "to": "/building-guides/ag9e5xidv2gzh5c0"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/表格使用/拆分-合并/如何实现表格到表格的逐条数据传递",
+    "to": "/building-guides/dbb27xz9qz6m25hr"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/表格使用/拆分-合并/如何实现动态设置多人填写表单并汇总",
+    "to": "/building-guides/oupm79e7oog5pmqo"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/表格使用/更新/如何在目标表格中更新已有的信息-并新增没有的信息",
+    "to": "/building-guides/gk3avzayfxr23f96"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/表格使用/特殊用法/表格序号如何自动生成",
+    "to": "/building-guides/zfd66l6chfbu27t3"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/表格使用/特殊用法/表格字段如何控制主表单字段的显示-隐藏",
+    "to": "/building-guides/nbxua9eongqrrwa3"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/表格使用/特殊用法/如何解决表格行序号生成方案中-多行文本字符限制问题",
+    "to": "/building-guides/ockgqmx9i6wk2g6r"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/表格使用/特殊用法/如何在代码块中分辨表格的不同列-如何获取表格子字段的field-id",
+    "to": "/building-guides/rlbvmdxdnmaruuzf"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/表格使用/添加/如何将成员与日期批量添加到表格",
+    "to": "/building-guides/tgu9xvt3skfig8yg"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/表格使用/添加/如何使用代码块自动添加表格行",
+    "to": "/building-guides/xhhopf8uwdlq5shu"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/表格使用/校验/如何输出表格重复行提示",
+    "to": "/building-guides/gl2c5wmngnzoq5mq"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/表格使用/校验/如何提示表格提交校验失败具体行数",
+    "to": "/building-guides/qygz0sy92kbggn9i"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/爱客crm/轻流-x-爱客crm",
+    "to": "/building-guides/bqfwnr890pp3ci7u"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/钉钉/钉钉待办提醒的工单",
+    "to": "/building-guides/camfachbrpug2xhw"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/钉钉/轻流-and-钉钉同步通讯录常见问题",
+    "to": "/building-guides/ugin0n9zt3gfpafy"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/钉钉/轻流-x-钉钉-单点登录",
+    "to": "/building-guides/nc3784gswa4onaa3"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/钉钉/轻流-x-钉钉-机器人",
+    "to": "/building-guides/qszvwmnfknp0govb"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/钉钉/轻流-x-钉钉-日程",
+    "to": "/building-guides/qkmnk9put8g1hnyl"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/钉钉/轻流-x-钉钉-消息推送",
+    "to": "/building-guides/asgoomhtrzmdtm9b"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/钉钉/专有云钉钉版本使用智能工作流收不到待办",
+    "to": "/building-guides/at8qkimu2g7squ3v"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/飞鹅/如何实现对接飞鹅小票机打印",
+    "to": "/building-guides/qvkmheorgan29u1q"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/飞书/飞书登录时提示generate-access-token-fail",
+    "to": "/building-guides/mhytpquz1c8mw3lz"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/飞书/飞书管理后台设置轻流应用可见范围",
+    "to": "/building-guides/wricy0odm28c5cay"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/飞书/轻流-x-飞书机器人",
+    "to": "/building-guides/tlpxxrbdx3w4dnki"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/金蝶云星空/轻流-x-金蝶云星空",
+    "to": "/building-guides/ov0tgpbhdlx90y03"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/聚水潭/轻流-x-聚水潭",
+    "to": "/building-guides/atpwypfiwkovktc5"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/企业微信/鉴权配置-获取企微的access-token",
+    "to": "/building-guides/imec4ztymprrfiwq"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/企业微信/企业微信版本-手机端无法登录至企业微信版本工作区",
+    "to": "/building-guides/pllbvdvi795ofwt5"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/企业微信/轻流-x-企业微信-创建-更改-删除日程",
+    "to": "/building-guides/nrusqt3hkg925xbb"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/企业微信/轻流-x-企业微信-获取打卡数据",
+    "to": "/building-guides/qfd284vsto9n9gvg"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/企业微信/轻流-x-企业微信-机器人推送信息",
+    "to": "/building-guides/cgu3y0znz70o3lar"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/企业微信/轻流-x-企业微信-家校沟通",
+    "to": "/building-guides/zzaqgnytohy8u14r"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/企业微信/轻流-x-企业微信-微信客服",
+    "to": "/building-guides/pg0u5o7br3cw802u"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/数据库/轻流-x-数据库",
+    "to": "/building-guides/pb0i9nx81m2zpq9e"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/腾讯云/轻流-x-腾讯云函数-解析excel文件内容至表格",
+    "to": "/building-guides/im6nlq0t0c3euii5"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/腾讯云/轻流-x-腾讯云idaas",
+    "to": "/building-guides/oga0w51gzmkg77h9"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/旺店通/轻流-x-旺店通-旗舰版",
+    "to": "/building-guides/gzvgfrnqyn2atmdh"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/旺店通/轻流-x-旺店通-企业版",
+    "to": "/building-guides/gf76dvqh4fc89qg2"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/微盟云/微盟云open-api获取客户信息配置实例",
+    "to": "/building-guides/yd3w45kwhdooa5lg"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/微软/轻流-x-微软ad-单点登录",
+    "to": "/building-guides/mkfi0g110r90xvx8"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/微软/轻流-x-微软powerbi",
+    "to": "/building-guides/ez960meqb72ihqfg"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/微软/轻流-x-microsoft-graph",
+    "to": "/building-guides/roql4wn8ggkeudr0"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/微信/公有云配置了微信增强-专有云本地化对接微信服务号-但是客户收不到提醒推送",
+    "to": "/building-guides/aqi5gmzuq3g733s3"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/微信/轻流-x-微信公众号-单点登录",
+    "to": "/building-guides/fvigegdn18yti867"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/微信/如何实现微信native支付",
+    "to": "/building-guides/vmv2ves81ypd4vat"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/微信/微信增强有什么用-和绑定微信什么关系",
+    "to": "/building-guides/gegdvi6gb8mzrwm9"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/有赞/轻流-x-有赞-新增商品",
+    "to": "/building-guides/kml0hpdvr9m5n0id"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/语雀/语雀开放性调研",
+    "to": "/building-guides/ixp9x867rox9i1ea"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/支付宝/如何实现支付宝扫码支付",
+    "to": "/building-guides/fweegxgnwnryevpz"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/中国银行/轻流-x-银企直联-中国银行",
+    "to": "/building-guides/koqv0el5ftx110wq"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/adobe-reader/电子签章-验证时签名有效性未知的解决方法",
+    "to": "/building-guides/gaw8xqcl8zvopogu"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/jira/轻流-x-jira",
+    "to": "/building-guides/hu3p90g7iswg86gq"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/sharepoint/轻流-x-sharepoint-处理列表和列表项",
+    "to": "/building-guides/lymzcgt5o0klwg64"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/第三方集成/siri/轻流-x-siri",
+    "to": "/building-guides/yr2gmk16yu3lusa9"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/公式函数/关于if函数的嵌套使用",
+    "to": "/building-guides/eogi1pnu659v3ppf"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/公式函数/函数公式-指定范围内-随机数",
+    "to": "/building-guides/fccrn6szggkwkhv3"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/公式函数/判断函数公式左右括号是否对等",
+    "to": "/building-guides/lidhvouhb41gqftu"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/公式函数/如何根据字符取内容",
+    "to": "/building-guides/ygwssi6vfymfft6m"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/公式函数/如何计算两个日期之间相隔的工作日天数",
+    "to": "/building-guides/bb4tlgttsbo48ngh"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/公式函数/如何计算月初月末周一周日-本周范围",
+    "to": "/building-guides/nwwlnl9gn3oxmfus"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/公式函数/如何利用时间戳函数计算两个日期之间历经时长",
+    "to": "/building-guides/lgaea7umygt1qzwx"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/公式函数/如何实现自定义编号",
+    "to": "/building-guides/gqqestrl5dgmnn9k"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/公式函数/如何实现自定义编号-进阶版",
+    "to": "/building-guides/derqdxfg22ouf4i7"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/公式函数/如何使用sumif函数分类求和",
+    "to": "/building-guides/zri0haou31apdgvc"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/公式函数/如何限制表格某一字段的首字符内容",
+    "to": "/building-guides/dz4tsc5h1spz599f"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/公式函数/如何在一个字符串中-取出两个相同字符之间的内容",
+    "to": "/building-guides/tn4ci3ig029g6ppy"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/公式函数/筛选数据时如何自定义日期的动态范围",
+    "to": "/building-guides/exxngxxxy6pf7cqi"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/流程设计/对设置超时的任务呈现状态如何分析",
+    "to": "/building-guides/ppuifrgi1qp2hxga"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/流程设计/如何分析流程超时的任务状态",
+    "to": "/building-guides/orws2hstcgigmk9t"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/流程设计/如何实现发布的多方任务都完成后再提醒下一节点负责人处理流程",
+    "to": "/building-guides/xvqxcsmvainngl0q"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/流程设计/如何实现流程的自动通过-回退与小循环",
+    "to": "/building-guides/nzw9azqltegna2ht"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/流程设计/如何实现任务的-指派-表单字段控制节点负责人",
+    "to": "/building-guides/oifdxhscc8n7b4dn"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/流程设计/审批拒绝-如何触发流程外q-robot",
+    "to": "/building-guides/cpgtig8lvnmhwgft"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/流程设计/提交-通过时重新触发公式-关联的使用场景",
+    "to": "/building-guides/fgavbol4uuqc3a16"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/流程设计/有哪些方式让-外部人员-参与到轻流中",
+    "to": "/building-guides/rkc9eswzqo8lo767"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/其他/附件上传/如何查看附件上传中的文件url",
+    "to": "/building-guides/oyen3g59hdh37wix"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/其他/附件上传/qs主动获取url链接如何放到附件上传字段",
+    "to": "/building-guides/gbzi4nkduaeuan8h"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/其他/模板问题/短信模板审核不通过如何处理",
+    "to": "/building-guides/fo8y1953agi59yx9"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/其他/模板问题/批量打印时如何让内容是连续的-而不是每条数据都只在一页",
+    "to": "/building-guides/xdle8puae7icgt21"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/其他/模板问题/word打印模板-表格行如何设置",
+    "to": "/building-guides/xv257pffcksk7wts"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/其他/模板问题/word打印模板-分页设置",
+    "to": "/building-guides/kzwfrotrv3sn3y18"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/其他/模板问题/word打印模板常见问题",
+    "to": "/building-guides/ge6hvfzf44yn1wfx"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/其他/模板问题/word打印模板如何制作资产标签",
+    "to": "/building-guides/rles50bzxcmpdynl"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/其他/模板问题/word打印模版表格序号自动生成",
+    "to": "/building-guides/swwzuvvp3e86e4qq"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/其他/使用故障/表格子字段无法插入q-robot邮件正文",
+    "to": "/building-guides/fxdpoc46lpx00f2c"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/其他/使用故障/客户拒收了邮件导致再也收不到-怎么还原",
+    "to": "/building-guides/uvez64yk51p8stxk"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/其他/使用故障/审批节点设置的是表单中的成员字段-但是节点无负责人",
+    "to": "/building-guides/bufgq11h4mvg657y"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/其他/使用故障/手机端打开数据一直加载中是为什么",
+    "to": "/building-guides/ytdyvb04zi5q1ft8"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/其他/使用故障/微信小程序中附件上传报错",
+    "to": "/building-guides/kwf831nay3kdzeyg"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/其他/使用故障/无法打开提醒推送-报错404-not-found",
+    "to": "/building-guides/ymnb24ki6k5qbe9h"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/其他/使用故障/q-linker和webhook的报错",
+    "to": "/building-guides/dtydws7kzw5we8np"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/其他/使用故障/qlinker自动触发抛错failed-to-execute-get-request-attempted-read-from-closed-stream-的原因",
+    "to": "/building-guides/uiwbogrm3g65ggzq"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/其他/随机抽取/如何实现抽签效果",
+    "to": "/building-guides/ogqwr49bdxf85t37"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/其他/随机抽取/如何实现随机抽奖",
+    "to": "/building-guides/ryh2rq2qf2m7apo4"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/其他/随机抽取/如何实现随机抽取考卷作答",
+    "to": "/building-guides/saru48rexnexvv0g"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/其他/随机抽取/如何实现随机派单",
+    "to": "/building-guides/tt7hze4pmds6dnvd"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/其他/通讯录/如何获取指定成员的手机号",
+    "to": "/building-guides/aaz3iuvvrl4at2lh"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/其他/通讯录/如何解决通讯录-用户姓名-重名问题",
+    "to": "/building-guides/uosgefhfnspr435i"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/其他/自动推送/成员如何定时收到填写日报-周报的待办",
+    "to": "/building-guides/ye8fgx6lh69zhhop"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/其他/自动推送/定时轮训获取数组的特定元素数据",
+    "to": "/building-guides/eurpuk1mf56yl5mh"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/其他/自动推送/如何实现自动发送生日提醒",
+    "to": "/building-guides/mistio1s2k5xoyvr"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/轻代码/代码块示例/代码块-获取excel表格特定区域数据",
+    "to": "/building-guides/qzggxgb93pyea96w"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/轻代码/openapi/调用添加数据接口-body内容中如何写主字段以及表格字段-queid获取方式",
+    "to": "/building-guides/to5cbms03tbcobxf"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/轻代码/openapi/如何排查接口问题",
+    "to": "/building-guides/ey8bra7d6iqo58h0"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/轻代码/q-linker/如何在表单中获取成员userid",
+    "to": "/building-guides/dgv2hs83dxumhdud"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/轻代码/q-linker/json-path解析",
+    "to": "/building-guides/bwmnqgfynq01md9p"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/轻代码/webhook/webhook实现批量新增-更新-删除的使用规范及局限性",
+    "to": "/building-guides/kcfknizuuzuq3gsw"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/数据管理/数据权限/非管理员查看全部数据的方法",
+    "to": "/building-guides/qyvq1var4yubo4gx"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/数据管理/数据权限/如何根据部门-角色做数据查看权限",
+    "to": "/building-guides/xzob3uzg07sakyr2"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/数据管理/数据校验/轻流密码校验功能实现方法",
+    "to": "/building-guides/qxrp56p170hredwi"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/数据管理/数据校验/如何对多项选择中的必选内容做提交校验",
+    "to": "/building-guides/kxg5wqgpbvb8x11d"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/数据管理/数据校验/如何利用提交校验限制应用提交时间",
+    "to": "/building-guides/ohlyk31c0pm54oni"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/数据管理/数据校验/如何实现表格行内容是否必填校验",
+    "to": "/building-guides/eulolz3qg2g1fagk"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/数据管理/数据校验/如何实现打卡定位提交校验功能",
+    "to": "/building-guides/etqdhps89wy0e9gy"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/数据管理/数据校验/如何实现校验表格特定行的内容必填",
+    "to": "/building-guides/grs450l7296qk4mr"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/数据管理/数据校验/如何校验每人每天只提交数据的数量",
+    "to": "/building-guides/ucmhgd5dypmr6ds8"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/数据管理/数据校验/如何针对表格限制表格行数",
+    "to": "/building-guides/lt9p1cgw1i8gn5rc"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/数据管理/应用数据处理/报表-获取-上周最后一天-的数据",
+    "to": "/building-guides/bnow9nk6siy29z0g"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/数据管理/应用数据处理/表格录入产品数据-产品编号根据已有数据进行递增",
+    "to": "/building-guides/gw04azggx9g0dzrs"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/数据管理/应用数据处理/公有云数据添加表格如何每200行一条数据",
+    "to": "/building-guides/pdl7re75umlq42se"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/数据管理/应用数据处理/关联报表如何实现多对多匹配",
+    "to": "/building-guides/taakucigo3f73dc1"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/数据管理/应用数据处理/获取应用数据接口详解",
+    "to": "/building-guides/qogxhcuwxvn19f2m"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/数据管理/应用数据处理/逻辑表单没有按照预期显示",
+    "to": "/building-guides/us9kab8dwvmk5lmr"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/数据管理/应用数据处理/如何获取与a应用项目有交集的所有数据",
+    "to": "/building-guides/mxh1ck2dgruo6wff"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/数据管理/应用数据处理/如何实现已有客户直接选-新客户自动添加",
+    "to": "/building-guides/oczvo9oqp2524pur"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/数据管理/应用数据处理/如何实现应用数据的去重计数",
+    "to": "/building-guides/rxur3k0i9f5nzi72"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/数据管理/应用数据处理/如何实现自动引用其他应用数据",
+    "to": "/building-guides/lhd7kws866crge2b"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/数据管理/应用数据处理/如何用数据关联实现类目划分",
+    "to": "/building-guides/dyhr0o6mg2zle0nc"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/数据管理/应用数据处理/使用q-robot添加数据时-如何避免数据重复添加",
+    "to": "/building-guides/em8nf8dy3o2f0tz0"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/数据管理/应用数据处理/数据导入如何触发公式及数据关联",
+    "to": "/building-guides/aw9vqdom5ggr4ay2"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/数据管理/应用数据处理/数据的数据列表中某个字段无内容-打开数据详情该字段显示内容",
+    "to": "/building-guides/ql1gquuwilm4vkvf"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/数据管理/应用数据处理/添加数据-openapi和qs被动字段传值详解",
+    "to": "/building-guides/fgbu2dq2zc5lglut"
+  },
+  {
+    "from": "/搭建技巧/按功能分类/数据管理/应用数据处理/同比环比",
+    "to": "/building-guides/xprkaaupnkg051ug"
+  },
+  {
+    "from": "/搭建技巧/按行业分类/地产物业/如何实现定期生成租金账单",
+    "to": "/building-guides/dbrw3m6hug6hw4sx"
+  },
+  {
+    "from": "/搭建技巧/按行业分类/地产物业/如何实现一次生成每期租金账单",
+    "to": "/building-guides/pfqty4igrqrw44k0"
+  },
+  {
+    "from": "/搭建技巧/按行业分类/地产物业/如何实现逐期生成租金账单",
+    "to": "/building-guides/ivm0g2u3ndzw516q"
+  },
+  {
+    "from": "/搭建技巧/按行业分类/教育培训/如何实现机构学员管理",
+    "to": "/building-guides/qmakyryerh4t1uub"
+  },
+  {
+    "from": "/搭建技巧/按行业分类/教育培训/如何实现统一收取费用的数据管理",
+    "to": "/building-guides/zm9dtfhnqopcnpyr"
+  },
+  {
+    "from": "/搭建技巧/按行业分类/企业服务/如何实现利益冲突查询",
+    "to": "/building-guides/bipzuitd34lgv77f"
+  },
+  {
+    "from": "/搭建技巧/按行业分类/制造业/两个文本控制流水号的生成",
+    "to": "/building-guides/owctwxsu2xqdus76"
+  },
+  {
+    "from": "/更新动态/产品公告/表单详情按钮顺序调整",
+    "to": "/release-notes/af8me508ir9bpbq0"
+  },
+  {
+    "from": "/更新动态/产品公告/功能更新通知-外部用户参与协同",
+    "to": "/release-notes/grqmdkm33bpf3xt4"
+  },
+  {
+    "from": "/更新动态/产品公告/功能升级速览",
+    "to": "/release-notes/hb357lbubeokwqac"
+  },
+  {
+    "from": "/更新动态/产品公告/关于限制微信增强用户和动态邮箱字段方式参与流程的申明",
+    "to": "/release-notes/hv0xirdhiqxvbim1"
+  },
+  {
+    "from": "/更新动态/产品公告/关于整表关联中引用字段使用规则调整的通知",
+    "to": "/release-notes/sgapyudor05y5at7"
+  },
+  {
+    "from": "/更新动态/产品公告/获取应用数据接口分页返回逻辑变更",
+    "to": "/release-notes/ez3a3p148x1mtlc0"
+  },
+  {
+    "from": "/更新动态/产品公告/流程引擎升级",
+    "to": "/release-notes/qo7iokp05vq9mevi"
+  },
+  {
+    "from": "/更新动态/产品公告/批量定时更新-流程日志记录变更",
+    "to": "/release-notes/rahpomew2fkpyd4l"
+  },
+  {
+    "from": "/更新动态/产品公告/企业微信公有云-自建应用-同步部门主管",
+    "to": "/release-notes/tm5gd9yq7pytiw0w"
+  },
+  {
+    "from": "/更新动态/产品公告/轻流安全体系升级公告",
+    "to": "/release-notes/ysv6vmet4oro2vgu"
+  },
+  {
+    "from": "/更新动态/产品公告/轻流安全体系升级公告-edr7h9",
+    "to": "/release-notes/edr7h9q82p18vuym"
+  },
+  {
+    "from": "/更新动态/产品公告/数据修改校验优化",
+    "to": "/release-notes/xo6t963z9igqarc1"
+  },
+  {
+    "from": "/更新动态/产品公告/停机更新",
+    "to": "/release-notes/bwyy8b8zz12ou8vr"
+  },
+  {
+    "from": "/更新动态/产品公告/停机更新-ews0hr",
+    "to": "/release-notes/ews0hr2unshs0835"
+  },
+  {
+    "from": "/更新动态/产品公告/停机更新-mg9i20",
+    "to": "/release-notes/mg9i205bg1rh0l49"
+  },
+  {
+    "from": "/更新动态/产品公告/未认证工作区使用限制公告",
+    "to": "/release-notes/wyvni72gn4frc7i1"
+  },
+  {
+    "from": "/更新动态/产品公告/新版关联引擎上线",
+    "to": "/release-notes/gamzqrtc2tl9sr7t"
+  },
+  {
+    "from": "/更新动态/产品公告/针对-工作区配额数据概览-数据提交总量-数据统计逻辑的变更通知",
+    "to": "/release-notes/acnek27g525qumxn"
+  },
+  {
+    "from": "/更新动态/产品公告/针对-数字字段功能表现变更-的通知",
+    "to": "/release-notes/zyl87p7ux8ivtqdr"
+  },
+  {
+    "from": "/更新动态/产品公告/针对-引用字段产品逻辑变更-的通知",
+    "to": "/release-notes/bhantkctuuf78dbm"
+  },
+  {
+    "from": "/更新动态/产品公告/重要维护通知-钉钉环境升级",
+    "to": "/release-notes/zche6npo1h3r3nel"
+  },
+  {
+    "from": "/更新动态/产品公告/重要维护通知-轻流服务升级",
+    "to": "/release-notes/yb7il8x8lwi6gvgl"
+  },
+  {
+    "from": "/更新动态/产品公告/重要维护通知-轻流服务升级-qctt99",
+    "to": "/release-notes/qctt990dzbxiukxw"
+  },
+  {
+    "from": "/更新动态/产品公告/重要维护通知-轻析服务升级",
+    "to": "/release-notes/kngzbwgf39dc1xrq"
+  },
+  {
+    "from": "/更新动态/产品公告/重要维护通知-轻析服务升级-lwx9ac",
+    "to": "/release-notes/lwx9acmuorlbagdf"
+  },
+  {
+    "from": "/更新动态/产品公告/重要维护通知-系统升级停机公告",
+    "to": "/release-notes/lhyl93eqp1yigx2v"
+  },
+  {
+    "from": "/更新动态/产品公告/open-api-分页参数限制变更",
+    "to": "/release-notes/odb44ie751znvlt9"
+  },
+  {
+    "from": "/更新动态/产品公告/q-robot-and-定时任务触发次数上限",
+    "to": "/release-notes/kh4mf0oaf48ykaqn"
+  },
+  {
+    "from": "/更新动态/产品公告/q-source单次执行上限",
+    "to": "/release-notes/aro3dh50dei92rpg"
+  },
+  {
+    "from": "/更新动态/产品公告/q-source主动单次执行上限",
+    "to": "/release-notes/qwwyxoikhqbbxi1b"
+  },
+  {
+    "from": "/更新动态/更新日志",
+    "to": "/release-notes"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本",
+    "to": "/release-notes/rphk9kdbczxrixk1"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2022-08-01-功能更新日志",
+    "to": "/release-notes/vbd23wptgmbsu7ws"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2022-08-15-功能更新日志",
+    "to": "/release-notes/hcv2xq07nzv0treq"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2022-08-29-功能更新日志",
+    "to": "/release-notes/oty96wpc5w1munmn"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2022-09-27-功能更新日志",
+    "to": "/release-notes/sa5xhz9p9mqgz79z"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2022-10-31-功能更新日志",
+    "to": "/release-notes/pohyh18kmscxtm5a"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2022-11-29-功能更新日志",
+    "to": "/release-notes/heoky494yegerw1e"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2023-01-04-功能更新日志",
+    "to": "/release-notes/hy3agf9hqgs2p2wu"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2023-02-27-功能更新日志",
+    "to": "/release-notes/uy9b0i024n1imb1m"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2023-03-27-功能更新日志",
+    "to": "/release-notes/ap2n8c054dp0icxq"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2023-04-24-功能更新日志",
+    "to": "/release-notes/xb1fyph3h7ufohzb"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2023-05-29-功能更新日志",
+    "to": "/release-notes/oqyzefvygngy7feu"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2023-06-19-功能更新日志",
+    "to": "/release-notes/xzevps2mrtcvrgzx"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2023-07-17-功能更新日志",
+    "to": "/release-notes/fxh37yrathrgf6vq"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2023-07-28-功能更新日志",
+    "to": "/release-notes/kaukq7hornr09p1t"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2023-08-11-功能更新日志",
+    "to": "/release-notes/zl0li6rgxeccvrqn"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2023-10-16-功能更新日志",
+    "to": "/release-notes/ps7xirlvwgrtaxob"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2023-10-26-功能更新日志",
+    "to": "/release-notes/gat6ygu70g32x4ch"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2023-8-25-功能更新日志",
+    "to": "/release-notes/ky4e8ybsq9utryma"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2023-9-22-功能更新日志",
+    "to": "/release-notes/vg6469oqpem55l33"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2024-1-11-功能更新日志",
+    "to": "/release-notes/nniz06os3242s1y9"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2024-1-25-功能更新日志",
+    "to": "/release-notes/mu03nadm2353lmbx"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2024-10-10功能更新日志",
+    "to": "/release-notes/umd1name1fgm26bn"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2024-10-24功能更新日志",
+    "to": "/release-notes/xve87gfvs9tp09ch"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2024-11-07功能更新日志",
+    "to": "/release-notes/ef0mll7l33ckl073"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2024-11-28功能更新日志",
+    "to": "/release-notes/aaog8uqlhuau2vnn"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2024-12-12功能更新日志",
+    "to": "/release-notes/ear7dc1uge3v4v5z"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2024-12-26功能更新日志",
+    "to": "/release-notes/un2sked6miy139pv"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2024-2-29-功能更新日志",
+    "to": "/release-notes/zhu7k4a0e39dmonf"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2024-2-8-功能更新日志",
+    "to": "/release-notes/ulqevpgilqna221g"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2024-3-28-功能更新日志",
+    "to": "/release-notes/hsbgyh4878p9zwin"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2024-3-7-功能更新日志",
+    "to": "/release-notes/el9pqd0yqmh0glgv"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2024-4-25-功能更新日志",
+    "to": "/release-notes/ghi2t7iced017e2d"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2024-5-16-功能更新日志",
+    "to": "/release-notes/xzzwaxr8uaqm2c5k"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2024-5-30功能更新日志",
+    "to": "/release-notes/didrn5g40ogns8mu"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2024-6-13功能更新日志",
+    "to": "/release-notes/fwi00rcf02139ced"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2024-6-27功能更新日志",
+    "to": "/release-notes/kwydi3u3gulwm821"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2024-8-29功能更新日志",
+    "to": "/release-notes/ir6rc1kekaz5yy51"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2024-8-8功能更新日志",
+    "to": "/release-notes/exlx7db2kzcibmyn"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2025-01-09功能更新日志-7-1-4版本",
+    "to": "/release-notes/gxwpqwpc2urknwup"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2025-01-16功能更新日志-7-1-5版本",
+    "to": "/release-notes/mrw5x68kimzouzhw"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2025-02-13功能更新日志-7-1-6版本",
+    "to": "/release-notes/lwy6sqessm2i99pg"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2025-02-27功能更新日志-7-1-7版本",
+    "to": "/release-notes/xwkmd6mgroc331vt"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2025-03-13功能更新日志-7-1-8版本",
+    "to": "/release-notes/bwc84yq74eabkd6k"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2025-03-27功能更新日志-7-1-9版本",
+    "to": "/release-notes/tcqd66sgxzv46ra4"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2025-04-10功能更新日志-7-2-0版本",
+    "to": "/release-notes/zyr5igx0ngmukvw3"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2025-04-24功能更新日志-7-2-1版本",
+    "to": "/release-notes/hxm17t2nyl08328q"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2025-05-08功能更新日志-7-2-2版本",
+    "to": "/release-notes/isdlg062xegbaobp"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2025-05-22功能更新日志-7-2-3版本",
+    "to": "/release-notes/qafklz50odsat8i7"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2025-06-05功能更新日志-7-2-4版本",
+    "to": "/release-notes/ovh6etha6wmo7wke"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2025-06-19功能更新日志-7-2-5版本",
+    "to": "/release-notes/fsqox1nefggvcvqp"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2025-07-03功能更新日志-7-2-6版本",
+    "to": "/release-notes/bl9x0i9fiq2pgwoy"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2025-07-17功能更新日志-7-2-7版本",
+    "to": "/release-notes/esoq1bha8of6788b"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2025-07-31功能更新日志-7-2-8版本",
+    "to": "/release-notes/fmbgw33wsvqr603g"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2025-08-14功能更新日志-7-2-9版本",
+    "to": "/release-notes/kq2fnh4h2l26274h"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2025-08-28功能更新日志-7-3-0版本",
+    "to": "/release-notes/gvlgsygnktl8hsqa"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2025-09-11-功能更新日志-7-3-1版本",
+    "to": "/release-notes/zkdus584gbgil29d"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2025-09-25功能更新日志-7-3-2版本",
+    "to": "/release-notes/iun6o0eot1mx7dlw"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2025-10-23-功能更新日志-7-3-3版本",
+    "to": "/release-notes/gg1xdm5b7o0kkd0d"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2025-11-06功能更新日志-7-3-4版本",
+    "to": "/release-notes/ncbcc5zft3rdhyzl"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2025-11-20功能更新日志-7-3-5版本",
+    "to": "/release-notes/nf62bh2dgrbi12oh"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2025-12-04功能更新日志",
+    "to": "/release-notes/fulr3pxw2n620w2h"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2026-01-08功能更新日志",
+    "to": "/release-notes/ilog4nm19iidthh7"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2026-01-22功能更新日志",
+    "to": "/release-notes/hf2ypgdtn4hdlz3t"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2026-02-05功能更新日志",
+    "to": "/release-notes/uafgxvmxqeaa5u2c"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2026-03-05功能更新日志",
+    "to": "/release-notes/gcwszr06p3gdoqek"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2026-03-16-功能日志更新",
+    "to": "/release-notes/dbd913ia7lpbw3ct"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2026-07-09-功能日志更新",
+    "to": "/release-notes/fqgqp43shks7x58z"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2026-07-23-功能日志更新",
+    "to": "/release-notes/uc6hd5qc9a6lzo7o"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2026-3-26-功能日志更新",
+    "to": "/release-notes/wcz1zgdwtdfy00xb"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2026-4-16-功能更新日志",
+    "to": "/release-notes/pi0e1yuszflei7kd"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2026-4-23-功能日志更新",
+    "to": "/release-notes/ngqupuhy7lfyo853"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2026-5-21-功能日志更新",
+    "to": "/release-notes/egmuyugz32ezpy2f"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2026-5-28-功能日志更新",
+    "to": "/release-notes/qgi1bqps3pfgs9eq"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2026-6-25-功能日志更新",
+    "to": "/release-notes/dohzq3t5hiq58bky"
+  },
+  {
+    "from": "/更新动态/更新日志/轻流-官网-企微-飞书-钉钉版本/2026-6-4-功能日志更新",
+    "to": "/release-notes/re7rqcrz0ld0xwo6"
+  },
+  {
+    "from": "/更新动态/更新日志/轻翼",
+    "to": "/release-notes/mp3qpzxg25dn5ggu"
+  },
+  {
+    "from": "/更新动态/更新日志/轻翼/v1-1-智能体可以对话啦",
+    "to": "/release-notes/zdo918gl7xq5ltxf"
+  },
+  {
+    "from": "/更新动态/更新日志/轻翼/v1-2-查工商信息-看新闻-搞翻译-增删改查数据-智能体新增大量实用技能",
+    "to": "/release-notes/yvxza5e6gl6b5w83"
+  },
+  {
+    "from": "/更新动态/更新日志/专有轻流",
+    "to": "/release-notes/yba84r6r8ydw58xx"
+  },
+  {
+    "from": "/更新动态/更新日志/专有轻流/10-0功能更新日志",
+    "to": "/release-notes/nnidg68rxb3ubysi"
+  },
+  {
+    "from": "/更新动态/更新日志/专有轻流/5-0-0-功能更新日志",
+    "to": "/release-notes/fbf4getd6yiwd4rr"
+  },
+  {
+    "from": "/更新动态/更新日志/专有轻流/5-1-0-功能更新日志",
+    "to": "/release-notes/prgrmt9a6gbpzt7e"
+  },
+  {
+    "from": "/更新动态/更新日志/专有轻流/5-2-0-功能更新日志",
+    "to": "/release-notes/ohimwr10kiuuoi6u"
+  },
+  {
+    "from": "/更新动态/更新日志/专有轻流/5-2-0功能变更日志",
+    "to": "/release-notes/kz2tagc3rkzlrbe1"
+  },
+  {
+    "from": "/更新动态/更新日志/专有轻流/5-3-0功能变更日志",
+    "to": "/release-notes/ho5xyubtlyu9hlns"
+  },
+  {
+    "from": "/更新动态/更新日志/专有轻流/5-3-0功能更新日志",
+    "to": "/release-notes/soy0rgy4mb0gxugz"
+  },
+  {
+    "from": "/更新动态/更新日志/专有轻流/6-0-0功能更新日志",
+    "to": "/release-notes/ib6e8g541yyu8ruz"
+  },
+  {
+    "from": "/更新动态/更新日志/专有轻流/6-2-0功能更新日志",
+    "to": "/release-notes/wkwyds13ub16oqug"
+  },
+  {
+    "from": "/更新动态/更新日志/专有轻流/7-1-8功能更新日志",
+    "to": "/release-notes/cbwwnp7mt83qf4gp"
+  },
+  {
+    "from": "/更新动态/更新日志/专有轻流/7-2-5功能更新日志",
+    "to": "/release-notes/umqrytwvokghgmg9"
+  },
+  {
+    "from": "/更新动态/更新日志/专有轻流/7-3-2功能更新日志",
+    "to": "/release-notes/vv258g44p8z6huar"
+  },
+  {
+    "from": "/解决方案/按场景分类/财务-报销",
+    "to": "/solutions/vqgo36z94y98xasy"
+  },
+  {
+    "from": "/解决方案/按场景分类/财务-报销/费控报销系统",
+    "to": "/solutions/wvacvz7l26y9z6dq"
+  },
+  {
+    "from": "/解决方案/按场景分类/采招-供应",
+    "to": "/solutions/cpw8zegz718g0rfp"
+  },
+  {
+    "from": "/解决方案/按场景分类/采招-供应/供应商协同管理系统",
+    "to": "/solutions/gb14r257wiogttka"
+  },
+  {
+    "from": "/解决方案/按场景分类/工单-售后",
+    "to": "/solutions/mvpnezg7nh5egib4"
+  },
+  {
+    "from": "/解决方案/按场景分类/工单-售后/售后维修工单",
+    "to": "/solutions/vetmzl1vk4bemh4w"
+  },
+  {
+    "from": "/解决方案/按场景分类/进销存-仓库",
+    "to": "/solutions/ggcxv9oafr2kro68"
+  },
+  {
+    "from": "/解决方案/按场景分类/进销存-仓库/进销存方案介绍",
+    "to": "/solutions/inventory-management"
+  },
+  {
+    "from": "/解决方案/按场景分类/进销存-仓库/进销存使用说明",
+    "to": "/solutions/gsvvu45f8dkg40gm"
+  },
+  {
+    "from": "/解决方案/按场景分类/进销存-仓库/进销存使用说明/财务人员",
+    "to": "/solutions/nvrv1akffe4c7ng3"
+  },
+  {
+    "from": "/解决方案/按场景分类/进销存-仓库/进销存使用说明/采购人员",
+    "to": "/solutions/uaqq8296hl9n008g"
+  },
+  {
+    "from": "/解决方案/按场景分类/进销存-仓库/进销存使用说明/仓库人员",
+    "to": "/solutions/gls98u8ew4394rsg"
+  },
+  {
+    "from": "/解决方案/按场景分类/进销存-仓库/进销存使用说明/销售人员",
+    "to": "/solutions/lelkm9ggt7u3gais"
+  },
+  {
+    "from": "/解决方案/按场景分类/客户-销售",
+    "to": "/solutions/hhvkvgivhbmy1aa8"
+  },
+  {
+    "from": "/解决方案/按场景分类/客户-销售/客户跟进管理",
+    "to": "/solutions/zyve81hy7q4ibd35"
+  },
+  {
+    "from": "/解决方案/按场景分类/客户-销售/轻流crm解决方案",
+    "to": "/solutions/uise2f5a7pxnf8tn"
+  },
+  {
+    "from": "/解决方案/按场景分类/客户-销售/综合合同管理",
+    "to": "/solutions/hq5m8pbfrck4letp"
+  },
+  {
+    "from": "/解决方案/按场景分类/人事-行政",
+    "to": "/solutions/ymw453z0spevr3b2"
+  },
+  {
+    "from": "/解决方案/按场景分类/人事-行政/轻流oa解决方案",
+    "to": "/solutions/mz11g9n80z5z7me1"
+  },
+  {
+    "from": "/解决方案/按场景分类/人事-行政/行政后勤管理",
+    "to": "/solutions/dikihyfub8pv2py7"
+  },
+  {
+    "from": "/解决方案/按场景分类/人事-行政/资产管理",
+    "to": "/solutions/lczztm3tmn5vinwu"
+  },
+  {
+    "from": "/解决方案/按场景分类/设备-巡检",
+    "to": "/solutions/mpsgtr014yuega3g"
+  },
+  {
+    "from": "/解决方案/按场景分类/设备-巡检/设备巡检",
+    "to": "/solutions/bywtr7i11cwg4pon"
+  },
+  {
+    "from": "/解决方案/按场景分类/项目-任务",
+    "to": "/solutions/awl9muwmikuauhiz"
+  },
+  {
+    "from": "/解决方案/按场景分类/项目-任务/敏捷项目管理",
+    "to": "/solutions/gp6tm91syp7ri76f"
+  },
+  {
+    "from": "/解决方案/按场景分类/项目-任务/嵌套式pdca研发项目管理",
+    "to": "/solutions/wghzl23toik9dee6"
+  },
+  {
+    "from": "/解决方案/按场景分类/项目-任务/轻流互联网研发项目管理系统",
+    "to": "/solutions/kbq1se0eagow4rws"
+  },
+  {
+    "from": "/解决方案/按场景分类/项目-任务/全流程研发项目管理",
+    "to": "/solutions/ocfo6agpbca7f6is"
+  },
+  {
+    "from": "/解决方案/按场景分类/项目-任务/项目任务管理",
+    "to": "/solutions/ov2yk18ne0sbya6u"
+  },
+  {
+    "from": "/解决方案/按场景分类/erp-生产",
+    "to": "/solutions/oa0vk7lm0h7l6gzd"
+  },
+  {
+    "from": "/解决方案/按场景分类/erp-生产/模具管理",
+    "to": "/solutions/gtg3mpurb7o8yuhl"
+  },
+  {
+    "from": "/解决方案/按行业分类/地产物业",
+    "to": "/solutions/nbekbxr84nxd2xme"
+  },
+  {
+    "from": "/解决方案/按行业分类/互联网科技",
+    "to": "/solutions/kitztxkccrvz3mng"
+  },
+  {
+    "from": "/解决方案/按行业分类/互联网科技/互联网产品研发",
+    "to": "/solutions/wnddrgholhusc0eh"
+  },
+  {
+    "from": "/解决方案/按行业分类/建筑工程",
+    "to": "/solutions/tgbfnr0b1c07uao5"
+  },
+  {
+    "from": "/解决方案/按行业分类/建筑工程/工程项目审批",
+    "to": "/solutions/bbubxa2n67ly6pbm"
+  },
+  {
+    "from": "/解决方案/按行业分类/交通运输",
+    "to": "/solutions/ddmi5m3ovwuonbiw"
+  },
+  {
+    "from": "/解决方案/按行业分类/教育培训",
+    "to": "/solutions/pgrghagoge8apmvb"
+  },
+  {
+    "from": "/解决方案/按行业分类/教育培训/家校管理方案",
+    "to": "/solutions/gkyo9lvyq2bxmgap"
+  },
+  {
+    "from": "/解决方案/按行业分类/教育培训/校园德育管理",
+    "to": "/solutions/ggo2gqoglp3bhtxb"
+  },
+  {
+    "from": "/解决方案/按行业分类/教育培训/校园行政解决方案",
+    "to": "/solutions/xfo873ix76esd8t7"
+  },
+  {
+    "from": "/解决方案/按行业分类/教育培训/校园疫苗接种管理",
+    "to": "/solutions/qf319r7px1ze7yuo"
+  },
+  {
+    "from": "/解决方案/按行业分类/教育培训/学生管理",
+    "to": "/solutions/bqgdwg01c3srbce3"
+  },
+  {
+    "from": "/解决方案/按行业分类/金融业",
+    "to": "/solutions/iwwytyw7yx9g323s"
+  },
+  {
+    "from": "/解决方案/按行业分类/零售贸易",
+    "to": "/solutions/tlgwwea91v3ygam5"
+  },
+  {
+    "from": "/解决方案/按行业分类/零售贸易/餐饮行业管理系统",
+    "to": "/solutions/mrmgnxbyraqtshz6"
+  },
+  {
+    "from": "/解决方案/按行业分类/零售贸易/物品租赁",
+    "to": "/solutions/wyi8m1ccmgb39uu8"
+  },
+  {
+    "from": "/解决方案/按行业分类/能源矿产",
+    "to": "/solutions/caen2i30vqb4p892"
+  },
+  {
+    "from": "/解决方案/按行业分类/企业服务",
+    "to": "/solutions/quplts39xl33xmu0"
+  },
+  {
+    "from": "/解决方案/按行业分类/企业服务/美容门店管理",
+    "to": "/solutions/ap03lgl8i0t6ab9y"
+  },
+  {
+    "from": "/解决方案/按行业分类/医疗健康",
+    "to": "/solutions/pbknn8iqwsuymgnt"
+  },
+  {
+    "from": "/解决方案/按行业分类/政府公益",
+    "to": "/solutions/eqa1zai4rfktuq4t"
+  },
+  {
+    "from": "/解决方案/按行业分类/政府公益/政务督办系统",
+    "to": "/solutions/qf9zqc3bkd41l3vz"
+  },
+  {
+    "from": "/解决方案/按行业分类/制造业",
+    "to": "/solutions/gacpc91pum6rl8bb"
+  },
+  {
+    "from": "/解决方案/按行业分类/制造业/轻流plm解决方案",
+    "to": "/solutions/klukqrhn1kxr6wln"
+  },
+  {
+    "from": "/解决方案/按行业分类/制造业/轻流qms-质量管理系统",
+    "to": "/solutions/og4vvs7fi3iigdw7"
+  },
+  {
+    "from": "/联系我们",
+    "to": "/contact"
+  },
+  {
+    "from": "/视频中心",
+    "to": "/video-guides"
+  },
+  {
+    "from": "/视频中心/功能教学",
+    "to": "/video-guides/gzegcz3s53ophiqb"
+  },
+  {
+    "from": "/视频中心/角色分类",
+    "to": "/video-guides/pv626lfmrgby1kmw"
+  },
+  {
+    "from": "/视频中心/客户案例",
+    "to": "/video-guides/vpm8qv31y63ldgfg"
+  },
+  {
+    "from": "/视频中心/行业趋势",
+    "to": "/video-guides/tz0r5erw7xffrv4b"
+  },
+  {
+    "from": "/视频中心/专题演示",
+    "to": "/video-guides/lefhlm5gxoq8gcvz"
+  },
+  {
+    "from": "/新手指南",
+    "to": "/getting-started"
+  }
+]
