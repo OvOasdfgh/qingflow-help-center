@@ -136,6 +136,58 @@ body {
   color: var(--ifm-heading-color);
 }
 
+.navbar__external-action {
+  align-items: center;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  display: inline-flex;
+  font-weight: 650;
+  height: 36px;
+  justify-content: center;
+  line-height: 1;
+  margin: 0 4px;
+  padding: 0 14px;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+.navbar__external-action--website {
+  background: transparent;
+  color: var(--ifm-heading-color);
+}
+
+.navbar__external-action-icon {
+  flex: 0 0 auto;
+  margin-right: 7px;
+}
+
+.navbar__external-action--website > svg[aria-label] {
+  display: none;
+}
+
+.navbar__external-action--website:hover {
+  background: var(--ifm-color-emphasis-100);
+  border-color: var(--ifm-color-emphasis-500);
+  color: var(--ifm-heading-color);
+}
+
+.navbar__external-action--trial,
+.navbar__external-action--trial:hover {
+  color: #ffffff;
+}
+
+.navbar__external-action--trial {
+  background: var(--qf-accent);
+  border-color: var(--qf-accent);
+}
+
+.navbar__external-action--trial:hover {
+  background: var(--qf-accent-hover);
+  border-color: var(--qf-accent-hover);
+}
+
 .navbar__item[href$='/search'],
 .navbar__item[href='/search'] {
   align-items: center;
@@ -432,6 +484,10 @@ table th {
     width: 44px;
   }
 
+  .navbar__items--right .navbar__external-action {
+    display: none;
+  }
+
   .navbar-sidebar {
     height: 100dvh !important;
     inset: 0 !important;
@@ -478,6 +534,12 @@ table th {
     border-radius: 5px;
     font-size: 15px;
     min-height: 42px;
+  }
+
+  .navbar-sidebar .navbar__external-action {
+    justify-content: center;
+    margin: 8px 0 0;
+    width: 100%;
   }
 
   .theme-doc-markdown > header > h1,
