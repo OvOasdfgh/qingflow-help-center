@@ -24,6 +24,12 @@ const concurrency = Number.parseInt(process.env.ASSET_CONCURRENCY ?? '16', 10);
 const maxAssetBytes = 95 * 1024 * 1024;
 const maxRepositoryMigrationBytes = 1024 * 1024 * 1024;
 const imagePattern = /!\[[^\]]*\]\((?:<([^>]+)>|([^\s)]+))(?:\s+["'][^"']*["'])?\)/g;
+const referrers = {
+  none: null,
+  site: 'https://help-center.qingflow.com/',
+  yuque: 'https://www.yuque.com/',
+};
+const noReferrerHosts = new Set(['cdn.nlark.com', 'www.yuque.com']);
 
 const contentTypeExtensions = new Map([
   ['image/avif', 'avif'],
@@ -105,6 +111,27 @@ async function writeJson(filePath, value) {
 }
 
 async function fetchWithRetry(url, options, attempts = 3) {
+  const referrerMode = options.referrerMode ?? 'browser';
+  if (referrerMode !== 'browser' && !(referrerMode in referrers)) {
+    throw new Error(
+      `Unknown asset referrer mode: ${referrerMode}. Expected browser, none, site, or yuque.`,
+    );
+  }
+
+  const referrer =
+    referrerMode === 'browser'
+      ? noReferrerHosts.has(new URL(url).hostname)
+        ? null
+        : referrers.site
+      : referrers[referrerMode];
+  const headers = {
+    Accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+    'User-Agent': 'Qingflow-Help-Center-Asset-Migrator/1.0',
+  };
+  if (referrer) {
+    headers.Referer = referrer;
+  }
+
   let lastError;
   for (let attempt = 1; attempt <= attempts; attempt += 1) {
     try {
@@ -112,11 +139,7 @@ async function fetchWithRetry(url, options, attempts = 3) {
         redirect: 'follow',
         signal: AbortSignal.timeout(options.timeout),
         method: options.method,
-        headers: {
-          Accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
-          Referer: 'https://www.yuque.com/',
-          'User-Agent': 'Qingflow-Help-Center-Asset-Migrator/1.0',
-        },
+        headers,
       });
     } catch (error) {
       lastError = error;
@@ -143,13 +166,14 @@ async function probeAssets() {
   const {references} = await collectExternalImages();
   const urls = [...references.keys()];
   const startedAt = new Date().toISOString();
+  const referrerMode = process.env.ASSET_REFERRER_MODE ?? 'browser';
   const results = await mapConcurrent(
     urls,
     async (url) => {
       try {
         const response = await fetchWithRetry(
           url,
-          {method: 'HEAD', timeout: 30_000},
+          {method: 'HEAD', timeout: 30_000, referrerMode},
           2,
         );
         const contentLength = Number.parseInt(
@@ -174,6 +198,7 @@ async function probeAssets() {
   const report = {
     startedAt,
     completedAt: new Date().toISOString(),
+    referrerMode,
     total: results.length,
     available: results.filter((result) => result.ok).length,
     unavailable: results.filter((result) => !result.ok).length,
@@ -202,7 +227,11 @@ async function existingManifestEntry(url, entry) {
 }
 
 async function downloadAsset(url, identityUrl = url) {
-  const response = await fetchWithRetry(url, {method: 'GET', timeout: 120_000});
+  const response = await fetchWithRetry(url, {
+    method: 'GET',
+    timeout: 120_000,
+    referrerMode: 'yuque',
+  });
   if (!response.ok || !response.body) {
     throw new Error(`HTTP ${response.status}`);
   }
