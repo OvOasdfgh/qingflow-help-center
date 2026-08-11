@@ -1,0 +1,220 @@
+---
+title: "轻流 MCP 产品说明与接入指南"
+description: "介绍轻流远程 MCP 服务的能力、服务地址、OAuth 与授权码接入方式，覆盖 Codex、Cursor、Kimi Code、ZCode 等客户端。"
+slug: "/product-guides/qingflow-ai/atgqmmsnnnvogbo3"
+source_url: "https://exiao.yuque.com/ixwxsb/bgzs0e/atgqmmsnnnvogbo3?singleDoc#"
+source_updated_at: "2026-08-05T02:57:35.000Z"
+keywords:
+  - "帮助文档"
+  - "轻流AI"
+  - "Qingflow MCP/CLI"
+  - "轻流 MCP 产品说明与接入指南"
+  - "MCP"
+---
+## 一、功能简介
+
+轻流 MCP 是由轻流托管的远程 MCP（Model Context Protocol）服务。连接后，AI Agent（AI 智能体）可以在当前轻流账户的权限范围内读取信息、执行操作和搭建业务系统，并继续遵循现有的工作区、应用和流程规则。
+
+轻流 MCP 可用于 Codex、Cursor、Kimi Code、ZCode，以及其他支持远程 Streamable HTTP MCP 的客户端。
+
+| 能力 | 可以完成的操作 |
+| --- | --- |
+| 发现业务应用 | 查找工作区中的应用、门户、视图和图表 |
+| 管理业务数据 | 查询、新增、修改和删除记录，以及导入、导出和批量处理数据 |
+| 处理流程待办 | 获取待办和流程信息、执行审批动作并查看流程记录 |
+| 分析业务信息 | 结合视图、报表和记录内容进行汇总分析 |
+| 搭建业务应用 | 创建或调整表单、布局、视图、流程、图表和门户 |
+| 协同持续执行 | 结合成员、角色和工作区信息完成多步骤任务 |
+
+例如，可以让 AI Agent 汇总延期项目、跟进逾期应收、处理流程待办，或搭建包含表单、审批流程和状态看板的业务应用。
+
+## 二、连接前准备
+
+连接轻流 MCP 前，需要满足以下条件：
+
+1. 拥有能够正常登录的轻流账户，并有权访问目标工作区。
+2. AI 客户端支持远程 Streamable HTTP MCP。
+3. 使用 OAuth 时，客户端能够打开浏览器完成授权。
+
+### 2.1 选择服务地址
+
+请根据当前使用环境选择轻流 MCP 服务地址：
+
+| 环境 | 服务地址 |
+| --- | --- |
+| 官网环境 | `https://mcp.qingflow.com/mcp` |
+| 钉钉环境 | `https://mcp.ding.qingflow.com/mcp` |
+
+本文统一使用 `QINGFLOW_MCP_URL` 表示服务地址。在命令行中，可以按当前环境设置变量：
+
+```bash
+# 官网环境
+export QINGFLOW_MCP_URL="https://mcp.qingflow.com/mcp"
+
+# 钉钉环境（二选一，不要与官网环境同时设置）
+export QINGFLOW_MCP_URL="https://mcp.ding.qingflow.com/mcp"
+```
+
+JSON 配置中的 `<QINGFLOW_MCP_URL>` 是占位符。多数 MCP 客户端不会自动解析 JSON 中的环境变量，需要将其替换为上表中的实际地址。
+
+### 2.2 选择认证方式
+
+| 认证方式 | 适用情况 |
+| --- | --- |
+| OAuth 授权（推荐） | 客户端支持通过浏览器完成登录和授权 |
+| 轻流授权码（备用） | 客户端暂不支持标准 OAuth，需要手动配置个人授权码 |
+
+## 三、使用 OAuth 接入（推荐）
+
+OAuth 授权页会展示 `read` 和 `write` 权限范围。授权完成后，AI 实际可以访问的内容仍受当前轻流账户权限限制。
+
+### 3.1 Codex
+
+操作路径：Codex 客户端 →「设置」→「插件」→「MCP」→「添加服务器」
+
+1. 服务器名称填写 `qingflow`，类型选择「Streamable HTTP」。
+2. 地址填写当前环境对应的 `QINGFLOW_MCP_URL` 实际值并保存。
+3. 选择连接或登录，在浏览器中登录轻流并确认 `read`、`write` 授权。
+4. 运行 `codex mcp list`，或在 Codex 对话中输入 `/mcp`，确认 `qingflow` 已连接。
+
+也可以使用 Codex CLI：
+
+```bash
+codex mcp add qingflow --url "$QINGFLOW_MCP_URL"
+codex mcp login qingflow
+```
+
+### 3.2 Cursor
+
+操作路径：Cursor →「Settings」→「Tools & MCPs」→「Add Custom MCP」
+
+根据使用范围，将配置保存到项目级文件 `.cursor/mcp.json`，或全局文件 `~/.cursor/mcp.json`：
+
+```json
+{
+  "mcpServers": {
+    "qingflow": {
+      "url": "<QINGFLOW_MCP_URL>"
+    }
+  }
+}
+```
+
+保存后，在 MCP 管理页找到 `qingflow`，点击连接或授权，并在浏览器中完成轻流登录和授权。返回 Cursor 后，确认连接状态正常并已显示可用工具。
+
+### 3.3 Kimi Code
+
+1. 在对话输入框运行 `/mcp-config`，新增名为 `qingflow` 的远程 HTTP 服务。
+2. 将与 Cursor 示例相同的 JSON 配置保存至 `~/.kimi-code/mcp.json`。
+3. 运行 `/mcp-config login qingflow`，在浏览器中登录轻流并确认 `read`、`write` 授权。
+4. 返回 Kimi Code，运行 `/mcp` 检查连接状态。
+
+### 3.4 其他支持 OAuth 的客户端
+
+1. 新增远程 MCP 服务，传输方式选择「Streamable HTTP」。
+2. 在「MCP Server URL」中填写当前环境对应的服务地址。
+3. 不要添加静态 `Authorization` 请求头。
+4. 启动连接，并根据客户端提示在浏览器中完成轻流 OAuth 授权。
+5. 连接成功后，检查客户端是否已经显示轻流工具列表。
+
+## 四、验证连接
+
+首次连接时，建议先执行只读任务：
+
+> 请列出我当前有权访问的轻流应用，并简要说明每个应用的用途。先不要修改任何数据。
+
+如果客户端的 MCP 列表显示 `qingflow` 已连接，并且可以看到轻流工具被调用，即表示接入成功。
+
+## 五、使用轻流授权码接入（备用）
+
+如果客户端不支持标准 OAuth，可以使用个人轻流授权码接入。
+
+### 5.1 获取授权码
+
+获取路径：登录轻流 → 左下角头像 →「个人中心」→「账户信息」→「安全信息」→「授权码」
+
+> 授权码代表个人轻流身份。请勿将授权码分享给他人，也不要将其写入公开代码仓库。
+
+### 5.2 Codex
+
+建议通过环境变量引用授权码：
+
+```bash
+export QINGFLOW_AUTH_CODE="<轻流授权码>"
+
+codex mcp add qingflow \
+  --url "$QINGFLOW_MCP_URL" \
+  --bearer-token-env-var QINGFLOW_AUTH_CODE
+```
+
+从设置该变量的同一个终端启动 Codex，然后运行 `codex mcp list`，或输入 `/mcp` 检查连接。
+
+> 不要将真实授权码直接写入 `config.toml`。需要长期使用时，应将环境变量保存在可信的本机凭证环境中。
+
+### 5.3 Cursor、ZCode 和 Kimi Code
+
+这三个客户端均可通过地址和 `Authorization` 请求头接入。将占位符替换为实际地址和个人授权码：
+
+```json
+{
+  "mcpServers": {
+    "qingflow": {
+      "url": "<QINGFLOW_MCP_URL>",
+      "headers": {
+        "Authorization": "Bearer <轻流授权码>"
+      }
+    }
+  }
+}
+```
+
+| 客户端 | 配置方法 |
+| --- | --- |
+| Cursor | 使用全局配置 `~/.cursor/mcp.json`，重新加载后在 MCP 管理页确认 `qingflow` 已连接 |
+| ZCode | 进入「设置」→「MCP 服务器」→「新建 MCP 服务器」，类型选择「HTTP」，填写地址和请求头后启用服务 |
+| Kimi Code | 运行 `/mcp-config` 新增远程 HTTP 服务，在 `~/.kimi-code/mcp.json` 中保存配置，开启新会话后运行 `/mcp` 检查连接 |
+
+> 授权码会以明文保存在配置中。请使用个人设备的全局配置并限制文件访问权限，不要将配置提交到 Git。
+
+### 5.4 其他客户端
+
+其他支持 Streamable HTTP 和自定义请求头的 MCP 客户端，需要发送：
+
+```text
+URL: <QINGFLOW_MCP_URL>
+Authorization: Bearer <轻流授权码>
+```
+
+不同客户端的字段名称可能不同，请将凭证保存在客户端的安全配置中。
+
+## 六、安全与权限
+
+- AI Agent 不会获得当前轻流账户之外的额外数据权限。
+- 浏览器授权页会展示 `read`、`write` 权限范围，由用户主动确认。
+- 支持操作确认的客户端，可以在修改数据或执行流程动作前要求用户确认。
+- 优先使用 OAuth，减少长期保存凭证的需要。
+- 不要在项目配置、公开仓库、聊天记录或共享文档中保存真实授权码，也不要分享含有 `Authorization` 请求头的配置文件。
+
+## 七、常见问题
+
+### 7.1 OAuth 没有打开浏览器，或者授权后仍未连接怎么办？
+
+1. 确认客户端支持远程 MCP OAuth。
+2. 检查轻流 MCP 地址是否完整。
+3. 在客户端中重新发起登录。
+4. 如果浏览器回调失败，关闭旧授权窗口并重启客户端后重试。
+5. 检查本机是否拦截了回调地址。
+
+### 7.2 如何切换轻流账户或重新授权？
+
+先在客户端的 MCP 管理页断开或移除 `qingflow`，再重新连接并完成浏览器授权。Codex 可以重新运行：
+
+```bash
+codex mcp login qingflow
+```
+
+使用轻流授权码时，需要替换凭证并重启客户端。
+
+### 7.3 AI 会看到当前账户无权访问的数据吗？
+
+不会。轻流 MCP 复用当前用户身份和轻流已有权限模型，应用、记录、视图和流程的访问范围仍由轻流中的配置决定。

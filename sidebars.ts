@@ -23,6 +23,7 @@ const sidebars: SidebarsConfig = {
                 "id": "migrated/rphk9kdbczxrixk1"
               },
               "items": [
+                "migrated/wn5gs7ggbnhm0gax",
                 "migrated/uc6hd5qc9a6lzo7o",
                 "migrated/fqgqp43shks7x58z",
                 "migrated/dohzq3t5hiq58bky",
@@ -1875,7 +1876,17 @@ const sidebars: SidebarsConfig = {
           },
           "items": [
             "migrated/sigv97ziqu57969r",
-            "migrated/pdwhowgks483t262",
+            {
+              "type": "category",
+              "label": "Qingflow MCP/CLI",
+              "link": {
+                "type": "doc",
+                "id": "migrated/pdwhowgks483t262"
+              },
+              "items": [
+                "migrated/atgqmmsnnnvogbo3"
+              ]
+            },
             "migrated/wrebzrh97dltpvun",
             {
               "type": "category",
