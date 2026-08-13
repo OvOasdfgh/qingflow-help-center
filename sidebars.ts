@@ -1875,6 +1875,8 @@ const sidebars: SidebarsConfig = {
             "id": "migrated/bduifk8xokipcu3f"
           },
           "items": [
+            "migrated/zkaf2n0me0qs1yzu",
+            "migrated/ioiiffougpi9c55c",
             "migrated/sigv97ziqu57969r",
             {
               "type": "category",
