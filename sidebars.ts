@@ -1875,6 +1875,15 @@ const sidebars: SidebarsConfig = {
             "id": "migrated/bduifk8xokipcu3f"
           },
           "items": [
+            {
+              "type": "category",
+              "label": "QingBuilder",
+              "items": [
+                "migrated/dkmqpe03ack8uoug",
+                "migrated/ufb96lyl072o23fq",
+                "migrated/uc3wcyvgsd45x8iy"
+              ]
+            },
             "migrated/zkaf2n0me0qs1yzu",
             "migrated/ioiiffougpi9c55c",
             "migrated/sigv97ziqu57969r",
