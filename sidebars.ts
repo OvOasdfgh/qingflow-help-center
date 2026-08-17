@@ -1874,10 +1874,11 @@ const sidebars: SidebarsConfig = {
             "type": "doc",
             "id": "migrated/bduifk8xokipcu3f"
           },
-          "items": [
-            {
-              "type": "category",
-              "label": "QingBuilder",
+             "items": [
+        "migrated/bughr2zg3zpex2tx",
+        {
+          "type": "category",
+          "label": "QingBuilder",
               "items": [
                 "migrated/dkmqpe03ack8uoug",
                 "migrated/ufb96lyl072o23fq",
