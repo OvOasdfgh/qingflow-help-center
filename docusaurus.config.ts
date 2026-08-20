@@ -129,11 +129,6 @@ const config: Config = {
           'data-umami-event': 'search',
           'data-umami-event-location': 'navbar',
         },
-        {
-          href: 'https://github.com/nonepointer666/qingflow-help-center',
-          label: 'GitHub',
-          position: 'right',
-        },
       ],
     },
     footer: {
@@ -186,10 +181,6 @@ const config: Config = {
               label: '解决方案',
               to: '/docs/solutions/inventory-management',
             },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/nonepointer666/qingflow-help-center',
-            },
           ],
         },
       ],
@@ -209,7 +200,6 @@ const config: Config = {
       host: process.env.TYPESENSE_HOST ?? '',
       searchApiKey: process.env.TYPESENSE_SEARCH_API_KEY ?? '',
       collection: process.env.TYPESENSE_COLLECTION ?? 'qingflow_help_docs',
-      enableSemantic: process.env.TYPESENSE_ENABLE_SEMANTIC === 'true',
     },
   },
 };

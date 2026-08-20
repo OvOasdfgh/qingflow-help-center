@@ -17,8 +17,12 @@ import {
 import styles from './search.module.css';
 
 type SearchDocument = {
+  doc_id?: string;
+  record_type?: 'document' | 'section';
   title?: string;
   section?: string;
+  breadcrumb?: string;
+  keywords?: string[];
   content?: string;
   url?: string;
   version?: string;
@@ -35,6 +39,8 @@ type SearchHit = {
 };
 
 type SearchState = 'idle' | 'loading' | 'ready' | 'error';
+type SynonymGroup = {terms: string[]};
+type LocalSearchData = {documents: SearchDocument[]; synonymGroups: SynonymGroup[]};
 
 const localDocuments: SearchDocument[] = [
   {
@@ -95,40 +101,69 @@ const localDocuments: SearchDocument[] = [
   },
 ];
 
-function searchLocalDocuments(query: string, documents: SearchDocument[]): SearchHit[] {
-  const normalizedQuery = query.toLowerCase().replace(/\s+/g, '');
-  const words = query.toLowerCase().split(/\s+/).filter(Boolean);
+function normalizeSearchText(value: string): string {
+  return value.toLowerCase().replace(/[\s\u3000]+/g, '').trim();
+}
 
-  return documents
-    .map((document) => {
-      const corpus = [
-        document.title,
-        document.section,
-        document.content,
-        ...(document.tags ?? []),
-      ]
-        .filter(Boolean)
-        .join(' ')
-        .toLowerCase();
-      const compactCorpus = corpus.replace(/\s+/g, '');
-      let score = compactCorpus.includes(normalizedQuery) ? 20 : 0;
+function expandQuery(query: string, synonymGroups: SynonymGroup[]): string[] {
+  const variants = new Set([query]);
+  const normalizedQuery = normalizeSearchText(query);
 
-      words.forEach((word) => {
-        if (corpus.includes(word)) score += 5;
+  synonymGroups.forEach(({terms}) => {
+    const normalizedTerms = terms.map(normalizeSearchText);
+    if (normalizedTerms.some((term) => normalizedQuery.includes(term))) {
+      terms.forEach((term) => variants.add(term));
+    }
+  });
+
+  return Array.from(variants);
+}
+
+function searchLocalDocuments(
+  query: string,
+  documents: SearchDocument[],
+  synonymGroups: SynonymGroup[],
+): SearchHit[] {
+  const variants = expandQuery(query, synonymGroups).map(normalizeSearchText);
+  const fields: Array<[keyof SearchDocument, number]> = [
+    ['title', 100],
+    ['section', 80],
+    ['keywords', 70],
+    ['tags', 50],
+    ['breadcrumb', 30],
+    ['content', 10],
+  ];
+  const bestByDocument = new Map<string, {document: SearchDocument; score: number}>();
+
+  documents.forEach((document) => {
+    let score = 0;
+    fields.forEach(([field, weight]) => {
+      const values = Array.isArray(document[field])
+        ? (document[field] as string[])
+        : [String(document[field] ?? '')];
+      const value = normalizeSearchText(values.join(' '));
+      variants.forEach((variant) => {
+        if (!variant || !value.includes(variant)) return;
+        score += weight * (variant === normalizeSearchText(query) ? 1 : 0.72);
+        if (value.startsWith(variant)) score += Math.round(weight * 0.2);
       });
+    });
 
-      if (normalizedQuery.length > 2) {
-        for (let index = 0; index < normalizedQuery.length - 1; index += 1) {
-          if (compactCorpus.includes(normalizedQuery.slice(index, index + 2))) {
-            score += 1;
-          }
-        }
-      }
+    if (score === 0) return;
+    const key = document.doc_id ?? document.url ?? document.title ?? '';
+    const previous = bestByDocument.get(key);
+    if (!previous || score > previous.score) {
+      bestByDocument.set(key, {document, score});
+    }
+  });
 
-      return {document, score};
-    })
-    .filter((item) => item.score >= 2)
-    .sort((left, right) => right.score - left.score)
+  return Array.from(bestByDocument.values())
+    .sort(
+      (left, right) =>
+        right.score - left.score ||
+        (left.document.title ?? '').localeCompare(right.document.title ?? '', 'zh-CN') ||
+        (left.document.url ?? '').localeCompare(right.document.url ?? ''),
+    )
     .slice(0, 8)
     .map(({document}) => ({document}));
 }
@@ -137,13 +172,13 @@ export default function SearchPage(): ReactNode {
   const {siteConfig} = useDocusaurusContext();
   const searchPath = useBaseUrl('/search');
   const searchIndexPath = useBaseUrl('/search-records.json');
-  const localIndexPromise = useRef<Promise<SearchDocument[]> | null>(null);
+  const searchSynonymsPath = useBaseUrl('/search-synonyms.json');
+  const localIndexPromise = useRef<Promise<LocalSearchData> | null>(null);
   const customFields = (siteConfig.customFields ?? {}) as {
     typesense?: {
       host?: string;
       searchApiKey?: string;
       collection?: string;
-      enableSemantic?: boolean;
     };
   };
   const [query, setQuery] = useState('');
@@ -156,16 +191,22 @@ export default function SearchPage(): ReactNode {
 
   function getLocalDocuments() {
     if (!localIndexPromise.current) {
-      localIndexPromise.current = fetch(searchIndexPath)
-        .then(async (response) => {
-          if (!response.ok) {
-            throw new Error(`Local search index responded with ${response.status}`);
+      localIndexPromise.current = Promise.all([
+        fetch(searchIndexPath),
+        fetch(searchSynonymsPath),
+      ])
+        .then(async ([documentsResponse, synonymsResponse]) => {
+          if (!documentsResponse.ok) {
+            throw new Error(`Local search index responded with ${documentsResponse.status}`);
           }
-
-          const documents: unknown = await response.json();
-          return Array.isArray(documents) ? (documents as SearchDocument[]) : localDocuments;
+          const documents: unknown = await documentsResponse.json();
+          const synonyms: unknown = synonymsResponse.ok ? await synonymsResponse.json() : [];
+          return {
+            documents: Array.isArray(documents) ? (documents as SearchDocument[]) : localDocuments,
+            synonymGroups: Array.isArray(synonyms) ? (synonyms as SynonymGroup[]) : [],
+          };
         })
-        .catch(() => localDocuments);
+        .catch(() => ({documents: localDocuments, synonymGroups: []}));
     }
 
     return localIndexPromise.current;
@@ -185,17 +226,13 @@ export default function SearchPage(): ReactNode {
 
     if (!canUseTypesense) {
       const documents = await getLocalDocuments();
-      setResults(searchLocalDocuments(trimmedQuery, documents));
+      setResults(searchLocalDocuments(trimmedQuery, documents.documents, documents.synonymGroups));
       setState('ready');
       return;
     }
 
     const host = typesense.host?.replace(/\/$/, '');
     const collection = typesense.collection || 'qingflow_help_docs';
-    const queryBy = typesense.enableSemantic
-      ? 'title,section,content,tags,embedding'
-      : 'title,section,content,tags';
-
     try {
       const response = await fetch(`${host}/multi_search`, {
         method: 'POST',
@@ -208,14 +245,15 @@ export default function SearchPage(): ReactNode {
             {
               collection,
               q: trimmedQuery,
-              query_by: queryBy,
-              highlight_fields: 'title,section,content',
-              prefix: 'true,true,false,false',
-              num_typos: 2,
+              query_by: 'title,section,keywords,tags,breadcrumb,content',
+              query_by_weights: '12,10,8,6,4,1',
+              highlight_fields: 'title,section,keywords,content',
+              prioritize_exact_match: true,
+              prioritize_token_position: true,
+              text_match_type: 'max_score',
+              prefix: 'true,true,true,true,false,false',
+              num_typos: 1,
               per_page: 8,
-              ...(typesense.enableSemantic
-                ? {vector_query: 'embedding:([], alpha: 0.65)'}
-                : {}),
             },
           ],
         }),
@@ -230,7 +268,7 @@ export default function SearchPage(): ReactNode {
       setState('ready');
     } catch {
       const documents = await getLocalDocuments();
-      setResults(searchLocalDocuments(trimmedQuery, documents));
+      setResults(searchLocalDocuments(trimmedQuery, documents.documents, documents.synonymGroups));
       setState('ready');
       setNotice('在线搜索暂不可用，已显示站内索引结果。');
     }
@@ -347,6 +385,10 @@ export default function SearchPage(): ReactNode {
               <div className={styles.results}>
                 {results.map((result, index) => {
                   const document = result.document ?? {};
+                  const resultTitle =
+                    document.record_type === 'section'
+                      ? document.section ?? document.title
+                      : document.title;
                   const snippet =
                     result.highlights?.[0]?.snippet ??
                     document.content?.slice(0, 180) ??
@@ -360,7 +402,10 @@ export default function SearchPage(): ReactNode {
                           <span>{document.section ?? '帮助文档'}</span>
                           {document.version ? <small>{document.version}</small> : null}
                         </div>
-                        <Heading as="h2">{document.title ?? '未命名文档'}</Heading>
+                        <Heading as="h2">{resultTitle ?? '未命名文档'}</Heading>
+                        {document.record_type === 'section' && document.title ? (
+                          <p className={styles.resultBreadcrumb}>{document.title}</p>
+                        ) : null}
                         <p>{snippet}</p>
                         {tags.length > 0 ? (
                           <div className={styles.tagRow}>

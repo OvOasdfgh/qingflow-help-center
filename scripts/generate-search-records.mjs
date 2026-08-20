@@ -9,6 +9,8 @@ const publicOutputFile = path.join(cwd, 'static', 'search-records.json');
 const rawDocsDir = path.join(cwd, 'static', 'raw-docs');
 const llmsOutputFile = path.join(cwd, 'static', 'llms.txt');
 const llmsFullOutputFile = path.join(cwd, 'static', 'llms-full.txt');
+const synonymsFile = path.join(cwd, 'data', 'search-synonyms.json');
+const publicSynonymsFile = path.join(cwd, 'static', 'search-synonyms.json');
 
 const sectionByRoute = new Map([
   ['getting-started', '新手指南'],
@@ -90,6 +92,21 @@ async function getMarkdownFiles(dir) {
   return nested.flat();
 }
 
+function parseYamlValue(value) {
+  const trimmed = value.trim();
+  if (!trimmed) return '';
+
+  if (trimmed.startsWith('[') && trimmed.endsWith(']')) {
+    return trimmed
+      .slice(1, -1)
+      .split(',')
+      .map((item) => item.trim().replace(/^['"]|['"]$/g, ''))
+      .filter(Boolean);
+  }
+
+  return trimmed.replace(/^['"]|['"]$/g, '');
+}
+
 function parseFrontMatter(source) {
   if (!source.startsWith('---\n')) {
     return {attributes: {}, body: source};
@@ -104,18 +121,27 @@ function parseFrontMatter(source) {
   const body = source.slice(end + 5).trim();
   const attributes = {};
 
-  for (const line of rawFrontMatter.split('\n')) {
+  const lines = rawFrontMatter.split('\n');
+  for (let index = 0; index < lines.length; index += 1) {
+    const line = lines[index];
     const separatorIndex = line.indexOf(':');
     if (separatorIndex === -1) {
       continue;
     }
 
     const key = line.slice(0, separatorIndex).trim();
-    const value = line
-      .slice(separatorIndex + 1)
-      .trim()
-      .replace(/^['"]|['"]$/g, '');
-    attributes[key] = value;
+    const rawValue = line.slice(separatorIndex + 1).trim();
+    if (!rawValue) {
+      const list = [];
+      while (index + 1 < lines.length && /^\s+-\s+/.test(lines[index + 1])) {
+        index += 1;
+        list.push(parseYamlValue(lines[index].replace(/^\s+-\s+/, '')));
+      }
+      attributes[key] = list;
+      continue;
+    }
+
+    attributes[key] = parseYamlValue(rawValue);
   }
 
   return {attributes, body};
@@ -151,6 +177,57 @@ function normalizeContent(body) {
     .trim();
 }
 
+function normalizeSearchText(value) {
+  return String(value ?? '')
+    .toLowerCase()
+    .replace(/[\s\u3000]+/g, '')
+    .trim();
+}
+
+function cleanHeading(value) {
+  return value
+    .replace(/\s+#+\s*$/, '')
+    .replace(/[*_`~]/g, '')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .trim();
+}
+
+function extractSections(body) {
+  const lines = body.split('\n');
+  const headings = [];
+  let inCodeBlock = false;
+
+  lines.forEach((line, lineIndex) => {
+    if (/^\s*```/.test(line)) {
+      inCodeBlock = !inCodeBlock;
+      return;
+    }
+
+    if (inCodeBlock) return;
+    const match = line.match(/^(#{2,6})\s+(.+?)\s*$/);
+    if (match) {
+      headings.push({
+        level: match[1].length,
+        title: cleanHeading(match[2]),
+        lineIndex,
+      });
+    }
+  });
+
+  return headings
+    .map((heading, index) => {
+      const nextHeading = headings
+        .slice(index + 1)
+        .find((candidate) => candidate.level <= heading.level);
+      const endLine = nextHeading?.lineIndex ?? lines.length;
+      return {
+        ...heading,
+        body: lines.slice(heading.lineIndex, endLine).join('\n').trim(),
+      };
+    })
+    .filter((section) => section.title && normalizeContent(section.body));
+}
+
 function cleanMarkdown(body) {
   return body
     .replace(/\n---\s*\n+\[查看语雀原文\]\([^)]+\)\s*$/s, '')
@@ -171,6 +248,49 @@ function inferTags(relativePath, attributes, title) {
   return Array.from(tags);
 }
 
+function asStringArray(value) {
+  if (Array.isArray(value)) return value.filter(Boolean).map(String);
+  if (typeof value === 'string') {
+    return value
+      .split(/[,，\s]+/)
+      .map((item) => item.trim())
+      .filter(Boolean);
+  }
+  return [];
+}
+
+function buildSynonymKeywords(values, synonymGroups, sourceValues = values) {
+  const source = normalizeSearchText(sourceValues.join(' '));
+  const keywords = new Set(values.filter(Boolean));
+
+  synonymGroups.forEach((group) => {
+    const terms = asStringArray(group.terms);
+    if (terms.some((term) => source.includes(normalizeSearchText(term)))) {
+      terms.forEach((term) => keywords.add(term));
+    }
+  });
+
+  return Array.from(keywords);
+}
+
+function slugifyHeading(value, usedSlugs) {
+  const base = value
+    .toLowerCase()
+    .trim()
+    .replace(/[\s\u3000]+/g, '-')
+    .replace(/[^\p{Letter}\p{Number}\p{Script=Han}-]/gu, '')
+    .replace(/-+/g, '-')
+    .replace(/^-+|-+$/g, '') || 'section';
+  let slug = base;
+  let suffix = 2;
+  while (usedSlugs.has(slug)) {
+    slug = `${base}-${suffix}`;
+    suffix += 1;
+  }
+  usedSlugs.add(slug);
+  return slug;
+}
+
 function buildUrl(relativePath, attributes) {
   if (attributes.slug) {
     return withTrailingSlash(`/docs${attributes.slug}`);
@@ -187,7 +307,11 @@ function withTrailingSlash(url) {
 async function main() {
   const markdownFiles = await getMarkdownFiles(docsRoot);
   const records = [];
+  const documentRecords = [];
   const rawWrites = [];
+  const synonymGroups = JSON.parse(await readFile(synonymsFile, 'utf8'));
+  const generatedAt = new Date().toISOString();
+  const generatedAtTs = Date.now();
 
   await rm(rawDocsDir, {recursive: true, force: true});
 
@@ -198,6 +322,17 @@ async function main() {
     const cleanBody = cleanMarkdown(body);
     const title = extractTitle(cleanBody, attributes.title);
     const content = normalizeContent(cleanBody);
+    const category = extractSection(relativePath, attributes);
+    const tags = inferTags(relativePath, attributes, title);
+    const frontMatterKeywords = [
+      ...asStringArray(attributes.keywords),
+      ...asStringArray(attributes.search_aliases),
+    ];
+    const keywords = buildSynonymKeywords(
+      [title, category, ...tags, ...frontMatterKeywords],
+      synonymGroups,
+      [title, category, content, ...tags, ...frontMatterKeywords],
+    );
     const rawRelativePath = relativePath.replace(/\.(md|mdx)$/i, '.md');
     const rawOutputPath = path.join(rawDocsDir, rawRelativePath);
     const rawUrl = `/raw-docs/${rawRelativePath.replaceAll(path.sep, '/')}`;
@@ -211,19 +346,52 @@ async function main() {
       ),
     );
 
-    records.push({
-      id: relativePath.replaceAll(path.sep, '-').replace(/\.(md|mdx)$/i, ''),
+    const docId = relativePath.replaceAll(path.sep, '-').replace(/\.(md|mdx)$/i, '');
+    const documentRecord = {
+      id: docId,
+      doc_id: docId,
+      record_type: 'document',
       title,
-      section: extractSection(relativePath, attributes),
+      section: category,
+      breadcrumb: category,
+      keywords,
       content,
       url: buildUrl(relativePath, attributes),
       product: 'qingflow',
       version: 'current',
       language: 'zh-CN',
-      tags: inferTags(relativePath, attributes, title),
+      tags,
       raw_url: rawUrl,
-      updated_at: new Date().toISOString(),
-      updated_at_ts: Date.now(),
+      updated_at: generatedAt,
+      updated_at_ts: generatedAtTs,
+    };
+    documentRecords.push(documentRecord);
+    records.push(documentRecord);
+
+    const usedSlugs = new Set();
+    extractSections(cleanBody).forEach((section, sectionIndex) => {
+      const sectionKeywords = buildSynonymKeywords(
+        [title, section.title, category, ...tags, ...frontMatterKeywords],
+        synonymGroups,
+        [title, section.title, category, section.body, ...tags, ...frontMatterKeywords],
+      );
+      records.push({
+        id: `${docId}--section-${sectionIndex + 1}`,
+        doc_id: docId,
+        record_type: 'section',
+        title,
+        section: section.title,
+        breadcrumb: `${category} / ${title}`,
+        keywords: sectionKeywords,
+        content: normalizeContent(section.body),
+        url: `${buildUrl(relativePath, attributes)}#${slugifyHeading(section.title, usedSlugs)}`,
+        product: 'qingflow',
+        version: 'current',
+        language: 'zh-CN',
+        tags,
+        updated_at: generatedAt,
+        updated_at_ts: generatedAtTs,
+      });
     });
   }
 
@@ -246,19 +414,19 @@ async function main() {
     '',
     '## AI 资源',
     '',
-    `- [完整文档索引](${siteUrl}/llms-full.txt): 包含全部 ${records.length} 篇文档的链接与摘要。`,
+    `- [完整文档索引](${siteUrl}/llms-full.txt): 包含全部 ${documentRecords.length} 篇文档的链接与摘要。`,
     `- [站点地图](${siteUrl}/sitemap.xml): 包含所有可抓取页面。`,
     '',
   ].join('\n');
   const llmsFullText = [
     '# 轻流帮助中心完整文档索引',
     '',
-    `> 共 ${records.length} 篇文档。精简入口请访问 ${siteUrl}/llms.txt。`,
+    `> 共 ${documentRecords.length} 篇文档。精简入口请访问 ${siteUrl}/llms.txt。`,
     '',
     ...llmsSections.flatMap((section) => [
       `## ${section.title}`,
       '',
-      ...records
+      ...documentRecords
         .filter((record) => record.section === section.section)
         .sort((a, b) => a.title.localeCompare(b.title, 'zh-CN'))
         .map(
@@ -279,6 +447,7 @@ async function main() {
     writeFile(publicOutputFile, serializedRecords),
     writeFile(llmsOutputFile, llmsText),
     writeFile(llmsFullOutputFile, llmsFullText),
+    writeFile(publicSynonymsFile, JSON.stringify(synonymGroups, null, 2)),
   ]);
 
   console.log(

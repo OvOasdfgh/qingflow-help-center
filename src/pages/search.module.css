@@ -204,6 +204,13 @@
   max-width: 700px;
 }
 
+.resultBreadcrumb {
+  color: #85878d;
+  font-size: 12px;
+  line-height: 1.5;
+  margin: -2px 0 6px;
+}
+
 .resultArrow {
   color: #96989e;
   position: absolute;

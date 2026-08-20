@@ -11,8 +11,12 @@ const schema = {
   name: collection,
   enable_nested_fields: false,
   fields: [
+    {name: 'doc_id', type: 'string', facet: true},
+    {name: 'record_type', type: 'string', facet: true},
     {name: 'title', type: 'string'},
     {name: 'section', type: 'string', facet: true},
+    {name: 'breadcrumb', type: 'string'},
+    {name: 'keywords', type: 'string[]', facet: true, optional: true},
     {name: 'content', type: 'string'},
     {name: 'url', type: 'string', facet: true},
     {name: 'product', type: 'string', facet: true},
@@ -31,6 +35,29 @@ async function ensureCollection() {
   });
 
   if (response.ok) {
+    const existingSchema = await response.json();
+    const existingFields = new Set(
+      (existingSchema.fields ?? []).map((field) => field.name),
+    );
+    const missingFields = schema.fields.filter((field) => !existingFields.has(field.name));
+    if (missingFields.length > 0) {
+      const alterResponse = await fetch(`${host}/collections/${collection}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-TYPESENSE-API-KEY': apiKey ?? '',
+        },
+        body: JSON.stringify({fields: missingFields}),
+      });
+
+      if (!alterResponse.ok) {
+        const details = await alterResponse.text();
+        throw new Error(
+          `Failed to update collection schema: ${alterResponse.status} ${details}`,
+        );
+      }
+      console.log(`Added ${missingFields.length} fields to ${collection}`);
+    }
     return;
   }
 

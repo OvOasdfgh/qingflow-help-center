@@ -2,8 +2,12 @@
   "name": "qingflow_help_docs",
   "enable_nested_fields": false,
   "fields": [
+    {"name": "doc_id", "type": "string", "facet": true},
+    {"name": "record_type", "type": "string", "facet": true},
     {"name": "title", "type": "string"},
     {"name": "section", "type": "string", "facet": true},
+    {"name": "breadcrumb", "type": "string"},
+    {"name": "keywords", "type": "string[]", "facet": true, "optional": true},
     {"name": "content", "type": "string"},
     {"name": "url", "type": "string", "facet": true},
     {"name": "product", "type": "string", "facet": true},

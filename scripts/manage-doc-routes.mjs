@@ -1,5 +1,6 @@
 import {mkdir, readFile, readdir, stat, writeFile} from 'node:fs/promises';
 import path from 'node:path';
+import {pinyin} from 'pinyin-pro';
 
 const cwd = process.cwd();
 const docsRoot = path.join(cwd, 'docs', 'migrated');
@@ -8,8 +9,10 @@ const sourceRoots = [
   path.join(cwd, 'docusaurus.config.ts'),
   path.join(cwd, 'scripts'),
   path.join(cwd, 'src'),
+  path.join(cwd, 'docs'),
 ];
 const chinesePattern = /\p{Script=Han}/u;
+const yuqueKeyPattern = /^[a-z0-9]{16}$/;
 
 const sectionRoutes = new Map([
   ['新手指南', 'getting-started'],
@@ -80,6 +83,14 @@ function readSlug(source, filePath) {
   return match[1];
 }
 
+function readTitle(source, filePath) {
+  const match = source.match(/^title:\s*["']([^"']+)["']\s*$/m);
+  if (!match) {
+    throw new Error(`Missing title in ${path.relative(cwd, filePath)}`);
+  }
+  return match[1];
+}
+
 function createEnglishSlug(oldSlug, documentId) {
   const exactRoute = exactRoutes.get(documentId);
   if (exactRoute) {
@@ -105,6 +116,25 @@ function createEnglishSlug(oldSlug, documentId) {
   return parts.length === 1 ? `/${section}` : `/${section}/${documentId}`;
 }
 
+function createTitleSlug(title) {
+  const romanized = pinyin(title, {
+    toneType: 'none',
+    type: 'array',
+    nonZh: 'consecutive',
+  }).join('-');
+  const slug = romanized
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 96)
+    .replace(/-+$/g, '');
+  return slug || 'document';
+}
+
+function isYuqueKeySlug(slug) {
+  return yuqueKeyPattern.test(slug.split('/').filter(Boolean).at(-1) ?? '');
+}
+
 async function readRedirects() {
   try {
     return JSON.parse(await readFile(redirectsFile, 'utf8'));
@@ -121,7 +151,7 @@ async function rewriteRouteReferences(routeChanges) {
     await Promise.all(sourceRoots.map((target) => getFiles(target)))
   )
     .flat()
-    .filter((filePath) => /\.(?:js|mjs|ts|tsx)$/.test(filePath));
+    .filter((filePath) => /\.(?:js|mjs|ts|tsx|md|mdx)$/.test(filePath));
   const replacements = routeChanges
     .map(({from, to}) => ({from: `/docs${from}`, to: `/docs${to}`}))
     .sort((a, b) => b.from.length - a.from.length);
@@ -189,22 +219,60 @@ async function migrateRoutes() {
     .filter((filePath) => filePath.endsWith('.mdx'))
     .sort();
   const routeChanges = [];
+  const reservedSlugs = new Set();
+  const pendingKeyMigrations = [];
 
   for (const filePath of markdownFiles) {
     const source = await readFile(filePath, 'utf8');
     const oldSlug = readSlug(source, filePath);
-    if (!chinesePattern.test(oldSlug)) {
+    const documentId = path.basename(filePath, '.mdx');
+    if (chinesePattern.test(oldSlug)) {
+      const newSlug = createEnglishSlug(oldSlug, documentId);
+      const output = source.replace(
+        /^slug:\s*["'][^"']+["']\s*$/m,
+        `slug: "${newSlug}"`,
+      );
+      await writeFile(filePath, output);
+      routeChanges.push({from: oldSlug, to: newSlug});
+      reservedSlugs.add(newSlug);
       continue;
     }
 
-    const documentId = path.basename(filePath, '.mdx');
-    const newSlug = createEnglishSlug(oldSlug, documentId);
-    const output = source.replace(
+    if (isYuqueKeySlug(oldSlug)) {
+      pendingKeyMigrations.push({
+        filePath,
+        oldSlug,
+        source,
+        title: readTitle(source, filePath),
+      });
+    } else {
+      reservedSlugs.add(oldSlug);
+    }
+  }
+
+  const duplicateCounts = new Map();
+  for (const migration of pendingKeyMigrations.sort((a, b) =>
+    a.oldSlug.localeCompare(b.oldSlug),
+  )) {
+    const parts = migration.oldSlug.split('/').filter(Boolean);
+    const routePrefix = `/${parts.slice(0, -1).join('/')}`;
+    const titleSlug = createTitleSlug(migration.title);
+    const baseSlug = `${routePrefix}/${titleSlug}`;
+    let newSlug = baseSlug;
+    let suffix = duplicateCounts.get(baseSlug) ?? 1;
+    while (reservedSlugs.has(newSlug)) {
+      suffix += 1;
+      newSlug = `${baseSlug}-${suffix}`;
+    }
+    duplicateCounts.set(baseSlug, suffix);
+    reservedSlugs.add(newSlug);
+
+    const output = migration.source.replace(
       /^slug:\s*["'][^"']+["']\s*$/m,
       `slug: "${newSlug}"`,
     );
-    await writeFile(filePath, output);
-    routeChanges.push({from: oldSlug, to: newSlug});
+    await writeFile(migration.filePath, output);
+    routeChanges.push({from: migration.oldSlug, to: newSlug});
   }
 
   const redirectMap = new Map(
@@ -212,6 +280,11 @@ async function migrateRoutes() {
   );
   for (const redirect of routeChanges) {
     redirectMap.set(redirect.from, redirect.to);
+    for (const [from, to] of redirectMap) {
+      if (to === redirect.from) {
+        redirectMap.set(from, redirect.to);
+      }
+    }
   }
   const redirects = Array.from(redirectMap, ([from, to]) => ({from, to})).sort(
     (a, b) => a.from.localeCompare(b.from, 'zh-CN'),
