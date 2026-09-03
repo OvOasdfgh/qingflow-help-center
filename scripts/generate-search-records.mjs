@@ -108,17 +108,18 @@ function parseYamlValue(value) {
 }
 
 function parseFrontMatter(source) {
-  if (!source.startsWith('---\n')) {
+  const normalizedSource = source.replace(/\r\n?/g, '\n');
+  if (!normalizedSource.startsWith('---\n')) {
     return {attributes: {}, body: source};
   }
 
-  const end = source.indexOf('\n---\n', 4);
+  const end = normalizedSource.indexOf('\n---\n', 4);
   if (end === -1) {
     return {attributes: {}, body: source};
   }
 
-  const rawFrontMatter = source.slice(4, end).trim();
-  const body = source.slice(end + 5).trim();
+  const rawFrontMatter = normalizedSource.slice(4, end).trim();
+  const body = normalizedSource.slice(end + 5).trim();
   const attributes = {};
 
   const lines = rawFrontMatter.split('\n');
@@ -164,6 +165,20 @@ function extractSection(relativePath, attributes) {
 
   const parts = relativePath.split(path.sep);
   return parts.length > 1 ? parts[0] : 'general';
+}
+
+function inferBusinessPriority(relativePath, attributes) {
+  const route = String(attributes.slug ?? '')
+    .split('/')
+    .filter(Boolean)[0]
+    ?.toLowerCase();
+  const fallbackRoute = relativePath.split(path.sep).filter(Boolean)[0]?.toLowerCase();
+  const section = route ?? fallbackRoute ?? '';
+
+  if (section === 'product-guides') return 30;
+  if (section === 'faq') return 20;
+  if (section === 'release-notes') return 10;
+  return 0;
 }
 
 function normalizeContent(body) {
@@ -323,6 +338,7 @@ async function main() {
     const title = extractTitle(cleanBody, attributes.title);
     const content = normalizeContent(cleanBody);
     const category = extractSection(relativePath, attributes);
+    const businessPriority = inferBusinessPriority(relativePath, attributes);
     const tags = inferTags(relativePath, attributes, title);
     const frontMatterKeywords = [
       ...asStringArray(attributes.keywords),
@@ -358,6 +374,7 @@ async function main() {
       content,
       url: buildUrl(relativePath, attributes),
       product: 'qingflow',
+      business_priority: businessPriority,
       version: 'current',
       language: 'zh-CN',
       tags,
@@ -386,6 +403,7 @@ async function main() {
         content: normalizeContent(section.body),
         url: `${buildUrl(relativePath, attributes)}#${slugifyHeading(section.title, usedSlugs)}`,
         product: 'qingflow',
+        business_priority: businessPriority,
         version: 'current',
         language: 'zh-CN',
         tags,

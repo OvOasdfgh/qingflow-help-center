@@ -7,6 +7,7 @@ import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 import {
   ArrowRight,
+  ChevronLeft,
   ChevronRight,
   FileSearch,
   LoaderCircle,
@@ -28,12 +29,20 @@ type SearchDocument = {
   version?: string;
   language?: string;
   product?: string;
+  business_priority?: number;
   tags?: string[];
 };
 
+type SearchMatch = {start: number; end: number};
+type SearchSnippet = {text: string; matches: SearchMatch[]};
+type ResultSnippet = SearchSnippet & {source: 'local' | 'typesense'};
+
 type SearchHit = {
   document?: SearchDocument;
+  snippet?: string;
+  snippetMatches?: SearchMatch[];
   highlights?: Array<{
+    field?: string;
     snippet?: string;
   }>;
 };
@@ -41,6 +50,9 @@ type SearchHit = {
 type SearchState = 'idle' | 'loading' | 'ready' | 'error';
 type SynonymGroup = {terms: string[]};
 type LocalSearchData = {documents: SearchDocument[]; synonymGroups: SynonymGroup[]};
+type SearchPageResult = {hits: SearchHit[]; found: number; page: number; perPage: number};
+
+const PAGE_SIZE = 8;
 
 const localDocuments: SearchDocument[] = [
   {
@@ -105,6 +117,31 @@ function normalizeSearchText(value: string): string {
   return value.toLowerCase().replace(/[\s\u3000]+/g, '').trim();
 }
 
+function normalizeSearchTextWithMap(value: string): {
+  text: string;
+  offsets: number[];
+  endOffsets: number[];
+} {
+  let text = '';
+  const offsets: number[] = [];
+  const endOffsets: number[] = [];
+  let offset = 0;
+
+  for (const character of value.toLowerCase()) {
+    const startOffset = offset;
+    offset += character.length;
+    if (/^[\s\u3000]$/u.test(character)) continue;
+
+    for (const normalizedCharacter of Array.from(character)) {
+      text += normalizedCharacter;
+      offsets.push(startOffset);
+      endOffsets.push(offset);
+    }
+  }
+
+  return {text, offsets, endOffsets};
+}
+
 function expandQuery(query: string, synonymGroups: SynonymGroup[]): string[] {
   const variants = new Set([query]);
   const normalizedQuery = normalizeSearchText(query);
@@ -119,12 +156,162 @@ function expandQuery(query: string, synonymGroups: SynonymGroup[]): string[] {
   return Array.from(variants);
 }
 
+function getBusinessPriority(document: SearchDocument): number {
+  if (typeof document.business_priority === 'number') {
+    return document.business_priority;
+  }
+
+  const url = (document.url ?? '').toLowerCase();
+  const section = (document.section ?? '').toLowerCase();
+
+  if (url.includes('/product-guides/') || section === '产品指南' || section === '帮助文档') {
+    return 30;
+  }
+  if (
+    url.includes('/faq/') ||
+    section.includes('faq') ||
+    section.includes('常见问题')
+  ) {
+    return 20;
+  }
+  if (
+    url.includes('/release-notes/') ||
+    section.includes('更新日志') ||
+    section.includes('更新动态')
+  ) {
+    return 10;
+  }
+
+  return 0;
+}
+
+function findSearchMatches(value: string, variants: string[]): SearchMatch[] {
+  const normalizedValue = normalizeSearchTextWithMap(value);
+  const normalizedVariants = Array.from(
+    new Set(variants.map(normalizeSearchText).filter(Boolean)),
+  ).sort((left, right) => right.length - left.length);
+  const matches: SearchMatch[] = [];
+
+  normalizedVariants.forEach((variant) => {
+    let searchFrom = 0;
+    while (searchFrom < normalizedValue.text.length) {
+      const matchIndex = normalizedValue.text.indexOf(variant, searchFrom);
+      if (matchIndex === -1) break;
+
+      const matchEndIndex = matchIndex + variant.length - 1;
+      const start = normalizedValue.offsets[matchIndex];
+      const end = normalizedValue.endOffsets[matchEndIndex];
+      if (start !== undefined && end !== undefined) {
+        matches.push({start, end});
+      }
+      searchFrom = matchIndex + variant.length;
+    }
+  });
+
+  return matches
+    .sort((left, right) => left.start - right.start || right.end - left.end)
+    .reduce<SearchMatch[]>((merged, match) => {
+      const previous = merged[merged.length - 1];
+      if (previous && match.start < previous.end) {
+        previous.end = Math.max(previous.end, match.end);
+      } else {
+        merged.push({...match});
+      }
+      return merged;
+    }, []);
+}
+
+type SearchQueryTerms = {primary: string[]; fragments: string[]};
+
+function buildSearchQueryTerms(variants: string[]): SearchQueryTerms {
+  const primary = new Set<string>();
+  const fragments = new Set<string>();
+
+  variants.forEach((variant) => {
+    extractSearchTokens(variant).forEach((token) => {
+      primary.add(token);
+      const characters = Array.from(token);
+      if (/^\p{Script=Han}+$/u.test(token) && characters.length >= 3) {
+        for (let index = 0; index < characters.length - 1; index += 1) {
+          fragments.add(characters.slice(index, index + 2).join(''));
+        }
+      }
+    });
+  });
+
+  return {primary: Array.from(primary), fragments: Array.from(fragments)};
+}
+
+function extractSearchTokens(value: string): string[] {
+  return value.toLowerCase().match(/[\p{Script=Han}]+|[a-z0-9]+/giu) ?? [];
+}
+
+function getSearchHighlightTerms(variants: string[]): string[] {
+  const {primary, fragments} = buildSearchQueryTerms(variants);
+  return Array.from(new Set([...variants, ...primary, ...fragments]))
+    .map(normalizeSearchText)
+    .filter(Boolean)
+    .sort((left, right) => right.length - left.length);
+}
+
+function createSearchSnippet(document: SearchDocument, variants: string[]): SearchSnippet {
+  const content = String(document.content ?? '').trim();
+  if (!content) return {text: '', matches: []};
+
+  const normalizedContent = normalizeSearchTextWithMap(content);
+  let matchIndex = -1;
+  let matchedLength = 0;
+
+  for (const variant of variants) {
+    if (!variant) continue;
+    const index = normalizedContent.text.indexOf(variant);
+    if (index !== -1 && (matchIndex === -1 || index < matchIndex)) {
+      matchIndex = index;
+      matchedLength = variant.length;
+    }
+  }
+
+  if (matchIndex === -1) {
+    const {primary, fragments} = buildSearchQueryTerms(variants);
+    for (const term of [...primary, ...fragments]) {
+      const index = normalizedContent.text.indexOf(term);
+      if (index !== -1 && (matchIndex === -1 || index < matchIndex)) {
+        matchIndex = index;
+        matchedLength = term.length;
+      }
+    }
+  }
+
+  const highlightTerms = getSearchHighlightTerms(variants);
+
+  if (matchIndex === -1) {
+    const fallback = content.replace(/\s+/g, ' ').trim();
+    const text = fallback.length > 180 ? `${fallback.slice(0, 180).trimEnd()}...` : fallback;
+    return {text, matches: findSearchMatches(text, highlightTerms)};
+  }
+
+  const matchStart = normalizedContent.offsets[matchIndex] ?? 0;
+  const matchEndIndex = matchIndex + matchedLength - 1;
+  const matchEnd = normalizedContent.endOffsets[matchEndIndex] ?? content.length;
+  const start = Math.max(0, matchStart - 90);
+  const end = Math.min(content.length, matchEnd + 150);
+  const snippet = content.slice(start, end).replace(/\s+/g, ' ').trim();
+  const text = `${start > 0 ? '...' : ''}${snippet}${end < content.length ? '...' : ''}`;
+
+  return {text, matches: findSearchMatches(text, highlightTerms)};
+}
+
 function searchLocalDocuments(
   query: string,
   documents: SearchDocument[],
   synonymGroups: SynonymGroup[],
-): SearchHit[] {
+  page: number,
+  perPage: number,
+): SearchPageResult {
+  const normalizedQuery = normalizeSearchText(query);
   const variants = expandQuery(query, synonymGroups).map(normalizeSearchText);
+  const queryTerms = buildSearchQueryTerms([normalizedQuery]);
+  const variantTerms = buildSearchQueryTerms(variants);
   const fields: Array<[keyof SearchDocument, number]> = [
     ['title', 100],
     ['section', 80],
@@ -133,39 +320,171 @@ function searchLocalDocuments(
     ['breadcrumb', 30],
     ['content', 10],
   ];
-  const bestByDocument = new Map<string, {document: SearchDocument; score: number}>();
+  const bestByDocument = new Map<
+    string,
+    {document: SearchDocument; score: number; businessPriority: number}
+  >();
 
   documents.forEach((document) => {
     let score = 0;
+    const matchedPrimaryTerms = new Set<string>();
+    const matchedFragments = new Set<string>();
     fields.forEach(([field, weight]) => {
       const values = Array.isArray(document[field])
         ? (document[field] as string[])
         : [String(document[field] ?? '')];
       const value = normalizeSearchText(values.join(' '));
-      variants.forEach((variant) => {
-        if (!variant || !value.includes(variant)) return;
-        score += weight * (variant === normalizeSearchText(query) ? 1 : 0.72);
-        if (value.startsWith(variant)) score += Math.round(weight * 0.2);
+      queryTerms.primary.forEach((term) => {
+        if (value.includes(term)) matchedPrimaryTerms.add(term);
       });
+
+      const exactVariant = variants.find((variant) => variant && value.includes(variant));
+      if (exactVariant) {
+        score += weight * (exactVariant === normalizedQuery ? 2 : 1.2);
+        if (value.startsWith(exactVariant)) score += Math.round(weight * 0.2);
+        return;
+      }
+
+      const matchedTerms = variantTerms.primary.filter((term) => value.includes(term));
+      if (matchedTerms.length > 0) {
+        score += Math.min(weight * 1.25, matchedTerms.length * weight * 0.42);
+        return;
+      }
+
+      const matchedFieldFragments = variantTerms.fragments.filter((fragment) =>
+        value.includes(fragment),
+      );
+      matchedFieldFragments.forEach((fragment) => matchedFragments.add(fragment));
+      score += Math.min(weight * 0.8, matchedFieldFragments.length * weight * 0.18);
     });
 
+    if (queryTerms.primary.length > 0 && matchedPrimaryTerms.size > 0) {
+      score += 18 * (matchedPrimaryTerms.size / queryTerms.primary.length);
+    } else if (matchedFragments.size > 0) {
+      score += Math.min(12, matchedFragments.size * 2);
+    }
+
+    if (
+      queryTerms.primary.length > 0 &&
+      matchedPrimaryTerms.size === 0 &&
+      matchedFragments.size < getMinimumFragmentMatches(variantTerms.fragments.length)
+    ) {
+      return;
+    }
     if (score === 0) return;
     const key = document.doc_id ?? document.url ?? document.title ?? '';
+    const businessPriority = getBusinessPriority(document);
     const previous = bestByDocument.get(key);
-    if (!previous || score > previous.score) {
-      bestByDocument.set(key, {document, score});
+    if (
+      !previous ||
+      score > previous.score ||
+      (score === previous.score && businessPriority > previous.businessPriority)
+    ) {
+      bestByDocument.set(key, {document, score, businessPriority});
     }
   });
 
-  return Array.from(bestByDocument.values())
+  const ranked = Array.from(bestByDocument.values())
     .sort(
       (left, right) =>
         right.score - left.score ||
+        right.businessPriority - left.businessPriority ||
         (left.document.title ?? '').localeCompare(right.document.title ?? '', 'zh-CN') ||
         (left.document.url ?? '').localeCompare(right.document.url ?? ''),
-    )
-    .slice(0, 8)
-    .map(({document}) => ({document}));
+    );
+  const safePage = Math.max(1, Math.floor(page) || 1);
+  const totalPages = getTotalPages(ranked.length, perPage);
+  const resolvedPage = totalPages > 0 ? Math.min(safePage, totalPages) : 1;
+  const start = (resolvedPage - 1) * perPage;
+
+  return {
+    found: ranked.length,
+    page: resolvedPage,
+    perPage,
+    hits: ranked.slice(start, start + perPage).map(({document}) => {
+      const snippet = createSearchSnippet(document, variants);
+      return {
+        document,
+        snippet: snippet.text,
+        snippetMatches: snippet.matches,
+      };
+    }),
+  };
+}
+
+function getTotalPages(found: number, perPage: number): number {
+  return found > 0 ? Math.ceil(found / perPage) : 0;
+}
+
+function getMinimumFragmentMatches(fragmentCount: number): number {
+  if (fragmentCount === 0) return 0;
+  return Math.min(fragmentCount, Math.max(2, Math.ceil(fragmentCount * 0.5)));
+}
+
+function getResultSnippet(result: SearchHit, query: string): ResultSnippet {
+  const contentHighlight = result.highlights?.find(
+    (highlight) => highlight.field === 'content' && highlight.snippet,
+  );
+  const generatedSnippet = result.document
+    ? createSearchSnippet(result.document, [normalizeSearchText(query)])
+    : {text: '', matches: []};
+
+  if (contentHighlight?.snippet) {
+    return {text: contentHighlight.snippet, matches: [], source: 'typesense'};
+  }
+  if (result.snippet !== undefined) {
+    return {
+      text: result.snippet,
+      matches: result.snippetMatches ?? [],
+      source: result.snippetMatches !== undefined ? 'local' : 'typesense',
+    };
+  }
+  const fallbackHighlight = result.highlights?.find((highlight) => highlight.snippet)?.snippet;
+  if (fallbackHighlight) {
+    return {text: fallbackHighlight, matches: [], source: 'typesense'};
+  }
+  return {...generatedSnippet, source: 'local'};
+}
+
+function renderTypesenseSnippet(value: string): ReactNode {
+  return value.split(/(<mark>[\s\S]*?<\/mark>)/gi).map((part, index) => {
+    const match = part.match(/^<mark>([\s\S]*?)<\/mark>$/i);
+    return match ? (
+      <mark key={index} className={styles.resultHighlight}>
+        {match[1]}
+      </mark>
+    ) : (
+      part
+    );
+  });
+}
+
+function renderLocalSnippet(value: string, matches: SearchMatch[]): ReactNode {
+  if (matches.length === 0) return value;
+
+  const parts: ReactNode[] = [];
+  let cursor = 0;
+  matches.forEach((match, index) => {
+    const start = Math.max(cursor, Math.min(value.length, match.start));
+    const end = Math.max(start, Math.min(value.length, match.end));
+    if (start > cursor) parts.push(value.slice(cursor, start));
+    if (end > start) {
+      parts.push(
+        <mark key={index} className={styles.resultHighlight}>
+          {value.slice(start, end)}
+        </mark>,
+      );
+    }
+    cursor = end;
+  });
+  if (cursor < value.length) parts.push(value.slice(cursor));
+  return parts;
+}
+
+function renderSearchSnippet(snippet: ResultSnippet): ReactNode {
+  return snippet.source === 'typesense'
+    ? renderTypesenseSnippet(snippet.text)
+    : renderLocalSnippet(snippet.text, snippet.matches);
 }
 
 export default function SearchPage(): ReactNode {
@@ -184,6 +503,8 @@ export default function SearchPage(): ReactNode {
   const [query, setQuery] = useState('');
   const [state, setState] = useState<SearchState>('idle');
   const [results, setResults] = useState<SearchHit[]>([]);
+  const [totalResults, setTotalResults] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const [notice, setNotice] = useState('');
 
   const typesense = customFields.typesense ?? {};
@@ -212,10 +533,13 @@ export default function SearchPage(): ReactNode {
     return localIndexPromise.current;
   }
 
-  async function runSearch(nextQuery: string) {
+  async function runSearch(nextQuery: string, requestedPage = 1) {
     const trimmedQuery = nextQuery.trim();
+    const nextPage = Math.max(1, Math.floor(requestedPage) || 1);
     if (!trimmedQuery) {
       setResults([]);
+      setTotalResults(0);
+      setCurrentPage(1);
       setState('idle');
       setNotice('');
       return;
@@ -226,7 +550,16 @@ export default function SearchPage(): ReactNode {
 
     if (!canUseTypesense) {
       const documents = await getLocalDocuments();
-      setResults(searchLocalDocuments(trimmedQuery, documents.documents, documents.synonymGroups));
+      const localResult = searchLocalDocuments(
+        trimmedQuery,
+        documents.documents,
+        documents.synonymGroups,
+        nextPage,
+        PAGE_SIZE,
+      );
+      setResults(localResult.hits);
+      setTotalResults(localResult.found);
+      setCurrentPage(localResult.page);
       setState('ready');
       return;
     }
@@ -253,7 +586,11 @@ export default function SearchPage(): ReactNode {
               text_match_type: 'max_score',
               prefix: 'true,true,true,true,false,false',
               num_typos: 1,
-              per_page: 8,
+              page: nextPage,
+              per_page: PAGE_SIZE,
+              group_by: 'doc_id',
+              group_limit: 1,
+              sort_by: '_text_match:desc,business_priority:desc,updated_at_ts:desc',
             },
           ],
         }),
@@ -264,39 +601,83 @@ export default function SearchPage(): ReactNode {
       }
 
       const payload = await response.json();
-      setResults(payload.results?.[0]?.hits ?? []);
+      const searchResult = payload.results?.[0] ?? {};
+      const groupedHits = Array.isArray(searchResult.grouped_hits)
+        ? searchResult.grouped_hits.flatMap((group: {hits?: SearchHit[]}) => group.hits ?? [])
+        : [];
+      const hits = groupedHits.length > 0
+        ? groupedHits
+        : Array.isArray(searchResult.hits)
+          ? searchResult.hits
+          : [];
+      const found = Number.isFinite(searchResult.found)
+        ? Math.max(0, Number(searchResult.found))
+        : hits.length;
+      const resolvedPage = found > 0
+        ? Math.min(nextPage, getTotalPages(found, PAGE_SIZE))
+        : 1;
+      if (resolvedPage !== nextPage) {
+        updateUrl(trimmedQuery, resolvedPage);
+        await runSearch(trimmedQuery, resolvedPage);
+        return;
+      }
+      setResults(hits);
+      setTotalResults(found);
+      setCurrentPage(resolvedPage);
       setState('ready');
     } catch {
       const documents = await getLocalDocuments();
-      setResults(searchLocalDocuments(trimmedQuery, documents.documents, documents.synonymGroups));
+      const localResult = searchLocalDocuments(
+        trimmedQuery,
+        documents.documents,
+        documents.synonymGroups,
+        nextPage,
+        PAGE_SIZE,
+      );
+      setResults(localResult.hits);
+      setTotalResults(localResult.found);
+      setCurrentPage(localResult.page);
       setState('ready');
       setNotice('在线搜索暂不可用，已显示站内索引结果。');
     }
   }
 
   useEffect(() => {
-    const nextQuery = new URLSearchParams(window.location.search).get('q') ?? '';
+    const params = new URLSearchParams(window.location.search);
+    const nextQuery = params.get('q') ?? '';
+    const nextPage = Math.max(1, Number.parseInt(params.get('page') ?? '1', 10) || 1);
     setQuery(nextQuery);
-    if (nextQuery) void runSearch(nextQuery);
+    setCurrentPage(nextPage);
+    if (nextQuery) void runSearch(nextQuery, nextPage);
   }, []);
 
-  function updateUrl(nextQuery: string) {
-    const nextUrl = nextQuery.trim()
-      ? `${searchPath}?q=${encodeURIComponent(nextQuery.trim())}`
-      : searchPath;
+  function updateUrl(nextQuery: string, nextPage = 1) {
+    const params = new URLSearchParams();
+    if (nextQuery.trim()) params.set('q', nextQuery.trim());
+    if (nextPage > 1) params.set('page', String(nextPage));
+    const queryString = params.toString();
+    const nextUrl = queryString ? `${searchPath}?${queryString}` : searchPath;
     window.history.replaceState({}, '', nextUrl);
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    updateUrl(query);
-    void runSearch(query);
+    updateUrl(query, 1);
+    void runSearch(query, 1);
   }
 
   function handleSuggestion(nextQuery: string) {
     setQuery(nextQuery);
-    updateUrl(nextQuery);
-    void runSearch(nextQuery);
+    updateUrl(nextQuery, 1);
+    void runSearch(nextQuery, 1);
+  }
+
+  function handlePageChange(nextPage: number) {
+    const totalPages = getTotalPages(totalResults, PAGE_SIZE);
+    if (nextPage < 1 || nextPage > totalPages || nextPage === currentPage) return;
+
+    updateUrl(query, nextPage);
+    void runSearch(query, nextPage);
   }
 
   return (
@@ -361,7 +742,7 @@ export default function SearchPage(): ReactNode {
               {state === 'ready' ? (
                 <div className={styles.resultsHeader}>
                   <Heading as="h2">搜索结果</Heading>
-                  <span>{results.length} 篇相关文档</span>
+                  <span>{totalResults} 篇相关文档</span>
                 </div>
               ) : null}
 
@@ -390,9 +771,7 @@ export default function SearchPage(): ReactNode {
                       ? document.section ?? document.title
                       : document.title;
                   const snippet =
-                    result.highlights?.[0]?.snippet ??
-                    document.content?.slice(0, 180) ??
-                    '';
+                    getResultSnippet(result, query);
                   const tags = document.tags ?? [];
 
                   return (
@@ -406,7 +785,7 @@ export default function SearchPage(): ReactNode {
                         {document.record_type === 'section' && document.title ? (
                           <p className={styles.resultBreadcrumb}>{document.title}</p>
                         ) : null}
-                        <p>{snippet}</p>
+                        <p>{renderSearchSnippet(snippet)}</p>
                         {tags.length > 0 ? (
                           <div className={styles.tagRow}>
                             {tags.slice(0, 4).map((tag) => (
@@ -420,6 +799,28 @@ export default function SearchPage(): ReactNode {
                   );
                 })}
               </div>
+
+              {state === 'ready' && getTotalPages(totalResults, PAGE_SIZE) > 1 ? (
+                <nav className={styles.pagination} aria-label="搜索结果分页">
+                  <button
+                    type="button"
+                    aria-label="上一页"
+                    disabled={currentPage === 1}
+                    onClick={() => handlePageChange(currentPage - 1)}>
+                    <ChevronLeft aria-hidden="true" size={17} />
+                  </button>
+                  <span>
+                    第 {currentPage} / {getTotalPages(totalResults, PAGE_SIZE)} 页
+                  </span>
+                  <button
+                    type="button"
+                    aria-label="下一页"
+                    disabled={currentPage === getTotalPages(totalResults, PAGE_SIZE)}
+                    onClick={() => handlePageChange(currentPage + 1)}>
+                    <ChevronRight aria-hidden="true" size={17} />
+                  </button>
+                </nav>
+              ) : null}
             </div>
           </div>
         </section>

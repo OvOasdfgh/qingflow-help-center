@@ -11,6 +11,7 @@
     {"name": "content", "type": "string"},
     {"name": "url", "type": "string", "facet": true},
     {"name": "product", "type": "string", "facet": true},
+    {"name": "business_priority", "type": "int32", "optional": true},
     {"name": "version", "type": "string", "facet": true},
     {"name": "language", "type": "string", "facet": true},
     {"name": "tags", "type": "string[]", "facet": true, "optional": true},
