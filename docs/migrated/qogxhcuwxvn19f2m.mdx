@@ -20,7 +20,7 @@ keywords:
 # 接口详解
 **请求方式：**POST
 
-**请求地址：**https://api.qingflow.com/app/<font style="color:#DF2A3F;">:appkey</font>/apply/filter（公有云版本）
+**请求地址：**https://api.qingflow.com/app/<font style={{color: '#DF2A3F'}}>:appkey</font>/apply/filter（公有云版本）
 
 > 请求地址中:appkey为需要替换的变量，根据实际获取值更新，示例如下：
 >
@@ -46,13 +46,13 @@ POST https://api.qingflow.com/app/1fa752c0/apply/filter
 ### appkey
 + 应用id，点击某应用，即可在链接地址中获取，如下图：
 
-<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1716623231601-68975cab-e1ca-4f78-af82-3e8f416f2137.png" width="634" title="" crop="0,0,1,1" id="GOySL" class="ne-image">
+<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1716623231601-68975cab-e1ca-4f78-af82-3e8f416f2137.png" width="634" title="" crop="0,0,1,1" id="GOySL" class="ne-image" />
 
 + 也可以在应用基本信息中获得（下图）
 
-<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1716623278918-d74314b1-f8a9-4047-8025-ddfccebd34b3.png" width="655" title="" crop="0,0,1,1" id="oypeC" class="ne-image">
+<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1716623278918-d74314b1-f8a9-4047-8025-ddfccebd34b3.png" width="655" title="" crop="0,0,1,1" id="oypeC" class="ne-image" />
 
-<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1716623198376-4a34289a-8b99-4394-986d-53b589eb37bc.png" width="594" title="" crop="0,0,1,1" id="FhA9o" class="ne-image">
+<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1716623198376-4a34289a-8b99-4394-986d-53b589eb37bc.png" width="594" title="" crop="0,0,1,1" id="FhA9o" class="ne-image" />
 
 :::
 
@@ -64,36 +64,36 @@ POST https://api.qingflow.com/app/1fa752c0/apply/filter
 
 
 :::color1
-+ <font style="color:#DF2A3F;">accessToken获取方式</font>
++ <font style={{color: '#DF2A3F'}}>accessToken获取方式</font>
 
 获取路径：【轻商城】——【插件中心】——【第三方连接】——「openapi」
 
-<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1716622834568-2203e7ec-7935-48f5-92c9-c920c6e48df6.png" width="659" title="" crop="0,0,1,1" id="XgzeI" class="ne-image">
+<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1716622834568-2203e7ec-7935-48f5-92c9-c920c6e48df6.png" width="659" title="" crop="0,0,1,1" id="XgzeI" class="ne-image" />
 
-+ 超级管理员accessToken：拥有工作区创建者权限，<font style="color:#DF2A3F;">可以调用除「code登录接口」外所有openAPI接口</font>。可直接在轻流系统中获取，如下：
++ 超级管理员accessToken：拥有工作区创建者权限，<font style={{color: '#DF2A3F'}}>可以调用除「code登录接口」外所有openAPI接口</font>。可直接在轻流系统中获取，如下：
 
-<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1716622899306-6d2482fd-5aff-43b3-8759-b5ebfdae528c.png" width="659" title="" crop="0,0,1,1" id="u7a76060d" class="ne-image">
+<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1716622899306-6d2482fd-5aff-43b3-8759-b5ebfdae528c.png" width="659" title="" crop="0,0,1,1" id="u7a76060d" class="ne-image" />
 
 + 子管理员accessToken：子管理员accessToken拥有对应子管理员的权限，能调用这个子管理员权限内可调用的接口。
     - 获取方式为：首先生成关联子管理员权限secret（如下图），再通过接口，由wsid（下文有详解）和secret获取。
     - 重置secret会让已获取过的accessToken失效。
 
-<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1716623002455-6c6e4bf6-874d-416e-8e92-e65cefb006f2.png" width="473" title="" crop="0,0,1,1" id="u06849e3b" class="ne-image">
+<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1716623002455-6c6e4bf6-874d-416e-8e92-e65cefb006f2.png" width="473" title="" crop="0,0,1,1" id="u06849e3b" class="ne-image" />
 
 :::
 
 ## 请求体（Body）
-| **<font style="color:#FFFFFF;">参数</font>** | **<font style="color:#FFFFFF;">必须</font>** | **<font style="color:#FFFFFF;">类型</font>** | **<font style="color:#FFFFFF;">说明</font>** |
+| **<font style={{color: '#FFFFFF'}}>参数</font>** | **<font style={{color: '#FFFFFF'}}>必须</font>** | **<font style={{color: '#FFFFFF'}}>类型</font>** | **<font style={{color: '#FFFFFF'}}>说明</font>** |
 | --- | --- | --- | --- |
-| pageSize | 是 | int | 每页数据条数，<font style="color:#DF2A3F;">注意pageSize最大可填200</font> |
+| pageSize | 是 | int | 每页数据条数，<font style={{color: '#DF2A3F'}}>注意pageSize最大可填200</font> |
 | pageNum | 是 | int | 请求页码 |
 | type | 否 | int | 获取个人待办事项：1；<br/>获取已办事项：2；<br/>获取我发起的已通过：3；<br/>获取我发起的已拒绝：10；<br/>获取我发起的草稿：5；<br/>获取我发起的待完善：6；<br/>获取我发起的流程中：7；<br/>获取全部数据：8；（不传默认为type=8）<br/>获取抄送事项：12 |
 | sorts | 否 | [array] | 排序情况 |
 | queId |  | int | 字段Id，[specialQueId可见文档](https://exiao.yuque.com/ixwxsb/cqfg2y/gpmeb799eb1hrqbz#specialQueId)，具体queId获取见下方 |
 | isAscend | | [boolean] | 是否升序，true：升序 |
-| queriesRel | 否 | string | 针对字段的查询条件之间逻辑关系，目前支持and、or，<font style="color:#DF2A3F;">默认为and</font>。多条件查询时在queries数组中以多个对象形式存在 |
+| queriesRel | 否 | string | 针对字段的查询条件之间逻辑关系，目前支持and、or，<font style={{color: '#DF2A3F'}}>默认为and</font>。多条件查询时在queries数组中以多个对象形式存在 |
 | queries | 否 | [array] | 针对字段的查询条件 |
-| queId | 是 | int | <font style="color:#DF2A3F;">如果设置了筛选查询条件，此处为必填项</font>，queId获取见下方 |
+| queId | 是 | int | <font style={{color: '#DF2A3F'}}>如果设置了筛选查询条件，此处为必填项</font>，queId获取见下方 |
 | searchKey | | string | 搜索关键字，搜索为模糊搜索 |
 | searchKeys | | [array] | 数组内的字段为或条件搜索，当searchKey不为null的时候此字段会被忽略，搜索为模糊搜索 |
 | minValue | | string | 数字模块中，是搜索结果中最小值，日期类型，就是最早日期 |
@@ -107,36 +107,36 @@ POST https://api.qingflow.com/app/1fa752c0/apply/filter
 
 :::color1
 # queId
-+ <font style="color:#DF2A3F;">queId获取方式</font>
++ <font style={{color: '#DF2A3F'}}>queId获取方式</font>
 
 ### 方式1、通过调用获取应用表单信息接口
 [获取应用表单信息接口](https://exiao.yuque.com/ixwxsb/cqfg2y/wsag40n60hzhosgp?singleDoc#%20《获取指定应用详细信息》)
 
-<img src="https://cdn.nlark.com/yuque/0/2023/png/28884377/1690775227313-9dd0ffff-2b1c-4df6-81a5-4010fb148484.png" width="947" title="" crop="0,0,1,1" id="M6t5j" class="ne-image">
+<img src="https://cdn.nlark.com/yuque/0/2023/png/28884377/1690775227313-9dd0ffff-2b1c-4df6-81a5-4010fb148484.png" width="947" title="" crop="0,0,1,1" id="M6t5j" class="ne-image" />
 
 ### 方式2、通过后台开发者工具去获取，打开浏览器按Fn+12
       点击network，然后清除数据
 
 #### safari获取方式
-<img src="https://cdn.nlark.com/yuque/0/2023/png/28884377/1690775349546-3f2d3ccb-f88a-4b73-9cd8-b0f5a06b5b82.png" width="1316" title="" crop="0,0,1,1" id="H0boR" class="ne-image">
+<img src="https://cdn.nlark.com/yuque/0/2023/png/28884377/1690775349546-3f2d3ccb-f88a-4b73-9cd8-b0f5a06b5b82.png" width="1316" title="" crop="0,0,1,1" id="H0boR" class="ne-image" />
 
      点击打开某条数据，然后点击该条数据的applyid,在预览中找到到该字段的queid
 
-<img src="https://cdn.nlark.com/yuque/0/2023/png/28884377/1690775455556-8b324192-cae6-4d50-8e4c-510f0f3a3af1.png" width="1305" title="" crop="0,0,1,1" id="edXdD" class="ne-image">
+<img src="https://cdn.nlark.com/yuque/0/2023/png/28884377/1690775455556-8b324192-cae6-4d50-8e4c-510f0f3a3af1.png" width="1305" title="" crop="0,0,1,1" id="edXdD" class="ne-image" />
 
 #### Google获取方式
  通过后台开发者工具去获取，打开浏览器按Fn+12，点击network，然后清除数据
 
 点击打开某条数据，然后点击该条数据的applyid,在response中找到到该字段的queid
 
-<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1711697613173-ab85cab3-1d6f-4f7a-87b3-fd1b7afd73ae.png" width="1326" title="" crop="0,0,1,1" id="u4c9ea917" class="ne-image">
+<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1711697613173-ab85cab3-1d6f-4f7a-87b3-fd1b7afd73ae.png" width="1326" title="" crop="0,0,1,1" id="u4c9ea917" class="ne-image" />
 
-<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1711697691374-f47674e6-845c-42b3-8fe5-a0617784e6aa.png" width="1330" title="" crop="0,0,1,1" id="ud4b952a5" class="ne-image">
+<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1711697691374-f47674e6-845c-42b3-8fe5-a0617784e6aa.png" width="1330" title="" crop="0,0,1,1" id="ud4b952a5" class="ne-image" />
 
 ### 方式3、直接发起一条数据，然后在右侧的apply，右击拷贝为curl，导入到postman中
-<img src="https://cdn.nlark.com/yuque/0/2023/png/28884377/1690782397069-e42543a1-f063-43ba-b095-100cea0599a8.png" width="1311" title="" crop="0,0,1,1" id="aPckQ" class="ne-image">
+<img src="https://cdn.nlark.com/yuque/0/2023/png/28884377/1690782397069-e42543a1-f063-43ba-b095-100cea0599a8.png" width="1311" title="" crop="0,0,1,1" id="aPckQ" class="ne-image" />
 
-<img src="https://cdn.nlark.com/yuque/0/2023/png/28884377/1690782466474-ea78a622-3818-4894-acae-911265027ef7.png" width="1271" title="" crop="0,0,1,1" id="qg0mE" class="ne-image">
+<img src="https://cdn.nlark.com/yuque/0/2023/png/28884377/1690782466474-ea78a622-3818-4894-acae-911265027ef7.png" width="1271" title="" crop="0,0,1,1" id="qg0mE" class="ne-image" />
 
 :::
 
@@ -233,7 +233,7 @@ queId=2是默认代表申请时间，一些系统字段queId都是默认的，�
 
 URL页面获取：打开数据详情页，找到applyid
 
-<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1729846117478-4f36e6ea-acbe-463a-b58d-5b7c5d5644e6.png" width="1016" title="" crop="0,0,1,1" id="u41e20201" class="ne-image">
+<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1729846117478-4f36e6ea-acbe-463a-b58d-5b7c5d5644e6.png" width="1016" title="" crop="0,0,1,1" id="u41e20201" class="ne-image" />
 
 :::
 
@@ -267,7 +267,7 @@ scope==3，代表未填写的状态
 #### 获取全部应用数据某个单行文字字段包含值或者等于特定值
 注意：这里是模糊搜索，如果应用数据中queId=289084275的数据中有值包含单行文字就会被查询出来，即为模糊搜素。
 
-所以如果想要<font style="color:#DF2A3F;">精确查询，见方式三，即minValue和maxValue都为一样的值</font>。
+所以如果想要<font style={{color: '#DF2A3F'}}>精确查询，见方式三，即minValue和maxValue都为一样的值</font>。
 
 ```json
 {
@@ -351,7 +351,7 @@ scope==3，代表未填写的状态
 ```
 
 #### 获取全部应用数据某个单行文字字段等于特定值1或特定值2
-<font style="color:#DF2A3F;">这里是精确搜索</font>
+<font style={{color: '#DF2A3F'}}>这里是精确搜索</font>
 
 ```json
 {
@@ -374,7 +374,7 @@ scope==3，代表未填写的状态
 ```
 
 ### 数字字段
-<font style="color:#DF2A3F;">注意：筛选时，数字字段需要body中加上"queType": 8</font>
+<font style={{color: '#DF2A3F'}}>注意：筛选时，数字字段需要body中加上"queType": 8</font>
 
 #### 获取全部应用数据数字字段等于特定值
 注意：数字字段筛选使用minValue和maxValue这两个参数。等于特定值的话，就将minValue和maxValue写为一样的即可。
@@ -395,7 +395,7 @@ scope==3，代表未填写的状态
 ```
 
 #### 获取全部应用数据数字字段为一段区间值
-比如需要筛选数字字段queId=289084277的值，1<=数字字段<=111.
+比如需要筛选数字字段 queId=289084277 的值，`1 <= 数字字段 <= 111`。
 
 ```json
 {
@@ -431,7 +431,7 @@ scope==3，代表未填写的状态
 ```
 
 #### 获取全部应用数据某个日期字段为一段区间值
-比如需要筛选日期字段queId=289084279的值，"2024-10-23 00:00:00"<=日期字段<="2024-10-24 00:00:00".即使日期字段表单设置为年月日格式，但是查询时需要将格式补齐。
+比如需要筛选日期字段 queId=289084279 的值，`2024-10-23 00:00:00 <= 日期字段 <= 2024-10-24 00:00:00`。即使日期字段表单设置为年月日格式，但是查询时需要将格式补齐。
 
 ```json
 {
@@ -489,14 +489,14 @@ scope==3，代表未填写的状态
 #### 获取全部应用数据某个单项选择/下拉选择值包含A值或者等于特定值
 方式一：模糊搜索，单项选择/下拉选择值包含某个值
 
-方式二/方式三：<font style="color:#DF2A3F;">精确搜索</font>，单项选择/下拉选择值等于特定值
+方式二/方式三：<font style={{color: '#DF2A3F'}}>精确搜索</font>，单项选择/下拉选择值等于特定值
 
 关于选择类字段获取对应的选项ID方法：
 
 :::color1
 方法一：[调用获取应用表单信息接口](https://exiao.yuque.com/ixwxsb/cqfg2y/wsag40n60hzhosgp?singleDoc#%20《获取指定应用表单信息》)获取optId
 
-<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1729843574351-79e2005e-ae18-45bc-803f-fb3530d0da48.png" width="896" title="" crop="0,0,1,1" id="u932c57b0" class="ne-image">
+<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1729843574351-79e2005e-ae18-45bc-803f-fb3530d0da48.png" width="896" title="" crop="0,0,1,1" id="u932c57b0" class="ne-image" />
 
 方法二：浏览器开发者工具获取
 
@@ -504,15 +504,15 @@ F12打开控制台
 
 + Safari浏览器
 
-<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1729843694049-9f361817-62fd-4490-b513-4580a208fdfe.png" width="1184" title="" crop="0,0,1,1" id="u1a5357f5" class="ne-image">
+<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1729843694049-9f361817-62fd-4490-b513-4580a208fdfe.png" width="1184" title="" crop="0,0,1,1" id="u1a5357f5" class="ne-image" />
 
-<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1729843759934-66f400e5-ec35-46b3-8f83-fe1ed9b67320.png" width="1189" title="" crop="0,0,1,1" id="u3212c2a5" class="ne-image">
+<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1729843759934-66f400e5-ec35-46b3-8f83-fe1ed9b67320.png" width="1189" title="" crop="0,0,1,1" id="u3212c2a5" class="ne-image" />
 
 + Google浏览器
 
-<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1729843853440-10efd95a-ceb4-4bf2-b83f-861f0705047e.png" width="1306" title="" crop="0,0,1,1" id="u29f6e132" class="ne-image">
+<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1729843853440-10efd95a-ceb4-4bf2-b83f-861f0705047e.png" width="1306" title="" crop="0,0,1,1" id="u29f6e132" class="ne-image" />
 
-<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1729843889113-44aa2c29-4069-4fae-91b5-7bddcf0b9be7.png" width="1315" title="" crop="0,0,1,1" id="u71af24db" class="ne-image">
+<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1729843889113-44aa2c29-4069-4fae-91b5-7bddcf0b9be7.png" width="1315" title="" crop="0,0,1,1" id="u71af24db" class="ne-image" />
 
 :::
 
@@ -603,11 +603,11 @@ F12打开控制台
 成员ID获取，可以在工作区通讯录中直接获取，获取调用工作区通讯录接口。
 
 :::color1
-<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1729845629932-0a1f00f8-6044-4e50-bc10-15a4a2edf7d4.png" width="1167" title="" crop="0,0,1,1" id="u6c6a7a94" class="ne-image">
+<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1729845629932-0a1f00f8-6044-4e50-bc10-15a4a2edf7d4.png" width="1167" title="" crop="0,0,1,1" id="u6c6a7a94" class="ne-image" />
 
 接口获取：[获取工作区全部成员](https://exiao.yuque.com/ixwxsb/cqfg2y/yyovulzhe33yonmf?singleDoc#%20《获取工作区全部成员》)
 
-<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1729845710233-b8d4fbee-7bc1-4bba-8cb6-3b52f43a8caf.png" width="920" title="" crop="0,0,1,1" id="ub2b824d5" class="ne-image">
+<img src="https://cdn.nlark.com/yuque/0/2024/png/28884377/1729845710233-b8d4fbee-7bc1-4bba-8cb6-3b52f43a8caf.png" width="920" title="" crop="0,0,1,1" id="ub2b824d5" class="ne-image" />
 
 :::
 
@@ -627,8 +627,6 @@ F12打开控制台
     ]
 }
 ```
-
-
 
 
 
